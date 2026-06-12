@@ -4,8 +4,8 @@ define(
     'atlascharts',
   ],
   function (ko, atlascharts) {
-    function render(element, valueAccessor) {
-      const $linechart = $(element);
+    function render (element, valueAccessor) {
+      const $linechart = $(element)
       const {
         data: lineChartData,
         xLabel,
@@ -21,13 +21,13 @@ define(
         getTooltipBuilder,
         yAxisWidth,
         yScale,
-      } = valueAccessor();
+      } = valueAccessor()
 
-      const linechart = new atlascharts.line();
+      const linechart = new atlascharts.line()
 
-      const width = $linechart.width();
-      const height = manualHeight || Math.min($linechart.width(), 500);
-      const data = lineChartData();
+      const width = $linechart.width()
+      const height = manualHeight || Math.min($linechart.width(), 500)
+      const data = lineChartData()
       linechart.render(data, $linechart[0], width, height, {
         xLabel,
         yLabel,
@@ -41,21 +41,21 @@ define(
         getTooltipBuilder,
         yAxisWidth,
         yScale: yScale || atlascharts.line.getRelativeY({ data, height }),
-      });
+      })
     }
 
     ko.bindingHandlers.lineChart = {
-      init: function(element, valueAccessor, allBindings, data, context) {
+      init: function (element, valueAccessor, allBindings, data, context) {
         const {
           setChartRenderMethod,
-        } = valueAccessor();
+        } = valueAccessor()
         if (typeof setChartRenderMethod === 'function') {
-          setChartRenderMethod(render.bind(null, element, valueAccessor));
+          setChartRenderMethod(render.bind(null, element, valueAccessor))
         }
       },
-      update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-        render(element, valueAccessor);
+      update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        render(element, valueAccessor)
       }
-    };
+    }
   }
-);
+)

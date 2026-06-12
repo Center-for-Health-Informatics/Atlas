@@ -5,7 +5,7 @@ define(['knockout'], function (ko) {
         attr: {
           contenteditable: valueAccessor()
         }
-      });
+      })
     }
-  };
-});
+  }
+})

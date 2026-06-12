@@ -1,14 +1,14 @@
 define([
-	'knockout',
+  'knockout',
 ], function (
-	ko
+  ko
 ) {
-	class Cohort {
-		constructor(data = {}) {
-			this.id = data.id || 0;
-			this.name = data.name || "";
-		}
-	}
-	
-	return Cohort;
-});
+  class Cohort {
+    constructor (data = {}) {
+      this.id = data.id || 0
+      this.name = data.name || ''
+    }
+  }
+
+  return Cohort
+})

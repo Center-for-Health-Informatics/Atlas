@@ -1,11 +1,10 @@
-define(['knockout','components/cohortbuilder/options','components/cohortbuilder/InputTypes/Range','components/cohortbuilder/InputTypes/Text', 'text!./DrugExposureTemplate.html'], function (ko, options, Range, Text, template) {
+define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/InputTypes/Range', 'components/cohortbuilder/InputTypes/Text', 'text!./DrugExposureTemplate.html'], function (ko, options, Range, Text, template) {
+  function DrugExposureViewModel (params) {
+    const self = this
 
-	function DrugExposureViewModel(params) {
-		var self = this;
-
-		self.expression = ko.utils.unwrapObservable(params.expression);
-		self.Criteria = params.criteria.DrugExposure;
-		self.options = options;
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.DrugExposure
+    self.options = options
 
     self.indexMessage = ko.i18nformat(
       'components.conditionDrugExposure.indexDataText',
@@ -17,13 +16,12 @@ define(['knockout','components/cohortbuilder/options','components/cohortbuilder/
           ko.i18n('components.conditionDrugExposure.anyDrug', 'Any Drug')
         ))
       }
-    );
-		
-	}
+    )
+  }
 
-	// return compoonent definition
-	return {
-		viewModel: DrugExposureViewModel,
-		template: template
-	};
-});
+  // return compoonent definition
+  return {
+    viewModel: DrugExposureViewModel,
+    template
+  }
+})

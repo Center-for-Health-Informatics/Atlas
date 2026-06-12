@@ -1,28 +1,28 @@
 define(
-  ['file-saver','papaparse'],
-  function() {
+  ['file-saver', 'papaparse'],
+  function () {
     class CsvUtils {
       /**
        * Converts a value to a string appropriate for entry into a CSV table.  E.g., a string value will be surrounded by quotes.
        * @param {string|number|object} theValue
        * @param {string} sDelimiter The string delimiter.  Defaults to a double quote (") if omitted.
        */
-      static toCsvValue(theValue, sDelimiter) {
-        var t = typeof (theValue), output;
+      static toCsvValue (theValue, sDelimiter) {
+        const t = typeof (theValue); let output
 
-        if (typeof (sDelimiter) === "undefined" || sDelimiter === null) {
-          sDelimiter = '"';
+        if (typeof (sDelimiter) === 'undefined' || sDelimiter === null) {
+          sDelimiter = '"'
         }
 
-        if (t === "undefined" || t === null) {
-          output = "";
-        } else if (t === "string") {
-          output = sDelimiter + theValue + sDelimiter;
+        if (t === 'undefined' || t === null) {
+          output = ''
+        } else if (t === 'string') {
+          output = sDelimiter + theValue + sDelimiter
         } else {
-          output = String(theValue);
+          output = String(theValue)
         }
 
-        return output;
+        return output
       }
 
       /**
@@ -32,87 +32,86 @@ define(
        * @param {string} cDelimiter The column delimiter.  Defaults to a comma (,) if omitted.
        * @return {string} The CSV equivalent of objArray.
        */
-      static toCsv(objArray, sDelimiter, cDelimiter) {
-        var i, l, names = [], name, value, obj, row, output = "", n, nl;
+      static toCsv (objArray, sDelimiter, cDelimiter) {
+        let i; let l; const names = []; let name; let value; let obj; let row; let output = ''; let n; let nl
 
         // Initialize default parameters.
-        if (typeof (sDelimiter) === "undefined" || sDelimiter === null) {
-          sDelimiter = '"';
+        if (typeof (sDelimiter) === 'undefined' || sDelimiter === null) {
+          sDelimiter = '"'
         }
-        if (typeof (cDelimiter) === "undefined" || cDelimiter === null) {
-          cDelimiter = ",";
+        if (typeof (cDelimiter) === 'undefined' || cDelimiter === null) {
+          cDelimiter = ','
         }
 
         for (i = 0, l = objArray.length; i < l; i += 1) {
           // Get the names of the properties.
-          obj = objArray[i];
-          row = "";
+          obj = objArray[i]
+          row = ''
           if (i === 0) {
             // Loop through the names
             for (name in obj) {
               if (obj.hasOwnProperty(name)) {
-                names.push(name);
-                row += [sDelimiter, name, sDelimiter, cDelimiter].join("");
+                names.push(name)
+                row += [sDelimiter, name, sDelimiter, cDelimiter].join('')
               }
             }
-            row = row.substring(0, row.length - 1);
-            output += row;
+            row = row.substring(0, row.length - 1)
+            output += row
           }
 
-          output += "\n";
-          row = "";
+          output += '\n'
+          row = ''
           for (n = 0, nl = names.length; n < nl; n += 1) {
-            name = names[n];
-            value = obj[name];
+            name = names[n]
+            value = obj[name]
             if (n > 0) {
-              row += cDelimiter;
+              row += cDelimiter
             }
-            row += CsvUtils.toCsvValue(value, '"');
+            row += CsvUtils.toCsvValue(value, '"')
           }
-          output += row;
+          output += row
         }
 
-        return output;
+        return output
       }
 
-      static saveAsCsv(objArray, fileName, sDelimiter, cDelimiter) {
-        const csvText = CsvUtils.toCsv(objArray, sDelimiter, cDelimiter);
+      static saveAsCsv (objArray, fileName, sDelimiter, cDelimiter) {
+        const csvText = CsvUtils.toCsv(objArray, sDelimiter, cDelimiter)
 
-        const blob = new Blob([csvText], {type: "text/csv;charset=utf-8"});
-        saveAs(blob, fileName || 'data.csv');
+        const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8' })
+        saveAs(blob, fileName || 'data.csv')
       }
 
-      static csvToJson(file, requiredHeader = null) {
-        const Papa = require('papaparse');
-        const regex = /^([\w|\W])+(csv|application\/vnd\.openxmlformats-officedocument\.spreadsheetml\.sheet|application\/vnd\.ms-excel)$/;//regex for the check valid files
+      static csvToJson (file, requiredHeader = null) {
+        const Papa = require('papaparse')
+        const regex = /^([\w|\W])+(csv|application\/vnd\.openxmlformats-officedocument\.spreadsheetml\.sheet|application\/vnd\.ms-excel)$/// regex for the check valid files
         if (!regex.test(file.type)) {
-          return alert("Select a valid CSV File.");
+          return alert('Select a valid CSV File.')
         }
-        const reader = new FileReader();
+        const reader = new FileReader()
 
         const parsedFile = new Promise((resolve, reject) => {
           reader.onload = function (e) {
-            const file =  Papa.parse(e.target.result, {
+            const file = Papa.parse(e.target.result, {
               header: true,
               skipEmptyLines: true,
-            });
+            })
 
             if (requiredHeader) {
-              const header = requiredHeader.every(head => file.meta.fields.includes(head));
+              const header = requiredHeader.every(head => file.meta.fields.includes(head))
               if (!header) {
-                alert('Select a valid CSV File with required headers');
-                reject('Select a valid CSV File with required headers');
+                alert('Select a valid CSV File with required headers')
+                reject('Select a valid CSV File with required headers')
               }
             }
-            resolve(file.data);
-          };
-          reader.readAsText(file);
-        });
-        return parsedFile;
+            resolve(file.data)
+          }
+          reader.readAsText(file)
+        })
+        return parsedFile
       }
-
     }
 
-    return CsvUtils;
+    return CsvUtils
   }
-);
+)

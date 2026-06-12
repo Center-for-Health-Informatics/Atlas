@@ -1,17 +1,17 @@
 define([
-    'services/http',
-    'appConfig',
+  'services/http',
+  'appConfig',
 ], function (
-    httpService,
-    config,
+  httpService,
+  config
 ) {
-    function loadSourceList() {
-        return httpService
-            .doGet(config.webAPIRoot + 'source/sources')
-            .then(res => res.data);
-    }
+  function loadSourceList () {
+    return httpService
+      .doGet(config.webAPIRoot + 'source/sources')
+      .then(res => res.data)
+  }
 
-    return {
-        loadSourceList,
-    };
-});
+  return {
+    loadSourceList,
+  }
+})

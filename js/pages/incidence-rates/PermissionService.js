@@ -1,15 +1,13 @@
 define([
-	'services/AuthAPI'
+  'services/AuthAPI'
 ], function (
-	AuthAPI
+  AuthAPI
 ) {
+  function isPermittedExportSQL () {
+    return AuthAPI.isPermitted('ir:sql:post')
+  }
 
-	function isPermittedExportSQL() {
-		return AuthAPI.isPermitted('ir:sql:post');
-	}
-
-	return {
-		isPermittedExportSQL,
-	};
-
-});
+  return {
+    isPermittedExportSQL,
+  }
+})

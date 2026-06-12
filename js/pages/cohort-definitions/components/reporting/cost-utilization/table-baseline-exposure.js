@@ -12,12 +12,11 @@ define(
     BaseCostUtilReport,
     commonUtils
   ) {
-
-    const componentName = 'table-baseline-exposure';
+    const componentName = 'table-baseline-exposure'
 
     class TableBaselineExposure extends BaseCostUtilReport {
-      constructor(params) {
-        super(params);
+      constructor (params) {
+        super(params)
         this.columns = [
           {
             title: ko.i18n('columns.periodStart', 'Period start'),
@@ -61,10 +60,10 @@ define(
             className: this.classes('exposure-avg'),
             render: BaseCostUtilReport.formatFullNumber,
           },
-        ];
-        this.dataList = params.dataList;
+        ]
+        this.dataList = params.dataList
       }
     }
 
-    return commonUtils.build(componentName, TableBaselineExposure, view);
-  });
+    return commonUtils.build(componentName, TableBaselineExposure, view)
+  })

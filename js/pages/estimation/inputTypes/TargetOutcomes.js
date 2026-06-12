@@ -1,14 +1,14 @@
 define([
-	'knockout',
+  'knockout',
 ], function (
-	ko
+  ko
 ) {
-	class TargetOutcomes {
-		constructor(data = {}) {
-			this.targetId = ko.observable(data.targetId || null);
-			this.outcomeIds = ko.observableArray((data.outcomeIds && Array.isArray(data.outcomeIds)) ? data.outcomeIds : []);
-		}
-	}
-	
-	return TargetOutcomes;
-});
+  class TargetOutcomes {
+    constructor (data = {}) {
+      this.targetId = ko.observable(data.targetId || null)
+      this.outcomeIds = ko.observableArray((data.outcomeIds && Array.isArray(data.outcomeIds)) ? data.outcomeIds : [])
+    }
+  }
+
+  return TargetOutcomes
+})

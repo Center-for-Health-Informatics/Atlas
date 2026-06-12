@@ -1,12 +1,12 @@
 define([
-	'knockout',
+  'knockout',
 ], function (
-	ko
+  ko
 ) {
-	class NegativeControlExposureCohortDefinition {
-		constructor(data = {}) {
-		}
-	}
-	
-	return NegativeControlExposureCohortDefinition;
-});
+  class NegativeControlExposureCohortDefinition {
+    constructor (data = {}) {
+    }
+  }
+
+  return NegativeControlExposureCohortDefinition
+})

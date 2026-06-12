@@ -1,12 +1,12 @@
 define([
-	'knockout',
+  'knockout',
 ], function (
-	ko
+  ko
 ) {
-	class NaiveBayesSettings {
-        constructor(data = {}) {
-        }
+  class NaiveBayesSettings {
+    constructor (data = {}) {
     }
-	
-	return NaiveBayesSettings;
-});
+  }
+
+  return NaiveBayesSettings
+})

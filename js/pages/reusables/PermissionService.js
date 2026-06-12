@@ -1,39 +1,38 @@
 define([
-    'services/AuthAPI',
+  'services/AuthAPI',
 ], function (
-	AuthAPI,
+  AuthAPI
 ) {
+  function isPermittedList () {
+    return AuthAPI.isPermitted('reusable:get')
+  }
 
-	function isPermittedList() {
-		return AuthAPI.isPermitted(`reusable:get`);
-	}
+  function isPermittedCreate () {
+    return AuthAPI.isPermitted('reusable:post')
+  }
 
-	function isPermittedCreate() {
-		return AuthAPI.isPermitted(`reusable:post`);
-	}
+  function isPermittedUpdate (id) {
+    return AuthAPI.isPermitted(`reusable:${id}:put`)
+  }
 
-	function isPermittedUpdate(id) {
-		return AuthAPI.isPermitted(`reusable:${id}:put`);
-	}
+  function isPermittedLoad (id) {
+    return AuthAPI.isPermitted(`reusable:${id}:get`)
+  }
 
-	function isPermittedLoad(id) {
-		return AuthAPI.isPermitted(`reusable:${id}:get`);
-	}
+  function isPermittedDelete (id) {
+    return AuthAPI.isPermitted(`reusable:${id}:delete`)
+  }
 
-	function isPermittedDelete(id) {
-		return AuthAPI.isPermitted(`reusable:${id}:delete`);
-	}
+  function isPermittedCopy (id) {
+    return AuthAPI.isPermitted(`reusable:${id}:post`)
+  }
 
-	function isPermittedCopy(id) {
-		return AuthAPI.isPermitted(`reusable:${id}:post`);
-	}
-
-	return {
-		isPermittedCreate,
-		isPermittedCopy,
-		isPermittedList,
-		isPermittedLoad,
-		isPermittedUpdate,
-		isPermittedDelete,
-	};
-});
+  return {
+    isPermittedCreate,
+    isPermittedCopy,
+    isPermittedList,
+    isPermittedLoad,
+    isPermittedUpdate,
+    isPermittedDelete,
+  }
+})

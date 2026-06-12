@@ -1,14 +1,14 @@
 define([
-  "knockout",
-  "appConfig",
-  "../options",
-  "../utils",
-  "../InputTypes/Range",
-  "../InputTypes/DateAdjustment",
-  "../InputTypes/ConceptSetSelection",
-  "../CriteriaGroup",
-  "text!./VisitOccurrenceTemplate.html",
-  "../const",
+  'knockout',
+  'appConfig',
+  '../options',
+  '../utils',
+  '../InputTypes/Range',
+  '../InputTypes/DateAdjustment',
+  '../InputTypes/ConceptSetSelection',
+  '../CriteriaGroup',
+  'text!./VisitOccurrenceTemplate.html',
+  '../const',
 ], function (
   ko,
   config,
@@ -21,132 +21,124 @@ define([
   template,
   constants
 ) {
-  function VisitOccurrenceViewModel(params) {
-    var self = this;
+  function VisitOccurrenceViewModel (params) {
+    const self = this
     self.addActions = [
       {
         ...constants.visitAttributes.addFirstDiagnosis,
         selected: false,
         action: function () {
-          if (self.Criteria.First() == null) self.Criteria.First(true);
+          if (self.Criteria.First() == null) self.Criteria.First(true)
         },
       },
       {
         ...constants.visitAttributes.addAge,
         selected: false,
         action: function () {
-          if (self.Criteria.Age() == null) self.Criteria.Age(new Range());
+          if (self.Criteria.Age() == null) self.Criteria.Age(new Range())
         },
       },
       {
         ...constants.visitAttributes.addGender,
         selected: false,
         action: function () {
-          if (self.Criteria.Gender() == null)
-            self.Criteria.Gender(ko.observableArray());
+          if (self.Criteria.Gender() == null) { self.Criteria.Gender(ko.observableArray()) }
         },
       },
       {
         ...constants.visitAttributes.addGenderCS,
         selected: false,
         action: function () {
-          if (self.Criteria.GenderCS() == null)
-            self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.GenderCS() == null) { self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.visitAttributes.addStartDate,
         selected: false,
         action: function () {
-          if (self.Criteria.OccurrenceStartDate() == null)
+          if (self.Criteria.OccurrenceStartDate() == null) {
             self.Criteria.OccurrenceStartDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
         ...constants.visitAttributes.addEndDate,
         selected: false,
         action: function () {
-          if (self.Criteria.OccurrenceEndDate() == null)
+          if (self.Criteria.OccurrenceEndDate() == null) {
             self.Criteria.OccurrenceEndDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
         ...constants.visitAttributes.addDateAdjustment,
         selected: false,
         action: function () {
-          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment());
+          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment())
         },
       },
       {
         ...constants.visitAttributes.addType,
         selected: false,
         action: function () {
-          if (self.Criteria.VisitType() == null)
-            self.Criteria.VisitType(ko.observableArray());
+          if (self.Criteria.VisitType() == null) { self.Criteria.VisitType(ko.observableArray()) }
         },
       },
       {
         ...constants.visitAttributes.addTypeCS,
         selected: false,
         action: function () {
-          if (self.Criteria.VisitTypeCS() == null)
-            self.Criteria.VisitTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.VisitTypeCS() == null) { self.Criteria.VisitTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.visitAttributes.addLength,
         selected: false,
         action: function () {
-          if (self.Criteria.VisitLength() == null)
-            self.Criteria.VisitLength(new Range());
+          if (self.Criteria.VisitLength() == null) { self.Criteria.VisitLength(new Range()) }
         },
       },
       {
         ...constants.visitAttributes.addSourceConcept,
         selected: false,
         action: function () {
-          if (self.Criteria.VisitSourceConcept() == null)
-            self.Criteria.VisitSourceConcept(ko.observable());
+          if (self.Criteria.VisitSourceConcept() == null) { self.Criteria.VisitSourceConcept(ko.observable()) }
         },
       },
       {
         ...constants.visitAttributes.addProviderSpecialty,
         selected: false,
         action: function () {
-          if (self.Criteria.ProviderSpecialty() == null)
-            self.Criteria.ProviderSpecialty(ko.observableArray());
+          if (self.Criteria.ProviderSpecialty() == null) { self.Criteria.ProviderSpecialty(ko.observableArray()) }
         },
       },
       {
         ...constants.visitAttributes.addProviderSpecialtyCS,
         selected: false,
         action: function () {
-          if (self.Criteria.ProviderSpecialtyCS() == null)
-            self.Criteria.ProviderSpecialtyCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.ProviderSpecialtyCS() == null) { self.Criteria.ProviderSpecialtyCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.visitAttributes.addPlaceService,
         selected: false,
         action: function () {
-          if (self.Criteria.PlaceOfService() == null)
-            self.Criteria.PlaceOfService(ko.observableArray());
+          if (self.Criteria.PlaceOfService() == null) { self.Criteria.PlaceOfService(ko.observableArray()) }
         },
       },
       {
         ...constants.visitAttributes.addPlaceServiceCS,
         selected: false,
         action: function () {
-          if (self.Criteria.PlaceOfServiceCS() == null)
-            self.Criteria.PlaceOfServiceCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.PlaceOfServiceCS() == null) { self.Criteria.PlaceOfServiceCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
@@ -154,7 +146,7 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.PlaceOfServiceLocation() == null) {
-            self.Criteria.PlaceOfServiceLocation(ko.observable());
+            self.Criteria.PlaceOfServiceLocation(ko.observable())
           }
         },
       },
@@ -162,13 +154,14 @@ define([
         ...constants.visitAttributes.addNested,
         selected: false,
         action: function () {
-          if (self.Criteria.CorrelatedCriteria() == null)
+          if (self.Criteria.CorrelatedCriteria() == null) {
             self.Criteria.CorrelatedCriteria(
               new CriteriaGroup(null, self.expression.ConceptSets)
-            );
+            )
+          }
         },
       },
-    ];
+    ]
 
     if (config.features.locationDistance) {
       self.addActions.splice(self.addActions.length - 1, 0, {
@@ -176,19 +169,19 @@ define([
         selected: false,
         action: function () {
           if (self.Criteria.PlaceOfServiceDistance() == null) {
-            self.Criteria.PlaceOfServiceDistance(new Range());
+            self.Criteria.PlaceOfServiceDistance(new Range())
           }
         },
-      });
+      })
     }
 
-    self.expression = ko.utils.unwrapObservable(params.expression);
-    self.Criteria = params.criteria.VisitOccurrence;
-    self.options = options;
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.VisitOccurrence
+    self.options = options
 
-		self.removeCriterion = function (propertyName) {
-			self.Criteria[propertyName](null);
-		}
+    self.removeCriterion = function (propertyName) {
+      self.Criteria[propertyName](null)
+    }
 
     self.indexMessage = ko.i18nformat(
       'components.conditionVisit.indexDataText',
@@ -200,12 +193,12 @@ define([
           ko.i18n('components.conditionVisit.anyVisit', 'Any Visit')
         ))
       }
-    );
+    )
   }
 
   // return compoonent definition
   return {
     viewModel: VisitOccurrenceViewModel,
-    template: template,
-  };
-});
+    template,
+  }
+})

@@ -32,16 +32,16 @@ define([
   cacheApi
 ) {
   class Configuration extends AutoBind(Page) {
-    constructor(params) {
-      super(params);
-      this.config = config;
-      this.api = config.api;
-      this.loading = ko.observable(false);
-      this.sharedState = sharedState;
-      this.isInProgress = ko.observable(false);
-      this.jobListing = sharedState.jobListing;
-      this.sourceJobs = new Map();
-      this.sources = sharedState.sources;
+    constructor (params) {
+      super(params)
+      this.config = config
+      this.api = config.api
+      this.loading = ko.observable(false)
+      this.sharedState = sharedState
+      this.isInProgress = ko.observable(false)
+      this.jobListing = sharedState.jobListing
+      this.sourceJobs = new Map()
+      this.sources = sharedState.sources
 
       this.priorityOptions = [
         {
@@ -58,135 +58,135 @@ define([
             'Whole Application'
           ),
         },
-      ];
+      ]
 
-      this.isAuthenticated = authApi.isAuthenticated;
+      this.isAuthenticated = authApi.isAuthenticated
       this.initializationCompleted = ko.pureComputed(
         () =>
           sharedState.appInitializationStatus() ===
             constants.applicationStatuses.running ||
           sharedState.appInitializationStatus() ===
             constants.applicationStatuses.noSourcesAvailable
-      );
-      this.hasSourceAccess = authApi.hasSourceAccess;
+      )
+      this.hasSourceAccess = authApi.hasSourceAccess
       this.hasPageAccess = ko.pureComputed(() => {
         return (
           (config.userAuthenticationEnabled &&
             this.isAuthenticated() &&
             authApi.isPermittedEditConfiguration()) ||
           !config.userAuthenticationEnabled
-        );
-      });
+        )
+      })
       this.canReadRoles = ko.pureComputed(() => {
-        return this.isAuthenticated() && authApi.isPermittedReadRoles();
-      });
+        return this.isAuthenticated() && authApi.isPermittedReadRoles()
+      })
       this.canCreateSource = ko.pureComputed(() => {
         if (!config.userAuthenticationEnabled) {
-          return false;
+          return false
         } else {
           return (
             config.userAuthenticationEnabled &&
             this.isAuthenticated() &&
             authApi.isPermittedCreateSource()
-          );
+          )
         }
-      });
+      })
       this.canChangePriority = ko.pureComputed(() => {
         if (!config.userAuthenticationEnabled) {
-          return false;
+          return false
         } else {
           return (
             config.userAuthenticationEnabled &&
             this.isAuthenticated() &&
             authApi.isPermittedEditSourcePriority()
-          );
+          )
         }
-      });
+      })
 
       this.canImport = ko.pureComputed(
         () => this.isAuthenticated() && authApi.isPermittedImportUsers()
-      );
+      )
       this.canManageTags = ko.pureComputed(
         () => this.isAuthenticated() && authApi.isPermittedTagsManagement()
-      );
+      )
       this.canClearServerCache = ko.pureComputed(() => {
         return (
           config.userAuthenticationEnabled &&
           this.isAuthenticated() &&
           authApi.isPermittedClearServerCache()
-        );
-      });
+        )
+      })
 
       this.intervalId = PollService.add({
         callback: () => this.checkJobs(),
         interval: config.pollInterval,
-      });
+      })
     }
 
-    dispose() {
-      PollService.stop(this.intervalId);
+    dispose () {
+      PollService.stop(this.intervalId)
     }
 
-    getSource(job) {
-      return this.sourceJobs.get(job.executionId);
+    getSource (job) {
+      return this.sourceJobs.get(job.executionId)
     }
 
-    async checkJobs() {
-      const notifications = await jobDetailsService.listRefreshCacheJobs();
+    async checkJobs () {
+      const notifications = await jobDetailsService.listRefreshCacheJobs()
       const jobs = notifications.data.map((n) => {
-        const job = new jobDetail();
-        job.status(n.status);
-        job.executionId = n.executionId;
-        return job;
-      });
+        const job = new jobDetail()
+        job.status(n.status)
+        job.executionId = n.executionId
+        return job
+      })
 
       jobs.forEach((job) => {
-        let source = this.getSource(job);
+        const source = this.getSource(job)
         if (source && (job.isComplete() || job.isFailed())) {
-          this.sourceJobs.delete(job.executionId);
+          this.sourceJobs.delete(job.executionId)
           source.refreshState(
             job.isComplete()
               ? sourceApi.buttonCheckState.success
               : sourceApi.buttonCheckState.failed
-          );
+          )
         }
-      });
+      })
     }
 
-    async onPageCreated() {
-      this.loading(true);
-      await sourceApi.initSourcesConfig();
-      super.onPageCreated();
-      this.loading(false);
+    async onPageCreated () {
+      this.loading(true)
+      await sourceApi.initSourcesConfig()
+      super.onPageCreated()
+      this.loading(false)
     }
 
-    canReadSource(source) {
+    canReadSource (source) {
       if (!config.userAuthenticationEnabled) {
-        return false;
+        return false
       } else {
         return (
           config.userAuthenticationEnabled &&
           this.isAuthenticated() &&
           authApi.isPermittedReadSource(source.sourceKey)
-        );
+        )
       }
     }
 
-    canCheckConnection(source) {
+    canCheckConnection (source) {
       if (!config.userAuthenticationEnabled) {
-        return false;
+        return false
       } else {
         return (
           config.userAuthenticationEnabled &&
           this.isAuthenticated() &&
           authApi.isPermittedCheckSourceConnection(source.sourceKey)
-        );
+        )
       }
     }
 
-    canRefreshSourceCache(source) {
+    canRefreshSourceCache (source) {
       if (!config.userAuthenticationEnabled) {
-        return false;
+        return false
       } else {
         return (
           config.userAuthenticationEnabled &&
@@ -194,12 +194,12 @@ define([
           authApi.hasSourceAccess(source.sourceKey) &&
           source.hasResults &&
           (source.hasVocabulary || source.hasCDM)
-        );
+        )
       }
     }
 
-    clearLocalStorageCache() {
-      localStorage.clear();
+    clearLocalStorageCache () {
+      localStorage.clear()
 
       alert(
         ko.unwrap(
@@ -208,10 +208,10 @@ define([
             'Local Storage has been cleared.  Please refresh the page to reload configuration information.'
           )
         )
-      );
+      )
     }
 
-    clearServerCache() {
+    clearServerCache () {
       if (
         confirm(
           ko.unwrap(
@@ -231,7 +231,7 @@ define([
                   'Server cache has been cleared.'
                 )
               )
-            );
+            )
           },
           (error) => {
             alert(
@@ -241,28 +241,28 @@ define([
                   'There was an error! The server cache has NOT been cleared.'
                 )
               )
-            );
+            )
           }
-        );
+        )
       }
     }
 
-    newSource() {
-      commonUtils.routeTo('/source/0');
+    newSource () {
+      commonUtils.routeTo('/source/0')
     }
 
-    selectSource(source) {
-      document.location = '#/source/' + source.sourceId;
+    selectSource (source) {
+      document.location = '#/source/' + source.sourceId
     }
 
-    async updateSourceDaimonPriority(sourceKey, daimonType) {
+    async updateSourceDaimonPriority (sourceKey, daimonType) {
       if (sharedState.priorityScope() !== 'application') {
-        return;
+        return
       }
-      this.isInProgress(true);
+      this.isInProgress(true)
       try {
-        await sourceApi.updateSourceDaimonPriority(sourceKey, daimonType);
-        await sourceApi.initSourcesConfig();
+        await sourceApi.updateSourceDaimonPriority(sourceKey, daimonType)
+        await sourceApi.initSourcesConfig()
       } catch (err) {
         alert(
           ko.unwrap(
@@ -271,63 +271,63 @@ define([
               'Failed to update priority source daimon'
             )
           )
-        );
+        )
       }
-      this.isInProgress(false);
+      this.isInProgress(false)
     }
 
-    async updateCurrentVocabularyVersion(sourceKey) {
+    async updateCurrentVocabularyVersion (sourceKey) {
       try {
-        const result = await sourceApi.getVocabularyInfo(sourceKey);
+        const result = await sourceApi.getVocabularyInfo(sourceKey)
         if (result && result.data && result.data.version != null) {
-          sharedState.currentVocabularyVersion(result.data.version);
-          return result.data.version;
+          sharedState.currentVocabularyVersion(result.data.version)
+          return result.data.version
         } else {
-          throw new Error('Vocabulary info response does not contain version');
+          throw new Error('Vocabulary info response does not contain version')
         }
       } catch (err) {
-        alert(ko.unwrap(ko.i18n('configuration.alerts.failUpdateCurrentVocabVersion', 'Failed to update current vocabulary version')));
+        alert(ko.unwrap(ko.i18n('configuration.alerts.failUpdateCurrentVocabVersion', 'Failed to update current vocabulary version')))
       }
     }
 
-    updateVocabPriority() {
-      var newVocabUrl = sharedState.vocabularyUrl();
-      var newCurrentVocabularyVersion = sharedState.currentVocabularyVersion();
-      var selectedSource = sharedState.sources().find((item) => {
-        return item.vocabularyUrl === newVocabUrl;
-      });
+    updateVocabPriority () {
+      const newVocabUrl = sharedState.vocabularyUrl()
+      const newCurrentVocabularyVersion = sharedState.currentVocabularyVersion()
+      const selectedSource = sharedState.sources().find((item) => {
+        return item.vocabularyUrl === newVocabUrl
+      })
       sharedState.priorityScope() === 'application' &&
         sharedState.defaultVocabularyUrl(newVocabUrl) &&
-        sharedState.defaultVocabularyVersion(newCurrentVocabularyVersion);
+        sharedState.defaultVocabularyVersion(newCurrentVocabularyVersion)
 
-      this.updateSourceDaimonPriority(selectedSource.sourceKey, 'Vocabulary');
-      this.updateCurrentVocabularyVersion(selectedSource.sourceKey);
-      return true;
+      this.updateSourceDaimonPriority(selectedSource.sourceKey, 'Vocabulary')
+      this.updateCurrentVocabularyVersion(selectedSource.sourceKey)
+      return true
     }
 
-    updateEvidencePriority() {
-      var newEvidenceUrl = sharedState.evidenceUrl();
-      var selectedSource = sharedState.sources().find((item) => {
-        return item.evidenceUrl === newEvidenceUrl;
-      });
+    updateEvidencePriority () {
+      const newEvidenceUrl = sharedState.evidenceUrl()
+      const selectedSource = sharedState.sources().find((item) => {
+        return item.evidenceUrl === newEvidenceUrl
+      })
       sharedState.priorityScope() === 'application' &&
-        sharedState.defaultEvidenceUrl(newEvidenceUrl);
-      this.updateSourceDaimonPriority(selectedSource.sourceKey, 'CEM');
-      return true;
+        sharedState.defaultEvidenceUrl(newEvidenceUrl)
+      this.updateSourceDaimonPriority(selectedSource.sourceKey, 'CEM')
+      return true
     }
 
-    updateResultsPriority() {
-      var newResultsUrl = sharedState.resultsUrl();
-      var selectedSource = sharedState.sources().find((item) => {
-        return item.resultsUrl === newResultsUrl;
-      });
+    updateResultsPriority () {
+      const newResultsUrl = sharedState.resultsUrl()
+      const selectedSource = sharedState.sources().find((item) => {
+        return item.resultsUrl === newResultsUrl
+      })
       sharedState.priorityScope() === 'application' &&
-        sharedState.defaultResultsUrl(newResultsUrl);
-      this.updateSourceDaimonPriority(selectedSource.sourceKey, 'Results');
-      return true;
+        sharedState.defaultResultsUrl(newResultsUrl)
+      this.updateSourceDaimonPriority(selectedSource.sourceKey, 'Results')
+      return true
     }
 
-    checkSourceConnection(source) {
+    checkSourceConnection (source) {
       sourceApi
         .checkSourceConnection(source.sourceKey)
         .then(({ data }) =>
@@ -338,60 +338,60 @@ define([
           )
         )
         .catch(() => {
-          source.connectionCheck(sourceApi.buttonCheckState.failed);
-        });
-      source.connectionCheck(sourceApi.buttonCheckState.checking);
+          source.connectionCheck(sourceApi.buttonCheckState.failed)
+        })
+      source.connectionCheck(sourceApi.buttonCheckState.checking)
     }
 
-    async refreshSourceCache(source) {
+    async refreshSourceCache (source) {
       try {
-        source.refreshState(sourceApi.buttonCheckState.checking);
-        const { data } = await sourceApi.refreshSourceCache(source.sourceKey);
+        source.refreshState(sourceApi.buttonCheckState.checking)
+        const { data } = await sourceApi.refreshSourceCache(source.sourceKey)
         if (data.executionId === undefined) {
-          source.refreshState(sourceApi.buttonCheckState.failed);
+          source.refreshState(sourceApi.buttonCheckState.failed)
         } else {
-          jobDetailsService.createJob(data);
-          this.sourceJobs.set(data.executionId, source);
-          source.refreshState(sourceApi.buttonCheckState.checking);
+          jobDetailsService.createJob(data)
+          this.sourceJobs.set(data.executionId, source)
+          source.refreshState(sourceApi.buttonCheckState.checking)
         }
       } catch (e) {
-        source.refreshState(sourceApi.buttonCheckState.failed);
+        source.refreshState(sourceApi.buttonCheckState.failed)
       }
     }
 
-    getRefreshCacheButtonStyles(source) {
-      return this.getButtonStyles(source.refreshState());
+    getRefreshCacheButtonStyles (source) {
+      return this.getButtonStyles(source.refreshState())
     }
 
-    getCheckButtonStyles(source) {
-      return this.getButtonStyles(source.connectionCheck());
+    getCheckButtonStyles (source) {
+      return this.getButtonStyles(source.connectionCheck())
     }
 
-    getButtonStyles(sourceState) {
-      let iconClass = 'fa-caret-right';
-      let buttonClass = 'btn-primary';
+    getButtonStyles (sourceState) {
+      let iconClass = 'fa-caret-right'
+      let buttonClass = 'btn-primary'
       switch (sourceState) {
         case sourceApi.buttonCheckState.success:
-          buttonClass = 'btn-success';
-          iconClass = 'fa-check-square';
-          break;
+          buttonClass = 'btn-success'
+          iconClass = 'fa-check-square'
+          break
         case sourceApi.buttonCheckState.failed:
-          buttonClass = 'btn-danger';
-          iconClass = 'fa-exclamation-circle';
-          break;
+          buttonClass = 'btn-danger'
+          iconClass = 'fa-exclamation-circle'
+          break
         case sourceApi.buttonCheckState.checking:
-          buttonClass = 'btn-warning';
-          iconClass = 'fa-circle-notch fa-spin';
-          break;
+          buttonClass = 'btn-warning'
+          iconClass = 'fa-circle-notch fa-spin'
+          break
       }
       return {
         iconClass,
         buttonClass,
-      };
+      }
     }
 
-    runDiagnostics() {
-      const startTime = performance.now();
+    runDiagnostics () {
+      const startTime = performance.now()
 
       // get the list of isPermitted functions, except the literal isPermitted
       for (const key in authApi) {
@@ -400,16 +400,16 @@ define([
           key.startsWith('isPermitted') &&
           key != 'isPermitted'
         ) {
-          authApi[key](); // Invoke the function
+          authApi[key]() // Invoke the function
         }
       }
 
-      const endTime = performance.now();
+      const endTime = performance.now()
 
-      const elapsedTime = endTime - startTime;
-      console.log(`Script execution time: ${elapsedTime} milliseconds`);
+      const elapsedTime = endTime - startTime
+      console.log(`Script execution time: ${elapsedTime} milliseconds`)
     }
   }
 
-  return commonUtils.build('ohdsi-configuration', Configuration, view);
-});
+  return commonUtils.build('ohdsi-configuration', Configuration, view)
+})

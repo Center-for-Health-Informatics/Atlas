@@ -1,14 +1,14 @@
 define([
-	'knockout',
+  'knockout',
 ], function (
-	ko
+  ko
 ) {
-	class ConceptSet {
-        constructor(data = {}) {
-            this.id = data.id || 0;
-            this.name = data.name || "";
-        }
-	}
-	
-	return ConceptSet;
-});
+  class ConceptSet {
+    constructor (data = {}) {
+      this.id = data.id || 0
+      this.name = data.name || ''
+    }
+  }
+
+  return ConceptSet
+})

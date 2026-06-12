@@ -1,16 +1,16 @@
 define([
-  "knockout",
-  "../options",
-  "../utils",
-  "../InputTypes/Range",
-  "../CriteriaGroup",
-  "text!./LocationRegionTemplate.html",
+  'knockout',
+  '../options',
+  '../utils',
+  '../InputTypes/Range',
+  '../CriteriaGroup',
+  'text!./LocationRegionTemplate.html',
 ], function (ko, options, utils, Range, CriteriaGroup, template) {
-  function LocationRegionViewModel(params) {
-    var self = this;
-    self.expression = ko.utils.unwrapObservable(params.expression);
-    self.Criteria = params.criteria.LocationRegion;
-    self.options = options;
+  function LocationRegionViewModel (params) {
+    const self = this
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.LocationRegion
+    self.options = options
 
     self.addActions = [
       {
@@ -18,12 +18,13 @@ define([
         selected: false,
         description: ko.i18n('components.locationRegion.criteria.startDate.option.description', 'Filter Locations by date when Person started living there'),
         action: function () {
-          if (self.Criteria.StartDate() == null)
+          if (self.Criteria.StartDate() == null) {
             self.Criteria.StartDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
@@ -31,12 +32,13 @@ define([
         selected: false,
         description: ko.i18n('components.locationRegion.criteria.endDate.option.description', 'Filter Locations by date when Person finished living there'),
         action: function () {
-          if (self.Criteria.EndDate() == null)
+          if (self.Criteria.EndDate() == null) {
             self.Criteria.EndDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
@@ -44,17 +46,18 @@ define([
         selected: false,
         description: ko.i18n('components.locationRegion.criteria.correlatedCriteria.option.description', 'Apply criteria using the location region as the index event'),
         action: function () {
-          if (self.Criteria.CorrelatedCriteria() == null)
+          if (self.Criteria.CorrelatedCriteria() == null) {
             self.Criteria.CorrelatedCriteria(
               new CriteriaGroup(null, self.expression.ConceptSets)
-            );
+            )
+          }
         },
       },
-    ];
+    ]
 
     self.removeCriterion = function (propertyName) {
-      self.Criteria[propertyName](null);
-    };
+      self.Criteria[propertyName](null)
+    }
 
     self.indexMessage = ko.i18nformat(
       'components.locationRegion.criteria.indexData.text',
@@ -66,12 +69,12 @@ define([
           ko.i18n('components.locationRegion.anyLocationRegion', 'Any Region')
         ))
       }
-    );
+    )
   }
 
   // return compoonent definition
   return {
     viewModel: LocationRegionViewModel,
-    template: template,
-  };
-});
+    template,
+  }
+})

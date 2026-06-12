@@ -15,15 +15,13 @@ define(
     CohortResultsService,
     commonUtils
   ) {
-
-    const componentName = 'cost-utilization-drug-summary-util';
+    const componentName = 'cost-utilization-drug-summary-util'
 
     class DrugUtilSummaryReport extends BaseDrugUtilReport {
+      constructor (params) {
+        super(params)
 
-      constructor(params) {
-        super(params);
-
-        this.onDrugSelect = params.onDrugSelect;
+        this.onDrugSelect = params.onDrugSelect
 
         this.drugsTableColumns = [
           {
@@ -48,23 +46,23 @@ define(
             className: this.classes('tbl-col', 'drug-class'),
           },
           ...this.drugsTableColumns,
-        ];
+        ]
 
-        this.init();
-        this.loadFilterOptions();
+        this.init()
+        this.loadFilterOptions()
       }
 
-      fetchAPI({ filters }) {
+      fetchAPI ({ filters }) {
         return CohortResultsService.loadDrugUtilSummaryReport({
-            source: this.source,
-            cohortId: this.cohortId,
-            window: this.window,
-            filters,
-          })
-          .then(({ data }) => this.dataList(data));
+          source: this.source,
+          cohortId: this.cohortId,
+          window: this.window,
+          filters,
+        })
+          .then(({ data }) => this.dataList(data))
       }
     }
 
-    return commonUtils.build(componentName, DrugUtilSummaryReport, view);
+    return commonUtils.build(componentName, DrugUtilSummaryReport, view)
   }
-);
+)

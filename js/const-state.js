@@ -4,8 +4,8 @@ define([], () => {
     running: 'running',
     noSourcesAvailable: 'no-sources-available',
     failed: 'failed',
-  };
-  
+  }
+
   return {
     applicationStatuses,
   }

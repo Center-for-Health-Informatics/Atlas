@@ -1,33 +1,32 @@
 define([
-	'services/AuthAPI',
+  'services/AuthAPI',
 ], function (
-	AuthAPI,
+  AuthAPI
 ) {
+  function isPermittedCreate () {
+    return AuthAPI.isPermitted('user:import:job:post')
+  }
 
-	function isPermittedCreate() {
-		return AuthAPI.isPermitted('user:import:job:post');
-	}
+  function isPermittedList () {
+    return AuthAPI.isPermitted('user:import:job:get')
+  }
 
-	function isPermittedList() {
-		return AuthAPI.isPermitted('user:import:job:get');
-	}
+  function isPermittedView (id) {
+    return AuthAPI.isPermitted(`user:import:job:${id}:get`)
+  }
 
-	function isPermittedView(id) {
-		return AuthAPI.isPermitted(`user:import:job:${id}:get`);
-	}
+  function isPermittedEdit (id) {
+    return isPermittedView(id) && AuthAPI.isPermitted(`user:import:job:${id}:put`)
+  }
 
-	function isPermittedEdit(id) {
-		return isPermittedView(id) && AuthAPI.isPermitted(`user:import:job:${id}:put`);
-	}
+  function isPermittedDelete (id) {
+    return AuthAPI.isPermitted(`user:import:job:${id}:delete`)
+  }
 
-	function isPermittedDelete(id) {
-		return AuthAPI.isPermitted(`user:import:job:${id}:delete`);
-	}
-
-	return {
-		isPermittedCreate,
-		isPermittedList,
-		isPermittedEdit,
-		isPermittedDelete,
-	};
-});
+  return {
+    isPermittedCreate,
+    isPermittedList,
+    isPermittedEdit,
+    isPermittedDelete,
+  }
+})

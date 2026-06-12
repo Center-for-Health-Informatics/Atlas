@@ -1,15 +1,15 @@
 define([
-  "knockout",
-  "../options",
-  "../utils",
-  "../InputTypes/Range",
-  "../InputTypes/Text",
-  "../InputTypes/DateAdjustment",
-  "../InputTypes/ConceptSetSelection",
-  "../CriteriaGroup",
-  "text!./ConditionOccurrenceTemplate.html",
-  "../const",
-  "./ConceptSetSelector",
+  'knockout',
+  '../options',
+  '../utils',
+  '../InputTypes/Range',
+  '../InputTypes/Text',
+  '../InputTypes/DateAdjustment',
+  '../InputTypes/ConceptSetSelection',
+  '../CriteriaGroup',
+  'text!./ConditionOccurrenceTemplate.html',
+  '../const',
+  './ConceptSetSelector',
 ], function (
   ko,
   options,
@@ -22,184 +22,177 @@ define([
   template,
   constants
 ) {
-  function ConditionOccurrenceViewModel(params) {
-    var self = this;
-    self.expression = ko.utils.unwrapObservable(params.expression);
-    self.Criteria = params.criteria.ConditionOccurrence;
-    self.options = options;
+  function ConditionOccurrenceViewModel (params) {
+    const self = this
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.ConditionOccurrence
+    self.options = options
 
     self.formatOption = function (d) {
       return (
         '<div class="optionText">' +
         d.text +
-        "</div>" +
+        '</div>' +
         '<div class="optionDescription">' +
         d.description +
-        "</div>"
-      );
-    };
+        '</div>'
+      )
+    }
 
     self.addActions = [
       {
         ...constants.occurrenceAttributes.addFirstDiagnosis,
         selected: false,
         action: function () {
-          if (self.Criteria.First() == null) self.Criteria.First(true);
+          if (self.Criteria.First() == null) self.Criteria.First(true)
         },
       },
       {
         ...constants.occurrenceAttributes.addAge,
         selected: false,
         action: function () {
-          if (self.Criteria.Age() == null) self.Criteria.Age(new Range());
+          if (self.Criteria.Age() == null) self.Criteria.Age(new Range())
         },
       },
       {
         ...constants.occurrenceAttributes.addGender,
         selected: false,
         action: function () {
-          if (self.Criteria.Gender() == null)
-            self.Criteria.Gender(ko.observableArray());
+          if (self.Criteria.Gender() == null) { self.Criteria.Gender(ko.observableArray()) }
         },
       },
       {
         ...constants.occurrenceAttributes.addGenderCS,
         selected: false,
         action: function () {
-          if (self.Criteria.GenderCS() == null)
-            self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.GenderCS() == null) { self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.occurrenceAttributes.addConditionStatus,
         selected: false,
         action: function () {
-            if (self.Criteria.ConditionStatus() == null)
-                self.Criteria.ConditionStatus(ko.observableArray());
+          if (self.Criteria.ConditionStatus() == null) { self.Criteria.ConditionStatus(ko.observableArray()) }
         }
       },
       {
         ...constants.occurrenceAttributes.addConditionStatusCS,
         selected: false,
         action: function () {
-            if (self.Criteria.ConditionStatusCS() == null)
-                self.Criteria.ConditionStatusCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.ConditionStatusCS() == null) { self.Criteria.ConditionStatusCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         }
       },
       {
         ...constants.occurrenceAttributes.addStartDate,
         selected: false,
         action: function () {
-          if (self.Criteria.OccurrenceStartDate() == null)
+          if (self.Criteria.OccurrenceStartDate() == null) {
             self.Criteria.OccurrenceStartDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
         ...constants.occurrenceAttributes.addEndDate,
         selected: false,
         action: function () {
-          if (self.Criteria.OccurrenceEndDate() == null)
+          if (self.Criteria.OccurrenceEndDate() == null) {
             self.Criteria.OccurrenceEndDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
         ...constants.occurrenceAttributes.addDateAdjustment,
         selected: false,
         action: function () {
-          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment());
+          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment())
         },
       },
       {
         ...constants.occurrenceAttributes.addType,
         selected: false,
         action: function () {
-          if (self.Criteria.ConditionType() == null)
-            self.Criteria.ConditionType(ko.observableArray());
+          if (self.Criteria.ConditionType() == null) { self.Criteria.ConditionType(ko.observableArray()) }
         },
       },
       {
         ...constants.occurrenceAttributes.addTypeCS,
         selected: false,
         action: function () {
-          if (self.Criteria.ConditionTypeCS() == null)
-            self.Criteria.ConditionTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.ConditionTypeCS() == null) { self.Criteria.ConditionTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.occurrenceAttributes.addVisit,
         selected: false,
         action: function () {
-          if (self.Criteria.VisitType() == null)
-            self.Criteria.VisitType(ko.observableArray());
+          if (self.Criteria.VisitType() == null) { self.Criteria.VisitType(ko.observableArray()) }
         },
       },
       {
         ...constants.occurrenceAttributes.addVisitCS,
         selected: false,
         action: function () {
-          if (self.Criteria.VisitTypeCS() == null)
-            self.Criteria.VisitTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.VisitTypeCS() == null) { self.Criteria.VisitTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.occurrenceAttributes.addStopReason,
         selected: false,
         action: function () {
-          if (self.Criteria.StopReason() == null)
+          if (self.Criteria.StopReason() == null) {
             self.Criteria.StopReason(
               new Text({
-                Op: "contains",
+                Op: 'contains',
               })
-            );
+            )
+          }
         },
       },
       {
         ...constants.occurrenceAttributes.addSourceConcept,
         selected: false,
         action: function () {
-          if (self.Criteria.ConditionSourceConcept() == null)
-            self.Criteria.ConditionSourceConcept(ko.observable());
+          if (self.Criteria.ConditionSourceConcept() == null) { self.Criteria.ConditionSourceConcept(ko.observable()) }
         },
       },
       {
         ...constants.occurrenceAttributes.addProviderSpecialty,
         selected: false,
         action: function () {
-          if (self.Criteria.ProviderSpecialty() == null)
-            self.Criteria.ProviderSpecialty(ko.observableArray());
+          if (self.Criteria.ProviderSpecialty() == null) { self.Criteria.ProviderSpecialty(ko.observableArray()) }
         },
       },
       {
         ...constants.occurrenceAttributes.addProviderSpecialtyCS,
         selected: false,
         action: function () {
-          if (self.Criteria.ProviderSpecialtyCS() == null)
-            self.Criteria.ProviderSpecialtyCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.ProviderSpecialtyCS() == null) { self.Criteria.ProviderSpecialtyCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.occurrenceAttributes.addNested,
         selected: false,
         action: function () {
-          if (self.Criteria.CorrelatedCriteria() == null)
+          if (self.Criteria.CorrelatedCriteria() == null) {
             self.Criteria.CorrelatedCriteria(
               new CriteriaGroup(null, self.expression.ConceptSets)
-            );
+            )
+          }
         },
       },
-    ];
+    ]
 
     self.removeCriterion = function (propertyName) {
-      self.Criteria[propertyName](null);
-    };
+      self.Criteria[propertyName](null)
+    }
 
     self.indexMessage = ko.i18nformat(
       'components.conditionOccurrence.indexDataText',
@@ -211,12 +204,12 @@ define([
           ko.i18n('components.conditionOccurrence.anyCondition', 'Any Condition')
         )),
       }
-    );
+    )
   }
 
   // return compoonent definition
   return {
     viewModel: ConditionOccurrenceViewModel,
-    template: template,
-  };
-});
+    template,
+  }
+})

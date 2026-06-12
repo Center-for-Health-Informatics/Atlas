@@ -1,26 +1,26 @@
 define([
-	'knockout', 
-	'text!./prior-editor.html',	
-	'components/Component',
-	'utils/CommonUtils',
-	'../options',
-	'databindings',
+  'knockout',
+  'text!./prior-editor.html',
+  'components/Component',
+  'utils/CommonUtils',
+  '../options',
+  'databindings',
 ], function (
-	ko, 
-	view, 
-	Component,
-	commonUtils,
-	options,
+  ko,
+  view,
+  Component,
+  commonUtils,
+  options
 ) {
-	class PriorEditor extends Component {
-		constructor(params) {
-            super(params);
+  class PriorEditor extends Component {
+    constructor (params) {
+      super(params)
 
-			this.prior = ko.isObservable(params.prior) ? params.prior() : params.prior;
-			this.options = options;
-			this.isEditPermitted = params.isEditPermitted;
-		}
-	}
+      this.prior = ko.isObservable(params.prior) ? params.prior() : params.prior
+      this.options = options
+      this.isEditPermitted = params.isEditPermitted
+    }
+  }
 
-	return commonUtils.build('cyclops-prior-editor', PriorEditor, view);
-});
+  return commonUtils.build('cyclops-prior-editor', PriorEditor, view)
+})

@@ -1,19 +1,19 @@
 define([
-	'knockout', 
-	'text!./naive-bayes-settings.html',	
-	'./ModelSettingsEditorComponent',
-	'utils/CommonUtils',
+  'knockout',
+  'text!./naive-bayes-settings.html',
+  './ModelSettingsEditorComponent',
+  'utils/CommonUtils',
 ], function (
-	ko, 
-	view, 
-	ModelSettingsEditorComponent,
-	commonUtils,
+  ko,
+  view,
+  ModelSettingsEditorComponent,
+  commonUtils
 ) {
-	class NaiveBayesSettings extends ModelSettingsEditorComponent {
-		constructor(params) {
-            	super(params);
-		}
-	}
+  class NaiveBayesSettings extends ModelSettingsEditorComponent {
+    constructor (params) {
+      super(params)
+    }
+  }
 
-	return commonUtils.build('naive-bayes-settings', NaiveBayesSettings, view);
-});
+  return commonUtils.build('naive-bayes-settings', NaiveBayesSettings, view)
+})

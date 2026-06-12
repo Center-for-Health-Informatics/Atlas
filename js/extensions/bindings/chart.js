@@ -1,5 +1,5 @@
 define(['knockout'], (ko) => {
-  function draw(
+  function draw (
     data,
     container,
     minHeight,
@@ -13,29 +13,27 @@ define(['knockout'], (ko) => {
         container.getBoundingClientRect().width,
         Math.max(container.getBoundingClientRect().height, minHeight),
         format
-      );
+      )
     }
   }
 
   ko.bindingHandlers.chart = {
-		update: function (element, valueAccessor) {
-      const chart = valueAccessor();
+    update: function (element, valueAccessor) {
+      const chart = valueAccessor()
       try {
-
-        let format = {};
+        const format = {}
 
         if (chart.format) {
-            for (let [key, value] of Object.entries(chart.format)) {
-                format[`${key}`] = (typeof value === "function") ? ko.unwrap(value) : value;
-            }
+          for (const [key, value] of Object.entries(chart.format)) {
+            format[`${key}`] = (typeof value === 'function') ? ko.unwrap(value) : value
+          }
         }
 
-        draw(chart.data(), element, chart.minHeight, format, chart.renderer);
-
-      } catch(er) {
-        console.error('Error when rendering chart', er);
-        draw(null, element, chart.minHeight, chart.format, chart.renderer);
+        draw(chart.data(), element, chart.minHeight, format, chart.renderer)
+      } catch (er) {
+        console.error('Error when rendering chart', er)
+        draw(null, element, chart.minHeight, chart.format, chart.renderer)
       }
-		}
-	};
-});
+    }
+  }
+})

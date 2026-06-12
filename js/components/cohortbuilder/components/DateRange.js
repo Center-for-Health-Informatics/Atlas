@@ -1,46 +1,46 @@
-define(["knockout", "text!./DateRangeTemplate.html"], function (
+define(['knockout', 'text!./DateRangeTemplate.html'], function (
   ko,
   componentTemplate
 ) {
-  function DateRangeViewModel(params) {
-    var self = this;
-    self.Range = params.Range; // this will be a NumericRange input type.
+  function DateRangeViewModel (params) {
+    const self = this
+    self.Range = params.Range // this will be a NumericRange input type.
 
     self.operationOptions = [
       {
-        id: "lt",
+        id: 'lt',
         name: ko.i18n('components.dateRange.before', 'Before'),
       },
       {
-        id: "lte",
+        id: 'lte',
         name: ko.i18n('components.dateRange.onOrBefore', 'On or Before'),
       },
       {
-        id: "eq",
+        id: 'eq',
         name: ko.i18n('components.dateRange.on', 'On'),
       },
       {
-        id: "gt",
+        id: 'gt',
         name: ko.i18n('components.dateRange.after', 'After'),
       },
       {
-        id: "gte",
+        id: 'gte',
         name: ko.i18n('components.dateRange.onOrAfter', 'On or After'),
       },
       {
-        id: "bt",
+        id: 'bt',
         name: ko.i18n('components.dateRange.between', 'Between'),
       },
       {
-        id: "!bt",
+        id: '!bt',
         name: ko.i18n('components.dateRange.notBetween', 'Not Between'),
       },
-    ];
+    ]
   }
 
   // return compoonent definition
   return {
     viewModel: DateRangeViewModel,
     template: componentTemplate,
-  };
-});
+  }
+})

@@ -21,22 +21,20 @@ define(
     appConfig,
     commonUtils
   ) {
+    const componentName = 'cost-utilization-visit-util'
 
-    const componentName = 'cost-utilization-visit-util';
-
-    const VISIT_CONCEPT = 'visitConcept';
-    const VISIT_TYPE_CONCEPT = 'visitTypeConcept';
+    const VISIT_CONCEPT = 'visitConcept'
+    const VISIT_TYPE_CONCEPT = 'visitTypeConcept'
 
     class VisitUtilReport extends BaseCostUtilReport {
+      constructor (params) {
+        super(params)
 
-      constructor(params) {
-        super(params);
+        this.setupVisitConceptOptions = this.setupVisitConceptOptions.bind(this)
+        this.setupVisitTypeConceptOptions = this.setupVisitTypeConceptOptions.bind(this)
 
-        this.setupVisitConceptOptions = this.setupVisitConceptOptions.bind(this);
-        this.setupVisitTypeConceptOptions = this.setupVisitTypeConceptOptions.bind(this);
-
-        this.window = params.window;
-        this.visitStat = params.visitStat;
+        this.window = params.window
+        this.visitStat = params.visitStat
 
         this.summary = {
           personsCount: ko.observable(),
@@ -55,7 +53,7 @@ define(
           paidPmPm: ko.observable(),
           allowedChargedRatio: ko.observable(),
           paidAllowedRatio: ko.observable(),
-        };
+        }
 
         this.tableColumns = [
           {
@@ -126,20 +124,20 @@ define(
             render: BaseCostUtilReport.formatPreciseNumber,
           },
           ...(appConfig.enableCosts ? this.getCostColumns() : [])
-        ];
+        ]
 
-        const chartList = this.tableColumns.filter(item => item.showInChart);
+        const chartList = this.tableColumns.filter(item => item.showInChart)
 
-        this.chartOptions = ko.observableArray(chartList.map(c => ({ label: c.title, value: c.title })));
-        this.displayedCharts = ko.observableArray(this.chartOptions().map(o => o.value));
+        this.chartOptions = ko.observableArray(chartList.map(c => ({ label: c.title, value: c.title })))
+        this.displayedCharts = ko.observableArray(this.chartOptions().map(o => o.value))
 
-        this.currentTab(this.rawDataTab);
+        this.currentTab(this.rawDataTab)
 
-        this.setupChartsData(chartList);
-        this.init();
+        this.setupChartsData(chartList)
+        this.init()
       }
 
-      getFilterList() {
+      getFilterList () {
         const filters = [
           costUtilConst.getPeriodTypeFilter(this.periods),
           {
@@ -156,61 +154,61 @@ define(
             options: ko.observableArray([]),
             selectedValue: ko.observable(null),
           },
-        ];
-        return filters;
+        ]
+        return filters
       }
 
-      setupVisitConceptOptions(conceptList) {
-        const filter = this.filterList().find(filter => filter.name === VISIT_CONCEPT);
+      setupVisitConceptOptions (conceptList) {
+        const filter = this.filterList().find(filter => filter.name === VISIT_CONCEPT)
         filter.options([
           { label: ko.i18n('options.allVisits', 'All visits'), value: null },
           ...VisitUtilReport.conceptsToOptions(conceptList)
-        ]);
+        ])
       }
 
-      setupVisitTypeConceptOptions(conceptList) {
-        const filter = this.filterList().find(filter => filter.name === VISIT_TYPE_CONCEPT);
+      setupVisitTypeConceptOptions (conceptList) {
+        const filter = this.filterList().find(filter => filter.name === VISIT_TYPE_CONCEPT)
         filter.options([
           { label: ko.i18n('options.allVisitTypes', 'All visit types'), value: null },
           ...VisitUtilReport.conceptsToOptions(conceptList)
-        ]);
+        ])
       }
 
-      fetchAPI({ filters }) {
+      fetchAPI ({ filters }) {
         return CohortResultsService.loadVisitUtilReport({
-            source: this.source,
-            cohortId: this.cohortId,
-            window: this.window,
-            visitStat: this.visitStat,
-            filters,
-          })
+          source: this.source,
+          cohortId: this.cohortId,
+          window: this.window,
+          visitStat: this.visitStat,
+          filters,
+        })
           .then(({ summary, data, visitConcepts, visitTypeConcepts }) => {
-            this.summary.personsCount(BaseCostUtilReport.formatFullNumber(summary.personsCount));
-            this.summary.personsPct(BaseCostUtilReport.formatPercents(summary.personsPct));
-            this.summary.visitsCount(BaseCostUtilReport.formatFullNumber(summary.visitsCount));
-            this.summary.visitsPer1000(BaseCostUtilReport.formatFullNumber(summary.visitsPer1000));
-            this.summary.visitsPer1000WithVisits(BaseCostUtilReport.formatFullNumber(summary.visitsPer1000WithVisits));
-            this.summary.visitsPer1000PerYear(BaseCostUtilReport.formatFullNumber(summary.visitsPer1000PerYear));
-            this.summary.lengthOfStayTotal(BaseCostUtilReport.formatFullNumber(summary.lengthOfStayTotal));
-            this.summary.lengthOfStayAvg(BaseCostUtilReport.formatFullNumber(summary.lengthOfStayAvg));
+            this.summary.personsCount(BaseCostUtilReport.formatFullNumber(summary.personsCount))
+            this.summary.personsPct(BaseCostUtilReport.formatPercents(summary.personsPct))
+            this.summary.visitsCount(BaseCostUtilReport.formatFullNumber(summary.visitsCount))
+            this.summary.visitsPer1000(BaseCostUtilReport.formatFullNumber(summary.visitsPer1000))
+            this.summary.visitsPer1000WithVisits(BaseCostUtilReport.formatFullNumber(summary.visitsPer1000WithVisits))
+            this.summary.visitsPer1000PerYear(BaseCostUtilReport.formatFullNumber(summary.visitsPer1000PerYear))
+            this.summary.lengthOfStayTotal(BaseCostUtilReport.formatFullNumber(summary.lengthOfStayTotal))
+            this.summary.lengthOfStayAvg(BaseCostUtilReport.formatFullNumber(summary.lengthOfStayAvg))
             /* Costs */
-            this.summary.allowed(BaseCostUtilReport.formatPreciseNumber(summary.allowed));
-            this.summary.allowedPmPm(BaseCostUtilReport.formatPreciseNumber(summary.allowedPmPm));
-            this.summary.charged(BaseCostUtilReport.formatPreciseNumber(summary.charged));
-            this.summary.chargedPmPm(BaseCostUtilReport.formatPreciseNumber(summary.chargedPmPm));
-            this.summary.paid(BaseCostUtilReport.formatPreciseNumber(summary.paid));
-            this.summary.paidPmPm(BaseCostUtilReport.formatPreciseNumber(summary.paidPmPm));
-            this.summary.allowedChargedRatio(BaseCostUtilReport.formatPreciseNumber(summary.allowedChargedRatio));
-            this.summary.paidAllowedRatio(BaseCostUtilReport.formatPreciseNumber(summary.paidAllowedRatio));
+            this.summary.allowed(BaseCostUtilReport.formatPreciseNumber(summary.allowed))
+            this.summary.allowedPmPm(BaseCostUtilReport.formatPreciseNumber(summary.allowedPmPm))
+            this.summary.charged(BaseCostUtilReport.formatPreciseNumber(summary.charged))
+            this.summary.chargedPmPm(BaseCostUtilReport.formatPreciseNumber(summary.chargedPmPm))
+            this.summary.paid(BaseCostUtilReport.formatPreciseNumber(summary.paid))
+            this.summary.paidPmPm(BaseCostUtilReport.formatPreciseNumber(summary.paidPmPm))
+            this.summary.allowedChargedRatio(BaseCostUtilReport.formatPreciseNumber(summary.allowedChargedRatio))
+            this.summary.paidAllowedRatio(BaseCostUtilReport.formatPreciseNumber(summary.paidAllowedRatio))
 
-            this.setupVisitConceptOptions(visitConcepts);
-            this.setupVisitTypeConceptOptions(visitTypeConcepts);
+            this.setupVisitConceptOptions(visitConcepts)
+            this.setupVisitTypeConceptOptions(visitTypeConcepts)
 
-            this.dataList(data);
-          });
+            this.dataList(data)
+          })
       }
     }
 
-    return commonUtils.build(componentName, VisitUtilReport, view);
+    return commonUtils.build(componentName, VisitUtilReport, view)
   }
-);
+)

@@ -1,40 +1,37 @@
 define([
-	'knockout',
-	'text!./conceptsetInclusionCount.html',
-	'components/Component',
-	'utils/CommonUtils',
-	'services/ConceptSet',
-], function(
-	ko,
-	view,
-	Component,
-	commonUtils,
-	conceptSetApi,
-){
+  'knockout',
+  'text!./conceptsetInclusionCount.html',
+  'components/Component',
+  'utils/CommonUtils',
+  'services/ConceptSet',
+], function (
+  ko,
+  view,
+  Component,
+  commonUtils,
+  conceptSetApi
+) {
+  class ConceptSetInclusionCount extends Component {
+    constructor (params) {
+      super(params)
+      this.countLoading = ko.observable()
+      this.inclusionCount = ko.observable(0)
+      this.expression = params.conceptSetExpression
 
-	class ConceptSetInclusionCount extends Component {
+      this.conceptSetSubscriptionRateLimit = params.conceptSetSubscriptionRateLimit || 1000
 
-		constructor(params) {
-			super(params);
-			this.countLoading = ko.observable();
-			this.inclusionCount = ko.observable(0);
-			this.expression = params.conceptSetExpression;
+      this.getInclusionCount = this.getInclusionCount.bind(this)
+      this.subscriptions.push(ko.pureComputed(() => ko.toJSON(this.expression())).extend({ rateLimit: { timeout: this.conceptSetSubscriptionRateLimit, method: 'notifyWhenChangesStop' } }).subscribe(this.getInclusionCount))
+      this.getInclusionCount()
+    }
 
-			this.conceptSetSubscriptionRateLimit = params.conceptSetSubscriptionRateLimit || 1000;
+    getInclusionCount () {
+      this.countLoading(true)
+      conceptSetApi.getInclusionCount(this.expression())
+        .then(({ data }) => this.inclusionCount(Number.isInteger(data) ? data : 0))
+        .finally(() => this.countLoading(false))
+    }
+  }
 
-			this.getInclusionCount = this.getInclusionCount.bind(this);
-			this.subscriptions.push(ko.pureComputed(() => ko.toJSON(this.expression())).extend({ rateLimit: { timeout: this.conceptSetSubscriptionRateLimit, method: "notifyWhenChangesStop" } }).subscribe(this.getInclusionCount));
-			this.getInclusionCount();
-		}
-
-		getInclusionCount() {
-			this.countLoading(true);
-			conceptSetApi.getInclusionCount(this.expression())
-				.then(({data}) => this.inclusionCount(Number.isInteger(data) ? data : 0))
-				.finally(() => this.countLoading(false));
-		}
-
-	}
-
-	commonUtils.build('conceptset-inclusion-count', ConceptSetInclusionCount, view);
-});
+  commonUtils.build('conceptset-inclusion-count', ConceptSetInclusionCount, view)
+})

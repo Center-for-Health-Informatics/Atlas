@@ -5,19 +5,18 @@ define([
 ], function (
   ko,
   Poll,
-  sharedState,
+  sharedState
 ) {
   class JobPollService extends Poll.PollServiceClass {
-
-    constructor() {
-      super();
-      this.isJobListMutated = ko.observable();
-      this.isJobListMutated.extend({ notify: 'always' });
+    constructor () {
+      super()
+      this.isJobListMutated = ko.observable()
+      this.isJobListMutated.extend({ notify: 'always' })
     }
 
-    extraActionsAfterCallback() {
-      sharedState.jobListing.valueHasMutated();
+    extraActionsAfterCallback () {
+      sharedState.jobListing.valueHasMutated()
     }
   }
-    return new JobPollService();
-});
+  return new JobPollService()
+})

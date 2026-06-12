@@ -1,137 +1,132 @@
 define([
-  "knockout",
-  "../options",
-  "../utils",
-  "../InputTypes/Range",
-  "../InputTypes/DateAdjustment",
-  "../InputTypes/ConceptSetSelection",
-  "../CriteriaGroup",
-  "text!./DoseEraTemplate.html",
-  "../const",
+  'knockout',
+  '../options',
+  '../utils',
+  '../InputTypes/Range',
+  '../InputTypes/DateAdjustment',
+  '../InputTypes/ConceptSetSelection',
+  '../CriteriaGroup',
+  'text!./DoseEraTemplate.html',
+  '../const',
 ], function (ko, options, utils, Range, DateAdjustment, ConceptSetSelection, CriteriaGroup, template, constants) {
-  function DoseEraViewModel(params) {
-    var self = this;
-    self.expression = ko.utils.unwrapObservable(params.expression);
-    self.Criteria = params.criteria.DoseEra;
-    self.options = options;
+  function DoseEraViewModel (params) {
+    const self = this
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.DoseEra
+    self.options = options
     self.addActions = [
       {
         ...constants.doseAttributes.addFirstDiagnosis,
         selected: false,
         action: function () {
-          if (self.Criteria.First() == null) self.Criteria.First(true);
+          if (self.Criteria.First() == null) self.Criteria.First(true)
         },
       },
       {
         ...constants.doseAttributes.addAgeAtStart,
         selected: false,
         action: function () {
-          if (self.Criteria.AgeAtStart() == null)
-            self.Criteria.AgeAtStart(new Range());
+          if (self.Criteria.AgeAtStart() == null) { self.Criteria.AgeAtStart(new Range()) }
         },
       },
       {
         ...constants.doseAttributes.addAgeAtEnd,
         selected: false,
         action: function () {
-          if (self.Criteria.AgeAtEnd() == null)
-            self.Criteria.AgeAtEnd(new Range());
+          if (self.Criteria.AgeAtEnd() == null) { self.Criteria.AgeAtEnd(new Range()) }
         },
       },
       {
         ...constants.doseAttributes.addGender,
         selected: false,
         action: function () {
-          if (self.Criteria.Gender() == null)
-            self.Criteria.Gender(ko.observableArray());
+          if (self.Criteria.Gender() == null) { self.Criteria.Gender(ko.observableArray()) }
         },
       },
       {
         ...constants.doseAttributes.addGenderCS,
         selected: false,
         action: function () {
-          if (self.Criteria.GenderCS() == null)
-            self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.GenderCS() == null) { self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.doseAttributes.addStartDate,
         selected: false,
         action: function () {
-          if (self.Criteria.EraStartDate() == null)
+          if (self.Criteria.EraStartDate() == null) {
             self.Criteria.EraStartDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
         ...constants.doseAttributes.addEndDate,
         selected: false,
         action: function () {
-          if (self.Criteria.EraEndDate() == null)
+          if (self.Criteria.EraEndDate() == null) {
             self.Criteria.EraEndDate(
               new Range({
-                Op: "lt",
+                Op: 'lt',
               })
-            );
+            )
+          }
         },
       },
       {
         ...constants.doseAttributes.addDateAdjustment,
         selected: false,
         action: function () {
-          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment());
+          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment())
         },
       },
       {
         ...constants.doseAttributes.addUnit,
         selected: false,
         action: function () {
-          if (self.Criteria.Unit() == null)
-            self.Criteria.Unit(ko.observableArray());
+          if (self.Criteria.Unit() == null) { self.Criteria.Unit(ko.observableArray()) }
         },
       },
       {
         ...constants.doseAttributes.addUnitCS,
         selected: false,
         action: function () {
-          if (self.Criteria.UnitCS() == null)
-            self.Criteria.UnitCS(new ConceptSetSelection({}, self.expression.ConceptSets));
+          if (self.Criteria.UnitCS() == null) { self.Criteria.UnitCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
         },
       },
       {
         ...constants.doseAttributes.addLength,
         selected: false,
         action: function () {
-          if (self.Criteria.EraLength() == null)
-            self.Criteria.EraLength(new Range());
+          if (self.Criteria.EraLength() == null) { self.Criteria.EraLength(new Range()) }
         },
       },
       {
         ...constants.doseAttributes.addValue,
         selected: false,
         action: function () {
-          if (self.Criteria.DoseValue() == null)
-            self.Criteria.DoseValue(new Range());
+          if (self.Criteria.DoseValue() == null) { self.Criteria.DoseValue(new Range()) }
         },
       },
       {
         ...constants.doseAttributes.addNested,
         selected: false,
         action: function () {
-          if (self.Criteria.CorrelatedCriteria() == null)
+          if (self.Criteria.CorrelatedCriteria() == null) {
             self.Criteria.CorrelatedCriteria(
               new CriteriaGroup(null, self.expression.ConceptSets)
-            );
+            )
+          }
         },
       },
-    ];
+    ]
 
     self.removeCriterion = function (propertyName) {
-      self.Criteria[propertyName](null);
-    };
+      self.Criteria[propertyName](null)
+    }
 
     self.indexMessage = ko.i18nformat(
       'components.conditionDose.indexDataText',
@@ -143,12 +138,12 @@ define([
           ko.i18n('components.conditionDose.anyDoseEra', 'Any Dose Era')
         ))
       }
-    );
+    )
   }
 
   // return compoonent definition
   return {
     viewModel: DoseEraViewModel,
-    template: template,
-  };
-});
+    template,
+  }
+})

@@ -1,16 +1,15 @@
 define(function (require, exports) {
+  const config = require('appConfig')
+  const authApi = require('services/AuthAPI')
+  const httpService = require('services/http')
 
-	const config = require('appConfig');
-	const authApi = require('services/AuthAPI');
-	const httpService = require('services/http');
+  function getDefaultCovariateSettings (temporal = false) {
+    return httpService.doGet(config.webAPIRoot + 'featureextraction/defaultcovariatesettings?temporal=' + temporal).catch(authApi.handleAccessDenied)
+  }
 
-	function getDefaultCovariateSettings(temporal = false) {
-		return httpService.doGet(config.webAPIRoot + 'featureextraction/defaultcovariatesettings?temporal=' + temporal).catch(authApi.handleAccessDenied);
-	}
+  const api = {
+    getDefaultCovariateSettings,
+  }
 
-	var api = {
-		getDefaultCovariateSettings: getDefaultCovariateSettings,
-	};
-
-	return api;
-});
+  return api
+})

@@ -1,3 +1,3 @@
 define(function (require) {
-    var localStorage = require("./localStorageExtender");
-});
+  const localStorage = require('./localStorageExtender')
+})

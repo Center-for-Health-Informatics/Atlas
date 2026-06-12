@@ -1,13 +1,13 @@
 define([
-  "knockout",
-  "text!./WindowedCriteria.html",
-  "../InputTypes/Window",
-  "components/Component",
-  "utils/AutoBind",
-  "utils/CommonUtils",
-  "../utils",
-  "../options",
-  "less!./WindowedCriteria.less",
+  'knockout',
+  'text!./WindowedCriteria.html',
+  '../InputTypes/Window',
+  'components/Component',
+  'utils/AutoBind',
+  'utils/CommonUtils',
+  '../utils',
+  '../options',
+  'less!./WindowedCriteria.less',
 ], function (
   ko,
   view,
@@ -19,31 +19,31 @@ define([
   options
 ) {
   class WindowedCriteria extends AutoBind(Component) {
-    constructor(params) {
-      super(params);
-      this.expression = params.expression;
-      this.criteria = params.criteria;
-      this.disableObservationPeriod = params.disableObservationPeriod || false;
+    constructor (params) {
+      super(params)
+      this.expression = params.expression
+      this.criteria = params.criteria
+      this.disableObservationPeriod = params.disableObservationPeriod || false
       if (this.disableObservationPeriod && params.defaultObservationPeriod) {
         this.criteria().IgnoreObservationPeriod(
           params.defaultObservationPeriod
-        );
+        )
       }
-      this.options = options;
+      this.options = options
     }
 
-    getCriteriaComponent(data) {
-      return utils.getCriteriaComponent(data);
+    getCriteriaComponent (data) {
+      return utils.getCriteriaComponent(data)
     }
 
-    addEndWindow() {
-      this.criteria().EndWindow(new Window({ UseEndWindow: true }));
+    addEndWindow () {
+      this.criteria().EndWindow(new Window({ UseEndWindow: true }))
     }
 
-    removeEndWindow() {
-      this.criteria().EndWindow(null);
+    removeEndWindow () {
+      this.criteria().EndWindow(null)
     }
   }
 
-  commonUtils.build("windowed-criteria", WindowedCriteria, view);
-});
+  commonUtils.build('windowed-criteria', WindowedCriteria, view)
+})

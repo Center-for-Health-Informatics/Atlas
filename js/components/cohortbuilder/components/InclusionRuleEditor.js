@@ -1,20 +1,20 @@
 define([
-  "knockout",
-  "text!./InclusionRuleEditorTemplate.html",
-  "components/cohortbuilder/components/CriteriaGroup",
-  "ko.sortable",
+  'knockout',
+  'text!./InclusionRuleEditorTemplate.html',
+  'components/cohortbuilder/components/CriteriaGroup',
+  'ko.sortable',
 ], function (ko, template) {
-  function InclusionRuleEditor(params) {
-    var self = this;
-    self.InclusionRule = params.InclusionRule;
-    self.IndexRule = params.IndexRule;
+  function InclusionRuleEditor (params) {
+    const self = this
+    self.InclusionRule = params.InclusionRule
+    self.IndexRule = params.IndexRule
   }
 
-  var component = {
+  const component = {
     viewModel: InclusionRuleEditor,
-    template: template,
-  };
+    template,
+  }
 
   // return component definition
-  return component;
-});
+  return component
+})

@@ -1,11 +1,9 @@
-define(['knockout','components/cohortbuilder/options','components/cohortbuilder/InputTypes/Range', 'text!./DrugEraTemplate.html'], function (ko, options, Range, template) {
-
-	function DrugEraViewModel(params) {
-		
-		var self = this;
-		self.expression = ko.utils.unwrapObservable(params.expression);
-		self.Criteria = params.criteria.DrugEra;
-		self.options = options;
+define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/InputTypes/Range', 'text!./DrugEraTemplate.html'], function (ko, options, Range, template) {
+  function DrugEraViewModel (params) {
+    const self = this
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.DrugEra
+    self.options = options
 
     self.indexMessage = ko.i18nformat(
       'components.conditionDrug.indexDataText',
@@ -17,13 +15,12 @@ define(['knockout','components/cohortbuilder/options','components/cohortbuilder/
           ko.i18n('components.conditionDrug.anyDrug', 'Any Drug')
         ))
       }
-    );
-		
-	}
+    )
+  }
 
-	// return compoonent definition
-	return {
-		viewModel: DrugEraViewModel,
-		template: template
-	};
-});
+  // return compoonent definition
+  return {
+    viewModel: DrugEraViewModel,
+    template
+  }
+})

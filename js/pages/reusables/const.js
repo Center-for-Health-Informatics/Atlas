@@ -1,7 +1,7 @@
 define((require, exports) => {
-	const getPageUrl = (id, section) => `/reusables/${id}/${section}`;
+  const getPageUrl = (id, section) => `/reusables/${id}/${section}`
 
-	return {
-		getPageUrl,
-	};
-});
+  return {
+    getPageUrl,
+  }
+})

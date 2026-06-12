@@ -18,8 +18,8 @@ define(
         label: ko.i18n('options.yy', 'Yearly'),
         value: 'yy',
       },
-    ];
-    
+    ]
+
     const cohortTabModes = {
       definition: 'definition',
       conceptsets: 'conceptsets',
@@ -27,13 +27,13 @@ define(
       reporting: 'reporting',
       explore: 'explore',
       export: 'export',
-    };
-  
+    }
+
     const importTabModes = {
       identifiers: 'identifiers',
       sourcecodes: 'sourcecodes',
       conceptset: 'conceptset',
-    };
+    }
     const conceptSetTabModes = {
       details: 'details',
       included: 'included',
@@ -41,32 +41,32 @@ define(
       included: 'included',
       sourcecodes: 'included-sourcecodes',
       export: 'export',
-    };
+    }
 
     const paths = {
       details: id => `/cohortdefinition/${id}`,
       downloadShiny: (id, sourceKey) => `shiny/download/cohort/${id}/${sourceKey}`,
       publishShiny: (id, sourceKey) => `shiny/publish/cohort/${id}/${sourceKey}`,
-    };
+    }
 
-		const getPeriodTypeFilter = (chosenPeriods) => ({
-			type: 'select',
-			label: ko.i18n('options.periodType', 'Period type'),
-			name: 'periodType',
-			options: ko.observableArray(periods.filter(p => chosenPeriods.includes(p.value))),
-			selectedValue: ko.observable(_.first(chosenPeriods)),
-		});
+    const getPeriodTypeFilter = (chosenPeriods) => ({
+      type: 'select',
+      label: ko.i18n('options.periodType', 'Period type'),
+      name: 'periodType',
+      options: ko.observableArray(periods.filter(p => chosenPeriods.includes(p.value))),
+      selectedValue: ko.observable(_.first(chosenPeriods)),
+    })
 
     const windowType = {
       baseline: 'baseline',
       atrisk: 'atrisk',
-    };
+    }
 
     const visitStat = {
       occurrence: 'occurrence',
       visitdate: 'visitdate',
       caresitedate: 'caresitedate',
-    };
+    }
 
     const rollups = [
       {
@@ -77,7 +77,7 @@ define(
         label: ko.i18n('options.rollupUtilizationDrug', 'Drugs'),
         value: 'rollupUtilizationDrug',
       },
-    ];
+    ]
 
     return {
       importTabModes,
@@ -88,6 +88,6 @@ define(
       getPeriodTypeFilter,
       periods,
       rollups,
-    };
+    }
   }
-);
+)

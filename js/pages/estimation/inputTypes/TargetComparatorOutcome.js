@@ -1,15 +1,15 @@
 define([
-    'services/analysis/Cohort'
+  'services/analysis/Cohort'
 ], function (
-    Cohort
+  Cohort
 ) {
-	class TargetComparatorOutcome {
-        constructor(data = {}) {
-            this.target = data.target || new Cohort();
-            this.comparator = data.comparator || new Cohort();
-            this.outcome = data.outcome || new Cohort();
-        }
-	}
-	
-	return TargetComparatorOutcome;
-});
+  class TargetComparatorOutcome {
+    constructor (data = {}) {
+      this.target = data.target || new Cohort()
+      this.comparator = data.comparator || new Cohort()
+      this.outcome = data.outcome || new Cohort()
+    }
+  }
+
+  return TargetComparatorOutcome
+})

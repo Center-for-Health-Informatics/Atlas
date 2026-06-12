@@ -31,10 +31,10 @@ define([
   lodash,
   consts,
   shinyConsts,
-	view
+  view
 ) {
   class AnalysisExecutionList extends Component {
-    constructor({
+    constructor ({
       analysisId,
       design,
       ExecutionService,
@@ -51,55 +51,55 @@ define([
       selectedSourceId,
       tableOptions,
     }) {
-      super();
-      this.analysisId = analysisId;
+      super()
+      this.analysisId = analysisId
       this.analysisId.subscribe((id) => {
         if (id) {
-          this.loadData();
+          this.loadData()
         }
-      });
-      this.resultsPathPrefix = resultsPathPrefix;
-      this.downloadApiPaths = downloadApiPaths;
-      this.downloadFileName = downloadFileName;
-      this.tableColumns = tableColumns;
-      this.runExecutionInParallel = runExecutionInParallel;
-      this.pollId = null;
-      this.PollService = PollService;
-      this.selectedSourceId = selectedSourceId;
-      this.tableOptions = tableOptions || CommonUtils.getTableOptions('S');
-      this.loading = ko.observable(false);
-      this.downloading = ko.observableArray();
+      })
+      this.resultsPathPrefix = resultsPathPrefix
+      this.downloadApiPaths = downloadApiPaths
+      this.downloadFileName = downloadFileName
+      this.tableColumns = tableColumns
+      this.runExecutionInParallel = runExecutionInParallel
+      this.pollId = null
+      this.PollService = PollService
+      this.selectedSourceId = selectedSourceId
+      this.tableOptions = tableOptions || CommonUtils.getTableOptions('S')
+      this.loading = ko.observable(false)
+      this.downloading = ko.observableArray()
 
-      this.ExecutionService = ExecutionService;
-      this.PermissionService = PermissionService;
-      this.extraExecutionPermissions = extraExecutionPermissions;
-      this.generationDisableReason = generationDisableReason;
+      this.ExecutionService = ExecutionService
+      this.PermissionService = PermissionService
+      this.extraExecutionPermissions = extraExecutionPermissions
+      this.generationDisableReason = generationDisableReason
 
-      this.executionStatuses = consts.executionStatuses;
+      this.executionStatuses = consts.executionStatuses
       this.runningExecutionStatuses = [
         this.executionStatuses.RUNNING,
         this.executionStatuses.STARTED,
-      ];
+      ]
 
-      this.isExitMessageShown = ko.observable(false);
-      this.exitMessage = ko.observable();
+      this.isExitMessageShown = ko.observable(false)
+      this.exitMessage = ko.observable()
 
-      this.executionResultMode = executionResultMode;
-      this.executionGroups = ko.observableArray([]);
-      this.showOnlySourcesWithResults = ko.observable(false);
+      this.executionResultMode = executionResultMode
+      this.executionGroups = ko.observableArray([])
+      this.showOnlySourcesWithResults = ko.observable(false)
       this.filteredExecutionGroups = ko.pureComputed(() => {
         return this.showOnlySourcesWithResults()
-            ? this.executionGroups().filter(eg => eg.submissions().length > 0)
-            : this.executionGroups();
-      });
-      this.executionResultModes = consts.executionResultModes;
-      this.isExecutionDesignShown = ko.observable(false);
-      this.executionDesign = ko.observable(null);
-      this.config = config;
+          ? this.executionGroups().filter(eg => eg.submissions().length > 0)
+          : this.executionGroups()
+      })
+      this.executionResultModes = consts.executionResultModes
+      this.isExecutionDesignShown = ko.observable(false)
+      this.executionDesign = ko.observable(null)
+      this.config = config
 
       this.sourcesColumn = [{
-          render: (s, p, d) => {
-            return `<span>${d.sourceName}</span><span data-bind="template: {
+        render: (s, p, d) => {
+          return `<span>${d.sourceName}</span><span data-bind="template: {
                         name: 'execution-group',
                         data: {
                             ...$data,
@@ -108,14 +108,14 @@ define([
                             isExpanded: $parent.selectedSourceId() == $data.sourceId,
                             toggleSection: () => $parent.toggleSection($data.sourceId)
                         }    
-                    }"></span>`;
-          }
-      }];
+                    }"></span>`
+        }
+      }]
 
-      this.stopping = ko.observable({});
-      this.isSourceStopping = (source) => this.stopping()[source.sourceKey];
+      this.stopping = ko.observable({})
+      this.isSourceStopping = (source) => this.stopping()[source.sourceKey]
 
-      const currentHash = ko.pureComputed(() => design() && design().hashCode);
+      const currentHash = ko.pureComputed(() => design() && design().hashCode)
       const execColumnsMap = {
         Date: {
           title: ko.i18n('columns.date', 'Date'),
@@ -146,106 +146,105 @@ define([
             ? DatatableUtils.renderExecutionResultsView()
             : DatatableUtils.renderExexcutionResultsDownload(this.isResultsViewPermitted.bind(this)),
         }
-      };
-      this.execColumns = tableColumns.map(col => execColumnsMap[col]);
+      }
+      this.execColumns = tableColumns.map(col => execColumnsMap[col])
 
-      this.isViewGenerationsPermitted =  ko.computed(
+      this.isViewGenerationsPermitted = ko.computed(
         () => (this.analysisId() ? this.PermissionService.isPermittedListGenerations(this.analysisId()) : true)
-      );
+      )
 
-      this.isViewGenerationsPermitted && this.startPolling();
+      this.isViewGenerationsPermitted && this.startPolling()
       this.shinyOptions = [
-				{
-					action: this.downloadShinyApp,
-					title: 'components.shiny.button.menu.download',
-					defaultTitle: 'Download'
-				},
-				{
-					action: this.publishShinyApp,
-					title: 'components.shiny.button.menu.publish',
-					defaultTitle: 'Publish'
-				}
-			];
+        {
+          action: this.downloadShinyApp,
+          title: 'components.shiny.button.menu.download',
+          defaultTitle: 'Download'
+        },
+        {
+          action: this.publishShinyApp,
+          title: 'components.shiny.button.menu.publish',
+          defaultTitle: 'Publish'
+        }
+      ]
     }
 
     downloadShinyApp = (source) => {
-      let submission = this.findLatestSubmission(source.sourceKey);
-      let submissionId;
+      const submission = this.findLatestSubmission(source.sourceKey)
+      let submissionId
       if (submission) {
-        submissionId = submission.id;
+        submissionId = submission.id
       }
 
-      let resultsPathPrefix = this.resultsPathPrefix;
-      let apiPath = (resultsPathPrefix && resultsPathPrefix.includes('characterizations'))
+      const resultsPathPrefix = this.resultsPathPrefix
+      const apiPath = (resultsPathPrefix && resultsPathPrefix.includes('characterizations'))
         ? shinyConsts.apiPaths.downloadShinyCC(submissionId, source.sourceKey)
-        : shinyConsts.apiPaths.downloadShinyPW(submissionId, source.sourceKey);
+        : shinyConsts.apiPaths.downloadShinyPW(submissionId, source.sourceKey)
 
       FileService.loadZipNoRename(
         config.api.url + apiPath
       )
-        .catch((e) => console.error("error when downloading: " + e))
-        .finally(() => this.loading(false));
+        .catch((e) => console.error('error when downloading: ' + e))
+        .finally(() => this.loading(false))
     }
 
     publishShinyApp = async (source) => {
-      this.loading = true;
-      let submission = this.findLatestSubmission(source.sourceKey);
-      let submissionId;
+      this.loading = true
+      const submission = this.findLatestSubmission(source.sourceKey)
+      let submissionId
       if (submission) {
-        submissionId = submission.id;
+        submissionId = submission.id
       }
 
-      let resultsPathPrefix = this.resultsPathPrefix;
-      let apiPath = (resultsPathPrefix && resultsPathPrefix.includes('characterizations'))
+      const resultsPathPrefix = this.resultsPathPrefix
+      const apiPath = (resultsPathPrefix && resultsPathPrefix.includes('characterizations'))
         ? shinyConsts.apiPaths.publishShinyCC(submissionId, source.sourceKey)
-        : shinyConsts.apiPaths.publishShinyPW(submissionId, source.sourceKey);
+        : shinyConsts.apiPaths.publishShinyPW(submissionId, source.sourceKey)
 
-      let alertPrefix = (resultsPathPrefix && resultsPathPrefix.includes('characterizations'))
-        ? "Characterization"
-        : "Pathway";
+      const alertPrefix = (resultsPathPrefix && resultsPathPrefix.includes('characterizations'))
+        ? 'Characterization'
+        : 'Pathway'
 
       try {
-        await httpService.doGet(config.api.url + apiPath);
-        alert("Cohort " + alertPrefix + " report is published");
+        await httpService.doGet(config.api.url + apiPath)
+        alert('Cohort ' + alertPrefix + ' report is published')
       } catch (e) {
-        console.error('An error has occurred when publishing', e);
+        console.error('An error has occurred when publishing', e)
         if (e.status === 403) {
-          alert('Permission denied');
+          alert('Permission denied')
         } else {
-          alert('Unexpected error occurred when publishing');
+          alert('Unexpected error occurred when publishing')
         }
       }
     }
 
-    startPolling() {
+    startPolling () {
       this.pollId = this.PollService.add({
         callback: silently => this.loadData({ silently }),
         interval: config.pollInterval,
         isSilentAfterFirstCall: true,
-      });
+      })
     }
 
-    dispose() {
-      this.PollService.stop(this.pollId);
+    dispose () {
+      this.PollService.stop(this.pollId)
     }
 
+    async loadData ({ silently = false } = {}) {
+      !silently && this.loading(true)
 
-    async loadData({ silently = false } = {}) {
-      !silently && this.loading(true);
-
-      const analysisId = this.analysisId();
+      const analysisId = this.analysisId()
 
       try {
-        const allSources = await SourceService.loadSourceList();
-        const executionList = await this.ExecutionService.listExecutions(analysisId);
+        const allSources = await SourceService.loadSourceList()
+        const executionList = await this.ExecutionService.listExecutions(analysisId)
         let sourceList = allSources.filter(({ daimons = [] }) => {
-          const daimonTypes = daimons.map(({ daimonType }) => daimonType);
-          return ['CDM', 'Results'].every(daimonType => daimonTypes.includes(daimonType));
-        });
-        sourceList = lodash.sortBy(sourceList, ['sourceName']);
+          const daimonTypes = daimons.map(({ daimonType }) => daimonType)
+          return ['CDM', 'Results'].every(daimonType => daimonTypes.includes(daimonType))
+        })
+        sourceList = lodash.sortBy(sourceList, ['sourceName'])
         sourceList.forEach(source => {
-          const { sourceKey, sourceName, sourceId } = source;
-          let group = this.getExecutionGroup(sourceKey);
+          const { sourceKey, sourceName, sourceId } = source
+          let group = this.getExecutionGroup(sourceKey)
           if (!group) {
             group = {
               sourceId,
@@ -253,163 +252,162 @@ define([
               sourceName,
               submissions: ko.observableArray(),
               status: ko.observable(),
-            };
-            this.executionGroups.push(group);
+            }
+            this.executionGroups.push(group)
           }
 
-          group.submissions(executionList.filter(({ sourceKey: exSourceKey }) => exSourceKey === sourceKey));
-          this.setExecutionGroupStatus(group);
-        });
-        this.executionGroups.valueHasMutated();
+          group.submissions(executionList.filter(({ sourceKey: exSourceKey }) => exSourceKey === sourceKey))
+          this.setExecutionGroupStatus(group)
+        })
+        this.executionGroups.valueHasMutated()
       } catch (err) {
-        console.error(err);
+        console.error(err)
       } finally {
-        this.loading(false);
+        this.loading(false)
       }
     }
 
-    async showExecutionDesign(executionId) {
+    async showExecutionDesign (executionId) {
       try {
-        this.executionDesign(null);
-        this.isExecutionDesignShown(true);
-        const data = await this.ExecutionService.loadExportDesignByGeneration(executionId);
-        this.executionDesign(data);
+        this.executionDesign(null)
+        this.isExecutionDesignShown(true)
+        const data = await this.ExecutionService.loadExportDesignByGeneration(executionId)
+        this.executionDesign(data)
       } catch (err) {
-        console.error(err);
-        this.executionDesign(null);
-        this.isExecutionDesignShown(false);
-        alert('Failed to load execution design');
+        console.error(err)
+        this.executionDesign(null)
+        this.isExecutionDesignShown(false)
+        alert('Failed to load execution design')
       }
     }
 
-    getExecutionGroup(sourceKey) {
+    getExecutionGroup (sourceKey) {
       return this.executionGroups().find(({ sourceKey: groupSourceKey }) => groupSourceKey === sourceKey)
     }
 
-    showExitMessage(sourceKey, id) {
-      const group = this.getExecutionGroup(sourceKey) || { submissions: ko.observableArray() };
-      const submission = group.submissions().find(({ id: submissionId }) => submissionId === id);
+    showExitMessage (sourceKey, id) {
+      const group = this.getExecutionGroup(sourceKey) || { submissions: ko.observableArray() }
+      const submission = group.submissions().find(({ id: submissionId }) => submissionId === id)
       if (submission && submission.exitMessage) {
-        this.exitMessage(submission.exitMessage);
-        this.isExitMessageShown(true);
+        this.exitMessage(submission.exitMessage)
+        this.isExitMessageShown(true)
       }
     }
 
-    toggleSection(sourceId) {
+    toggleSection (sourceId) {
       if (parseInt(this.selectedSourceId()) === sourceId) {
-        this.selectedSourceId(null);
-        CommonUtils.routeTo(`${this.resultsPathPrefix}${this.analysisId()}/executions`);
+        this.selectedSourceId(null)
+        CommonUtils.routeTo(`${this.resultsPathPrefix}${this.analysisId()}/executions`)
       } else {
-        this.selectedSourceId(sourceId);
-        CommonUtils.routeTo(`${this.resultsPathPrefix}${this.analysisId()}/executions/${sourceId}`);
+        this.selectedSourceId(sourceId)
+        CommonUtils.routeTo(`${this.resultsPathPrefix}${this.analysisId()}/executions/${sourceId}`)
       }
     }
 
-    isGenerationPermitted(sourceKey) {
-      const isPermitted = this.PermissionService.isPermittedGenerate(this.analysisId(), sourceKey);
+    isGenerationPermitted (sourceKey) {
+      const isPermitted = this.PermissionService.isPermittedGenerate(this.analysisId(), sourceKey)
       if (this.extraExecutionPermissions) {
-        return isPermitted && this.extraExecutionPermissions();
+        return isPermitted && this.extraExecutionPermissions()
       }
-      return isPermitted;
+      return isPermitted
     }
 
-    isResultsViewPermitted(sourceKey) {
-      return this.PermissionService.isPermittedResults(sourceKey);
+    isResultsViewPermitted (sourceKey) {
+      return this.PermissionService.isPermittedResults(sourceKey)
     }
 
-    getDisableReason(sourceKey) {
-      if (this.isGenerationPermitted(sourceKey)) return null;
+    getDisableReason (sourceKey) {
+      if (this.isGenerationPermitted(sourceKey)) return null
       if (this.generationDisableReason) {
-        return this.generationDisableReason();
+        return this.generationDisableReason()
       }
     }
 
-    async generate(sourceKey) {
-      this.stopping({ ...this.stopping(), [sourceKey]: false });
-      const executionGroup = this.getExecutionGroup(sourceKey);
-      if (!executionGroup) return false;
+    async generate (sourceKey) {
+      this.stopping({ ...this.stopping(), [sourceKey]: false })
+      const executionGroup = this.getExecutionGroup(sourceKey)
+      if (!executionGroup) return false
       try {
         if (this.runExecutionInParallel) {
-          await ExecutionUtils.StartExecution(executionGroup);
+          await ExecutionUtils.StartExecution(executionGroup)
         }
-        executionGroup.status(this.executionStatuses.PENDING);
-        const data = await this.ExecutionService.generate(this.analysisId(), sourceKey);
+        executionGroup.status(this.executionStatuses.PENDING)
+        const data = await this.ExecutionService.generate(this.analysisId(), sourceKey)
         if (data) {
-          JobDetailsService.createJob(data);
-          this.loadData({silently: true});
+          JobDetailsService.createJob(data)
+          this.loadData({ silently: true })
         }
-      } catch(err) {
-        console.error(err);
-        this.setExecutionGroupStatus(executionGroup);
+      } catch (err) {
+        console.error(err)
+        this.setExecutionGroupStatus(executionGroup)
       }
     }
 
-    cancelGenerate(sourceKey) {
-      this.stopping({...this.stopping(), [sourceKey]: true});
+    cancelGenerate (sourceKey) {
+      this.stopping({ ...this.stopping(), [sourceKey]: true })
       if (confirm(ko.i18n('components.analysisExecution.stopGenerationConfirmation', 'Do you want to stop generation?')())) {
-        this.ExecutionService.cancelGeneration(this.analysisId(), sourceKey);
+        this.ExecutionService.cancelGeneration(this.analysisId(), sourceKey)
       } else {
-        this.stopping({...this.stopping(), [sourceKey]: false});
+        this.stopping({ ...this.stopping(), [sourceKey]: false })
       }
     }
 
-    setExecutionGroupStatus(executionGroup) {
-      executionGroup.status(ExecutionUtils.getExecutionGroupStatus(executionGroup.submissions));
+    setExecutionGroupStatus (executionGroup) {
+      executionGroup.status(ExecutionUtils.getExecutionGroupStatus(executionGroup.submissions))
     }
 
-    checkResults({ sourceKey, callback }) {
-      const submission = this.findLatestSubmission(sourceKey);
+    checkResults ({ sourceKey, callback }) {
+      const submission = this.findLatestSubmission(sourceKey)
       if (submission) {
-        callback(submission.id);
+        callback(submission.id)
       } else {
-        alert(ko.i18n('components.analysisExecution.noCompletedExecutionsForDataSource', 'There is no completed executions for the data source yet')());
+        alert(ko.i18n('components.analysisExecution.noCompletedExecutionsForDataSource', 'There is no completed executions for the data source yet')())
       }
     }
 
-    async downloadResults(generationId) {
-      this.downloading.push(generationId);
+    async downloadResults (generationId) {
+      this.downloading.push(generationId)
       try {
-        await FileService.loadZip(config.webAPIRoot + this.downloadApiPaths.downloadResults(generationId), `${this.downloadFileName}-${generationId}.zip`);
+        await FileService.loadZip(config.webAPIRoot + this.downloadApiPaths.downloadResults(generationId), `${this.downloadFileName}-${generationId}.zip`)
       } finally {
-        this.downloading.remove(generationId);
+        this.downloading.remove(generationId)
       }
     }
 
-    downloadLatestResults(sourceKey) {
+    downloadLatestResults (sourceKey) {
       this.checkResults({
         sourceKey,
         callback: id => this.downloadResults(id),
-      });
+      })
     }
 
-    isDownloadInProgress(id) {
-      return ko.computed(() => this.downloading.indexOf(id) > -1);
+    isDownloadInProgress (id) {
+      return ko.computed(() => this.downloading.indexOf(id) > -1)
     }
 
-    goToResults(executionId) {
-      CommonUtils.routeTo(`${this.resultsPathPrefix}${this.analysisId()}/results/${executionId}`);
+    goToResults (executionId) {
+      CommonUtils.routeTo(`${this.resultsPathPrefix}${this.analysisId()}/results/${executionId}`)
     }
 
-    findLatestSubmission(sourceKey) {
-      const executionGroup = this.getExecutionGroup(sourceKey);
+    findLatestSubmission (sourceKey) {
+      const executionGroup = this.getExecutionGroup(sourceKey)
       if (executionGroup) {
-        const submissions = [...executionGroup.submissions()];
+        const submissions = [...executionGroup.submissions()]
         if (submissions.length > 0) {
-          submissions.sort((a, b) => b.endTime - a.endTime); // sort descending
-          return submissions.find(s => s.status === this.executionStatuses.COMPLETED);
+          submissions.sort((a, b) => b.endTime - a.endTime) // sort descending
+          return submissions.find(s => s.status === this.executionStatuses.COMPLETED)
         }
       }
-      return null;
+      return null
     }
 
-    goToLatestResults(sourceKey) {
+    goToLatestResults (sourceKey) {
       this.checkResults({
         sourceKey,
         callback: id => this.goToResults(id),
-      });
+      })
     }
-
   }
 
-  return CommonUtils.build('analysis-execution-list', AnalysisExecutionList, view);
-});
+  return CommonUtils.build('analysis-execution-list', AnalysisExecutionList, view)
+})

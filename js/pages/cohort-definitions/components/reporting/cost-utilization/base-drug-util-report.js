@@ -13,18 +13,16 @@ define(
     'less!./drug-util-detailed.less',
   ],
   function (ko, view, BaseCostUtilReport, appConfig, BemHelper, commonUtils, config, costUtilConst, CohortResultsService) {
-
-    const DRUG_SOURCE_TYPE = 'drugType';
+    const DRUG_SOURCE_TYPE = 'drugType'
 
     class BaseDrugUtilReport extends BaseCostUtilReport {
+      constructor (params) {
+        super(params)
+        this.setupDrugSourceConceptOptions = this.setupDrugSourceConceptOptions.bind(this)
 
-      constructor(params) {
-        super(params);
-        this.setupDrugSourceConceptOptions = this.setupDrugSourceConceptOptions.bind(this);
+        this.window = params.window
 
-        this.window = params.window;
-
-        this.filtersLoading = ko.observable(false);
+        this.filtersLoading = ko.observable(false)
 
         this.drugsTableColumns = [
           {
@@ -105,12 +103,12 @@ define(
             render: BaseCostUtilReport.formatFullNumber,
           },
           ...(appConfig.enableCosts ? this.getCostColumns() : []),
-        ];
+        ]
 
-        this.tableOptions = commonUtils.getTableOptions('M');
+        this.tableOptions = commonUtils.getTableOptions('M')
       }
 
-      getFilterList() {
+      getFilterList () {
         return [
           costUtilConst.getPeriodTypeFilter(this.periods),
           {
@@ -120,29 +118,29 @@ define(
             options: ko.observableArray([]),
             selectedValue: ko.observable(null),
           },
-        ];
+        ]
       }
 
-      setupDrugSourceConceptOptions(conceptList) {
-        const filter = this.filterList().find(filter => filter.name === DRUG_SOURCE_TYPE);
+      setupDrugSourceConceptOptions (conceptList) {
+        const filter = this.filterList().find(filter => filter.name === DRUG_SOURCE_TYPE)
         filter.options([
           { label: ko.i18n('options.allDrugSources', 'All drug sources'), value: null },
           ...BaseCostUtilReport.conceptsToOptions(conceptList)
-        ]);
+        ])
       }
 
-      async loadFilterOptions({ drugConceptId } = {}) {
-        this.filtersLoading(true);
+      async loadFilterOptions ({ drugConceptId } = {}) {
+        this.filtersLoading(true)
         try {
-          const res = await CohortResultsService.loadDrugTypesConcepts({ source: this.source, cohortId: this.cohortId, drugConceptId });
-          this.setupDrugSourceConceptOptions(res);
+          const res = await CohortResultsService.loadDrugTypesConcepts({ source: this.source, cohortId: this.cohortId, drugConceptId })
+          this.setupDrugSourceConceptOptions(res)
         } catch (e) {
-          console.error(e);
+          console.error(e)
         }
-        this.filtersLoading(false);
+        this.filtersLoading(false)
       }
     }
 
-    return BaseDrugUtilReport;
+    return BaseDrugUtilReport
   }
-);
+)

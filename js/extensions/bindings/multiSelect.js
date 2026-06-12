@@ -5,26 +5,26 @@ define(
   ],
   function (ko) {
     ko.bindingHandlers.multiSelect = {
-      init: function(element, valueAccessor, allBindings, data, context) {
+      init: function (element, valueAccessor, allBindings, data, context) {
         if (data.options) {
-          data.options.subscribe(() => $(element).selectpicker('refresh'));
+          data.options.subscribe(() => $(element).selectpicker('refresh'))
         }
 
         if (data.selectedValues) {
-          data.selectedValues.subscribe(() => $(element).selectpicker('refresh'));
+          data.selectedValues.subscribe(() => $(element).selectpicker('refresh'))
         }
 
         if (data.selectedValue) {
-            data.selectedValue.subscribe(() => $(element).selectpicker('refresh'));
+          data.selectedValue.subscribe(() => $(element).selectpicker('refresh'))
         }
 
-        ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-          $(element).selectpicker('destroy');
-        });
+        ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+          $(element).selectpicker('destroy')
+        })
       },
-      update: function(element, valueAccessor, allBindings, viewModel, bindingContext) {
-        $(element).selectpicker(valueAccessor());
+      update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+        $(element).selectpicker(valueAccessor())
       }
-    };
+    }
   }
-);
+)

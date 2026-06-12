@@ -1,103 +1,101 @@
 define(function (require, exports) {
-	
-	var ko = require('knockout')
-	
-	var expressionEditor = require('./components/CohortExpressionEditor');
-	ko.components.register('cohort-expression-editor', expressionEditor);
+  const ko = require('knockout')
 
-	var initialCriteriaEditor = require('./components/InitialCriteriaEditor');
-	ko.components.register('initial-criteria-editor', initialCriteriaEditor);
+  const expressionEditor = require('./components/CohortExpressionEditor')
+  ko.components.register('cohort-expression-editor', expressionEditor)
 
-	var censoringCriteriaEditor = require('./components/CensoringCriteriaEditor');
-	ko.components.register('censoring-criteria-editor', censoringCriteriaEditor);
-	
-	var inclusionEditor = require('./components/InclusionRuleEditor');
-	ko.components.register('inclusion-rule-editor', inclusionEditor);
-	
-	var criteriaGroup = require('./components/CriteriaGroup');
-	ko.components.register('criteria-group', criteriaGroup);
+  const initialCriteriaEditor = require('./components/InitialCriteriaEditor')
+  ko.components.register('initial-criteria-editor', initialCriteriaEditor)
 
-	var conditionOccurrence = require('./components/ConditionOccurrence');
-	ko.components.register('condition-occurrence-criteria', conditionOccurrence);
+  const censoringCriteriaEditor = require('./components/CensoringCriteriaEditor')
+  ko.components.register('censoring-criteria-editor', censoringCriteriaEditor)
 
-	var conditionEra = require('./components/ConditionEra');
-	ko.components.register('condition-era-criteria', conditionEra);
+  const inclusionEditor = require('./components/InclusionRuleEditor')
+  ko.components.register('inclusion-rule-editor', inclusionEditor)
 
-	var drugExposure = require('./components/DrugExposure');
-	ko.components.register('drug-exposure-criteria', drugExposure);
+  const criteriaGroup = require('./components/CriteriaGroup')
+  ko.components.register('criteria-group', criteriaGroup)
 
-	var drugEra = require('./components/DrugEra');
-	ko.components.register('drug-era-criteria', drugEra);	
-	
-	var doseEra = require('./components/DoseEra');
-	ko.components.register('dose-era-criteria', doseEra);
-	
-	var procedureOccurrence = require('./components/ProcedureOccurrence');
-	ko.components.register('procedure-occurrence-criteria', procedureOccurrence);
-	
-	var observation = require('./components/Observation');
-	ko.components.register('observation-criteria', observation);
-	
-	var visitOccurrence = require('./components/VisitOccurrence');
-	ko.components.register('visit-occurrence-criteria', visitOccurrence);
+  const conditionOccurrence = require('./components/ConditionOccurrence')
+  ko.components.register('condition-occurrence-criteria', conditionOccurrence)
 
-	var visitDetail = require('./components/VisitDetail');
-	ko.components.register('visit-detail-criteria', visitDetail);
-	
-	var deviceExposure = require('./components/DeviceExposure');
-	ko.components.register('device-exposure-criteria', deviceExposure);
+  const conditionEra = require('./components/ConditionEra')
+  ko.components.register('condition-era-criteria', conditionEra)
 
-	var measurement = require('./components/Measurement');
-	ko.components.register('measurement-criteria', measurement);
+  const drugExposure = require('./components/DrugExposure')
+  ko.components.register('drug-exposure-criteria', drugExposure)
 
-	var observationPeriod = require('./components/ObservationPeriod');
-	ko.components.register('observation-period-criteria', observationPeriod);
+  const drugEra = require('./components/DrugEra')
+  ko.components.register('drug-era-criteria', drugEra)
 
-	var specimen = require('./components/Specimen');
-	ko.components.register('specimen-criteria', specimen);
-	
-	var death = require('./components/Death');
-	ko.components.register('death-criteria', death);
+  const doseEra = require('./components/DoseEra')
+  ko.components.register('dose-era-criteria', doseEra)
 
-	var demographicCriteria = require('./components/DemographicCriteria');
-	ko.components.register('demographic-criteria', demographicCriteria);
-	
-	var numericRange = require('./components/NumericRange');
-	ko.components.register('numeric-range', numericRange);
+  const procedureOccurrence = require('./components/ProcedureOccurrence')
+  ko.components.register('procedure-occurrence-criteria', procedureOccurrence)
 
-	var dateRange = require('./components/DateRange');
-	ko.components.register('date-range', dateRange);
-	
-	var dateAdjustment = require('./components/DateAdjustment');
-	ko.components.register('date-adjustment', dateAdjustment);
+  const observation = require('./components/Observation')
+  ko.components.register('observation-criteria', observation)
 
-	var windowInput = require('./components/WindowInput');
-	ko.components.register('window-input',windowInput);
-	
-	var textFilter = require('./components/TextFilter');
-	ko.components.register('text-filter-input',textFilter);	
-	
-	var periodInput = require('./components/Period');
-	ko.components.register('period-input',periodInput);
+  const visitOccurrence = require('./components/VisitOccurrence')
+  ko.components.register('visit-occurrence-criteria', visitOccurrence)
 
-	var cycleToggleInput = require('./components/CycleToggleInput');
-	ko.components.register('cycle-toggle-input', cycleToggleInput);
+  const visitDetail = require('./components/VisitDetail')
+  ko.components.register('visit-detail-criteria', visitDetail)
 
-	var conceptList = require('./components/ConceptList');
-	ko.components.register('concept-list',conceptList);
-	
-	var endStrategyEditor = require('./components/EndStrategyEditor');
-	ko.components.register('end-strategy-editor', endStrategyEditor);
+  const deviceExposure = require('./components/DeviceExposure')
+  ko.components.register('device-exposure-criteria', deviceExposure)
 
-	var conceptSetPreview = require('./components/ConceptSetQuickview');
-	ko.components.register('conceptset-quickview', conceptSetPreview);
-	
-	var payerPlanPeriod = require('./components/PayerPlanPeriod');
-	ko.components.register('payer-plan-period-criteria', payerPlanPeriod);
+  const measurement = require('./components/Measurement')
+  ko.components.register('measurement-criteria', measurement)
 
-	var locationRegion = require('./components/LocationRegion');
-	ko.components.register('location-region-criteria', locationRegion);
+  const observationPeriod = require('./components/ObservationPeriod')
+  ko.components.register('observation-period-criteria', observationPeriod)
 
-	require('./components/WindowedCriteria');
-	
-});
+  const specimen = require('./components/Specimen')
+  ko.components.register('specimen-criteria', specimen)
+
+  const death = require('./components/Death')
+  ko.components.register('death-criteria', death)
+
+  const demographicCriteria = require('./components/DemographicCriteria')
+  ko.components.register('demographic-criteria', demographicCriteria)
+
+  const numericRange = require('./components/NumericRange')
+  ko.components.register('numeric-range', numericRange)
+
+  const dateRange = require('./components/DateRange')
+  ko.components.register('date-range', dateRange)
+
+  const dateAdjustment = require('./components/DateAdjustment')
+  ko.components.register('date-adjustment', dateAdjustment)
+
+  const windowInput = require('./components/WindowInput')
+  ko.components.register('window-input', windowInput)
+
+  const textFilter = require('./components/TextFilter')
+  ko.components.register('text-filter-input', textFilter)
+
+  const periodInput = require('./components/Period')
+  ko.components.register('period-input', periodInput)
+
+  const cycleToggleInput = require('./components/CycleToggleInput')
+  ko.components.register('cycle-toggle-input', cycleToggleInput)
+
+  const conceptList = require('./components/ConceptList')
+  ko.components.register('concept-list', conceptList)
+
+  const endStrategyEditor = require('./components/EndStrategyEditor')
+  ko.components.register('end-strategy-editor', endStrategyEditor)
+
+  const conceptSetPreview = require('./components/ConceptSetQuickview')
+  ko.components.register('conceptset-quickview', conceptSetPreview)
+
+  const payerPlanPeriod = require('./components/PayerPlanPeriod')
+  ko.components.register('payer-plan-period-criteria', payerPlanPeriod)
+
+  const locationRegion = require('./components/LocationRegion')
+  ko.components.register('location-region-criteria', locationRegion)
+
+  require('./components/WindowedCriteria')
+})

@@ -1,15 +1,15 @@
-define(['services/http', 'appConfig'], function(httpService, config) {
-  function createSample(payload, { cohortDefinitionId, sourceKey }) {
+define(['services/http', 'appConfig'], function (httpService, config) {
+  function createSample (payload, { cohortDefinitionId, sourceKey }) {
     return httpService
       .doPost(
         `${config.webAPIRoot}cohortsample/${cohortDefinitionId}/${sourceKey}`,
         {
           ...payload,
         }
-      ).then(res => res.data);
+      ).then(res => res.data)
   }
 
-  function getSampleList({ cohortDefinitionId, sourceKey }) {
+  function getSampleList ({ cohortDefinitionId, sourceKey }) {
     return httpService
       .doGet(
         `${config.webAPIRoot}cohortsample/${cohortDefinitionId}/${sourceKey}`
@@ -17,7 +17,7 @@ define(['services/http', 'appConfig'], function(httpService, config) {
       .then(res => res.data)
   }
 
-  function getSample({ cohortDefinitionId, sourceKey, sampleId }) {
+  function getSample ({ cohortDefinitionId, sourceKey, sampleId }) {
     return httpService
       .doGet(
         `${config.webAPIRoot}cohortsample/${cohortDefinitionId}/${sourceKey}/${sampleId}`
@@ -25,7 +25,7 @@ define(['services/http', 'appConfig'], function(httpService, config) {
       .then(res => res.data)
   }
 
-  function refreshSample({ cohortDefinitionId, sourceKey, sampleId }) {
+  function refreshSample ({ cohortDefinitionId, sourceKey, sampleId }) {
     return httpService
       .doPost(
         `${config.webAPIRoot}cohortsample/${cohortDefinitionId}/${sourceKey}/${sampleId}/refresh`,
@@ -34,7 +34,7 @@ define(['services/http', 'appConfig'], function(httpService, config) {
       .then(res => res.data)
   }
 
-  function deleteSample({ cohortDefinitionId, sourceKey, sampleId }) {
+  function deleteSample ({ cohortDefinitionId, sourceKey, sampleId }) {
     return httpService.doDelete(
       `${config.webAPIRoot}cohortsample/${cohortDefinitionId}/${sourceKey}/${sampleId}`
     )

@@ -1,13 +1,13 @@
 define(['knockout'], function (ko) {
-	var debug = false;
+  const debug = false
 
-	function Text(data) {
-		var self = this;
-		data = data || {};
+  function Text (data) {
+    const self = this
+    data = data || {}
 
-		self.Text = ko.observable(data.Text || null);
-		self.Op = ko.observable(data.Op || 'contains');
-	}
+    self.Text = ko.observable(data.Text || null)
+    self.Op = ko.observable(data.Op || 'contains')
+  }
 
-	return Text;
-});
+  return Text
+})

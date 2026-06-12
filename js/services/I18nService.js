@@ -1,49 +1,46 @@
-define(function(require, exports){
+define(function (require, exports) {
+  const config = require('appConfig')
+  const http = require('services/http')
+  const sharedState = require('atlas-state')
 
-	const config = require('appConfig');
-	const http = require("services/http");
-	const sharedState = require('atlas-state');
+  function getCurrentLocale () {
+    // stored lang
+    if (localStorage.locale && localStorage.locale !== 'null') {
+      return localStorage.locale
+    }
 
-	function getCurrentLocale() {
-		// stored lang
-		if (localStorage.locale && localStorage.locale !== 'null') {
-			return localStorage.locale;
-		}
+    // default navigator lang
+    const navigatorLang = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage
+    if (navigatorLang && navigatorLang.length >= 2) {
+      return navigatorLang.substr(0, 2) // ISO 639-1
+    }
 
-		// default navigator lang
-		const navigatorLang = (navigator.languages && navigator.languages[0]) || navigator.language || navigator.userLanguage;
-		if (navigatorLang && navigatorLang.length >= 2) {
-			return navigatorLang.substr(0, 2); // ISO 639-1
-		}
+    return config.defaultLocale
+  }
 
-		return config.defaultLocale;
-	}
+  function getLocale (locale) {
+    return http.doGet(`${config.webAPIRoot}i18n?lang=${locale}`)
+      .then(({ data }) => sharedState.localeSettings(data))
+  }
 
-	function getLocale(locale) {
+  async function changeLocale (locale) {
+    localStorage.locale = locale
+    await getLocale(locale)
+  }
 
-		return http.doGet(`${config.webAPIRoot}i18n?lang=${locale}`)
-			.then(({data}) => sharedState.localeSettings(data));
-	}
+  function getAvailableLocales () {
+    return http.doGet(`${config.webAPIRoot}i18n/locales`)
+      .then(({ data }) => {
+        sharedState.availableLocales(data)
+        const locale = getCurrentLocale()
+        sharedState.locale(locale)
+        changeLocale(locale)
+        sharedState.locale.subscribe(l => changeLocale(l))
+      })
+  }
 
-	async function changeLocale(locale) {
-		localStorage.locale = locale;
-		await getLocale(locale);
-	}
-
-	function getAvailableLocales() {
-
-		return http.doGet(`${config.webAPIRoot}i18n/locales`)
-			.then(({data}) => {
-				sharedState.availableLocales(data);
-				const locale = getCurrentLocale();
-				sharedState.locale(locale);
-				changeLocale(locale);
-				sharedState.locale.subscribe(l => changeLocale(l));
-			});
-	}
-
-	return {
-		getAvailableLocales,
-		getLocale,
-	};
-});
+  return {
+    getAvailableLocales,
+    getLocale,
+  }
+})

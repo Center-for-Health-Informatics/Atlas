@@ -17,16 +17,14 @@ define(
     costUtilConst,
     commonUtils
   ) {
-
-    const componentName = 'cost-utilization-drug-detailed-util';
+    const componentName = 'cost-utilization-drug-detailed-util'
 
     class DrugUtilDetailedReport extends BaseDrugUtilReport {
+      constructor (params) {
+        super(params)
 
-      constructor(params) {
-        super(params);
-
-        this.drugConceptId = params.drugConceptId();
-        this.displaySummary = params.displaySummary;
+        this.drugConceptId = params.drugConceptId()
+        this.displaySummary = params.displaySummary
 
         this.drugsTableColumns = [
           {
@@ -40,38 +38,37 @@ define(
             className: this.classes('tbl-col', 'period-end'),
           },
           ...this.drugsTableColumns,
-        ];
+        ]
 
+        const chartList = this.drugsTableColumns.filter(item => item.showInChart)
 
-        const chartList = this.drugsTableColumns.filter(item => item.showInChart);
+        this.chartOptions = ko.observableArray(chartList.map(c => ({ label: c.title, value: c.title })))
+        this.displayedCharts = ko.observableArray(this.chartOptions().map(o => o.value))
 
-        this.chartOptions = ko.observableArray(chartList.map(c => ({ label: c.title, value: c.title })));
-        this.displayedCharts = ko.observableArray(this.chartOptions().map(o => o.value));
-
-        this.init();
-        this.setupChartsData(chartList);
-        this.loadFilterOptions({ drugConceptId: this.drugConceptId });
+        this.init()
+        this.setupChartsData(chartList)
+        this.loadFilterOptions({ drugConceptId: this.drugConceptId })
       }
 
-      getFilterList() {
+      getFilterList () {
         return [
           costUtilConst.getPeriodTypeFilter(this.periods),
           ...super.getFilterList(),
-        ];
+        ]
       }
 
-      fetchAPI({ filters }) {
+      fetchAPI ({ filters }) {
         return CohortResultsService.loadDrugUtilDetailedReport({
-            source: this.source,
-            cohortId: this.cohortId,
-            window: this.window,
-            drugConceptId: this.drugConceptId,
-            filters,
-          })
-          .then(({ data }) => this.dataList(data));
+          source: this.source,
+          cohortId: this.cohortId,
+          window: this.window,
+          drugConceptId: this.drugConceptId,
+          filters,
+        })
+          .then(({ data }) => this.dataList(data))
       }
     }
 
-    return commonUtils.build(componentName, DrugUtilDetailedReport, view);
+    return commonUtils.build(componentName, DrugUtilDetailedReport, view)
   }
-);
+)

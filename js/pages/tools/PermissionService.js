@@ -1,24 +1,23 @@
 define([
-	'services/AuthAPI',
+  'services/AuthAPI',
 ], function (
-	AuthAPI,
+  AuthAPI
 ) {
-	return class PermissionService {
+  return class PermissionService {
+    static isPermittedReadTools () {
+      return AuthAPI.isPermitted('tool:get')
+    }
 
-		static isPermittedReadTools() {
-			return AuthAPI.isPermitted('tool:get');
-		}
+    static isPermittedCreateTool () {
+      return AuthAPI.isPermitted('tool:post')
+    }
 
-		static isPermittedCreateTool() {
-			return AuthAPI.isPermitted('tool:post');
-		}
+    static isPermittedUpdateTool () {
+      return AuthAPI.isPermitted('tool:put')
+    }
 
-		static isPermittedUpdateTool() {
-			return AuthAPI.isPermitted('tool:put');
-		}
-
-		static isPermittedDeleteTool() {
-			return AuthAPI.isPermitted('tool:*:delete');
-		}
-	}
-});
+    static isPermittedDeleteTool () {
+      return AuthAPI.isPermitted('tool:*:delete')
+    }
+  }
+})

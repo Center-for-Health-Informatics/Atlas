@@ -24,79 +24,77 @@ define(
     CsvUtils,
     commonUtils,
     numeral
-  , CohortResultsService, lodash) {
-
+    , CohortResultsService, lodash) {
     class BaseCostUtilReport extends Component {
-
-      constructor(params) {
+      constructor (params) {
         // Preserve context, because it can be lost during knockout handling
-        super(params);
-        this.getFilterList = this.getFilterList.bind(this);
-        this.loadData = this.loadData.bind(this);
-        this.getSelectedFilterValues = this.getSelectedFilterValues.bind(this);
-        this.applyFilters = this.applyFilters.bind(this);
-        this.createChartData = this.createChartData.bind(this);
-        this.createChartDataObservable = this.createChartDataObservable.bind(this);
-        this.init = this.init.bind(this);
-        this.buildSearchUrl = this.buildSearchUrl.bind(this);
-        this.saveAsCsv = this.saveAsCsv.bind(this);
-        this.setupChartsData = this.setupChartsData.bind(this);
+        super(params)
+        this.getFilterList = this.getFilterList.bind(this)
+        this.loadData = this.loadData.bind(this)
+        this.getSelectedFilterValues = this.getSelectedFilterValues.bind(this)
+        this.applyFilters = this.applyFilters.bind(this)
+        this.createChartData = this.createChartData.bind(this)
+        this.createChartDataObservable = this.createChartDataObservable.bind(this)
+        this.init = this.init.bind(this)
+        this.buildSearchUrl = this.buildSearchUrl.bind(this)
+        this.saveAsCsv = this.saveAsCsv.bind(this)
+        this.setupChartsData = this.setupChartsData.bind(this)
 
-        this.enableCosts = appConfig.enableCosts;
+        this.enableCosts = appConfig.enableCosts
 
         // Input params
 
-        this.source = params.source();
-        this.cohortId = params.cohortId();
+        this.source = params.source()
+        this.cohortId = params.cohortId()
 
         // Styling
 
-        this.loading = ko.observable(true);
+        this.loading = ko.observable(true)
 
         // Tabs
 
-        this.visualizationTab = 0;
-        this.rawDataTab = 1;
+        this.visualizationTab = 0
+        this.rawDataTab = 1
         this.tabLabels = {
           [this.visualizationTab]: ko.unwrap(ko.i18n('cohortDefinitions.costUtilization.visualization', 'Visualization')),
           [this.rawDataTab]: ko.unwrap(ko.i18n('cohortDefinitions.costUtilization.rawData', 'Raw data')),
-        };
-        this.currentTab = ko.observable(this.visualizationTab);
+        }
+        this.currentTab = ko.observable(this.visualizationTab)
 
         // Data
 
-        this.filterList = ko.observableArray([]);
-        this.dataList = ko.observableArray([]);
+        this.filterList = ko.observableArray([])
+        this.dataList = ko.observableArray([])
 
         // Charts formatters
 
-        this.dateTickFormat = d3.timeFormat('%Y-%m-%d');
-        this.emptyTickFormat = () => null;
-        this.formatDate = val => MomentAPI.formatDate(val, 'D MMM Y'); // TODO: display interval
-        this.formatRounded = d3.format(".0s");
-        this.tableOptions = commonUtils.getTableOptions('M');
+        this.dateTickFormat = d3.timeFormat('%Y-%m-%d')
+        this.emptyTickFormat = () => null
+        this.formatDate = val => MomentAPI.formatDate(val, 'D MMM Y') // TODO: display interval
+        this.formatRounded = d3.format('.0s')
+        this.tableOptions = commonUtils.getTableOptions('M')
       }
 
-      static conceptsToOptions(conceptList) {
+      static conceptsToOptions (conceptList) {
         return lodash.sortBy(
-            conceptList.map(el => ({ label: el.conceptName, value: el.conceptId })),
-            ['label']
-        );
+          conceptList.map(el => ({ label: el.conceptName, value: el.conceptId })),
+          ['label']
+        )
       }
 
-      static formatFullNumber(val) {
-        return numeral(val).format();
+      static formatFullNumber (val) {
+        return numeral(val).format()
       }
 
-      static formatPreciseNumber(val) {
-        return numeral(val).format('0,0.00');
+      static formatPreciseNumber (val) {
+        return numeral(val).format('0,0.00')
       }
 
-      static formatPercents(val) {
-        return numeral(val).format('0,0.00') + '%';
+      static formatPercents (val) {
+        return numeral(val).format('0,0.00') + '%'
       }
 
-      getCostColumns() {
+      getCostColumns () {
         return [
           {
             title: ko.i18n('columns.allowed', 'Allowed cost'),
@@ -154,70 +152,70 @@ define(
             showInChart: true,
             render: BaseCostUtilReport.formatPreciseNumber,
           },
-        ];
+        ]
       }
 
-      getTooltipBuilder(options) {
+      getTooltipBuilder (options) {
         return (d) => {
-          let tipText = '';
-          tipText += `Period: ${options.xFormat(d.xValue)} - ${options.xFormat(d.periodEnd)}</br>`;
-          tipText += `${options.yLabel}: ${BaseCostUtilReport.formatPreciseNumber(d.yValue)}`;
-          return tipText;
-        };
+          let tipText = ''
+          tipText += `Period: ${options.xFormat(d.xValue)} - ${options.xFormat(d.periodEnd)}</br>`
+          tipText += `${options.yLabel}: ${BaseCostUtilReport.formatPreciseNumber(d.yValue)}`
+          return tipText
+        }
       };
 
-      getFilterList() {
-        throw new Error('Should be overriden!');
+      getFilterList () {
+        throw new Error('Should be overriden!')
       }
 
-      buildSearchUrl() {
-        throw new Error('Should be overriden!');
+      buildSearchUrl () {
+        throw new Error('Should be overriden!')
       }
 
-      async loadData(filters) {
-        this.loading(true);
+      async loadData (filters) {
+        this.loading(true)
         try {
-          const res = await this.fetchAPI({ filters });
+          const res = await this.fetchAPI({ filters })
         } catch (e) {
-          console.error(e);
+          console.error(e)
         }
-        this.loading(false);
+        this.loading(false)
       }
-      
-      async initializePeriods() {
+
+      async initializePeriods () {
         try {
-          this.periods = await CohortResultsService.loadPeriods({ source: this.source, cohortId: this.cohortId, window: this.window });
+          this.periods = await CohortResultsService.loadPeriods({ source: this.source, cohortId: this.cohortId, window: this.window })
         } catch (e) {
-          console.error(e);
+          console.error(e)
         }
       }
 
-      getSelectedFilterValues() {
-        return filterPanelUtils.getSelectedFilterValues(this.filterList());
+      getSelectedFilterValues () {
+        return filterPanelUtils.getSelectedFilterValues(this.filterList())
       }
 
-      applyFilters() {
-        this.loadData(this.getSelectedFilterValues());
+      applyFilters () {
+        this.loadData(this.getSelectedFilterValues())
       }
 
-      saveAsCsv() {
-        CsvUtils.saveAsCsv(this.dataList());
+      saveAsCsv () {
+        CsvUtils.saveAsCsv(this.dataList())
       }
 
-      createChartData(yValueField) {
+      createChartData (yValueField) {
         return this.dataList().map((entry, idx) => ({
           id: idx,
           xValue: moment(entry.periodStart).toDate(),
           periodEnd: moment(entry.periodEnd).toDate(),
           yValue: parseFloat(entry[yValueField]) || 0,
-        }));
+        }))
       }
 
-      createChartDataObservable(yValueField) {
-        return ko.computed(() => this.createChartData(yValueField));
+      createChartDataObservable (yValueField) {
+        return ko.computed(() => this.createChartData(yValueField))
       }
 
-      setupChartsData(lines) {
+      setupChartsData (lines) {
         this.chartDataList = ko.computed(() =>
           lines
             .map(line => ({
@@ -226,18 +224,16 @@ define(
               visible: ko.computed(() => this.displayedCharts().includes(line.title)),
               yFormat: line.yFormat,
             }))
-        );
+        )
       }
 
-      async init() {
-        await this.initializePeriods();
-        await this.filterList(this.getFilterList());
-        await this.loadData(this.getSelectedFilterValues());
+      async init () {
+        await this.initializePeriods()
+        await this.filterList(this.getFilterList())
+        await this.loadData(this.getSelectedFilterValues())
       }
-
     }
 
-    return BaseCostUtilReport;
-
+    return BaseCostUtilReport
   }
 )

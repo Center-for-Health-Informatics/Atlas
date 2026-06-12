@@ -1,229 +1,229 @@
 define(function (require, exports) {
-  var NaiveBayesSettings = require("./modelSettings/NaiveBayesSettings");
-  var RandomForestSettings = require("./modelSettings/RandomForestSettings");
-  var MLPSettings = require("./modelSettings/MLPSettings");
-  var KNNSettings = require("./modelSettings/KNNSettings");
-  var GradientBoostingMachineSettings = require("./modelSettings/GradientBoostingMachineSettings");
-  var DecisionTreeSettings = require("./modelSettings/DecisionTreeSettings");
-  var AdaBoostSettings = require("./modelSettings/AdaBoostSettings");
-  var LassoLogisticRegressionSettings = require("./modelSettings/LassoLogisticRegressionSettings");
-  var utils = require("../utils");
-  var ko = require("knockout");
+  const NaiveBayesSettings = require('./modelSettings/NaiveBayesSettings')
+  const RandomForestSettings = require('./modelSettings/RandomForestSettings')
+  const MLPSettings = require('./modelSettings/MLPSettings')
+  const KNNSettings = require('./modelSettings/KNNSettings')
+  const GradientBoostingMachineSettings = require('./modelSettings/GradientBoostingMachineSettings')
+  const DecisionTreeSettings = require('./modelSettings/DecisionTreeSettings')
+  const AdaBoostSettings = require('./modelSettings/AdaBoostSettings')
+  const LassoLogisticRegressionSettings = require('./modelSettings/LassoLogisticRegressionSettings')
+  const utils = require('../utils')
+  const ko = require('knockout')
 
-  function GetSettingNameFromObject(data) {
-    if (data.hasOwnProperty("NaiveBayesSettings")) {
-      return "NaiveBayesSettings";
-    } else if (data.hasOwnProperty("RandomForestSettings")) {
-      return "RandomForestSettings";
-    } else if (data.hasOwnProperty("MLPSettings")) {
-      return "MLPSettings";
-    } else if (data.hasOwnProperty("KNNSettings")) {
-      return "KNNSettings";
-    } else if (data.hasOwnProperty("GradientBoostingMachineSettings")) {
-      return "GradientBoostingMachineSettings";
-    } else if (data.hasOwnProperty("DecisionTreeSettings")) {
-      return "DecisionTreeSettings";
-    } else if (data.hasOwnProperty("AdaBoostSettings")) {
-      return "AdaBoostSettings";
-    } else if (data.hasOwnProperty("LassoLogisticRegressionSettings")) {
-      return "LassoLogisticRegressionSettings";
+  function GetSettingNameFromObject (data) {
+    if (data.hasOwnProperty('NaiveBayesSettings')) {
+      return 'NaiveBayesSettings'
+    } else if (data.hasOwnProperty('RandomForestSettings')) {
+      return 'RandomForestSettings'
+    } else if (data.hasOwnProperty('MLPSettings')) {
+      return 'MLPSettings'
+    } else if (data.hasOwnProperty('KNNSettings')) {
+      return 'KNNSettings'
+    } else if (data.hasOwnProperty('GradientBoostingMachineSettings')) {
+      return 'GradientBoostingMachineSettings'
+    } else if (data.hasOwnProperty('DecisionTreeSettings')) {
+      return 'DecisionTreeSettings'
+    } else if (data.hasOwnProperty('AdaBoostSettings')) {
+      return 'AdaBoostSettings'
+    } else if (data.hasOwnProperty('LassoLogisticRegressionSettings')) {
+      return 'LassoLogisticRegressionSettings'
     }
   }
 
-  function GetSettingsFromObject(data) {
+  function GetSettingsFromObject (data) {
     switch (this.GetSettingNameFromObject(data)) {
-      case "NaiveBayesSettings":
+      case 'NaiveBayesSettings':
         return {
           NaiveBayesSettings: new exports.NaiveBayesSettings(
             data.NaiveBayesSettings
           ),
-        };
-        break;
-      case "RandomForestSettings":
+        }
+        break
+      case 'RandomForestSettings':
         return {
           RandomForestSettings: new exports.RandomForestSettings(
             data.RandomForestSettings
           ),
-        };
-        break;
-      case "MLPSettings":
+        }
+        break
+      case 'MLPSettings':
         return {
           MLPSettings: new exports.MLPSettings(data.MLPSettings),
-        };
-        break;
-      case "KNNSettings":
+        }
+        break
+      case 'KNNSettings':
         return {
           KNNSettings: new exports.KNNSettings(data.KNNSettings),
-        };
-        break;
-      case "GradientBoostingMachineSettings":
+        }
+        break
+      case 'GradientBoostingMachineSettings':
         return {
           GradientBoostingMachineSettings: new exports.GradientBoostingMachineSettings(
             data.GradientBoostingMachineSettings
           ),
-        };
-        break;
-      case "DecisionTreeSettings":
+        }
+        break
+      case 'DecisionTreeSettings':
         return {
           DecisionTreeSettings: new exports.DecisionTreeSettings(
             data.DecisionTreeSettings
           ),
-        };
-        break;
-      case "AdaBoostSettings":
+        }
+        break
+      case 'AdaBoostSettings':
         return {
           AdaBoostSettings: new exports.AdaBoostSettings(data.AdaBoostSettings),
-        };
-        break;
-      case "LassoLogisticRegressionSettings":
+        }
+        break
+      case 'LassoLogisticRegressionSettings':
         return {
           LassoLogisticRegressionSettings: new exports.LassoLogisticRegressionSettings(
             data.LassoLogisticRegressionSettings
           ),
-        };
-        break;
+        }
+        break
       default:
-        console.error("Model Settings not found!");
-        break;
+        console.error('Model Settings not found!')
+        break
     }
   }
 
-  function GetOptionsFromObject(data) {
-    const settingName = this.GetSettingNameFromObject(data);
-    return exports.options.find((f) => f.key === settingName);
+  function GetOptionsFromObject (data) {
+    const settingName = this.GetSettingNameFromObject(data)
+    return exports.options.find((f) => f.key === settingName)
   }
 
-  exports.NaiveBayesSettings = NaiveBayesSettings;
-  exports.RandomForestSettings = RandomForestSettings;
-  exports.MLPSettings = MLPSettings;
-  exports.KNNSettings = KNNSettings;
-  exports.GradientBoostingMachineSettings = GradientBoostingMachineSettings;
-  exports.DecisionTreeSettings = DecisionTreeSettings;
-  exports.AdaBoostSettings = AdaBoostSettings;
-  exports.LassoLogisticRegressionSettings = LassoLogisticRegressionSettings;
+  exports.NaiveBayesSettings = NaiveBayesSettings
+  exports.RandomForestSettings = RandomForestSettings
+  exports.MLPSettings = MLPSettings
+  exports.KNNSettings = KNNSettings
+  exports.GradientBoostingMachineSettings = GradientBoostingMachineSettings
+  exports.DecisionTreeSettings = DecisionTreeSettings
+  exports.AdaBoostSettings = AdaBoostSettings
+  exports.LassoLogisticRegressionSettings = LassoLogisticRegressionSettings
 
-  exports.GetSettingNameFromObject = GetSettingNameFromObject;
-  exports.GetSettingsFromObject = GetSettingsFromObject;
-  exports.GetOptionsFromObject = GetOptionsFromObject;
+  exports.GetSettingNameFromObject = GetSettingNameFromObject
+  exports.GetSettingsFromObject = GetSettingsFromObject
+  exports.GetOptionsFromObject = GetOptionsFromObject
 
   exports.options = [
     {
-      key: "LassoLogisticRegressionSettings",
-      name: "predictions.inputTypes.lassoLogisticRegression",
-      defaultName: "Lasso Logistic Regression",
-      editor: "lasso-logistic-regression-settings",
+      key: 'LassoLogisticRegressionSettings',
+      name: 'predictions.inputTypes.lassoLogisticRegression',
+      defaultName: 'Lasso Logistic Regression',
+      editor: 'lasso-logistic-regression-settings',
       action: () => {
         const defaultValues = utils.getDefaultModelSettingsValueList(
-          "LassoLogisticRegressionSettings"
-        );
+          'LassoLogisticRegressionSettings'
+        )
         return {
           LassoLogisticRegressionSettings: new LassoLogisticRegressionSettings(
             defaultValues
           ),
-        };
+        }
       },
     },
     {
-      key: "RandomForestSettings",
-      name: "predictions.inputTypes.randomForest",
-      defaultName: "Random Forest",
-      editor: "random-forest-settings",
+      key: 'RandomForestSettings',
+      name: 'predictions.inputTypes.randomForest',
+      defaultName: 'Random Forest',
+      editor: 'random-forest-settings',
       action: () => {
         const defaultValues = utils.getDefaultModelSettingsValueList(
-          "RandomForestSettings"
-        );
+          'RandomForestSettings'
+        )
         return {
           RandomForestSettings: new RandomForestSettings(defaultValues),
-        };
+        }
       },
     },
     {
-      key: "GradientBoostingMachineSettings",
-      name: "predictions.inputTypes.gradientBoostingMachine",
-      defaultName: "Gradient Boosting Machine",
-      editor: "gradient-boosting-machine-settings",
+      key: 'GradientBoostingMachineSettings',
+      name: 'predictions.inputTypes.gradientBoostingMachine',
+      defaultName: 'Gradient Boosting Machine',
+      editor: 'gradient-boosting-machine-settings',
       action: () => {
         const defaultValues = utils.getDefaultModelSettingsValueList(
-          "GradientBoostingMachineSettings"
-        );
+          'GradientBoostingMachineSettings'
+        )
         return {
           GradientBoostingMachineSettings: new GradientBoostingMachineSettings(
             defaultValues
           ),
-        };
+        }
       },
     },
     {
-      key: "AdaBoostSettings",
-      name: "predictions.inputTypes.adaBoost",
-      defaultName: "Ada Boost",
-      editor: "ada-boost-settings",
+      key: 'AdaBoostSettings',
+      name: 'predictions.inputTypes.adaBoost',
+      defaultName: 'Ada Boost',
+      editor: 'ada-boost-settings',
       action: () => {
         const defaultValues = utils.getDefaultModelSettingsValueList(
-          "AdaBoostSettings"
-        );
+          'AdaBoostSettings'
+        )
         return {
           AdaBoostSettings: new AdaBoostSettings(defaultValues),
-        };
+        }
       },
     },
     {
-      key: "DecisionTreeSettings",
-      name: "predictions.inputTypes.decisionTree",
-      defaultName: "Decision Tree",
-      editor: "decision-tree-settings",
+      key: 'DecisionTreeSettings',
+      name: 'predictions.inputTypes.decisionTree',
+      defaultName: 'Decision Tree',
+      editor: 'decision-tree-settings',
       action: () => {
         const defaultValues = utils.getDefaultModelSettingsValueList(
-          "DecisionTreeSettings"
-        );
+          'DecisionTreeSettings'
+        )
         return {
           DecisionTreeSettings: new DecisionTreeSettings(defaultValues),
-        };
+        }
       },
     },
     {
-      key: "NaiveBayesSettings",
-      name: "predictions.inputTypes.naiveBayes",
-      defaultName: "Naive Bayes",
-      editor: "naive-bayes-settings",
+      key: 'NaiveBayesSettings',
+      name: 'predictions.inputTypes.naiveBayes',
+      defaultName: 'Naive Bayes',
+      editor: 'naive-bayes-settings',
       action: () => {
-        var defaultValues = utils.getDefaultModelSettingsValueList(
-          "NaiveBayesSettings"
-        );
+        const defaultValues = utils.getDefaultModelSettingsValueList(
+          'NaiveBayesSettings'
+        )
         return {
           NaiveBayesSettings: new NaiveBayesSettings(defaultValues),
-        };
+        }
       },
     },
     {
-      key: "MLPSettings",
-      name: "predictions.inputTypes.multilayerPerceptionModel",
-      defaultName: "Multilayer Perception Model",
-      editor: "mlp-settings",
+      key: 'MLPSettings',
+      name: 'predictions.inputTypes.multilayerPerceptionModel',
+      defaultName: 'Multilayer Perception Model',
+      editor: 'mlp-settings',
       action: () => {
         const defaultValues = utils.getDefaultModelSettingsValueList(
-          "MLPSettings"
-        );
+          'MLPSettings'
+        )
         return {
           MLPSettings: new MLPSettings(defaultValues),
-        };
+        }
       },
     },
     {
-      key: "KNNSettings",
-      name: "predictions.inputTypes.nearestNeighbors",
-      defaultName: "K Nearest Neighbors",
-      editor: "knn-settings",
+      key: 'KNNSettings',
+      name: 'predictions.inputTypes.nearestNeighbors',
+      defaultName: 'K Nearest Neighbors',
+      editor: 'knn-settings',
       action: () => {
         const defaultValues = utils.getDefaultModelSettingsValueList(
-          "KNNSettings"
-        );
+          'KNNSettings'
+        )
         return {
           KNNSettings: new KNNSettings(defaultValues),
-        };
+        }
       },
     },
-  ];
+  ]
 
   exports.defaultModelSettings = [
     {
@@ -264,7 +264,7 @@ define(function (require, exports) {
       modelSettings: [
         {
           setting: 'alpha',
-          name: ko.i18n('predictions.inputTypes.mlpSettings.name_alpha','Alpha'),
+          name: ko.i18n('predictions.inputTypes.mlpSettings.name_alpha', 'Alpha'),
           description: ko.i18n('predictions.inputTypes.mlpSettings.desc_alpha', 'The l2 regularisation'),
           defaultValue: [0.00001],
         },
@@ -392,5 +392,5 @@ define(function (require, exports) {
         },
       ],
     },
-  ];
-});
+  ]
+})

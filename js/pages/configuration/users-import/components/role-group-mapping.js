@@ -1,55 +1,52 @@
 define([
-	'knockout',
-	'text!./role-group-mapping.html',
-	'utils/AutoBind',
-	'components/Component',
-	'utils/CommonUtils',
-	'./search-group-dialog',
-], function(
-	ko,
-	view,
-	AutoBind,
-	Component,
-	commonUtils,
-){
+  'knockout',
+  'text!./role-group-mapping.html',
+  'utils/AutoBind',
+  'components/Component',
+  'utils/CommonUtils',
+  './search-group-dialog',
+], function (
+  ko,
+  view,
+  AutoBind,
+  Component,
+  commonUtils
+) {
+  class RoleGroupMapping extends AutoBind(Component) {
+    constructor (params) {
+      super(params)
 
-	class RoleGroupMapping extends AutoBind(Component){
+      this.selectedRole = ko.observable()
+      this.isSearchGroupDialog = ko.observable()
+      this.rolesMapping = params.rolesMapping || ko.observableArray([])
+      this.provider = params.provider
+      this.searchResults = ko.observableArray()
+      this.tableOptions = commonUtils.getTableOptions('L')
+    }
 
-		constructor(params) {
-			super(params);
+    onRolesRowClick (data) {
+      this.selectedRole(data)
+      this.isSearchGroupDialog(true)
+    }
 
-			this.selectedRole = ko.observable();
-			this.isSearchGroupDialog = ko.observable();
-			this.rolesMapping = params.rolesMapping || ko.observableArray([]);
-			this.provider = params.provider;
-			this.searchResults = ko.observableArray();
-			this.tableOptions = commonUtils.getTableOptions('L');
-		}
+    renderGroups (data, type, row) {
+      return (row || []).groups().map(group => group.displayName).sort().join(', ')
+    }
 
-		onRolesRowClick(data) {
-			this.selectedRole(data);
-			this.isSearchGroupDialog(true);
-		}
+    setGroupMapping () {
+      const selectedGroups = this.searchResults().filter(g => g.included()).map(g => {
+        delete g.included
+        return g
+      })
+      this.selectedRole().groups(selectedGroups)
+      this.rolesMapping.valueHasMutated()
+      this.closeGroupModal()
+    }
 
-		renderGroups(data, type, row) {
-			return (row || []).groups().map(group => group.displayName).sort().join(", ");
-		}
+    closeGroupModal () {
+      this.isSearchGroupDialog(false)
+    }
+  }
 
-		setGroupMapping() {
-			const selectedGroups = this.searchResults().filter(g => g.included()).map(g => {
-				delete g.included;
-				return g;
-			});
-			this.selectedRole().groups(selectedGroups);
-			this.rolesMapping.valueHasMutated();
-			this.closeGroupModal();
-		}
-
-		closeGroupModal() {
-			this.isSearchGroupDialog(false);
-		}
-	}
-
-	commonUtils.build('role-group-mapping', RoleGroupMapping, view);
-
-});
+  commonUtils.build('role-group-mapping', RoleGroupMapping, view)
+})

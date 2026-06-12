@@ -1,7 +1,6 @@
 define(function (require, exports) {
-	
-	var ko = require('knockout')
-	
-	var controlEditor = require('./components/control-editor');
-	var priorEditor = require('./components/prior-editor');
-});
+  const ko = require('knockout')
+
+  const controlEditor = require('./components/control-editor')
+  const priorEditor = require('./components/prior-editor')
+})

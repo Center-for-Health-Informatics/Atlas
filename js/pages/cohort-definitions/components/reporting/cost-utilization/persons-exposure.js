@@ -11,7 +11,7 @@ define(
     'less!./persons-exposure.less',
     'components/visualizations/line-chart',
   ],
-  function 
+  function
   (ko,
     view,
     BaseCostUtilReport,
@@ -19,54 +19,52 @@ define(
     CohortResultsService,
     commonUtils
   ) {
-
-    const componentName = 'cost-utilization-persons-exposure';
+    const componentName = 'cost-utilization-persons-exposure'
 
     class PersonAndExposureReport extends BaseCostUtilReport {
+      constructor (params) {
+        super(params)
 
-      constructor(params) {
-        super(params);
-
-        this.window = params.window;
+        this.window = params.window
 
         this.summary = {
           personsCount: ko.observable(0),
           exposureTotal: ko.observable(0),
           exposureAvg: ko.observable(0),
-        };
+        }
 
-        this.setupChartsData();
-        this.init();
+        this.setupChartsData()
+        this.init()
       }
 
-      getFilterList() {
+      getFilterList () {
         return [
           costUtilConst.getPeriodTypeFilter(this.periods),
-        ];
+        ]
       }
 
-      fetchAPI({ filters }) {
+      fetchAPI ({ filters }) {
         return CohortResultsService.loadPersonExposureReport({
-            source: this.source,
-            cohortId: this.cohortId,
-            window: this.window,
-            filters,
-          })
+          source: this.source,
+          cohortId: this.cohortId,
+          window: this.window,
+          filters,
+        })
           .then(({ summary, data }) => {
-            this.summary.personsCount(BaseCostUtilReport.formatFullNumber(summary.personsCount));
-            this.summary.exposureTotal(BaseCostUtilReport.formatFullNumber(summary.exposureTotal));
-            this.summary.exposureAvg(BaseCostUtilReport.formatFullNumber(summary.exposureAvg));
-            this.dataList(data);
-          });
+            this.summary.personsCount(BaseCostUtilReport.formatFullNumber(summary.personsCount))
+            this.summary.exposureTotal(BaseCostUtilReport.formatFullNumber(summary.exposureTotal))
+            this.summary.exposureAvg(BaseCostUtilReport.formatFullNumber(summary.exposureAvg))
+            this.dataList(data)
+          })
       }
 
-      setupChartsData() {
-        this.personsChartData = this.createChartDataObservable('personsCount');
-        this.totalExposureChartData = this.createChartDataObservable('exposureTotal');
-        this.avgExposurePerPersonChartData = this.createChartDataObservable('exposureAvg');
+      setupChartsData () {
+        this.personsChartData = this.createChartDataObservable('personsCount')
+        this.totalExposureChartData = this.createChartDataObservable('exposureTotal')
+        this.avgExposurePerPersonChartData = this.createChartDataObservable('exposureAvg')
       }
     }
 
-    return commonUtils.build(componentName, PersonAndExposureReport, view);
+    return commonUtils.build(componentName, PersonAndExposureReport, view)
   }
-);
+)

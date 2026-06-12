@@ -1,38 +1,37 @@
 define([
-	'knockout',
-	'text!./treemap.html',
-	'components/reports/classes/Treemap',
-	'components/Component',
-	'components/reports/const',
-	'utils/CommonUtils',
-	'components/heading',
-	'components/charts/treemap',
-	'components/reports/reportDrilldown'
+  'knockout',
+  'text!./treemap.html',
+  'components/reports/classes/Treemap',
+  'components/Component',
+  'components/reports/const',
+  'utils/CommonUtils',
+  'components/heading',
+  'components/charts/treemap',
+  'components/reports/reportDrilldown'
 ], function (
-	ko,
-	view,
-	TreemapReport,
-	Component,
-	constants,
-	commonUtils
+  ko,
+  view,
+  TreemapReport,
+  Component,
+  constants,
+  commonUtils
 ) {
-	class Observation extends TreemapReport {
-		constructor(params) {
-			super(params);   
-			
-			this.name = 'Observation'; // header
+  class Observation extends TreemapReport {
+    constructor (params) {
+      super(params)
 
-			this.byFrequency = true;
-			this.byType = true;
-			this.byValueAsConcept = true;
-			this.byQualifier = true;
-		}
+      this.name = 'Observation' // header
 
-        get aggProperty() {
-            return constants.aggProperties.byPerson;
-        }
+      this.byFrequency = true
+      this.byType = true
+      this.byValueAsConcept = true
+      this.byQualifier = true
+    }
 
-	}
+    get aggProperty () {
+      return constants.aggProperties.byPerson
+    }
+  }
 
-	return commonUtils.build('report-observation', Observation, view);
-});
+  return commonUtils.build('report-observation', Observation, view)
+})

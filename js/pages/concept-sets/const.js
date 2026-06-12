@@ -1,8 +1,8 @@
 define(
   (require, exports) => {
-    const config = require('appConfig');
-    const conceptSetConstants = require('components/conceptset/const');
-		
+    const config = require('appConfig')
+    const conceptSetConstants = require('components/conceptset/const')
+
     const ViewMode = {
       EXPRESSION: conceptSetConstants.ViewMode.EXPRESSION,
       INCLUDED: conceptSetConstants.ViewMode.INCLUDED,
@@ -16,14 +16,13 @@ define(
       COMPARE: 'compare',
       VERSIONS: 'versions',
       MESSAGES: 'messages',
-    };
-		
-    const pageTitle = 'Concept Sets';
-    const paths = {
-      mode: (id = 0, mode = ViewMode.EXPRESSION) => { return `/conceptset/${id}/${mode}`},
-      export: (id) => { return `${config.api.url}conceptset/${id}/export`},
     }
-  
+
+    const pageTitle = 'Concept Sets'
+    const paths = {
+      mode: (id = 0, mode = ViewMode.EXPRESSION) => { return `/conceptset/${id}/${mode}` },
+      export: (id) => { return `${config.api.url}conceptset/${id}/export` },
+    }
 
     const defaultConceptHierarchyRelationships = {
       childRelationships: [{
@@ -34,14 +33,14 @@ define(
         name: 'Has ancestor of',
         range: [1, 1]
       }]
-    };
-  
+    }
+
     const importModes = {
       IDENTIFIERS: {
         key: 'identifiers',
         title: 'Concept Identifiers',
       },
-			SOURCE_CODES: {
+      SOURCE_CODES: {
         key: 'source_codes',
         title: 'Source Codes'
       },
@@ -49,21 +48,21 @@ define(
         key: 'concept_set',
         title: 'Concept Set',
       },
-    };
+    }
 
     const importTypes = {
       OVERWRITE: 'overwrite',
       APPEND: 'append',
-    };
-  
+    }
+
     return {
-	    defaultConceptHierarchyRelationships,
+      defaultConceptHierarchyRelationships,
       pageTitle,
       paths,
       importModes,
       importTypes,
       ViewMode,
       RESOLVE_OUT_OF_ORDER: conceptSetConstants.RESOLVE_OUT_OF_ORDER
-    };
+    }
   }
-);
+)

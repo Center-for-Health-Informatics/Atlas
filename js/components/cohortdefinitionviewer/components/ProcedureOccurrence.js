@@ -1,12 +1,11 @@
 define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/utils', 'text!./ProcedureOccurrenceTemplate.html'
 ], function (ko, options, utils, template) {
+  function ProcedureOccurrenceViewModel (params) {
+    const self = this
 
-	function ProcedureOccurrenceViewModel(params) {
-		var self = this;
-
-		self.expression = ko.utils.unwrapObservable(params.expression);
-		self.Criteria = params.criteria.ProcedureOccurrence;
-		self.options = options;
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.ProcedureOccurrence
+    self.options = options
 
     self.indexMessage = ko.i18nformat(
       'components.conditionProcedureOccurrence.indexDataText',
@@ -18,13 +17,12 @@ define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilde
           ko.i18n('components.conditionProcedureOccurrence.anyProcedure', 'Any Procedure')
         ))
       }
-    );
-		
-	}
+    )
+  }
 
-	// return compoonent definition
-	return {
-		viewModel: ProcedureOccurrenceViewModel,
-		template: template
-	};
-});
+  // return compoonent definition
+  return {
+    viewModel: ProcedureOccurrenceViewModel,
+    template
+  }
+})

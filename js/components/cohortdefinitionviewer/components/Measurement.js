@@ -1,27 +1,25 @@
-define(['knockout','components/cohortbuilder/options','components/cohortbuilder/utils', 'text!./MeasurementTemplate.html'
+define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/utils', 'text!./MeasurementTemplate.html'
 ], function (ko, options, utils, template) {
+  function MeasurementViewModel (params) {
+    const self = this
 
-	function MeasurementViewModel(params) {
-		var self = this;
+    self.expression = ko.utils.unwrapObservable(params.expression)
+    self.Criteria = params.criteria.Measurement
+    self.options = options
 
-		self.expression = ko.utils.unwrapObservable(params.expression);
-		self.Criteria = params.criteria.Measurement;
-		self.options = options;
-	
     self.indexMessage = ko.pureComputed(() => {
-      var conceptSetName = utils.getConceptSetName(
+      const conceptSetName = utils.getConceptSetName(
         self.Criteria.CodesetId,
         self.expression.ConceptSets,
-        ""
-      );
-      return `${conceptSetName}.`;
-    });
-	
-	}
+        ''
+      )
+      return `${conceptSetName}.`
+    })
+  }
 
-	// return compoonent definition
-	return {
-		viewModel: MeasurementViewModel,
-		template: template
-	};
-});
+  // return compoonent definition
+  return {
+    viewModel: MeasurementViewModel,
+    template
+  }
+})

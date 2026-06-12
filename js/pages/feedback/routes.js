@@ -1,16 +1,16 @@
 define(
   (require, factory) => {
-    const { Route } = require('pages/Route');
-    function routes(router) {
+    const { Route } = require('pages/Route')
+    function routes (router) {
       return {
         '/feedback': new Route(() => {
           require(['feedback'], function () {
-            router.setCurrentView('feedback');
-          });
+            router.setCurrentView('feedback')
+          })
         }),
-      };
+      }
     }
 
-    return routes;
+    return routes
   }
-);
+)

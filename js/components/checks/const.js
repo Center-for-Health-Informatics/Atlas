@@ -1,5 +1,4 @@
-define(['knockout'], function(ko){
-
+define(['knockout'], function (ko) {
   const WarningSeverity = {
     INFO: 'INFO',
     WARNING: 'WARNING',
@@ -10,11 +9,10 @@ define(['knockout'], function(ko){
     INFO: 'fa-info',
     WARNING: 'fa-exclamation-triangle',
     CRITICAL: 'fa-times-circle',
-  };
+  }
 
   return {
     WarningSeverity,
     WarningSeverityIcon,
-  };
-
-});
+  }
+})

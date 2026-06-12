@@ -1,12 +1,12 @@
 define([
-	'knockout',
+  'knockout',
 ], function (
-	ko
+  ko
 ) {
-	class NegativeControl {
-		constructor(data = {}) {
-		}
-	}
-	
-	return NegativeControl;
-});
+  class NegativeControl {
+    constructor (data = {}) {
+    }
+  }
+
+  return NegativeControl
+})

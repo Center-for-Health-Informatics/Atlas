@@ -1,38 +1,36 @@
 define(function (require) {
+  const ko = require('knockout')
+  const constants = require('const')
+  const ReusableParameter = require('../pages/reusables/ReusableParameter')
+  const ConceptSet = require('components/conceptset/InputTypes/ConceptSet')
+  const CriteriaGroup = require('components/cohortbuilder/CriteriaGroup')
+  const PrimaryCriteria = require('components/cohortbuilder/PrimaryCriteria')
+  const CriteriaTypes = require('components/cohortbuilder/CriteriaTypes')
 
-    var ko = require('knockout');
-    var constants = require('const');
-    var ReusableParameter = require('../pages/reusables/ReusableParameter');
-    var ConceptSet = require('components/conceptset/InputTypes/ConceptSet');
-    var CriteriaGroup = require('components/cohortbuilder/CriteriaGroup');
-    var PrimaryCriteria = require('components/cohortbuilder/PrimaryCriteria');
-    var CriteriaTypes = require('components/cohortbuilder/CriteriaTypes');
+  class Reusable {
+    constructor (d) {
+      const data = d || {}
+      Object.assign(this, data)
+      this.name = ko.observable(data.name || ko.unwrap(constants.newEntityNames.reusable))
+      this.description = ko.observable(data.description || null)
+      this.data = data.data ? JSON.parse(data.data) : {}
+      this.type = ko.observable(this.data.type || 'CRITERIA_GROUP')
+      this.parameters = ko.observableArray(this.data.parameters && this.data.parameters.map((p) => new ReusableParameter(p)))
+      this.conceptSets = ko.observableArray(this.data.conceptSets && this.data.conceptSets.map((d) => new ConceptSet(d)))
 
-    class Reusable {
-        constructor(d) {
-            let data = d || {};
-            Object.assign(this, data);
-            this.name = ko.observable(data.name || ko.unwrap(constants.newEntityNames.reusable));
-            this.description = ko.observable(data.description || null);
-            this.data = data.data ? JSON.parse(data.data) : {};
-            this.type = ko.observable(this.data.type || 'CRITERIA_GROUP');
-            this.parameters = ko.observableArray(this.data.parameters && this.data.parameters.map((p) => new ReusableParameter(p)));
-            this.conceptSets = ko.observableArray(this.data.conceptSets && this.data.conceptSets.map((d) => new ConceptSet(d)));
+      // default type
+      this.criteriaGroupExpression = new CriteriaGroup(this.data.criteriaGroupExpression ? this.data.criteriaGroupExpression : this.data.expression,
+        this.conceptSets)
 
-            // default type
-            this.criteriaGroupExpression = new CriteriaGroup(this.data.criteriaGroupExpression ? this.data.criteriaGroupExpression : this.data.expression,
-                this.conceptSets);
+      this.initialEventExpression = new PrimaryCriteria(this.data.initialEventExpression, this.conceptSets)
 
-            this.initialEventExpression = new PrimaryCriteria(this.data.initialEventExpression, this.conceptSets);
+      this.censoringEventExpression = ko.observableArray(this.data.censoringEventExpression && this.data.censoringEventExpression.map(criteria =>
+        CriteriaTypes.GetCriteriaFromObject(criteria, this.conceptSets)
+      ))
 
-            this.censoringEventExpression = ko.observableArray(this.data.censoringEventExpression && this.data.censoringEventExpression.map(criteria =>
-                CriteriaTypes.GetCriteriaFromObject(criteria, this.conceptSets)
-            ));
-
-
-            this.tags = ko.observableArray(data.tags);
-        }
+      this.tags = ko.observableArray(data.tags)
     }
+  }
 
-    return Reusable;
-});
+  return Reusable
+})

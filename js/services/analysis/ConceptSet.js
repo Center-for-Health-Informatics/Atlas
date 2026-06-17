@@ -1,14 +1,11 @@
-define([
-  'knockout',
-], function (
-  ko
-) {
-  class ConceptSet {
-    constructor (data = {}) {
-      this.id = data.id || 0
-      this.name = data.name || ''
-    }
-  }
+import ko from 'knockout'
 
-  return ConceptSet
-})
+class ConceptSet {
+  constructor (data = {}) {
+    this.id = data.id || 0
+    this.name = data.name || ''
+  }
+}
+
+export default ConceptSet
+

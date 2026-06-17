@@ -1,114 +1,114 @@
-define(function (require, exports) {
-  const config = require('appConfig')
-  const authApi = require('services/AuthAPI')
-  const httpService = require('services/http')
-  const estimationEndpoint = 'estimation/'
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import httpService from 'services/http'
 
-  function getEstimationList () {
-    return httpService.doGet(config.webAPIRoot + estimationEndpoint).catch(authApi.handleAccessDenied)
-  }
+const estimationEndpoint = 'estimation/'
 
-  async function saveEstimation (analysis) {
-    const url = config.webAPIRoot + estimationEndpoint + (analysis.id || '')
-    let result
-    if (analysis.id) {
-      result = await httpService
-        .doPut(url, analysis)
-        .catch((error) => {
-          console.log('Error: ' + error)
-          authApi.handleAccessDenied(error)
-        })
-    } else {
-      result = authApi.executeWithRefresh(httpService
-        .doPost(url, analysis)
-        .catch((error) => {
-          console.log('Error: ' + error)
-          authApi.handleAccessDenied(error)
-        }))
-    }
-    return result
-  }
+function getEstimationList () {
+  return httpService.doGet(config.webAPIRoot + estimationEndpoint).catch(authApi.handleAccessDenied)
+}
 
-  async function copyEstimation (id) {
-    return authApi.executeWithRefresh(httpService.doGet(config.webAPIRoot + estimationEndpoint + (id || '') + '/copy')
+async function saveEstimation (analysis) {
+  const url = config.webAPIRoot + estimationEndpoint + (analysis.id || '')
+  let result
+  if (analysis.id) {
+    result = await httpService
+      .doPut(url, analysis)
+      .catch((error) => {
+        console.log('Error: ' + error)
+        authApi.handleAccessDenied(error)
+      })
+  } else {
+    result = authApi.executeWithRefresh(httpService
+      .doPost(url, analysis)
       .catch((error) => {
         console.log('Error: ' + error)
         authApi.handleAccessDenied(error)
       }))
   }
+  return result
+}
 
-  function deleteEstimation (id) {
-    return httpService.doDelete(config.webAPIRoot + estimationEndpoint + (id || ''))
-      .catch((error) => {
-        console.log('Error: ' + error)
-        authApi.handleAccessDenied(error)
-      })
-  }
+async function copyEstimation (id) {
+  return authApi.executeWithRefresh(httpService.doGet(config.webAPIRoot + estimationEndpoint + (id || '') + '/copy')
+    .catch((error) => {
+      console.log('Error: ' + error)
+      authApi.handleAccessDenied(error)
+    }))
+}
 
-  async function getEstimation (id) {
-    return authApi.executeWithRefresh(httpService
-      .doGet(config.webAPIRoot + estimationEndpoint + id)
-      .catch((error) => {
-        console.log('Error: ' + error)
-        authApi.handleAccessDenied(error)
-      }))
-  }
+function deleteEstimation (id) {
+  return httpService.doDelete(config.webAPIRoot + estimationEndpoint + (id || ''))
+    .catch((error) => {
+      console.log('Error: ' + error)
+      authApi.handleAccessDenied(error)
+    })
+}
 
-  function exportEstimation (id) {
-    return httpService
-      .doGet(config.webAPIRoot + estimationEndpoint + id + '/export')
-      .then(res => res.data)
-  }
+async function getEstimation (id) {
+  return authApi.executeWithRefresh(httpService
+    .doGet(config.webAPIRoot + estimationEndpoint + id)
+    .catch((error) => {
+      console.log('Error: ' + error)
+      authApi.handleAccessDenied(error)
+    }))
+}
 
-  function generate (id, source) {
-    return httpService.doPost(config.webAPIRoot + estimationEndpoint + id + '/generation/' + source)
-      .then(res => res.data)
-      .catch(error => {
-        authApi.handleAccessDenied(error)
-        if (error.status == 400) {
-          alert((error && error.data && error.data.payload && error.data.payload.message) ? error.data.payload.message : 'Error occurred during analysis generion')
-        }
-      })
-  }
+function exportEstimation (id) {
+  return httpService
+    .doGet(config.webAPIRoot + estimationEndpoint + id + '/export')
+    .then(res => res.data)
+}
 
-  function listExecutions (id) {
-    return httpService.doGet(config.webAPIRoot + estimationEndpoint + id + '/generation')
-      .then(res => res.data)
-      .catch(error => authApi.handleAccessDenied(error))
-  }
+function generate (id, source) {
+  return httpService.doPost(config.webAPIRoot + estimationEndpoint + id + '/generation/' + source)
+    .then(res => res.data)
+    .catch(error => {
+      authApi.handleAccessDenied(error)
+      if (error.status == 400) {
+        alert((error && error.data && error.data.payload && error.data.payload.message) ? error.data.payload.message : 'Error occurred during analysis generion')
+      }
+    })
+}
 
-  function importEstimation (specification) {
-    return authApi.executeWithRefresh(httpService
-      .doPost(config.webAPIRoot + estimationEndpoint + 'import', specification)
-      .then(res => res.data))
-  }
+function listExecutions (id) {
+  return httpService.doGet(config.webAPIRoot + estimationEndpoint + id + '/generation')
+    .then(res => res.data)
+    .catch(error => authApi.handleAccessDenied(error))
+}
 
-  function exists (name, id) {
-    return httpService
-      .doGet(`${config.webAPIRoot}${estimationEndpoint}${id}/exists?name=${name}`)
-      .then(res => res.data)
-      .catch(error => authApi.handleAccessDenied(error))
-  }
+function importEstimation (specification) {
+  return authApi.executeWithRefresh(httpService
+    .doPost(config.webAPIRoot + estimationEndpoint + 'import', specification)
+    .then(res => res.data))
+}
 
-  function runDiagnostics (design) {
-    return httpService
-      .doPost(`${config.webAPIRoot}${estimationEndpoint}check`, design)
-      .then(res => res.data)
-  }
+function exists (name, id) {
+  return httpService
+    .doGet(`${config.webAPIRoot}${estimationEndpoint}${id}/exists?name=${name}`)
+    .then(res => res.data)
+    .catch(error => authApi.handleAccessDenied(error))
+}
 
-  const api = {
-    getEstimationList,
-    saveEstimation,
-    copyEstimation,
-    deleteEstimation,
-    getEstimation,
-    exportEstimation,
-    importEstimation,
-    generate,
-    listExecutions,
-    exists,
-    runDiagnostics,
-  }
+function runDiagnostics (design) {
+  return httpService
+    .doPost(`${config.webAPIRoot}${estimationEndpoint}check`, design)
+    .then(res => res.data)
+}
 
-  return api
-})
+const api = {
+  getEstimationList,
+  saveEstimation,
+  copyEstimation,
+  deleteEstimation,
+  getEstimation,
+  exportEstimation,
+  importEstimation,
+  generate,
+  listExecutions,
+  exists,
+  runDiagnostics,
+}
+
+export default api
+

@@ -1,28 +1,21 @@
-define([
-  'knockout',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  'text!./nav-pills.html',
-  'less!./nav-pills.less',
-], function (
-  ko,
-  Component,
-  AutoBind,
-  commonUtils,
-  view
-) {
-  class NavPills extends AutoBind(Component) {
-    constructor (params) {
-      super()
-      this.selected = params.selected
-      this.pills = params.pills
-    }
+import ko from 'knockout'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import view from './nav-pills.html?raw'
+import './nav-pills.less'
 
-    onSelect (pill, event) {
-      this.selected(pill.key)
-    }
+class NavPills extends AutoBind(Component) {
+  constructor (params) {
+    super()
+    this.selected = params.selected
+    this.pills = params.pills
   }
 
-  return commonUtils.build('nav-pills', NavPills, view)
-})
+  onSelect (pill, event) {
+    this.selected(pill.key)
+  }
+}
+
+export default commonUtils.build('nav-pills', NavPills, view)
+

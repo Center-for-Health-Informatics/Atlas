@@ -1,34 +1,26 @@
-define([
-  'knockout',
-  'text!./browser.html',
-  'components/Component',
-  'utils/CommonUtils',
-  'services/MomentAPI',
-  'utils/DatatableUtils',
-  'faceted-datatable'
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  momentApi,
-  datatableUtils
-) {
-  class IRAnalysisBrowserModel extends Component {
-    constructor (params) {
-      super(params)
-      this.analysisList = params.analysisList
-      this.tableOptions = params.tableOptions || commonUtils.getTableOptions('M')
-      this.options = params.options
-      this.columns = params.columns
+import ko from 'knockout'
+import view from './browser.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import momentApi from 'services/MomentAPI'
+import datatableUtils from 'utils/DatatableUtils'
+import 'faceted-datatable'
 
-      this.rowClick = this.rowClick.bind(this)
-    }
+class IRAnalysisBrowserModel extends Component {
+  constructor (params) {
+    super(params)
+    this.analysisList = params.analysisList
+    this.tableOptions = params.tableOptions || commonUtils.getTableOptions('M')
+    this.options = params.options
+    this.columns = params.columns
 
-    rowClick (d) {
-      this.selected(d.id)
-    }
+    this.rowClick = this.rowClick.bind(this)
   }
 
-  return commonUtils.build('ir-analysis-browser', IRAnalysisBrowserModel, view)
-})
+  rowClick (d) {
+    this.selected(d.id)
+  }
+}
+
+export default commonUtils.build('ir-analysis-browser', IRAnalysisBrowserModel, view)
+

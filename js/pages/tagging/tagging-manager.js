@@ -1,39 +1,28 @@
-define([
-  'knockout',
-  'text!./tagging-manager.html',
-  'pages/Page',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  'services/Tags',
-  'appConfig',
-  'services/AuthAPI',
-  'databindings',
-  'components/ac-access-denied',
-  'components/heading',
-  'components/tabs',
-  './tabs/multi-assign',
-],
-function (
-  ko,
-  view,
-  Page,
-  AutoBind,
-  commonUtils,
-  tagsService,
-  config,
-  authApi
-) {
-  class TaggingManager extends AutoBind(Page) {
-    constructor (params) {
-      super(params)
-      this.isAuthenticated = authApi.isAuthenticated
-      this.selectedTabKey = ko.observable('multi-assign')
-    }
+import ko from 'knockout'
+import view from './tagging-manager.html?raw'
+import Page from 'pages/Page'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import tagsService from 'services/Tags'
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import 'databindings'
+import 'components/ac-access-denied'
+import 'components/heading'
+import 'components/tabs'
+import './tabs/multi-assign'
 
-    selectTab (index, { key }) {
-      // commonUtils.routeTo(`/tagging/${key}`);
-    }
+class TaggingManager extends AutoBind(Page) {
+  constructor (params) {
+    super(params)
+    this.isAuthenticated = authApi.isAuthenticated
+    this.selectedTabKey = ko.observable('multi-assign')
   }
 
-  return commonUtils.build('tagging-manager', TaggingManager, view)
-})
+  selectTab (index, { key }) {
+    // commonUtils.routeTo(`/tagging/${key}`);
+  }
+}
+
+export default commonUtils.build('tagging-manager', TaggingManager, view)
+

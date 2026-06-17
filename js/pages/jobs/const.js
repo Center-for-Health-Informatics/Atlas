@@ -1,9 +1,6 @@
-define(
-  (require, exports) => {
-    const pageTitle = 'Jobs'
+const pageTitle = 'Jobs'
 
-    return {
-      pageTitle,
-    }
-  }
-)
+export default {
+  pageTitle,
+}
+

@@ -1,24 +1,16 @@
-define([
-  'knockout',
-  'components/Chart',
-  'components/Component',
-  'atlascharts',
-  'text!components/charts/chart.html',
-  'utils/CommonUtils'
-], function (
-  ko,
-  Chart,
-  Component,
-  atlascharts,
-  view,
-  commonUtils
-) {
-  class SplitBoxplot extends Chart {
-    constructor (params, element) {
-      super(params, element)
-      this.renderer = new atlascharts.splitBoxplot()
-    }
-  }
+import ko from 'knockout'
+import Chart from 'components/Chart'
+import Component from 'components/Component'
+import atlascharts from 'atlascharts'
+import view from 'components/charts/chart.html?raw'
+import commonUtils from 'utils/CommonUtils'
 
-  return commonUtils.build('split-boxplot', SplitBoxplot, view)
-})
+class SplitBoxplot extends Chart {
+  constructor (params, element) {
+    super(params, element)
+    this.renderer = new atlascharts.splitBoxplot()
+  }
+}
+
+export default commonUtils.build('split-boxplot', SplitBoxplot, view)
+

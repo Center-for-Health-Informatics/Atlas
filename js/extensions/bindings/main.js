@@ -1,29 +1,28 @@
 // is this being loaded? doesn't seem like it
-define(function (require) {
-  const autocompleteBinding = require('./autocompleteBinding')
-  const htmlValueBinding = require('./htmlValueBinding')
-  const contentEditable = require('./contentEditable')
-  const contenteditableSwitch = require('./contenteditableSwitch')
-  const numericFn = require('./numericFn')
-  const ddSlickAction = require('./ddSlickActionBinding')
-  const clickToEdit = require('./clickToEditBinding')
-  const datePicker = require('./datepickerBinding')
-  const dateTimePicker = require('./dateTimePickerBinding')
-  const dataTable = require('./datatableBinding')
-  const dynamicDataTable = require('./dynamicDatatableBinding')
-  const eventListener = require('./eventListenerBinding')
-  const selectOnFocus = require('./knockout.selectOnFocus')
-  const sortExtender = require('./sortExtender')
-  const bootstrapModal = require('./bootstrapModal')
-  const treemap = require('./treemapBinding')
-  const d3ChartBinding = require('./d3ChartBinding')
-  const tooltipBinding = require('./tooltipBinding')
-  const placeholderBinding = require('./placeholderBinding')
-  const titleBinding = require('./titleBinding')
-  const chart = require('./chart')
-  const bootstrapCollapsable = require('./bootstrapCollapsable')
-  const numericExtender = require('./numericExtender')
-  const childChangesExtender = require('./childChangesExtender')
-  const alphaNumericExtender = require('./alphaNumericExtender')
-  const i18nBinding = require('./i18nBinding')
-})
+import autocompleteBinding from './autocompleteBinding'
+import htmlValueBinding from './htmlValueBinding'
+import contentEditable from './contentEditable'
+import contenteditableSwitch from './contenteditableSwitch'
+import numericFn from './numericFn'
+import ddSlickAction from './ddSlickActionBinding'
+import clickToEdit from './clickToEditBinding'
+import datePicker from './datepickerBinding'
+import dateTimePicker from './dateTimePickerBinding'
+import dataTable from './datatableBinding'
+import dynamicDataTable from './dynamicDatatableBinding'
+import eventListener from './eventListenerBinding'
+import selectOnFocus from './knockout.selectOnFocus'
+import sortExtender from './sortExtender'
+import bootstrapModal from './bootstrapModal'
+import treemap from './treemapBinding'
+import d3ChartBinding from './d3ChartBinding'
+import tooltipBinding from './tooltipBinding'
+import placeholderBinding from './placeholderBinding'
+import titleBinding from './titleBinding'
+import chart from './chart'
+import bootstrapCollapsable from './bootstrapCollapsable'
+import numericExtender from './numericExtender'
+import childChangesExtender from './childChangesExtender'
+import alphaNumericExtender from './alphaNumericExtender'
+import i18nBinding from './i18nBinding'
+

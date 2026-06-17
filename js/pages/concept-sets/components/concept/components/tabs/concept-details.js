@@ -1,29 +1,22 @@
-define([
-  'knockout',
-  'text!./concept-details.html',
-  'components/Component',
-  'utils/CommonUtils',
-  'services/MomentAPI',
-  'less!./concept-details.less',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  momentApi
-) {
-  class ConceptDetails extends Component {
-    constructor (params) {
-      super(params)
-      this.currentConcept = params.currentConcept
-      this.hasInfoAccess = params.hasInfoAccess
-      this.isAuthenticated = params.isAuthenticated
-    }
+import ko from 'knockout'
+import view from './concept-details.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import momentApi from 'services/MomentAPI'
+import './concept-details.less'
 
-    formatDate (date) {
-      return momentApi.formatDateTimeWithFormat(date, momentApi.ISO_DATE_FORMAT)
-    }
+class ConceptDetails extends Component {
+  constructor (params) {
+    super(params)
+    this.currentConcept = params.currentConcept
+    this.hasInfoAccess = params.hasInfoAccess
+    this.isAuthenticated = params.isAuthenticated
   }
 
-  return commonUtils.build('concept-details', ConceptDetails, view)
-})
+  formatDate (date) {
+    return momentApi.formatDateTimeWithFormat(date, momentApi.ISO_DATE_FORMAT)
+  }
+}
+
+export default commonUtils.build('concept-details', ConceptDetails, view)
+

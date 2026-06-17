@@ -1,18 +1,17 @@
-define([
-  'knockout',
-  '../options',
-  'text!./WindowInputTemplate.html',
-  'databindings',
-], function (ko, options, template) {
-  function WindowInputViewModel (params) {
-    const self = this
-    self.options = options
-    self.Window = ko.utils.unwrapObservable(params.Window) // this will be a Window input type.
-  }
+import ko from 'knockout'
+import options from '../options'
+import template from './WindowInputTemplate.html?raw'
+import 'databindings'
 
-  // return compoonent definition
-  return {
-    viewModel: WindowInputViewModel,
-    template,
-  }
-})
+function WindowInputViewModel (params) {
+  const self = this
+  self.options = options
+  self.Window = ko.utils.unwrapObservable(params.Window) // this will be a Window input type.
+}
+
+// return compoonent definition
+export default {
+  viewModel: WindowInputViewModel,
+  template,
+}
+

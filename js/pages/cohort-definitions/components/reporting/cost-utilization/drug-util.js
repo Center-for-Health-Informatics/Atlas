@@ -1,57 +1,48 @@
-define(
-  [
-    'knockout',
-    'text!./drug-util.html',
-    './base-drug-util-report',
-    'utils/CommonUtils',
-    'appConfig',
-    'less!./drug-util.less',
-    './drug-util-summary',
-    './drug-util-detailed',
-  ],
-  function (
-    ko,
-    view,
-    BaseDrugUtilReport,
-    commonUtils
-  ) {
-    const componentName = 'cost-utilization-drug-util'
+import ko from 'knockout'
+import view from './drug-util.html?raw'
+import BaseDrugUtilReport from './base-drug-util-report'
+import commonUtils from 'utils/CommonUtils'
+import 'appConfig'
+import './drug-util.less'
+import './drug-util-summary'
+import './drug-util-detailed'
 
-    const modes = {
-      summary: 'summary',
-      detailed: 'detailed',
-    }
+const componentName = 'cost-utilization-drug-util'
 
-    class DrugUtilReport extends BaseDrugUtilReport {
-      constructor (params) {
-        super(params)
-        this.onDrugSelect = this.onDrugSelect.bind(this)
-        this.displaySummary = this.displaySummary.bind(this)
+const modes = {
+  summary: 'summary',
+  detailed: 'detailed',
+}
 
-        this.cohortId = params.cohortId
-        this.window = params.window
+class DrugUtilReport extends BaseDrugUtilReport {
+  constructor (params) {
+    super(params)
+    this.onDrugSelect = this.onDrugSelect.bind(this)
+    this.displaySummary = this.displaySummary.bind(this)
 
-        this.source = params.source
+    this.cohortId = params.cohortId
+    this.window = params.window
 
-        //
-        this.modes = modes
-        this.currentMode = ko.observable(modes.summary)
+    this.source = params.source
 
-        this.drugConceptId = ko.observable(null)
-        this.drugName = ko.observable(null)
-      }
+    //
+    this.modes = modes
+    this.currentMode = ko.observable(modes.summary)
 
-      onDrugSelect ({ drugId, drugName }) {
-        this.drugConceptId(drugId)
-        this.drugName(drugName)
-        this.currentMode(modes.detailed)
-      }
-
-      displaySummary () {
-        this.currentMode(modes.summary)
-      }
-    }
-
-    return commonUtils.build(componentName, DrugUtilReport, view)
+    this.drugConceptId = ko.observable(null)
+    this.drugName = ko.observable(null)
   }
-)
+
+  onDrugSelect ({ drugId, drugName }) {
+    this.drugConceptId(drugId)
+    this.drugName(drugName)
+    this.currentMode(modes.detailed)
+  }
+
+  displaySummary () {
+    this.currentMode(modes.summary)
+  }
+}
+
+export default commonUtils.build(componentName, DrugUtilReport, view)
+

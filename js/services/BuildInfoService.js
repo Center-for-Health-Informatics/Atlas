@@ -1,23 +1,19 @@
-define([
-  'appConfig',
-  'services/http'],
-function (
-  appConfig,
-  httpService
-) {
-  const ISSUES_PAGE_SIZE = 100
+import appConfig from 'appConfig'
+import httpService from 'services/http'
 
-  function getBuildInfo () {
-    return httpService.doGet(appConfig.webAPIRoot + 'info').then(r => r.data)
-  }
+const ISSUES_PAGE_SIZE = 100
 
-  function getIssues (repo, milestone, page) {
-    return httpService.doGet(`https://api.github.com/repos/${repo}/issues?state=closed&per_page=${ISSUES_PAGE_SIZE}&page=${page}&milestone=${milestone}`)
-  }
+function getBuildInfo () {
+  return httpService.doGet(appConfig.webAPIRoot + 'info').then(r => r.data)
+}
 
-  return {
-    getBuildInfo,
-    getIssues,
-    ISSUES_PAGE_SIZE,
-  }
-})
+function getIssues (repo, milestone, page) {
+  return httpService.doGet(`https://api.github.com/repos/${repo}/issues?state=closed&per_page=${ISSUES_PAGE_SIZE}&page=${page}&milestone=${milestone}`)
+}
+
+export default {
+  getBuildInfo,
+  getIssues,
+  ISSUES_PAGE_SIZE,
+}
+

@@ -1,26 +1,19 @@
-define([
-  'knockout',
-  'text!./control-editor.html',
-  'components/Component',
-  'utils/CommonUtils',
-  '../options',
-  'databindings',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  options
-) {
-  class ControlEditor extends Component {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './control-editor.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import options from '../options'
+import 'databindings'
 
-      this.control = ko.isObservable(params.control) ? params.control() : params.control
-      this.options = options
-      this.isEditPermitted = params.isEditPermitted
-    }
+class ControlEditor extends Component {
+  constructor (params) {
+    super(params)
+
+    this.control = ko.isObservable(params.control) ? params.control() : params.control
+    this.options = options
+    this.isEditPermitted = params.isEditPermitted
   }
+}
 
-  return commonUtils.build('cyclops-control-editor', ControlEditor, view)
-})
+export default commonUtils.build('cyclops-control-editor', ControlEditor, view)
+

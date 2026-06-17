@@ -1,46 +1,45 @@
-define(['knockout', 'text!./ConceptSetQuickviewTemplate.html'], function (
-  ko,
-  componentTemplate
-) {
-  function ConceptSetQuickviewModel (params) {
-    const self = this
-    let excludesDefault = true
-    let descendantsDefault = true
-    let mappedDefault = true
+import ko from 'knockout'
+import componentTemplate from './ConceptSetQuickviewTemplate.html?raw'
 
-    self.conceptSet = ko.computed(() =>
-      ko.utils.unwrapObservable(params.conceptSet)
-    )
+function ConceptSetQuickviewModel (params) {
+  const self = this
+  let excludesDefault = true
+  let descendantsDefault = true
+  let mappedDefault = true
 
-    // behaviors
+  self.conceptSet = ko.computed(() =>
+    ko.utils.unwrapObservable(params.conceptSet)
+  )
 
-    self.toggleExcludes = function () {
-      self
-        .conceptSet()
-        .expression.items()
-        .forEach((item) => item.isExcluded(excludesDefault))
-      excludesDefault = !excludesDefault
-    }
+  // behaviors
 
-    self.toggleDescendants = function () {
-      self
-        .conceptSet()
-        .expression.items()
-        .forEach((item) => item.includeDescendants(descendantsDefault))
-      descendantsDefault = !descendantsDefault
-    }
-
-    self.toggleMapped = function () {
-      self
-        .conceptSet()
-        .expression.items()
-        .forEach((item) => item.includeMapped(mappedDefault))
-      mappedDefault = !mappedDefault
-    }
+  self.toggleExcludes = function () {
+    self
+      .conceptSet()
+      .expression.items()
+      .forEach((item) => item.isExcluded(excludesDefault))
+    excludesDefault = !excludesDefault
   }
 
-  return {
-    viewModel: ConceptSetQuickviewModel,
-    template: componentTemplate,
+  self.toggleDescendants = function () {
+    self
+      .conceptSet()
+      .expression.items()
+      .forEach((item) => item.includeDescendants(descendantsDefault))
+    descendantsDefault = !descendantsDefault
   }
-})
+
+  self.toggleMapped = function () {
+    self
+      .conceptSet()
+      .expression.items()
+      .forEach((item) => item.includeMapped(mappedDefault))
+    mappedDefault = !mappedDefault
+  }
+}
+
+export default {
+  viewModel: ConceptSetQuickviewModel,
+  template: componentTemplate,
+}
+

@@ -1,32 +1,22 @@
-define([
-  'jquery',
-  'knockout',
-  'text!./cohort-comparison-r-code.html',
-  'appConfig',
-  'components/cohortcomparison/ComparativeCohortAnalysis',
-  'services/VocabularyProvider',
-  'prism',
-],
-function (
-  $,
-  ko,
-  view,
-  config,
-  cohortComparison,
-  vocabularyAPI,
-  options
-) {
-  function cohortComparisonRCode (params) {
-    const self = this
-    self.config = config
-    self.cohortComparison = params.cohortComparison
-  }
+import $ from 'jquery'
+import ko from 'knockout'
+import view from './cohort-comparison-r-code.html?raw'
+import config from 'appConfig'
+import cohortComparison from 'components/cohortcomparison/ComparativeCohortAnalysis'
+import vocabularyAPI from 'services/VocabularyProvider'
+import options from 'prism'
 
-  const component = {
-    viewModel: cohortComparisonRCode,
-    template: view
-  }
+function cohortComparisonRCode (params) {
+  const self = this
+  self.config = config
+  self.cohortComparison = params.cohortComparison
+}
 
-  ko.components.register('cohort-comparison-r-code', component)
-  return component
-})
+const component = {
+  viewModel: cohortComparisonRCode,
+  template: view
+}
+
+ko.components.register('cohort-comparison-r-code', component)
+export default component
+

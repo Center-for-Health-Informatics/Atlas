@@ -1,15 +1,14 @@
-define(['knockout', 'text!./PeriodTemplate.html'], function (
-  ko,
-  componentTemplate
-) {
-  function PeriodViewModel (params) {
-    const self = this
-    self.Period = params.Period // this will be a NumericRange input type.
-  }
+import ko from 'knockout'
+import componentTemplate from './PeriodTemplate.html?raw'
 
-  // return compoonent definition
-  return {
-    viewModel: PeriodViewModel,
-    template: componentTemplate,
-  }
-})
+function PeriodViewModel (params) {
+  const self = this
+  self.Period = params.Period // this will be a NumericRange input type.
+}
+
+// return compoonent definition
+export default {
+  viewModel: PeriodViewModel,
+  template: componentTemplate,
+}
+

@@ -1,19 +1,13 @@
-define([
-  'knockout',
-  'text!./naive-bayes-settings.html',
-  './ModelSettingsEditorComponent',
-  'utils/CommonUtils',
-], function (
-  ko,
-  view,
-  ModelSettingsEditorComponent,
-  commonUtils
-) {
-  class NaiveBayesSettings extends ModelSettingsEditorComponent {
-    constructor (params) {
-      super(params)
-    }
-  }
+import ko from 'knockout'
+import view from './naive-bayes-settings.html?raw'
+import ModelSettingsEditorComponent from './ModelSettingsEditorComponent'
+import commonUtils from 'utils/CommonUtils'
 
-  return commonUtils.build('naive-bayes-settings', NaiveBayesSettings, view)
-})
+class NaiveBayesSettings extends ModelSettingsEditorComponent {
+  constructor (params) {
+    super(params)
+  }
+}
+
+export default commonUtils.build('naive-bayes-settings', NaiveBayesSettings, view)
+

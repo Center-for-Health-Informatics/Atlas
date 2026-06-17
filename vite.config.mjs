@@ -31,6 +31,10 @@ export default defineConfig({
 
       // ── App config ──
       { find: 'appConfig', replacement: js('config.js') },
+      { find: 'config-local', replacement: js('config-local.js') },
+      { find: 'config-gis', replacement: js('config-gis.js') },
+      { find: 'const-state', replacement: js('const-state.js') },
+      { find: 'version', replacement: js('version.js') },
 
       // ── AMD map: d3 v4 sub-package redirects ──
       { find: 'd3-color', replacement: nm('d3/build/d3.js') },

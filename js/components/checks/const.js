@@ -1,18 +1,19 @@
-define(['knockout'], function (ko) {
-  const WarningSeverity = {
-    INFO: 'INFO',
-    WARNING: 'WARNING',
-    CRITICAL: 'CRITICAL',
-  }
+import ko from 'knockout'
 
-  const WarningSeverityIcon = {
-    INFO: 'fa-info',
-    WARNING: 'fa-exclamation-triangle',
-    CRITICAL: 'fa-times-circle',
-  }
+const WarningSeverity = {
+  INFO: 'INFO',
+  WARNING: 'WARNING',
+  CRITICAL: 'CRITICAL',
+}
 
-  return {
-    WarningSeverity,
-    WarningSeverityIcon,
-  }
-})
+const WarningSeverityIcon = {
+  INFO: 'fa-info',
+  WARNING: 'fa-exclamation-triangle',
+  CRITICAL: 'fa-times-circle',
+}
+
+export default {
+  WarningSeverity,
+  WarningSeverityIcon,
+}
+

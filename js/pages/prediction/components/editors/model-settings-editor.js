@@ -1,30 +1,24 @@
-define([
-  'knockout',
-  'text!./model-settings-editor.html',
-  'components/Component',
-  'utils/CommonUtils',
-  './modelSettings/naive-bayes-settings',
-  './modelSettings/random-forest-settings',
-  './modelSettings/mlp-settings',
-  './modelSettings/knn-settings',
-  './modelSettings/gradient-boosting-machine-settings',
-  './modelSettings/decision-tree-settings',
-  './modelSettings/ada-boost-settings',
-  './modelSettings/lasso-logistic-regression-settings',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils
-) {
-  class ModelSettingsEditor extends Component {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './model-settings-editor.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import './modelSettings/naive-bayes-settings'
+import './modelSettings/random-forest-settings'
+import './modelSettings/mlp-settings'
+import './modelSettings/knn-settings'
+import './modelSettings/gradient-boosting-machine-settings'
+import './modelSettings/decision-tree-settings'
+import './modelSettings/ada-boost-settings'
+import './modelSettings/lasso-logistic-regression-settings'
 
-      this.editor = params.editor
-      this.editorSettings = params
-    }
+class ModelSettingsEditor extends Component {
+  constructor (params) {
+    super(params)
+
+    this.editor = params.editor
+    this.editorSettings = params
   }
+}
 
-  return commonUtils.build('model-settings-editor', ModelSettingsEditor, view)
-})
+export default commonUtils.build('model-settings-editor', ModelSettingsEditor, view)
+

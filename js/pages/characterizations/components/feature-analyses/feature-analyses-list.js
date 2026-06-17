@@ -1,69 +1,56 @@
-define([
-  'knockout',
-  'pages/characterizations/services/FeatureAnalysisService',
-  'pages/characterizations/services/PermissionService',
-  'text!./feature-analyses-list.html',
-  'appConfig',
-  'services/AuthAPI',
-  'pages/Page',
-  'utils/CommonUtils',
-  'utils/DatatableUtils',
-  'pages/characterizations/const',
-  './const',
-  '../tabbed-grid',
-  'less!./feature-analyses-list.less',
-], function (
-  ko,
-  FeatureAnalysisService,
-  PermissionService,
-  view,
-  config,
-  authApi,
-  Page,
-  commonUtils,
-  datatableUtils,
-  constants,
-  feConst
-) {
-  class FeatureAnalyses extends Page {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import FeatureAnalysisService from 'pages/characterizations/services/FeatureAnalysisService'
+import PermissionService from 'pages/characterizations/services/PermissionService'
+import view from './feature-analyses-list.html?raw'
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import Page from 'pages/Page'
+import commonUtils from 'utils/CommonUtils'
+import datatableUtils from 'utils/DatatableUtils'
+import constants from 'pages/characterizations/const'
+import feConst from './const'
+import '../tabbed-grid'
+import './feature-analyses-list.less'
 
-      this.gridTab = constants.featureAnalysesTab
+class FeatureAnalyses extends Page {
+  constructor (params) {
+    super(params)
 
-      this.loading = ko.observable(false)
-      this.data = ko.observableArray()
+    this.gridTab = constants.featureAnalysesTab
 
-      this.gridColumns = feConst.FeatureAnalysisColumns(this.classes)
-      this.gridOptions = {
-        Facets: feConst.FeatureAnalysisFacets,
-      }
-    }
+    this.loading = ko.observable(false)
+    this.data = ko.observableArray()
 
-    onRouterParamsChanged () {
-      this.isGetListPermitted() && this.loadData()
-    }
-
-    isGetListPermitted () {
-      return PermissionService.isPermittedGetFaList()
-    }
-
-    isCreatePermitted () {
-      return PermissionService.isPermittedCreateFa()
-    }
-
-    async loadData () {
-      this.loading(true)
-      const res = await FeatureAnalysisService.loadFeatureAnalysisList()
-      datatableUtils.coalesceField(res.content, 'modifiedDate', 'createdDate')
-      this.data(res.content)
-      this.loading(false)
-    }
-
-    createFeature () {
-      commonUtils.routeTo('/cc/feature-analyses/0')
+    this.gridColumns = feConst.FeatureAnalysisColumns(this.classes)
+    this.gridOptions = {
+      Facets: feConst.FeatureAnalysisFacets,
     }
   }
 
-  return commonUtils.build('feature-analyses-list', FeatureAnalyses, view)
-})
+  onRouterParamsChanged () {
+    this.isGetListPermitted() && this.loadData()
+  }
+
+  isGetListPermitted () {
+    return PermissionService.isPermittedGetFaList()
+  }
+
+  isCreatePermitted () {
+    return PermissionService.isPermittedCreateFa()
+  }
+
+  async loadData () {
+    this.loading(true)
+    const res = await FeatureAnalysisService.loadFeatureAnalysisList()
+    datatableUtils.coalesceField(res.content, 'modifiedDate', 'createdDate')
+    this.data(res.content)
+    this.loading(false)
+  }
+
+  createFeature () {
+    commonUtils.routeTo('/cc/feature-analyses/0')
+  }
+}
+
+export default commonUtils.build('feature-analyses-list', FeatureAnalyses, view)
+

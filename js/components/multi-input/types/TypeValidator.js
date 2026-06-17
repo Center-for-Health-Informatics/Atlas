@@ -1,18 +1,17 @@
-define([], function () {
-  class TypeValidator {
-    constructor (params) {
-      this.type = params.type || null
-      this.extender = params.extender || null
-    }
-
-    checkValue () {
-      return true
-    }
-
-    parseType (item) {
-      return item
-    }
+class TypeValidator {
+  constructor (params) {
+    this.type = params.type || null
+    this.extender = params.extender || null
   }
 
-  return TypeValidator
-})
+  checkValue () {
+    return true
+  }
+
+  parseType (item) {
+    return item
+  }
+}
+
+export default TypeValidator
+

@@ -1,36 +1,27 @@
-define([
-  'knockout',
-  'text!./explore-evidence.html',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  'atlas-state',
-  'components/conceptset/ConceptSetStore',
-], function (
-  ko,
-  view,
-  Component,
-  AutoBind,
-  commonUtils,
-  sharedState,
-  ConceptSetStore
-) {
-  class ExploreEvidence extends AutoBind(Component) {
-    constructor (params) {
-      super(params)
-      this.currentConceptSet = ConceptSetStore.repository().current
-      this.selectedConcepts = ko.pureComputed(() => this.currentConceptSet() && this.currentConceptSet().expression.items())
-      this.currentConceptSetDirtyFlag = sharedState.RepositoryConceptSet.dirtyFlag
-      this.currentConceptSetNegativeControls = sharedState.RepositoryConceptSet.negativeControls
-      this.conceptSetInclusionIdentifiers = ConceptSetStore.repository().conceptSetInclusionIdentifiers
-      this.resultsUrl = sharedState.resultsUrl
-      this.saveConceptSetFn = params.saveConceptSet
-    }
+import ko from 'knockout'
+import view from './explore-evidence.html?raw'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import sharedState from 'atlas-state'
+import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 
-    saveConceptSet (conceptSet, txtElem) {
-      return this.saveConceptSetFn(conceptSet, txtElem)
-    }
+class ExploreEvidence extends AutoBind(Component) {
+  constructor (params) {
+    super(params)
+    this.currentConceptSet = ConceptSetStore.repository().current
+    this.selectedConcepts = ko.pureComputed(() => this.currentConceptSet() && this.currentConceptSet().expression.items())
+    this.currentConceptSetDirtyFlag = sharedState.RepositoryConceptSet.dirtyFlag
+    this.currentConceptSetNegativeControls = sharedState.RepositoryConceptSet.negativeControls
+    this.conceptSetInclusionIdentifiers = ConceptSetStore.repository().conceptSetInclusionIdentifiers
+    this.resultsUrl = sharedState.resultsUrl
+    this.saveConceptSetFn = params.saveConceptSet
   }
 
-  return commonUtils.build('explore-evidence', ExploreEvidence, view)
-})
+  saveConceptSet (conceptSet, txtElem) {
+    return this.saveConceptSetFn(conceptSet, txtElem)
+  }
+}
+
+export default commonUtils.build('explore-evidence', ExploreEvidence, view)
+

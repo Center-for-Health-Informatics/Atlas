@@ -1,15 +1,16 @@
-define(['knockout'], function (ko) {
-  function DateOffsetStrategy (data, conceptSets) {
-    const self = this
-    data = data || {}
+import ko from 'knockout'
 
-    self.DateField = ko.observable(data.DateField || 'StartDate')
-    self.Offset = ko.observable(data.Offset || 0)
-  }
+function DateOffsetStrategy (data, conceptSets) {
+  const self = this
+  data = data || {}
 
-  DateOffsetStrategy.prototype.toJSON = function () {
-    return this
-  }
+  self.DateField = ko.observable(data.DateField || 'StartDate')
+  self.Offset = ko.observable(data.Offset || 0)
+}
 
-  return DateOffsetStrategy
-})
+DateOffsetStrategy.prototype.toJSON = function () {
+  return this
+}
+
+export default DateOffsetStrategy
+

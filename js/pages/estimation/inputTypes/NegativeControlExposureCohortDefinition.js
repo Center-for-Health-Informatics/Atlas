@@ -1,12 +1,9 @@
-define([
-  'knockout',
-], function (
-  ko
-) {
-  class NegativeControlExposureCohortDefinition {
-    constructor (data = {}) {
-    }
-  }
+import ko from 'knockout'
 
-  return NegativeControlExposureCohortDefinition
-})
+class NegativeControlExposureCohortDefinition {
+  constructor (data = {}) {
+  }
+}
+
+export default NegativeControlExposureCohortDefinition
+

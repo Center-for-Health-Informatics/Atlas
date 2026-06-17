@@ -1,9 +1,7 @@
-define(function (require, exports) {
-  const ko = require('knockout')
+import ko from 'knockout'
+import generateComponent from './components/GenerateComponent'
+import conceptSetBrowser from './components/ConceptSetBrowser'
 
-  const generateComponent = require('./components/GenerateComponent')
-  ko.components.register('generate-component', generateComponent)
+ko.components.register('generate-component', generateComponent)
 
-  const conceptSetBrowser = require('./components/ConceptSetBrowser')
-  ko.components.register('concept-set-browser', conceptSetBrowser)
-})
+ko.components.register('concept-set-browser', conceptSetBrowser)

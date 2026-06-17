@@ -1,26 +1,30 @@
-define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/InputTypes/Range', 'text!./DrugEraTemplate.html'], function (ko, options, Range, template) {
-  function DrugEraViewModel (params) {
-    const self = this
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.DrugEra
-    self.options = options
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import Range from 'components/cohortbuilder/InputTypes/Range'
+import template from './DrugEraTemplate.html?raw'
 
-    self.indexMessage = ko.i18nformat(
-      'components.conditionDrug.indexDataText',
-      'The index date refers to the drug era of <%= conceptSetName %>.',
-      {
-        conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
-          self.Criteria.CodesetId,
-          self.expression.ConceptSets,
-          ko.i18n('components.conditionDrug.anyDrug', 'Any Drug')
-        ))
-      }
-    )
-  }
+function DrugEraViewModel (params) {
+  const self = this
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.DrugEra
+  self.options = options
 
-  // return compoonent definition
-  return {
-    viewModel: DrugEraViewModel,
-    template
-  }
-})
+  self.indexMessage = ko.i18nformat(
+    'components.conditionDrug.indexDataText',
+    'The index date refers to the drug era of <%= conceptSetName %>.',
+    {
+      conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
+        self.Criteria.CodesetId,
+        self.expression.ConceptSets,
+        ko.i18n('components.conditionDrug.anyDrug', 'Any Drug')
+      ))
+    }
+  )
+}
+
+// return compoonent definition
+export default {
+  viewModel: DrugEraViewModel,
+  template
+}
+

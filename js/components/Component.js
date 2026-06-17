@@ -1,24 +1,19 @@
-define([
-  'knockout',
-  'utils/BemHelper',
-  'services/AuthAPI',
-], function (
-  ko,
-  BemHelper,
-  AuthAPI
-) {
-  class Component {
-    constructor () {
-      this.subscriptions = []
-      const bemHelper = new BemHelper(this.componentName)
-      this.classes = bemHelper.run.bind(bemHelper)
-      this.isAuthenticated = AuthAPI.isAuthenticated
-    }
+import ko from 'knockout'
+import BemHelper from 'utils/BemHelper'
+import AuthAPI from 'services/AuthAPI'
 
-    dispose () {
-      this.subscriptions.forEach(sub => sub.dispose())
-    }
+class Component {
+  constructor () {
+    this.subscriptions = []
+    const bemHelper = new BemHelper(this.componentName)
+    this.classes = bemHelper.run.bind(bemHelper)
+    this.isAuthenticated = AuthAPI.isAuthenticated
   }
 
-  return Component
-})
+  dispose () {
+    this.subscriptions.forEach(sub => sub.dispose())
+  }
+}
+
+export default Component
+

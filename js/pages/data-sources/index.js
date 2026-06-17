@@ -1,14 +1,11 @@
-define(
-  (require, exports) => {
-    const ko = require('knockout')
-    const buildRoutes = require('./routes')
+import ko from 'knockout'
+import buildRoutes from './routes'
 
-    return {
-      title: ko.i18n('navigation.datasources', 'Data Sources'),
-      buildRoutes,
-      navUrl: () => '#/datasources',
-      icon: 'database',
-      statusCss: () => ''
-    }
-  }
-)
+export default {
+  title: ko.i18n('navigation.datasources', 'Data Sources'),
+  buildRoutes,
+  navUrl: () => '#/datasources',
+  icon: 'database',
+  statusCss: () => ''
+}
+

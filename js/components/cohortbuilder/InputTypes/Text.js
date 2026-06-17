@@ -1,13 +1,14 @@
-define(['knockout'], function (ko) {
-  const debug = false
+import ko from 'knockout'
 
-  function Text (data) {
-    const self = this
-    data = data || {}
+const debug = false
 
-    self.Text = ko.observable(data.Text || null)
-    self.Op = ko.observable(data.Op || 'contains')
-  }
+function Text (data) {
+  const self = this
+  data = data || {}
 
-  return Text
-})
+  self.Text = ko.observable(data.Text || null)
+  self.Op = ko.observable(data.Op || 'contains')
+}
+
+export default Text
+

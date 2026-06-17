@@ -1,17 +1,19 @@
-define(['knockout', 'text!./GenerateComponentTemplate.html'], function (ko, template) {
-  function GenerateComponentViewModel (params) {
-    const self = this
-    self.info = params.info
-    self.dirtyFlag = params.dirtyFlag
-    self.source = params.source
-    self.isRunning = ko.pureComputed(function () {
-      return (self.info() && self.info().status != 'COMPLETE')
-    })
-  }
+import ko from 'knockout'
+import template from './GenerateComponentTemplate.html?raw'
 
-  // return compoonent definition
-  return {
-    viewModel: GenerateComponentViewModel,
-    template
-  }
-})
+function GenerateComponentViewModel (params) {
+  const self = this
+  self.info = params.info
+  self.dirtyFlag = params.dirtyFlag
+  self.source = params.source
+  self.isRunning = ko.pureComputed(function () {
+    return (self.info() && self.info().status != 'COMPLETE')
+  })
+}
+
+// return compoonent definition
+export default {
+  viewModel: GenerateComponentViewModel,
+  template
+}
+

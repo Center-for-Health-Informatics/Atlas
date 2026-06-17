@@ -1,24 +1,16 @@
-define([
-  'knockout',
-  'components/Chart',
-  'components/Component',
-  'atlascharts',
-  'text!components/charts/chart.html',
-  'utils/CommonUtils'
-], function (
-  ko,
-  Chart,
-  Component,
-  atlascharts,
-  view,
-  commonUtils
-) {
-  class HorizontalBoxPlot extends Chart {
-    constructor (params, element) {
-      super(params, element)
-      this.renderer = new atlascharts.horizontalBoxplot()
-    }
-  }
+import ko from 'knockout'
+import Chart from 'components/Chart'
+import Component from 'components/Component'
+import atlascharts from 'atlascharts'
+import view from 'components/charts/chart.html?raw'
+import commonUtils from 'utils/CommonUtils'
 
-  return commonUtils.build('horizontal-boxplot', HorizontalBoxPlot, view)
-})
+class HorizontalBoxPlot extends Chart {
+  constructor (params, element) {
+    super(params, element)
+    this.renderer = new atlascharts.horizontalBoxplot()
+  }
+}
+
+export default commonUtils.build('horizontal-boxplot', HorizontalBoxPlot, view)
+

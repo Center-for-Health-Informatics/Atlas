@@ -1,76 +1,75 @@
-define(function (require, exports) {
-  const $ = require('jquery')
-  const config = require('appConfig')
-  const d3 = require('d3')
+import $ from 'jquery'
+import config from 'appConfig'
+import d3 from 'd3'
 
-  function getConceptRecordCountWithResultsUrl (resultsUrl, conceptIds, results, isCamelCaseProps = true, formatter = d3.format(',')) {
-    const getConceptId = (concept) => isCamelCaseProps ? concept.conceptId : concept.CONCEPT_ID
-    const setRecordCount = (concept, val) => isCamelCaseProps ? (concept.recordCount = val) : (concept.RECORD_COUNT = val)
-    const setDescendantRecordCount = (concept, val) => isCamelCaseProps ? (concept.descendantRecordCount = val) : (concept.DESCENDANT_RECORD_COUNT = val)
-    const setPersonCount = (concept, val) => isCamelCaseProps ? (concept.personCount = val) : (concept.PERSON_COUNT = val)
-    const setDescendantPersonCount = (concept, val) => isCamelCaseProps ? (concept.descendantPersonCount = val) : (concept.DESCENDANT_PERSON_COUNT = val)
+function getConceptRecordCountWithResultsUrl (resultsUrl, conceptIds, results, isCamelCaseProps = true, formatter = d3.format(',')) {
+  const getConceptId = (concept) => isCamelCaseProps ? concept.conceptId : concept.CONCEPT_ID
+  const setRecordCount = (concept, val) => isCamelCaseProps ? (concept.recordCount = val) : (concept.RECORD_COUNT = val)
+  const setDescendantRecordCount = (concept, val) => isCamelCaseProps ? (concept.descendantRecordCount = val) : (concept.DESCENDANT_RECORD_COUNT = val)
+  const setPersonCount = (concept, val) => isCamelCaseProps ? (concept.personCount = val) : (concept.PERSON_COUNT = val)
+  const setDescendantPersonCount = (concept, val) => isCamelCaseProps ? (concept.descendantPersonCount = val) : (concept.DESCENDANT_PERSON_COUNT = val)
 
-    const densityPromise = $.Deferred()
-    const densityIndex = {}
+  const densityPromise = $.Deferred()
+  const densityIndex = {}
 
-    for (c = 0; c < results.length; c++) {
-      setRecordCount(results[c], 'loading')
-      setDescendantRecordCount(results[c], 'loading')
-      setPersonCount(results[c], 'loading')
-      setDescendantPersonCount(results[c], 'loading')
-    }
+  for (c = 0; c < results.length; c++) {
+    setRecordCount(results[c], 'loading')
+    setDescendantRecordCount(results[c], 'loading')
+    setPersonCount(results[c], 'loading')
+    setDescendantPersonCount(results[c], 'loading')
+  }
 
-    $.ajax({
-      url: resultsUrl + 'conceptRecordCount',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(conceptIds),
-      success: function (entries) {
-        for (let e = 0; e < entries.length; e++) {
-          densityIndex[Object.keys(entries[e])[0]] = Object.values(entries[e])[0]
-        }
-
-        for (let c = 0; c < results.length; c++) {
-          const concept = results[c]
-          if (densityIndex[getConceptId(concept)] != undefined) {
-            setRecordCount(concept, formatter(densityIndex[getConceptId(concept)][0]))
-            setDescendantRecordCount(concept, formatter(densityIndex[getConceptId(concept)][1]))
-            setPersonCount(concept, formatter(densityIndex[getConceptId(concept)][2]))
-            setDescendantPersonCount(concept, formatter(densityIndex[getConceptId(concept)][3]))
-          } else {
-            setRecordCount(concept, 0)
-            setDescendantRecordCount(concept, 0)
-            setPersonCount(concept, 0)
-            setDescendantPersonCount(concept, 0)
-          }
-        }
-
-        densityPromise.resolve()
-      },
-      error: function (error) {
-        for (let c = 0; c < results.length; c++) {
-          const concept = results[c]
-          setRecordCount(concept, 'timeout')
-          setDescendantRecordCount(concept, 'timeout')
-          setPersonCount(concept, 'timeout')
-          setDescendantPersonCount(concept, 'timeout')
-        }
-
-        densityPromise.resolve()
+  $.ajax({
+    url: resultsUrl + 'conceptRecordCount',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(conceptIds),
+    success: function (entries) {
+      for (let e = 0; e < entries.length; e++) {
+        densityIndex[Object.keys(entries[e])[0]] = Object.values(entries[e])[0]
       }
-    })
 
-    return densityPromise
-  }
+      for (let c = 0; c < results.length; c++) {
+        const concept = results[c]
+        if (densityIndex[getConceptId(concept)] != undefined) {
+          setRecordCount(concept, formatter(densityIndex[getConceptId(concept)][0]))
+          setDescendantRecordCount(concept, formatter(densityIndex[getConceptId(concept)][1]))
+          setPersonCount(concept, formatter(densityIndex[getConceptId(concept)][2]))
+          setDescendantPersonCount(concept, formatter(densityIndex[getConceptId(concept)][3]))
+        } else {
+          setRecordCount(concept, 0)
+          setDescendantRecordCount(concept, 0)
+          setPersonCount(concept, 0)
+          setDescendantPersonCount(concept, 0)
+        }
+      }
 
-  function getConceptRecordCount (sourceKey, conceptIds, results, isCamelCaseProps = true, formatter = d3.format(',')) {
-    return getConceptRecordCountWithResultsUrl(config.webAPIRoot + 'cdmresults/' + sourceKey + '/', conceptIds, results, isCamelCaseProps, formatter)
-  }
+      densityPromise.resolve()
+    },
+    error: function (error) {
+      for (let c = 0; c < results.length; c++) {
+        const concept = results[c]
+        setRecordCount(concept, 'timeout')
+        setDescendantRecordCount(concept, 'timeout')
+        setPersonCount(concept, 'timeout')
+        setDescendantPersonCount(concept, 'timeout')
+      }
 
-  const api = {
-    getConceptRecordCount,
-    getConceptRecordCountWithResultsUrl,
-  }
+      densityPromise.resolve()
+    }
+  })
 
-  return api
-})
+  return densityPromise
+}
+
+function getConceptRecordCount (sourceKey, conceptIds, results, isCamelCaseProps = true, formatter = d3.format(',')) {
+  return getConceptRecordCountWithResultsUrl(config.webAPIRoot + 'cdmresults/' + sourceKey + '/', conceptIds, results, isCamelCaseProps, formatter)
+}
+
+const api = {
+  getConceptRecordCount,
+  getConceptRecordCountWithResultsUrl,
+}
+
+export default api
+

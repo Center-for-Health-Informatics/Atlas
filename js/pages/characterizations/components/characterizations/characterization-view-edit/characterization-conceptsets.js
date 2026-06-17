@@ -1,32 +1,24 @@
-define([
-  'knockout',
-  'text!./characterization-conceptsets.html',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  '../../../services/CharacterizationService',
-  'components/conceptset/conceptset-list',
-], function (
-  ko,
-  view,
-  Component,
-  AutoBind,
-  commonUtils,
-  characterizationService
-) {
-  class CharacterizationConceptSet extends AutoBind(Component) {
-    constructor (params) {
-      super(params)
-      this.conceptSets = params.conceptSets
-      this.conceptSetStore = params.conceptSetStore
-      this.canEdit = params.canEdit || (() => false)
-      this.characterizationId = params.characterizationId
-    }
+import ko from 'knockout'
+import view from './characterization-conceptsets.html?raw'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import characterizationService from '../../../services/CharacterizationService'
+import 'components/conceptset/conceptset-list'
 
-    exportConceptSets () {
-      characterizationService.exportConceptSets(ko.unwrap(this.characterizationId))
-    }
+class CharacterizationConceptSet extends AutoBind(Component) {
+  constructor (params) {
+    super(params)
+    this.conceptSets = params.conceptSets
+    this.conceptSetStore = params.conceptSetStore
+    this.canEdit = params.canEdit || (() => false)
+    this.characterizationId = params.characterizationId
   }
 
-  return commonUtils.build('characterization-conceptsets', CharacterizationConceptSet, view)
-})
+  exportConceptSets () {
+    characterizationService.exportConceptSets(ko.unwrap(this.characterizationId))
+  }
+}
+
+export default commonUtils.build('characterization-conceptsets', CharacterizationConceptSet, view)
+

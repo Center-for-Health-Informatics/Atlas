@@ -1,35 +1,26 @@
-define([
-  'knockout',
-  'text!./fa-conceptset.html',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  '../../../services/FeatureAnalysisService',
-  'atlas-state',
-  'components/conceptset/conceptset-list'
-], function (
-  ko,
-  view,
-  Component,
-  AutoBind,
-  commonUtils,
-  faService,
-  sharedState
-) {
-  class FeatureAnalysisConceptSet extends AutoBind(Component) {
-    constructor (params) {
-      super(params)
-      this.data = params.data
-      this.canEdit = params.canEdit || (() => false)
-      this.featureId = params.featureId
-      this.conceptSetStore = params.conceptSetStore
-      this.conceptSets = ko.pureComputed(() => this.data() && this.data().conceptSets)
-    }
+import ko from 'knockout'
+import view from './fa-conceptset.html?raw'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import faService from '../../../services/FeatureAnalysisService'
+import sharedState from 'atlas-state'
+import 'components/conceptset/conceptset-list'
 
-    exportConceptSets () {
-      faService.exportConceptSets(ko.unwrap(this.featureId))
-    }
+class FeatureAnalysisConceptSet extends AutoBind(Component) {
+  constructor (params) {
+    super(params)
+    this.data = params.data
+    this.canEdit = params.canEdit || (() => false)
+    this.featureId = params.featureId
+    this.conceptSetStore = params.conceptSetStore
+    this.conceptSets = ko.pureComputed(() => this.data() && this.data().conceptSets)
   }
 
-  return commonUtils.build('feature-analysis-conceptset', FeatureAnalysisConceptSet, view)
-})
+  exportConceptSets () {
+    faService.exportConceptSets(ko.unwrap(this.featureId))
+  }
+}
+
+export default commonUtils.build('feature-analysis-conceptset', FeatureAnalysisConceptSet, view)
+

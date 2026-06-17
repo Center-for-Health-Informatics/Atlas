@@ -1,17 +1,19 @@
-define(['knockout', 'text!./CustomEraStrategyTemplate.html'], function (ko, template) {
-  function CustomEraStrategyViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import template from './CustomEraStrategyTemplate.html?raw'
 
-    self.strategy = ko.pureComputed(function () {
-      return ko.utils.unwrapObservable(params.strategy).CustomEra
-    })
+function CustomEraStrategyViewModel (params) {
+  const self = this
 
-    self.conceptSets = params.conceptSets
-  }
+  self.strategy = ko.pureComputed(function () {
+    return ko.utils.unwrapObservable(params.strategy).CustomEra
+  })
 
-  // return compoonent definition
-  return {
-    viewModel: CustomEraStrategyViewModel,
-    template
-  }
-})
+  self.conceptSets = params.conceptSets
+}
+
+// return compoonent definition
+export default {
+  viewModel: CustomEraStrategyViewModel,
+  template
+}
+

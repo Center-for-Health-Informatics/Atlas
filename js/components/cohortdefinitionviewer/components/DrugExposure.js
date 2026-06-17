@@ -1,27 +1,32 @@
-define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/InputTypes/Range', 'components/cohortbuilder/InputTypes/Text', 'text!./DrugExposureTemplate.html'], function (ko, options, Range, Text, template) {
-  function DrugExposureViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import Range from 'components/cohortbuilder/InputTypes/Range'
+import Text from 'components/cohortbuilder/InputTypes/Text'
+import template from './DrugExposureTemplate.html?raw'
 
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.DrugExposure
-    self.options = options
+function DrugExposureViewModel (params) {
+  const self = this
 
-    self.indexMessage = ko.i18nformat(
-      'components.conditionDrugExposure.indexDataText',
-      'The index date refers to the drug exposure of <%= conceptSetName %>.',
-      {
-        conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
-          self.Criteria.CodesetId,
-          self.expression.ConceptSets,
-          ko.i18n('components.conditionDrugExposure.anyDrug', 'Any Drug')
-        ))
-      }
-    )
-  }
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.DrugExposure
+  self.options = options
 
-  // return compoonent definition
-  return {
-    viewModel: DrugExposureViewModel,
-    template
-  }
-})
+  self.indexMessage = ko.i18nformat(
+    'components.conditionDrugExposure.indexDataText',
+    'The index date refers to the drug exposure of <%= conceptSetName %>.',
+    {
+      conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
+        self.Criteria.CodesetId,
+        self.expression.ConceptSets,
+        ko.i18n('components.conditionDrugExposure.anyDrug', 'Any Drug')
+      ))
+    }
+  )
+}
+
+// return compoonent definition
+export default {
+  viewModel: DrugExposureViewModel,
+  template
+}
+

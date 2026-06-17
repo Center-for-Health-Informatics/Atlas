@@ -1,49 +1,39 @@
-define([
-  'knockout',
-  'atlas-state',
-  'text!./tabbed-grid.html',
-  'appConfig',
-  'services/AuthAPI',
-  'components/Component',
-  'utils/CommonUtils',
-  'pages/characterizations/const',
-  'databindings',
-  'less!./tabbed-grid.less',
-  'components/heading',
-  'faceted-datatable'
-], function (
-  ko,
-  sharedState,
-  view,
-  config,
-  authApi,
-  Component,
-  commonUtils,
-  constants
-) {
-  class CharacterizationsTabbedGrid extends Component {
-    constructor (params) {
-      super()
+import ko from 'knockout'
+import sharedState from 'atlas-state'
+import view from './tabbed-grid.html?raw'
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import constants from 'pages/characterizations/const'
+import 'databindings'
+import './tabbed-grid.less'
+import 'components/heading'
+import 'faceted-datatable'
 
-      this.tabs = constants.gridTabs
-      this.activeTab = params.activeTab
+class CharacterizationsTabbedGrid extends Component {
+  constructor (params) {
+    super()
 
-      this.isViewPermitted = params.isViewPermitted
-      this.data = params.data
-      this.gridColumns = params.gridColumns
-      this.gridOptions = params.gridOptions
-      this.order = params.order || [[3, 'desc']]
+    this.tabs = constants.gridTabs
+    this.activeTab = params.activeTab
 
-      this.createNew = params.createNew
-      this.createNewEnabled = typeof params.createNewEnabled === 'undefined' ? () => true : params.createNewEnabled
-      this.createNewLabel = constants.gridTabs.filter(t => t.value === params.activeTab).newEntityLabel
-      this.tableOptions = commonUtils.getTableOptions('L')
-    }
+    this.isViewPermitted = params.isViewPermitted
+    this.data = params.data
+    this.gridColumns = params.gridColumns
+    this.gridOptions = params.gridOptions
+    this.order = params.order || [[3, 'desc']]
 
-    get datatableLanguage () {
-      return ko.i18n('datatable.language')
-    }
+    this.createNew = params.createNew
+    this.createNewEnabled = typeof params.createNewEnabled === 'undefined' ? () => true : params.createNewEnabled
+    this.createNewLabel = constants.gridTabs.filter(t => t.value === params.activeTab).newEntityLabel
+    this.tableOptions = commonUtils.getTableOptions('L')
   }
 
-  return commonUtils.build('characterizations-tabbed-grid', CharacterizationsTabbedGrid, view)
-})
+  get datatableLanguage () {
+    return ko.i18n('datatable.language')
+  }
+}
+
+export default commonUtils.build('characterizations-tabbed-grid', CharacterizationsTabbedGrid, view)
+

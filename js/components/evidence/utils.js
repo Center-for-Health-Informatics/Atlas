@@ -1,28 +1,30 @@
-define(['knockout', 'numeral'], function (ko, numeral) {
-  function hasEvidence (row) {
-    return (
-      row.descendantPmidCount > 0 ||
-            row.exactPmidCount > 0 ||
-            row.parentPmidCount > 0 ||
-            row.ancestorPmidCount > 0 ||
-            row.descendantSplicerCount > 0 ||
-            row.exactSplicerCount > 0 ||
-            row.parentSplicerCount > 0 ||
-            row.ancestorSplicerCount > 0
-    )
-  }
+import ko from 'knockout'
+import numeral from 'numeral'
 
-  function formatNumberWithCommas (val) {
-    return numeral(val).format('0,0')
-  }
+function hasEvidence (row) {
+  return (
+    row.descendantPmidCount > 0 ||
+          row.exactPmidCount > 0 ||
+          row.parentPmidCount > 0 ||
+          row.ancestorPmidCount > 0 ||
+          row.descendantSplicerCount > 0 ||
+          row.exactSplicerCount > 0 ||
+          row.parentSplicerCount > 0 ||
+          row.ancestorSplicerCount > 0
+  )
+}
 
-  function formatBooleanDisplay (val) {
-    return val.toString() == '1' ? 'Y' : 'N'
-  }
+function formatNumberWithCommas (val) {
+  return numeral(val).format('0,0')
+}
 
-  return {
-    hasEvidence,
-    formatNumberWithCommas,
-    formatBooleanDisplay,
-  }
-})
+function formatBooleanDisplay (val) {
+  return val.toString() == '1' ? 'Y' : 'N'
+}
+
+export default {
+  hasEvidence,
+  formatNumberWithCommas,
+  formatBooleanDisplay,
+}
+

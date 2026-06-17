@@ -1,26 +1,27 @@
-define(['knockout'], function (ko) {
-  function CustomEraStrategy (data, conceptSets) {
-    const self = this
-    data = data || {}
+import ko from 'knockout'
 
-    self.DrugCodesetId = ko.observable(data.DrugCodesetId)
-    self.GapDays = ko.observable(data.GapDays || 0)
-    self.Offset = ko.observable(data.Offset || 0)
-    self.DaysSupplyOverride = ko.observable(data.DaysSupplyOverride)
+function CustomEraStrategy (data, conceptSets) {
+  const self = this
+  data = data || {}
 
-    // set up subscription to update DrugCodesetId if the item is removed from conceptSets
-    conceptSets.subscribe(function (changes) {
-      changes.forEach(function (change) {
-        if (change.status === 'deleted') {
-          if (ko.utils.unwrapObservable(self.DrugCodesetId) == change.value.id) { self.DrugCodesetId(null) }
-        }
-      })
-    }, null, 'arrayChange')
-  }
+  self.DrugCodesetId = ko.observable(data.DrugCodesetId)
+  self.GapDays = ko.observable(data.GapDays || 0)
+  self.Offset = ko.observable(data.Offset || 0)
+  self.DaysSupplyOverride = ko.observable(data.DaysSupplyOverride)
 
-  CustomEraStrategy.prototype.toJSON = function () {
-    return this
-  }
+  // set up subscription to update DrugCodesetId if the item is removed from conceptSets
+  conceptSets.subscribe(function (changes) {
+    changes.forEach(function (change) {
+      if (change.status === 'deleted') {
+        if (ko.utils.unwrapObservable(self.DrugCodesetId) == change.value.id) { self.DrugCodesetId(null) }
+      }
+    })
+  }, null, 'arrayChange')
+}
 
-  return CustomEraStrategy
-})
+CustomEraStrategy.prototype.toJSON = function () {
+  return this
+}
+
+export default CustomEraStrategy
+

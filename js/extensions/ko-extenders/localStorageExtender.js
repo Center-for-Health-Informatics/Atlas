@@ -1,26 +1,27 @@
-define(['knockout', 'lscache'], function (ko, lscache) {
-  // Don't crash on browsers that are missing localStorage
-  if (typeof (localStorage) === 'undefined') { return }
+import ko from 'knockout'
+import lscache from 'lscache'
 
-  ko.extenders.localStoragePersist = function (target, options) {
-    let initialValue = target()
+// Don't crash on browsers that are missing localStorage
+if (typeof (localStorage) === 'undefined') { return }
 
-    const key = options[0]
-    const expiration = options[1]
+ko.extenders.localStoragePersist = function (target, options) {
+  let initialValue = target()
 
-    // Load existing value from localStorage if set
-    if (key && lscache.get(key) !== null) {
-      try {
-        initialValue = lscache.get(key)
-      } catch (e) {
-      }
+  const key = options[0]
+  const expiration = options[1]
+
+  // Load existing value from localStorage if set
+  if (key && lscache.get(key) !== null) {
+    try {
+      initialValue = lscache.get(key)
+    } catch (e) {
     }
-    target(initialValue)
-
-    // Subscribe to new values and add them to localStorage
-    target.subscribe(function (newValue) {
-      lscache.set(key, newValue, expiration)
-    })
-    return target
   }
-})
+  target(initialValue)
+
+  // Subscribe to new values and add them to localStorage
+  target.subscribe(function (newValue) {
+    lscache.set(key, newValue, expiration)
+  })
+  return target
+}

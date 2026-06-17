@@ -1,13 +1,10 @@
-define([
-  'services/AuthAPI'
-], function (
-  AuthAPI
-) {
-  function isPermittedExportSQL () {
-    return AuthAPI.isPermitted('ir:sql:post')
-  }
+import AuthAPI from 'services/AuthAPI'
 
-  return {
-    isPermittedExportSQL,
-  }
-})
+function isPermittedExportSQL () {
+  return AuthAPI.isPermitted('ir:sql:post')
+}
+
+export default {
+  isPermittedExportSQL,
+}
+

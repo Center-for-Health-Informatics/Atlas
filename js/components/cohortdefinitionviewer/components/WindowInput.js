@@ -1,19 +1,22 @@
-define(['knockout', 'components/cohortbuilder/options', 'text!./WindowInputTemplate.html'], function (ko, options, template) {
-  function WindowInputViewModel (params) {
-    const self = this
-    self.options = options
-    self.Window = ko.utils.unwrapObservable(params.Window) // this will be a Window input type.
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import template from './WindowInputTemplate.html?raw'
 
-    self.getCoeffName = function (coeffId) {
-      return self.options.windowCoeffOptions.filter(function (item) {
-        return item.value == coeffId
-      })[0].name
-    }
-  }
+function WindowInputViewModel (params) {
+  const self = this
+  self.options = options
+  self.Window = ko.utils.unwrapObservable(params.Window) // this will be a Window input type.
 
-  // return compoonent definition
-  return {
-    viewModel: WindowInputViewModel,
-    template
+  self.getCoeffName = function (coeffId) {
+    return self.options.windowCoeffOptions.filter(function (item) {
+      return item.value == coeffId
+    })[0].name
   }
-})
+}
+
+// return compoonent definition
+export default {
+  viewModel: WindowInputViewModel,
+  template
+}
+

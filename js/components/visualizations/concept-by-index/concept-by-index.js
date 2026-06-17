@@ -1,140 +1,144 @@
-define(['knockout', 'text!./concept-by-index.html', 'd3', 'jnj_chart'], function (ko, view, d3, jnj_chart) {
-  function conceptByIndex (params) {
-    const self = this
-    self.conceptId = params.conceptId
-    self.cohortDefinitionId = params.cohortDefinitionId
-    self.caption = params.caption
-    self.conceptDomain = params.conceptDomain.toLowerCase()
-    self.resultsUrl = params.resultsUrl
+import ko from 'knockout'
+import view from './concept-by-index.html?raw'
+import d3 from 'd3'
+import jnj_chart from 'jnj_chart'
 
-    self.dataframeToArray = function (dataframe) {
-      // dataframes from R serialize into an obect where each column is an array of values.
-      const keys = d3.keys(dataframe)
-      let result
-      if (dataframe[keys[0]] instanceof Array) {
-        result = dataframe[keys[0]].map(function (d, i) {
-          const item = {}
-          const container = this
-          keys.forEach(function (p) {
-            item[p] = container[p][i]
-          })
-          return item
-        }, dataframe)
-      } else {
-        result = [dataframe]
-      }
-      return result
-    }
+function conceptByIndex (params) {
+  const self = this
+  self.conceptId = params.conceptId
+  self.cohortDefinitionId = params.cohortDefinitionId
+  self.caption = params.caption
+  self.conceptDomain = params.conceptDomain.toLowerCase()
+  self.resultsUrl = params.resultsUrl
 
-    self.normalizeArray = function (ary, numerify) {
-      const obj = {}
-      let keys
-
-      if (ary && ary.length > 0 && ary instanceof Array) {
-        keys = d3.keys(ary[0])
-
-        $.each(keys, function () {
-          obj[this] = []
+  self.dataframeToArray = function (dataframe) {
+    // dataframes from R serialize into an obect where each column is an array of values.
+    const keys = d3.keys(dataframe)
+    let result
+    if (dataframe[keys[0]] instanceof Array) {
+      result = dataframe[keys[0]].map(function (d, i) {
+        const item = {}
+        const container = this
+        keys.forEach(function (p) {
+          item[p] = container[p][i]
         })
-
-        $.each(ary, function () {
-          const thisAryObj = this
-          $.each(keys, function () {
-            let val = thisAryObj[this]
-            if (numerify) {
-              if (_.isFinite(+val)) {
-                val = (+val)
-              }
-            }
-            obj[this].push(val)
-          })
-        })
-      } else {
-        obj.empty = true
-      }
-
-      return obj
+        return item
+      }, dataframe)
+    } else {
+      result = [dataframe]
     }
+    return result
+  }
 
-    self.render = function () {
-      $('#concept-by-index-caption').html(self.caption)
+  self.normalizeArray = function (ary, numerify) {
+    const obj = {}
+    let keys
 
-      $.ajax({
-        type: 'GET',
-        url: self.resultsUrl + self.cohortDefinitionId + '/cohortspecific' + self.conceptDomain + '/' + self.conceptId,
-        contentType: 'application/json; charset=utf-8',
-        success: function (result) {
-          if (result && result.length > 0) {
-            const normalized = self.dataframeToArray(self.normalizeArray(result))
+    if (ary && ary.length > 0 && ary instanceof Array) {
+      keys = d3.keys(ary[0])
 
-            // nest dataframe data into key->values pair
-            const totalRecordsData = d3.nest()
-              .key(function (d) {
-                return d.recordType
-              })
-              .entries(normalized)
-              .map(function (d) {
-                return {
-                  name: d.key,
-                  values: d.values
-                }
-              })
-
-            const scatter = new jnj_chart.scatterplot()
-
-            scatter.render(totalRecordsData, '#concept-by-index-scatterplot', 460, 150, {
-              yFormat: d3.format('0.2%'),
-              xValue: 'duration',
-              yValue: 'pctPersons',
-              xLabel: 'Duration Relative to Index',
-              yLabel: '% Persons',
-              seriesName: 'recordType',
-              showLegend: true,
-              tooltips: [
-                {
-                  label: 'Series',
-                  accessor: function (o) {
-                    return o.recordType
-                  }
-                },
-                {
-                  label: 'Percent Persons',
-                  accessor: function (o) {
-                    return d3.format('0.2%')(o.pctPersons)
-                  }
-                },
-                {
-                  label: 'Duration Relative to Index',
-                  accessor: function (o) {
-                    const years = Math.round(o.duration / 365)
-                    const days = o.duration % 365
-                    let result = ''
-                    if (years != 0) { result += years + 'y ' }
-
-                    result += days + 'd'
-                    return result
-                  }
-                },
-                {
-                  label: 'Person Count',
-                  accessor: function (o) {
-                    return o.countValue
-                  }
-                }
-              ]
-            })
-          }
-        }
+      $.each(keys, function () {
+        obj[this] = []
       })
+
+      $.each(ary, function () {
+        const thisAryObj = this
+        $.each(keys, function () {
+          let val = thisAryObj[this]
+          if (numerify) {
+            if (_.isFinite(+val)) {
+              val = (+val)
+            }
+          }
+          obj[this].push(val)
+        })
+      })
+    } else {
+      obj.empty = true
     }
-    self.render()
+
+    return obj
   }
 
-  const component = {
-    viewModel: conceptByIndex,
-    template: view
-  }
+  self.render = function () {
+    $('#concept-by-index-caption').html(self.caption)
 
-  ko.components.register('visualizations/concept-by-index', component)
-  return component
-})
+    $.ajax({
+      type: 'GET',
+      url: self.resultsUrl + self.cohortDefinitionId + '/cohortspecific' + self.conceptDomain + '/' + self.conceptId,
+      contentType: 'application/json; charset=utf-8',
+      success: function (result) {
+        if (result && result.length > 0) {
+          const normalized = self.dataframeToArray(self.normalizeArray(result))
+
+          // nest dataframe data into key->values pair
+          const totalRecordsData = d3.nest()
+            .key(function (d) {
+              return d.recordType
+            })
+            .entries(normalized)
+            .map(function (d) {
+              return {
+                name: d.key,
+                values: d.values
+              }
+            })
+
+          const scatter = new jnj_chart.scatterplot()
+
+          scatter.render(totalRecordsData, '#concept-by-index-scatterplot', 460, 150, {
+            yFormat: d3.format('0.2%'),
+            xValue: 'duration',
+            yValue: 'pctPersons',
+            xLabel: 'Duration Relative to Index',
+            yLabel: '% Persons',
+            seriesName: 'recordType',
+            showLegend: true,
+            tooltips: [
+              {
+                label: 'Series',
+                accessor: function (o) {
+                  return o.recordType
+                }
+              },
+              {
+                label: 'Percent Persons',
+                accessor: function (o) {
+                  return d3.format('0.2%')(o.pctPersons)
+                }
+              },
+              {
+                label: 'Duration Relative to Index',
+                accessor: function (o) {
+                  const years = Math.round(o.duration / 365)
+                  const days = o.duration % 365
+                  let result = ''
+                  if (years != 0) { result += years + 'y ' }
+
+                  result += days + 'd'
+                  return result
+                }
+              },
+              {
+                label: 'Person Count',
+                accessor: function (o) {
+                  return o.countValue
+                }
+              }
+            ]
+          })
+        }
+      }
+    })
+  }
+  self.render()
+}
+
+const component = {
+  viewModel: conceptByIndex,
+  template: view
+}
+
+ko.components.register('visualizations/concept-by-index', component)
+export default component
+

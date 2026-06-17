@@ -1,42 +1,41 @@
-define((require) => {
-  const {
-    AuthorizedRoute
-  } = require('pages/Route')
+import {
+  AuthorizedRoute
+} from 'pages/Route'
 
-  function routes (router) {
-    const reusablesManager = new AuthorizedRoute((id, section) => {
-      require(['./components/manager'], function () {
-        router.setCurrentView('reusables-manager', {
-          designId: id,
-          section,
-        })
+function routes (router) {
+  const reusablesManager = new AuthorizedRoute((id, section) => {
+    import('./components/manager').then(() => {
+      router.setCurrentView('reusables-manager', {
+        designId: id,
+        section,
       })
     })
+  })
 
-    const reusablesManagerVersion = new AuthorizedRoute((id, version) => {
-      require(['./components/manager'], function () {
-        router.setCurrentView('reusables-manager', {
-          designId: id,
-          section: 'design',
-          version
-        })
+  const reusablesManagerVersion = new AuthorizedRoute((id, version) => {
+    import('./components/manager').then(() => {
+      router.setCurrentView('reusables-manager', {
+        designId: id,
+        section: 'design',
+        version
       })
     })
+  })
 
-    const reusablesBrowser = new AuthorizedRoute(() => {
-      require(['./components/browser'], function () {
-        router.setCurrentView('reusables-browser')
-      })
+  const reusablesBrowser = new AuthorizedRoute(() => {
+    import('./components/browser').then(() => {
+      router.setCurrentView('reusables-browser')
     })
+  })
 
-    return {
-      reusables: reusablesBrowser,
-      'reusables/:id:': reusablesManager,
-      'reusables/:id:/version/:version:': reusablesManagerVersion,
-      'reusables/:id:/:section:': reusablesManager,
-      'reusables/:id:/:section:/:subId:': reusablesManager // for executions
-    }
+  return {
+    reusables: reusablesBrowser,
+    'reusables/:id:': reusablesManager,
+    'reusables/:id:/version/:version:': reusablesManagerVersion,
+    'reusables/:id:/:section:': reusablesManager,
+    'reusables/:id:/:section:/:subId:': reusablesManager // for executions
   }
+}
 
-  return routes
-})
+export default routes
+

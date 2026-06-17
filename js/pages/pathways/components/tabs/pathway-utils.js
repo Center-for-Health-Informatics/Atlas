@@ -1,71 +1,60 @@
-define([
-  'knockout',
-  '../../PathwayService',
-  '../../PermissionService',
-  'text!./pathway-utils.html',
-  'appConfig',
-  'services/AuthAPI',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  'less!./pathway-utils.less',
-], function (
-  ko,
-  PathwayService,
-  PermissionService,
-  view,
-  config,
-  authApi,
-  Component,
-  AutoBind,
-  commonUtils
-) {
-  class PathwayUtils extends AutoBind(Component) {
-    constructor (params) {
-      super()
+import ko from 'knockout'
+import PathwayService from '../../PathwayService'
+import PermissionService from '../../PermissionService'
+import view from './pathway-utils.html?raw'
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import './pathway-utils.less'
 
-      this.loading = ko.observable(false)
+class PathwayUtils extends AutoBind(Component) {
+  constructor (params) {
+    super()
 
-      this.MODE_JSON = 0
-      this.MODE_IMPORT = 1
+    this.loading = ko.observable(false)
 
-      this.dirtyFlag = params.dirtyFlag
-      this.analysisId = params.analysisId
-      this.mode = ko.observable(this.MODE_JSON)
+    this.MODE_JSON = 0
+    this.MODE_IMPORT = 1
 
-      this.isExportPermitted = PermissionService.isPermittedExport
-      this.isImportPermitted = PermissionService.isPermittedImport
+    this.dirtyFlag = params.dirtyFlag
+    this.analysisId = params.analysisId
+    this.mode = ko.observable(this.MODE_JSON)
 
-      this.exportEntity = ko.observable()
-      this.exportService = PathwayService.loadExportDesign
-      this.importService = PathwayService.importPathwayDesign
-      this.afterImportSuccess = params.afterImportSuccess
+    this.isExportPermitted = PermissionService.isPermittedExport
+    this.isImportPermitted = PermissionService.isPermittedImport
 
-      this.subscriptions = []
-      // subscriptions
-      this.subscriptions.push(this.analysisId.subscribe((newVal) => {
-        this.loadExportJSON()
-        console.log(`New value of analysisId: ${newVal}`)
-      }))
-    }
+    this.exportEntity = ko.observable()
+    this.exportService = PathwayService.loadExportDesign
+    this.importService = PathwayService.importPathwayDesign
+    this.afterImportSuccess = params.afterImportSuccess
 
-    setMode (mode) {
-      this.mode(mode)
-    }
+    this.subscriptions = []
+    // subscriptions
+    this.subscriptions.push(this.analysisId.subscribe((newVal) => {
+      this.loadExportJSON()
+      console.log(`New value of analysisId: ${newVal}`)
+    }))
+  }
 
-    async loadExportJSON () {
-      if (this.analysisId() !== 0) {
-        this.loading(true)
-        const res = await PathwayService.loadExportDesign(this.analysisId())
-        this.exportEntity(res)
-        this.loading(false)
-      }
-    }
+  setMode (mode) {
+    this.mode(mode)
+  }
 
-    dispose () {
-      this.subscriptions.forEach(s => s.dispose())
+  async loadExportJSON () {
+    if (this.analysisId() !== 0) {
+      this.loading(true)
+      const res = await PathwayService.loadExportDesign(this.analysisId())
+      this.exportEntity(res)
+      this.loading(false)
     }
   }
 
-  return commonUtils.build('pathway-utils', PathwayUtils, view)
-})
+  dispose () {
+    this.subscriptions.forEach(s => s.dispose())
+  }
+}
+
+export default commonUtils.build('pathway-utils', PathwayUtils, view)
+

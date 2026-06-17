@@ -1,32 +1,29 @@
-define([
-  'services/AuthAPI',
-], function (
-  AuthAPI
-) {
-  function isPermittedCreate () {
-    return AuthAPI.isPermitted('user:import:job:post')
-  }
+import AuthAPI from 'services/AuthAPI'
 
-  function isPermittedList () {
-    return AuthAPI.isPermitted('user:import:job:get')
-  }
+function isPermittedCreate () {
+  return AuthAPI.isPermitted('user:import:job:post')
+}
 
-  function isPermittedView (id) {
-    return AuthAPI.isPermitted(`user:import:job:${id}:get`)
-  }
+function isPermittedList () {
+  return AuthAPI.isPermitted('user:import:job:get')
+}
 
-  function isPermittedEdit (id) {
-    return isPermittedView(id) && AuthAPI.isPermitted(`user:import:job:${id}:put`)
-  }
+function isPermittedView (id) {
+  return AuthAPI.isPermitted(`user:import:job:${id}:get`)
+}
 
-  function isPermittedDelete (id) {
-    return AuthAPI.isPermitted(`user:import:job:${id}:delete`)
-  }
+function isPermittedEdit (id) {
+  return isPermittedView(id) && AuthAPI.isPermitted(`user:import:job:${id}:put`)
+}
 
-  return {
-    isPermittedCreate,
-    isPermittedList,
-    isPermittedEdit,
-    isPermittedDelete,
-  }
-})
+function isPermittedDelete (id) {
+  return AuthAPI.isPermitted(`user:import:job:${id}:delete`)
+}
+
+export default {
+  isPermittedCreate,
+  isPermittedList,
+  isPermittedEdit,
+  isPermittedDelete,
+}
+

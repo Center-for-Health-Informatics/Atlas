@@ -1,49 +1,53 @@
-define(['knockout', './Criteria', '../InputTypes/Range', 'conceptpicker/InputTypes/Concept', '../InputTypes/ConceptSetSelection'],
-  function (ko, Criteria, Range, Concept, ConceptSetSelection) {
-    function Death (data, conceptSets) {
-      const self = this
-      data = data || {}
+import ko from 'knockout'
+import Criteria from './Criteria'
+import Range from '../InputTypes/Range'
+import Concept from 'conceptpicker/InputTypes/Concept'
+import ConceptSetSelection from '../InputTypes/ConceptSetSelection'
 
-      Criteria.call(this, data, conceptSets)
+function Death (data, conceptSets) {
+  const self = this
+  data = data || {}
 
-      // set up subscription to update CodesetId and DeathSourceConcept if the item is removed from conceptSets
-      conceptSets.subscribe(function (changes) {
-        changes.forEach(function (change) {
-          if (change.status === 'deleted') {
-            if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
-            if (ko.utils.unwrapObservable(self.DeathSourceConcept()) == change.value.id) { self.DeathSourceConcept()(null) }
-          }
-        })
-      }, null, 'arrayChange')
+  Criteria.call(this, data, conceptSets)
 
-      // General Condition Occurence Criteria
+  // set up subscription to update CodesetId and DeathSourceConcept if the item is removed from conceptSets
+  conceptSets.subscribe(function (changes) {
+    changes.forEach(function (change) {
+      if (change.status === 'deleted') {
+        if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
+        if (ko.utils.unwrapObservable(self.DeathSourceConcept()) == change.value.id) { self.DeathSourceConcept()(null) }
+      }
+    })
+  }, null, 'arrayChange')
 
-      // Verbatim fields
-      self.CodesetId = ko.observable(data.CodesetId)
+  // General Condition Occurence Criteria
 
-      self.OccurrenceStartDate = ko.observable(data.OccurrenceStartDate && new Range(data.OccurrenceStartDate))
-      self.DeathType = ko.observable(data.DeathType && ko.observableArray(data.DeathType.map(function (d) {
-        return new Concept(d)
-      })))
-      self.DeathTypeExclude = ko.observable(data.DeathTypeExclude || null)
-      self.DeathTypeCS = ko.observable(data.DeathTypeCS && new ConceptSetSelection(data.DeathTypeCS, conceptSets))
+  // Verbatim fields
+  self.CodesetId = ko.observable(data.CodesetId)
 
-      self.DeathSourceConcept = ko.observable(data.DeathSourceConcept != null ? ko.observable(data.DeathSourceConcept) : null)
-      // Derived Fields
-      self.Age = ko.observable(data.Age && new Range(data.Age))
+  self.OccurrenceStartDate = ko.observable(data.OccurrenceStartDate && new Range(data.OccurrenceStartDate))
+  self.DeathType = ko.observable(data.DeathType && ko.observableArray(data.DeathType.map(function (d) {
+    return new Concept(d)
+  })))
+  self.DeathTypeExclude = ko.observable(data.DeathTypeExclude || null)
+  self.DeathTypeCS = ko.observable(data.DeathTypeCS && new ConceptSetSelection(data.DeathTypeCS, conceptSets))
 
-      // Linked Fields
-      self.Gender = ko.observable(data.Gender && ko.observableArray(data.Gender.map(function (d) {
-        return new Concept(d)
-      })))
-      self.GenderCS = ko.observable(data.GenderCS && new ConceptSetSelection(data.GenderCS, conceptSets))
-    }
+  self.DeathSourceConcept = ko.observable(data.DeathSourceConcept != null ? ko.observable(data.DeathSourceConcept) : null)
+  // Derived Fields
+  self.Age = ko.observable(data.Age && new Range(data.Age))
 
-    Death.prototype = new Criteria()
-    Death.prototype.constructor = Death
-    Death.prototype.toJSON = function () {
-      return this
-    }
+  // Linked Fields
+  self.Gender = ko.observable(data.Gender && ko.observableArray(data.Gender.map(function (d) {
+    return new Concept(d)
+  })))
+  self.GenderCS = ko.observable(data.GenderCS && new ConceptSetSelection(data.GenderCS, conceptSets))
+}
 
-    return Death
-  })
+Death.prototype = new Criteria()
+Death.prototype.constructor = Death
+Death.prototype.toJSON = function () {
+  return this
+}
+
+export default Death
+

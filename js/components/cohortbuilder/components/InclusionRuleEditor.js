@@ -1,20 +1,19 @@
-define([
-  'knockout',
-  'text!./InclusionRuleEditorTemplate.html',
-  'components/cohortbuilder/components/CriteriaGroup',
-  'ko.sortable',
-], function (ko, template) {
-  function InclusionRuleEditor (params) {
-    const self = this
-    self.InclusionRule = params.InclusionRule
-    self.IndexRule = params.IndexRule
-  }
+import ko from 'knockout'
+import template from './InclusionRuleEditorTemplate.html?raw'
+import 'components/cohortbuilder/components/CriteriaGroup'
+import 'ko.sortable'
 
-  const component = {
-    viewModel: InclusionRuleEditor,
-    template,
-  }
+function InclusionRuleEditor (params) {
+  const self = this
+  self.InclusionRule = params.InclusionRule
+  self.IndexRule = params.IndexRule
+}
 
-  // return component definition
-  return component
-})
+const component = {
+  viewModel: InclusionRuleEditor,
+  template,
+}
+
+// return component definition
+export default component
+

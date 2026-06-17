@@ -1,23 +1,26 @@
-define(['knockout', 'text!./EndStrategyViewerTemplate.html', './DateOffsetStrategy', './CustomEraStrategy']
-  , function (ko, template, dateOffsetStrategyComponent, customEraStrategyComponent) {
-    ko.components.register('date-offset-strategy-viewer', dateOffsetStrategyComponent)
-    ko.components.register('custom-era-strategy-viewer', customEraStrategyComponent)
+import ko from 'knockout'
+import template from './EndStrategyViewerTemplate.html?raw'
+import dateOffsetStrategyComponent from './DateOffsetStrategy'
+import customEraStrategyComponent from './CustomEraStrategy'
 
-    function EndStrategyViewerViewModel (params) {
-      const self = this
+ko.components.register('date-offset-strategy-viewer', dateOffsetStrategyComponent)
+ko.components.register('custom-era-strategy-viewer', customEraStrategyComponent)
 
-      self.strategy = params.strategy
-      self.conceptSets = params.conceptSets
+function EndStrategyViewerViewModel (params) {
+  const self = this
 
-      self.strategyComponentName = ko.pureComputed(function () {
-        const strategy = ko.utils.unwrapObservable(params.strategy)
-        if (strategy.hasOwnProperty('DateOffset')) { return 'date-offset-strategy-viewer' } else if (strategy.hasOwnProperty('CustomEra')) { return 'custom-era-strategy-viewer' } else { return 'unknown-strategy-viewer' }
-      })
-    }
+  self.strategy = params.strategy
+  self.conceptSets = params.conceptSets
 
-    // return compoonent definition
-    return {
-      viewModel: EndStrategyViewerViewModel,
-      template
-    }
+  self.strategyComponentName = ko.pureComputed(function () {
+    const strategy = ko.utils.unwrapObservable(params.strategy)
+    if (strategy.hasOwnProperty('DateOffset')) { return 'date-offset-strategy-viewer' } else if (strategy.hasOwnProperty('CustomEra')) { return 'custom-era-strategy-viewer' } else { return 'unknown-strategy-viewer' }
   })
+}
+
+// return compoonent definition
+export default {
+  viewModel: EndStrategyViewerViewModel,
+  template
+}
+

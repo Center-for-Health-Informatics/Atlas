@@ -1,3 +1,2 @@
-define(function (require) {
-  const localStorage = require('./localStorageExtender')
-})
+import localStorage from './localStorageExtender'
+

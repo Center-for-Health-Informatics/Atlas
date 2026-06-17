@@ -1,42 +1,39 @@
-define(
-  (require, exports) => {
-    const home = require('./home/index')
-    const dataSources = require('./data-sources/index')
-    const vocabulary = require('./vocabulary/index')
-    const conceptSets = require('./concept-sets/index')
-    const cohortDefinitions = require('./cohort-definitions/index')
-    const characterizations = require('./characterizations/index')
-    const incidenceRates = require('./incidence-rates/index')
-    const profiles = require('./profiles/index')
-    const pathways = require('./pathways/index')
-    const estimation = require('./estimation/index')
-    const prediction = require('./prediction/index')
-    const reusables = require('./reusables/index')
-    const tagging = require('./tagging/index')
-    const jobs = require('./jobs/index')
-    const configuration = require('./configuration/index')
-    const feedback = require('./feedback/index')
-    const tools = require('./tools/index')
+import home from './home/index'
+import dataSources from './data-sources/index'
+import vocabulary from './vocabulary/index'
+import conceptSets from './concept-sets/index'
+import cohortDefinitions from './cohort-definitions/index'
+import characterizations from './characterizations/index'
+import incidenceRates from './incidence-rates/index'
+import profiles from './profiles/index'
+import pathways from './pathways/index'
+import estimation from './estimation/index'
+import prediction from './prediction/index'
+import reusables from './reusables/index'
+import tagging from './tagging/index'
+import jobs from './jobs/index'
+import configuration from './configuration/index'
+import feedback from './feedback/index'
+import tools from './tools/index'
 
-    // order of nav items in left-nav will appear in the following order:
-    return {
-      home,
-      dataSources,
-      vocabulary,
-      conceptSets,
-      cohortDefinitions,
-      characterizations,
-      pathways,
-      incidenceRates,
-      profiles,
-      estimation,
-      prediction,
-      reusables,
-      tagging,
-      jobs,
-      configuration,
-      feedback,
-      tools
-    }
-  }
-)
+// order of nav items in left-nav will appear in the following order:
+export default {
+  home,
+  dataSources,
+  vocabulary,
+  conceptSets,
+  cohortDefinitions,
+  characterizations,
+  pathways,
+  incidenceRates,
+  profiles,
+  estimation,
+  prediction,
+  reusables,
+  tagging,
+  jobs,
+  configuration,
+  feedback,
+  tools
+}
+

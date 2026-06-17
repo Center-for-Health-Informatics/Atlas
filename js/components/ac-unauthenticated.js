@@ -1,14 +1,18 @@
-define(['knockout', 'text!./unauthenticated.html', 'appConfig', 'services/AuthAPI'], function (ko, view, appConfig, authApi) {
-  function unauthenticated (params) {
-    const self = this
-    self.signInOpened = authApi.signInOpened
-  }
+import ko from 'knockout'
+import view from './unauthenticated.html?raw'
+import appConfig from 'appConfig'
+import authApi from 'services/AuthAPI'
 
-  const component = {
-    viewModel: unauthenticated,
-    template: view
-  }
+function unauthenticated (params) {
+  const self = this
+  self.signInOpened = authApi.signInOpened
+}
 
-  ko.components.register('unauthenticated', component)
-  return component
-})
+const component = {
+  viewModel: unauthenticated,
+  template: view
+}
+
+ko.components.register('unauthenticated', component)
+export default component
+

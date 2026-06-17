@@ -1,47 +1,52 @@
-define(['knockout', './Criteria', '../InputTypes/Range', 'conceptpicker/InputTypes/Concept', '../InputTypes/ConceptSetSelection'], function (ko, Criteria, Range, Concept, ConceptSetSelection) {
-  function DrugEra (data, conceptSets) {
-    const self = this
-    data = data || {}
+import ko from 'knockout'
+import Criteria from './Criteria'
+import Range from '../InputTypes/Range'
+import Concept from 'conceptpicker/InputTypes/Concept'
+import ConceptSetSelection from '../InputTypes/ConceptSetSelection'
 
-    Criteria.call(this, data, conceptSets)
+function DrugEra (data, conceptSets) {
+  const self = this
+  data = data || {}
 
-    // set up subscription to update CodesetId if the item is removed from conceptSets
-    conceptSets.subscribe(function (changes) {
-      changes.forEach(function (change) {
-        if (change.status === 'deleted') {
-          if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
-        }
-      })
-    }, null, 'arrayChange')
+  Criteria.call(this, data, conceptSets)
 
-    // General Drug Era Criteria
+  // set up subscription to update CodesetId if the item is removed from conceptSets
+  conceptSets.subscribe(function (changes) {
+    changes.forEach(function (change) {
+      if (change.status === 'deleted') {
+        if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
+      }
+    })
+  }, null, 'arrayChange')
 
-    // Verbatim fields
-    self.CodesetId = ko.observable(data.CodesetId)
+  // General Drug Era Criteria
 
-    self.EraStartDate = ko.observable(data.EraStartDate && new Range(data.EraStartDate))
-    self.EraEndDate = ko.observable(data.EraEndDate && new Range(data.EraEndDate))
-    self.OccurrenceCount = ko.observable(data.OccurrenceCount && new Range(data.OccurrenceCount))
-    self.GapDays = ko.observable(data.GapDays && new Range(data.GapDays))
-    self.EraLength = ko.observable(data.EraLength && new Range(data.EraLength))
+  // Verbatim fields
+  self.CodesetId = ko.observable(data.CodesetId)
 
-    // Derived Fields
-    self.First = ko.observable(data.First || null)
-    self.AgeAtStart = ko.observable(data.AgeAtStart && new Range(data.AgeAtStart))
-    self.AgeAtEnd = ko.observable(data.AgeAtEnd && new Range(data.AgeAtEnd))
+  self.EraStartDate = ko.observable(data.EraStartDate && new Range(data.EraStartDate))
+  self.EraEndDate = ko.observable(data.EraEndDate && new Range(data.EraEndDate))
+  self.OccurrenceCount = ko.observable(data.OccurrenceCount && new Range(data.OccurrenceCount))
+  self.GapDays = ko.observable(data.GapDays && new Range(data.GapDays))
+  self.EraLength = ko.observable(data.EraLength && new Range(data.EraLength))
 
-    // Linked Fields
-    self.Gender = ko.observable(data.Gender && ko.observableArray(data.Gender.map(function (d) {
-      return new Concept(d)
-    })))
-    self.GenderCS = ko.observable(data.GenderCS && new ConceptSetSelection(data.GenderCS, conceptSets))
-  }
+  // Derived Fields
+  self.First = ko.observable(data.First || null)
+  self.AgeAtStart = ko.observable(data.AgeAtStart && new Range(data.AgeAtStart))
+  self.AgeAtEnd = ko.observable(data.AgeAtEnd && new Range(data.AgeAtEnd))
 
-  DrugEra.prototype = new Criteria()
-  DrugEra.prototype.constructor = DrugEra
-  DrugEra.prototype.toJSON = function () {
-    return this
-  }
+  // Linked Fields
+  self.Gender = ko.observable(data.Gender && ko.observableArray(data.Gender.map(function (d) {
+    return new Concept(d)
+  })))
+  self.GenderCS = ko.observable(data.GenderCS && new ConceptSetSelection(data.GenderCS, conceptSets))
+}
 
-  return DrugEra
-})
+DrugEra.prototype = new Criteria()
+DrugEra.prototype.constructor = DrugEra
+DrugEra.prototype.toJSON = function () {
+  return this
+}
+
+export default DrugEra
+

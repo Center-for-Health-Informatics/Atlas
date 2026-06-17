@@ -1,17 +1,19 @@
-define(['knockout', 'components/cohortbuilder/options', 'text!./PayerPlanPeriodTemplate.html'
-], function (ko, options, template) {
-  function PayerPlanPeriodViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import template from './PayerPlanPeriodTemplate.html?raw'
 
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.PayerPlanPeriod
-    self.options = options
+function PayerPlanPeriodViewModel (params) {
+  const self = this
 
-    self.indexMessage = ko.i18n('components.conditionPayerPlanPeriod.indexDataText', 'The index date refers to the payer plan period.')
-  }
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.PayerPlanPeriod
+  self.options = options
 
-  return {
-    viewModel: PayerPlanPeriodViewModel,
-    template
-  }
-})
+  self.indexMessage = ko.i18n('components.conditionPayerPlanPeriod.indexDataText', 'The index date refers to the payer plan period.')
+}
+
+export default {
+  viewModel: PayerPlanPeriodViewModel,
+  template
+}
+

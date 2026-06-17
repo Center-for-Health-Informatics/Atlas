@@ -1,20 +1,14 @@
-define([
-  'components/Chart',
-  'atlascharts',
-  'text!components/charts/chart.html',
-  'utils/CommonUtils'
-], function (
-  Chart,
-  atlascharts,
-  view,
-  commonUtils
-) {
-  class FrequencyHistogramComponent extends Chart {
-    constructor (params, element) {
-      super(params, element)
-      this.renderer = new atlascharts.histogram()
-    }
-  }
+import Chart from 'components/Chart'
+import atlascharts from 'atlascharts'
+import view from 'components/charts/chart.html?raw'
+import commonUtils from 'utils/CommonUtils'
 
-  return commonUtils.build('frequency-histogram', FrequencyHistogramComponent, view)
-})
+class FrequencyHistogramComponent extends Chart {
+  constructor (params, element) {
+    super(params, element)
+    this.renderer = new atlascharts.histogram()
+  }
+}
+
+export default commonUtils.build('frequency-histogram', FrequencyHistogramComponent, view)
+

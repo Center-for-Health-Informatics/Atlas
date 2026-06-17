@@ -1,13 +1,16 @@
-define(['knockout', 'text!./forbidden.html', 'appConfig'], function (ko, view, appConfig) {
-  function forbidden (params) {
-    const self = this
-  }
+import ko from 'knockout'
+import view from './forbidden.html?raw'
+import appConfig from 'appConfig'
 
-  const component = {
-    viewModel: forbidden,
-    template: view
-  }
+function forbidden (params) {
+  const self = this
+}
 
-  ko.components.register('forbidden', component)
-  return component
-})
+const component = {
+  viewModel: forbidden,
+  template: view
+}
+
+ko.components.register('forbidden', component)
+export default component
+

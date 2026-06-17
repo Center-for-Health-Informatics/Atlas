@@ -1,23 +1,17 @@
-define([
-  'knockout',
-  'text!./user-bar-jobs.html',
-  'components/Component',
-  'utils/CommonUtils',
-  'less!./user-bar-jobs.less',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils
-) {
-  class UserBarJobs extends Component {
-    constructor (params) {
-      super()
+import ko from 'knockout'
+import view from './user-bar-jobs.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import './user-bar-jobs.less'
 
-      this.jobNameClick = params.jobNameClick
-      this.jobListing = params.jobListing
-    }
+class UserBarJobs extends Component {
+  constructor (params) {
+    super()
+
+    this.jobNameClick = params.jobNameClick
+    this.jobListing = params.jobListing
   }
+}
 
-  return commonUtils.build('user-bar-jobs', UserBarJobs, view)
-})
+export default commonUtils.build('user-bar-jobs', UserBarJobs, view)
+

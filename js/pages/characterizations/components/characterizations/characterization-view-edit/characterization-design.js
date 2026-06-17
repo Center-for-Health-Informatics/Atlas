@@ -1,214 +1,197 @@
-define([
-  'knockout',
-  'atlas-state',
-  'pages/characterizations/services/PermissionService',
-  'text!./characterization-design.html',
-  'appConfig',
-  'services/AuthAPI',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  'components/cohortbuilder/CriteriaGroup',
-  'components/conceptset/InputTypes/ConceptSet',
-  'services/Vocabulary',
-  'lodash',
-  'components/conceptset/utils',
-  'const',
-  'pages/characterizations/components/feature-analyses/feature-analyses-browser',
-  './characterization-params-create-modal',
-  'components/cohort/linked-cohort-list',
-  'components/linked-entity-list',
-  'less!./characterization-design.less',
-  'components/cohortbuilder/components',
-  'circe',
-  'components/ac-access-denied',
-], function (
-  ko,
-  sharedState,
-  PermissionService,
-  view,
-  config,
-  authApi,
-  Component,
-  AutoBind,
-  commonUtils,
-  CriteriaGroup,
-  ConceptSet,
-  VocabularyAPI,
-  lodash,
-  conceptSetUtils,
-  globalConstants
-) {
-  class CharacterizationDesign extends AutoBind(Component) {
-    constructor (params) {
-      super()
+import ko from 'knockout'
+import sharedState from 'atlas-state'
+import PermissionService from 'pages/characterizations/services/PermissionService'
+import view from './characterization-design.html?raw'
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
+import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
+import VocabularyAPI from 'services/Vocabulary'
+import lodash from 'lodash'
+import conceptSetUtils from 'components/conceptset/utils'
+import globalConstants from 'const'
+import 'pages/characterizations/components/feature-analyses/feature-analyses-browser'
+import './characterization-params-create-modal'
+import 'components/cohort/linked-cohort-list'
+import 'components/linked-entity-list'
+import './characterization-design.less'
+import 'components/cohortbuilder/components'
+import 'circe'
+import 'components/ac-access-denied'
 
-      this.design = params.design
-      this.characterizationId = params.characterizationId
-      this.areStratasNamesEmpty = params.areStratasNamesEmpty
-      this.duplicatedStrataNames = params.duplicatedStrataNames
-      this.loadConceptSet = params.loadConceptSet
+class CharacterizationDesign extends AutoBind(Component) {
+  constructor (params) {
+    super()
 
-      this.loading = ko.observable(false)
+    this.design = params.design
+    this.characterizationId = params.characterizationId
+    this.areStratasNamesEmpty = params.areStratasNamesEmpty
+    this.duplicatedStrataNames = params.duplicatedStrataNames
+    this.loadConceptSet = params.loadConceptSet
 
-      this.isViewPermitted = this.isPermittedViewResolver()
-      this.isEditPermitted = params.isEditPermitted
+    this.loading = ko.observable(false)
 
-      this.cohorts = ko.pureComputed({
-        read: () => params.design() && params.design().cohorts() || [],
-        write: (value) => params.design().cohorts(value),
-      })
+    this.isViewPermitted = this.isPermittedViewResolver()
+    this.isEditPermitted = params.isEditPermitted
 
-      this.strataConceptSets = ko.pureComputed({
-        read: () => params.design() && params.design().strataConceptSets || [],
-        write: (value) => params.design() && params.design().strataConceptSets(value)
-      })
+    this.cohorts = ko.pureComputed({
+      read: () => params.design() && params.design().cohorts() || [],
+      write: (value) => params.design().cohorts(value),
+    })
 
-      this.stratas = ko.pureComputed({
-        read: () => params.design() && params.design().stratas() || [],
-        write: (value) => params.design().stratas(value),
-      })
+    this.strataConceptSets = ko.pureComputed({
+      read: () => params.design() && params.design().strataConceptSets || [],
+      write: (value) => params.design() && params.design().strataConceptSets(value)
+    })
 
-      this.featureAnalyses = {
-        newItemAction: this.showFeatureBrowser,
-        columns: globalConstants.getLinkedFeatureAnalysisColumns(this),
-        data: ko.pureComputed(() => params.design() && params.design().featureAnalyses() || [])
-      }
+    this.stratas = ko.pureComputed({
+      read: () => params.design() && params.design().stratas() || [],
+      write: (value) => params.design().stratas(value),
+    })
 
-      this.featureAnalysesParams = {
-        newItemAction: this.showParameterCreateModal,
-        columns: globalConstants.getLinkedFeAParametersColumns(this),
-        data: ko.pureComputed(() => params.design() && params.design().parameters() || [])
-      }
-
-      this.includeAnnual = ko.observable(this.featureAnalyses.data().reduce((a, b) => a || !!ko.unwrap(b.includeAnnual), false))
-      this.includeAnnual.subscribe((newVal) => this.featureAnalyses.data().forEach(fa => fa.supportsAnnual && fa.includeAnnual(newVal)))
-      this.includeTemporal = ko.observable(this.featureAnalyses.data().reduce((a, b) => a || !!ko.unwrap(b.includeTemporal), false))
-      this.includeTemporal.subscribe((newVal) => this.featureAnalyses.data().forEach(fa => fa.supportsTemporal && fa.includeTemporal(newVal)))
-
-      this.showFeatureAnalysesBrowser = ko.observable(false)
-
-      this.isParameterCreateModalShown = ko.observable(false)
-      this.showConceptSetBrowser = ko.observable(false)
-      this.criteriaContext = ko.observable()
-      this.tableOptions = commonUtils.getTableOptions('M')
+    this.featureAnalyses = {
+      newItemAction: this.showFeatureBrowser,
+      columns: globalConstants.getLinkedFeatureAnalysisColumns(this),
+      data: ko.pureComputed(() => params.design() && params.design().featureAnalyses() || [])
     }
 
-    checkStrataNames (data, event) {
-      this.areStratasNamesEmpty(this.stratas().find(s => s.name() === ''))
-      this.duplicatedStrataNames(Object.entries(lodash.groupBy(this.stratas().map(s => s.name()))).filter(entry => entry[1].length > 1).map(entry => entry[0]))
+    this.featureAnalysesParams = {
+      newItemAction: this.showParameterCreateModal,
+      columns: globalConstants.getLinkedFeAParametersColumns(this),
+      data: ko.pureComputed(() => params.design() && params.design().parameters() || [])
     }
 
-    isStrataDuplicated (strataName) {
-      return !!this.duplicatedStrataNames().find(s => s === strataName)
-    }
+    this.includeAnnual = ko.observable(this.featureAnalyses.data().reduce((a, b) => a || !!ko.unwrap(b.includeAnnual), false))
+    this.includeAnnual.subscribe((newVal) => this.featureAnalyses.data().forEach(fa => fa.supportsAnnual && fa.includeAnnual(newVal)))
+    this.includeTemporal = ko.observable(this.featureAnalyses.data().reduce((a, b) => a || !!ko.unwrap(b.includeTemporal), false))
+    this.includeTemporal.subscribe((newVal) => this.featureAnalyses.data().forEach(fa => fa.supportsTemporal && fa.includeTemporal(newVal)))
 
-    isPermittedViewResolver () {
-      return ko.pureComputed(
-        () => (this.characterizationId() ? PermissionService.isPermittedGetCC(this.characterizationId()) : true)
-      )
-    }
+    this.showFeatureAnalysesBrowser = ko.observable(false)
 
-    getRemoveCell (action, identifierField = 'id') {
-      return (s, p, d) => {
-        return `<a href='#' data-bind="click: () => $component.params.${action}('${d[identifierField]}'), text: ko.i18n('cc.viewEdit.design.fa.actions.remove', 'Remove')">Remove</a>`
-      }
-    }
+    this.isParameterCreateModalShown = ko.observable(false)
+    this.showConceptSetBrowser = ko.observable(false)
+    this.criteriaContext = ko.observable()
+    this.tableOptions = commonUtils.getTableOptions('M')
+  }
 
-    renderSupportsAnnual () {
-      return (s, p, d) => ko.unwrap(d.supportsAnnual ? ko.i18n('options.yes', 'Yes') : ko.i18n('options.no', 'No'))
-    }
+  checkStrataNames (data, event) {
+    this.areStratasNamesEmpty(this.stratas().find(s => s.name() === ''))
+    this.duplicatedStrataNames(Object.entries(lodash.groupBy(this.stratas().map(s => s.name()))).filter(entry => entry[1].length > 1).map(entry => entry[0]))
+  }
 
-    renderSupportsTemporal () {
-      return (s, p, d) => ko.unwrap(d.supportsTemporal ? ko.i18n('options.yes', 'Yes') : ko.i18n('options.no', 'No'))
-    }
+  isStrataDuplicated (strataName) {
+    return !!this.duplicatedStrataNames().find(s => s === strataName)
+  }
 
-    showFeatureBrowser () {
-      this.showFeatureAnalysesBrowser(true)
-    }
+  isPermittedViewResolver () {
+    return ko.pureComputed(
+      () => (this.characterizationId() ? PermissionService.isPermittedGetCC(this.characterizationId()) : true)
+    )
+  }
 
-    closeFeatureBrowser () {
-      this.showFeatureAnalysesBrowser(false)
-    }
-
-    onSelect (data = []) {
-      this.closeFeatureBrowser()
-      const ccDesign = this.design()
-      const featureAnalyses = data.map(item => lodash.pick(item, ['id', 'name', 'description', 'supportsAnnual', 'supportsTemporal']))
-        .map(item => { return { ...item, includeAnnual: ko.observable(ko.unwrap(this.includeAnnual)), includeTemporal: ko.observable(ko.unwrap(this.includeTemporal)) } })
-      ccDesign.featureAnalyses(featureAnalyses)
-    }
-
-    removeFeature (id) {
-      this.design().featureAnalyses.remove(a => a.id === parseInt(id))
-    }
-
-    addParam ({ name, value }) {
-      const ccDesign = this.design()
-      this.isParameterCreateModalShown(false)
-      this.design().parameters(lodash.uniqBy(
-        [
-          ...(ccDesign.parameters() || []),
-          { name, value }
-        ],
-        'name'
-      )
-      )
-    }
-
-    removeParam (name) {
-      this.design().parameters.remove(a => a.name === name)
-    }
-
-    addStrata () {
-      const strata = {
-        name: ko.observable(ko.i18n('cc.viewEdit.design.subgroups.newSubgroup', 'New Subgroup')()),
-        criteria: ko.observable(new CriteriaGroup(null, this.strataConceptSets))
-      }
-      const ccDesign = this.design()
-      ccDesign.stratas([
-        ...(ccDesign.stratas() || []),
-        strata
-      ])
-      this.checkStrataNames()
-    }
-
-    removeStrata (index) {
-      const strataToRemove = this.design().stratas()[index]
-      this.design().stratas.remove(strataToRemove)
-    }
-
-    showParameterCreateModal () {
-      this.isParameterCreateModalShown(true)
-    }
-
-    handleConceptSetImport (item, context, event) {
-      this.criteriaContext(item)
-      this.showConceptSetBrowser(true)
-    }
-
-    handleEditConceptSet (item, context) {
-      if (item.conceptSetId() == null) {
-        return
-      }
-      this.loadConceptSet(item.conceptSetId())
-    }
-
-    onRespositoryConceptSetSelected (conceptSet, source) {
-      conceptSetUtils.conceptSetSelectionHandler(this.strataConceptSets(), this.criteriaContext(), conceptSet, source)
-        .done(() => this.showConceptSetBrowser(false))
-    }
-
-    onRespositoryActionComplete (result) {
-      this.showConceptSetBrowser(false)
-      if (result.action === 'add') {
-        const newId = conceptSetUtils.newConceptSetHandler(this.strataConceptSets(), this.criteriaContext())
-        this.loadConceptSet(newId)
-      }
-
-      this.criteriaContext(null)
+  getRemoveCell (action, identifierField = 'id') {
+    return (s, p, d) => {
+      return `<a href='#' data-bind="click: () => $component.params.${action}('${d[identifierField]}'), text: ko.i18n('cc.viewEdit.design.fa.actions.remove', 'Remove')">Remove</a>`
     }
   }
 
-  return commonUtils.build('characterization-design', CharacterizationDesign, view)
-})
+  renderSupportsAnnual () {
+    return (s, p, d) => ko.unwrap(d.supportsAnnual ? ko.i18n('options.yes', 'Yes') : ko.i18n('options.no', 'No'))
+  }
+
+  renderSupportsTemporal () {
+    return (s, p, d) => ko.unwrap(d.supportsTemporal ? ko.i18n('options.yes', 'Yes') : ko.i18n('options.no', 'No'))
+  }
+
+  showFeatureBrowser () {
+    this.showFeatureAnalysesBrowser(true)
+  }
+
+  closeFeatureBrowser () {
+    this.showFeatureAnalysesBrowser(false)
+  }
+
+  onSelect (data = []) {
+    this.closeFeatureBrowser()
+    const ccDesign = this.design()
+    const featureAnalyses = data.map(item => lodash.pick(item, ['id', 'name', 'description', 'supportsAnnual', 'supportsTemporal']))
+      .map(item => { return { ...item, includeAnnual: ko.observable(ko.unwrap(this.includeAnnual)), includeTemporal: ko.observable(ko.unwrap(this.includeTemporal)) } })
+    ccDesign.featureAnalyses(featureAnalyses)
+  }
+
+  removeFeature (id) {
+    this.design().featureAnalyses.remove(a => a.id === parseInt(id))
+  }
+
+  addParam ({ name, value }) {
+    const ccDesign = this.design()
+    this.isParameterCreateModalShown(false)
+    this.design().parameters(lodash.uniqBy(
+      [
+        ...(ccDesign.parameters() || []),
+        { name, value }
+      ],
+      'name'
+    )
+    )
+  }
+
+  removeParam (name) {
+    this.design().parameters.remove(a => a.name === name)
+  }
+
+  addStrata () {
+    const strata = {
+      name: ko.observable(ko.i18n('cc.viewEdit.design.subgroups.newSubgroup', 'New Subgroup')()),
+      criteria: ko.observable(new CriteriaGroup(null, this.strataConceptSets))
+    }
+    const ccDesign = this.design()
+    ccDesign.stratas([
+      ...(ccDesign.stratas() || []),
+      strata
+    ])
+    this.checkStrataNames()
+  }
+
+  removeStrata (index) {
+    const strataToRemove = this.design().stratas()[index]
+    this.design().stratas.remove(strataToRemove)
+  }
+
+  showParameterCreateModal () {
+    this.isParameterCreateModalShown(true)
+  }
+
+  handleConceptSetImport (item, context, event) {
+    this.criteriaContext(item)
+    this.showConceptSetBrowser(true)
+  }
+
+  handleEditConceptSet (item, context) {
+    if (item.conceptSetId() == null) {
+      return
+    }
+    this.loadConceptSet(item.conceptSetId())
+  }
+
+  onRespositoryConceptSetSelected (conceptSet, source) {
+    conceptSetUtils.conceptSetSelectionHandler(this.strataConceptSets(), this.criteriaContext(), conceptSet, source)
+      .done(() => this.showConceptSetBrowser(false))
+  }
+
+  onRespositoryActionComplete (result) {
+    this.showConceptSetBrowser(false)
+    if (result.action === 'add') {
+      const newId = conceptSetUtils.newConceptSetHandler(this.strataConceptSets(), this.criteriaContext())
+      this.loadConceptSet(newId)
+    }
+
+    this.criteriaContext(null)
+  }
+}
+
+export default commonUtils.build('characterization-design', CharacterizationDesign, view)
+

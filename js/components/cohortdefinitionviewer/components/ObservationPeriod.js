@@ -1,16 +1,19 @@
-define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/utils', 'text!./ObservationPeriodTemplate.html'
-], function (ko, options, utils, template) {
-  function ObservationPeriodViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import utils from 'components/cohortbuilder/utils'
+import template from './ObservationPeriodTemplate.html?raw'
 
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.ObservationPeriod
-    self.options = options
-  }
+function ObservationPeriodViewModel (params) {
+  const self = this
 
-  // return compoonent definition
-  return {
-    viewModel: ObservationPeriodViewModel,
-    template
-  }
-})
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.ObservationPeriod
+  self.options = options
+}
+
+// return compoonent definition
+export default {
+  viewModel: ObservationPeriodViewModel,
+  template
+}
+

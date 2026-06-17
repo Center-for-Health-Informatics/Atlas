@@ -1,37 +1,36 @@
-define([
-  'knockout',
-  'text!./ConceptListTemplate.html',
-  'conceptpicker/InputTypes/Concept',
-], function (ko, template, Concept) {
-  function CocneptListViewModel (params) {
-    const self = this
-    self.ConceptList = ko.utils.unwrapObservable(params.$raw.ConceptList)
-    self.PickerParams = params.PickerParams
+import ko from 'knockout'
+import template from './ConceptListTemplate.html?raw'
+import Concept from 'conceptpicker/InputTypes/Concept'
 
-    // onAdd handler
-    self.addConcepts = function (concepts) {
-      // remove only add new concepts.
-      const ixConcepts = {}
-      self.ConceptList().forEach(function (item) {
-        ixConcepts[item.CONCEPT_ID] = true
-      })
+function CocneptListViewModel (params) {
+  const self = this
+  self.ConceptList = ko.utils.unwrapObservable(params.$raw.ConceptList)
+  self.PickerParams = params.PickerParams
 
-      const importedConcepts = []
-      concepts.forEach(function (item) {
-        if (!ixConcepts[item.CONCEPT_ID]) importedConcepts.push(item)
-      })
+  // onAdd handler
+  self.addConcepts = function (concepts) {
+    // remove only add new concepts.
+    const ixConcepts = {}
+    self.ConceptList().forEach(function (item) {
+      ixConcepts[item.CONCEPT_ID] = true
+    })
 
-      self.ConceptList(self.ConceptList().concat(importedConcepts))
-    }
+    const importedConcepts = []
+    concepts.forEach(function (item) {
+      if (!ixConcepts[item.CONCEPT_ID]) importedConcepts.push(item)
+    })
 
-    self.removeConcept = function (item) {
-      this.ConceptList.remove(item)
-    }
+    self.ConceptList(self.ConceptList().concat(importedConcepts))
   }
 
-  // return compoonent definition
-  return {
-    viewModel: CocneptListViewModel,
-    template,
+  self.removeConcept = function (item) {
+    this.ConceptList.remove(item)
   }
-})
+}
+
+// return compoonent definition
+export default {
+  viewModel: CocneptListViewModel,
+  template,
+}
+

@@ -1,14 +1,11 @@
-define([
-  'knockout',
-], function (
-  ko
-) {
-  class FullAnalysis {
-    constructor (targetComparatorOutcome, cohortMethodAnalysis) {
-      this.targetComparatorOutcome = targetComparatorOutcome || null
-      this.cohortMethodAnalysis = cohortMethodAnalysis || null
-    }
-  }
+import ko from 'knockout'
 
-  return FullAnalysis
-})
+class FullAnalysis {
+  constructor (targetComparatorOutcome, cohortMethodAnalysis) {
+    this.targetComparatorOutcome = targetComparatorOutcome || null
+    this.cohortMethodAnalysis = cohortMethodAnalysis || null
+  }
+}
+
+export default FullAnalysis
+

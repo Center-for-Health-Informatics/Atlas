@@ -1,6 +1,5 @@
-define(function (require, exports) {
-  require('./components/editor')
-  require('./components/browser')
-  require('./components/results')
-  require('./components/report')
-})
+import './components/editor'
+import './components/browser'
+import './components/results'
+import './components/report'
+

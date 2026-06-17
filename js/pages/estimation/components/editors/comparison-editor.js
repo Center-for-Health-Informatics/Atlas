@@ -1,88 +1,80 @@
-define([
-  'knockout',
-  'text!./comparison-editor.html',
-  'components/Component',
-  'utils/CommonUtils',
-  'services/analysis/Cohort',
-  'services/analysis/ConceptSet',
-  'components/entityBrowsers/cohort-definition-browser',
-  'components/cohort/linked-cohort-list',
-  'circe',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  Cohort,
-  ConceptSet
-) {
-  class ComparisonEditor extends Component {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './comparison-editor.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import Cohort from 'services/analysis/Cohort'
+import ConceptSet from 'services/analysis/ConceptSet'
+import 'components/entityBrowsers/cohort-definition-browser'
+import 'components/cohort/linked-cohort-list'
+import 'circe'
 
-      this.comparison = params.comparison
-      this.isEditPermitted = params.isEditPermitted
-      this.currentCohort = ko.observable(null)
-      this.showCohortSelector = ko.observable(false)
-      this.showConceptSetSelector = ko.observable(false)
-      this.currentConceptSet = ko.observable(null)
-    }
+class ComparisonEditor extends Component {
+  constructor (params) {
+    super(params)
 
-    cohortSelected (id, name) {
-      this.currentCohort()(new Cohort({ id, name }))
-      this.showCohortSelector(false)
-    }
-
-    chooseTarget () {
-      this.showCohortSelector(true)
-      this.currentCohort(this.comparison.target)
-    }
-
-    chooseComparator () {
-      this.showCohortSelector(true)
-      this.currentCohort(this.comparison.comparator)
-    }
-
-    clearTarget () {
-      this.comparison.target(new Cohort())
-    }
-
-    clearComparator () {
-      this.comparison.comparator(new Cohort())
-    }
-
-    chooseNegativeControlOutcomesConceptSet () {
-      this.currentConceptSet(this.comparison.negativeControlOutcomesConceptSet)
-      this.showConceptSetSelector(true)
-    }
-
-    clearNegativeControlOutcomesConceptSet () {
-      this.comparison.negativeControlOutcomesConceptSet(new ConceptSet())
-    }
-
-    chooseIncludedCovariateConceptSet () {
-      this.currentConceptSet(this.comparison.includedCovariateConceptSet)
-      this.showConceptSetSelector(true)
-    }
-
-    clearIncludedCovariateConceptSet () {
-      this.comparison.includedCovariateConceptSet(new ConceptSet())
-    }
-
-    chooseExcludedCovariateConceptSet () {
-      this.currentConceptSet(this.comparison.excludedCovariateConceptSet)
-      this.showConceptSetSelector(true)
-    }
-
-    clearExcludedCovariateConceptSet () {
-      this.comparison.excludedCovariateConceptSet(new ConceptSet())
-    }
-
-    conceptsetSelected (d) {
-      this.currentConceptSet()(new ConceptSet({ id: d.id, name: d.name }))
-      this.showConceptSetSelector(false)
-    }
+    this.comparison = params.comparison
+    this.isEditPermitted = params.isEditPermitted
+    this.currentCohort = ko.observable(null)
+    this.showCohortSelector = ko.observable(false)
+    this.showConceptSetSelector = ko.observable(false)
+    this.currentConceptSet = ko.observable(null)
   }
 
-  return commonUtils.build('comparison-editor', ComparisonEditor, view)
-})
+  cohortSelected (id, name) {
+    this.currentCohort()(new Cohort({ id, name }))
+    this.showCohortSelector(false)
+  }
+
+  chooseTarget () {
+    this.showCohortSelector(true)
+    this.currentCohort(this.comparison.target)
+  }
+
+  chooseComparator () {
+    this.showCohortSelector(true)
+    this.currentCohort(this.comparison.comparator)
+  }
+
+  clearTarget () {
+    this.comparison.target(new Cohort())
+  }
+
+  clearComparator () {
+    this.comparison.comparator(new Cohort())
+  }
+
+  chooseNegativeControlOutcomesConceptSet () {
+    this.currentConceptSet(this.comparison.negativeControlOutcomesConceptSet)
+    this.showConceptSetSelector(true)
+  }
+
+  clearNegativeControlOutcomesConceptSet () {
+    this.comparison.negativeControlOutcomesConceptSet(new ConceptSet())
+  }
+
+  chooseIncludedCovariateConceptSet () {
+    this.currentConceptSet(this.comparison.includedCovariateConceptSet)
+    this.showConceptSetSelector(true)
+  }
+
+  clearIncludedCovariateConceptSet () {
+    this.comparison.includedCovariateConceptSet(new ConceptSet())
+  }
+
+  chooseExcludedCovariateConceptSet () {
+    this.currentConceptSet(this.comparison.excludedCovariateConceptSet)
+    this.showConceptSetSelector(true)
+  }
+
+  clearExcludedCovariateConceptSet () {
+    this.comparison.excludedCovariateConceptSet(new ConceptSet())
+  }
+
+  conceptsetSelected (d) {
+    this.currentConceptSet()(new ConceptSet({ id: d.id, name: d.name }))
+    this.showConceptSetSelector(false)
+  }
+}
+
+export default commonUtils.build('comparison-editor', ComparisonEditor, view)
+

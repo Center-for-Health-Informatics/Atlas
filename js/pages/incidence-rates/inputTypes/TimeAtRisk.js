@@ -1,11 +1,13 @@
-define(['knockout', './FieldOffset'], function (ko, FieldOffset) {
-  function TimeAtRisk (data) {
-    const self = this
-    data = data || {}
+import ko from 'knockout'
+import FieldOffset from './FieldOffset'
 
-    self.start = new FieldOffset(data.start, 'StartDate')
-    self.end = new FieldOffset(data.end, 'EndDate')
-  }
+function TimeAtRisk (data) {
+  const self = this
+  data = data || {}
 
-  return TimeAtRisk
-})
+  self.start = new FieldOffset(data.start, 'StartDate')
+  self.end = new FieldOffset(data.end, 'EndDate')
+}
+
+export default TimeAtRisk
+

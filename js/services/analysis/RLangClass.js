@@ -1,9 +1,8 @@
-define(() => {
-  class RLangClass {
-    constructor (data = {}) {
-      this.attr_class = data.attr_class || 'args'
-    }
+class RLangClass {
+  constructor (data = {}) {
+    this.attr_class = data.attr_class || 'args'
   }
+}
 
-  return RLangClass
-})
+export default RLangClass
+

@@ -1,18 +1,17 @@
-define(function (require) {
-  const ko = require('knockout')
-  const ReusablesService = require('services/ReusablesService')
-  const ConceptSet = require('components/conceptset/InputTypes/ConceptSet')
+import ko from 'knockout'
+import ReusablesService from 'services/ReusablesService'
+import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 
-  class ReusableParameter {
-    constructor (d) {
-      const data = d || {}
-      Object.assign(this, data)
-      this.id = data.id
-      this.name = ko.observable(data.name || 'Parameter ' + data.id)
-      this.type = ReusablesService.PARAMETER_TYPE.CONCEPT_SET // first iteration only supports concept sets as parameters
-      this.data = data.data ? new ConceptSet(data.data) : new ConceptSet({ id: data.id * -1, name: this.name() })
-    }
+class ReusableParameter {
+  constructor (d) {
+    const data = d || {}
+    Object.assign(this, data)
+    this.id = data.id
+    this.name = ko.observable(data.name || 'Parameter ' + data.id)
+    this.type = ReusablesService.PARAMETER_TYPE.CONCEPT_SET // first iteration only supports concept sets as parameters
+    this.data = data.data ? new ConceptSet(data.data) : new ConceptSet({ id: data.id * -1, name: this.name() })
   }
+}
 
-  return ReusableParameter
-})
+export default ReusableParameter
+

@@ -1,12 +1,9 @@
-define([
-  'knockout',
-], function (
-  ko
-) {
-  class NaiveBayesSettings {
-    constructor (data = {}) {
-    }
-  }
+import ko from 'knockout'
 
-  return NaiveBayesSettings
-})
+class NaiveBayesSettings {
+  constructor (data = {}) {
+  }
+}
+
+export default NaiveBayesSettings
+

@@ -1,21 +1,18 @@
-define([
-  './TypeValidator',
-], function (
-  TypeValidator
-) {
-  class IntegerTypeValidator extends TypeValidator {
-    constructor () {
-      super({ type: 'integer', extender: { numeric: 0 } })
-    }
+import TypeValidator from './TypeValidator'
 
-    checkValue (val) {
-      return !isNaN(val)
-    }
-
-    parseType (item) {
-      return parseInt(item)
-    }
+class IntegerTypeValidator extends TypeValidator {
+  constructor () {
+    super({ type: 'integer', extender: { numeric: 0 } })
   }
 
-  return IntegerTypeValidator
-})
+  checkValue (val) {
+    return !isNaN(val)
+  }
+
+  parseType (item) {
+    return parseInt(item)
+  }
+}
+
+export default IntegerTypeValidator
+

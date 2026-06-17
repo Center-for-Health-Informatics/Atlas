@@ -1,14 +1,11 @@
-define(
-  (require, exports) => {
-    const ko = require('knockout')
-    const buildRoutes = require('./routes')
+import ko from 'knockout'
+import buildRoutes from './routes'
 
-    return {
-      title: ko.i18n('navigation.search', 'Search'),
-      buildRoutes,
-      navUrl: () => '#/search',
-      icon: 'search',
-      statusCss: () => ''
-    }
-  }
-)
+export default {
+  title: ko.i18n('navigation.search', 'Search'),
+  buildRoutes,
+  navUrl: () => '#/search',
+  icon: 'search',
+  statusCss: () => ''
+}
+

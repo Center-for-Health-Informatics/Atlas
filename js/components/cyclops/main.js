@@ -1,6 +1,4 @@
-define(function (require, exports) {
-  const ko = require('knockout')
+import ko from 'knockout'
+import controlEditor from './components/control-editor'
+import priorEditor from './components/prior-editor'
 
-  const controlEditor = require('./components/control-editor')
-  const priorEditor = require('./components/prior-editor')
-})

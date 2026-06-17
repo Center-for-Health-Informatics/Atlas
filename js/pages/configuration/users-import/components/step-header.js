@@ -1,20 +1,13 @@
-define(['knockout',
-  'text!./step-header.html',
-  'components/Component',
-  'utils/CommonUtils',],
-function (
-  ko,
-  view,
-  Component,
-  commonUtils
-) {
-  class StepHeader extends Component {
-    constructor (params) {
-      super(params)
-      this.header = params.header || ''
-    }
-  }
+import ko from 'knockout'
+import view from './step-header.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
 
-  commonUtils.build('step-header', StepHeader, view)
+class StepHeader extends Component {
+  constructor (params) {
+    super(params)
+    this.header = params.header || ''
+  }
 }
-)
+
+commonUtils.build('step-header', StepHeader, view)

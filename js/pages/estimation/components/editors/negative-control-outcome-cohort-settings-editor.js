@@ -1,26 +1,19 @@
-define([
-  'knockout',
-  'text!./negative-control-outcome-cohort-settings-editor.html',
-  'components/Component',
-  'utils/CommonUtils',
-  '../../const',
-  'databindings',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  constants
-) {
-  class NegativeControlOutcomeCohortSettingsEditor extends Component {
-    constructor (params) {
-      super(params)
-      this.isEditPermitted = params.isEditPermitted
+import ko from 'knockout'
+import view from './negative-control-outcome-cohort-settings-editor.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import constants from '../../const'
+import 'databindings'
 
-      this.negativeControlCohortSettings = params.negativeControlCohortSettings
-      this.options = constants.options
-    }
+class NegativeControlOutcomeCohortSettingsEditor extends Component {
+  constructor (params) {
+    super(params)
+    this.isEditPermitted = params.isEditPermitted
+
+    this.negativeControlCohortSettings = params.negativeControlCohortSettings
+    this.options = constants.options
   }
+}
 
-  return commonUtils.build('nc-outcome-cohort-settings-editor', NegativeControlOutcomeCohortSettingsEditor, view)
-})
+export default commonUtils.build('nc-outcome-cohort-settings-editor', NegativeControlOutcomeCohortSettingsEditor, view)
+

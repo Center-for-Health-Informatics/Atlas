@@ -1,16 +1,14 @@
-define(
-  (require, factory) => {
-    const { Route } = require('pages/Route')
-    function routes (router) {
-      return {
-        '/feedback': new Route(() => {
-          require(['feedback'], function () {
-            router.setCurrentView('feedback')
-          })
-        }),
-      }
-    }
+import { Route } from 'pages/Route'
 
-    return routes
+function routes (router) {
+  return {
+    '/feedback': new Route(() => {
+      import('feedback').then(() => {
+        router.setCurrentView('feedback')
+      })
+    }),
   }
-)
+}
+
+export default routes
+

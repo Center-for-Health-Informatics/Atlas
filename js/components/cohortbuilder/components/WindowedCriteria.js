@@ -1,49 +1,38 @@
-define([
-  'knockout',
-  'text!./WindowedCriteria.html',
-  '../InputTypes/Window',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  '../utils',
-  '../options',
-  'less!./WindowedCriteria.less',
-], function (
-  ko,
-  view,
-  Window,
-  Component,
-  AutoBind,
-  commonUtils,
-  utils,
-  options
-) {
-  class WindowedCriteria extends AutoBind(Component) {
-    constructor (params) {
-      super(params)
-      this.expression = params.expression
-      this.criteria = params.criteria
-      this.disableObservationPeriod = params.disableObservationPeriod || false
-      if (this.disableObservationPeriod && params.defaultObservationPeriod) {
-        this.criteria().IgnoreObservationPeriod(
-          params.defaultObservationPeriod
-        )
-      }
-      this.options = options
-    }
+import ko from 'knockout'
+import view from './WindowedCriteria.html?raw'
+import Window from '../InputTypes/Window'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import utils from '../utils'
+import options from '../options'
+import './WindowedCriteria.less'
 
-    getCriteriaComponent (data) {
-      return utils.getCriteriaComponent(data)
+class WindowedCriteria extends AutoBind(Component) {
+  constructor (params) {
+    super(params)
+    this.expression = params.expression
+    this.criteria = params.criteria
+    this.disableObservationPeriod = params.disableObservationPeriod || false
+    if (this.disableObservationPeriod && params.defaultObservationPeriod) {
+      this.criteria().IgnoreObservationPeriod(
+        params.defaultObservationPeriod
+      )
     }
-
-    addEndWindow () {
-      this.criteria().EndWindow(new Window({ UseEndWindow: true }))
-    }
-
-    removeEndWindow () {
-      this.criteria().EndWindow(null)
-    }
+    this.options = options
   }
 
-  commonUtils.build('windowed-criteria', WindowedCriteria, view)
-})
+  getCriteriaComponent (data) {
+    return utils.getCriteriaComponent(data)
+  }
+
+  addEndWindow () {
+    this.criteria().EndWindow(new Window({ UseEndWindow: true }))
+  }
+
+  removeEndWindow () {
+    this.criteria().EndWindow(null)
+  }
+}
+
+commonUtils.build('windowed-criteria', WindowedCriteria, view)

@@ -1,68 +1,65 @@
-define([
-  'services/AuthAPI',
-], function (
-  AuthAPI
-) {
-  function isPermittedCreate () {
-    return AuthAPI.isPermitted('pathway-analysis:post')
-  }
+import AuthAPI from 'services/AuthAPI'
 
-  function isPermittedImport () {
-    return AuthAPI.isPermitted('pathway-analysis:import:post')
-  }
+function isPermittedCreate () {
+  return AuthAPI.isPermitted('pathway-analysis:post')
+}
 
-  function isPermittedList () {
-    return AuthAPI.isPermitted('pathway-analysis:get')
-  }
+function isPermittedImport () {
+  return AuthAPI.isPermitted('pathway-analysis:import:post')
+}
 
-  function isPermittedLoad (id) {
-    return AuthAPI.isPermitted(`pathway-analysis:${id}:get`)
-  }
+function isPermittedList () {
+  return AuthAPI.isPermitted('pathway-analysis:get')
+}
 
-  function isPermittedUpdate (id) {
-    return AuthAPI.isPermitted(`pathway-analysis:${id}:put`)
-  }
+function isPermittedLoad (id) {
+  return AuthAPI.isPermitted(`pathway-analysis:${id}:get`)
+}
 
-  function isPermittedDelete (id) {
-    return AuthAPI.isPermitted(`pathway-analysis:${id}:delete`)
-  }
+function isPermittedUpdate (id) {
+  return AuthAPI.isPermitted(`pathway-analysis:${id}:put`)
+}
 
-  function isPermittedListGenerations (id) {
-    return AuthAPI.isPermitted(`pathway-analysis:${id}:generation:get`)
-  }
+function isPermittedDelete (id) {
+  return AuthAPI.isPermitted(`pathway-analysis:${id}:delete`)
+}
 
-  function isPermittedGenerate (id, sourceKey) {
-    return AuthAPI.isPermitted(`pathway-analysis:${id}:generation:${sourceKey}:post`)
-  }
+function isPermittedListGenerations (id) {
+  return AuthAPI.isPermitted(`pathway-analysis:${id}:generation:get`)
+}
 
-  function isPermittedResults (sourceKey) {
-    return AuthAPI.isPermitted('pathway-analysis:generation:*:result:get') && AuthAPI.isPermitted(`source:${sourceKey}:access`)
-  }
+function isPermittedGenerate (id, sourceKey) {
+  return AuthAPI.isPermitted(`pathway-analysis:${id}:generation:${sourceKey}:post`)
+}
 
-  function isPermittedExportGenerationDesign (id) {
-    return AuthAPI.isPermitted(`pathway-analysis:generation:${id}:design:get`)
-  }
+function isPermittedResults (sourceKey) {
+  return AuthAPI.isPermitted('pathway-analysis:generation:*:result:get') && AuthAPI.isPermitted(`source:${sourceKey}:access`)
+}
 
-  function isPermittedExport (id) {
-    return AuthAPI.isPermitted(`pathway-analysis:${id}:export:get`)
-  }
+function isPermittedExportGenerationDesign (id) {
+  return AuthAPI.isPermitted(`pathway-analysis:generation:${id}:design:get`)
+}
 
-  function isPermittedCopy (id) {
-    return AuthAPI.isPermitted(`pathway-analysis:${id}:post`)
-  }
+function isPermittedExport (id) {
+  return AuthAPI.isPermitted(`pathway-analysis:${id}:export:get`)
+}
 
-  return {
-    isPermittedCreate,
-    isPermittedCopy,
-    isPermittedImport,
-    isPermittedList,
-    isPermittedLoad,
-    isPermittedUpdate,
-    isPermittedDelete,
-    isPermittedListGenerations,
-    isPermittedGenerate,
-    isPermittedResults,
-    isPermittedExportGenerationDesign,
-    isPermittedExport
-  }
-})
+function isPermittedCopy (id) {
+  return AuthAPI.isPermitted(`pathway-analysis:${id}:post`)
+}
+
+export default {
+  isPermittedCreate,
+  isPermittedCopy,
+  isPermittedImport,
+  isPermittedList,
+  isPermittedLoad,
+  isPermittedUpdate,
+  isPermittedDelete,
+  isPermittedListGenerations,
+  isPermittedGenerate,
+  isPermittedResults,
+  isPermittedExportGenerationDesign,
+  isPermittedExport
+}
+

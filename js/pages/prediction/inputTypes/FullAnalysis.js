@@ -1,23 +1,19 @@
-define([
-  './TargetOutcome',
-  './ModelCovarPopTuple'
-], function (
-  TargetOutcome,
-  ModelCovarPopTuple
-) {
-  class FullAnalysis {
-    constructor (targetOutcome, modelCovarPopTuple) {
-      if (typeof targetOutcome !== TargetOutcome) {
-        targetOutcome = new TargetOutcome(targetOutcome)
-      }
-      if (typeof modelCovarPopTuple !== ModelCovarPopTuple) {
-        modelCovarPopTuple = new ModelCovarPopTuple(modelCovarPopTuple)
-      }
+import TargetOutcome from './TargetOutcome'
+import ModelCovarPopTuple from './ModelCovarPopTuple'
 
-      this.targetOutcome = targetOutcome || null
-      this.modelCovarPopTuple = modelCovarPopTuple || null
+class FullAnalysis {
+  constructor (targetOutcome, modelCovarPopTuple) {
+    if (typeof targetOutcome !== TargetOutcome) {
+      targetOutcome = new TargetOutcome(targetOutcome)
     }
-  }
+    if (typeof modelCovarPopTuple !== ModelCovarPopTuple) {
+      modelCovarPopTuple = new ModelCovarPopTuple(modelCovarPopTuple)
+    }
 
-  return FullAnalysis
-})
+    this.targetOutcome = targetOutcome || null
+    this.modelCovarPopTuple = modelCovarPopTuple || null
+  }
+}
+
+export default FullAnalysis
+

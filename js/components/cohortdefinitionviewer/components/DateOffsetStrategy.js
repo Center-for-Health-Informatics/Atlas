@@ -1,21 +1,23 @@
-define(['knockout', 'text!./DateOffsetStrategyTemplate.html'], function (ko, template) {
-  function DateOffsetStrategyViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import template from './DateOffsetStrategyTemplate.html?raw'
 
-    self.strategy = ko.pureComputed(function () {
-      return ko.utils.unwrapObservable(params.strategy).DateOffset
-    })
+function DateOffsetStrategyViewModel (params) {
+  const self = this
 
-    self.fieldOptions = [{ id: 'StartDate', name: ko.i18n('options.startDate', 'start date') }, { id: 'EndDate', name: ko.i18n('options.endDate', 'end date') }]
+  self.strategy = ko.pureComputed(function () {
+    return ko.utils.unwrapObservable(params.strategy).DateOffset
+  })
 
-    self.fieldName = ko.pureComputed(function () {
-      return self.fieldOptions.filter(function (option) { return option.id == ko.utils.unwrapObservable(self.strategy().DateField) })[0].name
-    })
-  }
+  self.fieldOptions = [{ id: 'StartDate', name: ko.i18n('options.startDate', 'start date') }, { id: 'EndDate', name: ko.i18n('options.endDate', 'end date') }]
 
-  // return compoonent definition
-  return {
-    viewModel: DateOffsetStrategyViewModel,
-    template
-  }
-})
+  self.fieldName = ko.pureComputed(function () {
+    return self.fieldOptions.filter(function (option) { return option.id == ko.utils.unwrapObservable(self.strategy().DateField) })[0].name
+  })
+}
+
+// return compoonent definition
+export default {
+  viewModel: DateOffsetStrategyViewModel,
+  template
+}
+

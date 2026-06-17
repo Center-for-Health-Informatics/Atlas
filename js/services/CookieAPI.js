@@ -1,18 +1,17 @@
-define(function (require, exports) {
-  const jsCookie = require('js-cookie')
+import jsCookie from 'js-cookie'
 
-  function setField (field, value) {
-    jsCookie.set(field, value, { expires: 365, path: '/' })
-  }
+function setField (field, value) {
+  jsCookie.set(field, value, { expires: 365, path: '/' })
+}
 
-  function clearField (field) {
-    jsCookie.remove(field, { path: '/' })
-  }
+function clearField (field) {
+  jsCookie.remove(field, { path: '/' })
+}
 
-  const api = {
-    setField,
-    clearField,
-  }
+const api = {
+  setField,
+  clearField,
+}
 
-  return api
-})
+export default api
+

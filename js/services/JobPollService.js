@@ -1,22 +1,17 @@
-define([
-  'knockout',
-  'services/Poll',
-  'atlas-state',
-], function (
-  ko,
-  Poll,
-  sharedState
-) {
-  class JobPollService extends Poll.PollServiceClass {
-    constructor () {
-      super()
-      this.isJobListMutated = ko.observable()
-      this.isJobListMutated.extend({ notify: 'always' })
-    }
+import ko from 'knockout'
+import Poll from 'services/Poll'
+import sharedState from 'atlas-state'
 
-    extraActionsAfterCallback () {
-      sharedState.jobListing.valueHasMutated()
-    }
+class JobPollService extends Poll.PollServiceClass {
+  constructor () {
+    super()
+    this.isJobListMutated = ko.observable()
+    this.isJobListMutated.extend({ notify: 'always' })
   }
-  return new JobPollService()
-})
+
+  extraActionsAfterCallback () {
+    sharedState.jobListing.valueHasMutated()
+  }
+}
+export default new JobPollService()
+

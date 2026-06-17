@@ -1,16 +1,14 @@
-define(
-  (require, factory) => {
-    const { AuthorizedRoute } = require('pages/Route')
-    function routes (router) {
-      return {
-        '/jobs': new AuthorizedRoute(() => {
-          require(['pages/jobs/job-manager'], function () {
-            router.setCurrentView('job-manager')
-          })
-        }),
-      }
-    }
+import { AuthorizedRoute } from 'pages/Route'
 
-    return routes
+function routes (router) {
+  return {
+    '/jobs': new AuthorizedRoute(() => {
+      import('pages/jobs/job-manager').then(() => {
+        router.setCurrentView('job-manager')
+      })
+    }),
   }
-)
+}
+
+export default routes
+

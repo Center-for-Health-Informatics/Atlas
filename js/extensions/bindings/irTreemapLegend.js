@@ -1,5 +1,8 @@
-define(['jquery', 'knockout', 'd3'], function ($, ko, d3) {
-  function renderLegend (data, target, options) {
+import $ from 'jquery'
+import ko from 'knockout'
+import d3 from 'd3'
+
+function renderLegend (data, target, options) {
     if (data().scale.domain().length == 0 || isNaN(data().scale.domain()[0])) {
       // scale is empty or was calculated as NaN so it's invalid. Do nothing.
       return
@@ -86,4 +89,3 @@ define(['jquery', 'knockout', 'd3'], function ($, ko, d3) {
       renderLegend(data, element, options)
     }
   }
-})

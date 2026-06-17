@@ -1,34 +1,26 @@
-define([
-  'knockout',
-  'text!./treemap.html',
-  'components/reports/classes/Treemap',
-  'components/Component',
-  'components/reports/const',
-  'utils/CommonUtils',
-  'components/heading',
-  'components/charts/treemap',
-  'components/reports/reportDrilldown'
-], function (
-  ko,
-  view,
-  TreemapReport,
-  Component,
-  constants,
-  commonUtils
-) {
-  class Condition extends TreemapReport {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './treemap.html?raw'
+import TreemapReport from 'components/reports/classes/Treemap'
+import Component from 'components/Component'
+import constants from 'components/reports/const'
+import commonUtils from 'utils/CommonUtils'
+import 'components/heading'
+import 'components/charts/treemap'
+import 'components/reports/reportDrilldown'
 
-      this.name = 'Condition' // header
+class Condition extends TreemapReport {
+  constructor (params) {
+    super(params)
 
-      this.byType = true
-    }
+    this.name = 'Condition' // header
 
-    get aggProperty () {
-      return constants.aggProperties.byPerson
-    }
+    this.byType = true
   }
 
-  return commonUtils.build('report-condition', Condition, view)
-})
+  get aggProperty () {
+    return constants.aggProperties.byPerson
+  }
+}
+
+export default commonUtils.build('report-condition', Condition, view)
+

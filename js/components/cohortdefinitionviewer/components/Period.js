@@ -1,22 +1,24 @@
-define(['knockout', 'text!./PeriodTemplate.html'], function (ko, componentTemplate) {
-  function PeriodViewModel (params) {
-    const self = this
-    self.Period = ko.toJS(params.Period) // this will be a Period input type.
+import ko from 'knockout'
+import componentTemplate from './PeriodTemplate.html?raw'
 
-    self.startDateExpression = ko.pureComputed(function () {
-      if (self.Period.StartDate == null) { return ('on the period start date') }
-      return ('on ' + self.Period.StartDate)
-    })
+function PeriodViewModel (params) {
+  const self = this
+  self.Period = ko.toJS(params.Period) // this will be a Period input type.
 
-    self.endDateExpression = ko.pureComputed(function () {
-      if (self.Period.EndDate == null) { return ('on the period end date') }
-      return ('on ' + self.Period.EndDate)
-    })
-  };
+  self.startDateExpression = ko.pureComputed(function () {
+    if (self.Period.StartDate == null) { return ('on the period start date') }
+    return ('on ' + self.Period.StartDate)
+  })
 
-  // return compoonent definition
-  return {
-    viewModel: PeriodViewModel,
-    template: componentTemplate
-  }
-})
+  self.endDateExpression = ko.pureComputed(function () {
+    if (self.Period.EndDate == null) { return ('on the period end date') }
+    return ('on ' + self.Period.EndDate)
+  })
+};
+
+// return compoonent definition
+export default {
+  viewModel: PeriodViewModel,
+  template: componentTemplate
+}
+

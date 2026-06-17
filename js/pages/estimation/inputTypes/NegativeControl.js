@@ -1,12 +1,9 @@
-define([
-  'knockout',
-], function (
-  ko
-) {
-  class NegativeControl {
-    constructor (data = {}) {
-    }
-  }
+import ko from 'knockout'
 
-  return NegativeControl
-})
+class NegativeControl {
+  constructor (data = {}) {
+  }
+}
+
+export default NegativeControl
+

@@ -1,8 +1,7 @@
-define(
-  (require, exports) => {
-    const consts = require('const')
-    const ko = require('knockout')
-    const pageTitle = ko.computed({
+import consts from 'const'
+import ko from 'knockout'
+
+const pageTitle = ko.computed({
       read: ko.i18n('navigation.characterizations', 'Characterizations'),
       write: (value) => false,
     })
@@ -58,7 +57,7 @@ FROM (
 GROUP BY drug_concept_id, c.concept_name, stat.total_cnt
         `
 
-    return {
+    export default {
       feAnalysisTypes,
       pageTitle,
       ccGenerationStatus,
@@ -67,5 +66,4 @@ GROUP BY drug_concept_id, c.concept_name, stat.total_cnt
       gridTabs,
       demoCustomSqlAnalysisDesign,
     }
-  }
-)
+

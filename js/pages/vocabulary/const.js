@@ -1,16 +1,13 @@
-define(
-  (require, exports) => {
-    const sharedState = require('atlas-state')
+import sharedState from 'atlas-state'
 
-    const pageTitle = 'Search'
-    const apiPaths = {
-      domains: () => sharedState.vocabularyUrl() + 'domains',
-      vocabularies: () => sharedState.vocabularyUrl() + 'vocabularies',
-    }
+const pageTitle = 'Search'
+const apiPaths = {
+  domains: () => sharedState.vocabularyUrl() + 'domains',
+  vocabularies: () => sharedState.vocabularyUrl() + 'vocabularies',
+}
 
-    return {
-      pageTitle,
-      apiPaths,
-    }
-  }
-)
+export default {
+  pageTitle,
+  apiPaths,
+}
+

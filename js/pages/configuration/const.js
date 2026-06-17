@@ -1,11 +1,8 @@
-define(
-  (require, exports) => {
-    const pageTitle = 'Concept Sets'
-    const priotirizableDaimonTypes = ['Vocabulary', 'Results', 'CEM']
+const pageTitle = 'Concept Sets'
+const priotirizableDaimonTypes = ['Vocabulary', 'Results', 'CEM']
 
-    return {
-      pageTitle,
-      priotirizableDaimonTypes,
-    }
-  }
-)
+export default {
+  pageTitle,
+  priotirizableDaimonTypes,
+}
+

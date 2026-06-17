@@ -1,28 +1,31 @@
-define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/utils', 'text!./DeviceExposureTemplate.html'
-], function (ko, options, utils, template) {
-  function DeviceExposureViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import utils from 'components/cohortbuilder/utils'
+import template from './DeviceExposureTemplate.html?raw'
 
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.DeviceExposure
-    self.options = options
+function DeviceExposureViewModel (params) {
+  const self = this
 
-    self.indexMessage = ko.i18nformat(
-      'components.conditionDevice.indexDataText',
-      'The index date refers to the device exposure of <%= conceptSetName %>.',
-      {
-        conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
-          self.Criteria.CodesetId,
-          self.expression.ConceptSets,
-          ko.i18n('components.conditionDevice.anyDevice', 'Any Device')
-        ))
-      }
-    )
-  }
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.DeviceExposure
+  self.options = options
 
-  // return compoonent definition
-  return {
-    viewModel: DeviceExposureViewModel,
-    template
-  }
-})
+  self.indexMessage = ko.i18nformat(
+    'components.conditionDevice.indexDataText',
+    'The index date refers to the device exposure of <%= conceptSetName %>.',
+    {
+      conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
+        self.Criteria.CodesetId,
+        self.expression.ConceptSets,
+        ko.i18n('components.conditionDevice.anyDevice', 'Any Device')
+      ))
+    }
+  )
+}
+
+// return compoonent definition
+export default {
+  viewModel: DeviceExposureViewModel,
+  template
+}
+

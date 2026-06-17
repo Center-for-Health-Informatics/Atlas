@@ -1,15 +1,14 @@
-define(function (require, exports) {
-  const config = require('appConfig')
-  const authApi = require('services/AuthAPI')
-  const httpService = require('services/http')
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import httpService from 'services/http'
 
-  function getDefaultCovariateSettings (temporal = false) {
-    return httpService.doGet(config.webAPIRoot + 'featureextraction/defaultcovariatesettings?temporal=' + temporal).catch(authApi.handleAccessDenied)
-  }
+function getDefaultCovariateSettings (temporal = false) {
+  return httpService.doGet(config.webAPIRoot + 'featureextraction/defaultcovariatesettings?temporal=' + temporal).catch(authApi.handleAccessDenied)
+}
 
-  const api = {
-    getDefaultCovariateSettings,
-  }
+const api = {
+  getDefaultCovariateSettings,
+}
 
-  return api
-})
+export default api
+

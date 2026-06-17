@@ -1,8 +1,8 @@
-define(['knockout'], function (ko) {
-  ko.extenders.sorted = function (target, sortFn) {
-    const result = ko.pureComputed(function () {
-      return target().map(function (item) { return item }).sort(sortFn)
-    }).extend({ notify: 'always' })
-    return result
-  }
-})
+import ko from 'knockout'
+
+ko.extenders.sorted = function (target, sortFn) {
+  const result = ko.pureComputed(function () {
+    return target().map(function (item) { return item }).sort(sortFn)
+  }).extend({ notify: 'always' })
+  return result
+}

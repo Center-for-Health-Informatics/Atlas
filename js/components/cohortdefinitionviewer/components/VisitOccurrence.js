@@ -1,27 +1,31 @@
-define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/InputTypes/Range', 'text!./VisitOccurrenceTemplate.html'], function (ko, options, Range, template) {
-  function VisitOccurrenceViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import Range from 'components/cohortbuilder/InputTypes/Range'
+import template from './VisitOccurrenceTemplate.html?raw'
 
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.VisitOccurrence
-    self.options = options
+function VisitOccurrenceViewModel (params) {
+  const self = this
 
-    self.indexMessage = ko.i18nformat(
-      'components.conditionVisit.indexDataText',
-      'The index date refers to the visit of <%= conceptSetName %>.',
-      {
-        conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
-          self.Criteria.CodesetId,
-          self.expression.ConceptSets,
-          ko.i18n('components.conditionVisit.anyVisit', 'Any Visit')
-        ))
-      }
-    )
-  }
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.VisitOccurrence
+  self.options = options
 
-  // return compoonent definition
-  return {
-    viewModel: VisitOccurrenceViewModel,
-    template
-  }
-})
+  self.indexMessage = ko.i18nformat(
+    'components.conditionVisit.indexDataText',
+    'The index date refers to the visit of <%= conceptSetName %>.',
+    {
+      conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
+        self.Criteria.CodesetId,
+        self.expression.ConceptSets,
+        ko.i18n('components.conditionVisit.anyVisit', 'Any Visit')
+      ))
+    }
+  )
+}
+
+// return compoonent definition
+export default {
+  viewModel: VisitOccurrenceViewModel,
+  template
+}
+

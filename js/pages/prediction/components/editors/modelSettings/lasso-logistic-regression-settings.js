@@ -1,24 +1,18 @@
-define([
-  'knockout',
-  'text!./lasso-logistic-regression-settings.html',
-  './ModelSettingsEditorComponent',
-  'utils/CommonUtils',
-], function (
-  ko,
-  view,
-  ModelSettingsEditorComponent,
-  commonUtils
-) {
-  class LassoLogisticRegressionSettings extends ModelSettingsEditorComponent {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './lasso-logistic-regression-settings.html?raw'
+import ModelSettingsEditorComponent from './ModelSettingsEditorComponent'
+import commonUtils from 'utils/CommonUtils'
 
-      this.variance = {
-        name: 'variance',
-        value: this.modelSettings.variance,
-      }
+class LassoLogisticRegressionSettings extends ModelSettingsEditorComponent {
+  constructor (params) {
+    super(params)
+
+    this.variance = {
+      name: 'variance',
+      value: this.modelSettings.variance,
     }
   }
+}
 
-  return commonUtils.build('lasso-logistic-regression-settings', LassoLogisticRegressionSettings, view)
-})
+export default commonUtils.build('lasso-logistic-regression-settings', LassoLogisticRegressionSettings, view)
+

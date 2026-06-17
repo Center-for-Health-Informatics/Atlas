@@ -1,40 +1,33 @@
-define([
-  'knockout',
-  'text!./mlp-settings.html',
-  './ModelSettingsEditorComponent',
-  'utils/CommonUtils',
-  'utils/DataTypeConverterUtils'
-], function (
-  ko,
-  view,
-  ModelSettingsEditorComponent,
-  commonUtils,
-  dataTypeConverterUtils
-) {
-  const settings = {
-    size: 'size',
-    alpha: 'alpha',
-  }
+import ko from 'knockout'
+import view from './mlp-settings.html?raw'
+import ModelSettingsEditorComponent from './ModelSettingsEditorComponent'
+import commonUtils from 'utils/CommonUtils'
+import dataTypeConverterUtils from 'utils/DataTypeConverterUtils'
 
-  class MLPSettings extends ModelSettingsEditorComponent {
-    constructor (params) {
-      super(params)
+const settings = {
+  size: 'size',
+  alpha: 'alpha',
+}
 
-      this.size = {
-        name: settings.size,
-        value: this.modelSettings.size,
-        valueLabel: this.utils.getDefaultModelSettingName(this.defaultModelSettings, settings.size),
-        default: this.utils.getDefaultModelSettingValue(this.defaultModelSettings, settings.size),
-      }
+class MLPSettings extends ModelSettingsEditorComponent {
+  constructor (params) {
+    super(params)
 
-      this.alpha = {
-        name: settings.alpha,
-        value: this.modelSettings.alpha,
-        valueLabel: this.utils.getDefaultModelSettingName(this.defaultModelSettings, settings.alpha),
-        default: this.utils.getDefaultModelSettingValue(this.defaultModelSettings, settings.alpha),
-      }
+    this.size = {
+      name: settings.size,
+      value: this.modelSettings.size,
+      valueLabel: this.utils.getDefaultModelSettingName(this.defaultModelSettings, settings.size),
+      default: this.utils.getDefaultModelSettingValue(this.defaultModelSettings, settings.size),
+    }
+
+    this.alpha = {
+      name: settings.alpha,
+      value: this.modelSettings.alpha,
+      valueLabel: this.utils.getDefaultModelSettingName(this.defaultModelSettings, settings.alpha),
+      default: this.utils.getDefaultModelSettingValue(this.defaultModelSettings, settings.alpha),
     }
   }
+}
 
-  return commonUtils.build('mlp-settings', MLPSettings, view)
-})
+export default commonUtils.build('mlp-settings', MLPSettings, view)
+

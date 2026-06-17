@@ -1,20 +1,14 @@
-define([
-  'knockout',
-  'components/Component',
-  'utils/CommonUtils',
-  'text!./concept-legend.html',
-  'less!./concept-legend.less',
-], (
-  ko,
-  Component,
-  CommonUtils,
-  view
-) => {
-  class ConceptLegend extends Component {
-    constructor (params) {
-      super(params)
-    }
-  }
+import ko from 'knockout'
+import Component from 'components/Component'
+import CommonUtils from 'utils/CommonUtils'
+import view from './concept-legend.html?raw'
+import './concept-legend.less'
 
-  return CommonUtils.build('concept-legend', ConceptLegend, view)
-})
+class ConceptLegend extends Component {
+  constructor (params) {
+    super(params)
+  }
+}
+
+export default CommonUtils.build('concept-legend', ConceptLegend, view)
+

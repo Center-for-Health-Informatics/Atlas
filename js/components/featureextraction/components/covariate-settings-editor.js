@@ -1,43 +1,35 @@
-define([
-  'knockout',
-  'text!./covariate-settings-editor.html',
-  'components/Component',
-  'utils/CommonUtils',
-  'appConfig',
-  '../InputTypes/CovariateSettings',
-  'less!./featureextraction.less',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  config,
-  CovariateSettings
-) {
-  class CovariateSettingsEditor extends Component {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './covariate-settings-editor.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import config from 'appConfig'
+import CovariateSettings from '../InputTypes/CovariateSettings'
+import './featureextraction.less'
 
-      this.covariateSettings = (params.covariateSettings == null ? new CovariateSettings() : (ko.isObservable(params.covariateSettings) ? params.covariateSettings() : params.covariateSettings))
-      this.longTermLabel = ko.pureComputed(() => {
-        return this.getWindowLabel(this.covariateSettings.longTermStartDays())
-      })
-      this.isEditPermitted = params.isEditPermitted
+class CovariateSettingsEditor extends Component {
+  constructor (params) {
+    super(params)
 
-      this.mediumTermLabel = ko.pureComputed(() => {
-        return this.getWindowLabel(this.covariateSettings.mediumTermStartDays())
-      })
+    this.covariateSettings = (params.covariateSettings == null ? new CovariateSettings() : (ko.isObservable(params.covariateSettings) ? params.covariateSettings() : params.covariateSettings))
+    this.longTermLabel = ko.pureComputed(() => {
+      return this.getWindowLabel(this.covariateSettings.longTermStartDays())
+    })
+    this.isEditPermitted = params.isEditPermitted
 
-      this.shortTermLabel = ko.pureComputed(() => {
-        return this.getWindowLabel(this.covariateSettings.shortTermStartDays())
-      })
-    }
+    this.mediumTermLabel = ko.pureComputed(() => {
+      return this.getWindowLabel(this.covariateSettings.mediumTermStartDays())
+    })
 
-    getWindowLabel (value) {
-      const dayLabel = Math.abs(value) === 1 ? 'day' : 'days'
-      return '(' + value + ' ' + dayLabel + ')'
-    }
+    this.shortTermLabel = ko.pureComputed(() => {
+      return this.getWindowLabel(this.covariateSettings.shortTermStartDays())
+    })
   }
 
-  return commonUtils.build('covar-settings-editor', CovariateSettingsEditor, view)
-})
+  getWindowLabel (value) {
+    const dayLabel = Math.abs(value) === 1 ? 'day' : 'days'
+    return '(' + value + ' ' + dayLabel + ')'
+  }
+}
+
+export default commonUtils.build('covar-settings-editor', CovariateSettingsEditor, view)
+

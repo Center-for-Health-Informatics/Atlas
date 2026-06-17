@@ -1,92 +1,88 @@
-define([
-  'knockout',
-  'appConfig'
-], function (
-  ko,
-  config
-) {
-  const WIZARD_STEPS = {
-    PROVIDERS: 'providers',
-    MAPPING: 'mapping',
-    IMPORT: 'import',
-    FINISH: 'finish',
-  }
+import ko from 'knockout'
+import config from 'appConfig'
 
-  const PROVIDERS = {
-    ACTIVE_DIRECTORY: 'ad',
-    LDAP: 'ldap',
-  }
+const WIZARD_STEPS = {
+  PROVIDERS: 'providers',
+  MAPPING: 'mapping',
+  IMPORT: 'import',
+  FINISH: 'finish',
+}
 
-  const AuthenticationProviders = [
-    { value: PROVIDERS.ACTIVE_DIRECTORY, label: 'Active Directory' },
-    { value: PROVIDERS.LDAP, label: 'LDAP' },
-  ]
+const PROVIDERS = {
+  ACTIVE_DIRECTORY: 'ad',
+  LDAP: 'ldap',
+}
 
-  const IMPORT_STATUS = {
-    NEW_USER: 'New user',
-    MODIFIED: 'Modified',
-    EXISTS: 'Already exist',
-    UNKNOWN: 'Unknown',
-  }
+const AuthenticationProviders = [
+  { value: PROVIDERS.ACTIVE_DIRECTORY, label: 'Active Directory' },
+  { value: PROVIDERS.LDAP, label: 'LDAP' },
+]
 
-  const Api = {
-    userImportJob: config.webAPIRoot + 'user/import/job',
-  }
+const IMPORT_STATUS = {
+  NEW_USER: 'New user',
+  MODIFIED: 'Modified',
+  EXISTS: 'Already exist',
+  UNKNOWN: 'Unknown',
+}
 
-  const JobExecution = {
-    ONCE: 'ONCE',
-    HOURLY: 'HOURLY',
-    DAILY: 'DAILY',
-    WEEKLY: 'WEEKLY',
-    MONTHLY: 'MONTHLY',
-    YEARLY: 'YEARLY'
-  }
+const Api = {
+  userImportJob: config.webAPIRoot + 'user/import/job',
+}
 
-  const JobStatuses = {
-    COMPLETED: 'COMPLETED',
-    FAILED: 'FAILED',
-    STARTED: 'STARTED',
-    STARTING: 'STARTING',
-    STOPPED: 'STOPPED',
-    STOPPING: 'STOPPING',
-    UNKNOWN: 'UNKNOWN',
-  }
+const JobExecution = {
+  ONCE: 'ONCE',
+  HOURLY: 'HOURLY',
+  DAILY: 'DAILY',
+  WEEKLY: 'WEEKLY',
+  MONTHLY: 'MONTHLY',
+  YEARLY: 'YEARLY'
+}
 
-  const JobStatusLabels = {
-    COMPLETED: 'Completed',
-    FAILED: 'Failed',
-    STARTED: 'Started',
-    STARTING: 'Starting',
-    STOPPED: 'Stopped',
-    STOPPING: 'Stopping',
-    UNKNOWN: 'Unknown',
-  }
+const JobStatuses = {
+  COMPLETED: 'COMPLETED',
+  FAILED: 'FAILED',
+  STARTED: 'STARTED',
+  STARTING: 'STARTING',
+  STOPPED: 'STOPPED',
+  STOPPING: 'STOPPING',
+  UNKNOWN: 'UNKNOWN',
+}
 
-  const JobExecutionOptions = [
-    { value: JobExecution.ONCE, label: 'Once' },
-    { value: JobExecution.HOURLY, label: 'Hourly' },
-    { value: JobExecution.DAILY, label: 'Daily' },
-    { value: JobExecution.WEEKLY, label: 'Weekly' },
-    { value: JobExecution.MONTHLY, label: 'Monthly' },
-    { value: JobExecution.YEARLY, label: 'Annually' },
-  ]
+const JobStatusLabels = {
+  COMPLETED: 'Completed',
+  FAILED: 'Failed',
+  STARTED: 'Started',
+  STARTING: 'Starting',
+  STOPPED: 'Stopped',
+  STOPPING: 'Stopping',
+  UNKNOWN: 'Unknown',
+}
 
-  const JobEndOptions = {
-    NEVER: 'never',
-    AFTER: 'after',
-    ON: 'on',
-  }
+const JobExecutionOptions = [
+  { value: JobExecution.ONCE, label: 'Once' },
+  { value: JobExecution.HOURLY, label: 'Hourly' },
+  { value: JobExecution.DAILY, label: 'Daily' },
+  { value: JobExecution.WEEKLY, label: 'Weekly' },
+  { value: JobExecution.MONTHLY, label: 'Monthly' },
+  { value: JobExecution.YEARLY, label: 'Annually' },
+]
 
-  return {
-    WIZARD_STEPS,
-    PROVIDERS,
-    IMPORT_STATUS,
-    Api,
-    AuthenticationProviders,
-    JobExecution,
-    JobExecutionOptions,
-    JobEndOptions,
-    JobStatuses,
-    JobStatusLabels,
-  }
-})
+const JobEndOptions = {
+  NEVER: 'never',
+  AFTER: 'after',
+  ON: 'on',
+}
+
+export default {
+  WIZARD_STEPS,
+  PROVIDERS,
+  IMPORT_STATUS,
+  Api,
+  AuthenticationProviders,
+  JobExecution,
+  JobExecutionOptions,
+  JobEndOptions,
+  JobStatuses,
+  JobStatusLabels,
+}
+

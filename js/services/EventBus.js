@@ -1,11 +1,10 @@
-define(function (require, exports) {
-  const ko = require('knockout')
+import ko from 'knockout'
 
-  class EventBus {
-    constructor () {
-      this.errorMsg = ko.observable()
-    }
+class EventBus {
+  constructor () {
+    this.errorMsg = ko.observable()
   }
+}
 
-  return new EventBus()
-})
+export default new EventBus()
+

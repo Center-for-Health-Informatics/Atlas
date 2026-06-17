@@ -1,23 +1,28 @@
-define(['knockout', 'jquery', 'utils/CommonUtils', 'text!./concept-modal.html', 'databindings'], function (ko, $, commonUtils, template) {
-  function ConceptSetListModal (params) {
-    const self = this
-    self.title = params.title || 'Concept List'
-    self.conceptSetList = params.conceptSetList
-    self.isShown = params.isShown
-    self.commonUtils = commonUtils
-    self.onNavigate = function () {
-      // closes the modal when the concept link is clicked (causing a route change)
-      // see: https://github.com/twbs/bootstrap/issues/489
-      $('.modal.in').modal('hide')
-    }
-    self.tableOptions = commonUtils.getTableOptions('M')
-  }
-  const component = {
-    viewModel: ConceptSetListModal,
-    template
-  }
+import ko from 'knockout'
+import $ from 'jquery'
+import commonUtils from 'utils/CommonUtils'
+import template from './concept-modal.html?raw'
+import 'databindings'
 
-  ko.components.register('conceptset-concept-modal', component)
+function ConceptSetListModal (params) {
+  const self = this
+  self.title = params.title || 'Concept List'
+  self.conceptSetList = params.conceptSetList
+  self.isShown = params.isShown
+  self.commonUtils = commonUtils
+  self.onNavigate = function () {
+    // closes the modal when the concept link is clicked (causing a route change)
+    // see: https://github.com/twbs/bootstrap/issues/489
+    $('.modal.in').modal('hide')
+  }
+  self.tableOptions = commonUtils.getTableOptions('M')
+}
+const component = {
+  viewModel: ConceptSetListModal,
+  template
+}
 
-  return component
-})
+ko.components.register('conceptset-concept-modal', component)
+
+export default component
+

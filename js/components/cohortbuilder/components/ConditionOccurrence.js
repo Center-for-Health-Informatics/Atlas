@@ -1,215 +1,203 @@
-define([
-  'knockout',
-  '../options',
-  '../utils',
-  '../InputTypes/Range',
-  '../InputTypes/Text',
-  '../InputTypes/DateAdjustment',
-  '../InputTypes/ConceptSetSelection',
-  '../CriteriaGroup',
-  'text!./ConditionOccurrenceTemplate.html',
-  '../const',
-  './ConceptSetSelector',
-], function (
-  ko,
-  options,
-  utils,
-  Range,
-  Text,
-  DateAdjustment,
-  ConceptSetSelection,
-  CriteriaGroup,
-  template,
-  constants
-) {
-  function ConditionOccurrenceViewModel (params) {
-    const self = this
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.ConditionOccurrence
-    self.options = options
+import ko from 'knockout'
+import options from '../options'
+import utils from '../utils'
+import Range from '../InputTypes/Range'
+import Text from '../InputTypes/Text'
+import DateAdjustment from '../InputTypes/DateAdjustment'
+import ConceptSetSelection from '../InputTypes/ConceptSetSelection'
+import CriteriaGroup from '../CriteriaGroup'
+import template from './ConditionOccurrenceTemplate.html?raw'
+import constants from '../const'
+import './ConceptSetSelector'
 
-    self.formatOption = function (d) {
-      return (
-        '<div class="optionText">' +
-        d.text +
-        '</div>' +
-        '<div class="optionDescription">' +
-        d.description +
-        '</div>'
-      )
-    }
+function ConditionOccurrenceViewModel (params) {
+  const self = this
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.ConditionOccurrence
+  self.options = options
 
-    self.addActions = [
-      {
-        ...constants.occurrenceAttributes.addFirstDiagnosis,
-        selected: false,
-        action: function () {
-          if (self.Criteria.First() == null) self.Criteria.First(true)
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addAge,
-        selected: false,
-        action: function () {
-          if (self.Criteria.Age() == null) self.Criteria.Age(new Range())
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addGender,
-        selected: false,
-        action: function () {
-          if (self.Criteria.Gender() == null) { self.Criteria.Gender(ko.observableArray()) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addGenderCS,
-        selected: false,
-        action: function () {
-          if (self.Criteria.GenderCS() == null) { self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addConditionStatus,
-        selected: false,
-        action: function () {
-          if (self.Criteria.ConditionStatus() == null) { self.Criteria.ConditionStatus(ko.observableArray()) }
-        }
-      },
-      {
-        ...constants.occurrenceAttributes.addConditionStatusCS,
-        selected: false,
-        action: function () {
-          if (self.Criteria.ConditionStatusCS() == null) { self.Criteria.ConditionStatusCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
-        }
-      },
-      {
-        ...constants.occurrenceAttributes.addStartDate,
-        selected: false,
-        action: function () {
-          if (self.Criteria.OccurrenceStartDate() == null) {
-            self.Criteria.OccurrenceStartDate(
-              new Range({
-                Op: 'lt',
-              })
-            )
-          }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addEndDate,
-        selected: false,
-        action: function () {
-          if (self.Criteria.OccurrenceEndDate() == null) {
-            self.Criteria.OccurrenceEndDate(
-              new Range({
-                Op: 'lt',
-              })
-            )
-          }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addDateAdjustment,
-        selected: false,
-        action: function () {
-          if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment())
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addType,
-        selected: false,
-        action: function () {
-          if (self.Criteria.ConditionType() == null) { self.Criteria.ConditionType(ko.observableArray()) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addTypeCS,
-        selected: false,
-        action: function () {
-          if (self.Criteria.ConditionTypeCS() == null) { self.Criteria.ConditionTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addVisit,
-        selected: false,
-        action: function () {
-          if (self.Criteria.VisitType() == null) { self.Criteria.VisitType(ko.observableArray()) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addVisitCS,
-        selected: false,
-        action: function () {
-          if (self.Criteria.VisitTypeCS() == null) { self.Criteria.VisitTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addStopReason,
-        selected: false,
-        action: function () {
-          if (self.Criteria.StopReason() == null) {
-            self.Criteria.StopReason(
-              new Text({
-                Op: 'contains',
-              })
-            )
-          }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addSourceConcept,
-        selected: false,
-        action: function () {
-          if (self.Criteria.ConditionSourceConcept() == null) { self.Criteria.ConditionSourceConcept(ko.observable()) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addProviderSpecialty,
-        selected: false,
-        action: function () {
-          if (self.Criteria.ProviderSpecialty() == null) { self.Criteria.ProviderSpecialty(ko.observableArray()) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addProviderSpecialtyCS,
-        selected: false,
-        action: function () {
-          if (self.Criteria.ProviderSpecialtyCS() == null) { self.Criteria.ProviderSpecialtyCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
-        },
-      },
-      {
-        ...constants.occurrenceAttributes.addNested,
-        selected: false,
-        action: function () {
-          if (self.Criteria.CorrelatedCriteria() == null) {
-            self.Criteria.CorrelatedCriteria(
-              new CriteriaGroup(null, self.expression.ConceptSets)
-            )
-          }
-        },
-      },
-    ]
-
-    self.removeCriterion = function (propertyName) {
-      self.Criteria[propertyName](null)
-    }
-
-    self.indexMessage = ko.i18nformat(
-      'components.conditionOccurrence.indexDataText',
-      'The index date refers to the condition occurrence of <%= conceptSetName %>.',
-      {
-        conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
-          self.Criteria.CodesetId,
-          self.expression.ConceptSets,
-          ko.i18n('components.conditionOccurrence.anyCondition', 'Any Condition')
-        )),
-      }
+  self.formatOption = function (d) {
+    return (
+      '<div class="optionText">' +
+      d.text +
+      '</div>' +
+      '<div class="optionDescription">' +
+      d.description +
+      '</div>'
     )
   }
 
-  // return compoonent definition
-  return {
-    viewModel: ConditionOccurrenceViewModel,
-    template,
+  self.addActions = [
+    {
+      ...constants.occurrenceAttributes.addFirstDiagnosis,
+      selected: false,
+      action: function () {
+        if (self.Criteria.First() == null) self.Criteria.First(true)
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addAge,
+      selected: false,
+      action: function () {
+        if (self.Criteria.Age() == null) self.Criteria.Age(new Range())
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addGender,
+      selected: false,
+      action: function () {
+        if (self.Criteria.Gender() == null) { self.Criteria.Gender(ko.observableArray()) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addGenderCS,
+      selected: false,
+      action: function () {
+        if (self.Criteria.GenderCS() == null) { self.Criteria.GenderCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addConditionStatus,
+      selected: false,
+      action: function () {
+        if (self.Criteria.ConditionStatus() == null) { self.Criteria.ConditionStatus(ko.observableArray()) }
+      }
+    },
+    {
+      ...constants.occurrenceAttributes.addConditionStatusCS,
+      selected: false,
+      action: function () {
+        if (self.Criteria.ConditionStatusCS() == null) { self.Criteria.ConditionStatusCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
+      }
+    },
+    {
+      ...constants.occurrenceAttributes.addStartDate,
+      selected: false,
+      action: function () {
+        if (self.Criteria.OccurrenceStartDate() == null) {
+          self.Criteria.OccurrenceStartDate(
+            new Range({
+              Op: 'lt',
+            })
+          )
+        }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addEndDate,
+      selected: false,
+      action: function () {
+        if (self.Criteria.OccurrenceEndDate() == null) {
+          self.Criteria.OccurrenceEndDate(
+            new Range({
+              Op: 'lt',
+            })
+          )
+        }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addDateAdjustment,
+      selected: false,
+      action: function () {
+        if (self.Criteria.DateAdjustment() == null) self.Criteria.DateAdjustment(new DateAdjustment())
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addType,
+      selected: false,
+      action: function () {
+        if (self.Criteria.ConditionType() == null) { self.Criteria.ConditionType(ko.observableArray()) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addTypeCS,
+      selected: false,
+      action: function () {
+        if (self.Criteria.ConditionTypeCS() == null) { self.Criteria.ConditionTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addVisit,
+      selected: false,
+      action: function () {
+        if (self.Criteria.VisitType() == null) { self.Criteria.VisitType(ko.observableArray()) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addVisitCS,
+      selected: false,
+      action: function () {
+        if (self.Criteria.VisitTypeCS() == null) { self.Criteria.VisitTypeCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addStopReason,
+      selected: false,
+      action: function () {
+        if (self.Criteria.StopReason() == null) {
+          self.Criteria.StopReason(
+            new Text({
+              Op: 'contains',
+            })
+          )
+        }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addSourceConcept,
+      selected: false,
+      action: function () {
+        if (self.Criteria.ConditionSourceConcept() == null) { self.Criteria.ConditionSourceConcept(ko.observable()) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addProviderSpecialty,
+      selected: false,
+      action: function () {
+        if (self.Criteria.ProviderSpecialty() == null) { self.Criteria.ProviderSpecialty(ko.observableArray()) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addProviderSpecialtyCS,
+      selected: false,
+      action: function () {
+        if (self.Criteria.ProviderSpecialtyCS() == null) { self.Criteria.ProviderSpecialtyCS(new ConceptSetSelection({}, self.expression.ConceptSets)) }
+      },
+    },
+    {
+      ...constants.occurrenceAttributes.addNested,
+      selected: false,
+      action: function () {
+        if (self.Criteria.CorrelatedCriteria() == null) {
+          self.Criteria.CorrelatedCriteria(
+            new CriteriaGroup(null, self.expression.ConceptSets)
+          )
+        }
+      },
+    },
+  ]
+
+  self.removeCriterion = function (propertyName) {
+    self.Criteria[propertyName](null)
   }
-})
+
+  self.indexMessage = ko.i18nformat(
+    'components.conditionOccurrence.indexDataText',
+    'The index date refers to the condition occurrence of <%= conceptSetName %>.',
+    {
+      conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
+        self.Criteria.CodesetId,
+        self.expression.ConceptSets,
+        ko.i18n('components.conditionOccurrence.anyCondition', 'Any Condition')
+      )),
+    }
+  )
+}
+
+// return compoonent definition
+export default {
+  viewModel: ConditionOccurrenceViewModel,
+  template,
+}
+

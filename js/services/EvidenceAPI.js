@@ -1,75 +1,74 @@
-define(function (require, exports) {
-  const $ = require('jquery')
-  const config = require('appConfig')
+import $ from 'jquery'
+import config from 'appConfig'
 
-  function getNegativeControls (sourceKey, conceptSetId) {
-    const infoPromise = $.ajax({
-      url: config.webAPIRoot + 'evidence/' + sourceKey + '/negativecontrols/' + (conceptSetId || '-1'),
-      error: function (error) {
-        console.log('Error: ' + error)
-      }
+function getNegativeControls (sourceKey, conceptSetId) {
+  const infoPromise = $.ajax({
+    url: config.webAPIRoot + 'evidence/' + sourceKey + '/negativecontrols/' + (conceptSetId || '-1'),
+    error: function (error) {
+      console.log('Error: ' + error)
+    }
+  })
+  return infoPromise
+}
+
+function getDrugLabelExists (sourceKey, conceptIds) {
+  const infoPromise = $.ajax({
+    url: config.webAPIRoot + 'evidence/' + sourceKey + '/druglabel',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify(conceptIds),
+    error: function (error) {
+      console.log('Error: ' + error)
+    }
+  })
+  return infoPromise
+}
+
+function getDrugConditionPairs (sourceKey, targetDomainId, drugConceptIds, conditionConceptIds, sourceIds) {
+  const pairPromise = $.ajax({
+    url: config.webAPIRoot + 'evidence/' + sourceKey + '/drugconditionpairs',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      targetDomain: targetDomainId,
+      drugConceptIds,
+      conditionConceptIds,
+      sourceIds,
     })
-    return infoPromise
-  }
+  })
+  return pairPromise
+}
 
-  function getDrugLabelExists (sourceKey, conceptIds) {
-    const infoPromise = $.ajax({
-      url: config.webAPIRoot + 'evidence/' + sourceKey + '/druglabel',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(conceptIds),
-      error: function (error) {
-        console.log('Error: ' + error)
-      }
-    })
-    return infoPromise
-  }
+function generateNegativeControls (sourceKey, conceptSetId, conceptSetName, conceptDomainId, targetDomainId, conceptIds, csToInclude, csToExclude) {
+  const negativeControlsJob = $.ajax({
+    url: config.webAPIRoot + 'evidence/' + sourceKey + '/negativecontrols',
+    method: 'POST',
+    contentType: 'application/json',
+    data: JSON.stringify({
+      jobName: 'NEGATIVE_CONTROLS_' + conceptSetId,
+      conceptSetId,
+      conceptSetName,
+      conceptDomainId,
+      outcomeOfInterest: targetDomainId,
+      conceptsOfInterest: conceptIds,
+      csToInclude,
+      csToExclude,
+      // translatedSchema: "translated",
+    }),
+    error: function (error) {
+      console.log('Error: ' + error)
+    }
+  })
 
-  function getDrugConditionPairs (sourceKey, targetDomainId, drugConceptIds, conditionConceptIds, sourceIds) {
-    const pairPromise = $.ajax({
-      url: config.webAPIRoot + 'evidence/' + sourceKey + '/drugconditionpairs',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        targetDomain: targetDomainId,
-        drugConceptIds,
-        conditionConceptIds,
-        sourceIds,
-      })
-    })
-    return pairPromise
-  }
+  return negativeControlsJob
+}
 
-  function generateNegativeControls (sourceKey, conceptSetId, conceptSetName, conceptDomainId, targetDomainId, conceptIds, csToInclude, csToExclude) {
-    const negativeControlsJob = $.ajax({
-      url: config.webAPIRoot + 'evidence/' + sourceKey + '/negativecontrols',
-      method: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify({
-        jobName: 'NEGATIVE_CONTROLS_' + conceptSetId,
-        conceptSetId,
-        conceptSetName,
-        conceptDomainId,
-        outcomeOfInterest: targetDomainId,
-        conceptsOfInterest: conceptIds,
-        csToInclude,
-        csToExclude,
-        // translatedSchema: "translated",
-      }),
-      error: function (error) {
-        console.log('Error: ' + error)
-      }
-    })
+const api = {
+  getDrugConditionPairs,
+  getDrugLabelExists,
+  getNegativeControls,
+  generateNegativeControls
+}
 
-    return negativeControlsJob
-  }
+export default api
 
-  const api = {
-    getDrugConditionPairs,
-    getDrugLabelExists,
-    getNegativeControls,
-    generateNegativeControls
-  }
-
-  return api
-})

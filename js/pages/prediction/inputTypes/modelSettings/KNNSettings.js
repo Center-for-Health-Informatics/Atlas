@@ -1,14 +1,11 @@
-define([
-  'knockout',
-  'databindings',
-], function (
-  ko
-) {
-  class KNNSettings {
-    constructor (data = {}) {
-      this.k = ko.observable(data.k === 0 ? 0 : data.k || 1000).extend({ numeric: 0 })
-    }
-  }
+import ko from 'knockout'
+import 'databindings'
 
-  return KNNSettings
-})
+class KNNSettings {
+  constructor (data = {}) {
+    this.k = ko.observable(data.k === 0 ? 0 : data.k || 1000).extend({ numeric: 0 })
+  }
+}
+
+export default KNNSettings
+

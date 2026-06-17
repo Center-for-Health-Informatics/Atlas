@@ -1,32 +1,36 @@
-define(['knockout', '../InputTypes/Range', 'conceptpicker/InputTypes/Concept', '../InputTypes/ConceptSetSelection'], function (ko, Range, Concept, ConceptSetSelection) {
-  function DemographicCriteria (data, conceptSets) {
-    const self = this
-    data = data || {}
+import ko from 'knockout'
+import Range from '../InputTypes/Range'
+import Concept from 'conceptpicker/InputTypes/Concept'
+import ConceptSetSelection from '../InputTypes/ConceptSetSelection'
 
-    self.Age = ko.observable(data.Age && new Range(data.Age))
+function DemographicCriteria (data, conceptSets) {
+  const self = this
+  data = data || {}
 
-    self.Gender = ko.observable(data.Gender && ko.observableArray(data.Gender.map(function (d) {
-      return new Concept(d)
-    })))
-    self.GenderCS = ko.observable(data.GenderCS && new ConceptSetSelection(data.GenderCS, conceptSets))
+  self.Age = ko.observable(data.Age && new Range(data.Age))
 
-    self.Race = ko.observable(data.Race && ko.observableArray(data.Race.map(function (d) {
-      return new Concept(d)
-    })))
-    self.RaceCS = ko.observable(data.RaceCS && new ConceptSetSelection(data.RaceCS, conceptSets))
+  self.Gender = ko.observable(data.Gender && ko.observableArray(data.Gender.map(function (d) {
+    return new Concept(d)
+  })))
+  self.GenderCS = ko.observable(data.GenderCS && new ConceptSetSelection(data.GenderCS, conceptSets))
 
-    self.Ethnicity = ko.observable(data.Ethnicity && ko.observableArray(data.Ethnicity.map(function (d) {
-      return new Concept(d)
-    })))
-    self.EthnicityCS = ko.observable(data.EthnicityCS && new ConceptSetSelection(data.EthnicityCS, conceptSets))
+  self.Race = ko.observable(data.Race && ko.observableArray(data.Race.map(function (d) {
+    return new Concept(d)
+  })))
+  self.RaceCS = ko.observable(data.RaceCS && new ConceptSetSelection(data.RaceCS, conceptSets))
 
-    self.OccurrenceStartDate = ko.observable(data.OccurrenceStartDate && new Range(data.OccurrenceStartDate))
-    self.OccurrenceEndDate = ko.observable(data.OccurrenceEndDate && new Range(data.OccurrenceEndDate))
-  }
+  self.Ethnicity = ko.observable(data.Ethnicity && ko.observableArray(data.Ethnicity.map(function (d) {
+    return new Concept(d)
+  })))
+  self.EthnicityCS = ko.observable(data.EthnicityCS && new ConceptSetSelection(data.EthnicityCS, conceptSets))
 
-  DemographicCriteria.prototype.toJSON = function () {
-    return this
-  }
+  self.OccurrenceStartDate = ko.observable(data.OccurrenceStartDate && new Range(data.OccurrenceStartDate))
+  self.OccurrenceEndDate = ko.observable(data.OccurrenceEndDate && new Range(data.OccurrenceEndDate))
+}
 
-  return DemographicCriteria
-})
+DemographicCriteria.prototype.toJSON = function () {
+  return this
+}
+
+export default DemographicCriteria
+

@@ -1,28 +1,31 @@
-define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/utils', 'text!./ProcedureOccurrenceTemplate.html'
-], function (ko, options, utils, template) {
-  function ProcedureOccurrenceViewModel (params) {
-    const self = this
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import utils from 'components/cohortbuilder/utils'
+import template from './ProcedureOccurrenceTemplate.html?raw'
 
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.ProcedureOccurrence
-    self.options = options
+function ProcedureOccurrenceViewModel (params) {
+  const self = this
 
-    self.indexMessage = ko.i18nformat(
-      'components.conditionProcedureOccurrence.indexDataText',
-      'The index date refers to the procedure of <%= conceptSetName %>.',
-      {
-        conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
-          self.Criteria.CodesetId,
-          self.expression.ConceptSets,
-          ko.i18n('components.conditionProcedureOccurrence.anyProcedure', 'Any Procedure')
-        ))
-      }
-    )
-  }
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.ProcedureOccurrence
+  self.options = options
 
-  // return compoonent definition
-  return {
-    viewModel: ProcedureOccurrenceViewModel,
-    template
-  }
-})
+  self.indexMessage = ko.i18nformat(
+    'components.conditionProcedureOccurrence.indexDataText',
+    'The index date refers to the procedure of <%= conceptSetName %>.',
+    {
+      conceptSetName: ko.pureComputed(() => utils.getConceptSetName(
+        self.Criteria.CodesetId,
+        self.expression.ConceptSets,
+        ko.i18n('components.conditionProcedureOccurrence.anyProcedure', 'Any Procedure')
+      ))
+    }
+  )
+}
+
+// return compoonent definition
+export default {
+  viewModel: ProcedureOccurrenceViewModel,
+  template
+}
+

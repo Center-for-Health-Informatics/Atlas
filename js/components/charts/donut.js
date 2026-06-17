@@ -1,24 +1,16 @@
-define([
-  'knockout',
-  'components/Chart',
-  'components/Component',
-  'atlascharts',
-  'text!components/charts/chart.html',
-  'utils/CommonUtils'
-], function (
-  ko,
-  Chart,
-  Component,
-  atlascharts,
-  view,
-  commonUtils
-) {
-  class Donut extends Chart {
-    constructor (params, element) {
-      super(params, element)
-      this.renderer = new atlascharts.donut()
-    }
-  }
+import ko from 'knockout'
+import Chart from 'components/Chart'
+import Component from 'components/Component'
+import atlascharts from 'atlascharts'
+import view from 'components/charts/chart.html?raw'
+import commonUtils from 'utils/CommonUtils'
 
-  return commonUtils.build('donut', Donut, view)
-})
+class Donut extends Chart {
+  constructor (params, element) {
+    super(params, element)
+    this.renderer = new atlascharts.donut()
+  }
+}
+
+export default commonUtils.build('donut', Donut, view)
+

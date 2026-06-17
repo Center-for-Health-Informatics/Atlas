@@ -1,49 +1,40 @@
-define([
-  'knockout',
-  'atlas-state',
-  'text!./characterization-params-create-modal.html',
-  'appConfig',
-  'services/AuthAPI',
-  'components/Component',
-  'utils/CommonUtils',
-  'utils/DatatableUtils',
-  'pages/characterizations/const',
-  'less!./characterization-params-create-modal.less',
-], function (
-  ko,
-  sharedState,
-  view,
-  config,
-  authApi,
-  Component,
-  commonUtils
-) {
-  class CharacterizationParamsCreateModal extends Component {
-    constructor (params) {
-      super()
+import ko from 'knockout'
+import sharedState from 'atlas-state'
+import view from './characterization-params-create-modal.html?raw'
+import config from 'appConfig'
+import authApi from 'services/AuthAPI'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import 'utils/DatatableUtils'
+import 'pages/characterizations/const'
+import './characterization-params-create-modal.less'
 
-      this.showModal = params.showModal
-      this.parentSubmit = params.submit
+class CharacterizationParamsCreateModal extends Component {
+  constructor (params) {
+    super()
 
-      this.paramName = ko.observable()
-      this.paramValue = ko.observable()
+    this.showModal = params.showModal
+    this.parentSubmit = params.submit
 
-      this.submitParam = this.submitParam.bind(this)
-    }
+    this.paramName = ko.observable()
+    this.paramValue = ko.observable()
 
-    submitParam () {
-      this.parentSubmit({
-        name: this.paramName(),
-        value: this.paramValue()
-      })
-      this.resetParams()
-    }
-
-    resetParams () {
-      this.paramName('')
-      this.paramValue('')
-    }
+    this.submitParam = this.submitParam.bind(this)
   }
 
-  return commonUtils.build('characterization-params-create-modal', CharacterizationParamsCreateModal, view)
-})
+  submitParam () {
+    this.parentSubmit({
+      name: this.paramName(),
+      value: this.paramValue()
+    })
+    this.resetParams()
+  }
+
+  resetParams () {
+    this.paramName('')
+    this.paramValue('')
+  }
+}
+
+export default commonUtils.build('characterization-params-create-modal', CharacterizationParamsCreateModal, view)
+

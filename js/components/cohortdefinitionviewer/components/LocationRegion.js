@@ -1,21 +1,25 @@
-define(['knockout', 'components/cohortbuilder/options', 'components/cohortbuilder/InputTypes/Range', 'text!./LocationRegionTemplate.html'], function (ko, options, Range, template) {
-  function LocationRegionViewModel (params) {
-    const self = this
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.Criteria = params.criteria.LocationRegion
-    self.options = options
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import Range from 'components/cohortbuilder/InputTypes/Range'
+import template from './LocationRegionTemplate.html?raw'
 
-    self.getCodesetName = function (codesetId, defaultName) {
-      if (codesetId != null) {
-        const selectedConceptSet = self.expression.ConceptSets().filter(function (item) { return item.id == codesetId })[0]
-        return ko.utils.unwrapObservable(selectedConceptSet.name)
-      } else { return defaultName }
-    }
-  }
+function LocationRegionViewModel (params) {
+  const self = this
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.Criteria = params.criteria.LocationRegion
+  self.options = options
 
-  // return compoonent definition
-  return {
-    viewModel: LocationRegionViewModel,
-    template
+  self.getCodesetName = function (codesetId, defaultName) {
+    if (codesetId != null) {
+      const selectedConceptSet = self.expression.ConceptSets().filter(function (item) { return item.id == codesetId })[0]
+      return ko.utils.unwrapObservable(selectedConceptSet.name)
+    } else { return defaultName }
   }
-})
+}
+
+// return compoonent definition
+export default {
+  viewModel: LocationRegionViewModel,
+  template
+}
+

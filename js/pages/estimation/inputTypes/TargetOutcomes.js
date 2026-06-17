@@ -1,14 +1,11 @@
-define([
-  'knockout',
-], function (
-  ko
-) {
-  class TargetOutcomes {
-    constructor (data = {}) {
-      this.targetId = ko.observable(data.targetId || null)
-      this.outcomeIds = ko.observableArray((data.outcomeIds && Array.isArray(data.outcomeIds)) ? data.outcomeIds : [])
-    }
-  }
+import ko from 'knockout'
 
-  return TargetOutcomes
-})
+class TargetOutcomes {
+  constructor (data = {}) {
+    this.targetId = ko.observable(data.targetId || null)
+    this.outcomeIds = ko.observableArray((data.outcomeIds && Array.isArray(data.outcomeIds)) ? data.outcomeIds : [])
+  }
+}
+
+export default TargetOutcomes
+

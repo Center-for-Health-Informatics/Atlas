@@ -1,31 +1,24 @@
-define([
-  'knockout',
-  'text!./vocabulary.html',
-  'pages/Page',
-  './components/search',
-  'utils/CommonUtils',
-  'components/heading',
-  'less!./vocabulary.less'
-], function (
-  ko,
-  view,
-  Page,
-  searchTab,
-  commonUtils
-) {
-  class Vocabulary extends Page {
-    constructor (params) {
-      super(params)
-      this.model = params.model
-      this.query = ko.observable()
-    }
+import ko from 'knockout'
+import view from './vocabulary.html?raw'
+import Page from 'pages/Page'
+import searchTab from './components/search'
+import commonUtils from 'utils/CommonUtils'
+import 'components/heading'
+import './vocabulary.less'
 
-    onRouterParamsChanged ({ query }) {
-      if (query !== undefined) {
-        this.query(query)
-      }
-    }
+class Vocabulary extends Page {
+  constructor (params) {
+    super(params)
+    this.model = params.model
+    this.query = ko.observable()
   }
 
-  return commonUtils.build('vocabulary', Vocabulary, view)
-})
+  onRouterParamsChanged ({ query }) {
+    if (query !== undefined) {
+      this.query(query)
+    }
+  }
+}
+
+export default commonUtils.build('vocabulary', Vocabulary, view)
+

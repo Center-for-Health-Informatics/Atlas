@@ -1,37 +1,36 @@
-define([
-  'knockout'
-], function (ko) {
-  const importTypes = {
-    OVERWRITE: 'overwrite',
-    APPEND: 'append',
-  }
+import ko from 'knockout'
 
-  const ViewMode = {
-    EXPRESSION: 'expression',
-    INCLUDED: 'included',
-    SOURCECODES: 'included-sourcecodes',
-    RECOMMEND: 'recommend',
-    EXPORT: 'conceptset-export',
-    IMPORT: 'conceptset-import',
-    ANNOTATION: 'annotation',
-    MAPPINGS: 'resolve-mappings'
-  }
+const importTypes = {
+  OVERWRITE: 'overwrite',
+  APPEND: 'append',
+}
 
-  const ConceptSetSources = {
-    featureAnalysis: 'featureAnalysis',
-    repository: 'repository',
-    cohortDefinition: 'cohortDefinition',
-    characterization: 'characterization',
-    incidenceRates: 'incidenceRates',
-    reusables: 'reusables'
-  }
+const ViewMode = {
+  EXPRESSION: 'expression',
+  INCLUDED: 'included',
+  SOURCECODES: 'included-sourcecodes',
+  RECOMMEND: 'recommend',
+  EXPORT: 'conceptset-export',
+  IMPORT: 'conceptset-import',
+  ANNOTATION: 'annotation',
+  MAPPINGS: 'resolve-mappings'
+}
 
-  const RESOLVE_OUT_OF_ORDER = 'resolveConceptSetExpression() resolved out of order'
+const ConceptSetSources = {
+  featureAnalysis: 'featureAnalysis',
+  repository: 'repository',
+  cohortDefinition: 'cohortDefinition',
+  characterization: 'characterization',
+  incidenceRates: 'incidenceRates',
+  reusables: 'reusables'
+}
 
-  return {
-    importTypes,
-    ViewMode,
-    ConceptSetSources,
-    RESOLVE_OUT_OF_ORDER,
-  }
-})
+const RESOLVE_OUT_OF_ORDER = 'resolveConceptSetExpression() resolved out of order'
+
+export default {
+  importTypes,
+  ViewMode,
+  ConceptSetSources,
+  RESOLVE_OUT_OF_ORDER,
+}
+

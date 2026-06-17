@@ -1,31 +1,36 @@
-define(['knockout', './Criteria', '../InputTypes/Range', 'conceptpicker/InputTypes/Concept', '../InputTypes/Text'], function (ko, Criteria, Range, Concept, Text) {
-  function LocationRegion (data, conceptSets) {
-    const self = this
-    data = data || {}
+import ko from 'knockout'
+import Criteria from './Criteria'
+import Range from '../InputTypes/Range'
+import Concept from 'conceptpicker/InputTypes/Concept'
+import Text from '../InputTypes/Text'
 
-    Criteria.call(this, data, conceptSets)
+function LocationRegion (data, conceptSets) {
+  const self = this
+  data = data || {}
 
-    conceptSets.subscribe(function (changes) {
-      changes.forEach(function (change) {
-        if (change.status === 'deleted') {
-          if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
-        }
-      })
-    }, null, 'arrayChange')
+  Criteria.call(this, data, conceptSets)
 
-    // General Location Region Criteria
+  conceptSets.subscribe(function (changes) {
+    changes.forEach(function (change) {
+      if (change.status === 'deleted') {
+        if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
+      }
+    })
+  }, null, 'arrayChange')
 
-    self.CodesetId = ko.observable(data.CodesetId)
+  // General Location Region Criteria
 
-    self.StartDate = ko.observable(data.OccurrenceStartDate && new Range(data.StartDate))
-    self.EndDate = ko.observable(data.OccurrenceEndDate && new Range(data.EndDate))
-  }
+  self.CodesetId = ko.observable(data.CodesetId)
 
-  LocationRegion.prototype = new Criteria()
-  LocationRegion.prototype.constructor = LocationRegion
-  LocationRegion.prototype.toJSON = function () {
-    return this
-  }
+  self.StartDate = ko.observable(data.OccurrenceStartDate && new Range(data.StartDate))
+  self.EndDate = ko.observable(data.OccurrenceEndDate && new Range(data.EndDate))
+}
 
-  return LocationRegion
-})
+LocationRegion.prototype = new Criteria()
+LocationRegion.prototype.constructor = LocationRegion
+LocationRegion.prototype.toJSON = function () {
+  return this
+}
+
+export default LocationRegion
+

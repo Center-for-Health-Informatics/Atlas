@@ -1,29 +1,28 @@
-define(['numeral'], function (
-  numeral
-) {
-  const formatStdDiff = (val) => numeral(val).format('0,0.0000')
+import numeral from 'numeral'
 
-  const formatPct = (val) => numeral(val).format('0.00') + '%'
+const formatStdDiff = (val) => numeral(val).format('0,0.0000')
 
-  const colorHorizontalBoxplot = [
-    '#ff9315',
-    '#0d61ff',
-    'gold',
-    'blue',
-    'green',
-    'red',
-    'black',
-    'orange',
-    'brown',
-    'grey',
-    'slateblue',
-    'grey1',
-    'darkgreen'
-  ]
+const formatPct = (val) => numeral(val).format('0.00') + '%'
 
-  return {
-    formatPct,
-    formatStdDiff,
-    colorHorizontalBoxplot
-  }
-})
+const colorHorizontalBoxplot = [
+  '#ff9315',
+  '#0d61ff',
+  'gold',
+  'blue',
+  'green',
+  'red',
+  'black',
+  'orange',
+  'brown',
+  'grey',
+  'slateblue',
+  'grey1',
+  'darkgreen'
+]
+
+export default {
+  formatPct,
+  formatStdDiff,
+  colorHorizontalBoxplot
+}
+

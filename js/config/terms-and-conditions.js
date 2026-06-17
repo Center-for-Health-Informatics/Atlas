@@ -1,21 +1,20 @@
-define([
-  'text!./terms-and-conditions-content-en.html',
-  'text!./terms-and-conditions-content-ru.html',
-  'text!./terms-and-conditions-content-ko.html',
-  'text!./terms-and-conditions-content-zh.html',
-  'less!./terms-and-conditions.less'
-], function (contentEn, contentRu, contentKo, contentZh) {
-  const termsAndConditions = {
-    contents: {
-      en: contentEn,
-      ru: contentRu,
-      ko: contentKo,
-      zh: contentZh
-    },
-    acceptanceExpiresInDays: 30
-  }
+import contentEn from './terms-and-conditions-content-en.html?raw'
+import contentRu from './terms-and-conditions-content-ru.html?raw'
+import contentKo from './terms-and-conditions-content-ko.html?raw'
+import contentZh from './terms-and-conditions-content-zh.html?raw'
+import './terms-and-conditions.less'
 
-  return {
-    termsAndConditions
-  }
-})
+const termsAndConditions = {
+  contents: {
+    en: contentEn,
+    ru: contentRu,
+    ko: contentKo,
+    zh: contentZh
+  },
+  acceptanceExpiresInDays: 30
+}
+
+export default {
+  termsAndConditions
+}
+

@@ -1,27 +1,23 @@
-define([
-  'knockout',
-  '../const',
-], function (
-  ko,
-  consts
-) {
-  const ImportComponent = (C = class {}) => class extends C {
-    constructor (params) {
-      super(params)
-      this.importing = params.importing || ko.observable(false)
-      this.selectedTabKey = params.selectedTabKey || ((mode) => null)
-    }
+import ko from 'knockout'
+import consts from '../const'
 
-    async doImport (options) {
-      this.importing(true)
-      try {
-        await this.runImport(options)
-        this.selectedTabKey(consts.ViewMode.EXPRESSION)
-      } finally {
-        this.importing(false)
-      }
-    }
+const ImportComponent = (C = class {}) => class extends C {
+  constructor (params) {
+    super(params)
+    this.importing = params.importing || ko.observable(false)
+    this.selectedTabKey = params.selectedTabKey || ((mode) => null)
   }
 
-  return ImportComponent
-})
+  async doImport (options) {
+    this.importing(true)
+    try {
+      await this.runImport(options)
+      this.selectedTabKey(consts.ViewMode.EXPRESSION)
+    } finally {
+      this.importing(false)
+    }
+  }
+}
+
+export default ImportComponent
+

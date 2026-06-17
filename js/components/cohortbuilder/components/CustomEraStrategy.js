@@ -1,30 +1,29 @@
-define([
-  'knockout',
-  'text!./CustomEraStrategyTemplate.html',
-  '../options',
-], function (ko, template, options) {
-  function CustomEraStrategyViewModel (params) {
-    const self = this
-    self.options = options
+import ko from 'knockout'
+import template from './CustomEraStrategyTemplate.html?raw'
+import options from '../options'
 
-    self.strategy = ko.pureComputed(function () {
-      return ko.utils.unwrapObservable(params.strategy).CustomEra
-    })
+function CustomEraStrategyViewModel (params) {
+  const self = this
+  self.options = options
 
-    self.addDaysSupplyOverride = function () {
-      self.strategy().DaysSupplyOverride(1)
-    }
+  self.strategy = ko.pureComputed(function () {
+    return ko.utils.unwrapObservable(params.strategy).CustomEra
+  })
 
-    self.removeDaysSupplyOverride = function () {
-      self.strategy().DaysSupplyOverride(null)
-    }
-
-    self.conceptSets = params.conceptSets
+  self.addDaysSupplyOverride = function () {
+    self.strategy().DaysSupplyOverride(1)
   }
 
-  // return compoonent definition
-  return {
-    viewModel: CustomEraStrategyViewModel,
-    template,
+  self.removeDaysSupplyOverride = function () {
+    self.strategy().DaysSupplyOverride(null)
   }
-})
+
+  self.conceptSets = params.conceptSets
+}
+
+// return compoonent definition
+export default {
+  viewModel: CustomEraStrategyViewModel,
+  template,
+}
+

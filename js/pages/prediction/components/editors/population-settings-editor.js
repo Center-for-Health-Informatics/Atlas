@@ -1,30 +1,22 @@
-define([
-  'knockout',
-  'text!./population-settings-editor.html',
-  'components/Component',
-  'utils/CommonUtils',
-  '../../const',
-  'const',
-  'databindings',
-  'less!./population-settings-editor.less',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  predictionConstants,
-  constants
-) {
-  class PopulationSettingsEditor extends Component {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './population-settings-editor.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import predictionConstants from '../../const'
+import constants from 'const'
+import 'databindings'
+import './population-settings-editor.less'
 
-      this.populationSettings = params.populationSettings
-      this.options = predictionConstants.options
-      this.constants = constants
-      this.isEditPermitted = params.isEditPermitted
-    }
+class PopulationSettingsEditor extends Component {
+  constructor (params) {
+    super(params)
+
+    this.populationSettings = params.populationSettings
+    this.options = predictionConstants.options
+    this.constants = constants
+    this.isEditPermitted = params.isEditPermitted
   }
+}
 
-  return commonUtils.build('population-settings-editor', PopulationSettingsEditor, view)
-})
+export default commonUtils.build('population-settings-editor', PopulationSettingsEditor, view)
+

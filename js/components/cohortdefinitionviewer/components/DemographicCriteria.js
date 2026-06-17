@@ -1,15 +1,17 @@
-define(['knockout', 'components/cohortbuilder/options', 'text!./DemographicCriteriaTemplate.html',
-], function (ko, options, template) {
-  function DemographicCriteriaViewModel (params) {
-    const self = this
-    self.Criteria = params.criteria
-    self.expression = ko.utils.unwrapObservable(params.expression)
-    self.options = options
-  }
+import ko from 'knockout'
+import options from 'components/cohortbuilder/options'
+import template from './DemographicCriteriaTemplate.html?raw'
 
-  // return compoonent definition
-  return {
-    viewModel: DemographicCriteriaViewModel,
-    template
-  }
-})
+function DemographicCriteriaViewModel (params) {
+  const self = this
+  self.Criteria = params.criteria
+  self.expression = ko.utils.unwrapObservable(params.expression)
+  self.options = options
+}
+
+// return compoonent definition
+export default {
+  viewModel: DemographicCriteriaViewModel,
+  template
+}
+

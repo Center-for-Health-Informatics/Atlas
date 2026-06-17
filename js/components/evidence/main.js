@@ -1,9 +1,7 @@
-define(function (require, exports) {
-  const ko = require('knockout')
+import ko from 'knockout'
+import evidencePairViewer from './components/evidence-pair-viewer'
+import negativeControls from './components/negative-controls'
 
-  const evidencePairViewer = require('./components/evidence-pair-viewer')
-  ko.components.register('evidence-pair-viewer', evidencePairViewer)
+ko.components.register('evidence-pair-viewer', evidencePairViewer)
 
-  const negativeControls = require('./components/negative-controls')
-  ko.components.register('negative-controls', negativeControls)
-})
+ko.components.register('negative-controls', negativeControls)

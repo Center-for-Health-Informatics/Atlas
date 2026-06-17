@@ -1,30 +1,33 @@
-define(['knockout', 'services/MomentAPI', 'lodash'], function (ko, momentAPI, _) {
-  const debug = false
+import ko from 'knockout'
+import momentAPI from 'services/MomentAPI'
+import _ from 'lodash'
 
-  function Range (data) {
-    const self = this
-    data = data || {}
+const debug = false
 
-    self.Value = ko.observable(data.Value === 0 ? 0 : data.Value || null)
-    self.Extent = ko.observable(data.Extent === 0 ? 0 : data.Extent || null)
-    self.Op = ko.observable(data.Op || 'gt')
+function Range (data) {
+  const self = this
+  data = data || {}
 
-    self.getPrettyValue = v => {
-      const value = momentAPI.formatDateToString(ko.toJS(v))
-      return _.isNil(value) ? '' : value
-    }
+  self.Value = ko.observable(data.Value === 0 ? 0 : data.Value || null)
+  self.Extent = ko.observable(data.Extent === 0 ? 0 : data.Extent || null)
+  self.Op = ko.observable(data.Op || 'gt')
 
-    self.prettyValue = ko.pureComputed(() => self.getPrettyValue(self.Value))
-    self.prettyExtent = ko.pureComputed(() => self.getPrettyValue(self.Extent))
+  self.getPrettyValue = v => {
+    const value = momentAPI.formatDateToString(ko.toJS(v))
+    return _.isNil(value) ? '' : value
   }
 
-  Range.prototype.toJSON = function () {
-    return {
-      Value: momentAPI.formatDateToString(this.Value),
-      Extent: momentAPI.formatDateToString(this.Extent),
-      Op: this.Op
-    }
-  }
+  self.prettyValue = ko.pureComputed(() => self.getPrettyValue(self.Value))
+  self.prettyExtent = ko.pureComputed(() => self.getPrettyValue(self.Extent))
+}
 
-  return Range
-})
+Range.prototype.toJSON = function () {
+  return {
+    Value: momentAPI.formatDateToString(this.Value),
+    Extent: momentAPI.formatDateToString(this.Extent),
+    Op: this.Op
+  }
+}
+
+export default Range
+

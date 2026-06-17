@@ -1,15 +1,16 @@
-define(['knockout'], function (ko) {
-  function FieldOffset (data, defaultDateField = 'StartDate', defaultOffset = 0) {
-    const self = this
-    data = data || {}
+import ko from 'knockout'
 
-    self.DateField = ko.observable(data.DateField || defaultDateField)
-    self.Offset = ko.observable(data.Offset || defaultOffset)
-  }
+function FieldOffset (data, defaultDateField = 'StartDate', defaultOffset = 0) {
+  const self = this
+  data = data || {}
 
-  FieldOffset.prototype.toJSON = function () {
-    return this
-  }
+  self.DateField = ko.observable(data.DateField || defaultDateField)
+  self.Offset = ko.observable(data.Offset || defaultOffset)
+}
 
-  return FieldOffset
-})
+FieldOffset.prototype.toJSON = function () {
+  return this
+}
+
+export default FieldOffset
+

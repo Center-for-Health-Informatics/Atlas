@@ -1,29 +1,21 @@
-define([
-  'jquery',
-  'knockout',
-  'text!./cohort-comparison-print-friendly.html',
-  'appConfig',
-  'components/cohortcomparison/ComparativeCohortAnalysis'
-], function (
-  $,
-  ko,
-  view,
-  config,
-  cohortComparison,
-  options
-) {
-  function cohortComparisonPrintFriendly (params) {
-    const self = this
-    self.config = config
-    self.loading = ko.observable(true)
-    self.cohortComparison = params.cohortComparison
-  }
+import $ from 'jquery'
+import ko from 'knockout'
+import view from './cohort-comparison-print-friendly.html?raw'
+import config from 'appConfig'
+import cohortComparison from 'components/cohortcomparison/ComparativeCohortAnalysis'
 
-  const component = {
-    viewModel: cohortComparisonPrintFriendly,
-    template: view
-  }
+function cohortComparisonPrintFriendly (params) {
+  const self = this
+  self.config = config
+  self.loading = ko.observable(true)
+  self.cohortComparison = params.cohortComparison
+}
 
-  ko.components.register('cohort-comparison-print-friendly', component)
-  return component
-})
+const component = {
+  viewModel: cohortComparisonPrintFriendly,
+  template: view
+}
+
+ko.components.register('cohort-comparison-print-friendly', component)
+export default component
+

@@ -1,13 +1,18 @@
-define(['require', 'knockout', '../InputTypes/Range', 'conceptpicker/InputTypes/Concept', '../InputTypes/Text', '../InputTypes/DateAdjustment', '../CriteriaGroup'], function (require, ko, Range, Concept, Text, DateAdjustment) {
-  function Criteria (data, conceptSets) {
-    const self = this
-    var data = data || {}
+import ko from 'knockout'
+import Range from '../InputTypes/Range'
+import Concept from 'conceptpicker/InputTypes/Concept'
+import Text from '../InputTypes/Text'
+import DateAdjustment from '../InputTypes/DateAdjustment'
+import '../CriteriaGroup'
+import CriteriaGroup from '../CriteriaGroup'
 
-    const CriteriaGroup = require('../CriteriaGroup')
+function Criteria (data, conceptSets) {
+  const self = this
+  var data = data || {}
 
-    self.CorrelatedCriteria = ko.observable(data.CorrelatedCriteria && new CriteriaGroup(data.CorrelatedCriteria, conceptSets))
-    self.DateAdjustment = ko.observable(data.DateAdjustment && new DateAdjustment(data.DateAdjustment))
-  }
+  self.CorrelatedCriteria = ko.observable(data.CorrelatedCriteria && new CriteriaGroup(data.CorrelatedCriteria, conceptSets))
+  self.DateAdjustment = ko.observable(data.DateAdjustment && new DateAdjustment(data.DateAdjustment))
+}
 
-  return Criteria
-})
+export default Criteria
+

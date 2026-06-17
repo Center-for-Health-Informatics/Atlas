@@ -1,26 +1,18 @@
-define([
-  'knockout',
-  'text!./temporal-covariate-settings-editor.html',
-  'components/Component',
-  'utils/CommonUtils',
-  'appConfig',
-  '../InputTypes/TemporalCovariateSettings',
-  'less!./featureextraction.less',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils,
-  config,
-  TemporalCovariateSettings
-) {
-  class TemporalCovariateSettingsEditor extends Component {
-    constructor (params) {
-      super(params)
+import ko from 'knockout'
+import view from './temporal-covariate-settings-editor.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import config from 'appConfig'
+import TemporalCovariateSettings from '../InputTypes/TemporalCovariateSettings'
+import './featureextraction.less'
 
-      this.covariateSettings = (params.covariateSettings == null ? new TemporalCovariateSettings() : params.covariateSettings)
-    }
+class TemporalCovariateSettingsEditor extends Component {
+  constructor (params) {
+    super(params)
+
+    this.covariateSettings = (params.covariateSettings == null ? new TemporalCovariateSettings() : params.covariateSettings)
   }
+}
 
-  return commonUtils.build('temporal-covar-settings-editor', TemporalCovariateSettingsEditor, view)
-})
+export default commonUtils.build('temporal-covar-settings-editor', TemporalCovariateSettingsEditor, view)
+

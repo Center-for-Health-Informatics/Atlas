@@ -1,24 +1,16 @@
-define([
-  'knockout',
-  'components/Chart',
-  'components/Component',
-  'atlascharts',
-  'text!components/charts/chart.html',
-  'utils/CommonUtils'
-], function (
-  ko,
-  Chart,
-  Component,
-  atlascharts,
-  view,
-  commonUtils
-) {
-  class Histogram extends Chart {
-    constructor (params, element) {
-      super(params, element)
-      this.renderer = new atlascharts.histogram()
-    }
-  }
+import ko from 'knockout'
+import Chart from 'components/Chart'
+import Component from 'components/Component'
+import atlascharts from 'atlascharts'
+import view from 'components/charts/chart.html?raw'
+import commonUtils from 'utils/CommonUtils'
 
-  return commonUtils.build('histogram', Histogram, view)
-})
+class Histogram extends Chart {
+  constructor (params, element) {
+    super(params, element)
+    this.renderer = new atlascharts.histogram()
+  }
+}
+
+export default commonUtils.build('histogram', Histogram, view)
+

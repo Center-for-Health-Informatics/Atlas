@@ -1,17 +1,13 @@
-define([
-  'services/http',
-  'appConfig',
-], function (
-  httpService,
-  config
-) {
-  function loadSourceList () {
-    return httpService
-      .doGet(config.webAPIRoot + 'source/sources')
-      .then(res => res.data)
-  }
+import httpService from 'services/http'
+import config from 'appConfig'
 
-  return {
-    loadSourceList,
-  }
-})
+function loadSourceList () {
+  return httpService
+    .doGet(config.webAPIRoot + 'source/sources')
+    .then(res => res.data)
+}
+
+export default {
+  loadSourceList,
+}
+

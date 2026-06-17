@@ -1,15 +1,12 @@
-define([
-  'services/analysis/Cohort'
-], function (
-  Cohort
-) {
-  class TargetComparatorOutcome {
-    constructor (data = {}) {
-      this.target = data.target || new Cohort()
-      this.comparator = data.comparator || new Cohort()
-      this.outcome = data.outcome || new Cohort()
-    }
-  }
+import Cohort from 'services/analysis/Cohort'
 
-  return TargetComparatorOutcome
-})
+class TargetComparatorOutcome {
+  constructor (data = {}) {
+    this.target = data.target || new Cohort()
+    this.comparator = data.comparator || new Cohort()
+    this.outcome = data.outcome || new Cohort()
+  }
+}
+
+export default TargetComparatorOutcome
+

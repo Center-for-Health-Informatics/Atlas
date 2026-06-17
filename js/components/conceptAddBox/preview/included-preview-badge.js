@@ -1,25 +1,19 @@
-define([
-  'knockout',
-  'text!./included-preview-badge.html',
-  'components/Component',
-  'utils/CommonUtils',
-  'components/conceptsetInclusionCount/conceptsetInclusionCount',
-], function (
-  ko,
-  view,
-  Component,
-  commonUtils
-) {
-  class IncludedPreviewBadge extends Component {
-    constructor (params) {
-      super(params)
-      this.expression = ko.pureComputed(() => {
-        return {
-          items: params.previewConcepts()
-        }
-      })
-    }
-  }
+import ko from 'knockout'
+import view from './included-preview-badge.html?raw'
+import Component from 'components/Component'
+import commonUtils from 'utils/CommonUtils'
+import 'components/conceptsetInclusionCount/conceptsetInclusionCount'
 
-  return commonUtils.build('conceptset-list-included-preview-badge', IncludedPreviewBadge, view)
-})
+class IncludedPreviewBadge extends Component {
+  constructor (params) {
+    super(params)
+    this.expression = ko.pureComputed(() => {
+      return {
+        items: params.previewConcepts()
+      }
+    })
+  }
+}
+
+export default commonUtils.build('conceptset-list-included-preview-badge', IncludedPreviewBadge, view)
+

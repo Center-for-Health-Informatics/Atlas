@@ -1,61 +1,47 @@
-define([
-  'knockout',
-  'text!./conceptsets-list.html',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  'services/AuthAPI',
-  'services/ConceptSet',
-  'components/conceptset/ConceptSetStore',
-  'atlas-state',
-  '../const',
-  'appConfig',
-  'const',
-  'components/tabs',
-  'circe'
-], function (
-  ko,
-  view,
-  Component,
-  AutoBind,
-  commonUtils,
-  authApi,
-  conceptSetService,
-  ConceptSetStore,
-  sharedState,
-  constants,
-  config,
-  globalConstants
-) {
-  class ConceptsetList extends AutoBind(Component) {
-    constructor (params) {
-      super(params)
-      this.conceptSetStore = ConceptSetStore.getStore(ConceptSetStore.sourceKeys().repository)
-      this.currentConceptSet = this.conceptSetStore.current
-      this.canCreateConceptSet = ko.pureComputed(function () {
-        return ((authApi.isAuthenticated() && authApi.isPermittedCreateConceptset()) || !config.userAuthenticationEnabled)
-      })
-      this.tableOptions = commonUtils.getTableOptions('L')
-    }
+import ko from 'knockout'
+import view from './conceptsets-list.html?raw'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import authApi from 'services/AuthAPI'
+import conceptSetService from 'services/ConceptSet'
+import ConceptSetStore from 'components/conceptset/ConceptSetStore'
+import sharedState from 'atlas-state'
+import constants from '../const'
+import config from 'appConfig'
+import globalConstants from 'const'
+import 'components/tabs'
+import 'circe'
 
-    onRespositoryConceptSetSelected (conceptSet) {
-      commonUtils.routeTo(constants.paths.mode(conceptSet.id))
-    }
+class ConceptsetList extends AutoBind(Component) {
+  constructor (params) {
+    super(params)
+    this.conceptSetStore = ConceptSetStore.getStore(ConceptSetStore.sourceKeys().repository)
+    this.currentConceptSet = this.conceptSetStore.current
+    this.canCreateConceptSet = ko.pureComputed(function () {
+      return ((authApi.isAuthenticated() && authApi.isPermittedCreateConceptset()) || !config.userAuthenticationEnabled)
+    })
+    this.tableOptions = commonUtils.getTableOptions('L')
+  }
 
-    onConceptSetBrowserAction (result) {
-      // Inspect the result to see what type of action was taken. For now
-      // we're handling the 'add' action
-      if (result.action == 'add') {
-        this.newConceptSet()
-      }
-    }
+  onRespositoryConceptSetSelected (conceptSet) {
+    commonUtils.routeTo(constants.paths.mode(conceptSet.id))
+  }
 
-    newConceptSet () {
-      if (this.currentConceptSet() == undefined) {
-        commonUtils.routeTo(constants.paths.mode())
-      }
+  onConceptSetBrowserAction (result) {
+    // Inspect the result to see what type of action was taken. For now
+    // we're handling the 'add' action
+    if (result.action == 'add') {
+      this.newConceptSet()
     }
   }
 
-  return commonUtils.build('conceptsets-list', ConceptsetList, view)
-})
+  newConceptSet () {
+    if (this.currentConceptSet() == undefined) {
+      commonUtils.routeTo(constants.paths.mode())
+    }
+  }
+}
+
+export default commonUtils.build('conceptsets-list', ConceptsetList, view)
+

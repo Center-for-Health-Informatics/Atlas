@@ -1,73 +1,61 @@
-define([
-  'knockout',
-  'text!./included-sourcecodes-preview.html',
-  'components/Component',
-  'utils/AutoBind',
-  'utils/CommonUtils',
-  'atlas-state',
-  'const',
-  'services/ConceptSet',
-  'services/Vocabulary',
-  'components/conceptset/utils',
-], function (
-  ko,
-  view,
-  Component,
-  AutoBind,
-  commonUtils,
-  sharedState,
-  globalConstants,
-  conceptSetService,
-  vocabularyService,
-  conceptSetUtils
-) {
-  class IncludedSourcecodesPreview extends AutoBind(Component) {
-    constructor (params) {
-      super(params)
-      this.previewConcepts = params.previewConcepts
-      this.loading = ko.observable(true)
-      this.includedSourcecodes = ko.observableArray()
-      this.relatedSourcecodesColumns = globalConstants.getRelatedSourcecodesColumns(sharedState, { canEditCurrentConceptSet: ko.observable(false) }, () => {})
-        .filter(c =>
-          c.data === 'CONCEPT_ID' ||
-					c.data === 'CONCEPT_CODE' ||
-					c.data === 'CONCEPT_NAME' ||
-					c.data === 'CONCEPT_CLASS_ID' ||
-					c.data === 'DOMAIN_ID' ||
-					c.data === 'VOCABULARY_ID'
-        )
-      this.relatedSourcecodesOptions = globalConstants.relatedSourcecodesOptions
-      this.tableOptions = params.tableOptions || commonUtils.getTableOptions('M')
+import ko from 'knockout'
+import view from './included-sourcecodes-preview.html?raw'
+import Component from 'components/Component'
+import AutoBind from 'utils/AutoBind'
+import commonUtils from 'utils/CommonUtils'
+import sharedState from 'atlas-state'
+import globalConstants from 'const'
+import conceptSetService from 'services/ConceptSet'
+import vocabularyService from 'services/Vocabulary'
+import conceptSetUtils from 'components/conceptset/utils'
 
-      this.subscriptions.push(ko.pureComputed(() => ko.toJSON(this.previewConcepts()))
-        .extend({
-          rateLimit: {
-            timeout: 1000,
-            method: 'notifyWhenChangesStop'
-          }
-        })
-        .subscribe(this.loadSourceCodes))
-      this.loadSourceCodes()
-    }
+class IncludedSourcecodesPreview extends AutoBind(Component) {
+  constructor (params) {
+    super(params)
+    this.previewConcepts = params.previewConcepts
+    this.loading = ko.observable(true)
+    this.includedSourcecodes = ko.observableArray()
+    this.relatedSourcecodesColumns = globalConstants.getRelatedSourcecodesColumns(sharedState, { canEditCurrentConceptSet: ko.observable(false) }, () => {})
+      .filter(c =>
+        c.data === 'CONCEPT_ID' ||
+			c.data === 'CONCEPT_CODE' ||
+			c.data === 'CONCEPT_NAME' ||
+			c.data === 'CONCEPT_CLASS_ID' ||
+			c.data === 'DOMAIN_ID' ||
+			c.data === 'VOCABULARY_ID'
+      )
+    this.relatedSourcecodesOptions = globalConstants.relatedSourcecodesOptions
+    this.tableOptions = params.tableOptions || commonUtils.getTableOptions('M')
 
-    async loadSourceCodes () {
-      try {
-        this.loading(true)
-        const conceptIds = await vocabularyService.resolveConceptSetExpression({
-          items: this.previewConcepts()
-        })
-        const data = await vocabularyService.getMappedConceptsById(conceptIds)
-        this.includedSourcecodes(data.map(item => ({
-          ...item,
-          isSelected: ko.observable(false),
-        })))
-      } catch (err) {
-        console.error(err)
-      } finally {
-        this.loading(false)
-      }
-    }
+    this.subscriptions.push(ko.pureComputed(() => ko.toJSON(this.previewConcepts()))
+      .extend({
+        rateLimit: {
+          timeout: 1000,
+          method: 'notifyWhenChangesStop'
+        }
+      })
+      .subscribe(this.loadSourceCodes))
+    this.loadSourceCodes()
   }
 
-  return commonUtils.build('conceptset-list-included-sourcecodes-preview', IncludedSourcecodesPreview, view)
-})
+  async loadSourceCodes () {
+    try {
+      this.loading(true)
+      const conceptIds = await vocabularyService.resolveConceptSetExpression({
+        items: this.previewConcepts()
+      })
+      const data = await vocabularyService.getMappedConceptsById(conceptIds)
+      this.includedSourcecodes(data.map(item => ({
+        ...item,
+        isSelected: ko.observable(false),
+      })))
+    } catch (err) {
+      console.error(err)
+    } finally {
+      this.loading(false)
+    }
+  }
+}
+
+export default commonUtils.build('conceptset-list-included-sourcecodes-preview', IncludedSourcecodesPreview, view)
+

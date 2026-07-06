@@ -12,7 +12,7 @@ function getConceptRecordCountWithResultsUrl (resultsUrl, conceptIds, results, i
   const densityPromise = $.Deferred()
   const densityIndex = {}
 
-  for (c = 0; c < results.length; c++) {
+  for (let c = 0; c < results.length; c++) {
     setRecordCount(results[c], 'loading')
     setDescendantRecordCount(results[c], 'loading')
     setPersonCount(results[c], 'loading')

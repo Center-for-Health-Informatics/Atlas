@@ -72,9 +72,11 @@ class ConceptRelated extends Component {
       }, {
         caption: ko.i18n('facets.caption.distance', 'Distance'),
         binding: function (o) {
-          return Math.max.apply(Math, o.RELATIONSHIPS.map(function (d) {
-            return d.RELATIONSHIP_DISTANCE
-          }))
+          return o.RELATIONSHIPS
+            ? Math.max.apply(Math, o.RELATIONSHIPS.map(function (d) {
+              return d.RELATIONSHIP_DISTANCE
+            }))
+            : 0
         },
       }]
     }

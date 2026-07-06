@@ -1,3 +1,4 @@
+import 'prism'
 import 'prismlanguages/prism-sql'
 
 function highlightJS (code, language) {

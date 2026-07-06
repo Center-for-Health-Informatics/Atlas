@@ -51,7 +51,7 @@ function loadDensity (results, sourceKey, formatter) {
   }
 
   const searchResultIdentifiers = []
-  for (c = 0; c < results.length; c++) {
+  for (let c = 0; c < results.length; c++) {
     results[c].RECORD_COUNT = 0
     results[c].DESCENDANT_RECORD_COUNT = 0
     results[c].PERSON_COUNT = 0

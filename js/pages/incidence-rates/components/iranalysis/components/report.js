@@ -11,8 +11,8 @@ import 'databindings/irTreemapLegend'
 import '../../../../../components/cohortbuilder/css/report.css'
 
 function bitCounter (bits) {
-  counted = 0
-  for (b = 0; b < bits.length; b++) {
+  let counted = 0
+  for (let b = 0; b < bits.length; b++) {
     if (bits[b] == '1') {
       counted++
     }
@@ -97,7 +97,7 @@ class IRAnalysisReportsViewer extends Component {
     const passed = []
     const failed = []
 
-    for (b = 0; b < bits.length; b++) {
+    for (let b = 0; b < bits.length; b++) {
       if (bits[b] == '1') {
         passed.push(this.report().stratifyStats[b])
         pass_count++

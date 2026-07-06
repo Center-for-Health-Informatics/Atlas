@@ -62,7 +62,7 @@ class CsvUtils {
 
       output += '\n'
       row = ''
-      for (n = 0, nl = names.length; n < nl; n += 1) {
+      for (let n = 0, nl = names.length; n < nl; n += 1) {
         name = names[n]
         value = obj[name]
         if (n > 0) {

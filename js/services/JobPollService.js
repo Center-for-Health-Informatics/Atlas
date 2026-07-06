@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import Poll from 'services/Poll'
+import * as Poll from 'services/Poll'
 import sharedState from 'atlas-state'
 
 class JobPollService extends Poll.PollServiceClass {

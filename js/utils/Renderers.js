@@ -10,8 +10,6 @@ const renderConceptSetCheckbox = (hasPermissions, field, readonly = false) => {
     : `<span data-bind="css: { selected: ${field}}" class="fa fa-check readonly"></span>`
 }
 
-export default {
-  renderCheckbox,
-  renderConceptSetCheckbox
-}
+export { renderCheckbox, renderConceptSetCheckbox }
+export default { renderCheckbox, renderConceptSetCheckbox }
 

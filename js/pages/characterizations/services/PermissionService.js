@@ -75,7 +75,7 @@ function isPermittedCopyFa (id) {
   return AuthAPI.isPermitted(`feature-analysis:${id}:copy:get`)
 }
 
-export default {
+export {
   isPermittedCreateCC,
   isPermittedImportCC,
   isPermittedGetCCList,

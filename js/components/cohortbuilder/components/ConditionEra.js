@@ -138,8 +138,6 @@ function ConditionEraViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: ConditionEraViewModel,
-  template,
-}
+export { template }
+export default { template }
 

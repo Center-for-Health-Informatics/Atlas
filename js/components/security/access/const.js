@@ -11,7 +11,7 @@ const entityType = {
   REUSABLE: 'REUSABLE'
 }
 
-export default {
+export {
   entityType
 }
-
+export default { entityType }

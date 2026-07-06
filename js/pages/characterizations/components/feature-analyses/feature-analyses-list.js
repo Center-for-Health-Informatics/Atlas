@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import FeatureAnalysisService from 'pages/characterizations/services/FeatureAnalysisService'
-import PermissionService from 'pages/characterizations/services/PermissionService'
+import * as PermissionService from 'pages/characterizations/services/PermissionService'
 import view from './feature-analyses-list.html?raw'
 import config from 'appConfig'
 import authApi from 'services/AuthAPI'

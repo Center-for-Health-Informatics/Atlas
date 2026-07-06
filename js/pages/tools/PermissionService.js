@@ -18,3 +18,7 @@ export default class PermissionService {
   }
 }
 
+export const isPermittedReadTools = (...args) => PermissionService.isPermittedReadTools(...args)
+export const isPermittedCreateTool = (...args) => PermissionService.isPermittedCreateTool(...args)
+export const isPermittedUpdateTool = (...args) => PermissionService.isPermittedUpdateTool(...args)
+export const isPermittedDeleteTool = (...args) => PermissionService.isPermittedDeleteTool(...args)

@@ -10,8 +10,6 @@ const feAnalysisTypes = {
   CUSTOM_FE: 'CUSTOM_FE'
 }
 
-export default {
-  INCLUSION_REPORT,
-  feAnalysisTypes
-}
+export { INCLUSION_REPORT, feAnalysisTypes }
+export default { INCLUSION_REPORT, feAnalysisTypes }
 

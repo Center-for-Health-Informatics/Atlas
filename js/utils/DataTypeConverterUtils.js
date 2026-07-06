@@ -53,14 +53,6 @@ const convertFromRDateToDate = function (dateTime) {
   }
 }
 
-export default {
-  commaDelimitedListToArray,
-  commaDelimitedListToNumericArray,
-  commaDelimitedListToPercentArray,
-  convertFromRDateToDate,
-  convertToDateForR,
-  convertFromPercent,
-  convertToPercent,
-  percentArrayToCommaDelimitedList,
-}
+export { commaDelimitedListToArray, commaDelimitedListToNumericArray, commaDelimitedListToPercentArray, convertFromRDateToDate, convertToDateForR, convertFromPercent, convertToPercent, percentArrayToCommaDelimitedList }
+export default { commaDelimitedListToArray, commaDelimitedListToNumericArray, commaDelimitedListToPercentArray, convertFromRDateToDate, convertToDateForR, convertFromPercent, convertToPercent, percentArrayToCommaDelimitedList }
 

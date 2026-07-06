@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import clipboard from 'clipboard'
 import FeatureAnalysisService from 'pages/characterizations/services/FeatureAnalysisService'
-import PermissionService from 'pages/characterizations/services/PermissionService'
+import * as PermissionService from 'pages/characterizations/services/PermissionService'
 import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
 import AdditionalCriteria from 'components/cohortbuilder/AdditionalCriteria'
 import WindowedCriteria from 'components/cohortbuilder/WindowedCriteria'

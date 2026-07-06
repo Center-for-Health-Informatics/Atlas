@@ -6,7 +6,7 @@ import sharedState from 'atlas-state'
 import ko from 'knockout'
 import constants from 'const'
 import EventBus from 'services/EventBus'
-import 'director'
+import { Router } from 'director'
 
 class AtlasRouter {
   constructor () {

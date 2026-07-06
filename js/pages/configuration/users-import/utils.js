@@ -29,11 +29,6 @@ const JobStatusRender = (data, type, row) => {
 
 const ExitMessageRender = (data) => data ? `<a href="#" data-bind="click: () => $component.onMessageClick($data)">${data.substr(0, 20) + '...'}</a>` : ''
 
-export default {
-  ExecuteRender,
-  EndsRender,
-  ProviderRender,
-  JobStatusRender,
-  ExitMessageRender,
-}
+export { ExecuteRender, EndsRender, ProviderRender, JobStatusRender, ExitMessageRender }
+export default { ExecuteRender, EndsRender, ProviderRender, JobStatusRender, ExitMessageRender }
 

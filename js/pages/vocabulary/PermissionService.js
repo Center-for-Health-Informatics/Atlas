@@ -5,7 +5,7 @@ const isPermittedSearch = () => {
   return sharedState.vocabularyUrl() !== undefined && AuthAPI.isPermitted(`vocabulary:${sharedState.sourceKeyOfVocabUrl()}:search:*:get`)
 }
 
-export default {
+export {
   isPermittedSearch,
 }
-
+export default { isPermittedSearch }

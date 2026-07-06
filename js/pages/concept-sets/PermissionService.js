@@ -23,3 +23,15 @@ export default class PermissionService {
   }
 }
 
+export function isPermittedGetInfo (sourceKey, conceptId) {
+  return AuthAPI.isPermitted(`vocabulary:${sourceKey}:concept:${conceptId}:get`)
+}
+export function isPermittedGetRC (sourceKey) {
+  return AuthAPI.isPermitted(`cdmresults:${sourceKey}:conceptRecordCount:post`)
+}
+export function isPermittedLookupIds () {
+  return sharedState.vocabularyUrl() !== undefined && AuthAPI.isPermitted(`vocabulary:${sharedState.sourceKeyOfVocabUrl()}:lookup:identifiers:post`)
+}
+export function isPermittedLookupCodes () {
+  return sharedState.vocabularyUrl() !== undefined && AuthAPI.isPermitted(`vocabulary:${sharedState.sourceKeyOfVocabUrl()}:lookup:sourcecodes:post`)
+}

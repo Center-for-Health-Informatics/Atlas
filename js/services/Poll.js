@@ -64,8 +64,6 @@ class PollService {
   }
 }
 
-export default {
-  PollService: new PollService(),
-  PollServiceClass: PollService,
-}
+const _pollService = new PollService()
+export { _pollService as PollService, PollService as PollServiceClass }
 

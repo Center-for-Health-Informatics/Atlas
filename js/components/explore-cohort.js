@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import view from './explore-cohort.html?raw'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import sharedState from 'atlas-state'
 import config from 'appConfig'
 import authApi from 'services/AuthAPI'

@@ -22,9 +22,6 @@ function formatBooleanDisplay (val) {
   return val.toString() == '1' ? 'Y' : 'N'
 }
 
-export default {
-  hasEvidence,
-  formatNumberWithCommas,
-  formatBooleanDisplay,
-}
+export { hasEvidence, formatNumberWithCommas, formatBooleanDisplay }
+export default { hasEvidence, formatNumberWithCommas, formatBooleanDisplay }
 

@@ -33,50 +33,50 @@ function GetSettingsFromObject (data) {
   switch (this.GetSettingNameFromObject(data)) {
     case 'NaiveBayesSettings':
       return {
-        NaiveBayesSettings: new exports.NaiveBayesSettings(
+        NaiveBayesSettings: new NaiveBayesSettings(
           data.NaiveBayesSettings
         ),
       }
       break
     case 'RandomForestSettings':
       return {
-        RandomForestSettings: new exports.RandomForestSettings(
+        RandomForestSettings: new RandomForestSettings(
           data.RandomForestSettings
         ),
       }
       break
     case 'MLPSettings':
       return {
-        MLPSettings: new exports.MLPSettings(data.MLPSettings),
+        MLPSettings: new MLPSettings(data.MLPSettings),
       }
       break
     case 'KNNSettings':
       return {
-        KNNSettings: new exports.KNNSettings(data.KNNSettings),
+        KNNSettings: new KNNSettings(data.KNNSettings),
       }
       break
     case 'GradientBoostingMachineSettings':
       return {
-        GradientBoostingMachineSettings: new exports.GradientBoostingMachineSettings(
+        GradientBoostingMachineSettings: new GradientBoostingMachineSettings(
           data.GradientBoostingMachineSettings
         ),
       }
       break
     case 'DecisionTreeSettings':
       return {
-        DecisionTreeSettings: new exports.DecisionTreeSettings(
+        DecisionTreeSettings: new DecisionTreeSettings(
           data.DecisionTreeSettings
         ),
       }
       break
     case 'AdaBoostSettings':
       return {
-        AdaBoostSettings: new exports.AdaBoostSettings(data.AdaBoostSettings),
+        AdaBoostSettings: new AdaBoostSettings(data.AdaBoostSettings),
       }
       break
     case 'LassoLogisticRegressionSettings':
       return {
-        LassoLogisticRegressionSettings: new exports.LassoLogisticRegressionSettings(
+        LassoLogisticRegressionSettings: new LassoLogisticRegressionSettings(
           data.LassoLogisticRegressionSettings
         ),
       }
@@ -89,23 +89,11 @@ function GetSettingsFromObject (data) {
 
 function GetOptionsFromObject (data) {
   const settingName = this.GetSettingNameFromObject(data)
-  return exports.options.find((f) => f.key === settingName)
+  return options.find((f) => f.key === settingName)
 }
 
-exports.NaiveBayesSettings = NaiveBayesSettings
-exports.RandomForestSettings = RandomForestSettings
-exports.MLPSettings = MLPSettings
-exports.KNNSettings = KNNSettings
-exports.GradientBoostingMachineSettings = GradientBoostingMachineSettings
-exports.DecisionTreeSettings = DecisionTreeSettings
-exports.AdaBoostSettings = AdaBoostSettings
-exports.LassoLogisticRegressionSettings = LassoLogisticRegressionSettings
 
-exports.GetSettingNameFromObject = GetSettingNameFromObject
-exports.GetSettingsFromObject = GetSettingsFromObject
-exports.GetOptionsFromObject = GetOptionsFromObject
-
-exports.options = [
+const options = [
   {
     key: 'LassoLogisticRegressionSettings',
     name: 'predictions.inputTypes.lassoLogisticRegression',
@@ -224,7 +212,7 @@ exports.options = [
   },
 ]
 
-exports.defaultModelSettings = [
+const defaultModelSettings = [
   {
     name: 'RandomForestSettings',
     modelSettings: [
@@ -392,3 +380,6 @@ exports.defaultModelSettings = [
     ],
   },
 ]
+
+export { NaiveBayesSettings, RandomForestSettings, MLPSettings, KNNSettings, GradientBoostingMachineSettings, DecisionTreeSettings, AdaBoostSettings, LassoLogisticRegressionSettings, utils, ko, GetSettingNameFromObject, GetSettingsFromObject, GetOptionsFromObject, options, defaultModelSettings }
+export default { NaiveBayesSettings, RandomForestSettings, MLPSettings, KNNSettings, GradientBoostingMachineSettings, DecisionTreeSettings, AdaBoostSettings, LassoLogisticRegressionSettings, utils, ko, GetSettingNameFromObject, GetSettingsFromObject, GetOptionsFromObject, options, defaultModelSettings }

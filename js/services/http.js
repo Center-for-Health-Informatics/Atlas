@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import config from 'appConfig'
 import sharedState from 'atlas-state'
-import { Api: OHDSIApi, STATUS } from 'ohdsi-api'
+import { Api as OHDSIApi, STATUS } from 'ohdsi-api'
 import EventBus from 'services/EventBus'
 
 const JSON_RESPONSE_TYPE = 'application/json'

@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import view from './forbidden.html?raw'
+import view from './ac-forbidden.html?raw'
 import appConfig from 'appConfig'
 
 function forbidden (params) {

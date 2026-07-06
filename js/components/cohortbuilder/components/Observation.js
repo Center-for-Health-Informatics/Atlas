@@ -212,8 +212,6 @@ function ObservationViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: ObservationViewModel,
-  template,
-}
+export { template }
+export default { template }
 

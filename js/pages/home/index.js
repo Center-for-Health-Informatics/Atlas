@@ -8,4 +8,3 @@ export default {
   icon: 'home',
   statusCss: () => ''
 }
-

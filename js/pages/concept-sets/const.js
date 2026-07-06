@@ -53,13 +53,15 @@ const importTypes = {
   APPEND: 'append',
 }
 
-export default {
+export const RESOLVE_OUT_OF_ORDER = conceptSetConstants.RESOLVE_OUT_OF_ORDER
+export {
   defaultConceptHierarchyRelationships,
   pageTitle,
   paths,
   importModes,
   importTypes,
   ViewMode,
-  RESOLVE_OUT_OF_ORDER: conceptSetConstants.RESOLVE_OUT_OF_ORDER
 }
 
+
+export default { RESOLVE_OUT_OF_ORDER, defaultConceptHierarchyRelationships, pageTitle, paths, importModes, importTypes, ViewMode }

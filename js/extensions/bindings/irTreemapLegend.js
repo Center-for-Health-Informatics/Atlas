@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import ko from 'knockout'
-import d3 from 'd3'
+import * as d3 from 'd3'
 
 function renderLegend (data, target, options) {
     if (data().scale.domain().length == 0 || isNaN(data().scale.domain()[0])) {

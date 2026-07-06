@@ -15,6 +15,7 @@ import conceptSetService from 'services/ConceptSet'
 import commonUtils from 'utils/CommonUtils'
 import BemHelper from 'utils/BemHelper'
 import constants from 'const'
+import bowser from 'bowser'
 import './app.less'
 
 export default class Application {
@@ -41,6 +42,7 @@ export default class Application {
        return sharedState.appInitializationStatus() != constants.applicationStatuses.initializing
      })
 
+     this.bowser = bowser
      this.toggleBrowserWarning = function (bowser) {
        const browserInfo = bowser.getParser(navigator.userAgent).getBrowser()
        const isBrowserSupported = browserInfo.name.toLowerCase() === 'chrome' && parseInt(browserInfo.version) > 63
@@ -123,16 +125,12 @@ export default class Application {
        // Add user interaction listener that keeps refreshing the token as long
        // as the user is active (either moving mouse, navigating with keyboard and/or typing):
        let userInteractionCount = 0
-       console.log('Adding user interaction listeners...');
-       ['mouseover', 'keydown', 'focusin'].forEach(eventType => {
+       ;['mouseover', 'keydown', 'focusin'].forEach(eventType => {
          window.addEventListener(eventType, (event) => {
            userInteractionCount++
            if (userInteractionCount % 30 == 0) {
-             console.log('>>> Checking user token....')
              userInteractionCount = 0
-             // Refresh the Atlas token if it is close to expiring:
              if (authApi.isAuthenticated() && this.timeToExpire() < config.refreshTokenThreshold) {
-               console.log('>>> Token close to expiring. Refreshing user token....')
                authApi.refreshToken()
              }
            }

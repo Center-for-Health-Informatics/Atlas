@@ -493,24 +493,6 @@ function getPermissionsText (clause = false, action = 'edit') {
   return ko.unwrap(clause) ? null : ko.i18nformat('components.conceptSet.notEnoughPermissions', 'Not enough permissions to <%=action%> Concept Set', { action })
 }
 
-export default {
-  toRepositoryConceptSetItems,
-  addItemsToConceptSet,
-  createRepositoryConceptSet,
-  removeConceptsFromConceptSet,
-  recommendedConceptOptions,
-  getRecommendedConceptColumns,
-  includedConceptsOptions,
-  getIncludedConceptsColumns,
-  getIncludedConceptSetDrawCallback,
-  getAncestorsModalHandler,
-  getAncestorsRenderFunction,
-  loadSourceCodes,
-  loadIncluded,
-  loadAndApplyAncestors,
-  onCurrentConceptSetModeChanged,
-  newConceptSetHandler,
-  conceptSetSelectionHandler,
-  getPermissionsText,
-}
+export { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, removeConceptsFromConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
+export default { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, removeConceptsFromConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
 

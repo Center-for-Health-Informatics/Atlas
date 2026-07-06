@@ -5,7 +5,7 @@ import commonUtils from 'utils/CommonUtils'
 import sharedState from 'atlas-state'
 import httpService from 'services/http'
 import authApi from 'services/AuthAPI'
-import PermissionService from 'pages/concept-sets/PermissionService'
+import * as PermissionService from 'pages/concept-sets/PermissionService'
 import constants from 'components/reports/const'
 import 'components/reports/reportDrilldown'
 

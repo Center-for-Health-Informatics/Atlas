@@ -1,6 +1,6 @@
 const pageTitle = 'Tools'
 
-export default {
+export {
   pageTitle,
 }
-
+export default { pageTitle }

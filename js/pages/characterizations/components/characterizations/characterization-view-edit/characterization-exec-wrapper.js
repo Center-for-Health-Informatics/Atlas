@@ -5,7 +5,7 @@ import commonUtils from 'utils/CommonUtils'
 import JobPollService from 'services/JobPollService'
 import consts from 'const'
 import CharacterizationService from 'pages/characterizations/services/CharacterizationService'
-import PermissionService from 'pages/characterizations/services/PermissionService'
+import * as PermissionService from 'pages/characterizations/services/PermissionService'
 import './characterization-results'
 import 'components/analysisExecution/analysis-execution-list'
 

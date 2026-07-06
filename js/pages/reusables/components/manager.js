@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import view from './manager.html?raw'
 import ReusablesService from 'services/ReusablesService'
-import PermissionService from '../PermissionService'
+import * as PermissionService from '../PermissionService'
 import GlobalPermissionService from 'services/Permission'
 import TagsService from 'services/Tags'
 import { entityType } from 'components/security/access/const'

@@ -79,14 +79,6 @@ const rollups = [
   },
 ]
 
-export default {
-  importTabModes,
-  conceptSetTabModes,
-  paths,
-  windowType,
-  visitStat,
-  getPeriodTypeFilter,
-  periods,
-  rollups,
-}
+export { importTabModes, conceptSetTabModes, paths, windowType, visitStat, getPeriodTypeFilter, periods, rollups }
+export default { importTabModes, conceptSetTabModes, paths, windowType, visitStat, getPeriodTypeFilter, periods, rollups }
 

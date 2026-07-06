@@ -6,7 +6,7 @@
 		// Browser global.
 		root.jnj_chart = factory(root.$, root.d3, root._, root.util);
 	}
-}(this, function (jQuery, d3, _, util) {
+}(globalThis, function (jQuery, d3, _, util) {
 	var module = {
 		version: "0.0.1"
 	};

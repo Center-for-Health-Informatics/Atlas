@@ -11,7 +11,6 @@ function clearCache () {
     })
 }
 
-export default {
-  clearCache,
-}
+export { clearCache }
+export default { clearCache }
 

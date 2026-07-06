@@ -73,7 +73,7 @@ const JobEndOptions = {
   ON: 'on',
 }
 
-export default {
+export {
   WIZARD_STEPS,
   PROVIDERS,
   IMPORT_STATUS,
@@ -85,4 +85,4 @@ export default {
   JobStatuses,
   JobStatusLabels,
 }
-
+export default { WIZARD_STEPS, PROVIDERS, IMPORT_STATUS, Api, AuthenticationProviders, JobExecution, JobExecutionOptions, JobEndOptions, JobStatuses, JobStatusLabels }

@@ -1,4 +1,4 @@
-/* global ko, document */
+import ko from 'knockout'
 
 // Github repository: https://github.com/One-com/knockout-select-on-focus
 // License: standard 3-clause BSD license https://raw.github.com/One-com/knockout-dragdrop/master/LICENCE
@@ -17,7 +17,7 @@
  *     <input type="text" data-bind="selectOnFocus: { pattern: /^[^\.]+/, onlySelectOnFirstFocus: true }">
  *     Only select the pattern on the first focus.
  */
-(function (factory) {
+;(function (factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD anonymous module with hard-coded dependency on "knockout"
     define(['knockout'], factory)

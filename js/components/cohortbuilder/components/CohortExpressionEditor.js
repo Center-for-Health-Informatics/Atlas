@@ -2,7 +2,7 @@ import ko from 'knockout'
 import $ from 'jquery'
 import options from '../options'
 import CriteriaGroup from '../CriteriaGroup'
-import criteriaTypes from '../CriteriaTypes'
+import * as criteriaTypes from '../CriteriaTypes'
 import CohortExpression from '../CohortExpression'
 import InclusionRule from '../InclusionRule'
 import template from './CohortExpressionEditorTemplate.html?raw'
@@ -119,8 +119,6 @@ function CohortExpressionEditorViewModel (params) {
 }
 
 // return factory
-export default {
-  viewModel: CohortExpressionEditorViewModel,
-  template,
-}
+export { template }
+export default { template }
 

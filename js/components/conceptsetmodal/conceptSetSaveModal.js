@@ -5,8 +5,8 @@ import conceptSetService from 'services/ConceptSet'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import AutoBind from 'utils/AutoBind'
-import view from './components/conceptsetmodal/conceptSetSaveModal.html?raw'
-import './components/conceptsetmodal/style.css'
+import view from './conceptSetSaveModal.html?raw'
+import './style.css'
 
 class ConceptSetSaveModal extends AutoBind(Component) {
   constructor (params) {

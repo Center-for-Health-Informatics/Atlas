@@ -2,13 +2,13 @@ import ko from 'knockout'
 import $ from 'jquery'
 import view from './report.html?raw'
 import IRAnalysisService from 'services/IRAnalysis'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
 import 'databindings'
 import 'databindings/irTreemapLegend'
-import './components/cohortbuilder/css/report.css'
+import '../../../../../components/cohortbuilder/css/report.css'
 
 function bitCounter (bits) {
   counted = 0

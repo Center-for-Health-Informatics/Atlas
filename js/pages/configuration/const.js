@@ -1,8 +1,8 @@
 const pageTitle = 'Concept Sets'
 const priotirizableDaimonTypes = ['Vocabulary', 'Results', 'CEM']
 
-export default {
+export {
   pageTitle,
   priotirizableDaimonTypes,
 }
-
+export default { pageTitle, priotirizableDaimonTypes }

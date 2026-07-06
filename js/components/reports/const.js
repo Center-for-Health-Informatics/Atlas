@@ -83,12 +83,12 @@ const reports = [{
 }
 ]
 
-export default {
+export const aggProperties = {
+  byPerson: recordsPerPersonProperty,
+  byLengthOfEra: lengthOfEraProperty,
+}
+export {
   apiPaths,
-  aggProperties: {
-    byPerson: recordsPerPersonProperty,
-    byLengthOfEra: lengthOfEraProperty,
-  },
   reports,
 }
-
+export default { apiPaths, reports, aggProperties }

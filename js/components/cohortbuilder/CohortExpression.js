@@ -3,8 +3,8 @@ import CriteriaGroup from './CriteriaGroup'
 import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import PrimaryCriteria from './PrimaryCriteria'
 import InclusionRule from './InclusionRule'
-import EndStrategies from './EndStrategies'
-import CriteriaTypes from './CriteriaTypes'
+import * as EndStrategies from './EndStrategies'
+import * as CriteriaTypes from './CriteriaTypes'
 import Period from './InputTypes/Period'
 
 function CohortExpression (data) {

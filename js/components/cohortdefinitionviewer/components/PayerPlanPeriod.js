@@ -12,8 +12,6 @@ function PayerPlanPeriodViewModel (params) {
   self.indexMessage = ko.i18n('components.conditionPayerPlanPeriod.indexDataText', 'The index date refers to the payer plan period.')
 }
 
-export default {
-  viewModel: PayerPlanPeriodViewModel,
-  template
-}
+export { template }
+export default { template }
 

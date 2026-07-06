@@ -14,7 +14,6 @@ const termsAndConditions = {
   acceptanceExpiresInDays: 30
 }
 
-export default {
-  termsAndConditions
-}
+export { termsAndConditions }
+export default { termsAndConditions }
 

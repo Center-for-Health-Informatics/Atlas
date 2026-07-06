@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import $ from 'jquery'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import template from './FeasibilityAttritionReport.html?raw'
 import '../css/report.css'
 

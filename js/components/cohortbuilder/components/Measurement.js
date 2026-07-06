@@ -237,8 +237,6 @@ function MeasurementViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: MeasurementViewModel,
-  template,
-}
+export { template }
+export default { template }
 

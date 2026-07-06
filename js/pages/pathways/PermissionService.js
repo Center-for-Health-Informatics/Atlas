@@ -48,7 +48,7 @@ function isPermittedCopy (id) {
   return AuthAPI.isPermitted(`pathway-analysis:${id}:post`)
 }
 
-export default {
+export {
   isPermittedCreate,
   isPermittedCopy,
   isPermittedImport,
@@ -62,4 +62,4 @@ export default {
   isPermittedExportGenerationDesign,
   isPermittedExport
 }
-
+export default { isPermittedCreate, isPermittedCopy, isPermittedImport, isPermittedList, isPermittedLoad, isPermittedUpdate, isPermittedDelete, isPermittedListGenerations, isPermittedGenerate, isPermittedResults, isPermittedExportGenerationDesign, isPermittedExport }

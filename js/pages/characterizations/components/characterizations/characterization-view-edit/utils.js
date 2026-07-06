@@ -20,9 +20,6 @@ const colorHorizontalBoxplot = [
   'darkgreen'
 ]
 
-export default {
-  formatPct,
-  formatStdDiff,
-  colorHorizontalBoxplot
-}
+export { formatPct, formatStdDiff, colorHorizontalBoxplot }
+export default { formatPct, formatStdDiff, colorHorizontalBoxplot }
 

@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import view from './death.html?raw'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
 import constants from 'const'

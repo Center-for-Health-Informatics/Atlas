@@ -104,12 +104,6 @@ function getLastViewedTime () {
   }
 }
 
-export default {
-  createJob,
-  list,
-  listRefreshCacheJobs,
-  getJobURL,
-  setLastViewedTime,
-  getLastViewedTime,
-}
+export { createJob, list, listRefreshCacheJobs, getJobURL, setLastViewedTime, getLastViewedTime }
+export default { createJob, list, listRefreshCacheJobs, getJobURL, setLastViewedTime, getLastViewedTime }
 

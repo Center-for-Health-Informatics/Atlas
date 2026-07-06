@@ -13,8 +13,6 @@ function extractServerMessage (e) {
   }
 }
 
-export default {
-  translateException,
-  extractServerMessage
-}
+export { translateException, extractServerMessage }
+export default { translateException, extractServerMessage }
 

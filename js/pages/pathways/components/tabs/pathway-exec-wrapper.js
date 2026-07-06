@@ -5,7 +5,7 @@ import commonUtils from 'utils/CommonUtils'
 import JobPollService from 'services/JobPollService'
 import consts from 'const'
 import PathwayService from '../../PathwayService'
-import PermissionService from '../../PermissionService'
+import * as PermissionService from '../../PermissionService'
 import './pathway-results'
 import 'components/analysisExecution/analysis-execution-list'
 

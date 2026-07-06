@@ -4,7 +4,7 @@ function isPermittedExportSQL () {
   return AuthAPI.isPermitted('ir:sql:post')
 }
 
-export default {
+export {
   isPermittedExportSQL,
 }
 

@@ -40,4 +40,4 @@ CriteriaGroup.prototype.toJSON = function () {
   }
   return this
 }
-module.exports = CriteriaGroup
+export default CriteriaGroup

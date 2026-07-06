@@ -57,7 +57,7 @@ class AuthorizedRoute extends Route {
   }
 }
 
-export default {
+export {
   Route,
   AuthorizedRoute,
 }

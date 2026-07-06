@@ -7,7 +7,6 @@ function loadSourceList () {
     .then(res => res.data)
 }
 
-export default {
-  loadSourceList,
-}
+export { loadSourceList }
+export default { loadSourceList }
 

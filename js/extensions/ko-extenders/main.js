@@ -1,2 +1,1 @@
-import localStorage from './localStorageExtender'
-
+import './localStorageExtender'

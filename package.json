@@ -1,9 +1,10 @@
 {
-  "name": "atlas",
-  "version": "2.15.0-DEV",
+  "name": "@chi/atlas",
+  "version": "0.1.0",
   "description": "is an open source software tool for researchers to conduct scientific analyses on standardized observational data converted to the OMOP Common Data Model V5",
   "main": "js/main.js",
   "scripts": {
+    "dev": "vite --config vite.config.mjs",
     "prep": "npm i && npm run clean && npm run genversion",
     "clean": "rimraf ./js/assets/bundle && rimraf ./js/assets/fonts && rimraf ./js/assets/images",
     "build": "npm run prep && npm run build:dev",
@@ -17,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/OHDSI/Atlas.git"
+    "url": "git+https://github.com/Center-for-Health-Informatics/Atlas.git"
   },
   "author": "Chris Knoll",
   "contributors": [
@@ -29,13 +30,14 @@
     "Vitaly Koulakov",
     "Jungmi Han",
     "Mark Velez",
-    "Anton Gackovka"
+    "Anton Gackovka",
+    "Rob Ireton <iretonrt@ucmail.uc.edu>"
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/OHDSI/Atlas/issues"
+    "url": "https://github.com/Center-for-Health-Informatics/Atlas/issues"
   },
-  "homepage": "https://github.com/OHDSI/Atlas#readme",
+  "homepage": "https://github.com/Center-for-Health-Informatics/Atlas#readme",
   "devDependencies": {
     "@babel/core": "^7.24.7",
     "@babel/plugin-transform-object-rest-spread": "^7.24.7",

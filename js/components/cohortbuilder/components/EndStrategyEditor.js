@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import template from './EndStrategyEditorTemplate.html?raw'
-import strategies from '../EndStrategies'
+import * as strategies from '../EndStrategies'
 import dateOffsetStrategyComponent from './DateOffsetStrategy'
 import customEraStrategyComponent from './CustomEraStrategy'
 
@@ -71,8 +71,6 @@ function EndStrategyEditorViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: EndStrategyEditorViewModel,
-  template,
-}
+export { template }
+export default { template }
 

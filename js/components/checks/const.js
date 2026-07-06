@@ -12,8 +12,8 @@ const WarningSeverityIcon = {
   CRITICAL: 'fa-times-circle',
 }
 
-export default {
+export {
   WarningSeverity,
   WarningSeverityIcon,
 }
-
+export default { WarningSeverity, WarningSeverityIcon }

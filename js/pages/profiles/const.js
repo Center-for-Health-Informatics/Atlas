@@ -4,8 +4,6 @@ const paths = {
   person: (sourceKey, personId) => `#/profiles/${sourceKey}/${personId}`,
 }
 
-export default {
-  pageTitle,
-  paths,
-}
+export { pageTitle, paths }
+export default { pageTitle, paths }
 

@@ -25,8 +25,6 @@ function CohortExpressionEditorViewModel (params) {
 }
 
 // return factory
-export default {
-  viewModel: CohortExpressionEditorViewModel,
-  template
-}
+export { template }
+export default { template }
 

@@ -1,4 +1,4 @@
-import d3 from 'd3'
+import * as d3 from 'd3'
 import _ from 'lodash'
 import html2canvas from 'html2canvas'
 import 'file-saver'

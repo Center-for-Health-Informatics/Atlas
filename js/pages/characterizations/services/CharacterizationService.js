@@ -134,29 +134,6 @@ function updateVersion (version) {
   }).then(res => res.data)
 }
 
-export default {
-  loadCharacterizationList,
-  importCharacterization,
-  loadCharacterizationDesign,
-  loadCharacterizationExportDesign,
-  createCharacterization,
-  copyCharacterization,
-  updateCharacterization,
-  deleteCharacterization,
-  listExecutions,
-  loadCharacterizationExecution,
-  loadCharacterizationResults,
-  loadCharacterizationResultsCount,
-  loadExportDesignByGeneration,
-  generate,
-  getPrevalenceStatsByGeneration,
-  cancelGeneration,
-  exists,
-  exportConceptSets,
-  runDiagnostics,
-  getVersions,
-  getVersion,
-  updateVersion,
-  copyVersion
-}
+export { loadCharacterizationList, importCharacterization, loadCharacterizationDesign, loadCharacterizationExportDesign, createCharacterization, copyCharacterization, updateCharacterization, deleteCharacterization, listExecutions, loadCharacterizationExecution, loadCharacterizationResults, loadCharacterizationResultsCount, loadExportDesignByGeneration, generate, getPrevalenceStatsByGeneration, cancelGeneration, exists, exportConceptSets, runDiagnostics, getVersions, getVersion, updateVersion, copyVersion }
+export default { loadCharacterizationList, importCharacterization, loadCharacterizationDesign, loadCharacterizationExportDesign, createCharacterization, copyCharacterization, updateCharacterization, deleteCharacterization, listExecutions, loadCharacterizationExecution, loadCharacterizationResults, loadCharacterizationResultsCount, loadExportDesignByGeneration, generate, getPrevalenceStatsByGeneration, cancelGeneration, exists, exportConceptSets, runDiagnostics, getVersions, getVersion, updateVersion, copyVersion }
 

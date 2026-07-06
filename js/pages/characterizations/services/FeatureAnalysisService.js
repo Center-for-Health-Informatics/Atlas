@@ -44,16 +44,6 @@ async function copyFeatureAnalysis (id) {
   return authApi.executeWithRefresh(httpService.doGet(`${config.webAPIRoot}feature-analysis/${id}/copy`))
 }
 
-export default {
-  loadFeatureAnalysisList,
-  loadFeatureAnalysis,
-  loadFeatureAnalysisDomains,
-  createFeatureAnalysis,
-  updateFeatureAnalysis,
-  deleteFeatureAnalysis,
-  exists,
-  exportConceptSets,
-  copyFeatureAnalysis,
-  loadAggregates,
-}
+export { loadFeatureAnalysisList, loadFeatureAnalysis, loadFeatureAnalysisDomains, createFeatureAnalysis, updateFeatureAnalysis, deleteFeatureAnalysis, exists, exportConceptSets, copyFeatureAnalysis, loadAggregates }
+export default { loadFeatureAnalysisList, loadFeatureAnalysis, loadFeatureAnalysisDomains, createFeatureAnalysis, updateFeatureAnalysis, deleteFeatureAnalysis, exists, exportConceptSets, copyFeatureAnalysis, loadAggregates }
 

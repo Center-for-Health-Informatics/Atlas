@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import config from 'appConfig'
-import d3 from 'd3'
+import * as d3 from 'd3'
 
 function getConceptRecordCountWithResultsUrl (resultsUrl, conceptIds, results, isCamelCaseProps = true, formatter = d3.format(',')) {
   const getConceptId = (concept) => isCamelCaseProps ? concept.conceptId : concept.CONCEPT_ID

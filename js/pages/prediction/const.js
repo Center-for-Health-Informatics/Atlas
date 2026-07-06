@@ -385,7 +385,7 @@ const getCovariateSettingsTableColumns = (canEdit) => [
   },
 ]
 
-export default {
+export {
   apiPaths,
   pageTitle,
   paths,
@@ -398,4 +398,4 @@ export default {
   getModelSettingsTableColumns,
   getCovariateSettingsTableColumns,
 }
-
+export default { apiPaths, pageTitle, paths, conceptSetCrossReference, defaultNontemporalCovariates, options, predictionGenerationStatus, getCohortTableColumns, getPopulationSettingsTableColumns, getModelSettingsTableColumns, getCovariateSettingsTableColumns }

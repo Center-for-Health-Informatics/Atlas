@@ -142,19 +142,6 @@ function decorateComponent (component, { assetTypeGetter, assetGetter, addTagToA
   }
 }
 
-export default {
-  ASSET_TYPE,
-  assignTag,
-  unassignTag,
-  loadTagsSuggestions,
-  decorateComponent,
-  loadAvailableTags,
-  getAssignmentPermissions,
-  multiAssign,
-  multiUnassign,
-  createNewTag,
-  getTag,
-  updateTag,
-  deleteTag
-}
+export { ASSET_TYPE, assignTag, unassignTag, loadTagsSuggestions, decorateComponent, loadAvailableTags, getAssignmentPermissions, multiAssign, multiUnassign, createNewTag, getTag, updateTag, deleteTag }
+export default { ASSET_TYPE, assignTag, unassignTag, loadTagsSuggestions, decorateComponent, loadAvailableTags, getAssignmentPermissions, multiAssign, multiUnassign, createNewTag, getTag, updateTag, deleteTag }
 

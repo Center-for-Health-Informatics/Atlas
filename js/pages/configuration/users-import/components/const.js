@@ -40,7 +40,7 @@ const WEEKDAYS = [
   },
 ]
 
-export default {
+export {
   WEEKDAYS,
 }
-
+export default { WEEKDAYS }

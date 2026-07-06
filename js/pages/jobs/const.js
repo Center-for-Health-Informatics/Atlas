@@ -1,6 +1,5 @@
 const pageTitle = 'Jobs'
 
-export default {
-  pageTitle,
-}
+export { pageTitle }
+export default { pageTitle }
 

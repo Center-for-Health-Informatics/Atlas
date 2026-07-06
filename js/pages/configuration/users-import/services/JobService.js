@@ -45,13 +45,6 @@ function getJobHistory (id) {
     .then(res => res.data)
 }
 
-export default {
-  listJobs,
-  getJob,
-  createJob,
-  updateJob,
-  deleteJob,
-  mapRoleGroups,
-  getJobHistory,
-}
+export { listJobs, getJob, createJob, updateJob, deleteJob, mapRoleGroups, getJobHistory }
+export default { listJobs, getJob, createJob, updateJob, deleteJob, mapRoleGroups, getJobHistory }
 

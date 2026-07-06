@@ -72,9 +72,9 @@ const FeatureAnalysisColumns = (classes) => [
 
 const ANY_DOMAIN = 'ANY'
 
-export default {
+export {
   FeatureAnalysisFacets,
   FeatureAnalysisColumns,
   ANY_DOMAIN,
 }
-
+export default { FeatureAnalysisFacets, FeatureAnalysisColumns, ANY_DOMAIN }

@@ -3,7 +3,7 @@ const MESSAGE_TEMPLATES = {
   UNPERMITTED: 'You do not have permissions to export the %s',
 }
 
-export default {
+export {
   MESSAGE_TEMPLATES,
 }
-
+export default { MESSAGE_TEMPLATES }

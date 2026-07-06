@@ -50,3 +50,15 @@ export default class PermissionService {
   }
 }
 
+export const isPermittedCreate = (...args) => PermissionService.isPermittedCreate(...args)
+export const isPermittedList = (...args) => PermissionService.isPermittedList(...args)
+export const isPermittedLoad = (...args) => PermissionService.isPermittedLoad(...args)
+export const isPermittedUpdate = (...args) => PermissionService.isPermittedUpdate(...args)
+export const isPermittedDelete = (...args) => PermissionService.isPermittedDelete(...args)
+export const isPermittedCopy = (...args) => PermissionService.isPermittedCopy(...args)
+export const isPermittedDownload = (...args) => PermissionService.isPermittedDownload(...args)
+export const isPermittedExport = (...args) => PermissionService.isPermittedExport(...args)
+export const isPermittedGenerate = (...args) => PermissionService.isPermittedGenerate(...args)
+export const isPermittedListGenerations = (...args) => PermissionService.isPermittedListGenerations(...args)
+export const isPermittedResults = (...args) => PermissionService.isPermittedResults(...args)
+export const isPermittedImport = (...args) => PermissionService.isPermittedImport(...args)

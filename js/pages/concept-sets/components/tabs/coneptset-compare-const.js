@@ -4,8 +4,6 @@ const expressionType = {
 }
 const requiredHeader = ['concept_name', 'concept_name', 'vocabulary_id']
 
-export default {
-  requiredHeader,
-  expressionType
-}
+export { requiredHeader, expressionType }
+export default { requiredHeader, expressionType }
 

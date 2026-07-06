@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import d3tip from 'd3-tip'
 import _ from 'lodash'
 import d3Selection from 'd3-selection'

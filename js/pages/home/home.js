@@ -8,7 +8,7 @@ import authApi from 'services/AuthAPI'
 import buildInfoService from 'services/BuildInfoService'
 import sharedState from 'atlas-state'
 import lodash from 'lodash'
-import version from 'version'
+import { version } from 'version'
 import 'components/heading'
 
 class Home extends Page {

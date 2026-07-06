@@ -429,14 +429,6 @@ const getCca = (canEdit) => [{
   }
 }]
 
-export default {
-  pageTitle,
-  apiPaths,
-  paths,
-  conceptSetCrossReference,
-  isUsingRegularization,
-  setRegularization,
-  options,
-  getCca,
-}
+export { pageTitle, apiPaths, paths, conceptSetCrossReference, isUsingRegularization, setRegularization, options, getCca }
+export default { pageTitle, apiPaths, paths, conceptSetCrossReference, isUsingRegularization, setRegularization, options, getCca }
 

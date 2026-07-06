@@ -30,10 +30,6 @@ function deleteTool (id) {
     })
 }
 
-export default {
-  getTools,
-  updateTool,
-  createTool,
-  deleteTool
-}
+export { getTools, updateTool, createTool, deleteTool }
+export default { getTools, updateTool, createTool, deleteTool }
 

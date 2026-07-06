@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import view from './dashboard.html?raw'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import atlascharts from 'atlascharts'
 import d3tip from 'd3-tip'
 import commonUtils from 'utils/CommonUtils'

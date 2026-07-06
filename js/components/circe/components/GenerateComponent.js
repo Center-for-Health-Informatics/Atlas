@@ -12,8 +12,6 @@ function GenerateComponentViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: GenerateComponentViewModel,
-  template
-}
+export { template }
+export default { template }
 

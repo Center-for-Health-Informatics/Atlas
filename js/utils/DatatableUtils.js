@@ -176,23 +176,6 @@ const getExecutionStatus = () => (s, p, d) => {
   }
 }
 
-export default {
-  getDateFieldFormatter,
-  getFacetForDate,
-  getLinkFormatter,
-  getCreatedByFormatter,
-  getFacetForCreatedBy,
-  getFacetForDesign,
-  renderCountColumn,
-  getFacetForDomain,
-  coalesceField,
-  addTagGroupsToFacets,
-  addTagGroupsToColumns,
-  renderExecutionStatus,
-  renderExecutionDuration,
-  renderExecutionResultsView,
-  renderExexcutionResultsDownload,
-  renderExecutionDesign,
-  getExecutionStatus,
-}
+export { getDateFieldFormatter, getFacetForDate, getLinkFormatter, getCreatedByFormatter, getFacetForCreatedBy, getFacetForDesign, renderCountColumn, getFacetForDomain, coalesceField, addTagGroupsToFacets, addTagGroupsToColumns, renderExecutionStatus, renderExecutionDuration, renderExecutionResultsView, renderExexcutionResultsDownload, renderExecutionDesign, getExecutionStatus }
+export default { getDateFieldFormatter, getFacetForDate, getLinkFormatter, getCreatedByFormatter, getFacetForCreatedBy, getFacetForDesign, renderCountColumn, getFacetForDomain, coalesceField, addTagGroupsToFacets, addTagGroupsToColumns, renderExecutionStatus, renderExecutionDuration, renderExecutionResultsView, renderExexcutionResultsDownload, renderExecutionDesign, getExecutionStatus }
 

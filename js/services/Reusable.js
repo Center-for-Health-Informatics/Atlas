@@ -4,7 +4,7 @@ import ReusableParameter from '../pages/reusables/ReusableParameter'
 import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
 import PrimaryCriteria from 'components/cohortbuilder/PrimaryCriteria'
-import CriteriaTypes from 'components/cohortbuilder/CriteriaTypes'
+import * as CriteriaTypes from 'components/cohortbuilder/CriteriaTypes'
 
 class Reusable {
   constructor (d) {

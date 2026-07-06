@@ -1,6 +1,5 @@
 const getPageUrl = (id, section) => `/reusables/${id}/${section}`
 
-export default {
-  getPageUrl,
-}
+export { getPageUrl }
+export default { getPageUrl }
 

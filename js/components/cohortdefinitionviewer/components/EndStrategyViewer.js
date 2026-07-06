@@ -19,8 +19,6 @@ function EndStrategyViewerViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: EndStrategyViewerViewModel,
-  template
-}
+export { template }
+export default { template }
 

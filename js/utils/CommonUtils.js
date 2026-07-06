@@ -133,6 +133,95 @@ const syntaxHighlight = function (json) {
     } else if (/null/.test(match)) {
       cls = 'null'
     }
-    export default '<span class="' + cls + '">' + match + '</span>'
+    return '<span class="' + cls + '">' + match + '</span>'
   })
+}
 
+const getPathwaysUrl = (id, section) => `/pathways/${id}/${section}`
+
+async function confirmAndDelete ({ loading, remove, redirect, message = 'Are you sure?' } = {}) {
+  if (confirm(message)) {
+    loading(true)
+    await remove()
+    loading(false)
+    redirect()
+  }
+}
+
+const normalizeUrl = (...parts) => URI(parts.join('/')).normalizePathname().toString()
+
+const f = (a, b) => [].concat(...a.map(d => b.map(e => [].concat(d, e))))
+const cartesian = (a, b, ...c) => (b ? cartesian(f(a, b), ...c) : a)
+
+const toggleConceptSetCheckbox = function (hasPermissions, selectedConcepts, d, field, successFunction) {
+  if (hasPermissions()) {
+    const concept = selectedConcepts()[d.idx]
+    if (concept) {
+      concept[field](!concept[field]())
+      if (successFunction && typeof successFunction === 'function') {
+        successFunction()
+      }
+    }
+  }
+}
+
+const selectAllFilteredItems = (data, filteredData, value) => {
+  const fData = (ko.utils.unwrapObservable(filteredData) || []).map(i => i.id)
+  data().forEach(i => {
+    if (fData.length === 0) {
+      i.selected(value)
+    } else {
+      if (fData.includes(i.id)) {
+        i.selected(value)
+      }
+    }
+  })
+}
+
+const escapeTooltip = function (tooltipText) {
+  return tooltipText.replace(/'/g, "\\'").replace(/"/g, '&quot;')
+}
+
+const getSelectedConcepts = (conceptList) => {
+  return ko.unwrap(conceptList).filter(concept => concept.isSelected()).map(({ isSelected, ...concept }) => ({
+    ...concept
+  }))
+}
+
+const buildConceptSetItems = (concepts, options) => {
+  return concepts.map((concept) => ({
+    concept,
+    ...ko.toJS(options)
+  }))
+}
+
+const clearConceptsSelectionState = concepts => ko.unwrap(concepts).forEach(concept => concept.isSelected && concept.isSelected(false))
+
+const getUniqueIdentifier = () => {
+  return ([1e7] + 1e3 + 4e3 + 8e3 + 1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16))
+}
+
+const isNameLengthValid = function (name) {
+  return name.length <= constants.maxEntityNameLength
+}
+
+const isNameCharactersValid = function (name) {
+  const forbiddenSymbols = ['\\', '/', ':', '*', '?', '"', '<', '>', '|']
+  return !forbiddenSymbols.some(symbol => name.includes(symbol))
+}
+
+const formatDateForAuthorship = (date, format = momentApi.DESIGN_DATE_TIME_FORMAT) => {
+  const d = ko.unwrap(date)
+  return d ? momentApi.formatDateTimeWithFormat(d, format) : ''
+}
+
+const getTableOptions = (variant = 'M') => {
+  const { commonDataTableOptions: opts } = appConfig
+  return Object.keys(opts).reduce((p, c) => ({
+    ...p,
+    [c]: opts[c][variant],
+  }), {})
+}
+
+export { build, confirmAndDelete, cartesian, routeTo, hasRelationship, contextSensitiveLinkColor, hasCDM, hasResults, renderLink, renderBoundLink, renderHierarchyLink, syntaxHighlight, getPathwaysUrl, normalizeUrl, toggleConceptSetCheckbox, selectAllFilteredItems, escapeTooltip, highlightRow, buildConceptSetItems, getSelectedConcepts, getUniqueIdentifier, clearConceptsSelectionState, formatDateForAuthorship, isNameCharactersValid, isNameLengthValid, getTableOptions, getConceptLinkClass }
+export default { build, confirmAndDelete, cartesian, routeTo, hasRelationship, contextSensitiveLinkColor, hasCDM, hasResults, renderLink, renderBoundLink, renderHierarchyLink, syntaxHighlight, getPathwaysUrl, normalizeUrl, toggleConceptSetCheckbox, selectAllFilteredItems, escapeTooltip, highlightRow, buildConceptSetItems, getSelectedConcepts, getUniqueIdentifier, clearConceptsSelectionState, formatDateForAuthorship, isNameCharactersValid, isNameLengthValid, getTableOptions, getConceptLinkClass }

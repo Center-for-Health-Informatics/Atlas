@@ -126,8 +126,6 @@ function DrugEraViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: DrugEraViewModel,
-  template,
-}
+export { template }
+export default { template }
 

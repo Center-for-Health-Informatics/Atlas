@@ -5,7 +5,6 @@ const applicationStatuses = {
   failed: 'failed',
 }
 
-export default {
-  applicationStatuses,
-}
+export { applicationStatuses }
+export default { applicationStatuses }
 

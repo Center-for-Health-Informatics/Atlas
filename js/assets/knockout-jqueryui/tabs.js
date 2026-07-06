@@ -1,106 +1,64 @@
-/*global define*/
-define(
+import ko from 'knockout'
+import BindingHandler from './bindingHandler'
+import { uiVersion, createObject, register } from './utils'
+import 'jquery-ui/ui/widgets/tabs'
 
-    [
-			'jquery',
-			'knockout',
-			'./bindingHandler',
-			'./utils',
-			'jquery-ui/ui/widgets/tabs'
-    ],
+function postInitHandler18 (element, valueAccessor) {
+  const value = valueAccessor()
+  if (ko.isWriteableObservable(value.selected)) {
+    this.on(element, 'show', function (ev, ui) {
+      if ($(element)[0] === ev.target) {
+        value.selected(ui.index)
+      }
+    })
+  }
+}
 
-    function ($, ko, BindingHandler, utils) {
+function postInitHandler (element, valueAccessor) {
+  const value = valueAccessor()
+  if (ko.isWriteableObservable(value.active)) {
+    this.on(element, 'activate', function (ev, ui) {
+      if ($(element)[0] === ev.target) {
+        value.active(ui.newTab.index())
+      }
+    })
+  }
+}
 
-        'use strict';
+function Tabs () {
+  BindingHandler.call(this, 'tabs')
+  this.version = uiVersion
 
-        var postInitHandler18, postInitHandler, Tabs;
+  if (uiVersion && uiVersion.major === 1 && uiVersion.minor === 8) {
+    this.options = ['ajaxOptions', 'cache', 'collapsible', 'cookie',
+      'disabled', 'event', 'fx', 'idPrefix', 'panelTemplate', 'selected',
+      'spinner', 'tabTemplate']
+    this.events = ['add', 'create', 'disable', 'enable', 'load', 'remove',
+      'select', 'show']
+    this.hasRefresh = false
+  } else {
+    this.options = ['active', 'collapsible', 'disabled', 'event',
+      'heightStyle', 'hide', 'show']
+    this.events = ['activate', 'beforeActivate', 'beforeLoad', 'create', 'load']
+    this.hasRefresh = true
+  }
+}
 
-        postInitHandler18 = function (element, valueAccessor) {
-            /// <summary>Keeps the active binding property in sync with the tabs' state.
-            /// </summary>
-            /// <param name='element' type='DOMNode'></param>
-            /// <param name='valueAccessor' type='Function'></param>
+Tabs.prototype = createObject(BindingHandler.prototype)
+Tabs.prototype.constructor = Tabs
 
-            var value = valueAccessor();
+Tabs.prototype.init = function (element, valueAccessor) {
+  BindingHandler.prototype.init.apply(this, arguments)
 
-            if (ko.isWriteableObservable(value.selected)) {
-                /*jslint unparam:true*/
-                this.on(element, 'show', function (ev, ui) {
-                    if ($(element)[0] === ev.target) {
-                        // Only activate if this is the right tab widget.
-                        value.selected(ui.index);
-                    }
-                });
-                /*jslint unparam:false*/
-            }
-        };
+  if (this.version && this.version.major === 1 && this.version.minor === 8) {
+    postInitHandler18.call(this, element, valueAccessor)
+  } else {
+    postInitHandler.call(this, element, valueAccessor)
+  }
 
-        postInitHandler = function (element, valueAccessor) {
-            /// <summary>Keeps the active binding property in sync with the tabs' state.
-            /// </summary>
-            /// <param name='element' type='DOMNode'></param>
-            /// <param name='valueAccessor' type='Function'></param>
+  return { controlsDescendantBindings: true }
+}
 
-            var value = valueAccessor();
+register(Tabs)
 
-            if (ko.isWriteableObservable(value.active)) {
-                /*jslint unparam:true*/
-                this.on(element, 'activate', function (ev, ui) {
-                    if ($(element)[0] === ev.target) {
-                        // Only activate if this is the right tab widget.
-                        value.active(ui.newTab.index());
-                    }
-                });
-                /*jslint unparam:false*/
-            }
-        };
-
-        Tabs = function () {
-            /// <summary>Constructor.</summary>
-
-            BindingHandler.call(this, 'tabs');
-
-            this.version = utils.uiVersion;
-
-            if (this.version.major === 1 && this.version.minor === 8) {
-                this.options = ['ajaxOptions', 'cache', 'collapsible', 'cookie',
-                    'disabled', 'event', 'fx', 'idPrefix', 'panelTemplate', 'selected',
-                    'spinner', 'tabTemplate'];
-                this.events = ['add', 'create', 'disable', 'enable', 'load', 'remove',
-                    'select', 'show'];
-                this.hasRefresh = false;
-            } else {
-                this.options = ['active', 'collapsible', 'disabled', 'event',
-                    'heightStyle', 'hide', 'show'];
-                this.events = ['activate', 'beforeActivate', 'beforeLoad', 'create',
-                    'load'];
-                this.hasRefresh = true;
-            }
-        };
-
-        Tabs.prototype = utils.createObject(BindingHandler.prototype);
-        Tabs.prototype.constructor = Tabs;
-
-        Tabs.prototype.init = function (element, valueAccessor) {
-            /// <summary>Keeps the active binding property in sync with the tabs' state.
-            /// </summary>
-            /// <param name='element' type='DOMNode'></param>
-            /// <param name='valueAccessor' type='Function'></param>
-
-            BindingHandler.prototype.init.apply(this, arguments);
-
-            if (this.version.major === 1 && this.version.minor === 8) {
-                postInitHandler18.call(this, element, valueAccessor);
-            } else {
-                postInitHandler.call(this, element, valueAccessor);
-            }
-
-            // the inner elements have already been taken care of
-            return { controlsDescendantBindings: true };
-        };
-
-        utils.register(Tabs);
-
-        return Tabs;
-    }
-);
+export default Tabs

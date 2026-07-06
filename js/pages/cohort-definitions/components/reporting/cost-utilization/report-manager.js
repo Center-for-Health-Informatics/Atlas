@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import view from './report-manager.html?raw'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import atlascharts from 'atlascharts'
 import colorbrewer from 'colorbrewer'
 import _ from 'lodash'

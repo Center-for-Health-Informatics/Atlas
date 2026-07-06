@@ -6,12 +6,12 @@ options.dayOptions = ['0', '1', '7', '14', '21', '30', '60', '90', '120', '180',
 options.monthOptions = [1, 3, 6, 9, 12, 24, 36]
 
 options.ageOptions = []
-for (i = 1; i < 100; i++) {
+for (let i = 1; i < 100; i++) {
   options.ageOptions.push(i)
 } // intialize age options
 
 options.quantityOptions = []
-for (i = 0; i < 100; i++) {
+for (let i = 0; i < 100; i++) {
   options.quantityOptions.push(i)
 } // intialize quantity options
 
@@ -31,7 +31,7 @@ options.windowDayOptions.push({
   label: ko.i18n('options.all', 'ALL'),
   value: ' ' // ' ' is used to work around an autocomplete issue: when it's set to null or '', the autocomplete uses the label for the value instead of value (annoying)
 })
-for (i = 0; i < options.dayOptions.length; i++) {
+for (let i = 0; i < options.dayOptions.length; i++) {
   options.windowDayOptions.push({
     label: options.dayOptions[i],
     value: options.dayOptions[i]

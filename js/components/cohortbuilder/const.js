@@ -1346,7 +1346,7 @@ function setCriteria (criteria) {
   }
 }
 
-const initialEventList = [
+const _initialEventList = [
   'addConditionEra',
   'addConditionOccurrence',
   'addDeath',
@@ -1364,7 +1364,7 @@ const initialEventList = [
   'addVisitDetail',
   'fromReusable',
 ]
-const censoringEventList = [
+const _censoringEventList = [
   'addConditionEra',
   'addConditionOccurrence',
   'addDeath',
@@ -1732,27 +1732,26 @@ const CriteriaTypes = {
 
 const getListCriteria = setCriteria(criteria)
 
-export default {
-  CriteriaTypes,
-  initialEventList: getListCriteria(initialEventList, 'initial'),
-  censoringEventList: getListCriteria(censoringEventList, 'censoring'),
-  groupAttributes: getListCriteria(groupAttributesList, 'group'),
-  windowedAttributes: getListCriteria(windowedpAttributesList, 'group'),
-  eraAttributes: getListCriteria(eraAttributesList, 'era', 'era'),
-  occurrenceAttributes: getListCriteria(occurrenceAttributesList, 'occurrence', 'occurrence'),
-  deathAttributes: getListCriteria(deathAttributesList, 'death', 'death'),
-  deviceAttributes: getListCriteria(deviceAttributesList, 'device', 'device'),
-  doseAttributes: getListCriteria(doseAttributesList, 'dose', 'dose'),
-  drugAttributes: getListCriteria(drugAttributesList, 'drug', 'drug'),
-  drugexposureAttributes: getListCriteria(drugexposureAttributesList, 'drugexposure', 'drugexposure'),
-  measurementAttributes: getListCriteria(measurementAttributesList, 'measurement', 'measurement'),
-  observationAttributes: getListCriteria(observationAttributesList, 'observation', 'observation'),
-  observationPeriodAttributes: getListCriteria(observationPeriodAttributesList, 'observationperiod', 'observationperiod'),
-  payerPlanAttributes: getListCriteria(payerPlanAttributesList, 'payerplan', 'payerplan'),
-  procedureOccurrenceAttributes: getListCriteria(procedureOccurrenceAttributesList, 'procedureoccurrence', 'procedureoccurrence'),
-  specimenAttributes: getListCriteria(specimenAttributesList, 'specimen', 'specimen'),
-  visitAttributes: getListCriteria(visitAttributesList, 'visit', 'visit'),
-  visitDetailAttributes: getListCriteria(visitDetailAttributesList, 'visitdetail', 'visitdetail'),
-  demographicAttributes: getListCriteria(demographicAttributesList, 'demographic', 'demographic'),
-}
+export const initialEventList = getListCriteria(_initialEventList, 'initial')
+export const censoringEventList = getListCriteria(_censoringEventList, 'censoring')
+export const groupAttributes = getListCriteria(groupAttributesList, 'group')
+export const windowedAttributes = getListCriteria(windowedpAttributesList, 'group')
+export const eraAttributes = getListCriteria(eraAttributesList, 'era', 'era')
+export const occurrenceAttributes = getListCriteria(occurrenceAttributesList, 'occurrence', 'occurrence')
+export const deathAttributes = getListCriteria(deathAttributesList, 'death', 'death')
+export const deviceAttributes = getListCriteria(deviceAttributesList, 'device', 'device')
+export const doseAttributes = getListCriteria(doseAttributesList, 'dose', 'dose')
+export const drugAttributes = getListCriteria(drugAttributesList, 'drug', 'drug')
+export const drugexposureAttributes = getListCriteria(drugexposureAttributesList, 'drugexposure', 'drugexposure')
+export const measurementAttributes = getListCriteria(measurementAttributesList, 'measurement', 'measurement')
+export const observationAttributes = getListCriteria(observationAttributesList, 'observation', 'observation')
+export const observationPeriodAttributes = getListCriteria(observationPeriodAttributesList, 'observationperiod', 'observationperiod')
+export const payerPlanAttributes = getListCriteria(payerPlanAttributesList, 'payerplan', 'payerplan')
+export const procedureOccurrenceAttributes = getListCriteria(procedureOccurrenceAttributesList, 'procedureoccurrence', 'procedureoccurrence')
+export const specimenAttributes = getListCriteria(specimenAttributesList, 'specimen', 'specimen')
+export const visitAttributes = getListCriteria(visitAttributesList, 'visit', 'visit')
+export const visitDetailAttributes = getListCriteria(visitDetailAttributesList, 'visitdetail', 'visitdetail')
+export const demographicAttributes = getListCriteria(demographicAttributesList, 'demographic', 'demographic')
+export { CriteriaTypes }
 
+export default { initialEventList,censoringEventList,groupAttributes,windowedAttributes,eraAttributes,occurrenceAttributes,deathAttributes,deviceAttributes,doseAttributes,drugAttributes,drugexposureAttributes,measurementAttributes,observationAttributes,observationPeriodAttributes,payerPlanAttributes,procedureOccurrenceAttributes,specimenAttributes,visitAttributes,visitDetailAttributes,demographicAttributes,CriteriaTypes }

@@ -5,8 +5,8 @@ import commonUtils from 'utils/CommonUtils'
 import authApi from 'services/AuthAPI'
 import toolService from 'services/ToolService'
 import momentApi from 'services/MomentAPI'
-import PermissionService from './PermissionService'
-import './styles/switch-button.css'
+import * as PermissionService from './PermissionService'
+import '../../styles/switch-button.css'
 import './tool-management.less'
 
 class ToolManage extends Page {

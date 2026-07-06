@@ -10,8 +10,6 @@ function DemographicCriteriaViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: DemographicCriteriaViewModel,
-  template
-}
+export { template }
+export default { template }
 

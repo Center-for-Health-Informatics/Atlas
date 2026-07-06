@@ -158,8 +158,6 @@ function VisitDetailViewModel (params) {
 }
 
 // return component definition
-export default {
-  viewModel: VisitDetailViewModel,
-  template,
-}
+export { template }
+export default { template }
 

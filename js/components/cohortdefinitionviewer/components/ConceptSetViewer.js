@@ -48,8 +48,6 @@ class ConceptSetViewer extends Component {
 }
 
 // return compoonent definition
-export default {
-  viewModel: ConceptSetViewer,
-  template
-}
+export { template }
+export default { template }
 

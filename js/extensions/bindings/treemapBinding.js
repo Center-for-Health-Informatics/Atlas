@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import ko from 'knockout'
-import d3 from 'd3'
+import * as d3 from 'd3'
 
 function renderTreemap (data, target, options) {
   const w = 400

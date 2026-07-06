@@ -1,6 +1,6 @@
 const pageTitle = 'Feedback'
 
-export default {
+export {
   pageTitle,
 }
-
+export default { pageTitle }

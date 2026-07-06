@@ -33,7 +33,61 @@ function shouldSkip (path) {
   return SKIP_RE.some(r => r.test(path))
 }
 
-// ─── Bracket matching (string/comment-aware) ──────────────────────────────────
+// ─── Bracket matching (string/comment/regex-aware) ───────────────────────────
+
+// Returns true if the "/" at src[pos] is a regex literal start, not division.
+// Heuristic: division follows a closing delimiter or identifier/digit; regex follows everything else.
+function isRegexStart (src, pos) {
+  let j = pos - 1
+  while (j >= 0 && /[ \t\n]/.test(src[j])) j--
+  if (j < 0) return true
+  const c = src[j]
+  return !(/[\w$\d)\]>]/.test(c))
+}
+
+// Skip a regex literal starting at src[pos] (which must be '/'). Returns index of closing '/'.
+function skipRegex (src, pos) {
+  let i = pos + 1, inClass = false
+  while (i < src.length) {
+    const c = src[i]
+    if (c === '\\') { i += 2; continue }
+    if (c === '[') inClass = true
+    else if (c === ']') inClass = false
+    else if (c === '/' && !inClass) return i
+    i++
+  }
+  return pos // fallback: treat as division
+}
+
+function skipLiteral (src, i) {
+  const ch = src[i]
+  if (ch === '"' || ch === "'") {
+    i++
+    while (i < src.length) {
+      if (src[i] === '\\') { i += 2; continue }
+      if (src[i] === ch) return i
+      i++
+    }
+  } else if (ch === '`') {
+    i++
+    while (i < src.length) {
+      if (src[i] === '\\') { i += 2; continue }
+      if (src[i] === '`') return i
+      if (src[i] === '$' && src[i + 1] === '{') {
+        const e = findClose(src, i + 1); if (e >= 0) i = e
+      }
+      i++
+    }
+  } else if (src.slice(i, i + 2) === '//') {
+    while (i < src.length && src[i] !== '\n') i++
+    return i - 1
+  } else if (src.slice(i, i + 2) === '/*') {
+    const e = src.indexOf('*/', i + 2); return e >= 0 ? e + 1 : src.length
+  } else if (ch === '/' && isRegexStart(src, i)) {
+    return skipRegex(src, i)
+  }
+  return i
+}
 
 function findClose (src, pos) {
   const OPEN = src[pos]
@@ -42,27 +96,8 @@ function findClose (src, pos) {
   let depth = 0, i = pos
   while (i < src.length) {
     const ch = src[i]
-    if (ch === '"' || ch === "'") {
-      const q = ch; i++
-      while (i < src.length) {
-        if (src[i] === '\\') { i += 2; continue }
-        if (src[i] === q) break
-        i++
-      }
-    } else if (ch === '`') {
-      i++
-      while (i < src.length) {
-        if (src[i] === '\\') { i += 2; continue }
-        if (src[i] === '`') break
-        if (src[i] === '$' && src[i + 1] === '{') {
-          const e = findClose(src, i + 1); if (e >= 0) i = e
-        }
-        i++
-      }
-    } else if (src.slice(i, i + 2) === '//') {
-      while (i < src.length && src[i] !== '\n') i++
-    } else if (src.slice(i, i + 2) === '/*') {
-      const e = src.indexOf('*/', i + 2); if (e < 0) return -1; i = e + 1
+    if (ch === '"' || ch === "'" || ch === '`' || src.slice(i, i + 2) === '//' || src.slice(i, i + 2) === '/*' || (ch === '/' && isRegexStart(src, i))) {
+      i = skipLiteral(src, i)
     } else if (ch === OPEN) { depth++ }
     else if (ch === CLOSE) { if (--depth === 0) return i }
     i++
@@ -123,6 +158,11 @@ function makeImport (dep, param) {
     return `import '${mod}' // was optional!`
   }
   if (!param) return `import '${dep}'`
+  // Destructuring param: convert { A: aliasA, B } → { A as aliasA, B } for ESM
+  if (param.startsWith('{')) {
+    const inner = param.slice(1, -1).replace(/(\w+)\s*:\s*(\w+)/g, '$1 as $2')
+    return `import {${inner}} from '${dep}'`
+  }
   return `import ${param} from '${dep}'`
 }
 
@@ -148,16 +188,8 @@ function findLastReturn (body) {
   let depth = 0, last = -1, i = 0
   while (i < body.length) {
     const ch = body[i]
-    if (ch === '"' || ch === "'") {
-      const q = ch; i++
-      while (i < body.length) { if (body[i] === '\\') { i += 2; continue } if (body[i] === q) break; i++ }
-    } else if (ch === '`') {
-      i++
-      while (i < body.length) { if (body[i] === '\\') { i += 2; continue } if (body[i] === '`') break; i++ }
-    } else if (body.slice(i, i + 2) === '//') {
-      while (i < body.length && body[i] !== '\n') i++
-    } else if (body.slice(i, i + 2) === '/*') {
-      const e = body.indexOf('*/', i + 2); if (e >= 0) i = e + 1
+    if (ch === '"' || ch === "'" || ch === '`' || body.slice(i, i + 2) === '//' || body.slice(i, i + 2) === '/*' || (ch === '/' && isRegexStart(body, i))) {
+      i = skipLiteral(body, i)
     } else if ('{(['.includes(ch)) depth++
     else if ('})]'.includes(ch)) depth--
     else if (depth === 0 && body.slice(i, i + 7) === 'return ') { last = i }

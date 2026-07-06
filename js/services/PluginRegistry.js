@@ -16,9 +16,6 @@ document.addEventListener(REGISTER_PLUGIN_EVENT, e => {
   add(e.detail.type, e.detail.plugin)
 })
 
-export default {
-  REGISTER_PLUGIN_EVENT,
-  add,
-  findByType,
-}
+export { REGISTER_PLUGIN_EVENT, add, findByType }
+export default { REGISTER_PLUGIN_EVENT, add, findByType }
 

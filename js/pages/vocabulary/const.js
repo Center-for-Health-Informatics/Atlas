@@ -6,8 +6,6 @@ const apiPaths = {
   vocabularies: () => sharedState.vocabularyUrl() + 'vocabularies',
 }
 
-export default {
-  pageTitle,
-  apiPaths,
-}
+export { pageTitle, apiPaths }
+export default { pageTitle, apiPaths }
 

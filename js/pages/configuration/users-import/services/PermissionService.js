@@ -20,7 +20,7 @@ function isPermittedDelete (id) {
   return AuthAPI.isPermitted(`user:import:job:${id}:delete`)
 }
 
-export default {
+export {
   isPermittedCreate,
   isPermittedList,
   isPermittedEdit,

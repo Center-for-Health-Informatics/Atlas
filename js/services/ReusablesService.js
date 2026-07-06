@@ -85,18 +85,6 @@ function updateVersion (version) {
   }).then(res => res.data)
 }
 
-export default {
-  PARAMETER_TYPE,
-  list,
-  create,
-  exists,
-  copy,
-  load,
-  save,
-  del,
-  getVersions,
-  getVersion,
-  updateVersion,
-  copyVersion
-}
+export { PARAMETER_TYPE, list, create, exists, copy, load, save, del, getVersions, getVersion, updateVersion, copyVersion }
+export default { PARAMETER_TYPE, list, create, exists, copy, load, save, del, getVersions, getVersion, updateVersion, copyVersion }
 

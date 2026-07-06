@@ -3,7 +3,7 @@ import view from './chartVenn.html?raw'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import venn from 'venn'
 import './venn.less'
 

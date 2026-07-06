@@ -21,7 +21,7 @@
 		// Browser globals (root is window)
 		root.d3.slider = factory(root.d3);
 	}
-}(this, function (d3) {
+}(globalThis, function (d3) {
 	return function module() {
 		"use strict";
 

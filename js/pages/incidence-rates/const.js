@@ -25,10 +25,10 @@ function isInProgress (currentStatus) {
   return [status.PENDING, status.RUNNING].includes(currentStatus)
 }
 
-export default {
+export {
   apiPaths,
   status,
   isInProgress,
   tabs,
 }
-
+export default { apiPaths, status, isInProgress, tabs }

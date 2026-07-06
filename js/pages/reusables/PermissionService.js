@@ -24,7 +24,7 @@ function isPermittedCopy (id) {
   return AuthAPI.isPermitted(`reusable:${id}:post`)
 }
 
-export default {
+export {
   isPermittedCreate,
   isPermittedCopy,
   isPermittedList,
@@ -32,4 +32,4 @@ export default {
   isPermittedUpdate,
   isPermittedDelete,
 }
-
+export default { isPermittedCreate, isPermittedCopy, isPermittedList, isPermittedLoad, isPermittedUpdate, isPermittedDelete }

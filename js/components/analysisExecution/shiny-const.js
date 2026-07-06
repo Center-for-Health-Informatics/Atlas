@@ -4,7 +4,6 @@ const apiPaths = {
   downloadShinyPW: (id, sourceKey) => `shiny/download/cohort_pathway/${id}/${sourceKey}`,
   publishShinyPW: (id, sourceKey) => `shiny/publish/cohort_pathway/${id}/${sourceKey}`,
 }
-export default {
-  apiPaths
-}
+export { apiPaths }
+export default { apiPaths }
 

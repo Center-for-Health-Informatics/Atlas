@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import options from '../options'
 import CriteriaGroup from '../CriteriaGroup'
-import criteriaTypes from '../CriteriaTypes'
+import * as criteriaTypes from '../CriteriaTypes'
 import CohortExpression from '../CohortExpression'
 import InclusionRule from '../InclusionRule'
 import template from './CensoringCriteriaEditor.html?raw'
@@ -244,8 +244,6 @@ function CensoringCriteriaViewModel (params) {
   }
 }
 
-export default {
-  viewModel: CensoringCriteriaViewModel,
-  template
-}
+export { template }
+export default { template }
 

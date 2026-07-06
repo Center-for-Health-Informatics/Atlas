@@ -20,8 +20,6 @@ function sortedStrataNames (strataNames, filter = null) {
   return Array.from(strataNames).map(s => ({ id: s[0], name: s[1] })).filter(s => !filter || s.id !== 0).sort((a, b) => a.id - b.id)
 }
 
-export default {
-  extractMeaningfulCovName,
-  sortedStrataNames,
-}
+export { extractMeaningfulCovName, sortedStrataNames }
+export default { extractMeaningfulCovName, sortedStrataNames }
 

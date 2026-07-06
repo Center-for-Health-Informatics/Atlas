@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import CriteriaTypes from './CriteriaTypes'
+import * as CriteriaTypes from './CriteriaTypes'
 import Window from './InputTypes/Window'
 
 class WindowedCriteria {

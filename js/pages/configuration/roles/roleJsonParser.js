@@ -148,7 +148,7 @@ const isPermissionContainExplicitId = function (permision) {
 		!permision.startsWith(ROLE_PERMISSION + ':' + PUBLIC_ROLE_ID + ':') // public role is predefine and has id=1
 }
 
-export default {
+export {
   validateAndParseRoles,
   parseRole,
   fixRoles,

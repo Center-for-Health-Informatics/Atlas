@@ -44,7 +44,7 @@ class CsvUtils {
       cDelimiter = ','
     }
 
-    for (i = 0, l = objArray.length; i < l; i += 1) {
+    for (let i = 0, l = objArray.length; i < l; i += 1) {
       // Get the names of the properties.
       obj = objArray[i]
       row = ''

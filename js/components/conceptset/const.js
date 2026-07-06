@@ -27,10 +27,10 @@ const ConceptSetSources = {
 
 const RESOLVE_OUT_OF_ORDER = 'resolveConceptSetExpression() resolved out of order'
 
-export default {
+export {
   importTypes,
   ViewMode,
   ConceptSetSources,
   RESOLVE_OUT_OF_ORDER,
 }
-
+export default { importTypes, ViewMode, ConceptSetSources, RESOLVE_OUT_OF_ORDER }

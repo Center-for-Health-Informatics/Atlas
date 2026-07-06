@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import view from './concept-by-index.html?raw'
-import d3 from 'd3'
+import * as d3 from 'd3'
 import jnj_chart from 'jnj_chart'
 
 function conceptByIndex (params) {

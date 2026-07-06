@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import PathwayService from '../../PathwayService'
-import PermissionService from '../../PermissionService'
+import * as PermissionService from '../../PermissionService'
 import view from './pathway-utils.html?raw'
 import config from 'appConfig'
 import authApi from 'services/AuthAPI'

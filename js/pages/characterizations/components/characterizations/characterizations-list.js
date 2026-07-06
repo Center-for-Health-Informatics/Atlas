@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import CharacterizationService from 'pages/characterizations/services/CharacterizationService'
-import PermissionService from 'pages/characterizations/services/PermissionService'
+import * as PermissionService from 'pages/characterizations/services/PermissionService'
 import view from './characterizations-list.html?raw'
 import config from 'appConfig'
 import authApi from 'services/AuthAPI'

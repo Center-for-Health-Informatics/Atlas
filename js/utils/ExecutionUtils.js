@@ -44,9 +44,6 @@ function getExecutionGroupStatus (submissions = []) {
   return executionStatuses.COMPLETED
 }
 
-export default {
-  StartExecution,
-  generateVersionTags,
-  getExecutionGroupStatus,
-}
+export { StartExecution, generateVersionTags, getExecutionGroupStatus }
+export default { StartExecution, generateVersionTags, getExecutionGroupStatus }
 

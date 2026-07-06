@@ -29,9 +29,13 @@
  *			  storageGet
  *				SharedCrossfilter
  */
-define(['jquery', 'knockout', 'lz-string', 'lodash', 'crossfilter'], function ($, ko, LZString, _, crossfilter) {
+import $ from 'jquery'
+import ko from 'knockout'
+import LZString from 'lz-string'
+import _ from 'lodash'
+import crossfilter from 'crossfilter'
 
-	var DEBUG = true;
+var DEBUG = true;
 	var ALLOW_CACHING = [
 		//'.*',
 		//'/WebAPI/[^/]+/person/',
@@ -1889,6 +1893,5 @@ define(['jquery', 'knockout', 'lz-string', 'lodash', 'crossfilter'], function ($
 	if (DEBUG) {
 		window.util = utilModule;
 	}
-	return utilModule;
 
-});
+export default utilModule

@@ -38,8 +38,6 @@ function getAvailableLocales () {
     })
 }
 
-export default {
-  getAvailableLocales,
-  getLocale,
-}
+export { getAvailableLocales, getLocale }
+export default { getAvailableLocales, getLocale }
 

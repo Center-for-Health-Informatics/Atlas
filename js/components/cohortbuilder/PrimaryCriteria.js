@@ -1,6 +1,6 @@
 // AdditoinalCriteria.js - a wrapper for criteria that is used as Additional Criteria
 import ko from 'knockout'
-import CriteriaTypes from './CriteriaTypes'
+import * as CriteriaTypes from './CriteriaTypes'
 
 function PrimaryCriteria (data, conceptSets) {
   const self = this
@@ -18,4 +18,4 @@ function PrimaryCriteria (data, conceptSets) {
   self.PrimaryCriteriaLimit = { Type: ko.observable(data.PrimaryCriteriaLimit && data.PrimaryCriteriaLimit.Type || 'First') }
 }
 
-module.exports = PrimaryCriteria
+export default PrimaryCriteria

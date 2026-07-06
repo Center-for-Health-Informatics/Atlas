@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import criteriaTypes from '../CriteriaTypes'
+import * as criteriaTypes from '../CriteriaTypes'
 import CriteriaGroup from '../CriteriaGroup'
 import Window from '../InputTypes/Window'
 import AdditionalCriteria from '../AdditionalCriteria'
@@ -316,8 +316,6 @@ function CriteriaGroupViewModel (params) {
 }
 
 // return compoonent definition
-export default {
-  viewModel: CriteriaGroupViewModel,
-  template
-}
+export { template }
+export default { template }
 

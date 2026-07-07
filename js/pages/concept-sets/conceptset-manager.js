@@ -504,7 +504,7 @@ class ConceptsetManager extends AutoBind(Page) {
 
   async saveConceptSet (conceptSet, nameElementId) {
     if (this.previewVersion() && !confirm(ko.i18n('common.savePreviewWarning', 'Save as current version?')())) {
-      return
+      return false
     }
     this.isSaving(true)
     this.loading(true)
@@ -518,6 +518,7 @@ class ConceptsetManager extends AutoBind(Page) {
       const results = await conceptSetService.exists(conceptSet.name(), conceptSet.id)
       if (results > 0) {
         this.raiseConceptSetNameProblem(ko.i18n('cs.manager.csAlreadyExistsMessage', 'A concept set with this name already exists. Please choose a different name.')(), nameElementId)
+        return false
       } else {
         const savedConceptSet = await conceptSetService.saveConceptSet(conceptSet)
         const savedVersions = await this.versionsParams()?.getList()
@@ -543,9 +544,11 @@ class ConceptsetManager extends AutoBind(Page) {
         this.previewVersion(null)
 
         commonUtils.routeTo('/conceptset/' + savedConceptSet.data.id + '/expression')
+        return true
       }
     } catch (e) {
       alert(ko.i18n('cs.manager.csSaveErrorMessage', 'An error occurred while attempting to save a concept set.')())
+      return false
     } finally {
       this.loading(false)
       this.isSaving(false)
@@ -574,8 +577,10 @@ class ConceptsetManager extends AutoBind(Page) {
   }
 
   async save () {
-    await this.saveConceptSet(this.currentConceptSet(), '#txtConceptSetName')
-    this.currentConceptSetDirtyFlag().reset()
+    const saved = await this.saveConceptSet(this.currentConceptSet(), '#txtConceptSetName')
+    if (saved) {
+      this.currentConceptSetDirtyFlag().reset()
+    }
   }
 
   async copy () {

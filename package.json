@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "is an open source software tool for researchers to conduct scientific analyses on standardized observational data converted to the OMOP Common Data Model V5",
   "main": "js/main.js",
+  "type": "module",
   "scripts": {
     "dev": "vite --config vite.config.mjs",
     "prep": "npm i && npm run clean && npm run genversion",
@@ -12,7 +13,7 @@
     "build:docker": "npm run clean && npm run genversion && npm run build:dev && npm prune --production",
     "compress": "terser ./js/assets/bundle/bundle.js -o ./js/assets/bundle/bundle.js -c --source-map",
     "genversion": "genversion -s js/version/version.js && r_js -convert js/version js/ && rimraf js/version",
-    "test": "jest --runInBand --watchman=false",
+    "test": "node --import ./tests/register-hooks.mjs --test",
     "lint": "eslint \"js/**/*.js\" \"tests/**/*.js\"",
     "lint:fix": "eslint --fix \"js/**/*.js\" \"tests/**/*.js\""
   },
@@ -47,7 +48,6 @@
     "eslint": "^9.39.3",
     "genversion": "^2.2.0",
     "html-document": "^0.8.1",
-    "jest": "^29.7.0",
     "neostandard": "^0.13.0",
     "requirejs": "^2.3.6",
     "rimraf": "^2.6.2",

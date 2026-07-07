@@ -183,9 +183,7 @@ const escapeTooltip = function (tooltipText) {
 }
 
 const getSelectedConcepts = (conceptList) => {
-  return ko.unwrap(conceptList).filter(concept => concept.isSelected()).map(({ isSelected, ...concept }) => ({
-    ...concept
-  }))
+  return ko.unwrap(conceptList).filter(concept => concept.isSelected())
 }
 
 const buildConceptSetItems = (concepts, options) => {

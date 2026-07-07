@@ -1,0 +1,20 @@
+# Changelog
+
+Notable fixes made while shaking out the Atlas + webapi rewrite. Not exhaustive version history — just a running log of bugs found and fixed during testing, newest first. Each entry notes which repo (`atlas` or `webapi`) it touched.
+
+## 2026-07-07
+
+- **[atlas] Dropped Jest for Node's built-in test runner** — `npm test` now runs `node --test` instead of Jest. The old setup depended on a RequireJS shim (`jest.config.js`'s `requireAmd`/`requirejsInstance`) to load AMD-style modules, which no longer made sense once the app source moved to ESM (it was already failing 18/18 tests — see `MIGRATION_STATUS.md`). Ported all 5 existing test files (`AutoBind`, `BemHelper`, `CommonUtils`, `DataTypeConverterUtils`, `ExceptionUtils`) to plain ESM imports + `node:assert/strict`; added `tests/hooks.mjs` (a small module-resolution hook, registered via `tests/register-hooks.mjs`) to stand in for the handful of Vite-only bare-specifier aliases (`appConfig`, `atlas-state`, etc.) that `CommonUtils.js` imports. Also updated the one stale assertion in `CommonUtils.test.js` that had encoded the `isSelected`-stripping bug fixed above — it now asserts the corrected, intended behavior instead. `jest` and `jest.config.js` are gone; `package.json` gained `"type": "module"`.
+
+- **[atlas] Concept set save silently reported success on name conflict** — `saveConceptSet()` in `js/pages/concept-sets/conceptset-manager.js` showed an "already exists" alert but didn't actually communicate failure to its caller. `save()` then unconditionally reset the dirty flag afterward regardless of outcome, so the cart nav icon turned green and the Save button disabled itself as if the concept set had been persisted — even though nothing was saved and the set was still unnamed/id 0. Fixed by having `saveConceptSet()` return `true`/`false` and only resetting the dirty flag on an actual successful save.
+
+- **[atlas] Duplicate concepts silently added to concept sets** — `getSelectedConcepts()` in `js/utils/CommonUtils.js` stripped the `isSelected` observable off returned concepts before handing them back. That broke `clearConceptsSelectionState()`'s attempt to uncheck a concept's checkbox after "Add To Concept Set" (it operated on the stripped copies, not the live observables), so the checkbox silently stayed checked. Any subsequent Preview or Add re-added the same concept on top of what was already in the set, since Atlas has no dedup check. Fixed by no longer stripping `isSelected`.
+
+- **[atlas] Unhandled 422 fetching GitHub release-notes on the Home page** — `home.js` unconditionally fetched closed issues from `api.github.com` for release notes, defaulting a missing `milestoneId` to `'*'` ("any milestone"). Since webapi's `/info` stub always returns `milestoneId: null`, this turned a small scoped query into an unbounded fetch of every closed issue in OHDSI/Atlas history, which GitHub's paginated Issues API now hard-rejects (422) past ~1000 results via `page`. Fixed by skipping the GitHub fetch entirely when no real milestone is available, and wrapping the call in try/catch so a GitHub failure can no longer break the Home page.
+
+- **[webapi] Cohort Pathways browser crashed on load** — `GET /pathway-analysis` returned a bare array, but Atlas's `pathways` browser (and `cohort-pathway-browser.js`) always expects a paginated `{ content: [...] }` shape (matching how `reusable.js` already worked). Mismatch caused `coalesceField`'s `list.forEach` to throw on `undefined`. Fixed by passing `{ paginated: true }` to `makeAnalysisRouter('pathway_analysis', ...)` in `src/routes/pathway.js`.
+
+## Notes
+
+- Atlas and webapi are separate repos/containers. A fix under `[webapi]` requires a container rebuild + recreate to take effect (`docker compose build` + recreate) — restarting Atlas alone, or just refreshing the browser, does nothing for webapi-side changes.
+- A fix under `[atlas]` just needs a browser refresh (dev server) or a rebuild of the served bundle, depending on how Atlas is being served.

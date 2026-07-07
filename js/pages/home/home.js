@@ -34,19 +34,28 @@ class Home extends Page {
 
   async onPageCreated () {
     const info = await buildInfoService.getBuildInfo()
-    const atlasMilestoneId = lodash.get(info, 'buildInfo.atlasRepositoryInfo.milestoneId', '*')
-    const webapiMilestoneId = lodash.get(info, 'buildInfo.webapiRepositoryInfo.milestoneId', '*')
+    const atlasMilestoneId = lodash.get(info, 'buildInfo.atlasRepositoryInfo.milestoneId')
+    const webapiMilestoneId = lodash.get(info, 'buildInfo.webapiRepositoryInfo.milestoneId')
     const atlasReleaseTag = lodash.get(info, 'buildInfo.atlasRepositoryInfo.releaseTag')
     const webapiReleaseTag = lodash.get(info, 'buildInfo.webapiRepositoryInfo.releaseTag')
     this.atlasReleaseTag(atlasReleaseTag)
     this.webapiReleaseTag(webapiReleaseTag)
     this.webapiVersion(this.getWebapiVersion(info))
-    const atlasIssues = await this.getIssuesFromAllPages('OHDSI/Atlas', atlasMilestoneId)
-    const webapiIssues = await this.getIssuesFromAllPages('OHDSI/WebAPI', webapiMilestoneId)
-    let issues = lodash.orderBy([...atlasIssues, ...webapiIssues], ['closed_at'], ['desc'])
-    // The API returns both issues and PRs and PRs in most cases would duplicate issues, therefore just leave issues
-    issues = issues.filter(item => item.html_url.includes('/issues/'))
-    this.github_status(issues)
+    // Without a real milestone, "closed issues for this release" becomes "every
+    // closed issue ever" — an unbounded query GitHub's API rejects past ~1000 results.
+    if (!atlasMilestoneId && !webapiMilestoneId) return
+    try {
+      const atlasIssues = atlasMilestoneId ? await this.getIssuesFromAllPages('OHDSI/Atlas', atlasMilestoneId) : []
+      const webapiIssues = webapiMilestoneId ? await this.getIssuesFromAllPages('OHDSI/WebAPI', webapiMilestoneId) : []
+      let issues = lodash.orderBy([...atlasIssues, ...webapiIssues], ['closed_at'], ['desc'])
+      // The API returns both issues and PRs and PRs in most cases would duplicate issues, therefore just leave issues
+      issues = issues.filter(item => item.html_url.includes('/issues/'))
+      this.github_status(issues)
+    } catch (e) {
+      // GitHub's public API is best-effort here (unauthenticated, rate-limited) —
+      // don't let it break the home page.
+      this.github_status([])
+    }
   }
 
   async getIssuesFromAllPages (repo, milestone, page = 1, list = []) {

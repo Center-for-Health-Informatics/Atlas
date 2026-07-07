@@ -1,8 +1,6 @@
-let AutoBind
-
-beforeAll(async () => {
-  AutoBind = await requireAmd(['utils/AutoBind'])
-})
+import { test, describe } from 'node:test'
+import assert from 'node:assert/strict'
+import AutoBind from '../../js/utils/AutoBind.js'
 
 describe('AutoBind', () => {
   test('binds prototype methods to the instance context', () => {
@@ -20,16 +18,12 @@ describe('AutoBind', () => {
     const instance = new Example()
     const { increment } = instance
 
-    expect(increment()).toBe(2)
-    expect(instance.counter).toBe(2)
+    assert.strictEqual(increment(), 2)
+    assert.strictEqual(instance.counter, 2)
   })
 
   test('leaves non-function prototype properties untouched', () => {
     class Sample extends AutoBind() {
-      constructor () {
-        super()
-      }
-
       getName () {
         return this.componentName
       }
@@ -39,7 +33,7 @@ describe('AutoBind', () => {
 
     const instance = new Sample()
 
-    expect(instance.componentName).toBe('sample-component')
-    expect(instance.getName()).toBe('sample-component')
+    assert.strictEqual(instance.componentName, 'sample-component')
+    assert.strictEqual(instance.getName(), 'sample-component')
   })
 })

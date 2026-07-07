@@ -1,58 +1,17 @@
-const appConfigStub = {
-  commonDataTableOptions: {
-    pageLength: {
-      XS: 5,
-      M: 25,
-    },
-    lengthMenu: {
-      XS: [[5, 10], ['5', '10']],
-      M: [[10, 25, 50], ['10', '25', '50']],
-    },
-  },
-}
-
-let commonUtils
-let ko
-let appConfig
-
-beforeAll(() => {
-  if (!requirejsInstance.defined('atlas-state')) {
-    requirejsInstance.define('atlas-state', [], () => ({
-      selectedConceptsIndex: {},
-      localeSettings: {},
-    }))
-  }
-  if (!requirejsInstance.defined('appConfig')) {
-    requirejsInstance.define('appConfig', [], () => appConfigStub)
-  }
-  if (!requirejsInstance.defined('pages/Page')) {
-    requirejsInstance.define('pages/Page', [], () => class MockPage {})
-  }
-  if (!requirejsInstance.defined('services/MomentAPI')) {
-    requirejsInstance.define('services/MomentAPI', [], () => ({
-      DESIGN_DATE_TIME_FORMAT: 'YYYY-MM-DD H:mm',
-      formatDateTimeWithFormat: (value, format) => `${value}:${format}`,
-    }))
-  }
-  if (!requirejsInstance.defined('const')) {
-    requirejsInstance.define('const', [], () => ({
-      maxEntityNameLength: 255,
-    }))
-  }
-})
-
-beforeAll(async () => {
-  [commonUtils, ko, appConfig] = await requireAmd(['utils/CommonUtils', 'knockout', 'appConfig'])
-})
+import { test, describe } from 'node:test'
+import assert from 'node:assert/strict'
+import ko from 'knockout'
+import commonUtils from '../../js/utils/CommonUtils.js'
+import appConfig from '../stubs/appConfig.js'
 
 describe('CommonUtils', () => {
   test('normalizeUrl combines segments without duplicate slashes', () => {
-    expect(commonUtils.normalizeUrl('/path/', '/to/', 'resource')).toBe('/path/to/resource')
+    assert.strictEqual(commonUtils.normalizeUrl('/path/', '/to/', 'resource'), '/path/to/resource')
   })
 
   test('cartesian produces all permutations across multiple arrays', () => {
     const result = commonUtils.cartesian([1, 2], ['a'], ['x', 'y'])
-    expect(result).toEqual([
+    assert.deepStrictEqual(result, [
       [1, 'a', 'x'],
       [1, 'a', 'y'],
       [2, 'a', 'x'],
@@ -62,18 +21,26 @@ describe('CommonUtils', () => {
 
   test('escapeTooltip escapes both single and double quotes', () => {
     const escaped = commonUtils.escapeTooltip('Bob\'s "quote"')
-    expect(escaped).toBe('Bob\\\'s &quot;quote&quot;')
+    assert.strictEqual(escaped, 'Bob\\\'s &quot;quote&quot;')
   })
 
-  test('getSelectedConcepts returns copies of selected items without selection flag', () => {
+  // Regression test: getSelectedConcepts used to strip the `isSelected`
+  // observable off each returned concept, which silently broke
+  // clearConceptsSelectionState()'s ability to uncheck a concept after it was
+  // added to a concept set (it was resetting stripped copies, not the live
+  // observables) — concepts could get added twice as a result. It must
+  // return the live objects, isSelected included.
+  test('getSelectedConcepts returns the live selected items with isSelected intact', () => {
     const concepts = ko.observableArray([
       { id: 1, name: 'A', isSelected: () => true },
       { id: 2, name: 'B', isSelected: () => false },
     ])
 
     const result = commonUtils.getSelectedConcepts(concepts)
-    expect(result).toEqual([{ id: 1, name: 'A' }])
-    expect(result[0]).not.toHaveProperty('isSelected')
+    assert.strictEqual(result.length, 1)
+    assert.strictEqual(result[0].id, 1)
+    assert.strictEqual(result[0].name, 'A')
+    assert.strictEqual(typeof result[0].isSelected, 'function')
   })
 
   test('clearConceptsSelectionState resets observable selection flags', () => {
@@ -83,8 +50,8 @@ describe('CommonUtils', () => {
 
     commonUtils.clearConceptsSelectionState(conceptList)
 
-    expect(first.isSelected()).toBe(false)
-    expect(second.isSelected()).toBe(false)
+    assert.strictEqual(first.isSelected(), false)
+    assert.strictEqual(second.isSelected(), false)
   })
 
   test('buildConceptSetItems merges shared options into each entry', () => {
@@ -99,14 +66,14 @@ describe('CommonUtils', () => {
 
     const items = commonUtils.buildConceptSetItems(concepts, options)
 
-    expect(items).toEqual([
+    assert.deepStrictEqual(items, [
       { concept: concepts[0], includeDescendants: true, isExcluded: false },
       { concept: concepts[1], includeDescendants: true, isExcluded: false },
     ])
   })
 
   test('getTableOptions returns variant specific datatable preferences', () => {
-    expect(commonUtils.getTableOptions('XS')).toEqual({
+    assert.deepStrictEqual(commonUtils.getTableOptions('XS'), {
       pageLength: appConfig.commonDataTableOptions.pageLength.XS,
       lengthMenu: appConfig.commonDataTableOptions.lengthMenu.XS,
     })

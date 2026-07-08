@@ -138,4 +138,3 @@ class ConfigureAccessModal extends AutoBind(Component) {
 }
 
 export default commonUtils.build('configure-access-modal', ConfigureAccessModal, view)
-

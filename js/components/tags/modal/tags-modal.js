@@ -253,7 +253,7 @@ class TagsModal extends AutoBind(Component) {
 
   showIncludedTagsTable (tagGroup) {
     const tags = this.allTagsList().filter(t => t.groups.filter(tg => tg.id === tagGroup.id).length > 0)
-    tags.forEach(t => t.assigned = this.assignedTagsList().filter(at => at.id === t.id).length > 0)
+    tags.forEach(t => { t.assigned = this.assignedTagsList().filter(at => at.id === t.id).length > 0 })
     this.sortByAssigned(tags)
     this.tagsInGroupList(tags)
     this.currentTagGroup(tagGroup)
@@ -265,4 +265,3 @@ class TagsModal extends AutoBind(Component) {
 }
 
 export default commonUtils.build('tags-modal', TagsModal, view)
-

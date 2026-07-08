@@ -485,4 +485,3 @@ class TagsMultiAssign extends AutoBind(Component) {
 }
 
 export default commonUtils.build('multi-assign', TagsMultiAssign, view)
-

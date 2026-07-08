@@ -225,4 +225,3 @@ class UserBar extends Component {
 }
 
 export default commonUtils.build('user-bar', UserBar, view)
-

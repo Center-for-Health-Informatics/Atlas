@@ -150,4 +150,3 @@ class ConceptsetExpression extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-expression', ConceptsetExpression, view)
-

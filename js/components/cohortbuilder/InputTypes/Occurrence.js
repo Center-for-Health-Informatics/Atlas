@@ -11,4 +11,3 @@ function Occurrence (data) {
 }
 
 export default Occurrence
-

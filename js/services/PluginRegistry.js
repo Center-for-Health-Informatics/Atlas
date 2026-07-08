@@ -18,4 +18,3 @@ document.addEventListener(REGISTER_PLUGIN_EVENT, e => {
 
 export { REGISTER_PLUGIN_EVENT, add, findByType }
 export default { REGISTER_PLUGIN_EVENT, add, findByType }
-

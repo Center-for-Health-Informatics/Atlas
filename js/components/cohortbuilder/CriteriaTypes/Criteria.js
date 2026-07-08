@@ -8,11 +8,10 @@ import CriteriaGroup from '../CriteriaGroup'
 
 function Criteria (data, conceptSets) {
   const self = this
-  var data = data || {}
+  data = data || {}
 
   self.CorrelatedCriteria = ko.observable(data.CorrelatedCriteria && new CriteriaGroup(data.CorrelatedCriteria, conceptSets))
   self.DateAdjustment = ko.observable(data.DateAdjustment && new DateAdjustment(data.DateAdjustment))
 }
 
 export default Criteria
-

@@ -21,4 +21,3 @@ export default {
   viewModel: PeriodViewModel,
   template: componentTemplate
 }
-

@@ -10,4 +10,3 @@ class ConceptSetCrossReference {
 }
 
 export default ConceptSetCrossReference
-

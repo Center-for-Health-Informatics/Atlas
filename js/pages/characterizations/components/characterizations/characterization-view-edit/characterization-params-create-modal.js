@@ -37,4 +37,3 @@ class CharacterizationParamsCreateModal extends Component {
 }
 
 export default commonUtils.build('characterization-params-create-modal', CharacterizationParamsCreateModal, view)
-

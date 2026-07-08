@@ -293,4 +293,3 @@ const component = {
 
 ko.components.register('faceted-datatable', component)
 export default component
-

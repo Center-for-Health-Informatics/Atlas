@@ -48,4 +48,3 @@ class CohortResultsService {
 }
 
 export default CohortResultsService
-

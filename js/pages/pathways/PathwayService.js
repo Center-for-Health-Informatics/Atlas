@@ -119,4 +119,3 @@ function updateVersion (version) {
 
 export { list, create, copy, load, save, del, listExecutions, getExecution, getResults, generate, cancelGeneration, loadExportDesign, loadExportDesignByGeneration, importPathwayDesign, exists, runDiagnostics, getVersions, getVersion, updateVersion, copyVersion }
 export default { list, create, copy, load, save, del, listExecutions, getExecution, getResults, generate, cancelGeneration, loadExportDesign, loadExportDesignByGeneration, importPathwayDesign, exists, runDiagnostics, getVersions, getVersion, updateVersion, copyVersion }
-

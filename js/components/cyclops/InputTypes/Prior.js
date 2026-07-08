@@ -16,4 +16,3 @@ class Prior extends RLangClass {
 }
 
 export default Prior
-

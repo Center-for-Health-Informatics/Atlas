@@ -47,4 +47,3 @@ function getExecutionGroupStatus (submissions = []) {
 
 export { StartExecution, generateVersionTags, getExecutionGroupStatus }
 export default { StartExecution, generateVersionTags, getExecutionGroupStatus }
-

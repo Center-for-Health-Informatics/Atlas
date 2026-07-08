@@ -33,4 +33,3 @@ DemographicCriteria.prototype.toJSON = function () {
 }
 
 export default DemographicCriteria
-

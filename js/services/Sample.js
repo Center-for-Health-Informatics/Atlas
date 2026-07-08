@@ -44,4 +44,3 @@ function deleteSample ({ cohortDefinitionId, sourceKey, sampleId }) {
 
 export { createSample, getSampleList, getSample, deleteSample, refreshSample }
 export default { createSample, getSampleList, getSample, deleteSample, refreshSample }
-

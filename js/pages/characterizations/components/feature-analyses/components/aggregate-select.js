@@ -50,7 +50,7 @@ class AggregateSelector extends AutoBind(Component) {
     this.aggregate = params.currentAggregate || ko.observable()
     this.aggregates = ko.computed(() => ((params.aggregates && params.aggregates()) || [])
       .filter(a => a.value === consts.ANY_DOMAIN || this.criteria.criteriaType === 'DemographicCriteria' ||
-			this.getCriteriaDomains(this.criteria).find(d => d === a.value)))
+      this.getCriteriaDomains(this.criteria).find(d => d === a.value)))
     this.domains = params.domains
   }
 
@@ -67,4 +67,3 @@ class AggregateSelector extends AutoBind(Component) {
 }
 
 export default commonUtils.build('aggregate-select', AggregateSelector, view)
-

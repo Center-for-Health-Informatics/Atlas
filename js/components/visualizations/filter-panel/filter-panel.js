@@ -53,4 +53,3 @@ const component = {
 
 ko.components.register(componentName, component)
 export default component
-

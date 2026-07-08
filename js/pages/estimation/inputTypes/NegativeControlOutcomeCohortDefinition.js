@@ -9,4 +9,3 @@ class NegativeControlOutcomeCohortDefinition {
 }
 
 export default NegativeControlOutcomeCohortDefinition
-

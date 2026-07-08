@@ -31,4 +31,3 @@ const ExitMessageRender = (data) => data ? `<a href="#" data-bind="click: () => 
 
 export { ExecuteRender, EndsRender, ProviderRender, JobStatusRender, ExitMessageRender }
 export default { ExecuteRender, EndsRender, ProviderRender, JobStatusRender, ExitMessageRender }
-

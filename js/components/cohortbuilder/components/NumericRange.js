@@ -43,4 +43,3 @@ export default {
   viewModel: NumericRangeViewModel,
   template: componentTemplate,
 }
-

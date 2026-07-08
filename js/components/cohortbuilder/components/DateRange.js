@@ -42,4 +42,3 @@ export default {
   viewModel: DateRangeViewModel,
   template: componentTemplate,
 }
-

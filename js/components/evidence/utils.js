@@ -24,4 +24,3 @@ function formatBooleanDisplay (val) {
 
 export { hasEvidence, formatNumberWithCommas, formatBooleanDisplay }
 export default { hasEvidence, formatNumberWithCommas, formatBooleanDisplay }
-

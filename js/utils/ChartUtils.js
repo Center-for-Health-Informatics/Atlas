@@ -55,7 +55,7 @@ class ChartUtils {
 
   // svgString2Image from http://bl.ocks.org/Rokotyan/0556f8facbaf344507cdc45dc3622177
   static svgString2Image (svgString, width, height, format, callback) {
-    var format = format || 'png'
+    format = format || 'png'
 
     const imgsrc = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgString))) // Convert SVG string to data URL
 
@@ -106,7 +106,7 @@ class ChartUtils {
 
   static combineSvgWithLegend (svgFiles) {
     let heightSvg = 0
-    svgFiles.forEach(file => heightSvg += file.clientHeight)
+    svgFiles.forEach(file => { heightSvg += file.clientHeight })
     const heightWithoutLegend = svgFiles[0].clientHeight
     const widthSvg = svgFiles[0].clientWidth
     const svgNS = 'http://www.w3.org/2000/svg'
@@ -201,7 +201,7 @@ class ChartUtils {
       yPercent: 'p'
     }
 
-    var options = { ...defaults, ...options }
+    options = { ...defaults, ...options }
 
     const series = {}
     series.name = 'All Time'
@@ -230,11 +230,11 @@ class ChartUtils {
       children: []
     }
 
-    for (var i = 0; i < data.percentPersons.length; i++) {
+    for (let i = 0; i < data.percentPersons.length; i++) {
       total += data.percentPersons[i]
     }
 
-    for (var i = 0; i < data.conceptPath.length; i++) {
+    for (let i = 0; i < data.conceptPath.length; i++) {
       const parts = data.conceptPath[i].split('||')
       let currentNode = root
       for (let j = 0; j < parts.length; j++) {
@@ -288,4 +288,3 @@ class ChartUtils {
 }
 
 export default ChartUtils
-

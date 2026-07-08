@@ -379,4 +379,3 @@ class PathwaysManager extends AutoBind(Page) {
 }
 
 export default commonUtils.build('pathways-manager', PathwaysManager, view)
-

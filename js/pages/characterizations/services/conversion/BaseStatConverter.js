@@ -154,4 +154,3 @@ class BaseStatConverter {
 }
 
 export default BaseStatConverter
-

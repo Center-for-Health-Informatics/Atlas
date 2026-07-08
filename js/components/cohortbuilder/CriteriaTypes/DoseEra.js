@@ -53,4 +53,3 @@ DoseEra.prototype.toJSON = function () {
 }
 
 export default DoseEra
-

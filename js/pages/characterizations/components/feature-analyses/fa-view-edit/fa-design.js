@@ -110,4 +110,3 @@ class FeatureAnalysisDesign extends AutoBind(Clipboard(Component)) {
 }
 
 export default commonUtils.build('feature-analysis-design', FeatureAnalysisDesign, view)
-

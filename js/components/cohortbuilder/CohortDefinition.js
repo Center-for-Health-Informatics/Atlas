@@ -3,7 +3,7 @@ import CohortExpression from './CohortExpression'
 
 function CohortDefinition (data) {
   const self = this
-  var data = data || {}
+  data = data || {}
 
   self.id = ko.observable(data.id)
   self.name = ko.observable(data.name || null)
@@ -17,4 +17,3 @@ function CohortDefinition (data) {
   self.tags = ko.observableArray(data.tags)
 }
 export default CohortDefinition
-

@@ -27,4 +27,3 @@ class ExecutionSettingsEditor extends Component {
 }
 
 export default commonUtils.build('execution-settings-editor', ExecutionSettingsEditor, view)
-

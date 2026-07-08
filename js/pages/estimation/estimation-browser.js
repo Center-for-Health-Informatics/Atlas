@@ -99,4 +99,3 @@ class EstimationBrowser extends Page {
 }
 
 export default commonUtils.build('estimation-browser', EstimationBrowser, view)
-

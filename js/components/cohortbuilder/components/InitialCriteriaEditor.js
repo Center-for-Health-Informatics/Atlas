@@ -277,4 +277,3 @@ function InitialCriteriaViewModel (params) {
 
 export { InitialCriteriaViewModel, template }
 export default { viewModel: InitialCriteriaViewModel, template }
-

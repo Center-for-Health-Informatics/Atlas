@@ -19,4 +19,3 @@ class GetDbCohortMethodDataArgs extends RLangClass {
 }
 
 export default GetDbCohortMethodDataArgs
-

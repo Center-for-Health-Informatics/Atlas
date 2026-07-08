@@ -10,11 +10,10 @@ function ConceptSet (data) {
   self.description = ko.observable(data.description || null)
   self.expression = {
     items: ko.observableArray(data.expression && data.expression.items &&
-														data.expression.items.map(function (item) {
-														  return new ConceptSetItem(item)
-														}))
+                            data.expression.items.map(function (item) {
+                              return new ConceptSetItem(item)
+                            }))
   }
 }
 
 export default ConceptSet
-

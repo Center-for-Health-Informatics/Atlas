@@ -82,4 +82,3 @@ class SelectSourcesPopup extends AutoBind(Component) {
 }
 
 export default commonUtils.build('select-sources-popup', SelectSourcesPopup, view)
-

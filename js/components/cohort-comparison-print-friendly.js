@@ -18,4 +18,3 @@ const component = {
 
 ko.components.register('cohort-comparison-print-friendly', component)
 export default component
-

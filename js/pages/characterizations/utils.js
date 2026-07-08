@@ -22,4 +22,3 @@ function sortedStrataNames (strataNames, filter = null) {
 
 export { extractMeaningfulCovName, sortedStrataNames }
 export default { extractMeaningfulCovName, sortedStrataNames }
-

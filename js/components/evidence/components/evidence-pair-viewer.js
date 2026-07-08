@@ -125,7 +125,7 @@ class EvidencePairViewer extends Component {
     }
 
     this.getMetadataFromPubmed = function () {
-      var metadataPromise = $.Deferred()
+      let metadataPromise = $.Deferred()
       const pubmedMetadataUrl = config.cemOptions.sourceRestEndpoints['medline_winnenburg']
       if (pubmedMetadataUrl && pubmedMetadataUrl.length > 0) {
         // Get the medline related results
@@ -139,7 +139,7 @@ class EvidencePairViewer extends Component {
         })
         // Retrieve the metadata
         const ids = uniqueIdentifiers.join()
-        var metadataPromise = $.ajax({
+        metadataPromise = $.ajax({
           url: pubmedMetadataUrl.replace('{@ids}', ids),
           method: 'GET'
         })
@@ -172,4 +172,3 @@ const component = {
 }
 
 export default component
-

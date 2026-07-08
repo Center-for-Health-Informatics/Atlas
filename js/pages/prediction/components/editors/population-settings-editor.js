@@ -19,4 +19,3 @@ class PopulationSettingsEditor extends Component {
 }
 
 export default commonUtils.build('population-settings-editor', PopulationSettingsEditor, view)
-

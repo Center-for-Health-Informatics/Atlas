@@ -10,4 +10,3 @@ function TimeAtRisk (data) {
 }
 
 export default TimeAtRisk
-

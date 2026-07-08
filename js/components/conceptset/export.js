@@ -41,4 +41,3 @@ class ConceptSetExport extends AutoBind(Clipboard(Component)) {
 }
 
 export default commonUtils.build('conceptset-list-export', ConceptSetExport, view)
-

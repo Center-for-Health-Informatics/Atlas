@@ -11,4 +11,3 @@ class ConceptLegend extends Component {
 }
 
 export default CommonUtils.build('concept-legend', ConceptLegend, view)
-

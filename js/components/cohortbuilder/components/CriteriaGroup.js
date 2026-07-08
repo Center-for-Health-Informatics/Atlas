@@ -281,7 +281,6 @@ function CriteriaGroupViewModel (params) {
       case 'specimen-criteria':
       case 'location-region-criteria':
         return false
-        break
       default:
         return true
     }
@@ -318,4 +317,3 @@ function CriteriaGroupViewModel (params) {
 // return compoonent definition
 export { CriteriaGroupViewModel, template }
 export default { viewModel: CriteriaGroupViewModel, template }
-

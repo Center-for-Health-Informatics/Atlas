@@ -31,4 +31,3 @@ function CriteriaGroupViewModel (params) {
 // return compoonent definition
 export { CriteriaGroupViewModel, template }
 export default { viewModel: CriteriaGroupViewModel, template }
-

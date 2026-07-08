@@ -8,4 +8,3 @@ class ConceptSet {
 }
 
 export default ConceptSet
-

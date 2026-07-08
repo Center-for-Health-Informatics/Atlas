@@ -32,4 +32,3 @@ function deleteTool (id) {
 
 export { getTools, updateTool, createTool, deleteTool }
 export default { getTools, updateTool, createTool, deleteTool }
-

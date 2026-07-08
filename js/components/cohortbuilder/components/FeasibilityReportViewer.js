@@ -26,4 +26,3 @@ ko.components.register('feasibility-report-viewer', component)
 
 // return compoonent definition
 export default component
-

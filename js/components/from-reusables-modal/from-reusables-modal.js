@@ -241,4 +241,3 @@ class FromReusablesModal extends AutoBind(Component) {
 }
 
 export default commonUtils.build('from-reusables-modal', FromReusablesModal, view)
-

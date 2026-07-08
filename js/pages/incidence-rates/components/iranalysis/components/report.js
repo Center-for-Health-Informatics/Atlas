@@ -140,4 +140,3 @@ class IRAnalysisReportsViewer extends Component {
 }
 
 export default commonUtils.build('ir-analysis-report', IRAnalysisReportsViewer, view)
-

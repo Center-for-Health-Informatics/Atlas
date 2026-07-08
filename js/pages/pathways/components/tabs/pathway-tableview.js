@@ -363,4 +363,3 @@ class PathwayTableview extends AutoBind(Component) {
 }
 
 export default CommonUtils.build('pathway-tableview', PathwayTableview, view)
-

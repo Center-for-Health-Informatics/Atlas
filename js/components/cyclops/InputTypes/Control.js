@@ -30,4 +30,3 @@ class Control extends RLangClass {
 }
 
 export default Control
-

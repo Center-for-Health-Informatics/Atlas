@@ -40,4 +40,3 @@ function getAvailableLocales () {
 
 export { getAvailableLocales, getLocale }
 export default { getAvailableLocales, getLocale }
-

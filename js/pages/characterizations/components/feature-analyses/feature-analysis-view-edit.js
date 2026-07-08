@@ -487,4 +487,3 @@ class FeatureAnalysisViewEdit extends AutoBind(Clipboard(Page)) {
 }
 
 export default commonUtils.build('feature-analysis-view-edit', FeatureAnalysisViewEdit, view)
-

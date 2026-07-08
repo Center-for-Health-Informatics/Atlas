@@ -27,4 +27,3 @@ function customizer (objValue, srcValue, key) {
 config.webAPIRoot = config.api.url
 
 export default config
-

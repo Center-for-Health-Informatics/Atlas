@@ -111,9 +111,9 @@ class ComparativeCohortAnalysisManager extends Page {
     this.isDiagnosticsRunning = ko.observable(false)
 
     const extraExecutionPermissions = ko.computed(() => !this.dirtyFlag().isDirty() &&
-		config.api.isExecutionEngineAvailable() &&
-		this.canEdit() &&
-		this.criticalCount() <= 0)
+    config.api.isExecutionEngineAvailable() &&
+    this.canEdit() &&
+    this.criticalCount() <= 0)
 
     const generationDisableReason = ko.computed(() => {
       if (this.dirtyFlag().isDirty()) return ko.unwrap(globalConstants.disabledReasons.DIRTY)
@@ -158,10 +158,10 @@ class ComparativeCohortAnalysisManager extends Page {
       if (this.estimationAnalysis()) {
         if (this.selectedAnalysisId() === '0') {
           return ko.i18n('const.newEntityNames.ple', 'New Population Level Effect Estimation')() + ' - ' +
-					ko.i18n('ple.caption', 'Comparative Cohort Analysis')()
+          ko.i18n('ple.caption', 'Comparative Cohort Analysis')()
         } else {
           return ko.i18n('ple.title', 'Population Level Effect Estimation')() + ' - ' +
-					ko.i18nformat('ple.captionNumber', 'Comparative Cohort Analysis #<%=id%>', { id: this.selectedAnalysisId() })()
+          ko.i18nformat('ple.captionNumber', 'Comparative Cohort Analysis #<%=id%>', { id: this.selectedAnalysisId() })()
         }
       }
     })
@@ -565,4 +565,3 @@ class ComparativeCohortAnalysisManager extends Page {
 }
 
 export default commonUtils.build('cca-manager', ComparativeCohortAnalysisManager, view)
-

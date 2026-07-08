@@ -27,4 +27,3 @@ class Measurement extends TreemapReport {
 }
 
 export default commonUtils.build('report-measurement', Measurement, view)
-

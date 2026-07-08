@@ -19,4 +19,3 @@ class NameValidation extends Component {
 }
 
 export default commonUtils.build('name-validation', NameValidation, view)
-

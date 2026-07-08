@@ -103,4 +103,3 @@ class IRBrowser extends Page {
 }
 
 export default commonUtils.build('ir-browser', IRBrowser, view)
-

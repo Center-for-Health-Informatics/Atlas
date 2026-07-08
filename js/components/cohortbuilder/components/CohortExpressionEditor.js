@@ -121,4 +121,3 @@ function CohortExpressionEditorViewModel (params) {
 // return factory
 export { CohortExpressionEditorViewModel, template }
 export default { viewModel: CohortExpressionEditorViewModel, template }
-

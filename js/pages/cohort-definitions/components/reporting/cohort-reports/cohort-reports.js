@@ -55,4 +55,3 @@ class CohortReports extends Component {
 }
 
 export default commonUtils.build('cohort-reports', CohortReports, view)
-

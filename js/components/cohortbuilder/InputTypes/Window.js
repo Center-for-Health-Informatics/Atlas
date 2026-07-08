@@ -19,4 +19,3 @@ function Window (data) {
 }
 
 export default Window
-

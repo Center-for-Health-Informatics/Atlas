@@ -12,4 +12,3 @@ const renderConceptSetCheckbox = (hasPermissions, field, readonly = false) => {
 
 export { renderCheckbox, renderConceptSetCheckbox }
 export default { renderCheckbox, renderConceptSetCheckbox }
-

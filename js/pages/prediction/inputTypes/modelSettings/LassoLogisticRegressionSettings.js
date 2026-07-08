@@ -9,4 +9,3 @@ class LassoLogisticRegressionSettings {
 }
 
 export default LassoLogisticRegressionSettings
-

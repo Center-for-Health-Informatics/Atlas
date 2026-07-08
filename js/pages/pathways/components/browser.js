@@ -94,4 +94,3 @@ class PathwaysBrowser extends Page {
 }
 
 export default commonUtils.build('pathways-browser', PathwaysBrowser, view)
-

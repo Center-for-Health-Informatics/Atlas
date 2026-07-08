@@ -20,4 +20,3 @@ export default {
   viewModel: DateAdjustmentViewModel,
   template: componentTemplate,
 }
-

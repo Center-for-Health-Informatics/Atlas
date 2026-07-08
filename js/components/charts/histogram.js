@@ -13,4 +13,3 @@ class Histogram extends Chart {
 }
 
 export default commonUtils.build('histogram', Histogram, view)
-

@@ -47,4 +47,3 @@ class ConceptsetExport extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptsets-export', ConceptsetExport, view)
-

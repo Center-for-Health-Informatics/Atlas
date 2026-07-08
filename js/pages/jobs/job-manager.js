@@ -50,4 +50,3 @@ class JobManager extends AutoBind(Page) {
 }
 
 export default commonUtils.build('job-manager', JobManager, view)
-

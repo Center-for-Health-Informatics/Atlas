@@ -192,4 +192,3 @@ class ConceptAddBox extends Component {
 }
 
 export default CommonUtils.build('concept-add-box', ConceptAddBox, view)
-

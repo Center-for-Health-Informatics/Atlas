@@ -50,4 +50,3 @@ class OutcomeModelArgsEditor extends Component {
 }
 
 export default commonUtils.build('outcome-model-args-editor', OutcomeModelArgsEditor, view)
-

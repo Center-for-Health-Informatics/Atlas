@@ -70,4 +70,3 @@ class TermsAndConditions extends AutoBind(Component) {
 }
 
 export default commonUtils.build('terms-and-conditions', TermsAndConditions, view)
-

@@ -24,4 +24,3 @@ class ExploreEvidence extends AutoBind(Component) {
 }
 
 export default commonUtils.build('explore-evidence', ExploreEvidence, view)
-

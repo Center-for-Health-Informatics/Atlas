@@ -23,4 +23,3 @@ class FeatureAnalysisConceptSet extends AutoBind(Component) {
 }
 
 export default commonUtils.build('feature-analysis-conceptset', FeatureAnalysisConceptSet, view)
-

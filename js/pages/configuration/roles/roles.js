@@ -45,4 +45,3 @@ class Roles extends AutoBind(Page) {
 }
 
 export default commonUtils.build('roles', Roles, view)
-

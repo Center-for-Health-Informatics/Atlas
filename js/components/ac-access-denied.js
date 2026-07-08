@@ -15,4 +15,3 @@ class AccessDenied extends Component {
 }
 
 export default commonUtils.build('access-denied', AccessDenied, view)
-

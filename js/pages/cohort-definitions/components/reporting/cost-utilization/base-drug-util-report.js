@@ -139,4 +139,3 @@ class BaseDrugUtilReport extends BaseCostUtilReport {
 }
 
 export default BaseDrugUtilReport
-

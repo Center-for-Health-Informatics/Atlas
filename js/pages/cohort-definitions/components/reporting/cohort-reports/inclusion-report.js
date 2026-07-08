@@ -30,4 +30,3 @@ export default commonUtils.build(
   CohortInclusionReport,
   view
 )
-

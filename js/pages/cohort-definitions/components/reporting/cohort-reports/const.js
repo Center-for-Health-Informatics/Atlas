@@ -12,4 +12,3 @@ const feAnalysisTypes = {
 
 export { INCLUSION_REPORT, feAnalysisTypes }
 export default { INCLUSION_REPORT, feAnalysisTypes }
-

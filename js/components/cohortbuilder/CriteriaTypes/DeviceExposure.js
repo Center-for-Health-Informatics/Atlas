@@ -66,4 +66,3 @@ DeviceOccurence.prototype.toJSON = function () {
 }
 
 export default DeviceOccurence
-

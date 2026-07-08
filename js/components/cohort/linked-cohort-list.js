@@ -95,4 +95,3 @@ class LinkedCohortList extends Component {
 }
 
 export default commonUtils.build('linked-cohort-list', LinkedCohortList, view)
-

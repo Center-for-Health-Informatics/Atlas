@@ -42,4 +42,3 @@ export default {
   viewModel: ConceptSetQuickviewModel,
   template: componentTemplate,
 }
-

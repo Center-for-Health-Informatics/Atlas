@@ -206,7 +206,7 @@ const checkPermission = function (permission, etalon) {
   }
   // If etalon has more parts than the permission, return true if rest of eLevels contains wildcard
   for (; i < etalonLevels.length; i++) { // loop through remaining etalonLevels
-    var etalonPart = etalonLevels[i].split(',')
+    etalonPart = etalonLevels[i].split(',')
     if (!etalonPart.includes('*')) {
       return false
     }
@@ -644,4 +644,3 @@ const api = {
 }
 
 export default api
-

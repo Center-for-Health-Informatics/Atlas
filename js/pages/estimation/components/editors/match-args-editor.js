@@ -24,4 +24,3 @@ class MatchArgsEditor extends Component {
 }
 
 export default commonUtils.build('match-args-editor', MatchArgsEditor, view)
-

@@ -39,4 +39,3 @@ class UserView extends AutoBind(Component) {
 }
 
 export default commonUtils.build('users', UserView, view)
-

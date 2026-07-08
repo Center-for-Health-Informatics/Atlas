@@ -46,4 +46,3 @@ async function copyFeatureAnalysis (id) {
 
 export { loadFeatureAnalysisList, loadFeatureAnalysis, loadFeatureAnalysisDomains, createFeatureAnalysis, updateFeatureAnalysis, deleteFeatureAnalysis, exists, exportConceptSets, copyFeatureAnalysis, loadAggregates }
 export default { loadFeatureAnalysisList, loadFeatureAnalysis, loadFeatureAnalysisDomains, createFeatureAnalysis, updateFeatureAnalysis, deleteFeatureAnalysis, exists, exportConceptSets, copyFeatureAnalysis, loadAggregates }
-

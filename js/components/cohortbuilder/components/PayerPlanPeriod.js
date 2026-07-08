@@ -176,4 +176,3 @@ function PayerPlanPeriodViewModel (params) {
 
 export { PayerPlanPeriodViewModel, template }
 export default { viewModel: PayerPlanPeriodViewModel, template }
-

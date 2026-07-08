@@ -75,4 +75,3 @@ class Trellisline extends Chart {
 }
 
 export default commonUtils.build('trellisline', Trellisline, view)
-

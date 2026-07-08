@@ -209,8 +209,8 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     this.isAgeRange = ko.pureComputed(() => ['between', 'notBetween'].includes(this.sampleAgeType()))
     this.firstAgeError = ko.pureComputed(() => this.firstAge() != null && this.firstAge() < 0)
     this.isAgeRangeError = ko.pureComputed(() => this.isAgeRange() && // age range selected
-				!(this.firstAge() == null && this.secondAge() == null) && // one is non-null
-				(this.firstAge() == null || this.secondAge() == null || this.firstAge() < 0 || this.secondAge() < 0 || this.firstAge() == this.secondAge())) //  has invalid value
+        !(this.firstAge() == null && this.secondAge() == null) && // one is non-null
+        (this.firstAge() == null || this.secondAge() == null || this.firstAge() < 0 || this.secondAge() < 0 || this.firstAge() == this.secondAge())) //  has invalid value
 
     // sampleSourceKey changes => get list of samples
     this.trackSub(this.sampleSourceKey.subscribe(val => {
@@ -353,7 +353,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     })
     this.canCopy = ko.pureComputed(() => {
       return !this.dirtyFlag().isDirty() && !this.isNew() &&
-			(this.isAuthenticated() && this.authApi.isPermittedCopyCohort(this.currentCohortDefinition().id()) || !config.userAuthenticationEnabled)
+      (this.isAuthenticated() && this.authApi.isPermittedCopyCohort(this.currentCohortDefinition().id()) || !config.userAuthenticationEnabled)
     })
     this.canDelete = ko.pureComputed(() => {
       if (this.isNew()) {
@@ -373,7 +373,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
       }
 
       return this.authApi.isPermittedReadCohorts() ||
-			(this.currentCohortDefinition() && this.authApi.isPermittedReadCohort(this.currentCohortDefinition().id()))
+      (this.currentCohortDefinition() && this.authApi.isPermittedReadCohort(this.currentCohortDefinition().id()))
     })
 
     this.hasAccessToGenerate = (sourceKey) => {
@@ -422,8 +422,8 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     })
 
     this.disableConceptSetExport = ko.pureComputed(() => {
-      return this.dirtyFlag().isDirty() || (this.currentCohortDefinition() && this.currentCohortDefinition().expression()	&&
-			this.currentCohortDefinition().expression().ConceptSets().length === 0)
+      return this.dirtyFlag().isDirty() || (this.currentCohortDefinition() && this.currentCohortDefinition().expression() &&
+      this.currentCohortDefinition().expression().ConceptSets().length === 0)
     })
 
     this.disableConceptSetExportMessage = ko.pureComputed(() => {
@@ -751,10 +751,10 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
     this.showReportNameDropdown = ko.pureComputed(() => {
       return this.reportSourceKey() != undefined &&
-			this.reportingState() != 'checking_status' &&
-			this.reportingState() != 'cohort_not_generated' &&
-			this.reportingState() != 'reports_not_generated' &&
-			this.reportingState() != 'generating_reports'
+      this.reportingState() != 'checking_status' &&
+      this.reportingState() != 'cohort_not_generated' &&
+      this.reportingState() != 'reports_not_generated' &&
+      this.reportingState() != 'generating_reports'
     })
 
     this.showUtilizationToRunModal = ko.observable(false)
@@ -842,7 +842,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
       entityTypeGetter: () => entityType.COHORT_DEFINITION,
       entityIdGetter: () => this.currentCohortDefinition().id(),
       createdByUsernameGetter: () => this.currentCohortDefinition() && this.currentCohortDefinition().createdBy() &&
-			this.currentCohortDefinition().createdBy().login
+      this.currentCohortDefinition().createdBy().login
     })
 
     TagsService.decorateComponent(this, {
@@ -1036,10 +1036,8 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
       switch (source.status()) {
         case 'COMPLETE':
           return false
-          break
         case 'n/a':
           return false
-          break
         default:
           return true
       }
@@ -1465,7 +1463,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
   exportConceptSetsCSV () {
     return FileService.loadZip(`${config.api.url}cohortdefinition/${this.currentCohortDefinition().id()}/export/conceptset`,
-			`cohortdefinition-conceptsets-${this.currentCohortDefinition().id()}.zip`)
+      `cohortdefinition-conceptsets-${this.currentCohortDefinition().id()}.zip`)
   }
 
   toggleCohortReport (item) {
@@ -1784,7 +1782,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
       }
     }
 
-    const	payload = {
+    const payload = {
       name,
       size,
       age,
@@ -1912,4 +1910,3 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 }
 
 export default commonUtils.build('cohort-definition-manager', CohortDefinitionManager, view)
-

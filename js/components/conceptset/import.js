@@ -83,8 +83,8 @@ class ConceptSetImport extends AutoBind(Component) {
 
   async importConceptSetExpression (expression, options) {
     if (this.currentConceptSet().expression.items().length == 0 ||
-			options.type == constants.importTypes.APPEND ||
-			this.confirmAction(options.type)) {
+      options.type == constants.importTypes.APPEND ||
+      this.confirmAction(options.type)) {
       if (options.type == constants.importTypes.OVERWRITE) {
         this.conceptSetStore.expression().items([])
       }
@@ -114,4 +114,3 @@ class ConceptSetImport extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-list-import', ConceptSetImport, view)
-

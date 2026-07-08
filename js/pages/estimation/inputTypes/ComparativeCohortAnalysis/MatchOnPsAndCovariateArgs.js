@@ -13,4 +13,3 @@ class MatchOnPsAndCovariateArgs extends RLangClass {
 }
 
 export default MatchOnPsAndCovariateArgs
-

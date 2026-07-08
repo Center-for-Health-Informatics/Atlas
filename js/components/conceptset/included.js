@@ -54,4 +54,3 @@ class IncludedConcepts extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-list-included', IncludedConcepts, view)
-

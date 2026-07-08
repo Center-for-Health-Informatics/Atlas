@@ -11,4 +11,3 @@ function ConceptSetItem (data) {
 }
 
 export default ConceptSetItem
-

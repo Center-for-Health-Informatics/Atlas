@@ -24,4 +24,3 @@ class StratifyArgsEditor extends Component {
 }
 
 export default commonUtils.build('stratify-args-editor', StratifyArgsEditor, view)
-

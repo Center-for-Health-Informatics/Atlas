@@ -57,4 +57,3 @@ class TemporalCovariateSettings extends RLangClass {
 }
 
 export default TemporalCovariateSettings
-

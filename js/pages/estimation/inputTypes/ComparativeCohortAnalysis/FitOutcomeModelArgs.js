@@ -19,4 +19,3 @@ class FitOutcomeModelArgs extends RLangClass {
 }
 
 export default FitOutcomeModelArgs
-

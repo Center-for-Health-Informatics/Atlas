@@ -45,4 +45,3 @@ class IncludedSourcecodes extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-list-included-sourcecodes', IncludedSourcecodes, view)
-

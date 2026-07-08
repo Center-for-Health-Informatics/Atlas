@@ -17,4 +17,3 @@ function ConceptSetSelection (data, conceptSets) {
 }
 
 export default ConceptSetSelection
-

@@ -78,4 +78,3 @@ class BaseDistributionStatConverter extends BaseStatConverter {
 }
 
 export default BaseDistributionStatConverter
-

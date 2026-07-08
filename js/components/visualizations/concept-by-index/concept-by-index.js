@@ -143,4 +143,3 @@ const component = {
 
 ko.components.register('visualizations/concept-by-index', component)
 export default component
-

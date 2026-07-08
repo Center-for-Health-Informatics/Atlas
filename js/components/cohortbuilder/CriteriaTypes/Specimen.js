@@ -64,4 +64,3 @@ Specimen.prototype.toJSON = function () {
 }
 
 export default Specimen
-

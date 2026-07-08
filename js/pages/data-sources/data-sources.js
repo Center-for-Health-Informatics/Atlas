@@ -154,4 +154,3 @@ class DataSources extends Page {
 }
 
 export default commonUtils.build('data-sources', DataSources, view)
-

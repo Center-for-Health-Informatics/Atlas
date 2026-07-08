@@ -159,4 +159,3 @@ class CohortMethodAnalysisEditor extends Component {
 }
 
 export default commonUtils.build('cohort-method-analysis-editor', CohortMethodAnalysisEditor, view)
-

@@ -26,4 +26,3 @@ function DeathViewModel (params) {
 // return compoonent definition
 export { DeathViewModel, template }
 export default { viewModel: DeathViewModel, template }
-

@@ -10,4 +10,3 @@ class PredictionCovariateSettings extends CovariateSettings {
   }
 }
 export default PredictionCovariateSettings
-

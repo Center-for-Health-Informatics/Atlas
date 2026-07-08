@@ -97,4 +97,3 @@ class Home extends Page {
 }
 
 export default commonUtils.build('home', Home, view)
-

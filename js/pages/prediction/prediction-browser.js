@@ -100,4 +100,3 @@ class PredictionBrowser extends Page {
 }
 
 export default commonUtils.build('prediction-browser', PredictionBrowser, view)
-

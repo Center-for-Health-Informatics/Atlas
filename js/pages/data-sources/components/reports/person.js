@@ -30,9 +30,9 @@ class Person extends Report {
         getTooltipBuilder: options => d => {
           const format = d3.format('')
           return `
-					${options.xLabel}: ${options.xFormat(d[options.xValue])}<br/>
-					${options.yLabel}: ${d3.format(',')(d[options.yValue])}
-				`
+          ${options.xLabel}: ${options.xFormat(d[options.xValue])}<br/>
+          ${options.yLabel}: ${d3.format(',')(d[options.yValue])}
+        `
         },
       },
     }
@@ -58,4 +58,3 @@ class Person extends Report {
 }
 
 export default commonUtils.build('report-person', Person, view)
-

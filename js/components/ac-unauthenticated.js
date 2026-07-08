@@ -15,4 +15,3 @@ const component = {
 
 ko.components.register('unauthenticated', component)
 export default component
-

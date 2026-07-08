@@ -14,4 +14,3 @@ function CustomEraStrategyViewModel (params) {
 // return compoonent definition
 export { CustomEraStrategyViewModel, template }
 export default { viewModel: CustomEraStrategyViewModel, template }
-

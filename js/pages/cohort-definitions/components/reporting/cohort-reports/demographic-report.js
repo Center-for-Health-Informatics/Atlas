@@ -369,4 +369,3 @@ class DemographicReportView extends AutoBind(Component) {
 }
 
 export default commonUtils.build('demographic-report', DemographicReportView, view)
-

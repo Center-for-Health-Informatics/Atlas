@@ -7,4 +7,3 @@ const applicationStatuses = {
 
 export { applicationStatuses }
 export default { applicationStatuses }
-

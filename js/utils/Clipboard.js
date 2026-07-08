@@ -44,4 +44,3 @@ const Clipboard = (C = class {}) => class extends C {
 }
 
 export default Clipboard
-

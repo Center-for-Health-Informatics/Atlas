@@ -25,4 +25,3 @@ class TaggingManager extends AutoBind(Page) {
 }
 
 export default commonUtils.build('tagging-manager', TaggingManager, view)
-

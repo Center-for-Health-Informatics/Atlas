@@ -10,4 +10,3 @@ class TargetOutcome {
 }
 
 export default TargetOutcome
-

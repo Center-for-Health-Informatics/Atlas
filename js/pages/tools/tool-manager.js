@@ -178,4 +178,3 @@ class ToolManage extends Page {
 }
 
 export default commonUtils.build('tool-manager', ToolManage, view)
-

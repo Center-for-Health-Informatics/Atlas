@@ -12,4 +12,3 @@ class RandomForestSettings {
 }
 
 export default RandomForestSettings
-

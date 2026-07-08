@@ -92,9 +92,9 @@ class ReportDrilldown extends Report {
         getTooltipBuilder: options => d => {
           const yFormat = d3.format('.2f')
           return `
-					Count: ${options.xFormat(d[options.xValue])}<br/>
-					${options.yLabel}: ${yFormat(d[options.yValue])}
-				`
+          Count: ${options.xFormat(d[options.xValue])}<br/>
+          ${options.yLabel}: ${yFormat(d[options.yValue])}
+        `
         },
       },
       prevalenceByGenderAgeYear: {
@@ -225,8 +225,8 @@ class ReportDrilldown extends Report {
         this.chartFormats.frequencyDistribution.yMax = yScaleMax
         this.chartFormats.frequencyDistribution.xLabel = ko.pureComputed(function () {
           return ko.i18n('dataSources.drilldown.chartFormat.frequencyDistribution.xLabel1', 'Count ("x" or more ')() +
-					report +
-					ko.i18n('dataSources.drilldown.chartFormat.frequencyDistribution.xLabel2', 's)')()
+          report +
+          ko.i18n('dataSources.drilldown.chartFormat.frequencyDistribution.xLabel2', 's)')()
         })
         this.chartFormats.frequencyDistribution.ticks = Math.min(5, frequencyHistogram.INTERVALS)
         const freqHistData = atlascharts.histogram.mapHistogram(frequencyHistogram)
@@ -373,4 +373,3 @@ class ReportDrilldown extends Report {
 }
 
 export default commonUtils.build('report-drilldown', ReportDrilldown, view)
-

@@ -8,4 +8,3 @@ const defaultInputParamsValues = {
 }
 
 export default defaultInputParamsValues
-

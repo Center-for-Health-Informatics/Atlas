@@ -30,4 +30,3 @@ class PathwayEditor extends Component {
 }
 
 export default commonUtils.build('pathway-design', PathwayEditor, view)
-

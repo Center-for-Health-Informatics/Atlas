@@ -3,7 +3,7 @@ import IRAnalysisExpression from './IRAnalysisExpression'
 
 function IRAnalysisDefinition (data) {
   const self = this
-  var data = data || {}
+  data = data || {}
 
   self.id = ko.observable(data.id || null)
   self.name = ko.observable(data.name || ko.i18n('const.newEntityNames.incidenceRate', 'New Incidence Rate Analysis')())
@@ -16,4 +16,3 @@ function IRAnalysisDefinition (data) {
   self.tags = ko.observableArray(data.tags)
 }
 export default IRAnalysisDefinition
-

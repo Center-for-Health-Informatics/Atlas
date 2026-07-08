@@ -43,4 +43,3 @@ class RandomForestSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('random-forest-settings', RandomForestSettings, view)
-

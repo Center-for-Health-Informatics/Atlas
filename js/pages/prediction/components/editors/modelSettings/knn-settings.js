@@ -15,4 +15,3 @@ class KNNSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('knn-settings', KNNSettings, view)
-

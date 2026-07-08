@@ -47,4 +47,3 @@ class CharacterizationExecWrapper extends Component {
 }
 
 export default commonUtils.build('characterization-exec-wrapper', CharacterizationExecWrapper, view)
-

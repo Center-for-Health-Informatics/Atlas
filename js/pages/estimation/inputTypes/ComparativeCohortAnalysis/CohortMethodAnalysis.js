@@ -39,4 +39,3 @@ class CohortMethodAnalysis extends Analysis {
 }
 
 export default CohortMethodAnalysis
-

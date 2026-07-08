@@ -103,4 +103,3 @@ class IRAnalysisEditorModel extends AutoBind(Component) {
 }
 
 export default commonUtils.build('ir-analysis-editor', IRAnalysisEditorModel, view)
-

@@ -22,4 +22,3 @@ const colorHorizontalBoxplot = [
 
 export { formatPct, formatStdDiff, colorHorizontalBoxplot }
 export default { formatPct, formatStdDiff, colorHorizontalBoxplot }
-

@@ -17,4 +17,3 @@ class Authorship extends AutoBind(Component) {
 }
 
 export default commonUtils.build('authorship', Authorship, view)
-

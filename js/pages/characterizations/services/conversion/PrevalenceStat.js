@@ -16,4 +16,3 @@ class PrevalenceStat {
 }
 
 export default PrevalenceStat
-

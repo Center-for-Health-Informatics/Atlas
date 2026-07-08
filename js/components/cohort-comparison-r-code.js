@@ -18,4 +18,3 @@ const component = {
 
 ko.components.register('cohort-comparison-r-code', component)
 export default component
-

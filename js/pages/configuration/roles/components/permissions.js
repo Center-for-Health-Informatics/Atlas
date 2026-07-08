@@ -30,4 +30,3 @@ class PermissionsView extends AutoBind(Component) {
 }
 
 export default commonUtils.build('permissions', PermissionsView, view)
-

@@ -38,4 +38,3 @@ class PatientLevelPrediction {
 }
 
 export default PatientLevelPrediction
-

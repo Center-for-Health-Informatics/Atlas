@@ -14,4 +14,3 @@ class ReusableParameter {
 }
 
 export default ReusableParameter
-

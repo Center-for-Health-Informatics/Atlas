@@ -13,4 +13,3 @@ class Scatterplot extends Chart {
 }
 
 export default commonUtils.build('scatterplot', Scatterplot, view)
-

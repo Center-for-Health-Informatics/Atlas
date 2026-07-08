@@ -23,4 +23,3 @@ class IncidenceRatesConceptSet extends AutoBind(Component) {
 }
 
 export default commonUtils.build('incidence-rates-conceptset', IncidenceRatesConceptSet, view)
-

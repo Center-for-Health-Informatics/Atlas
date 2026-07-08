@@ -20,4 +20,3 @@ class Heading extends Component {
 }
 
 export default commonUtils.build('heading-title', Heading, view)
-

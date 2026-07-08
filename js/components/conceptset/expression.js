@@ -68,4 +68,3 @@ class ConceptSetExpression extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-list-expression', ConceptSetExpression, view)
-

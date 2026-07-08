@@ -15,4 +15,3 @@ DateAdjustment.START_DATE = 'START_DATE'
 DateAdjustment.END_DATE = 'END_DATE'
 
 export default DateAdjustment
-

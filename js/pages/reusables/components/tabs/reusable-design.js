@@ -130,4 +130,3 @@ class ReusableEditor extends AutoBind(Component) {
 }
 
 export default commonUtils.build('reusable-design', ReusableEditor, view)
-

@@ -28,4 +28,3 @@ class WarningsBadgeComponent extends Component {
 }
 
 export default commonUtils.build('warnings-badge', WarningsBadgeComponent, view)
-

@@ -15,4 +15,3 @@ function extractServerMessage (e) {
 
 export { translateException, extractServerMessage }
 export default { translateException, extractServerMessage }
-

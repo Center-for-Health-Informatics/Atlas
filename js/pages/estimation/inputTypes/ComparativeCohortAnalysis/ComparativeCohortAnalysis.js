@@ -10,4 +10,3 @@ class ComparativeCohortAnalysis {
 }
 
 export default ComparativeCohortAnalysis
-

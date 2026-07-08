@@ -13,4 +13,3 @@ class RunPlpArgs {
 }
 
 export default RunPlpArgs
-

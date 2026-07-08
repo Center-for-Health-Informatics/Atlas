@@ -12,4 +12,3 @@ class WhitePage extends Component {
 }
 
 export default commonUtils.build('white-page', WhitePage, view)
-

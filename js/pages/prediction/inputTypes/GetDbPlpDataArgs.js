@@ -9,4 +9,3 @@ class GetDbPLPDataArgs {
 }
 
 export default GetDbPLPDataArgs
-

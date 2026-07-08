@@ -285,4 +285,3 @@ class ObservationPeriodReport extends Report {
 }
 
 export default commonUtils.build('report-observation-period', ObservationPeriodReport, view)
-

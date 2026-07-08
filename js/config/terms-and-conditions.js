@@ -16,4 +16,3 @@ const termsAndConditions = {
 
 export { termsAndConditions }
 export default { termsAndConditions }
-

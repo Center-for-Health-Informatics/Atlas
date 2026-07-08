@@ -56,4 +56,3 @@ PayerPlanPeriod.prototype.toJSON = function () {
 }
 
 export default PayerPlanPeriod
-

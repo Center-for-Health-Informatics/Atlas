@@ -23,4 +23,3 @@ class DrugEra extends TreemapReport {
 }
 
 export default commonUtils.build('report-drug-era', DrugEra, view)
-

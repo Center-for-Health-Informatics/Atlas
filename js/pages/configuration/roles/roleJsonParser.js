@@ -145,7 +145,7 @@ const reduceArray = function (inputArray = [], key = '', existingPermissionsMap 
 
 const isPermissionContainExplicitId = function (permision) {
   return PERMISSION_ID_REGEX.test(permision) &&
-		!permision.startsWith(ROLE_PERMISSION + ':' + PUBLIC_ROLE_ID + ':') // public role is predefine and has id=1
+    !permision.startsWith(ROLE_PERMISSION + ':' + PUBLIC_ROLE_ID + ':') // public role is predefine and has id=1
 }
 
 export {
@@ -156,4 +156,3 @@ export {
   reduceArray,
   isPermissionContainExplicitId
 }
-

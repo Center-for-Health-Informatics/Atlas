@@ -78,4 +78,3 @@ Measurement.prototype.toJSON = function () {
 }
 
 export default Measurement
-

@@ -38,4 +38,3 @@ class CharacterizationViewEditUtils extends AutoBind(Component) {
 }
 
 export default commonUtils.build('characterization-view-edit-utils', CharacterizationViewEditUtils, view)
-

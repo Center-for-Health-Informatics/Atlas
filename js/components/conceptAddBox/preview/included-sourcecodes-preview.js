@@ -18,11 +18,11 @@ class IncludedSourcecodesPreview extends AutoBind(Component) {
     this.relatedSourcecodesColumns = globalConstants.getRelatedSourcecodesColumns(sharedState, { canEditCurrentConceptSet: ko.observable(false) }, () => {})
       .filter(c =>
         c.data === 'CONCEPT_ID' ||
-			c.data === 'CONCEPT_CODE' ||
-			c.data === 'CONCEPT_NAME' ||
-			c.data === 'CONCEPT_CLASS_ID' ||
-			c.data === 'DOMAIN_ID' ||
-			c.data === 'VOCABULARY_ID'
+      c.data === 'CONCEPT_CODE' ||
+      c.data === 'CONCEPT_NAME' ||
+      c.data === 'CONCEPT_CLASS_ID' ||
+      c.data === 'DOMAIN_ID' ||
+      c.data === 'VOCABULARY_ID'
       )
     this.relatedSourcecodesOptions = globalConstants.relatedSourcecodesOptions
     this.tableOptions = params.tableOptions || commonUtils.getTableOptions('M')
@@ -58,4 +58,3 @@ class IncludedSourcecodesPreview extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-list-included-sourcecodes-preview', IncludedSourcecodesPreview, view)
-

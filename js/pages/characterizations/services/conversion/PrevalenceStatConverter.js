@@ -125,4 +125,3 @@ class PrevalenceStatConverter extends BaseStatConverter {
 }
 
 export default PrevalenceStatConverter
-

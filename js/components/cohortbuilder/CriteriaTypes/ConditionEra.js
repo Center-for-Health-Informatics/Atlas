@@ -48,4 +48,3 @@ ConditionEra.prototype.toJSON = function () {
 }
 
 export default ConditionEra
-

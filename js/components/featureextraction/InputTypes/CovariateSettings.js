@@ -124,4 +124,3 @@ class CovariateSettings extends RLangClass {
 }
 
 export default CovariateSettings
-

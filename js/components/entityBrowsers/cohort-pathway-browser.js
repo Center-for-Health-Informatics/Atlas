@@ -86,4 +86,3 @@ class CohortPathwayBrowser extends EntityBrowser {
 }
 
 export default commonUtils.build('cohort-pathway-browser', CohortPathwayBrowser, view)
-

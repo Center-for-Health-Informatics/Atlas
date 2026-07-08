@@ -78,4 +78,3 @@ options.selectorType = [{
 }]
 
 export default options
-

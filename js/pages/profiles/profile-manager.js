@@ -55,10 +55,10 @@ class ProfileManager extends AutoBind(Page) {
     // already loaded into the page model. If not, load it from the
     // server
     if (this.cohortDefinitionId() &&
-			(
-			  this.cohortDefinition() &&
-				this.cohortDefinition().id() === this.cohortDefinitionId
-			)
+      (
+        this.cohortDefinition() &&
+        this.cohortDefinition().id() === this.cohortDefinitionId
+      )
     ) {
       // The cohort definition requested is already loaded into the page model - just reference it
       this.currentCohortDefinition(this.cohortDefinition())
@@ -353,13 +353,13 @@ class ProfileManager extends AutoBind(Page) {
         })
         this.personRecords(person.records)
         person.shadedRegions =
-					person.observationPeriods.map(op => {
-					  return {
-					    x1: op.x1,
-					    x2: op.x2,
-					    className: 'observation-period',
-					  }
-					})
+          person.observationPeriods.map(op => {
+            return {
+              x1: op.x1,
+              x2: op.x2,
+              className: 'observation-period',
+            }
+          })
         this.shadedRegions(person.shadedRegions)
         this.person(person)
       })
@@ -465,4 +465,3 @@ class ProfileManager extends AutoBind(Page) {
 }
 
 export default commonUtils.build('profile-manager', ProfileManager, view)
-

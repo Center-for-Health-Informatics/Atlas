@@ -59,4 +59,3 @@ function decorateComponent (component, { entityTypeGetter, entityIdGetter, creat
 
 export { loadEntityAccessList, grantEntityAccess, revokeEntityAccess, loadRoleSuggestions, decorateComponent }
 export default { loadEntityAccessList, grantEntityAccess, revokeEntityAccess, loadRoleSuggestions, decorateComponent }
-

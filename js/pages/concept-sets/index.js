@@ -27,4 +27,3 @@ export default {
   icon: 'shopping-cart',
   statusCss,
 }
-

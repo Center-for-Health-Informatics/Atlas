@@ -482,4 +482,3 @@ function getPermissionsText (clause = false, action = 'edit') {
 
 export { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
 export default { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
-

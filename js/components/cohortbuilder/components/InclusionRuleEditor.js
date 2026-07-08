@@ -16,4 +16,3 @@ const component = {
 
 // return component definition
 export default component
-

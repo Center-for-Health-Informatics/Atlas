@@ -179,4 +179,3 @@ class ConceptHierarchy extends Component {
 }
 
 export default commonUtils.build('concept-hierarchy', ConceptHierarchy, view)
-

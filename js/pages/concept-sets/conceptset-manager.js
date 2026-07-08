@@ -98,10 +98,10 @@ class ConceptsetManager extends AutoBind(Page) {
     this.canSave = ko.computed(() => {
       return (
         !this.loading() &&
-			this.currentConceptSet() != null &&
-			(this.currentConceptSetDirtyFlag().isDirty() || this.previewVersion()) &&
-			this.isNameCorrect() &&
-			this.canEdit()
+      this.currentConceptSet() != null &&
+      (this.currentConceptSetDirtyFlag().isDirty() || this.previewVersion()) &&
+      this.isNameCorrect() &&
+      this.canEdit()
       )
     })
     this.canCreate = ko.computed(() => {
@@ -138,10 +138,10 @@ class ConceptsetManager extends AutoBind(Page) {
     this.canOptimize = ko.computed(() => {
       return (
         this.currentConceptSet() &&
-			this.currentConceptSet().id != 0 &&
-			this.currentConceptSet().expression.items().length > 1 &&
-			this.canCreate() &&
-			this.canEdit()
+      this.currentConceptSet().id != 0 &&
+      this.currentConceptSet().expression.items().length > 1 &&
+      this.canCreate() &&
+      this.canEdit()
       )
     })
     this.optimalConceptSet = ko.observable(null)
@@ -151,9 +151,9 @@ class ConceptsetManager extends AutoBind(Page) {
     this.optimizerFoundSomething = ko.pureComputed(() => {
       let returnVal = false
       if (this.optimalConceptSet() &&
-			this.optimalConceptSet().length > 0 &&
-			this.currentConceptSet() && this.currentConceptSet().expression.items() &&
-			this.currentConceptSet().expression.items().length > 0) {
+      this.optimalConceptSet().length > 0 &&
+      this.currentConceptSet() && this.currentConceptSet().expression.items() &&
+      this.currentConceptSet().expression.items().length > 0) {
         returnVal = this.optimalConceptSet().length != this.currentConceptSet().expression.items().length
       }
       return returnVal
@@ -347,7 +347,7 @@ class ConceptsetManager extends AutoBind(Page) {
       entityTypeGetter: () => entityType.CONCEPT_SET,
       entityIdGetter: () => this.currentConceptSet() && this.currentConceptSet().id,
       createdByUsernameGetter: () => this.currentConceptSet() && this.currentConceptSet().createdBy &&
-			this.currentConceptSet().createdBy.login
+      this.currentConceptSet().createdBy.login
     })
 
     this.tags = ko.observableArray(this.currentConceptSet() && this.currentConceptSet().tags)
@@ -564,7 +564,7 @@ class ConceptsetManager extends AutoBind(Page) {
 
   closeConceptSet () {
     if (this.currentConceptSetDirtyFlag().isDirty() &&
-			!confirm(ko.unwrap(ko.i18n('cs.manager.csNotSavedConfirmMessage', 'Your concept set changes are not saved. Would you like to continue?')))) {
+      !confirm(ko.unwrap(ko.i18n('cs.manager.csNotSavedConfirmMessage', 'Your concept set changes are not saved. Would you like to continue?')))) {
 
     } else {
       this.conceptSetStore.clear()
@@ -727,4 +727,3 @@ class ConceptsetManager extends AutoBind(Page) {
   }
 }
 export default commonUtils.build('conceptset-manager', ConceptsetManager, view)
-

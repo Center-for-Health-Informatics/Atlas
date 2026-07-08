@@ -13,4 +13,3 @@ FieldOffset.prototype.toJSON = function () {
 }
 
 export default FieldOffset
-

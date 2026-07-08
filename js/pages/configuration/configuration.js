@@ -396,4 +396,3 @@ class Configuration extends AutoBind(Page) {
 }
 
 export default commonUtils.build('ohdsi-configuration', Configuration, view)
-

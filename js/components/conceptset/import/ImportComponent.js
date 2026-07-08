@@ -20,4 +20,3 @@ const ImportComponent = (C = class {}) => class extends C {
 }
 
 export default ImportComponent
-

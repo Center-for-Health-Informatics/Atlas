@@ -1,6 +1,6 @@
 const log = m => { console.log('[LOAD]', m); document.title = m }
 
-async function run() {
+async function run () {
   log('jquery'); const { default: $ } = await import('jquery')
   log('knockout'); const { default: ko } = await import('knockout')
   window.jQuery = window.$ = $

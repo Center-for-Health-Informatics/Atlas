@@ -30,4 +30,3 @@ Range.prototype.toJSON = function () {
 }
 
 export default Range
-

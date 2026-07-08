@@ -32,4 +32,3 @@ class Reusable {
 }
 
 export default Reusable
-

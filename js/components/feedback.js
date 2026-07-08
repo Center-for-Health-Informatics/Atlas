@@ -16,4 +16,3 @@ const component = {
 
 ko.components.register('feedback', component)
 export default component
-

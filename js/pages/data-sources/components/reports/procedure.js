@@ -24,4 +24,3 @@ class Procedure extends TreemapReport {
 }
 
 export default commonUtils.build('report-procedure', Procedure, view)
-

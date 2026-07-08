@@ -63,10 +63,10 @@ class ReportManager extends Component {
     this.reportValid = ko.computed(() => {
       return (
         this.reportReportName() != undefined &&
-			this.reportSourceKey() != undefined &&
-			this.reportCohortDefinitionId() != undefined &&
-			!this.loadingReport() &&
-			!this.loadingReportDrilldown()
+      this.reportSourceKey() != undefined &&
+      this.reportCohortDefinitionId() != undefined &&
+      !this.loadingReport() &&
+      !this.loadingReportDrilldown()
       )
     })
     const size4 = {
@@ -1134,41 +1134,41 @@ class ReportManager extends Component {
               }
 
               /* error in charting library
-						// cumulative observation
-						d3.selectAll("#cumulativeobservation svg")
-							.remove();
-						let cumObsData = ChartUtils.normalizeArray(data.cumulativeObservation);
-						if (!cumObsData.empty) {
-							let cumulativeObservationLine = new atlascharts.line();
-							let cumulativeData = atlascharts.histogram.normalizeDataframe(cumObsData)
-								.xLengthOfObservation
-								.map(function (d, i) {
-									let item = {
-										xValue: this.xLengthOfObservation[i],
-										yValue: this.yPercentPersons[i]
-									};
-									return item;
-								}, cumObsData);
+            // cumulative observation
+            d3.selectAll("#cumulativeobservation svg")
+              .remove();
+            let cumObsData = ChartUtils.normalizeArray(data.cumulativeObservation);
+            if (!cumObsData.empty) {
+              let cumulativeObservationLine = new atlascharts.line();
+              let cumulativeData = atlascharts.histogram.normalizeDataframe(cumObsData)
+                .xLengthOfObservation
+                .map(function (d, i) {
+                  let item = {
+                    xValue: this.xLengthOfObservation[i],
+                    yValue: this.yPercentPersons[i]
+                  };
+                  return item;
+                }, cumObsData);
 
-							let cumulativeObservationXLabel = 'Days';
-							if (cumulativeData.length > 0) {
-								if (cumulativeData.slice(-1)[0].xValue - cumulativeData[0].xValue > 1000) {
-									// convert x data to years
-									cumulativeData.forEach(function (d) {
-										d.xValue = d.xValue / 365.25;
-									});
-									cumulativeObservationXLabel = 'Years';
-								}
-							}
+              let cumulativeObservationXLabel = 'Days';
+              if (cumulativeData.length > 0) {
+                if (cumulativeData.slice(-1)[0].xValue - cumulativeData[0].xValue > 1000) {
+                  // convert x data to years
+                  cumulativeData.forEach(function (d) {
+                    d.xValue = d.xValue / 365.25;
+                  });
+                  cumulativeObservationXLabel = 'Years';
+                }
+              }
 
-							cumulativeObservationLine.render(cumulativeData, "#cumulativeobservation", 230, 115, {
-								yFormat: d3.format('0%'),
-								interpolate: (new atlascharts.line()).interpolation.curveStepBefore,
-								xLabel: cumulativeObservationXLabel,
-								yLabel: 'Percent of Population'
-							});
-						}
-						*/
+              cumulativeObservationLine.render(cumulativeData, "#cumulativeobservation", 230, 115, {
+                yFormat: d3.format('0%'),
+                interpolate: (new atlascharts.line()).interpolation.curveStepBefore,
+                xLabel: cumulativeObservationXLabel,
+                yLabel: 'Percent of Population'
+              });
+            }
+            */
 
               // observation period length by gender
               const obsPeriodByGenderData = ChartUtils.normalizeArray(data.durationByGender)
@@ -1267,22 +1267,22 @@ class ReportManager extends Component {
               // observed by year
               // tooltip bug
               /*
-						if (!data.personsWithContinuousObservationsByYear.empty && data.personsWithContinuousObservationsByYearStats) {
-							let histData3 = {};
-							let obsByYearDataMapped = data.personsWithContinuousObservationsByYear.map(value => ({ INTERVAL_INDEX: value.intervalIndex, COUNT_VALUE: value.countValue }));
-							histData2.DATA = ChartUtils.normalizeArray(obsByYearDataMapped);
-							histData3.INTERVAL_SIZE = +data.personsWithContinuousObservationsByYearStats[0].intervalSize;
-							histData3.OFFSET = +data.personsWithContinuousObservationsByYearStats[0].minValue;
-							histData3.MAX = +data.personsWithContinuousObservationsByYearStats[0].maxValue;
-							histData3.INTERVALS = Math.round((histData3.MAX - histData3.OFFSET + histData3.intervalSize) / histData3.INTERVAL_SIZE) + histData3.INTERVAL_SIZE;
-							d3.selectAll("#oppeoplebyyear svg").remove();
-							let observationLengthByYearHistogram = new atlascharts.histogram();
-							observationLengthByYearHistogram.render(atlascharts.histogram.mapHistogram(histData3), "#oppeoplebyyear", size12.width, size12.height, {
-								xLabel: 'Year',
-								yLabel: 'People'
-							});
-						}
-						*/
+            if (!data.personsWithContinuousObservationsByYear.empty && data.personsWithContinuousObservationsByYearStats) {
+              let histData3 = {};
+              let obsByYearDataMapped = data.personsWithContinuousObservationsByYear.map(value => ({ INTERVAL_INDEX: value.intervalIndex, COUNT_VALUE: value.countValue }));
+              histData2.DATA = ChartUtils.normalizeArray(obsByYearDataMapped);
+              histData3.INTERVAL_SIZE = +data.personsWithContinuousObservationsByYearStats[0].intervalSize;
+              histData3.OFFSET = +data.personsWithContinuousObservationsByYearStats[0].minValue;
+              histData3.MAX = +data.personsWithContinuousObservationsByYearStats[0].maxValue;
+              histData3.INTERVALS = Math.round((histData3.MAX - histData3.OFFSET + histData3.intervalSize) / histData3.INTERVAL_SIZE) + histData3.INTERVAL_SIZE;
+              d3.selectAll("#oppeoplebyyear svg").remove();
+              let observationLengthByYearHistogram = new atlascharts.histogram();
+              observationLengthByYearHistogram.render(atlascharts.histogram.mapHistogram(histData3), "#oppeoplebyyear", size12.width, size12.height, {
+                xLabel: 'Year',
+                yLabel: 'People'
+              });
+            }
+            */
 
               // observed by month
               const obsByMonthData = ChartUtils.normalizeArray(data.observedByMonth)
@@ -2224,8 +2224,8 @@ class ReportManager extends Component {
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
       const barDataTxt = '[{"attr":"Gender", "value":' + Math.max(0, oneBarData.genderP) +
-		'}, {"attr":"Race", "value":' + Math.max(0, oneBarData.raceP) +
-		'}, {"attr":"Ethnicity", "value":' + Math.max(0, oneBarData.ethP) + '}]'
+    '}, {"attr":"Race", "value":' + Math.max(0, oneBarData.raceP) +
+    '}, {"attr":"Ethnicity", "value":' + Math.max(0, oneBarData.ethP) + '}]'
 
       const barData = JSON.parse(barDataTxt)
       x.domain([0, d3.max(barData, function (d) {
@@ -3457,4 +3457,3 @@ class ReportManager extends Component {
 }
 
 export default commonUtils.build('report-manager', ReportManager, view)
-

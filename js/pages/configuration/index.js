@@ -22,4 +22,3 @@ export default {
   icon: 'cogs',
   statusCss,
 }
-

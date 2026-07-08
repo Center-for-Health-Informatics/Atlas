@@ -495,4 +495,3 @@ class CharacterizationViewEditResults extends AutoBind(Component) {
 }
 
 export default commonUtils.build('characterization-view-edit-results', CharacterizationViewEditResults, view)
-

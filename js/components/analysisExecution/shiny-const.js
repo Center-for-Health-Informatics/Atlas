@@ -6,4 +6,3 @@ const apiPaths = {
 }
 export { apiPaths }
 export default { apiPaths }
-

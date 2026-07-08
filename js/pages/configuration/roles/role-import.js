@@ -116,4 +116,3 @@ class RolesImport extends AutoBind(Component) {
 }
 
 export default commonUtils.build('role-import', RolesImport, view)
-

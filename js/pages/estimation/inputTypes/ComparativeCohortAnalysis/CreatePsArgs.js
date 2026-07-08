@@ -18,4 +18,3 @@ class CreatePsArgs extends RLangClass {
 }
 
 export default CreatePsArgs
-

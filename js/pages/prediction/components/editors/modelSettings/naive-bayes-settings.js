@@ -10,4 +10,3 @@ class NaiveBayesSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('naive-bayes-settings', NaiveBayesSettings, view)
-

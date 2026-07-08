@@ -10,4 +10,3 @@ class TrimByPsToEquipoiseArgs extends RLangClass {
 }
 
 export default TrimByPsToEquipoiseArgs
-

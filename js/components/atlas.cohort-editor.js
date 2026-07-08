@@ -60,4 +60,3 @@ const component = {
 
 ko.components.register('atlas.cohort-editor', component)
 export default component
-

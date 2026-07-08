@@ -14,4 +14,3 @@ const component = {
 
 ko.components.register('loading', component)
 export default component
-

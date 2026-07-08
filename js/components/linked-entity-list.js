@@ -24,4 +24,3 @@ class LinkedEntityList extends Component {
 }
 
 export default commonUtils.build('linked-entity-list', LinkedEntityList, view)
-

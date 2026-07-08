@@ -54,4 +54,3 @@ class Chart extends AutoBind(Component) {
 }
 
 export default Chart
-

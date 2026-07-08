@@ -129,4 +129,3 @@ class Dashboard extends Report {
 }
 
 export default commonUtils.build('report-dashboard', Dashboard, view)
-

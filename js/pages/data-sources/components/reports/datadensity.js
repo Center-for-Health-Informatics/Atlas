@@ -22,10 +22,10 @@ class datadensity extends Report {
       const yValue = d[options.yValue]
       const value = yValue < 1 ? d3.format('.3f')(yValue) : d3.formatPrefix('.3s', yValue)(yValue)
       return `
-			${d.seriesName}<br/>
-			${options.xLabel}: ${options.xFormat(d[options.xValue])}<br/>
-			${options.yLabel}: ${value}
-		`
+      ${d.seriesName}<br/>
+      ${options.xLabel}: ${options.xFormat(d[options.xValue])}<br/>
+      ${options.yLabel}: ${value}
+    `
     }
 
     this.chartFormats = {
@@ -125,4 +125,3 @@ class datadensity extends Report {
 }
 
 export default commonUtils.build('report-datadensity', datadensity, view)
-

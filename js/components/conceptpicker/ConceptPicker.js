@@ -134,4 +134,3 @@ const component = {
 
 ko.components.register('concept-picker', component)
 export default component
-

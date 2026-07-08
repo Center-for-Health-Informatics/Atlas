@@ -12,4 +12,3 @@ function highlightJS (code, language) {
 }
 
 export default highlightJS
-

@@ -71,4 +71,3 @@ class IncludedConceptsPreview extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-list-included-preview', IncludedConceptsPreview, view)
-

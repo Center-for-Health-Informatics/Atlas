@@ -40,4 +40,3 @@ const component = {
 ko.components.register('multi-select', component)
 
 export default component
-

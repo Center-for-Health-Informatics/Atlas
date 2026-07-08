@@ -9,4 +9,3 @@ function loadSourceList () {
 
 export { loadSourceList }
 export default { loadSourceList }
-

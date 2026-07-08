@@ -24,4 +24,3 @@ class DistributionStatConverter extends BaseDistributionStatConverter {
 }
 
 export default DistributionStatConverter
-

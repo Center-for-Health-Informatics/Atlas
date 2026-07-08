@@ -40,4 +40,3 @@ class FeasibilityReportViewerWithHeader extends Component {
 }
 
 export default commonUtils.build('feasibility-report-viewer-with-header', FeasibilityReportViewerWithHeader, view)
-

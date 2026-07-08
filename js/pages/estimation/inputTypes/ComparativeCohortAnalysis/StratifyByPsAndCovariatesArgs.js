@@ -12,4 +12,3 @@ class StratifyByPsAndCovariatesArgs extends RLangClass {
 }
 
 export default StratifyByPsAndCovariatesArgs
-

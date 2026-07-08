@@ -34,4 +34,3 @@ class EstimationAnalysis {
 }
 
 export default EstimationAnalysis
-

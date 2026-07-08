@@ -9,4 +9,3 @@ class TargetComparatorOutcome {
 }
 
 export default TargetComparatorOutcome
-

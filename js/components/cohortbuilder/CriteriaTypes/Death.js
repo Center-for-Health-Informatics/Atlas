@@ -50,4 +50,3 @@ Death.prototype.toJSON = function () {
 }
 
 export default Death
-

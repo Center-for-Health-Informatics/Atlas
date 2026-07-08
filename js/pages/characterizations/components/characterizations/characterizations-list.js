@@ -98,4 +98,3 @@ class Characterizations extends Component {
 }
 
 export default commonUtils.build('characterizations-list', Characterizations, view)
-

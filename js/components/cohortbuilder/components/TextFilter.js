@@ -38,4 +38,3 @@ export default {
   viewModel: TextFilterViewModel,
   template: componentTemplate,
 }
-

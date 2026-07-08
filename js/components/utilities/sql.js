@@ -81,4 +81,3 @@ class SqlExportUtil extends AutoBind(Component) {
 }
 
 export default commonUtils.build('export-sql', SqlExportUtil, view)
-

@@ -15,4 +15,3 @@ class LassoLogisticRegressionSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('lasso-logistic-regression-settings', LassoLogisticRegressionSettings, view)
-

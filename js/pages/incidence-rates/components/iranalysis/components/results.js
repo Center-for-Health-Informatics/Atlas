@@ -106,10 +106,10 @@ class IRAnalysisResultsViewer extends AutoBind(Component) {
       render: (s, p, d) => `${d.source.sourceName}`
     }, {
       /* title: ko.i18n('cohortDefinitions.cohortDefinitionManager.panels.generationStatus', 'Generation Status'),
-		render: (s,p,d) => {
-			return d.info() ? `${d.info().status}` : `n/a`
-		}
-	}, { */
+    render: (s,p,d) => {
+      return d.info() ? `${d.info().status}` : `n/a`
+    }
+  }, { */
       title: ko.i18n('ir.results.persons', 'Persons'),
       render: (s, p, d) => d.info() ? `${this.getSummaryData(d.info().summaryList).totalPersons}` : 'n/a'
     }, {
@@ -317,4 +317,3 @@ class IRAnalysisResultsViewer extends AutoBind(Component) {
 }
 
 export default commonUtils.build('ir-analysis-results', IRAnalysisResultsViewer, view)
-

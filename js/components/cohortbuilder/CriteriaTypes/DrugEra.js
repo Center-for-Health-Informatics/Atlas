@@ -49,4 +49,3 @@ DrugEra.prototype.toJSON = function () {
 }
 
 export default DrugEra
-

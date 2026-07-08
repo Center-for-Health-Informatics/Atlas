@@ -42,4 +42,3 @@ function sortedStrataNames (strataNames, filter = null) {
 
 export { formatPct, formatStdDiff, colorHorizontalBoxplot, sortedStrataNames, extractMeaningfulCovName }
 export default { formatPct, formatStdDiff, colorHorizontalBoxplot, sortedStrataNames, extractMeaningfulCovName }
-

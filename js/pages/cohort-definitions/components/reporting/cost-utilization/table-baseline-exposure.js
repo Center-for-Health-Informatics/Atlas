@@ -58,4 +58,3 @@ class TableBaselineExposure extends BaseCostUtilReport {
 }
 
 export default commonUtils.build(componentName, TableBaselineExposure, view)
-

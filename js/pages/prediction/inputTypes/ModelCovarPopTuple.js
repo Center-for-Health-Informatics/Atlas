@@ -11,4 +11,3 @@ class ModelCovarPopTuple {
 }
 
 export default ModelCovarPopTuple
-

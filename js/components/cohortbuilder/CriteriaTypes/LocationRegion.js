@@ -33,4 +33,3 @@ LocationRegion.prototype.toJSON = function () {
 }
 
 export default LocationRegion
-

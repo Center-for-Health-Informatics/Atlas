@@ -85,4 +85,3 @@ class EntityBrowser extends Component {
 }
 
 export default EntityBrowser
-

@@ -18,4 +18,3 @@ Period.prototype.toJSON = function () {
 }
 
 export default Period
-

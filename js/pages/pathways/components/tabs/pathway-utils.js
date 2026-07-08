@@ -57,4 +57,3 @@ class PathwayUtils extends AutoBind(Component) {
 }
 
 export default commonUtils.build('pathway-utils', PathwayUtils, view)
-

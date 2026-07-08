@@ -42,4 +42,3 @@ class ModelSettingsEditorComponent extends Component {
 }
 
 export default ModelSettingsEditorComponent
-

@@ -89,4 +89,3 @@ class IncidenceRateBrowser extends EntityBrowser {
 }
 
 export default commonUtils.build('incidence-rate-browser', IncidenceRateBrowser, view)
-

@@ -110,4 +110,3 @@ plainTextService.setUserTokenGetter(() => singletonApi.getUserToken())
 singletonApi.plainTextService = plainTextService
 
 export default singletonApi
-

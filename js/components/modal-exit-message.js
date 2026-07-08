@@ -31,4 +31,3 @@ class ModalExitMessage extends AutoBind(Clipboard(Component)) {
 }
 
 export default commonUtils.build('modal-exit-message', ModalExitMessage, view)
-

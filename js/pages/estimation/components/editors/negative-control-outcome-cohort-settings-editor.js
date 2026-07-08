@@ -16,4 +16,3 @@ class NegativeControlOutcomeCohortSettingsEditor extends Component {
 }
 
 export default commonUtils.build('nc-outcome-cohort-settings-editor', NegativeControlOutcomeCohortSettingsEditor, view)
-

@@ -14,4 +14,3 @@ function GenerateComponentViewModel (params) {
 // return compoonent definition
 export { GenerateComponentViewModel, template }
 export default { viewModel: GenerateComponentViewModel, template }
-

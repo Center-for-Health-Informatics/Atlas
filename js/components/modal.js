@@ -35,4 +35,3 @@ class AtlasModal extends Component {
 }
 
 export default commonUtils.build('atlas-modal', AtlasModal, view)
-

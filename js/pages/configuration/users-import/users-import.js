@@ -75,7 +75,7 @@ class UsersImport extends AutoBind(Component) {
     this.isShowUsernameHelp = ko.observable()
 
     this.importProvider.subscribe(() => {
-      this.rolesMapping().forEach(row => row.groups = ko.observableArray())
+      this.rolesMapping().forEach(row => { row.groups = ko.observableArray() })
       this.usersList.removeAll()
     })
 

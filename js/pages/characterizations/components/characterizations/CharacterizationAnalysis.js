@@ -30,4 +30,3 @@ class CharacterizationAnalysis {
 }
 
 export default CharacterizationAnalysis
-

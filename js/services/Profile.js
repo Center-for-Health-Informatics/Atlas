@@ -16,4 +16,3 @@ const getProfile = function (sourceKey, personId, cohort) {
 
 export { getProfile }
 export default { getProfile }
-

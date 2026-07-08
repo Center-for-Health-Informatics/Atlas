@@ -34,7 +34,7 @@ export function labeler () {
     const dist = Math.sqrt(dx * dx + dy * dy)
     let overlap = true
     const amount = 0
-    let theta = 0
+    const theta = 0
 
     // penalty for length of leader line
     if (dist > 0) ener += dist * w_len

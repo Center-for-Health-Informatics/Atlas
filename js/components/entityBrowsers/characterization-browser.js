@@ -89,4 +89,3 @@ class CharacterizationBrowser extends EntityBrowser {
 }
 
 export default commonUtils.build('characterization-browser', CharacterizationBrowser, view)
-

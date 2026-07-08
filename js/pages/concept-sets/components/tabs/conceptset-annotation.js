@@ -163,4 +163,3 @@ class ConceptsetAnnotation extends AutoBind(Component) {
   }
 }
 export default commonUtils.build('conceptset-annotation', ConceptsetAnnotation, view)
-

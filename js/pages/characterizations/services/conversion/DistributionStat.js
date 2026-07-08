@@ -23,4 +23,3 @@ class DistributionStat extends PrevalenceStat {
 }
 
 export default DistributionStat
-

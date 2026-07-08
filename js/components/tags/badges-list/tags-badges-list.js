@@ -33,4 +33,3 @@ class TagsBadgesList extends Component {
 }
 
 export default commonUtils.build('tags-badges-list', TagsBadgesList, view)
-

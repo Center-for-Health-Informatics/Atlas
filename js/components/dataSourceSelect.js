@@ -93,4 +93,3 @@ class DataSourceSelect extends AutoBind(Component) {
 }
 
 export default commonUtils.build('datasource-select', DataSourceSelect, view)
-

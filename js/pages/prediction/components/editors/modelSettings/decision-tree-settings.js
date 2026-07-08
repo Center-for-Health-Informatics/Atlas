@@ -51,4 +51,3 @@ class DecisionTreeSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('decision-tree-settings', DecisionTreeSettings, view)
-

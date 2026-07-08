@@ -36,4 +36,3 @@ class CharacterizationsTabbedGrid extends Component {
 }
 
 export default commonUtils.build('characterizations-tabbed-grid', CharacterizationsTabbedGrid, view)
-

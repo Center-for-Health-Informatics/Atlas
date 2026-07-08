@@ -78,4 +78,3 @@ class ConceptSetEditor extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-editor', ConceptSetEditor, view)
-

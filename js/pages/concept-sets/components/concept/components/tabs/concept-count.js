@@ -68,4 +68,3 @@ class ConceptManager extends Component {
 }
 
 export default commonUtils.build('concept-count', ConceptManager, view)
-

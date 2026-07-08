@@ -25,4 +25,3 @@ const component = {
 ko.components.register('conceptset-concept-modal', component)
 
 export default component
-

@@ -10,4 +10,3 @@ class TrimByPsArgs extends RLangClass {
 }
 
 export default TrimByPsArgs
-

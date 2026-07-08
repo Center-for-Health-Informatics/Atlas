@@ -70,4 +70,3 @@ ConditionOccurrence.prototype.toJSON = function () {
 }
 
 export default ConditionOccurrence
-

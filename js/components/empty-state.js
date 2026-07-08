@@ -14,4 +14,3 @@ class EmptyState extends Component {
 }
 
 export default commonUtils.build('empty-state', EmptyState, view)
-

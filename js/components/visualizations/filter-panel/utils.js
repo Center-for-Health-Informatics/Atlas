@@ -13,4 +13,3 @@ const getSelectedFilterValues = (filterList) => filterList.reduce(
 
 export { getSelectedFilterValues }
 export default { getSelectedFilterValues }
-

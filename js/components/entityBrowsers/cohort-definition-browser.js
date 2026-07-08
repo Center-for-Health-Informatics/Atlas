@@ -91,4 +91,3 @@ class CohortDefinitionBrowser extends EntityBrowser {
 }
 
 export default commonUtils.build('cohort-definition-browser', CohortDefinitionBrowser, view)
-

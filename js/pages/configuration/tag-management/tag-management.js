@@ -371,4 +371,3 @@ class TagManagement extends AutoBind(Page) {
 }
 
 export default commonUtils.build('tag-management', TagManagement, view)
-

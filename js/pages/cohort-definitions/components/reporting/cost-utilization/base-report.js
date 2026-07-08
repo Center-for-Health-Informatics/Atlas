@@ -221,4 +221,3 @@ class BaseCostUtilReport extends Component {
 }
 
 export default BaseCostUtilReport
-

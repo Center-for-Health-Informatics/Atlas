@@ -23,4 +23,3 @@ class IRAnalysisBrowserModel extends Component {
 }
 
 export default commonUtils.build('ir-analysis-browser', IRAnalysisBrowserModel, view)
-

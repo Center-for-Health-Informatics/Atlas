@@ -94,4 +94,3 @@ function runDiagnostics (design) {
 
 export { getPredictionList, savePrediction, copyPrediction, deletePrediction, getPrediction, exportPrediction, importPrediction, generate, listExecutions, exists, runDiagnostics }
 export default { getPredictionList, savePrediction, copyPrediction, deletePrediction, getPrediction, exportPrediction, importPrediction, generate, listExecutions, exists, runDiagnostics }
-

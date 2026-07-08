@@ -120,7 +120,7 @@ class SourceCodesImport extends AutoBind(ImportComponent(Component)) {
       const codes = this.sourcecodes().match(/[0-9a-zA-Z\.-]+/g)
       const { data } = await vocabularyApi.getConceptsByCode(codes)
       await vocabularyApi.loadDensity(data)
-      data.forEach(c => c.isSelected = ko.observable(false))
+      data.forEach(c => { c.isSelected = ko.observable(false) })
       this.loadedConcepts(data)
       this.notFoundCodes(codes.filter(code => data.filter(c => c.CONCEPT_CODE === code).length === 0))
     } finally {
@@ -130,4 +130,3 @@ class SourceCodesImport extends AutoBind(ImportComponent(Component)) {
 }
 
 export default commonUtils.build('conceptset-list-import-sourcecodes', SourceCodesImport, view)
-

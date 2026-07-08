@@ -42,4 +42,3 @@ class Import extends AutoBind(Component) {
 }
 
 export default commonUtils.build('import', Import, view)
-

@@ -288,4 +288,3 @@ class PathwayResults extends AutoBind(Component) {
 }
 
 export default commonUtils.build('pathway-results', PathwayResults, view)
-

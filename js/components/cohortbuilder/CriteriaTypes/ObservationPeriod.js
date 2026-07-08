@@ -34,4 +34,3 @@ ObservationPeriod.prototype.toJSON = function () {
 }
 
 export default ObservationPeriod
-

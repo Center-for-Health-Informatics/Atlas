@@ -17,4 +17,3 @@ class EstimationAnalysisSettings {
 }
 
 export default EstimationAnalysisSettings
-

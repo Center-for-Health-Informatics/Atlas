@@ -42,8 +42,8 @@
   }
 
   /**
-	 * Load using the browsers built-in load event on link tags
-	 */
+   * Load using the browsers built-in load event on link tags
+   */
   function loadLink (url, load) {
     const link = createLink(url)
 
@@ -55,10 +55,10 @@
   };
 
   /**
-	 * Insert a script tag and use it's onload & onerror to know when
-	 * the CSS is loaded, this will unfortunately also fire on other
-	 * errors (file not found, network problems)
-	 */
+   * Insert a script tag and use it's onload & onerror to know when
+   * the CSS is loaded, this will unfortunately also fire on other
+   * errors (file not found, network problems)
+   */
   function loadScript (url, load) {
     const link = createLink(url)
     const script = doc.createElement('script')

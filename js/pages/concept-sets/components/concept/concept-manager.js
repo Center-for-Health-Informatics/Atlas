@@ -95,4 +95,3 @@ class ConceptManager extends AutoBind(Page) {
 }
 
 export default commonUtils.build('concept-manager', ConceptManager, view)
-

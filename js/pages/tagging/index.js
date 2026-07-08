@@ -10,4 +10,3 @@ export default {
   statusCss: () => '',
   hidden: !appConfig.enableTaggingSection
 }
-

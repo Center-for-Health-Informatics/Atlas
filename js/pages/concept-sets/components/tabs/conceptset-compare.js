@@ -462,4 +462,3 @@ class ConceptsetCompare extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-compare', ConceptsetCompare, view)
-

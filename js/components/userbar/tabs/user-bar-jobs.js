@@ -14,4 +14,3 @@ class UserBarJobs extends Component {
 }
 
 export default commonUtils.build('user-bar-jobs', UserBarJobs, view)
-

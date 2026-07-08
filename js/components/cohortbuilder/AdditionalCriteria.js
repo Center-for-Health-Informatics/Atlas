@@ -10,4 +10,3 @@ class AdditionalCriteria extends WindowedCriteria {
 }
 
 export default AdditionalCriteria
-

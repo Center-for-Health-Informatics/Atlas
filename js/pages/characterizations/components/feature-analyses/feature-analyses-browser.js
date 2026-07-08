@@ -56,4 +56,3 @@ class FeatureAnalysesBrowser extends EntityBrowser {
 }
 
 export default commonUtils.build('feature-analyses-browser', FeatureAnalysesBrowser, view)
-

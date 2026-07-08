@@ -24,4 +24,3 @@ CustomEraStrategy.prototype.toJSON = function () {
 }
 
 export default CustomEraStrategy
-

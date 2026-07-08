@@ -77,4 +77,3 @@ DrugExposure.prototype.toJSON = function () {
 }
 
 export default DrugExposure
-

@@ -13,4 +13,3 @@ class GradientBoostingMachineSettings {
 }
 
 export default GradientBoostingMachineSettings
-

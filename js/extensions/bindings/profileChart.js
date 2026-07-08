@@ -35,7 +35,7 @@ const tipText = d => {
 
 const htmlTipText = d => {
   let tipText = '<p>' + ko.i18n('profiles.chart.event', 'Event: ')() + d.conceptName + '</p>' +
-	'<p>' + ko.i18n('profiles.chart.startDay', 'Start Day: ')() + d.startDay + '</p>'
+  '<p>' + ko.i18n('profiles.chart.startDay', 'Start Day: ')() + d.startDay + '</p>'
   if (canViewProfileDates() && d.startDate != null) {
     tipText += '<p>' + ko.i18n('profiles.chart.startDate', 'Start Date: ')() + momentApi.formatDate(new Date(d.startDate)) + '</p>'
   }
@@ -113,7 +113,7 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
     } else {
       xfd[0].filterFunction(function (d) {
         return xScale.invert(s[0]) <= d.startDay && d.startDay <= xScale.invert(s[1]) ||
-				xScale.invert(s[0]) <= d.endDay && d.endDay <= xScale.invert(s[1])
+        xScale.invert(s[0]) <= d.endDay && d.endDay <= xScale.invert(s[1])
       }) // start day
     }
     xfObservable.valueHasMutated()
@@ -347,8 +347,8 @@ function makeFilter (ext) {
   const filter = function ([start, end] = []) {
     return (
       (start >= ext[0] && start <= ext[1]) ||
-		(end >= ext[0] && end <= ext[1]) ||
-		(start <= ext[0] && end >= ext[1])
+    (end >= ext[0] && end <= ext[1]) ||
+    (start <= ext[0] && end >= ext[1])
     )
   }
   filter.ext = () => ext

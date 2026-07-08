@@ -21,4 +21,3 @@ class ConditionEra extends TreemapReport {
 }
 
 export default commonUtils.build('report-condition-era', ConditionEra, view)
-

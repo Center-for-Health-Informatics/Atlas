@@ -63,5 +63,4 @@ export {
   ViewMode,
 }
 
-
 export default { RESOLVE_OUT_OF_ORDER, defaultConceptHierarchyRelationships, pageTitle, paths, importModes, importTypes, ViewMode }

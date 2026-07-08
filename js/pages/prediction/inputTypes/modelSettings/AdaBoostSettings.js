@@ -10,4 +10,3 @@ class AdaBoostSettings {
 }
 
 export default AdaBoostSettings
-

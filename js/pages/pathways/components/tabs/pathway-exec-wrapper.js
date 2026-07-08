@@ -43,4 +43,3 @@ class PathwayExecWrapper extends Component {
 }
 
 export default commonUtils.build('pathway-exec-wrapper', PathwayExecWrapper, view)
-

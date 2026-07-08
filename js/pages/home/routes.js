@@ -44,4 +44,3 @@ function setAuth (token, authClient, reloginRequired, url) {
 }
 
 export default routes
-

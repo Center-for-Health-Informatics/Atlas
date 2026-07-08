@@ -6,4 +6,3 @@ const paths = {
 
 export { pageTitle, paths }
 export default { pageTitle, paths }
-

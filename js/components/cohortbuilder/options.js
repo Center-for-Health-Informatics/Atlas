@@ -104,4 +104,3 @@ options.EventDateOptions = [{
 }]
 
 export default options
-

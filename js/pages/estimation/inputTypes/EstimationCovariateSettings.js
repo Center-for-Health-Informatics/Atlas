@@ -10,4 +10,3 @@ class EstimationCovariateSettings extends CovariateSettings {
   }
 }
 export default EstimationCovariateSettings
-

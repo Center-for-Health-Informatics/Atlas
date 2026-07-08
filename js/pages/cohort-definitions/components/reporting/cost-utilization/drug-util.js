@@ -45,4 +45,3 @@ class DrugUtilReport extends BaseDrugUtilReport {
 }
 
 export default commonUtils.build(componentName, DrugUtilReport, view)
-

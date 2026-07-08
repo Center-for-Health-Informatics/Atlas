@@ -45,4 +45,3 @@ class ConceptSetImport extends AutoBind(ImportComponent(Component)) {
 }
 
 export default commonUtils.build('conceptset-list-import-conceptset', ConceptSetImport, view)
-

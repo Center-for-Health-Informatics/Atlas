@@ -56,7 +56,7 @@ function getJobURL (n) {
     case 'generateCohortCharacterization':
       if (n.status == 'COMPLETED') {
         return 'cc/characterizations/' + n.jobParameters.cohort_characterization_id + '/results/' +
-		        n.executionId
+            n.executionId
       } else {
         return 'cc/characterizations/' + n.jobParameters.cohort_characterization_id + '/executions/' + n.jobParameters.source_id
       }
@@ -75,6 +75,7 @@ function getJobURL (n) {
         case 'PLP':
           return 'plp/' + n.jobParameters.cohortId
       }
+      return null
     case 'generateEstimationAnalysis':
       return 'estimation/cca/' + n.jobParameters.estimation_analysis_id + '/executions/' + n.jobParameters.source_id
     case 'generatePredictionAnalysis':
@@ -106,4 +107,3 @@ function getLastViewedTime () {
 
 export { createJob, list, listRefreshCacheJobs, getJobURL, setLastViewedTime, getLastViewedTime }
 export default { createJob, list, listRefreshCacheJobs, getJobURL, setLastViewedTime, getLastViewedTime }
-

@@ -20,4 +20,3 @@ class WindowedCriteria {
 }
 
 export default WindowedCriteria
-

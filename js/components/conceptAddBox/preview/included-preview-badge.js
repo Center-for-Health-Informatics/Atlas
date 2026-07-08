@@ -16,4 +16,3 @@ class IncludedPreviewBadge extends Component {
 }
 
 export default commonUtils.build('conceptset-list-included-preview-badge', IncludedPreviewBadge, view)
-

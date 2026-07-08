@@ -69,4 +69,3 @@ class MultiInput extends AutoBind(Component) {
 }
 
 export default commonUtils.build('multi-input', MultiInput, view)
-

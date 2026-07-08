@@ -66,4 +66,3 @@ class PollService {
 
 const _pollService = new PollService()
 export { _pollService as PollService, PollService as PollServiceClass }
-

@@ -65,4 +65,3 @@ VisitOccurence.prototype.toJSON = function () {
 }
 
 export default VisitOccurence
-

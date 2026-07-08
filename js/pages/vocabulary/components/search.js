@@ -86,7 +86,7 @@ class Search extends AutoBind(Component) {
         entities.push(ko.i18n('search.loadingMessage.recommending', 'recommended concept into new concept set')())
       }
       return ko.i18n('search.loadingMessage.loading', 'Loading')() +
-				` ${entities.join(', ')}`
+        ` ${entities.join(', ')}`
     })
     this.buttons = [
       'colvis',
@@ -374,8 +374,8 @@ class Search extends AutoBind(Component) {
     // if we don't have a search and aren't looking up domain or vocabulary details, abort.
     if (
       this.currentSearch() === undefined &&
-		vocabElements.size == 0 &&
-		domainElements.size == 0
+    vocabElements.size == 0 &&
+    domainElements.size == 0
     ) {
       return
     }
@@ -534,4 +534,3 @@ class Search extends AutoBind(Component) {
 }
 
 export default commonUtils.build('vocabulary-search', Search, view)
-

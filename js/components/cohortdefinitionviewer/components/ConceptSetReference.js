@@ -34,4 +34,3 @@ function ConceptSetReference (params) {
 // return compoonent definition
 export { ConceptSetReference, template }
 export default { viewModel: ConceptSetReference, template }
-

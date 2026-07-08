@@ -174,4 +174,3 @@ class ConceptRelated extends Component {
 }
 
 export default commonUtils.build('concept-related', ConceptRelated, view)
-

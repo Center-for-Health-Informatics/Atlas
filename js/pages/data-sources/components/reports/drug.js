@@ -30,4 +30,3 @@ class Drug extends TreemapReport {
 }
 
 export default commonUtils.build('report-drug', Drug, view)
-

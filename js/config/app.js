@@ -168,4 +168,3 @@ appConfig.enableTaggingSection = false
 appConfig.refreshTokenThreshold = 1000 * 60 * 60 * 4 // refresh auth token if it will expire within 4 hours
 
 export default appConfig
-

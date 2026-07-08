@@ -3,7 +3,7 @@ import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
 
 function InclusionRule (data, conceptSets) {
   const self = this
-  var data = data || {}
+  data = data || {}
 
   self.name = ko.observable(data.name || null)
   self.description = ko.observable(data.description || null)
@@ -11,4 +11,3 @@ function InclusionRule (data, conceptSets) {
 }
 
 export default InclusionRule
-

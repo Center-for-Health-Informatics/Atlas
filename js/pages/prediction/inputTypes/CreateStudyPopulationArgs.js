@@ -21,4 +21,3 @@ class CreateStudyPopulationArgs extends RLangClass {
 }
 
 export default CreateStudyPopulationArgs
-

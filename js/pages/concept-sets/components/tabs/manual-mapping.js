@@ -264,4 +264,3 @@ class ManualMapping extends AutoBind(Component) {
 }
 
 export default commonUtils.build('manual-mapping', ManualMapping, view)
-

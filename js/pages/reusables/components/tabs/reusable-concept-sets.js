@@ -18,4 +18,3 @@ class ReusableConceptSets extends AutoBind(Component) {
 }
 
 export default commonUtils.build('reusable-concept-sets', ReusableConceptSets, view)
-

@@ -14,4 +14,3 @@ class JobPollService extends Poll.PollServiceClass {
   }
 }
 export default new JobPollService()
-

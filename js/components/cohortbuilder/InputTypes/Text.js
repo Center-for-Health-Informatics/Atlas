@@ -11,4 +11,3 @@ function Text (data) {
 }
 
 export default Text
-

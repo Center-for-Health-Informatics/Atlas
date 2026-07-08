@@ -21,4 +21,3 @@ class CharacterizationConceptSet extends AutoBind(Component) {
 }
 
 export default commonUtils.build('characterization-conceptsets', CharacterizationConceptSet, view)
-

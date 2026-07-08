@@ -91,4 +91,3 @@ class ConceptSetEntityBrowser extends EntityBrowser {
 }
 
 export default commonUtils.build('concept-set-entity-browser', ConceptSetEntityBrowser, view)
-

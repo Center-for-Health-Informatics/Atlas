@@ -15,4 +15,3 @@ class FloatTypeValidator extends TypeValidator {
 }
 
 export default FloatTypeValidator
-

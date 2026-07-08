@@ -29,4 +29,3 @@ class AdaBoostSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('ada-boost-settings', AdaBoostSettings, view)
-

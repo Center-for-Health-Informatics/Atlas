@@ -429,4 +429,3 @@ class ResolveConceptSetMappings extends AutoBind(Component) {
 }
 
 export default commonUtils.build('resolve-mappings', ResolveConceptSetMappings, view)
-

@@ -13,4 +13,3 @@ class DecisionTreeSettings {
 }
 
 export default DecisionTreeSettings
-

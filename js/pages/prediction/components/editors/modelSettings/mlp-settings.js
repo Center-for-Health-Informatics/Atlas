@@ -30,4 +30,3 @@ class MLPSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('mlp-settings', MLPSettings, view)
-

@@ -50,4 +50,3 @@ class PredictionCovariateSettingsEditor extends Component {
 }
 
 export default commonUtils.build('prediction-covar-settings-editor', PredictionCovariateSettingsEditor, view)
-

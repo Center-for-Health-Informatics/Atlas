@@ -74,4 +74,3 @@ function LocationRegionViewModel (params) {
 // return compoonent definition
 export { LocationRegionViewModel, template }
 export default { viewModel: LocationRegionViewModel, template }
-

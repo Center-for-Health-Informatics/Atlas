@@ -12,4 +12,3 @@ const maxDepthOptions = ['1', '2', '3', '4', '5', '6', '7']
 
 export { pageTitle, combinationWindowOptions, minCellCountOptions, maxDepthOptions }
 export default { pageTitle, combinationWindowOptions, minCellCountOptions, maxDepthOptions }
-

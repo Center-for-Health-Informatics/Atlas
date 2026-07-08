@@ -13,4 +13,3 @@ class HorizontalBoxPlot extends Chart {
 }
 
 export default commonUtils.build('horizontal-boxplot', HorizontalBoxPlot, view)
-

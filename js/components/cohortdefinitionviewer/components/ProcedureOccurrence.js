@@ -26,4 +26,3 @@ function ProcedureOccurrenceViewModel (params) {
 // return compoonent definition
 export { ProcedureOccurrenceViewModel, template }
 export default { viewModel: ProcedureOccurrenceViewModel, template }
-

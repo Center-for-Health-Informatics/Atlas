@@ -19,4 +19,3 @@ import tools from './tools/index'
 // order of nav items in left-nav will appear in the following order:
 export { home, dataSources, vocabulary, conceptSets, cohortDefinitions, characterizations, pathways, incidenceRates, profiles, estimation, prediction, reusables, tagging, jobs, configuration, feedback, tools }
 export default { home, dataSources, vocabulary, conceptSets, cohortDefinitions, characterizations, pathways, incidenceRates, profiles, estimation, prediction, reusables, tagging, jobs, configuration, feedback, tools }
-

@@ -26,4 +26,3 @@ class Observation extends TreemapReport {
 }
 
 export default commonUtils.build('report-observation', Observation, view)
-

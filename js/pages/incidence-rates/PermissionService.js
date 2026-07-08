@@ -7,4 +7,3 @@ function isPermittedExportSQL () {
 export {
   isPermittedExportSQL,
 }
-

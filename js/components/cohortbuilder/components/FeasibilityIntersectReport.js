@@ -134,9 +134,9 @@ function FeasibilityIntersectReport (params) {
     const rects = $(element).find('rect')
     ko.utils.arrayForEach(rects, (rect) => {
       if (self.allAnyOption() === 'ANY' && self.passedFailedOption() === 'PASSED' && checkRulesAny(rect.id) ||
-			self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'PASSED' && checkRulesAll(rect.id) ||
-			self.allAnyOption() === 'ANY' && self.passedFailedOption() === 'FAILED' && checkRulesAny(rect.id, true) ||
-			self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'FAILED' && checkRulesAll(rect.id, true)) { // include this rectangle in summary
+      self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'PASSED' && checkRulesAll(rect.id) ||
+      self.allAnyOption() === 'ANY' && self.passedFailedOption() === 'FAILED' && checkRulesAny(rect.id, true) ||
+      self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'FAILED' && checkRulesAll(rect.id, true)) { // include this rectangle in summary
         summaryValue += rect.__data__.value
 
         let percent = 0
@@ -162,4 +162,3 @@ ko.components.register('feasibility-intersect-report', component)
 
 // return compoonent definition
 export default component
-

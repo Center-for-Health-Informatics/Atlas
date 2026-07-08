@@ -19,4 +19,3 @@ class ConceptDetails extends Component {
 }
 
 export default commonUtils.build('concept-details', ConceptDetails, view)
-

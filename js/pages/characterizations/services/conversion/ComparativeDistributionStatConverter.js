@@ -14,4 +14,3 @@ class ComparativeDistributionStatConverter extends BaseDistributionStatConverter
 }
 
 export default ComparativeDistributionStatConverter
-

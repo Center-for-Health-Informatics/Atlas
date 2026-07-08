@@ -25,4 +25,3 @@ class IndetifiersImport extends AutoBind(ImportComponent(Component)) {
 }
 
 export default commonUtils.build('conceptset-list-import-identifiers', IndetifiersImport, view)
-

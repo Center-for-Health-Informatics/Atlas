@@ -194,4 +194,3 @@ class CharacterizationDesign extends AutoBind(Component) {
 }
 
 export default commonUtils.build('characterization-design', CharacterizationDesign, view)
-

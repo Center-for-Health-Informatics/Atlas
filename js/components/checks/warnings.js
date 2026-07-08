@@ -85,4 +85,3 @@ class WarningComponent extends AutoBind(Component) {
 }
 
 export default commonUtils.build('warnings', WarningComponent, view)
-

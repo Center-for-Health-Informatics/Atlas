@@ -14,4 +14,3 @@ class Panel extends Component {
 }
 
 export default commonUtils.build('panel', Panel, view)
-

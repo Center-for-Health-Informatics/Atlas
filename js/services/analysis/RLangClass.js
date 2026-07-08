@@ -5,4 +5,3 @@ class RLangClass {
 }
 
 export default RLangClass
-

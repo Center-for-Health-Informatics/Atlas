@@ -2,7 +2,7 @@ import ko from 'knockout'
 
 function jobDetail (data) {
   const self = this
-  var data = data || {}
+  data = data || {}
 
   self.name = data.name || ''
   self.type = data.type || 'batch'
@@ -34,7 +34,6 @@ function jobDetail (data) {
       case 'ir-analysis':
       case 'negative-controls':
         return null
-        break
       default:
         return progressData[self.progressValue]
     }
@@ -51,7 +50,6 @@ function jobDetail (data) {
         } else {
           return 'COMPLETE'
         }
-        break
       case 'cohort-generation':
         statusData = statusData.find(j => (String(j.id.cohortDefinitionId) + String(j.id.sourceId)) == this.executionId)
         break
@@ -81,4 +79,3 @@ function jobDetail (data) {
 }
 
 export default jobDetail
-

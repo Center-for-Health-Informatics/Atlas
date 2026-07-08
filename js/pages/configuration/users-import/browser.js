@@ -98,4 +98,3 @@ class UserImportBrowser extends AutoBind(Component) {
 }
 
 export default commonUtils.build('user-import-browser', UserImportBrowser, view)
-

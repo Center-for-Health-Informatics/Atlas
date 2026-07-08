@@ -55,7 +55,7 @@ class PredictionSpecificationViewEdit extends AutoBind(Component) {
   modelSettingRowClickHandler (data, obj, tableRow, rowIndex) {
     if (
       obj.target.className.indexOf('btn-remove') >= 0 ||
-		obj.target.className.indexOf('fa-times') >= 0
+    obj.target.className.indexOf('fa-times') >= 0
     ) {
       this.deleteFromTable(this.modelSettings, obj, rowIndex)
     } else {
@@ -66,7 +66,7 @@ class PredictionSpecificationViewEdit extends AutoBind(Component) {
   covariateSettingRowClickHandler (data, obj, tableRow, rowIndex) {
     if (
       obj.target.className.indexOf('btn-remove') >= 0 ||
-		obj.target.className.indexOf('fa-times') >= 0
+    obj.target.className.indexOf('fa-times') >= 0
     ) {
       this.deleteFromTable(this.patientLevelPredictionAnalysis().covariateSettings, obj, rowIndex)
     } else {
@@ -77,7 +77,7 @@ class PredictionSpecificationViewEdit extends AutoBind(Component) {
   populationSettingRowClickHandler (data, obj, tableRow, rowIndex) {
     if (
       obj.target.className.indexOf('btn-remove') >= 0 ||
-		obj.target.className.indexOf('fa-times') >= 0
+    obj.target.className.indexOf('fa-times') >= 0
     ) {
       this.deleteFromTable(this.patientLevelPredictionAnalysis().populationSettings, obj, rowIndex)
     } else {
@@ -105,7 +105,7 @@ class PredictionSpecificationViewEdit extends AutoBind(Component) {
     // Check if the button or inner element were clicked
     if (
       obj.target.className.indexOf('btn-remove') >= 0 ||
-		obj.target.className.indexOf('fa-times') >= 0
+    obj.target.className.indexOf('fa-times') >= 0
     ) {
       list.splice(index, 1)
     }
@@ -114,20 +114,20 @@ class PredictionSpecificationViewEdit extends AutoBind(Component) {
   // For later when we support temporal and non-temporal covariate settings
   /*
 addCovariateSettings(setting) {
-	const covariateSettings = (setting == 'Temporal') ? new TemporalCovariateSettings(this.defaultTemporalCovariateSettings) : new PredictionCovariateSettings(this.defaultCovariateSettings);
-	const headingPrefix = (setting == 'Temporal') ? 'Temporal ' : '';
-	const editorNamePrefix = (setting == 'Temporal') ? 'temporal-' : '';
-	this.patientLevelPredictionAnalysis().covariateSettings.push(
-		covariateSettings
-	);
-	var index = this.patientLevelPredictionAnalysis().covariateSettings().length - 1;
-	this.editorHeading(headingPrefix + 'Covariate Settings');
-	this.editorDescription('Add or update the covariate settings');
-	this.editorComponentName(editorNamePrefix + 'prediction-covar-settings-editor');
-	this.editorComponentParams({
-		covariateSettings: this.patientLevelPredictionAnalysis().covariateSettings()[index],
-	});
-	this.managerMode('editor');
+  const covariateSettings = (setting == 'Temporal') ? new TemporalCovariateSettings(this.defaultTemporalCovariateSettings) : new PredictionCovariateSettings(this.defaultCovariateSettings);
+  const headingPrefix = (setting == 'Temporal') ? 'Temporal ' : '';
+  const editorNamePrefix = (setting == 'Temporal') ? 'temporal-' : '';
+  this.patientLevelPredictionAnalysis().covariateSettings.push(
+    covariateSettings
+  );
+  var index = this.patientLevelPredictionAnalysis().covariateSettings().length - 1;
+  this.editorHeading(headingPrefix + 'Covariate Settings');
+  this.editorDescription('Add or update the covariate settings');
+  this.editorComponentName(editorNamePrefix + 'prediction-covar-settings-editor');
+  this.editorComponentParams({
+    covariateSettings: this.patientLevelPredictionAnalysis().covariateSettings()[index],
+  });
+  this.managerMode('editor');
 }
 */
 
@@ -204,4 +204,3 @@ addCovariateSettings(setting) {
 }
 
 export default commonUtils.build('prediction-specification-view-edit', PredictionSpecificationViewEdit, view)
-

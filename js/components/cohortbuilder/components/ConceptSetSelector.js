@@ -81,4 +81,3 @@ const component = {
 
 ko.components.register('conceptset-selector', component)
 export default component
-

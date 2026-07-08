@@ -13,4 +13,3 @@ DateOffsetStrategy.prototype.toJSON = function () {
 }
 
 export default DateOffsetStrategy
-

@@ -77,4 +77,3 @@ class ComparisonEditor extends Component {
 }
 
 export default commonUtils.build('comparison-editor', ComparisonEditor, view)
-

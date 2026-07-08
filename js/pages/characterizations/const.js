@@ -2,37 +2,37 @@ import consts from 'const'
 import ko from 'knockout'
 
 const pageTitle = ko.computed({
-      read: ko.i18n('navigation.characterizations', 'Characterizations'),
-      write: (value) => false,
-    })
+  read: ko.i18n('navigation.characterizations', 'Characterizations'),
+  write: (value) => false,
+})
 
-    const characterizationsTab = 0
-    const featureAnalysesTab = 1
+const characterizationsTab = 0
+const featureAnalysesTab = 1
 
-    const gridTabs = [
-      {
-        link: '#/cc/characterizations',
-        tabLabel: ko.i18n('cc.tabs.characterizations.title', 'Characterizations'),
-        newEntityLabel: ko.i18n('cc.tabs.characterizations.newLabel', 'Characterization'),
-        value: characterizationsTab,
-      },
-      {
-        link: '#/cc/feature-analyses',
-        tabLabel: ko.i18n('cc.tabs.featureAnalyses.title', 'Feature analyses'),
-        newEntityLabel: ko.i18n('cc.tabs.featureAnalyses.newLabel', 'Feature analysis'),
-        value: featureAnalysesTab,
-      },
-    ]
+const gridTabs = [
+  {
+    link: '#/cc/characterizations',
+    tabLabel: ko.i18n('cc.tabs.characterizations.title', 'Characterizations'),
+    newEntityLabel: ko.i18n('cc.tabs.characterizations.newLabel', 'Characterization'),
+    value: characterizationsTab,
+  },
+  {
+    link: '#/cc/feature-analyses',
+    tabLabel: ko.i18n('cc.tabs.featureAnalyses.title', 'Feature analyses'),
+    newEntityLabel: ko.i18n('cc.tabs.featureAnalyses.newLabel', 'Feature analysis'),
+    value: featureAnalysesTab,
+  },
+]
 
-    const ccGenerationStatus = consts.generationStatuses
+const ccGenerationStatus = consts.generationStatuses
 
-    const feAnalysisTypes = {
-      PRESET: 'PRESET',
-      CRITERIA_SET: 'CRITERIA_SET',
-      CUSTOM_FE: 'CUSTOM_FE'
-    }
+const feAnalysisTypes = {
+  PRESET: 'PRESET',
+  CRITERIA_SET: 'CRITERIA_SET',
+  CUSTOM_FE: 'CUSTOM_FE'
+}
 
-    const demoCustomSqlAnalysisDesign = `-- Custom analysis producing same results as Feature Extraction's "One covariate per drug in the drug_era table overlapping with any time prior to index."
+const demoCustomSqlAnalysisDesign = `-- Custom analysis producing same results as Feature Extraction's "One covariate per drug in the drug_era table overlapping with any time prior to index."
 SELECT
   CAST(drug_concept_id AS BIGINT) * 1000 + @analysis_id AS covariate_id,
   c.concept_name                                                                  AS covariate_name,
@@ -57,13 +57,12 @@ FROM (
 GROUP BY drug_concept_id, c.concept_name, stat.total_cnt
         `
 
-    export default {
-      feAnalysisTypes,
-      pageTitle,
-      ccGenerationStatus,
-      characterizationsTab,
-      featureAnalysesTab,
-      gridTabs,
-      demoCustomSqlAnalysisDesign,
-    }
-
+export default {
+  feAnalysisTypes,
+  pageTitle,
+  ccGenerationStatus,
+  characterizationsTab,
+  featureAnalysesTab,
+  gridTabs,
+  demoCustomSqlAnalysisDesign,
+}

@@ -11,4 +11,3 @@ const AutoBind = (C = class {}) => class AutoBind extends C {
 }
 
 export default AutoBind
-

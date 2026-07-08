@@ -16,4 +16,3 @@ class PriorEditor extends Component {
 }
 
 export default commonUtils.build('cyclops-prior-editor', PriorEditor, view)
-

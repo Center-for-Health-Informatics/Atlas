@@ -208,4 +208,3 @@ class Venn extends Component {
 }
 
 export default commonUtils.build('venn-diagram', Venn, view)
-

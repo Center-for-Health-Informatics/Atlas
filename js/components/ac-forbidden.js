@@ -13,4 +13,3 @@ const component = {
 
 ko.components.register('forbidden', component)
 export default component
-

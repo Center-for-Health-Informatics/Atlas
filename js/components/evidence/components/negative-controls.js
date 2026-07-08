@@ -437,13 +437,10 @@ class NegativeControls extends Component {
         switch (source.status()) {
           case 'COMPLETE':
             return false
-            break
           case 'ERROR':
             return false
-            break
           case 'n/a':
             return false
-            break
           default:
             return true
         }
@@ -539,4 +536,3 @@ const component = {
 }
 
 export default component
-

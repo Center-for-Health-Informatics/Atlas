@@ -48,7 +48,7 @@ function FeasibilityAttritionReport (params) {
     if (self.attritionStats()) {
       const attritionStat = self.attritionStats()[index]
       return 'Rule ' + attritionStat.name + ': ' + attritionStat.countSatisfying.toLocaleString() + ', ' +
-			this.formatPercent(attritionStat.percentSatisfying)
+      this.formatPercent(attritionStat.percentSatisfying)
     }
     return ''
   }
@@ -67,4 +67,3 @@ ko.components.register('feasibility-attrition-report', component)
 
 // return compoonent definition
 export default component
-

@@ -44,4 +44,3 @@ class ConceptsetList extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptsets-list', ConceptsetList, view)
-

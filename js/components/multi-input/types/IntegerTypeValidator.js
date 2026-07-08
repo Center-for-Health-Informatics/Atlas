@@ -15,4 +15,3 @@ class IntegerTypeValidator extends TypeValidator {
 }
 
 export default IntegerTypeValidator
-

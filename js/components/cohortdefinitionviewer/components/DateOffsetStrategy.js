@@ -18,4 +18,3 @@ function DateOffsetStrategyViewModel (params) {
 // return compoonent definition
 export { DateOffsetStrategyViewModel, template }
 export default { viewModel: DateOffsetStrategyViewModel, template }
-

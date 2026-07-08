@@ -391,4 +391,3 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
 }
 
 export default commonUtils.build('role-details', RoleDetails, view)
-

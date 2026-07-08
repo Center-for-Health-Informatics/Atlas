@@ -47,4 +47,3 @@ function getJobHistory (id) {
 
 export { listJobs, getJob, createJob, updateJob, deleteJob, mapRoleGroups, getJobHistory }
 export default { listJobs, getJob, createJob, updateJob, deleteJob, mapRoleGroups, getJobHistory }
-

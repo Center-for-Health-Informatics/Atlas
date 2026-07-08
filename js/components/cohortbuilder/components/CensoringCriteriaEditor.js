@@ -246,4 +246,3 @@ function CensoringCriteriaViewModel (params) {
 
 export { CensoringCriteriaViewModel, template }
 export default { viewModel: CensoringCriteriaViewModel, template }
-

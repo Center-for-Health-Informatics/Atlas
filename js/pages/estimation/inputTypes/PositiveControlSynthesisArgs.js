@@ -27,4 +27,3 @@ class PositiveControlSynthesisArgs {
 }
 
 export default PositiveControlSynthesisArgs
-

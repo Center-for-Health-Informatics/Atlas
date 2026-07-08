@@ -163,4 +163,3 @@ class VersionsComponent extends AutoBind(Component) {
 }
 
 export default commonUtils.build('versions', VersionsComponent, view)
-

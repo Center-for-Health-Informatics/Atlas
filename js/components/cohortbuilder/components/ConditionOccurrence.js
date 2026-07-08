@@ -198,4 +198,3 @@ function ConditionOccurrenceViewModel (params) {
 // return compoonent definition
 export { ConditionOccurrenceViewModel, template }
 export default { viewModel: ConditionOccurrenceViewModel, template }
-

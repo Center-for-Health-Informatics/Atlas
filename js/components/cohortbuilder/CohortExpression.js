@@ -9,7 +9,7 @@ import Period from './InputTypes/Period'
 
 function CohortExpression (data) {
   const self = this
-  var data = data || {}
+  data = data || {}
 
   self.ConceptSets = ko.observableArray(data.ConceptSets && data.ConceptSets.map(function (d) { return new ConceptSet(d) }))
   self.PrimaryCriteria = ko.observable(new PrimaryCriteria(data.PrimaryCriteria, self.ConceptSets))
@@ -30,4 +30,3 @@ function CohortExpression (data) {
   self.cdmVersionRange = data.cdmVersionRange || null
 }
 export default CohortExpression
-

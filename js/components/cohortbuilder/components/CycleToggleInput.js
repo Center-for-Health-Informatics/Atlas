@@ -31,4 +31,3 @@ function CycleToggleInputViewModel (params) {
 // return compoonent definition
 export { CycleToggleInputViewModel, template }
 export default { viewModel: CycleToggleInputViewModel, template }
-

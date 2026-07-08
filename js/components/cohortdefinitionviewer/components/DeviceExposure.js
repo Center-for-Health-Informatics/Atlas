@@ -26,4 +26,3 @@ function DeviceExposureViewModel (params) {
 // return compoonent definition
 export { DeviceExposureViewModel, template }
 export default { viewModel: DeviceExposureViewModel, template }
-

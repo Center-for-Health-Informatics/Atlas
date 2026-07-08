@@ -347,4 +347,3 @@ const reusableTypes = {
 
 export { maxEntityNameLength, minChartHeight, treemapGradient, defaultDeciles, relatedSourcecodesOptions, getLinkedFeAParametersColumns, getLinkedFeatureAnalysisColumns, getLinkedCohortColumns, getRelatedSourcecodesColumns, apiPaths, applicationStatuses, generationStatuses, timeAtRiskCohortDate, newEntityNames, pluginTypes, executionStatuses, executionResultModes, sqlDialects, eventTypes, jobTypes, disabledReasons, reusableTypes }
 export default { maxEntityNameLength, minChartHeight, treemapGradient, defaultDeciles, relatedSourcecodesOptions, getLinkedFeAParametersColumns, getLinkedFeatureAnalysisColumns, getLinkedCohortColumns, getRelatedSourcecodesColumns, apiPaths, applicationStatuses, generationStatuses, timeAtRiskCohortDate, newEntityNames, pluginTypes, executionStatuses, executionResultModes, sqlDialects, eventTypes, jobTypes, disabledReasons, reusableTypes }
-

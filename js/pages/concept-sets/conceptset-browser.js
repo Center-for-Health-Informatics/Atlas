@@ -21,4 +21,3 @@ class ConceptsetBrowser extends AutoBind(Page) {
 }
 
 export default commonUtils.build('conceptset-browser', ConceptsetBrowser, view)
-

@@ -23,4 +23,3 @@ class Condition extends TreemapReport {
 }
 
 export default commonUtils.build('report-condition', Condition, view)
-

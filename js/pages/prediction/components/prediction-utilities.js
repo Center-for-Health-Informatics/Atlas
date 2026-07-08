@@ -71,7 +71,7 @@ class PredictionUtilities extends Component {
     this.loading(true)
     fileService.loadZip(
       config.api.url + constants.apiPaths.downloadPackage(this.selectedAnalysisId(), this.packageName()),
-			`prediction_study_${this.selectedAnalysisId()}_export.zip`
+      `prediction_study_${this.selectedAnalysisId()}_export.zip`
     )
       .catch((e) => console.error('error when downloading: ' + e))
       .finally(() => this.loading(false))
@@ -146,4 +146,3 @@ class PredictionUtilities extends Component {
 }
 
 export default commonUtils.build('prediction-utilities', PredictionUtilities, view)
-

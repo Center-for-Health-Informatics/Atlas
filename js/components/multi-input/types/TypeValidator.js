@@ -14,4 +14,3 @@ class TypeValidator {
 }
 
 export default TypeValidator
-

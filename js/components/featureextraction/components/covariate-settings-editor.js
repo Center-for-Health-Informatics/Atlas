@@ -32,4 +32,3 @@ class CovariateSettingsEditor extends Component {
 }
 
 export default commonUtils.build('covar-settings-editor', CovariateSettingsEditor, view)
-

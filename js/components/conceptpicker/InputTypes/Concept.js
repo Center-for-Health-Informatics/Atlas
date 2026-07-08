@@ -20,4 +20,3 @@ function Concept (data) {
 }
 
 export default Concept
-

@@ -14,4 +14,3 @@ class Comparison {
 }
 
 export default Comparison
-

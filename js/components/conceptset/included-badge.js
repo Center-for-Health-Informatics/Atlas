@@ -12,4 +12,3 @@ class IncludedBadge extends Component {
 }
 
 export default commonUtils.build('conceptset-list-included-badge', IncludedBadge, view)
-

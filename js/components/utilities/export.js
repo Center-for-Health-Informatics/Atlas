@@ -76,4 +76,3 @@ class ExportUtil extends AutoBind(Clipboard(Component)) {
 }
 
 export default commonUtils.build('export', ExportUtil, view)
-

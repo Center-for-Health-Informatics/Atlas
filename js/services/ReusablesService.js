@@ -87,4 +87,3 @@ function updateVersion (version) {
 
 export { PARAMETER_TYPE, list, create, exists, copy, load, save, del, getVersions, getVersion, updateVersion, copyVersion }
 export default { PARAMETER_TYPE, list, create, exists, copy, load, save, del, getVersions, getVersion, updateVersion, copyVersion }
-

@@ -8,4 +8,3 @@ class TargetOutcomes {
 }
 
 export default TargetOutcomes
-

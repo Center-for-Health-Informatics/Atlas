@@ -171,4 +171,3 @@ state.Reusable = {
 state.Reusable.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.Reusable.current()))
 
 export default state
-

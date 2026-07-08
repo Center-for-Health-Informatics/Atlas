@@ -25,4 +25,3 @@ class CopyToClipboard extends AutoBind(Clipboard(Component)) {
 }
 
 export default commonUtils.build('copy-to-clipboard', CopyToClipboard, view)
-

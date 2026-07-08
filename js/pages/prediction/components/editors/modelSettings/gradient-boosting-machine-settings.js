@@ -50,4 +50,3 @@ class GradientBoostingMachineSettings extends ModelSettingsEditorComponent {
 }
 
 export default commonUtils.build('gradient-boosting-machine-settings', GradientBoostingMachineSettings, view)
-

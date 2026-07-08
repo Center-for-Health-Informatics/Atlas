@@ -13,4 +13,3 @@ class SplitBoxplot extends Chart {
 }
 
 export default commonUtils.build('split-boxplot', SplitBoxplot, view)
-

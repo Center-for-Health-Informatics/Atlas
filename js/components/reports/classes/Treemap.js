@@ -174,4 +174,3 @@ class TreemapReport extends Report {
 }
 
 export default TreemapReport
-

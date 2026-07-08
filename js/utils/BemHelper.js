@@ -74,4 +74,3 @@ class BemHelper {
 }
 
 export default BemHelper
-

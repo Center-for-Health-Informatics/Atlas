@@ -36,12 +36,12 @@ class ComparativeCohortAnalysisSpecificationViewEdit extends AutoBind(Component)
   comparisonTableRowClickHandler (data, obj, tableRow, rowIndex) {
     if (
       obj.target.className.indexOf('btn-remove') >= 0 ||
-		obj.target.className.indexOf('fa-times') >= 0
+    obj.target.className.indexOf('fa-times') >= 0
     ) {
       this.deleteFromTable(this.comparisons, obj, rowIndex)
     } else if (
       obj.target.className.indexOf('btn-copy') >= 0 ||
-		obj.target.className.indexOf('fa-clone') >= 0
+    obj.target.className.indexOf('fa-clone') >= 0
     ) {
       this.copyComparison(obj, rowIndex)
     } else {
@@ -52,12 +52,12 @@ class ComparativeCohortAnalysisSpecificationViewEdit extends AutoBind(Component)
   analysisSettingsTableRowClickHandler (data, obj, tableRow, rowIndex) {
     if (
       obj.target.className.indexOf('btn-remove') >= 0 ||
-		obj.target.className.indexOf('fa-times') >= 0
+    obj.target.className.indexOf('fa-times') >= 0
     ) {
       this.deleteFromTable(this.cohortMethodAnalysisList, obj, rowIndex)
     } else if (
       obj.target.className.indexOf('btn-copy') >= 0 ||
-		obj.target.parentElement.className.indexOf('btn-copy') >= 0
+    obj.target.parentElement.className.indexOf('btn-copy') >= 0
     ) {
       this.copyAnalysisSettings(obj, rowIndex)
     } else {
@@ -127,7 +127,7 @@ class ComparativeCohortAnalysisSpecificationViewEdit extends AutoBind(Component)
     // Check if the button or inner element were clicked
     if (
       obj.target.className.indexOf('btn-remove') >= 0 ||
-		obj.target.className.indexOf('fa-times') >= 0
+    obj.target.className.indexOf('fa-times') >= 0
     ) {
       list.splice(index, 1)
     }
@@ -140,4 +140,3 @@ class ComparativeCohortAnalysisSpecificationViewEdit extends AutoBind(Component)
 }
 
 export default commonUtils.build('comparative-cohort-analysis-specification-view-edit', ComparativeCohortAnalysisSpecificationViewEdit, view)
-

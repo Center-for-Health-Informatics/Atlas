@@ -49,4 +49,3 @@ class ConceptDrilldownReport extends Component {
 }
 
 export default commonUtils.build('concept-drilldown-report', ConceptDrilldownReport, view)
-

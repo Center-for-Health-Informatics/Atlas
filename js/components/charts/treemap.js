@@ -25,4 +25,3 @@ class Treemap extends Chart {
 }
 
 export default commonUtils.build('treemap', Treemap, view)
-

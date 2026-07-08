@@ -14,4 +14,3 @@ class Sunburst extends Chart {
 }
 
 export default commonUtils.build('sunburst', Sunburst, view)
-

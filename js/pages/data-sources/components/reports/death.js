@@ -46,9 +46,9 @@ class Death extends Report {
           return d => {
             const format = d3.format('0.5f')
             return `
-						${options.xLabel}: ${options.xFormat(d.xValue)}<br/>
-						${options.yLabel}: ${format(d.yValue)}
-					`
+            ${options.xLabel}: ${options.xFormat(d.xValue)}<br/>
+            ${options.yLabel}: ${format(d.yValue)}
+          `
           }
         }
       },
@@ -124,4 +124,3 @@ class Death extends Report {
 }
 
 export default commonUtils.build('report-death', Death, view)
-

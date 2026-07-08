@@ -65,4 +65,3 @@ class ConceptSetRecommend extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-recommend', ConceptSetRecommend, view)
-

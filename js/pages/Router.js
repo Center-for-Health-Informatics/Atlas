@@ -117,4 +117,3 @@ class AtlasRouter {
   }
 }
 export default new AtlasRouter()
-

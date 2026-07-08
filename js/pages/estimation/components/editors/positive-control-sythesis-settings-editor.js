@@ -32,4 +32,3 @@ class PositiveControlSythesisSettingsEditor extends Component {
 }
 
 export default commonUtils.build('positive-control-synthesis-settings-editor', PositiveControlSythesisSettingsEditor, view)
-

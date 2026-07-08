@@ -55,4 +55,3 @@ VisitDetail.prototype.toJSON = function () {
 }
 
 export default VisitDetail
-

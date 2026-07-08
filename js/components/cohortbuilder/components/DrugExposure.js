@@ -275,4 +275,3 @@ function DrugExposureViewModel (params) {
 // return compoonent definition
 export { DrugExposureViewModel, template }
 export default { viewModel: DrugExposureViewModel, template }
-

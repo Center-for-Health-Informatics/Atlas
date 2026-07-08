@@ -16,7 +16,7 @@ ko.extenders.numeric = function (target, precision) {
         const current = target()
         const roundingMultiplier = Math.pow(10, precision)
 
-        var valueToWrite = newValue
+        let valueToWrite = newValue
         if (roundingMultiplier > 1) {
           // When roundingMultiplier > 1, we're allowing floats
           let newValueAsFloat
@@ -39,7 +39,7 @@ ko.extenders.numeric = function (target, precision) {
           valueToWrite = newValueAsFloat
         } else {
           const newValueAsNum = isNumeric.test(newValue) ? +newValue : current
-          var valueToWrite = newValueAsNum !== null ? Math.round(newValueAsNum * roundingMultiplier) / roundingMultiplier : null
+          valueToWrite = newValueAsNum !== null ? Math.round(newValueAsNum * roundingMultiplier) / roundingMultiplier : null
         }
 
         // only write if it changed or if

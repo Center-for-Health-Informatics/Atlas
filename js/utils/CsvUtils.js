@@ -112,4 +112,3 @@ class CsvUtils {
 }
 
 export default CsvUtils
-

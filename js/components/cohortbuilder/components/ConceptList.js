@@ -31,4 +31,3 @@ function CocneptListViewModel (params) {
 // return compoonent definition
 export { CocneptListViewModel, template }
 export default { viewModel: CocneptListViewModel, template }
-

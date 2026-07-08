@@ -8,4 +8,3 @@ const apiPaths = {
 
 export { pageTitle, apiPaths }
 export default { pageTitle, apiPaths }
-

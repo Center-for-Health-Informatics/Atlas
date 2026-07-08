@@ -101,7 +101,7 @@ class ComparativeCohortAnalysisUtilities extends Component {
     this.loading(true)
     fileService.loadZip(
       config.api.url + constants.apiPaths.downloadCcaAnalysisPackage(this.selectedAnalysisId(), this.packageName()),
-		`estimation_study_${this.selectedAnalysisId()}_export.zip`
+    `estimation_study_${this.selectedAnalysisId()}_export.zip`
     )
       .catch((e) => console.error('error when downloading: ' + e))
       .finally(() => this.loading(false))
@@ -125,4 +125,3 @@ class ComparativeCohortAnalysisUtilities extends Component {
 }
 
 export default commonUtils.build('comparative-cohort-analysis-utilities', ComparativeCohortAnalysisUtilities, view)
-

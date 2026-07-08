@@ -53,4 +53,3 @@ class FeatureAnalyses extends Page {
 }
 
 export default commonUtils.build('feature-analyses-list', FeatureAnalyses, view)
-

@@ -143,4 +143,3 @@ function DoseEraViewModel (params) {
 // return compoonent definition
 export { DoseEraViewModel, template }
 export default { viewModel: DoseEraViewModel, template }
-

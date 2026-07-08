@@ -51,4 +51,3 @@ class Tabs extends Component {
 }
 
 export default commonUtils.build('tabs', Tabs, view)
-

@@ -283,4 +283,3 @@ options.negControlTableOptions = {
 }
 
 export default options
-

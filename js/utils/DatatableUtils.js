@@ -68,7 +68,7 @@ const getFacetForDomain = (domain) => domain !== null ? domain : 'None'
 
 const renderCountColumn = (value) => value || '...'
 
-const coalesceField = (list, field1, field2) => list.forEach(e => e[field1] = e[field1] || e[field2])
+const coalesceField = (list, field1, field2) => list.forEach(e => { e[field1] = e[field1] || e[field2] })
 
 const idComparator = (a, b) => a.id - b.id
 
@@ -178,4 +178,3 @@ const getExecutionStatus = () => (s, p, d) => {
 
 export { getDateFieldFormatter, getFacetForDate, getLinkFormatter, getCreatedByFormatter, getFacetForCreatedBy, getFacetForDesign, renderCountColumn, getFacetForDomain, coalesceField, addTagGroupsToFacets, addTagGroupsToColumns, renderExecutionStatus, renderExecutionDuration, renderExecutionResultsView, renderExexcutionResultsDownload, renderExecutionDesign, getExecutionStatus }
 export default { getDateFieldFormatter, getFacetForDate, getLinkFormatter, getCreatedByFormatter, getFacetForCreatedBy, getFacetForDesign, renderCountColumn, getFacetForDomain, coalesceField, addTagGroupsToFacets, addTagGroupsToColumns, renderExecutionStatus, renderExecutionDuration, renderExecutionResultsView, renderExexcutionResultsDownload, renderExecutionDesign, getExecutionStatus }
-

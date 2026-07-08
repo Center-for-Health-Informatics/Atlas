@@ -86,4 +86,3 @@ class ReusableBrowser extends EntityBrowser {
 }
 
 export default commonUtils.build('reusable-browser', ReusableBrowser, view)
-

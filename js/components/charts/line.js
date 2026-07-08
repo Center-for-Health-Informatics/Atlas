@@ -13,4 +13,3 @@ class Line extends Chart {
 }
 
 export default commonUtils.build('atlasline', Line, view)
-

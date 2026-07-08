@@ -107,4 +107,3 @@ const component = {
 
 ko.components.register('faceted-datatable-cf-profile', component)
 export default component
-

@@ -69,4 +69,3 @@ ProcedureOccurrence.prototype.toJSON = function () {
 }
 
 export default ProcedureOccurrence
-

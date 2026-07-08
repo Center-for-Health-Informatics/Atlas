@@ -6,7 +6,7 @@ import StratifyRule from './StratifyRule'
 
 function IRAnalysisExpression (data) {
   const self = this
-  var data = data || {}
+  data = data || {}
 
   self.ConceptSets = ko.observableArray(data.ConceptSets && data.ConceptSets.map(function (d) { return new ConceptSet(d) }))
   self.targetIds = ko.observableArray(data.targetIds)
@@ -18,4 +18,3 @@ function IRAnalysisExpression (data) {
   }))
 }
 export default IRAnalysisExpression
-

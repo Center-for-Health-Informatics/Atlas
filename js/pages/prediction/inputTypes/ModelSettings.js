@@ -37,50 +37,42 @@ function GetSettingsFromObject (data) {
           data.NaiveBayesSettings
         ),
       }
-      break
     case 'RandomForestSettings':
       return {
         RandomForestSettings: new RandomForestSettings(
           data.RandomForestSettings
         ),
       }
-      break
     case 'MLPSettings':
       return {
         MLPSettings: new MLPSettings(data.MLPSettings),
       }
-      break
     case 'KNNSettings':
       return {
         KNNSettings: new KNNSettings(data.KNNSettings),
       }
-      break
     case 'GradientBoostingMachineSettings':
       return {
         GradientBoostingMachineSettings: new GradientBoostingMachineSettings(
           data.GradientBoostingMachineSettings
         ),
       }
-      break
     case 'DecisionTreeSettings':
       return {
         DecisionTreeSettings: new DecisionTreeSettings(
           data.DecisionTreeSettings
         ),
       }
-      break
     case 'AdaBoostSettings':
       return {
         AdaBoostSettings: new AdaBoostSettings(data.AdaBoostSettings),
       }
-      break
     case 'LassoLogisticRegressionSettings':
       return {
         LassoLogisticRegressionSettings: new LassoLogisticRegressionSettings(
           data.LassoLogisticRegressionSettings
         ),
       }
-      break
     default:
       console.error('Model Settings not found!')
       break
@@ -91,7 +83,6 @@ function GetOptionsFromObject (data) {
   const settingName = this.GetSettingNameFromObject(data)
   return options.find((f) => f.key === settingName)
 }
-
 
 const options = [
   {

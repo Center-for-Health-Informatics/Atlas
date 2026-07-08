@@ -13,4 +13,3 @@ function clearCache () {
 
 export { clearCache }
 export default { clearCache }
-

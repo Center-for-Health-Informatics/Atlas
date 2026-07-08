@@ -76,4 +76,3 @@ Observation.prototype.toJSON = function () {
 }
 
 export default Observation
-

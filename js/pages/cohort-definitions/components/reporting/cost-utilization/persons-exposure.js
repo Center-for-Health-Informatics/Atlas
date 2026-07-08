@@ -56,4 +56,3 @@ class PersonAndExposureReport extends BaseCostUtilReport {
 }
 
 export default commonUtils.build(componentName, PersonAndExposureReport, view)
-

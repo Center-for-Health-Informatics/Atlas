@@ -1754,4 +1754,4 @@ export const visitDetailAttributes = getListCriteria(visitDetailAttributesList, 
 export const demographicAttributes = getListCriteria(demographicAttributesList, 'demographic', 'demographic')
 export { CriteriaTypes }
 
-export default { initialEventList,censoringEventList,groupAttributes,windowedAttributes,eraAttributes,occurrenceAttributes,deathAttributes,deviceAttributes,doseAttributes,drugAttributes,drugexposureAttributes,measurementAttributes,observationAttributes,observationPeriodAttributes,payerPlanAttributes,procedureOccurrenceAttributes,specimenAttributes,visitAttributes,visitDetailAttributes,demographicAttributes,CriteriaTypes }
+export default { initialEventList, censoringEventList, groupAttributes, windowedAttributes, eraAttributes, occurrenceAttributes, deathAttributes, deviceAttributes, doseAttributes, drugAttributes, drugexposureAttributes, measurementAttributes, observationAttributes, observationPeriodAttributes, payerPlanAttributes, procedureOccurrenceAttributes, specimenAttributes, visitAttributes, visitDetailAttributes, demographicAttributes, CriteriaTypes }

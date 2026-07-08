@@ -11,4 +11,3 @@ class FrequencyHistogramComponent extends Chart {
 }
 
 export default commonUtils.build('frequency-histogram', FrequencyHistogramComponent, view)
-

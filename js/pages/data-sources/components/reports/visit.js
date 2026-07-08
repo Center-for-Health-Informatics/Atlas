@@ -21,4 +21,3 @@ class Visit extends TreemapReport {
 }
 
 export default commonUtils.build('report-visit', Visit, view)
-

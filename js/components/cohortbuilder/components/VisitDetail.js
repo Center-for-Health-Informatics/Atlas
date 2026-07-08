@@ -160,4 +160,3 @@ function VisitDetailViewModel (params) {
 // return component definition
 export { VisitDetailViewModel, template }
 export default { viewModel: VisitDetailViewModel, template }
-

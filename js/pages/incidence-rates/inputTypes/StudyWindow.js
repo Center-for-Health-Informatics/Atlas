@@ -15,4 +15,3 @@ StudyWindow.prototype.toJSON = function () {
   }
 }
 export default StudyWindow
-

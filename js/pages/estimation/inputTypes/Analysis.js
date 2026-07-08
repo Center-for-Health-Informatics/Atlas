@@ -10,4 +10,3 @@ class Analysis extends RLangClass {
 }
 
 export default Analysis
-

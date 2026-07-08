@@ -199,4 +199,3 @@ class VisitUtilReport extends BaseCostUtilReport {
 }
 
 export default commonUtils.build(componentName, VisitUtilReport, view)
-

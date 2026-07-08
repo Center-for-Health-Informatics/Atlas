@@ -55,4 +55,3 @@ class ConceptSetSaveModal extends AutoBind(Component) {
 }
 
 export default commonUtils.build('conceptset-save', ConceptSetSaveModal, view)
-

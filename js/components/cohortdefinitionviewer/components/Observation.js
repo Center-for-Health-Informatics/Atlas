@@ -26,4 +26,3 @@ function ObservationViewModel (params) {
 // return compoonent definition
 export { ObservationViewModel, template }
 export default { viewModel: ObservationViewModel, template }
-

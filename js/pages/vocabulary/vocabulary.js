@@ -21,4 +21,3 @@ class Vocabulary extends Page {
 }
 
 export default commonUtils.build('vocabulary', Vocabulary, view)
-

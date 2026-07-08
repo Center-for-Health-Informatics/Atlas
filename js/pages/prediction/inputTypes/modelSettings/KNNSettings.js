@@ -8,4 +8,3 @@ class KNNSettings {
 }
 
 export default KNNSettings
-

@@ -15,4 +15,3 @@ class TemporalCovariateSettingsEditor extends Component {
 }
 
 export default commonUtils.build('temporal-covar-settings-editor', TemporalCovariateSettingsEditor, view)
-

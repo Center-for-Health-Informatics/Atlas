@@ -163,4 +163,3 @@ class UtilitieView extends AutoBind(Component) {
 }
 
 export default commonUtils.build('utilities', UtilitieView, view)
-

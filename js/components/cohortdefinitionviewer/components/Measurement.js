@@ -23,4 +23,3 @@ function MeasurementViewModel (params) {
 // return compoonent definition
 export { MeasurementViewModel, template }
 export default { viewModel: MeasurementViewModel, template }
-

@@ -119,16 +119,16 @@ function exploreCohort (params) {
       if (['gender', 'age'].indexOf(facet.key) > -1) {
         if (selected.length > 1) {
           return `${facet.caption}:
-						${selected.slice(0, selected.length - 1).map(d => d.Name).join(', ')}
-						or ${selected[selected.length - 1].Name}`
+            ${selected.slice(0, selected.length - 1).map(d => d.Name).join(', ')}
+            or ${selected[selected.length - 1].Name}`
         } else {
           return `${facet.caption}: ${selected[0].Name}`
         }
       } else {
         if (selected.length > 1) {
           return `People with
-						${selected.slice(0, selected.length - 1).map(d => d.Name).join(', ')}
-						or ${selected[selected.length - 1].Name} ${facet.key}`
+            ${selected.slice(0, selected.length - 1).map(d => d.Name).join(', ')}
+            or ${selected[selected.length - 1].Name} ${facet.key}`
         } else {
           return `People with ${selected[0].Name} ${facet.key}`
         }
@@ -220,4 +220,3 @@ function average (data) {
   const avg = sum / data.length
   return avg
 }
-

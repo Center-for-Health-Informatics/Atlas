@@ -16,4 +16,3 @@ class FullAnalysis {
 }
 
 export default FullAnalysis
-

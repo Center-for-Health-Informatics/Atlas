@@ -65,40 +65,40 @@ class IRAnalysisManager extends AutoBind(Page) {
     this.conceptSetStore = ConceptSetStore.getStore(ConceptSetStore.sourceKeys().incidenceRates)
     this.isViewPermitted = ko.pureComputed(() => {
       return !config.userAuthenticationEnabled ||
-			(
-			  config.userAuthenticationEnabled &&
-				authAPI.isPermittedReadIRs()
-			)
+      (
+        config.userAuthenticationEnabled &&
+        authAPI.isPermittedReadIRs()
+      )
     })
     this.canCreate = ko.pureComputed(() => {
       return !config.userAuthenticationEnabled ||
-		(
-		  config.userAuthenticationEnabled &&
-			authAPI.isPermittedCreateIR()
-		)
+    (
+      config.userAuthenticationEnabled &&
+      authAPI.isPermittedCreateIR()
+    )
     })
     this.isDeletable = ko.pureComputed(() => {
       return !config.userAuthenticationEnabled ||
-			(
-			  config.userAuthenticationEnabled &&
-				authAPI.isPermittedDeleteIR(this.selectedAnalysisId())
-			)
+      (
+        config.userAuthenticationEnabled &&
+        authAPI.isPermittedDeleteIR(this.selectedAnalysisId())
+      )
     })
     this.isEditable = ko.pureComputed(() => {
       return this.selectedAnalysisId() === null || this.selectedAnalysisId() === 0 ||
-			!config.userAuthenticationEnabled ||
-			(
-			  config.userAuthenticationEnabled &&
-				authAPI.isPermittedEditIR(this.selectedAnalysisId())
-			)
+      !config.userAuthenticationEnabled ||
+      (
+        config.userAuthenticationEnabled &&
+        authAPI.isPermittedEditIR(this.selectedAnalysisId())
+      )
     })
     this.canCopy = ko.pureComputed(() => {
       return !config.userAuthenticationEnabled ||
-			(
-			  config.userAuthenticationEnabled &&
-				authAPI.isPermittedCopyIR(this.selectedAnalysisId()) &&
-				!this.dirtyFlag().isDirty()
-			)
+      (
+        config.userAuthenticationEnabled &&
+        authAPI.isPermittedCopyIR(this.selectedAnalysisId()) &&
+        !this.dirtyFlag().isDirty()
+      )
     })
     this.isPermittedExportSQL = isPermittedExportSQL
     this.selectedAnalysisId.subscribe((id) => {
@@ -174,9 +174,9 @@ class IRAnalysisManager extends AutoBind(Page) {
 
     this.canSave = ko.pureComputed(() => {
       return this.isEditable() &&
-			this.isNameCorrect() &&
-			(this.dirtyFlag().isDirty() || this.previewVersion()) &&
-			!this.isRunning()
+      this.isNameCorrect() &&
+      (this.dirtyFlag().isDirty() || this.previewVersion()) &&
+      !this.isRunning()
     })
     this.error = ko.observable()
     this.isSaving = ko.observable(false)
@@ -210,7 +210,7 @@ class IRAnalysisManager extends AutoBind(Page) {
       entityTypeGetter: () => entityType.INCIDENCE_RATE,
       entityIdGetter: () => this.selectedAnalysisId(),
       createdByUsernameGetter: () => this.selectedAnalysis() && this.selectedAnalysis().createdBy() &&
-			this.selectedAnalysis().createdBy().login
+      this.selectedAnalysis().createdBy().login
     })
 
     this.tags = ko.observableArray()
@@ -624,7 +624,7 @@ class IRAnalysisManager extends AutoBind(Page) {
     this.exporting(true)
     try {
       await FileService.loadZip(`${config.api.url}ir/${this.selectedAnalysisId()}/export`,
-			`incidence-rate-${this.selectedAnalysisId()}.zip`)
+      `incidence-rate-${this.selectedAnalysisId()}.zip`)
     } catch (e) {
       alert(exceptionUtils.translateException(e))
     } finally {
@@ -640,9 +640,9 @@ class IRAnalysisManager extends AutoBind(Page) {
       if (source.daimons.filter(function (daimon) {
         return daimon.daimonType === 'CDM'
       }).length > 0 &&
-			source.daimons.filter(function (daimon) {
-			  return daimon.daimonType === 'Results'
-			}).length > 0) {
+      source.daimons.filter(function (daimon) {
+        return daimon.daimonType === 'Results'
+      }).length > 0) {
         sourceList.push({
           source,
           info: ko.observable()
@@ -698,4 +698,3 @@ class IRAnalysisManager extends AutoBind(Page) {
 }
 
 export default commonUtils.build('ir-manager', IRAnalysisManager, view)
-

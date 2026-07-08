@@ -10,4 +10,3 @@ class MLPSettings {
 }
 
 export default MLPSettings
-

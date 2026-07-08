@@ -36,4 +36,3 @@ class EvaluationSettingsEditor extends Component {
 }
 
 export default commonUtils.build('evaluation-settings-editor', EvaluationSettingsEditor, view)
-

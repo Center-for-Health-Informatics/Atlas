@@ -16,4 +16,3 @@ class ControlEditor extends Component {
 }
 
 export default commonUtils.build('cyclops-control-editor', ControlEditor, view)
-

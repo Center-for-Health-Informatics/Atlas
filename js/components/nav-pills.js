@@ -18,4 +18,3 @@ class NavPills extends AutoBind(Component) {
 }
 
 export default commonUtils.build('nav-pills', NavPills, view)
-

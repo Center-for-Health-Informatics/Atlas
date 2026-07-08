@@ -49,7 +49,7 @@ function Source (data) {
     return lodash.concat(result, diff)
   }
 
-  var data = data || {}
+  data = data || {}
 
   this.sourceId = ko.observable(data.sourceId || 0)
   this.name = ko.observable(data.sourceName || ko.unwrap(ko.i18n('configuration.newSource', 'New Source')))
@@ -367,4 +367,3 @@ class SourceManager extends AutoBind(Page) {
 }
 
 export default commonUtils.build('source-manager', SourceManager, view)
-

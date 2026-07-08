@@ -13,4 +13,3 @@ class Boxplot extends Chart {
 }
 
 export default commonUtils.build('boxplot', Boxplot, view)
-

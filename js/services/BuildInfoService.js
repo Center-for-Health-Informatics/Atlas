@@ -13,4 +13,3 @@ function getIssues (repo, milestone, page) {
 
 export { getBuildInfo, getIssues, ISSUES_PAGE_SIZE }
 export default { getBuildInfo, getIssues, ISSUES_PAGE_SIZE }
-

@@ -13,4 +13,3 @@ class Donut extends Chart {
 }
 
 export default commonUtils.build('donut', Donut, view)
-

@@ -344,10 +344,13 @@ class ProfileManager extends AutoBind(Page) {
               .value()
           }
         }
+        const cohortStartMs = new Date(cohort.startDate).getTime()
+        const toDay = (dateStr) => Math.floor((new Date(dateStr).getTime() - cohortStartMs) / (1000 * 60 * 60 * 24))
+        person.recordCount = person.records.length
+        person.ageAtIndex = person.yearOfBirth ? new Date(cohortStartMs).getFullYear() - person.yearOfBirth : ''
         person.records.forEach((rec) => {
-          // have to get startDate from person.cohorts
-          // rec.startDay = Math.floor((rec.startDate - cohort.startDate) / (1000 * 60 * 60 * 24));
-          // rec.endDay = rec.endDate ? Math.floor((rec.endDate - cohort.startDate) / (1000 * 60 * 60 * 24)) : rec.startDay;
+          rec.startDay = toDay(rec.startDate)
+          rec.endDay = rec.endDate ? toDay(rec.endDate) : rec.startDay
           rec.highlight = this.defaultColor
           rec.stroke = this.defaultColor
         })
@@ -355,8 +358,8 @@ class ProfileManager extends AutoBind(Page) {
         person.shadedRegions =
           person.observationPeriods.map(op => {
             return {
-              x1: op.x1,
-              x2: op.x2,
+              x1: toDay(op.startDate),
+              x2: toDay(op.endDate),
               className: 'observation-period',
             }
           })

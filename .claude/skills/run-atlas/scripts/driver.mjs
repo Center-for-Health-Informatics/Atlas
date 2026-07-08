@@ -25,6 +25,9 @@ page.on('console', msg => {
   if (msg.type() === 'error') console.log('[console error]', msg.text())
 })
 page.on('pageerror', err => console.log('[page error]', err.stack || err.message))
+page.on('response', res => {
+  if (res.status() >= 400) console.log('[http error]', res.status(), res.request().method(), res.url())
+})
 
 let shotCount = 0
 

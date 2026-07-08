@@ -1,5 +1,6 @@
 import ko from 'knockout'
 import options from 'components/cohortbuilder/options'
+import utils from 'components/cohortbuilder/utils'
 import Range from 'components/cohortbuilder/InputTypes/Range'
 import template from './VisitOccurrenceTemplate.html?raw'
 
@@ -24,6 +25,6 @@ function VisitOccurrenceViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { VisitOccurrenceViewModel, template }
+export default { viewModel: VisitOccurrenceViewModel, template }
 

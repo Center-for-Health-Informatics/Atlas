@@ -1,3 +1,5 @@
+import $ from 'jquery'
+import _ from 'lodash'
 import ko from 'knockout'
 import view from './concept-by-index.html?raw'
 import * as d3 from 'd3'

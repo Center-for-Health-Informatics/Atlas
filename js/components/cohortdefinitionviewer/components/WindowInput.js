@@ -15,6 +15,6 @@ function WindowInputViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { WindowInputViewModel, template }
+export default { viewModel: WindowInputViewModel, template }
 

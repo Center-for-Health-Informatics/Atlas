@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import * as d3 from 'd3'
 import d3tip from 'd3-tip'

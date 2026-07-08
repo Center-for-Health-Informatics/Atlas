@@ -100,19 +100,19 @@ function mapColumns (element, binding, xssOptions) {
 ko.bindingHandlers.dataTable = {
 
   init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-    jQuery.fn.dataTableExt.oSort['numberAbs-desc'] = function (x, y) {
+    $.fn.dataTableExt.oSort['numberAbs-desc'] = function (x, y) {
       return -1 * sortAbs(x, y)
     }
 
-    jQuery.fn.dataTableExt.oSort['numberAbs-asc'] = function (x, y) {
+    $.fn.dataTableExt.oSort['numberAbs-asc'] = function (x, y) {
       return sortAbs(x, y)
     }
 
-    jQuery.fn.dataTableExt.oSort['range-desc'] = function (x, y) {
+    $.fn.dataTableExt.oSort['range-desc'] = function (x, y) {
       return -1 * sortRange(x, y)
     }
 
-    jQuery.fn.dataTableExt.oSort['range-asc'] = function (x, y) {
+    $.fn.dataTableExt.oSort['range-asc'] = function (x, y) {
       return sortRange(x, y)
     }
 

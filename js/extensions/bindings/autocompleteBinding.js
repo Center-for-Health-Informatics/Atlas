@@ -1,5 +1,9 @@
 import $ from 'jquery'
 import ko from 'knockout'
+import 'jquery-ui/ui/keycode'
+import 'jquery-ui/ui/position'
+import 'jquery-ui/ui/unique-id'
+import 'jquery-ui/ui/widgets/menu'
 import 'jquery-ui/ui/widgets/autocomplete'
 
 ko.bindingHandlers.ko_autocomplete = {

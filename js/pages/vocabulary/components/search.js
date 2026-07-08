@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import sharedState from 'atlas-state'
 import config from 'appConfig'

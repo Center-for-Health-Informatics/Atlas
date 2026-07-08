@@ -4,7 +4,6 @@ import view from './cohort-comparison-r-code.html?raw'
 import config from 'appConfig'
 import cohortComparison from 'components/cohortcomparison/ComparativeCohortAnalysis'
 import vocabularyAPI from 'services/VocabularyProvider'
-import options from 'prism'
 
 function cohortComparisonRCode (params) {
   const self = this

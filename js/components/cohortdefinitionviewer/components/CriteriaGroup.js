@@ -29,6 +29,6 @@ function CriteriaGroupViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { CriteriaGroupViewModel, template }
+export default { viewModel: CriteriaGroupViewModel, template }
 

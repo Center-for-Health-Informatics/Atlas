@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import config from 'appConfig'
 import ohdsiUtil from 'assets/ohdsi.util'
 import authApi from 'services/AuthAPI'

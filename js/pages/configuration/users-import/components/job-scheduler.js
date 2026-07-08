@@ -1,4 +1,5 @@
 import ko from 'knockout'
+import moment from 'moment'
 import view from './job-scheduler.html?raw'
 import AutoBind from 'utils/AutoBind'
 import Component from 'components/Component'

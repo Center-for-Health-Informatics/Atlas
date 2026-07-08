@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import view from './welcome.html?raw'
 import appConfig from 'appConfig'

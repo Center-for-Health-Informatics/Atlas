@@ -27,7 +27,7 @@ class ExplorePrevalence extends AutoBind(Component) {
         title: ko.i18n('columns.conceptName', 'Concept name'),
         data: 'covariateName',
         class: this.classes('col-concept'),
-        render: (d, t, { covariateName, faType }) => pageUtils.extractMeaningfulCovName(covariateName, faType)
+        render: (d, t, { covariateName, faType }) => utils.extractMeaningfulCovName(covariateName, faType)
       },
     ]
     this.data = ko.observableArray()

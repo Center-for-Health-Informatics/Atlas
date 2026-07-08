@@ -68,7 +68,7 @@ ConceptPickerViewModel.prototype.addAndClose = function (vm) {
 
 ConceptPickerViewModel.prototype.search = function () {
   const self = this
-  searchParams = {
+  const searchParams = {
     QUERY: this.searchText,
     DOMAIN_ID: [this.SelectedDomain]
   }

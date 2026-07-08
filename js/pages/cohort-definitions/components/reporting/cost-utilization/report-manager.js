@@ -1,5 +1,7 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import view from './report-manager.html?raw'
+import sharedState from 'atlas-state'
 import * as d3 from 'd3'
 import atlascharts from 'atlascharts'
 import colorbrewer from 'colorbrewer'

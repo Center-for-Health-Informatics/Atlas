@@ -195,6 +195,6 @@ function DeviceExposureViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { DeviceExposureViewModel, template }
+export default { viewModel: DeviceExposureViewModel, template }
 

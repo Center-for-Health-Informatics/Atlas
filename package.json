@@ -9,10 +9,9 @@
     "prep": "npm i && npm run clean && npm run genversion",
     "clean": "rimraf ./js/assets/bundle && rimraf ./js/assets/fonts && rimraf ./js/assets/images",
     "build": "npm run prep && npm run build:dev",
-    "build:dev": "node build/optimize.js && npm run compress",
+    "build:dev": "vite build --config vite.config.mjs",
     "build:docker": "npm run clean && npm run genversion && npm run build:dev && npm prune --production",
-    "compress": "terser ./js/assets/bundle/bundle.js -o ./js/assets/bundle/bundle.js -c --source-map",
-    "genversion": "genversion -s js/version/version.js && r_js -convert js/version js/ && rimraf js/version",
+    "genversion": "genversion -e -s js/version.js",
     "test": "node --import ./tests/register-hooks.mjs --test",
     "lint": "eslint \"js/**/*.js\" \"tests/**/*.js\"",
     "lint:fix": "eslint --fix \"js/**/*.js\" \"tests/**/*.js\""
@@ -40,18 +39,12 @@
   },
   "homepage": "https://github.com/Center-for-Health-Informatics/Atlas#readme",
   "devDependencies": {
-    "@babel/core": "^7.24.7",
-    "@babel/plugin-transform-object-rest-spread": "^7.24.7",
-    "@babel/polyfill": "^7.12.1",
-    "@babel/preset-env": "^7.24.7",
     "@vitejs/plugin-legacy": "^5.4.3",
     "eslint": "^9.39.3",
     "genversion": "^2.2.0",
-    "html-document": "^0.8.1",
     "neostandard": "^0.13.0",
-    "requirejs": "^2.3.6",
+    "playwright": "^1.61.1",
     "rimraf": "^2.6.2",
-    "terser": "^5.16.4",
     "vite": "^5.4.21"
   },
   "dependencies": {

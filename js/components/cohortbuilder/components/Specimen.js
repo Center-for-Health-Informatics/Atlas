@@ -177,6 +177,6 @@ function SpecimenViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { SpecimenViewModel, template }
+export default { viewModel: SpecimenViewModel, template }
 

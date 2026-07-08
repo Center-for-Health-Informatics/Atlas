@@ -1,4 +1,5 @@
 import ko from 'knockout'
+import { saveAs } from 'file-saver'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import csvUtils from 'utils/CsvUtils'

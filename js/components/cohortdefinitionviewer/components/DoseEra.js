@@ -23,6 +23,6 @@ function DoseEraViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { DoseEraViewModel, template }
+export default { viewModel: DoseEraViewModel, template }
 

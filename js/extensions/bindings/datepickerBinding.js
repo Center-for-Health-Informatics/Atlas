@@ -1,4 +1,6 @@
+import $ from 'jquery'
 import ko from 'knockout'
+import 'jquery-ui/ui/keycode'
 import 'jquery-ui/ui/widgets/datepicker'
 
 ko.bindingHandlers.datepicker = {

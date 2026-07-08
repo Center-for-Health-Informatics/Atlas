@@ -1,3 +1,5 @@
+import $ from 'jquery'
+import _ from 'lodash'
 import ko from 'knockout'
 import view from './negative-controls.html?raw'
 import Component from 'components/Component'

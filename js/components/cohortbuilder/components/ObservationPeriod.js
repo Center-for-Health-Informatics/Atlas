@@ -117,6 +117,6 @@ function ObservationPeriodViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { ObservationPeriodViewModel, template }
+export default { viewModel: ObservationPeriodViewModel, template }
 

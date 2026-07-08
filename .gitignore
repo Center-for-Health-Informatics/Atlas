@@ -9,3 +9,10 @@ js/config-local.js
 js/version.js
 package-lock.json
 .vscode
+
+# Global gitignore excludes .claude/ entirely (personal settings, caches, etc.);
+# re-include just the project skills we want tracked in this repo.
+!.claude/
+.claude/*
+!.claude/skills/
+.claude/skills/run-atlas/scripts/screenshots/

@@ -24,6 +24,6 @@ function ProcedureOccurrenceViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { ProcedureOccurrenceViewModel, template }
+export default { viewModel: ProcedureOccurrenceViewModel, template }
 

@@ -13,6 +13,6 @@ function CocneptListViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { CocneptListViewModel, template }
+export default { viewModel: CocneptListViewModel, template }
 

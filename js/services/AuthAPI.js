@@ -221,7 +221,7 @@ const isPermitted = function (permission) {
 
   if (!permissions()) return false
 
-  firstPerm = permission.split(':')[0]
+  const firstPerm = permission.split(':')[0]
 
   const etalons = [...(permissions()['*'] || []), ...(permissions()[firstPerm] || [])]
   if (!etalons) {

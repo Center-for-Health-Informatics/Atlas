@@ -1,6 +1,4 @@
-import * as d3 from 'd3'
-
-d3.labeler = function () {
+export function labeler () {
   let lab = []
   let anc = []
   let w = 1 // box width
@@ -10,14 +8,14 @@ d3.labeler = function () {
   const max_move = 5.0
   const max_angle = 0.5
   let acc = 0
-  rej = 0
+  let rej = 0
 
   // weights
   const w_len = 0.2 // leader line length
   const w_inter = 1.0 // leader line intersection
   const w_lab2 = 30.0 // label-label overlap
   const w_lab_anc = 30.0 // label-anchor overlap
-  w_orient = 3.0 // orientation bias
+  const w_orient = 3.0 // orientation bias
 
   // booleans for user defined functions
   let user_energy = false
@@ -26,7 +24,7 @@ d3.labeler = function () {
   let user_defined_energy,
     user_defined_schedule
 
-  energy = function (index) {
+  const energy = function (index) {
     // energy function, tailored for label placement
 
     const m = lab.length
@@ -36,7 +34,7 @@ d3.labeler = function () {
     const dist = Math.sqrt(dx * dx + dy * dy)
     let overlap = true
     const amount = 0
-    theta = 0
+    let theta = 0
 
     // penalty for length of leader line
     if (dist > 0) ener += dist * w_len
@@ -83,7 +81,7 @@ d3.labeler = function () {
     return ener
   }
 
-  mcmove = function (currT) {
+  const mcmove = function (currT) {
     // Monte Carlo translation move
 
     // select a random label
@@ -124,7 +122,7 @@ d3.labeler = function () {
     }
   }
 
-  mcrotate = function (currT) {
+  const mcrotate = function (currT) {
     // Monte Carlo rotation move
 
     // select a random label
@@ -179,7 +177,7 @@ d3.labeler = function () {
     }
   }
 
-  intersect = function (x1, x2, x3, x4, y1, y2, y3, y4) {
+  const intersect = function (x1, x2, x3, x4, y1, y2, y3, y4) {
     // returns true if two lines intersect, else false
     // from http://paulbourke.net/geometry/lineline2d/
 
@@ -199,7 +197,7 @@ d3.labeler = function () {
     return false
   }
 
-  cooling_schedule = function (currT, initialT, nsweeps) {
+  const cooling_schedule = function (currT, initialT, nsweeps) {
     // linear cooling
     return (currT - (initialT / nsweeps))
   }

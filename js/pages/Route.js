@@ -18,7 +18,7 @@ class Route {
   }
 
   handler () {
-    throw new Exception('Handler should be overriden')
+    throw new Error('Handler should be overriden')
   }
 
   timeToExpire () {

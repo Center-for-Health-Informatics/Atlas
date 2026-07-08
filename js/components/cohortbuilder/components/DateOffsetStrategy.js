@@ -17,6 +17,6 @@ function DateOffsetStrategyViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { DateOffsetStrategyViewModel, template }
+export default { viewModel: DateOffsetStrategyViewModel, template }
 

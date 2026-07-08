@@ -87,7 +87,7 @@ function CohortConceptSetBrowser (params) {
     return (appConfig.userAuthenticationEnabled && self.isAuthenticated() && authApi.isPermittedReadConceptsets()) || !appConfig.userAuthenticationEnabled
   })
   self.canReadCohorts = ko.pureComputed(function () {
-    return (config.userAuthenticationEnabled && self.isAuthenticated() && authApi.isPermittedReadCohorts()) || !config.userAuthenticationEnabled
+    return (appConfig.userAuthenticationEnabled && self.isAuthenticated() && authApi.isPermittedReadCohorts()) || !appConfig.userAuthenticationEnabled
   })
 
   self.loadConceptSetsFromRepository = function (url) {

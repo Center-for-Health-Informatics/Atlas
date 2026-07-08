@@ -1,3 +1,5 @@
+import $ from 'jquery'
+import _ from 'lodash'
 import ko from 'knockout'
 import view from './conceptset-manager.html?raw'
 import Page from 'pages/Page'

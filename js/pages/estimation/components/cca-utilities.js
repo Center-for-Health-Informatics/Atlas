@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import view from './cca-utilities.html?raw'
 import Component from 'components/Component'

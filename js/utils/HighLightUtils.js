@@ -1,4 +1,4 @@
-import 'prism'
+import Prism from 'utils/prism'
 import 'prismlanguages/prism-sql'
 
 function highlightJS (code, language) {

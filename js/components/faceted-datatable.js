@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import view from './faceted-datatable.html?raw'
 import crossfilter from 'crossfilter'

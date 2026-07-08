@@ -1,8 +1,7 @@
 import * as d3 from 'd3'
 import _ from 'lodash'
 import html2canvas from 'html2canvas'
-import 'file-saver'
-import 'svgsaver'
+import { saveAs } from 'file-saver'
 import SvgSaver from 'svgsaver'
 
 // TODO: move into Visualizations repo

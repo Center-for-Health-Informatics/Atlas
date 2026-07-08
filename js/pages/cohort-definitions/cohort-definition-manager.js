@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import _ from 'lodash'
 import ko from 'knockout'
 import view from './cohort-definition-manager.html?raw'
 import config from 'appConfig'

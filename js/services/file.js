@@ -1,9 +1,9 @@
 import authApi from 'services/AuthAPI'
-import 'file-saver'
+import { saveAs } from 'file-saver'
 
 class FileService {
   // Helper function to simplify setting up and making the XMLHttpRequest
-  _makeRequest (url, method, params, callback) {
+  _makeRequest (url, method, params, callback, onError) {
     const xhr = new XMLHttpRequest()
     xhr.open(method, url, true)
     xhr.setRequestHeader('Authorization', authApi.getAuthorizationHeader())
@@ -14,7 +14,7 @@ class FileService {
         callback(xhr)
       }
     }
-    xhr.onerror = () => reject({
+    xhr.onerror = () => onError({
       status: xhr.status,
       statusText: xhr.statusText
     })
@@ -32,7 +32,7 @@ class FileService {
         } else {
           reject({ status: xhr.status, statusText: xhr.statusText })
         }
-      })
+      }, reject)
     })
   }
 
@@ -53,7 +53,7 @@ class FileService {
             statusText: xhr.statusText
           })
         }
-      })
+      }, reject)
     })
   }
 

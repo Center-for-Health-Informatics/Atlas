@@ -3,7 +3,6 @@ import view from './atlas.cohort-editor.html?raw'
 import config from 'appConfig'
 import sharedState from 'atlas-state'
 import commonUtils from 'utils/CommonUtils'
-import CohortDefinition from 'components/cohortbuilder/CohortDefinition'
 import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import conceptSetUtils from 'components/conceptset/utils'
 import 'components/cohortbuilder/components'
@@ -51,17 +50,6 @@ function cohortEditor (params) {
     }
 
     self.criteriaContext(null)
-  }
-
-  self.onGenerate = function (generateComponent) {
-    CohortDefinition.generate(self.currentCohortDefinition().id(), generateComponent.source.sourceKey, false)
-      .then(function (result) {
-        pollForInfo()
-      })
-  }
-
-  self.getExpressionJSON = function () {
-    return ko.toJSON(self.currentCohortDefinition().Expression, pruneJSON, 2)
   }
 }
 

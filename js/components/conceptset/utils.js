@@ -1,3 +1,5 @@
+import $ from 'jquery'
+import _ from 'lodash'
 import ko from 'knockout'
 import commonUtils from 'utils/CommonUtils'
 import renderers from 'utils/Renderers'
@@ -402,7 +404,7 @@ async function onCurrentConceptSetModeChanged (mode, conceptSetStore) {
     case 'included-sourcecodes':
       await loadIncluded(conceptSetStore)
       if (conceptSetStore.includedSourcecodes() == null) {
-        await loadSourcecodes(conceptSetStore)
+        await loadSourceCodes(conceptSetStore)
       }
       break
   }
@@ -416,21 +418,6 @@ function createRepositoryConceptSet (conceptSetStore) {
   sharedState.RepositoryConceptSet.current(newConceptSet)
   conceptSetStore.current(sharedState.RepositoryConceptSet.current())
   conceptSetStore.isEditable(true)
-}
-
-function removeConceptsFromConceptSet ({
-  concepts = [],
-  source,
-}) {
-  const currentConceptSet = sharedState[`${source}ConceptSet`]
-  const ids = concepts.map(({ concept }) => concept.CONCEPT_ID)
-  const indexesFormRemoval = concepts.map(concept => concept.idx)
-  ids.forEach(id => delete currentConceptSet.selectedConceptsIndex[id])
-  const selectedConcepts = currentConceptSet.selectedConcepts().filter(({ concept }, idx) => !indexesFormRemoval.includes(idx))
-
-  currentConceptSet.selectedConcepts(selectedConcepts)
-  currentConceptSet.selectedConcepts.valueHasMutated()
-  resolveConceptSetExpression({ source })
 }
 
 function createConceptSetItem (concept) {
@@ -493,6 +480,6 @@ function getPermissionsText (clause = false, action = 'edit') {
   return ko.unwrap(clause) ? null : ko.i18nformat('components.conceptSet.notEnoughPermissions', 'Not enough permissions to <%=action%> Concept Set', { action })
 }
 
-export { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, removeConceptsFromConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
-export default { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, removeConceptsFromConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
+export { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
+export default { toRepositoryConceptSetItems, addItemsToConceptSet, createRepositoryConceptSet, recommendedConceptOptions, getRecommendedConceptColumns, includedConceptsOptions, getIncludedConceptsColumns, getIncludedConceptSetDrawCallback, getAncestorsModalHandler, getAncestorsRenderFunction, loadSourceCodes, loadIncluded, loadAndApplyAncestors, onCurrentConceptSetModeChanged, newConceptSetHandler, conceptSetSelectionHandler, getPermissionsText }
 

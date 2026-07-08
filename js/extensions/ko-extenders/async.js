@@ -1,3 +1,4 @@
+import $ from 'jquery'
 /*
  * Credit to https://smellegantcode.wordpress.com/2012/12/10/asynchronous-computed-observables-in-knockout-js/
  */

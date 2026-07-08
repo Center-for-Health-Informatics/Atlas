@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import * as d3 from 'd3'
 import d3tip from 'd3-tip'
@@ -6,7 +7,7 @@ import d3Selection from 'd3-selection'
 import momentApi from 'services/MomentAPI'
 import authApi from 'services/AuthAPI'
 import config from 'appConfig'
-import 'extensions/d3-labeler'
+import { labeler } from 'extensions/d3-labeler'
 
 function canViewProfileDates () {
   return config.viewProfileDates && (!config.userAuthenticationEnabled || (config.userAuthenticationEnabled && authApi.isPermittedViewProfileDates()))
@@ -284,7 +285,7 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
       .attr('y1', d => d.y)
       .attr('x2', d => d.x)
       .attr('y2', d => d.y)
-    const sim_ann = d3.labeler()
+    const sim_ann = labeler()
       .label(label_array)
       .anchor(points)
       .width(width)

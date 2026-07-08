@@ -1,5 +1,6 @@
 import ko from 'knockout'
 import options from 'components/cohortbuilder/options'
+import utils from 'components/cohortbuilder/utils'
 import Range from 'components/cohortbuilder/InputTypes/Range'
 import template from './DrugEraTemplate.html?raw'
 
@@ -23,6 +24,6 @@ function DrugEraViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { DrugEraViewModel, template }
+export default { viewModel: DrugEraViewModel, template }
 

@@ -185,6 +185,6 @@ function VisitOccurrenceViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { VisitOccurrenceViewModel, template }
+export default { viewModel: VisitOccurrenceViewModel, template }
 

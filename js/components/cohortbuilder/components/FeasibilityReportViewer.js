@@ -13,7 +13,7 @@ function FeasibilityReportViewer (params) {
   self.selectedView = ko.observable('intersect')
 
   if (params.viewerWidget) {
-    viewerWidget(self)
+    params.viewerWidget(self)
   }
 }
 

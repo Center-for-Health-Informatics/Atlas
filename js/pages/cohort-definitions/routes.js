@@ -52,7 +52,7 @@ function routes (router) {
 
     '/cohortdefinition/:cohortDefinitionId/conceptsets/:conceptSetId/:mode': new AuthorizedRoute(
       (cohortDefinitionId, conceptSetId, mode) => {
-        Promise.all([import('components/conceptset/ConceptSetStore'), import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort')]).then(() => {
+        Promise.all([import('components/conceptset/ConceptSetStore'), import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort')]).then(([{ default: ConceptSetStore }]) => {
           sharedState.CohortDefinition.mode('conceptsets')
           sharedState.activeConceptSet(ConceptSetStore.cohortDefinition())
           router.setCurrentView('cohort-definition-manager', {
@@ -89,7 +89,7 @@ function routes (router) {
           selectedSourceId = parseInt(path[1])
         }
         // Determine any optional parameters to set based on the query string
-        qs = router.qs() // Get the query string parameters
+        const qs = router.qs() // Get the query string parameters
         const sourceKey = qs.sourceKey || null
         router.setCurrentView('cohort-definition-manager', {
           cohortDefinitionId,

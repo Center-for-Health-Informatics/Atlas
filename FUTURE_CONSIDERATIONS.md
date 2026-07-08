@@ -8,7 +8,9 @@ Running list of things worth revisiting. Not bugs blocking current work — just
 
 - **No duplicate-concept guard in concept sets** — Atlas has never validated or deduped concept IDs within a concept set's item list (`components/conceptset/utils.js` `addItemsToConceptSet` just pushes). You can add the same concept twice — once by mistake (a related checkbox-clearing bug was already fixed), or deliberately with conflicting flags — and nothing warns you. Worth considering a duplicate check/warning when adding items that already exist in the current expression.
 
-- **Browser Check** — It’s 2026, and we don’t prescribe a browser. Consider removing this all-together.
+- **Browser Check** — It’s 2026, and we don’t prescribe a browser. Consider removing this all-together, but, at the least, change the default to disabled.
+
+- **Visual Accessibility** — Many things in the UI are only distinguished by color. This is not sufficient.
 
 
 ## Infrastructure

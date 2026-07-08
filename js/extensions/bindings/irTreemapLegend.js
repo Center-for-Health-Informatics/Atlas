@@ -8,9 +8,9 @@ function renderLegend (data, target, options) {
       return
     }
 
-    w = 400
-    h = 40
-    x = d3.scaleLinear()
+    const w = 400
+    const h = 40
+    const x = d3.scaleLinear()
       .domain(data().scale.domain())
       .range([0, w - 30])
 

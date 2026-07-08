@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import ko from 'knockout'
 import view from './source-manager.html?raw'
 import Page from 'pages/Page'

@@ -305,14 +305,14 @@ class ComparativeCohortAnalysisManager extends Page {
       if (pcsaCovarSettings.includedCovariateConceptSet !== null && pcsaCovarSettings.includedCovariateConceptSet.id > 0) {
         this.addConceptSetToEstimation(specification, pcsaCovarSettings.includedCovariateConceptSet,
           constants.conceptSetCrossReference.positiveControlCovariateSettings.targetName,
-          index,
-          constants.conceptSetCrossReference.positiveControlCovariateSettings.targetName.includedCovariateConcepts)
+          null,
+          constants.conceptSetCrossReference.positiveControlCovariateSettings.propertyName.includedCovariateConcepts)
       }
       if (pcsaCovarSettings.excludedCovariateConceptSet !== null && pcsaCovarSettings.excludedCovariateConceptSet.id > 0) {
         this.addConceptSetToEstimation(specification, pcsaCovarSettings.excludedCovariateConceptSet,
           constants.conceptSetCrossReference.positiveControlCovariateSettings.targetName,
-          index,
-          constants.conceptSetCrossReference.positiveControlCovariateSettings.targetName.includedCovariateConcepts)
+          null,
+          constants.conceptSetCrossReference.positiveControlCovariateSettings.propertyName.excludedCovariateConcepts)
       }
 
       // Remove the concept set references by setting it to the base class

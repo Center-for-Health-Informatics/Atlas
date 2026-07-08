@@ -22,6 +22,6 @@ function ConditionEraViewModel (params) {
 }
 
 // return compoonent definition
-export { template }
-export default { template }
+export { ConditionEraViewModel, template }
+export default { viewModel: ConditionEraViewModel, template }
 

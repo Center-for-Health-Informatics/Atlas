@@ -1,3 +1,4 @@
+import $ from 'jquery'
 import clipboard from 'clipboard'
 
 const Clipboard = (C = class {}) => class extends C {

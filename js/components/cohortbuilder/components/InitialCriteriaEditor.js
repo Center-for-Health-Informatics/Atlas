@@ -275,6 +275,6 @@ function InitialCriteriaViewModel (params) {
   }
 }
 
-export { template }
-export default { template }
+export { InitialCriteriaViewModel, template }
+export default { viewModel: InitialCriteriaViewModel, template }
 

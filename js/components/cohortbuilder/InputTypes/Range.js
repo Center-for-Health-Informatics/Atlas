@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import momentAPI from 'services/MomentAPI'
-import _ from 'lodash'
+import { isNil } from 'utils/NativeCompat'
 
 function Range (data) {
   const self = this
@@ -12,7 +12,7 @@ function Range (data) {
 
   self.getPrettyValue = v => {
     const value = momentAPI.formatDateToString(ko.toJS(v))
-    return _.isNil(value) ? '' : value
+    return isNil(value) ? '' : value
   }
 
   self.prettyValue = ko.pureComputed(() => self.getPrettyValue(self.Value))

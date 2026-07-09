@@ -7,7 +7,7 @@ import consts from './const'
 import authApi from 'services/AuthAPI'
 import buildInfoService from 'services/BuildInfoService'
 import sharedState from 'atlas-state'
-import lodash from 'lodash'
+import { get, orderBy } from 'utils/NativeCompat'
 import { version } from 'version'
 import 'components/heading'
 
@@ -34,10 +34,10 @@ class Home extends Page {
 
   async onPageCreated () {
     const info = await buildInfoService.getBuildInfo()
-    const atlasMilestoneId = lodash.get(info, 'buildInfo.atlasRepositoryInfo.milestoneId')
-    const webapiMilestoneId = lodash.get(info, 'buildInfo.webapiRepositoryInfo.milestoneId')
-    const atlasReleaseTag = lodash.get(info, 'buildInfo.atlasRepositoryInfo.releaseTag')
-    const webapiReleaseTag = lodash.get(info, 'buildInfo.webapiRepositoryInfo.releaseTag')
+    const atlasMilestoneId = get(info, 'buildInfo.atlasRepositoryInfo.milestoneId')
+    const webapiMilestoneId = get(info, 'buildInfo.webapiRepositoryInfo.milestoneId')
+    const atlasReleaseTag = get(info, 'buildInfo.atlasRepositoryInfo.releaseTag')
+    const webapiReleaseTag = get(info, 'buildInfo.webapiRepositoryInfo.releaseTag')
     this.atlasReleaseTag(atlasReleaseTag)
     this.webapiReleaseTag(webapiReleaseTag)
     this.webapiVersion(this.getWebapiVersion(info))
@@ -47,7 +47,7 @@ class Home extends Page {
     try {
       const atlasIssues = atlasMilestoneId ? await this.getIssuesFromAllPages('OHDSI/Atlas', atlasMilestoneId) : []
       const webapiIssues = webapiMilestoneId ? await this.getIssuesFromAllPages('OHDSI/WebAPI', webapiMilestoneId) : []
-      let issues = lodash.orderBy([...atlasIssues, ...webapiIssues], ['closed_at'], ['desc'])
+      let issues = orderBy([...atlasIssues, ...webapiIssues], ['closed_at'], ['desc'])
       // The API returns both issues and PRs and PRs in most cases would duplicate issues, therefore just leave issues
       issues = issues.filter(item => item.html_url.includes('/issues/'))
       this.github_status(issues)

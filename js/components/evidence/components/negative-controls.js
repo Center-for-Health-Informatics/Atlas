@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import _ from 'lodash'
+import { each } from 'utils/NativeCompat'
 import ko from 'knockout'
 import view from './negative-controls.html?raw'
 import Component from 'components/Component'
@@ -454,7 +454,7 @@ class NegativeControls extends Component {
         .DataTable()
         .data()
       const selectedConcepts = []
-      _.each(dtItems, (item) => {
+      each(dtItems, (item) => {
         const concept = {
           CONCEPT_CLASS_ID: item.conceptClassId,
           CONCEPT_CODE: item.conceptCode,

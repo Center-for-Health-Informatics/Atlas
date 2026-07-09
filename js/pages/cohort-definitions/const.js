@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import _ from 'lodash'
+import { first } from 'utils/NativeCompat'
 
 const periods = [
   {
@@ -44,7 +44,7 @@ const getPeriodTypeFilter = (chosenPeriods) => ({
   label: ko.i18n('options.periodType', 'Period type'),
   name: 'periodType',
   options: ko.observableArray(periods.filter(p => chosenPeriods.includes(p.value))),
-  selectedValue: ko.observable(_.first(chosenPeriods)),
+  selectedValue: ko.observable(first(chosenPeriods)),
 })
 
 const windowType = {

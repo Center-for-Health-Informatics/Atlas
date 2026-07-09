@@ -1,18 +1,18 @@
-import _ from 'lodash'
+import { range } from 'utils/NativeCompat'
 import ko from 'knockout'
 
 const options = {}
 
-options.foldOptions = _.range(10, 0).map(v => '' + v)
-options.initialBound = _.range(10, 0).map(v => '' + v)
-options.maxBoundCount = _.range(10, 0).map(v => '' + v)
-options.foldOptions = _.range(10, 0).map(v => '' + v)
-options.cvRepetitions = _.range(1, 11).map(v => '' + v)
-options.minCVData = _.range(100, 400, 100).map(v => '' + v)
+options.foldOptions = range(10, 0).map(v => '' + v)
+options.initialBound = range(10, 0).map(v => '' + v)
+options.maxBoundCount = range(10, 0).map(v => '' + v)
+options.foldOptions = range(10, 0).map(v => '' + v)
+options.cvRepetitions = range(1, 11).map(v => '' + v)
+options.minCVData = range(100, 400, 100).map(v => '' + v)
 options.maxIterationOptions = ['1000', '500', '100']
 options.toleranceOptions = ['0.000001', '0.00001', '0.0001', '0.001', '0.01', '0.1']
 options.startingVariance = ['-1', '-0.01', '0', '0.01', '1']
-options.tuneSwindle = _.range(10, 0).map(v => '' + v)
+options.tuneSwindle = range(10, 0).map(v => '' + v)
 
 options.yesNoOptions = [{
   name: ko.i18n('options.yes', 'Yes'),

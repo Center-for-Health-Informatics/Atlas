@@ -16,7 +16,7 @@ import commonUtils from 'utils/CommonUtils'
 import exceptionUtils from 'utils/ExceptionUtils'
 import ohdsiUtil from 'assets/ohdsi.util'
 import constants from 'const'
-import lodash from 'lodash'
+import { get } from 'utils/NativeCompat'
 import './characterization-view-edit.less'
 import 'components/tabs'
 import 'faceted-datatable'
@@ -134,7 +134,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
     GlobalPermissionService.decorateComponent(this, {
       entityTypeGetter: () => entityType.COHORT_CHARACTERIZATION,
       entityIdGetter: () => this.characterizationId(),
-      createdByUsernameGetter: () => this.design() && lodash.get(this.design(), 'createdBy.login')
+      createdByUsernameGetter: () => this.design() && get(this.design(), 'createdBy.login')
     })
 
     TagsService.decorateComponent(this, {
@@ -380,15 +380,15 @@ class CharacterizationViewEdit extends AutoBind(Page) {
 
     if (this.previewVersion()) {
       createdText = ko.i18n('components.authorship.versionCreated', 'version created')
-      createdBy = lodash.get(this.previewVersion(), 'createdBy.name')
+      createdBy = get(this.previewVersion(), 'createdBy.name')
       createdDate = commonUtils.formatDateForAuthorship(this.previewVersion().createdDate)
       modifiedBy = null
       modifiedDate = null
     } else {
       createdText = ko.i18n('components.authorship.created', 'created')
-      createdBy = lodash.get(design, 'createdBy.name')
+      createdBy = get(design, 'createdBy.name')
       createdDate = commonUtils.formatDateForAuthorship(design.createdDate)
-      modifiedBy = lodash.get(design, 'modifiedBy.name')
+      modifiedBy = get(design, 'modifiedBy.name')
       modifiedDate = commonUtils.formatDateForAuthorship(design.modifiedDate)
     }
 

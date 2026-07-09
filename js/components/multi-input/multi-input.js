@@ -5,7 +5,7 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import IntegerTypeValidator from './types/IntegerTypeValidator'
 import FloatTypeValidator from './types/FloatTypeValidator'
-import _ from 'lodash'
+import { isEqual, sortBy } from 'utils/NativeCompat'
 import 'databindings'
 import './multi-input.less'
 
@@ -34,7 +34,7 @@ class MultiInput extends AutoBind(Component) {
       return (this.itemToAdd() !== null && this.itemToAdd().toString().length > 0 && this.typeValidator.checkValue(this.typeValidator.parseType(this.itemToAdd())))
     })
     this.enableDefaults = ko.pureComputed(() => {
-      return (this.selectedValues && this.hasDefaults() && !(_.isEqual(_.sortBy(this.selectedValues()), _.sortBy(this.defaultValues))))
+      return (this.selectedValues && this.hasDefaults() && !(isEqual(sortBy(this.selectedValues()), sortBy(this.defaultValues))))
     })
     this.defaultText = ko.pureComputed(() => {
       return this.enableDefaults()

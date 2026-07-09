@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import _ from 'lodash'
+import { uniq } from 'utils/NativeCompat'
 import ko from 'knockout'
 import view from './cohort-definition-manager.html?raw'
 import config from 'appConfig'
@@ -1496,7 +1496,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     }
 
     this.generateReportsEnabled(false)
-    analysisIdentifiers = _.uniq(analysisIdentifiers)
+    analysisIdentifiers = uniq(analysisIdentifiers)
     const cohortDefinitionId = this.currentCohortDefinition().id()
     const cohortJob = {}
 

@@ -5,7 +5,7 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
-import lodash from 'lodash'
+import { groupBy, pick, uniqBy } from 'utils/NativeCompat'
 import conceptSetUtils from 'components/conceptset/utils'
 import globalConstants from 'const'
 import 'pages/characterizations/components/feature-analyses/feature-analyses-browser'
@@ -74,7 +74,7 @@ class CharacterizationDesign extends AutoBind(Component) {
 
   checkStrataNames (data, event) {
     this.areStratasNamesEmpty(this.stratas().find(s => s.name() === ''))
-    this.duplicatedStrataNames(Object.entries(lodash.groupBy(this.stratas().map(s => s.name()))).filter(entry => entry[1].length > 1).map(entry => entry[0]))
+    this.duplicatedStrataNames(Object.entries(groupBy(this.stratas().map(s => s.name()))).filter(entry => entry[1].length > 1).map(entry => entry[0]))
   }
 
   isStrataDuplicated (strataName) {
@@ -112,7 +112,7 @@ class CharacterizationDesign extends AutoBind(Component) {
   onSelect (data = []) {
     this.closeFeatureBrowser()
     const ccDesign = this.design()
-    const featureAnalyses = data.map(item => lodash.pick(item, ['id', 'name', 'description', 'supportsAnnual', 'supportsTemporal']))
+    const featureAnalyses = data.map(item => pick(item, ['id', 'name', 'description', 'supportsAnnual', 'supportsTemporal']))
       .map(item => { return { ...item, includeAnnual: ko.observable(ko.unwrap(this.includeAnnual)), includeTemporal: ko.observable(ko.unwrap(this.includeTemporal)) } })
     ccDesign.featureAnalyses(featureAnalyses)
   }
@@ -124,7 +124,7 @@ class CharacterizationDesign extends AutoBind(Component) {
   addParam ({ name, value }) {
     const ccDesign = this.design()
     this.isParameterCreateModalShown(false)
-    this.design().parameters(lodash.uniqBy(
+    this.design().parameters(uniqBy(
       [
         ...(ccDesign.parameters() || []),
         { name, value }

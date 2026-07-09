@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import _ from 'lodash'
+import { isEmpty } from 'utils/NativeCompat'
 import ko from 'knockout'
 import commonUtils from 'utils/CommonUtils'
 import renderers from 'utils/Renderers'
@@ -285,7 +285,7 @@ function getAncestorsModalHandler ({ conceptSetStore, ancestors, ancestorsModalI
       .find(v => v.CONCEPT_ID === conceptId)
       .ANCESTORS
       .map(v => ({ concept: v })))
-    if (!_.isEmpty(ancestors())) {
+    if (!isEmpty(ancestors())) {
       ancestorsModalIsShown(true)
     }
   }
@@ -340,14 +340,14 @@ function loadAndApplyAncestors (data, conceptSetStore) {
     }
   })
   return new Promise((resolve, reject) => {
-    if (!_.isEmpty(selectedConceptIds) && !_.isEmpty(ids)) {
+    if (!isEmpty(selectedConceptIds) && !isEmpty(ids)) {
       vocabularyService.loadAncestors(selectedConceptIds, ids).then(({ data: ancestors }) => {
         const map = conceptSetStore.includedConceptsMap()
         $.each(data, idx => {
           const line = data[idx]
           const ancArray = ancestors[line.CONCEPT_ID]
           if (line.ANCESTORS == null) {
-            if (!_.isEmpty(ancArray)) {
+            if (!isEmpty(ancArray)) {
               line.ANCESTORS = ancArray.map(conceptId => map[conceptId]).filter(Boolean)
             } else {
               line.ANCESTORS = []

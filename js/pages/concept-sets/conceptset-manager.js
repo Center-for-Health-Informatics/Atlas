@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import _ from 'lodash'
+import { isEmpty, get } from 'utils/NativeCompat'
 import ko from 'knockout'
 import view from './conceptset-manager.html?raw'
 import Page from 'pages/Page'
@@ -20,7 +20,6 @@ import conceptSetService from 'services/ConceptSet'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 import conceptSetUtils from 'components/conceptset/utils'
 import authApi from 'services/AuthAPI'
-import lodash from 'lodash'
 import 'databindings'
 import 'bootstrap'
 import 'faceted-datatable'
@@ -456,7 +455,7 @@ class ConceptsetManager extends AutoBind(Page) {
         conceptSet = await conceptSetService.loadConceptSet(conceptSetId)
         expression = await conceptSetService.loadConceptSetExpression(conceptSetId)
       }
-      conceptSet.expression = _.isEmpty(expression) ? { items: [] } : expression
+      conceptSet.expression = isEmpty(expression) ? { items: [] } : expression
       sharedState.RepositoryConceptSet.current({ ...conceptSet, ...(new ConceptSet(conceptSet)) })
       this.conceptSetStore.current(sharedState.RepositoryConceptSet.current())
       this.conceptSetStore.isEditable(this.canEdit())
@@ -691,15 +690,15 @@ class ConceptsetManager extends AutoBind(Page) {
 
     if (this.previewVersion()) {
       createdText = ko.i18n('components.authorship.versionCreated', 'version created')
-      createdBy = lodash.get(this.previewVersion(), 'createdBy.name')
+      createdBy = get(this.previewVersion(), 'createdBy.name')
       createdDate = commonUtils.formatDateForAuthorship(this.previewVersion().createdDate)
       modifiedBy = null
       modifiedDate = null
     } else {
       createdText = ko.i18n('components.authorship.created', 'created')
-      createdBy = lodash.get(conceptSet, 'createdBy.name')
+      createdBy = get(conceptSet, 'createdBy.name')
       createdDate = commonUtils.formatDateForAuthorship(conceptSet.createdDate)
-      modifiedBy = lodash.get(conceptSet, 'modifiedBy.name')
+      modifiedBy = get(conceptSet, 'modifiedBy.name')
       modifiedDate = commonUtils.formatDateForAuthorship(conceptSet.modifiedDate)
     }
 

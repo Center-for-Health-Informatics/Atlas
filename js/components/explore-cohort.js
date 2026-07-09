@@ -3,7 +3,7 @@ import ko from 'knockout'
 import view from './explore-cohort.html?raw'
 import sharedState from 'atlas-state'
 import config from 'appConfig'
-import _ from 'lodash'
+import { map, clone } from 'utils/NativeCompat'
 import crossfilter from 'crossfilter'
 import 'd3-tip'
 import 'databindings'
@@ -11,7 +11,6 @@ import 'components/faceted-datatable-cf-profile'
 
 function exploreCohort (params) {
   const self = this
-  window._ = _
   window.exploreCohort = self
   self.defaultFetchMax = 100
 
@@ -44,8 +43,8 @@ function exploreCohort (params) {
         self.breakdown(breakdown)
         self.cf(cf)
         self.facets.removeAll()
-        self.facets.push(..._.map(dimConfig, function (dc, dimKey) {
-          const dim = _.clone(dc)
+        self.facets.push(...map(dimConfig, function (dc, dimKey) {
+          const dim = clone(dc)
           dim.key = dimKey
           dim.Members = []
           dim.cfdim = cf.dimension(dim.func)

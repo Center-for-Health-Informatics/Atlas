@@ -11,7 +11,7 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import utils from './utils'
 import characterizationUtils from '../../../utils'
-import lodash from 'lodash'
+import { groupBy, sortBy, uniqBy } from 'utils/NativeCompat'
 import * as d3 from 'd3'
 import filterUtils from 'components/visualizations/filter-panel/utils'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
@@ -273,8 +273,8 @@ class CharacterizationViewEditResults extends AutoBind(Component) {
   getData (resultsList) {
     const result = {
       ...this.data(),
-      analyses: lodash.sortBy(
-        lodash.uniqBy(
+      analyses: sortBy(
+        uniqBy(
           resultsList.map(r => ({
             analysisId: r.analysisId,
             domainId: this.design() && this.design().featureAnalyses && !r.isSummary
@@ -352,11 +352,11 @@ class CharacterizationViewEditResults extends AutoBind(Component) {
 
   getFilterList () {
     const cohorts = this.design().cohorts.map(c => ({ label: c.name, value: parseInt(c.id) }))
-    const domains = lodash.uniqBy(
+    const domains = uniqBy(
       this.design().featureAnalyses.map(fa => ({ label: this.findDomainById(fa.domain).name, value: fa.domain })),
       'value'
     )
-    const analyses = lodash.uniqBy(
+    const analyses = uniqBy(
       this.design().featureAnalyses.map(fa => ({ label: fa.name, value: fa.id })),
       'value'
     )
@@ -425,7 +425,7 @@ class CharacterizationViewEditResults extends AutoBind(Component) {
   }
 
   convertScatterplotData (analysis) {
-    const seriesData = lodash.groupBy(analysis.data, 'analysisName')
+    const seriesData = groupBy(analysis.data, 'analysisName')
     const firstCohortId = analysis.cohorts[0].cohortId
     const secondCohortId = analysis.cohorts[1].cohortId
     return Object.keys(seriesData).map(key => ({

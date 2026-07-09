@@ -6,7 +6,7 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import Clipboard from 'utils/Clipboard'
 import roleService from 'services/role'
-import _ from 'lodash'
+import { difference } from 'utils/NativeCompat'
 import ohdsiUtils from 'assets/ohdsi.util'
 import userService from 'services/User'
 import authApi from 'services/AuthAPI'
@@ -274,8 +274,8 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
   async saveUsers () {
     if (this.canEditRoleUsers()) {
       const currentRoleUserIds = this.getUsersList().map(u => u.id)
-      const userIdsToAdd = _.difference(currentRoleUserIds, this.roleUserIds)
-      const userIdsToRemove = _.difference(this.roleUserIds, currentRoleUserIds)
+      const userIdsToAdd = difference(currentRoleUserIds, this.roleUserIds)
+      const userIdsToRemove = difference(this.roleUserIds, currentRoleUserIds)
       this.roleUserIds = currentRoleUserIds
 
       await this.addRelations(userIdsToAdd, 'users')
@@ -287,8 +287,8 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
     if (this.canEditRolePermissions()) {
       const currentRolePermissionIds = this.getPermissionsList().map(p => p.id)
 
-      const permissionIdsToAdd = _.difference(currentRolePermissionIds, this.rolePermissionIds)
-      const permissionIdsToRemove = _.difference(this.rolePermissionIds, currentRolePermissionIds)
+      const permissionIdsToAdd = difference(currentRolePermissionIds, this.rolePermissionIds)
+      const permissionIdsToRemove = difference(this.rolePermissionIds, currentRolePermissionIds)
       this.rolePermissionIds = currentRolePermissionIds
 
       await this.addRelations(permissionIdsToAdd, 'permissions')

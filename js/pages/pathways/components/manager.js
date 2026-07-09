@@ -15,7 +15,7 @@ import commonUtils from 'utils/CommonUtils'
 import exceptionUtils from 'utils/ExceptionUtils'
 import ohdsiUtil from 'assets/ohdsi.util'
 import constants from 'const'
-import lodash from 'lodash'
+import { get } from 'utils/NativeCompat'
 import './manager.less'
 import 'components/tabs'
 import './tabs/pathway-design'
@@ -116,7 +116,7 @@ class PathwaysManager extends AutoBind(Page) {
     GlobalPermissionService.decorateComponent(this, {
       entityTypeGetter: () => entityType.PATHWAY_ANALYSIS,
       entityIdGetter: () => this.analysisId(),
-      createdByUsernameGetter: () => this.design() && lodash.get(this.design(), 'createdBy.login')
+      createdByUsernameGetter: () => this.design() && get(this.design(), 'createdBy.login')
     })
 
     TagsService.decorateComponent(this, {
@@ -349,15 +349,15 @@ class PathwaysManager extends AutoBind(Page) {
 
     if (this.previewVersion()) {
       createdText = ko.i18n('components.authorship.versionCreated', 'version created')
-      createdBy = lodash.get(this.previewVersion(), 'createdBy.name')
+      createdBy = get(this.previewVersion(), 'createdBy.name')
       createdDate = commonUtils.formatDateForAuthorship(this.previewVersion().createdDate)
       modifiedBy = null
       modifiedDate = null
     } else {
       createdText = ko.i18n('components.authorship.created', 'created')
-      createdBy = lodash.get(analysis, 'createdBy.name')
+      createdBy = get(analysis, 'createdBy.name')
       createdDate = commonUtils.formatDateForAuthorship(analysis.createdDate)
-      modifiedBy = lodash.get(analysis, 'modifiedBy.name')
+      modifiedBy = get(analysis, 'modifiedBy.name')
       modifiedDate = commonUtils.formatDateForAuthorship(analysis.modifiedDate)
     }
 

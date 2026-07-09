@@ -1,5 +1,5 @@
 import Component from 'components/Component'
-import _ from 'lodash'
+import { differenceWith } from 'utils/NativeCompat'
 
 function detectChanges (newVal, oldVal) {
   let nn = newVal[0]; let nv = newVal[1]; let on = oldVal[0]; let ov = oldVal[1]
@@ -27,7 +27,7 @@ class Page extends Component {
     this.subscriptions.push(params.router.routerParams.subscribe(newParams => {
       const np = Object.entries(newParams === undefined ? {} : newParams)
       const op = Object.entries(this.routerParams === undefined ? {} : this.routerParams)
-      const changedParams = _.differenceWith(np, op, detectChanges)
+      const changedParams = differenceWith(np, op, detectChanges)
       if (changedParams.length === 0 || this.activeRoute.title !== params.router.activeRoute().title) {
         return
       }

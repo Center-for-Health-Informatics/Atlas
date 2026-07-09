@@ -9,7 +9,7 @@ import CsvUtils from 'utils/CsvUtils'
 import commonUtils from 'utils/CommonUtils'
 import numeral from 'numeral'
 import CohortResultsService from 'services/CohortResults'
-import lodash from 'lodash'
+import { sortBy } from 'utils/NativeCompat'
 
 class BaseCostUtilReport extends Component {
   constructor (params) {
@@ -62,7 +62,7 @@ class BaseCostUtilReport extends Component {
   }
 
   static conceptsToOptions (conceptList) {
-    return lodash.sortBy(
+    return sortBy(
       conceptList.map(el => ({ label: el.conceptName, value: el.conceptId })),
       ['label']
     )

@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import RLangClass from 'services/analysis/RLangClass'
-import _ from 'lodash'
+import { range } from 'utils/NativeCompat'
 
 class TemporalCovariateSettings extends RLangClass {
   constructor (data = {}) {
@@ -45,8 +45,8 @@ class TemporalCovariateSettings extends RLangClass {
     this.DistinctObservationCount = ko.observable(data.DistinctObservationCount === 0 ? 0 : data.DistinctObservationCount || false)
     this.VisitCount = ko.observable(data.VisitCount === 0 ? 0 : data.VisitCount || false)
     this.VisitConceptCount = ko.observable(data.VisitConceptCount === 0 ? 0 : data.VisitConceptCount || false)
-    this.temporalStartDays = ko.observableArray((data.temporalStartDays && Array.isArray(data.temporalStartDays)) ? data.temporalStartDays : _.range(-365, 0))
-    this.temporalEndDays = ko.observableArray((data.temporalEndDays && Array.isArray(data.temporalEndDays)) ? data.temporalEndDays : _.range(-365, 0))
+    this.temporalStartDays = ko.observableArray((data.temporalStartDays && Array.isArray(data.temporalStartDays)) ? data.temporalStartDays : range(-365, 0))
+    this.temporalEndDays = ko.observableArray((data.temporalEndDays && Array.isArray(data.temporalEndDays)) ? data.temporalEndDays : range(-365, 0))
     this.includedCovariateConceptIds = ko.observableArray((data.includedCovariateConceptIds && Array.isArray(data.includedCovariateConceptIds)) ? data.includedCovariateConceptIds : [])
     this.addDescendantsToInclude = ko.observable(data.addDescendantsToInclude === 0 ? false : data.addDescendantsToInclude || false)
     this.excludedCovariateConceptIds = ko.observableArray((data.excludedCovariateConceptIds && Array.isArray(data.excludedCovariateConceptIds)) ? data.excludedCovariateConceptIds : [])

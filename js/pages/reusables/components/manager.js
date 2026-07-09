@@ -16,7 +16,7 @@ import exceptionUtils from 'utils/ExceptionUtils'
 import ohdsiUtil from 'assets/ohdsi.util'
 import constants from 'const'
 import reusableConstants from '../const'
-import lodash from 'lodash'
+import { get } from 'utils/NativeCompat'
 import './manager.less'
 import 'components/tabs'
 import './tabs/reusable-design'
@@ -96,7 +96,7 @@ class ReusableManager extends AutoBind(Page) {
     GlobalPermissionService.decorateComponent(this, {
       entityTypeGetter: () => entityType.REUSABLE,
       entityIdGetter: () => this.designId(),
-      createdByUsernameGetter: () => this.design() && lodash.get(this.design(), 'createdBy.login')
+      createdByUsernameGetter: () => this.design() && get(this.design(), 'createdBy.login')
     })
 
     TagsService.decorateComponent(this, {
@@ -319,9 +319,9 @@ class ReusableManager extends AutoBind(Page) {
       modifiedDate = null
     } else {
       createdText = ko.i18n('components.authorship.created', 'created')
-      createdBy = lodash.get(reusable, 'createdBy.name')
+      createdBy = get(reusable, 'createdBy.name')
       createdDate = commonUtils.formatDateForAuthorship(reusable.createdDate)
-      modifiedBy = lodash.get(reusable, 'modifiedBy.name')
+      modifiedBy = get(reusable, 'modifiedBy.name')
       modifiedDate = commonUtils.formatDateForAuthorship(reusable.modifiedDate)
     }
 

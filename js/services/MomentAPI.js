@@ -1,9 +1,7 @@
-import moment from 'moment'
 import ko from 'knockout'
 import sharedState from 'atlas-state'
-import { get } from 'lodash'
+import { get } from 'utils/NativeCompat'
 
-const PARSE_FORMAT = 'YYYY-MM-DD, H:mm'
 const DATE_TIME_FORMAT = 'MM/DD/YYYY h:mm A'
 const DATE_TIME_FORMAT_WITH_SECONDS = 'MM/DD/YYYY h:mm:ss A'
 const DATE_FORMAT = 'MM/DD/YYYY'
@@ -17,19 +15,80 @@ const dateTimeFormatWithSeconds = ko.computed(() => get(ko.unwrap(sharedState.lo
 const seconds = ko.computed(() => get(ko.unwrap(sharedState.localeSettings), 'format.date.seconds', 'sec'))
 const minutes = ko.computed(() => get(ko.unwrap(sharedState.localeSettings), 'format.date.minutes', 'min'))
 
+function pad (n, len = 2) {
+  return String(n).padStart(len, '0')
+}
+
+// Supports the small token vocabulary actually used by this app's format strings:
+// YYYY, MM, DD, HH, hh, H, h, mm, ss, A. Longer tokens are listed before their
+// single-character prefixes so the alternation doesn't stop short.
+function formatToken (date, format) {
+  const hours24 = date.getHours()
+  const hours12 = hours24 % 12 || 12
+  const tokens = {
+    YYYY: pad(date.getFullYear(), 4),
+    MM: pad(date.getMonth() + 1),
+    DD: pad(date.getDate()),
+    HH: pad(hours24),
+    hh: pad(hours12),
+    mm: pad(date.getMinutes()),
+    ss: pad(date.getSeconds()),
+    H: String(hours24),
+    h: String(hours12),
+    A: hours24 < 12 ? 'AM' : 'PM',
+  }
+  return format.replace(/YYYY|MM|DD|HH|hh|mm|ss|H|h|A/g, (token) => tokens[token])
+}
+
+// Date objects, epoch numbers, and ISO-ish strings (as returned by WebAPI) all
+// parse natively; anything else is treated as unparseable. Bare "YYYY-MM-DD"
+// strings are special-cased to local midnight (native Date parses them as UTC
+// midnight per spec, which moment's default parsing did not).
+function toDate (input) {
+  if (typeof input === 'string') {
+    const dateOnly = input.match(/^(\d{4})-(\d{2})-(\d{2})$/)
+    if (dateOnly) {
+      const [, y, mo, d] = dateOnly
+      return new Date(+y, +mo - 1, +d)
+    }
+  }
+  if (input instanceof Date || typeof input === 'number' || typeof input === 'string') {
+    const d = new Date(input)
+    return isNaN(d.getTime()) ? null : d
+  }
+  return null
+}
+
+// Interprets a naive (no-offset) ISO-ish date string as UTC wall-clock time,
+// matching moment.utc(str).valueOf() for the same input.
+function parseAsUTC (str) {
+  const match = str.match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?(?:\.\d+)?)?/)
+  if (!match) {
+    return Date.parse(str)
+  }
+  const [, y, mo, d, h = '0', mi = '0', s = '0'] = match
+  return Date.UTC(+y, +mo - 1, +d, +h, +mi, +s)
+}
+
 function formatDateTime (date) {
-  const m = moment(date, PARSE_FORMAT)
-  return m.isValid() ? m.format(dateTimeFormat()) : EMPTY_DATE
+  const d = toDate(date)
+  return d ? formatToken(d, dateTimeFormat()) : EMPTY_DATE
 }
 
 function formatDate (date, outFormat) {
-  const m = moment(date, PARSE_FORMAT)
-  return m.isValid() ? m.format(outFormat || DATE_FORMAT) : EMPTY_DATE
+  const d = toDate(date)
+  return d ? formatToken(d, outFormat || DATE_FORMAT) : EMPTY_DATE
 }
 
 function formatDuration (ms) {
-  const m = moment('1900-01-01 00:00:00').add(ms)
-  return m.isValid() ? m.format(DURATION_FORMAT) : EMPTY_DATE
+  if (typeof ms !== 'number' || isNaN(ms)) {
+    return EMPTY_DATE
+  }
+  const totalSeconds = Math.floor(ms / 1000)
+  const hours = Math.floor(totalSeconds / 3600) % 24
+  const mins = Math.floor((totalSeconds % 3600) / 60)
+  const secs = totalSeconds % 60
+  return `${pad(hours)}:${pad(mins)}:${pad(secs)}`
 }
 
 function formatInterval (ms) {
@@ -41,25 +100,28 @@ function formatDateTimeWithFormat (timestamp, outFormat) {
   if (timestamp === undefined || timestamp === null) {
     return EMPTY_DATE
   }
-  const m = moment(timestamp)
-  return m.isValid() ? m.format(outFormat) : EMPTY_DATE
+  const d = toDate(timestamp)
+  return d ? formatToken(d, outFormat) : EMPTY_DATE
 }
 
 function formatDateTimeUTC (timestamp, withSeconds) {
-  const m = moment(typeof timestamp === 'string' ? moment.utc(timestamp).valueOf() : timestamp)
+  const ms = typeof timestamp === 'string' ? parseAsUTC(timestamp) : timestamp
+  const d = toDate(ms)
   const format = withSeconds ? dateTimeFormatWithSeconds() : dateTimeFormat()
-  return m.isValid() ? m.format(format) : EMPTY_DATE
+  return d ? formatToken(d, format) : EMPTY_DATE
 }
 
-function diffInDays (fromDate, toDate) {
-  const fd = moment(fromDate)
-  const td = moment(toDate)
-
-  return td.diff(fd, 'days')
+function diffInDays (fromDate, toDate2) {
+  const fd = toDate(fromDate)
+  const td = toDate(toDate2)
+  if (!fd || !td) {
+    return NaN
+  }
+  return Math.trunc((td.getTime() - fd.getTime()) / 86400000)
 }
 
 function formatDateToString (value, format = ISO_DATE_FORMAT) {
-  return value instanceof Date ? moment(value).format(format) : value
+  return value instanceof Date ? formatToken(value, format) : value
 }
 
 const api = {
@@ -71,7 +133,7 @@ const api = {
   formatInterval,
   formatDateToString,
   diffInDays,
-  PARSE_FORMAT,
+  PARSE_FORMAT: 'YYYY-MM-DD, H:mm',
   DATE_TIME_FORMAT,
   DATE_FORMAT,
   DURATION_FORMAT,

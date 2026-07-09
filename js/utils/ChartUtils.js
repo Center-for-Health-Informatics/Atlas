@@ -1,5 +1,5 @@
 import * as d3 from 'd3'
-import _ from 'lodash'
+import { isFinite } from 'utils/NativeCompat'
 import html2canvas from 'html2canvas'
 import saveAs from 'utils/FileSaverUtils'
 import SvgSaver from 'svgsaver'
@@ -178,7 +178,7 @@ class ChartUtils {
         keys.forEach(function (key) {
           let val = thisAryObj[key]
           if (numerify) {
-            if (_.isFinite(+val)) {
+            if (isFinite(+val)) {
               val = (+val)
             }
           }

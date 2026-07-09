@@ -19,7 +19,7 @@ import ConceptSet from 'services/analysis/ConceptSet'
 import ConceptSetCrossReference from 'services/analysis/ConceptSetCrossReference'
 import authAPI from 'services/AuthAPI'
 import { PollService } from 'services/Poll'
-import lodash from 'lodash'
+import { get } from 'utils/NativeCompat'
 import 'services/FeatureExtraction'
 import 'featureextraction/components/covariate-settings-editor'
 import 'featureextraction/components/temporal-covariate-settings-editor'
@@ -177,7 +177,7 @@ class PatientLevelPredictionManager extends Page {
     GlobalPermissionService.decorateComponent(this, {
       entityTypeGetter: () => entityType.PREDICTION,
       entityIdGetter: () => this.selectedAnalysisId(),
-      createdByUsernameGetter: () => this.patientLevelPredictionAnalysis() && lodash.get(this.patientLevelPredictionAnalysis(), 'createdBy.login')
+      createdByUsernameGetter: () => this.patientLevelPredictionAnalysis() && get(this.patientLevelPredictionAnalysis(), 'createdBy.login')
     })
   }
 
@@ -455,9 +455,9 @@ class PatientLevelPredictionManager extends Page {
     const createdDate = commonUtils.formatDateForAuthorship(this.patientLevelPredictionAnalysis().createdDate)
     const modifiedDate = commonUtils.formatDateForAuthorship(this.patientLevelPredictionAnalysis().modifiedDate)
     return {
-      createdBy: lodash.get(this.patientLevelPredictionAnalysis(), 'createdBy.name'),
+      createdBy: get(this.patientLevelPredictionAnalysis(), 'createdBy.name'),
       createdDate,
-      modifiedBy: lodash.get(this.patientLevelPredictionAnalysis(), 'modifiedBy.name'),
+      modifiedBy: get(this.patientLevelPredictionAnalysis(), 'modifiedBy.name'),
       modifiedDate,
     }
   }

@@ -1,6 +1,6 @@
 import ko from 'knockout'
 import view from './multi-select.html?raw'
-import _ from 'lodash'
+import { xor } from 'utils/NativeCompat'
 import './multi-select.less'
 import 'extensions/bindings/multiSelect'
 import 'databindings/eventListenerBinding'
@@ -26,7 +26,7 @@ function multiSelectFilter (params) {
 
   self.onSelectionComplete = function (data, context, event) {
     // only reset the param's selectedValues if the current selections are different
-    if (params.multiple && _.xor(params.selectedValues(), self.selectedValues()).length !== 0) {
+    if (params.multiple && xor(params.selectedValues(), self.selectedValues()).length !== 0) {
       params.selectedValues(self.selectedValues())
     }
   }

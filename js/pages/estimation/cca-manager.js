@@ -21,7 +21,7 @@ import ConceptSetCrossReference from 'services/analysis/ConceptSetCrossReference
 import CovariateSettings from 'featureextraction/InputTypes/CovariateSettings'
 import FeatureExtractionService from 'services/FeatureExtraction'
 import { PollService } from 'services/Poll'
-import lodash from 'lodash'
+import { get } from 'utils/NativeCompat'
 import 'faceted-datatable'
 import 'components/tabs'
 import './components/cca-specification-view-edit'
@@ -181,7 +181,7 @@ class ComparativeCohortAnalysisManager extends Page {
     GlobalPermissionService.decorateComponent(this, {
       entityTypeGetter: () => entityType.ESTIMATION,
       entityIdGetter: () => this.selectedAnalysisId(),
-      createdByUsernameGetter: () => this.estimationAnalysis() && lodash.get(this.estimationAnalysis(), 'createdBy.login')
+      createdByUsernameGetter: () => this.estimationAnalysis() && get(this.estimationAnalysis(), 'createdBy.login')
     })
   }
 
@@ -559,9 +559,9 @@ class ComparativeCohortAnalysisManager extends Page {
     const createdDate = commonUtils.formatDateForAuthorship(this.estimationAnalysis().createdDate)
     const modifiedDate = commonUtils.formatDateForAuthorship(this.estimationAnalysis().modifiedDate)
     return {
-      createdBy: lodash.get(this.estimationAnalysis(), 'createdBy.name'),
+      createdBy: get(this.estimationAnalysis(), 'createdBy.name'),
       createdDate,
-      modifiedBy: lodash.get(this.estimationAnalysis(), 'modifiedBy.name'),
+      modifiedBy: get(this.estimationAnalysis(), 'modifiedBy.name'),
       modifiedDate,
     }
   }

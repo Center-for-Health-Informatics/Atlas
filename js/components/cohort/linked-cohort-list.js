@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
-import lodash from 'lodash'
+import { uniqBy } from 'utils/NativeCompat'
 import filterXSS from 'xss'
 import appConfig from 'appConfig'
 import view from './linked-cohort-list.html?raw'
@@ -79,7 +79,7 @@ class LinkedCohortList extends Component {
   attachCohort ({ id, name }) {
     const data = this.data()
     this.data(
-      lodash.uniqBy(
+      uniqBy(
         [
           ...data,
           { id, name }

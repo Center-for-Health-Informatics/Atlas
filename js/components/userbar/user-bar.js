@@ -7,7 +7,7 @@ import commonUtils from 'utils/CommonUtils'
 import authApi from 'services/AuthAPI'
 import jobDetailsService from 'services/JobDetailsService'
 import momentApi from 'services/MomentAPI'
-import lodash from 'lodash'
+import { sortBy } from 'utils/NativeCompat'
 import { PollService } from 'services/Poll'
 import constants from 'const'
 import './user-bar.less'
@@ -28,12 +28,12 @@ class UserBar extends Component {
     this.jobListing = state.jobListing
     this.selectTab = this.selectTab.bind(this)
     this.userJobParams = {
-      jobListing: ko.computed(() => lodash.sortBy(this.jobListing(), el => -1 * el.executionId)
+      jobListing: ko.computed(() => sortBy(this.jobListing(), el => -1 * el.executionId)
         .filter(j => j.ownerType === constants.jobTypes.USER_JOB.ownerType)),
       jobNameClick: this.jobNameClick.bind(this),
     }
     this.allJobParams = {
-      jobListing: ko.computed(() => lodash.sortBy(this.jobListing(), el => -1 * el.executionId)
+      jobListing: ko.computed(() => sortBy(this.jobListing(), el => -1 * el.executionId)
         .filter(j => j.ownerType === constants.jobTypes.ALL_JOB.ownerType)),
     }
     this.tabs = []

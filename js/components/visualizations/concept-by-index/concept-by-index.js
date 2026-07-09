@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import _ from 'lodash'
+import { isFinite } from 'utils/NativeCompat'
 import ko from 'knockout'
 import view from './concept-by-index.html?raw'
 import * as d3 from 'd3'
@@ -48,7 +48,7 @@ function conceptByIndex (params) {
         $.each(keys, function () {
           let val = thisAryObj[this]
           if (numerify) {
-            if (_.isFinite(+val)) {
+            if (isFinite(+val)) {
               val = (+val)
             }
           }

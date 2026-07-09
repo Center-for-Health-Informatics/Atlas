@@ -5,7 +5,7 @@ import ohdsiUtil from 'assets/ohdsi.util'
 import authApi from 'services/AuthAPI'
 import lscache from 'lscache'
 import ko from 'knockout'
-import lodash from 'lodash'
+import { sortBy } from 'utils/NativeCompat'
 import httpService from 'services/http'
 import constants from 'const'
 
@@ -96,7 +96,7 @@ function setSharedStateSources (sources, priorityDaimons) {
   sharedState.evidenceUrl() || (priorityDaimons[DAIMON_TYPE.CEM] && sharedState.defaultEvidenceUrl(getEvidenceUrl(priorityDaimons[DAIMON_TYPE.CEM].sourceKey)))
   sharedState.resultsUrl() || (priorityDaimons[DAIMON_TYPE.Results] && sharedState.defaultResultsUrl(getResultsUrl(priorityDaimons[DAIMON_TYPE.Results].sourceKey)))
 
-  const sourceList = lodash.sortBy(sources.map(function (source, sourceIndex) {
+  const sourceList = sortBy(sources.map(function (source, sourceIndex) {
     source.hasVocabulary = false
     source.hasEvidence = false
     source.hasResults = false

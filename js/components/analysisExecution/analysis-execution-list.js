@@ -8,7 +8,7 @@ import SourceService from 'services/Source'
 import JobDetailsService from 'services/JobDetailsService'
 import FileService from 'services/file'
 import httpService from 'services/http'
-import lodash from 'lodash'
+import { sortBy } from 'utils/NativeCompat'
 import consts from 'const'
 import shinyConsts from 'components/analysisExecution/shiny-const'
 import view from './analysis-execution-list.html?raw'
@@ -223,7 +223,7 @@ class AnalysisExecutionList extends Component {
         const daimonTypes = daimons.map(({ daimonType }) => daimonType)
         return ['CDM', 'Results'].every(daimonType => daimonTypes.includes(daimonType))
       })
-      sourceList = lodash.sortBy(sourceList, ['sourceName'])
+      sourceList = sortBy(sourceList, ['sourceName'])
       sourceList.forEach(source => {
         const { sourceKey, sourceName, sourceId } = source
         let group = this.getExecutionGroup(sourceKey)

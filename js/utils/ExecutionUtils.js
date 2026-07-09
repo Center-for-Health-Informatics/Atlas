@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import _ from 'lodash'
+import { orderBy } from 'utils/NativeCompat'
 import consts from '../const'
 
 async function StartExecution (executionGroup) {
@@ -23,7 +23,7 @@ async function StartExecution (executionGroup) {
 }
 
 function generateVersionTags (generations) {
-  const sortedHashes = _.orderBy([...generations], 'startTime', 'asc')
+  const sortedHashes = orderBy([...generations], 'startTime', 'asc')
     .map(info => info.hashCode)
     .filter((element, index, array) => array.indexOf(element) === index)
   generations.forEach((info) => {

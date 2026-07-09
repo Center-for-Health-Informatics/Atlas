@@ -9,7 +9,7 @@ import vocabularyProvider from 'services/Vocabulary'
 import ohdsiUtil from 'assets/ohdsi.util'
 import sourceApi from 'services/SourceAPI'
 import roleService from 'services/role'
-import lodash from 'lodash'
+import { omit, difference, flatten } from 'utils/NativeCompat'
 import authApi from 'services/AuthAPI'
 import sharedState from 'atlas-state'
 import constants from 'pages/configuration/const'
@@ -34,19 +34,19 @@ function Source (data) {
     const keys = daimons.map(function (value) { return value.daimonType })
     const result = daimons.map(function (value) {
       return {
-        ...lodash.omit(value, ['tableQualifier']),
+        ...omit(value, ['tableQualifier']),
         tableQualifier: ko.observable(value.tableQualifier),
         enabled: ko.observable(true),
       }
     })
-    const diff = lodash.difference(defaultKeys, keys).map(function (key) {
+    const diff = difference(defaultKeys, keys).map(function (key) {
       return {
         ...defaultDaimons[key],
         daimonType: key,
         enabled: ko.observable(false),
       }
     })
-    return lodash.concat(result, diff)
+    return result.concat(diff)
   }
 
   data = data || {}
@@ -263,7 +263,7 @@ class SourceManager extends AutoBind(Page) {
       username: this.selectedSource().username() || null,
       password: this.selectedSource().password() || null,
       daimons: ko.toJS(this.selectedSource().daimons()).filter(function (d) { return d.enabled }).map(function (d) {
-        return lodash.omit(d, ['enabled'])
+        return omit(d, ['enabled'])
       }),
       keyfileName: this.selectedSource().keyfileName(),
       keyfile: this.keyfile,
@@ -298,7 +298,7 @@ class SourceManager extends AutoBind(Page) {
 
   hasSelectedPriotirizableDaimons () {
     const otherSources = sharedState.sources().filter(s => s.sourceId !== this.selectedSource().sourceId)
-    const otherPriotirizableDaimons = lodash.flatten(
+    const otherPriotirizableDaimons = flatten(
       otherSources.map(s => s.daimons.filter(d => constants.priotirizableDaimonTypes.includes(d.daimonType) && d.sourceDaimonId))
     )
     const currenPriotirizableDaimons = this.selectedSource().daimons().filter(d => constants.priotirizableDaimonTypes.includes(d.daimonType) && d.sourceDaimonId)

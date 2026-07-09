@@ -19,7 +19,7 @@ import Clipboard from 'utils/Clipboard'
 import ohdsiUtil from 'assets/ohdsi.util'
 import globalConstants from 'const'
 import componentConst from './const'
-import lodash from 'lodash'
+import { sortBy } from 'utils/NativeCompat'
 import './feature-analysis-view-edit.less'
 import './fa-view-edit/fa-design'
 import './fa-view-edit/fa-conceptset'
@@ -244,7 +244,7 @@ class FeatureAnalysisViewEdit extends AutoBind(Clipboard(Page)) {
 
   async loadAggregates () {
     const aggregates = await FeatureAnalysisService.loadAggregates()
-    const aggregateMap = lodash.sortBy(aggregates.reduce((map, ag) => {
+    const aggregateMap = sortBy(aggregates.reduce((map, ag) => {
       ag.isDefault && this.defaultAggregate(ag)
       const domainId = ag.domain || componentConst.ANY_DOMAIN
       let domain = map.find(d => d.value === domainId)
@@ -260,7 +260,7 @@ class FeatureAnalysisViewEdit extends AutoBind(Clipboard(Page)) {
     }, []), a => a.label)
       .map(d => ({
         ...d,
-        aggregates: lodash.sortBy(d.aggregates, a => a.name),
+        aggregates: sortBy(d.aggregates, a => a.name),
       }))
     this.aggregates(aggregateMap)
   }

@@ -15,18 +15,11 @@
 
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="js/styles/splash.css" />
-		<link rel="stylesheet" href="js/styles/browserWarning.css" />
 
 		<title data-bind="text: pageTitle">ATLAS</title>
 	</head>
 
 	<body class="app">
-	<div id="b-alarm" style="display: none" class="browser-alarm" data-bind="visible: toggleBrowserWarning(bowser)">
-		<div class="browser-alarm__warning-text" data-bind="text: ko.i18n('commonErrors.browserWarning', 'Note that only Chrome browser newer than v.63 is officially supported')">
-			Note that only Chrome browser newer than v.63 is officially supported
-		</div>
-		<button type="button" class="close browser-alarm__close" onclick="toggleWarning(true)">&times;</button>
-	</div>
 	<!-- ko if: !initializationComplete() -->
 	<div id="splash">
 		<div id="stage">

@@ -8,7 +8,6 @@ appConfig.api = {
   name: 'Local',
   url: 'http://localhost:8080/WebAPI/'
 }
-appConfig.disableBrowserCheck = false // browser check will happen by default
 appConfig.enablePermissionManagement = true // allow UI to assign read/write permissions to entities
 appConfig.cacheSources = false
 appConfig.pollInterval = 60000

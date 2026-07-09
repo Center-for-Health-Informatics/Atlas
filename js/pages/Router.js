@@ -1,6 +1,5 @@
 import pages from 'pages'
 import vocabularyPage from 'pages/vocabulary/index'
-import querystring from 'querystring'
 import authApi from 'services/AuthAPI'
 import sharedState from 'atlas-state'
 import ko from 'knockout'
@@ -38,7 +37,7 @@ class AtlasRouter {
   }
 
   qs () {
-    return querystring.parse(window.location.href.split('?')[1])
+    return Object.fromEntries(new URLSearchParams(window.location.href.split('?')[1]))
   }
 
   handleNotFound () {

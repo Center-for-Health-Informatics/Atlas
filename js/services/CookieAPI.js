@@ -1,11 +1,10 @@
-import jsCookie from 'js-cookie'
-
 function setField (field, value) {
-  jsCookie.set(field, value, { expires: 365, path: '/' })
+  const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString()
+  document.cookie = `${field}=${encodeURIComponent(value)}; expires=${expires}; path=/`
 }
 
 function clearField (field) {
-  jsCookie.remove(field, { path: '/' })
+  document.cookie = `${field}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`
 }
 
 const api = {

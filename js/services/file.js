@@ -1,5 +1,5 @@
 import authApi from 'services/AuthAPI'
-import { saveAs } from 'file-saver'
+import saveAs from 'utils/FileSaverUtils'
 
 class FileService {
   // Helper function to simplify setting up and making the XMLHttpRequest

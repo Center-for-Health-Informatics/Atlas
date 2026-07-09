@@ -12,7 +12,6 @@ import i18nService from 'services/I18nService'
 import EventBus from 'services/EventBus'
 import BemHelper from 'utils/BemHelper'
 import constants from 'const'
-import bowser from 'bowser'
 import './app.less'
 
 export default class Application {
@@ -38,13 +37,6 @@ export default class Application {
     this.initializationComplete = ko.pureComputed(() => {
       return sharedState.appInitializationStatus() !== constants.applicationStatuses.initializing
     })
-
-    this.bowser = bowser
-    this.toggleBrowserWarning = function (bowser) {
-      const browserInfo = bowser.getParser(navigator.userAgent).getBrowser()
-      const isBrowserSupported = browserInfo.name.toLowerCase() === 'chrome' && parseInt(browserInfo.version) > 63
-      return !config.disableBrowserCheck && !isBrowserSupported
-    }
 
     this.appInitializationStatus = sharedState.appInitializationStatus
     this.noSourcesAvailable = ko.pureComputed(() => {

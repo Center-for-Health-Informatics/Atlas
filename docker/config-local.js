@@ -22,7 +22,6 @@ define([], function () {
 	configLocal.plpResultsEnabled = ("${ATLAS_PLP_RESULTS_ENABLED}" === "true");
 	configLocal.userAuthenticationEnabled = ("${ATLAS_USER_AUTH_ENABLED}" === "true");
 	configLocal.authProviders = [];
-	configLocal.disableBrowserCheck = ("${ATLAS_DISABLE_BROWSER_CHECK}" === "true");
 	configLocal.enablePermissionManagement = ("${ATLAS_ENABLE_PERMISSIONS_MGMT}" === "true");
 	configLocal.cacheSources = ("${ATLAS_CACHE_SOURCES}" === "true");
 	configLocal.enableSkipLogin = ("${ATLAS_SKIP_LOGIN}" === "true"); // automatically opens login window when user is not authenticated

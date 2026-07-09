@@ -1,4 +1,4 @@
-import { saveAs } from 'file-saver'
+import saveAs from 'utils/FileSaverUtils'
 import Papa from 'papaparse'
 
 class CsvUtils {

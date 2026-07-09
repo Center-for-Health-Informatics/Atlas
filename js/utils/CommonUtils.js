@@ -3,7 +3,6 @@ import ko from 'knockout'
 import appConfig from 'appConfig'
 import Page from 'pages/Page'
 import momentApi from 'services/MomentAPI'
-import URI from 'urijs'
 import constants from 'const'
 
 const build = function (name, ViewModelClass, template) {
@@ -139,7 +138,7 @@ async function confirmAndDelete ({ loading, remove, redirect, message = 'Are you
   }
 }
 
-const normalizeUrl = (...parts) => URI(parts.join('/')).normalizePathname().toString()
+const normalizeUrl = (...parts) => parts.join('/').replace(/([^:]\/)\/+/g, '$1')
 
 const f = (a, b) => [].concat(...a.map(d => b.map(e => [].concat(d, e))))
 const cartesian = (a, b, ...c) => (b ? cartesian(f(a, b), ...c) : a)

@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 import utils from '../../utils'
 
 class BaseStatConverter {
@@ -113,12 +113,12 @@ class BaseStatConverter {
     if (+val === Infinity || +val === -Infinity) {
       return ''
     } else {
-      return numeral(val).format('0,0.0000')
+      return formatNumeral(val, '0,0.0000')
     }
   }
 
   formatPct (val) {
-    return numeral(val).format('0.00') + '%'
+    return formatNumeral(val, '0.00') + '%'
   }
 
   getColumn (label, field, strata, cohortId, formatter) {
@@ -139,11 +139,11 @@ class BaseStatConverter {
   }
 
   getCountColumn (label, field, strata, cohortId) {
-    return this.getColumn(label, field, strata, cohortId, v => numeral(v).format())
+    return this.getColumn(label, field, strata, cohortId, v => formatNumeral(v))
   }
 
   getDecimal2Column (label, field, strata, cohortId) {
-    return this.getColumn(label, field, strata, cohortId, v => numeral(v).format('0.00'))
+    return this.getColumn(label, field, strata, cohortId, v => formatNumeral(v, '0.00'))
   }
 
   getPctColumn (label, field, strata, cohortId) {

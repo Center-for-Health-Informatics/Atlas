@@ -1,4 +1,4 @@
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 
 function hasEvidence (row) {
   return (
@@ -14,7 +14,7 @@ function hasEvidence (row) {
 }
 
 function formatNumberWithCommas (val) {
-  return numeral(val).format('0,0')
+  return formatNumeral(val, '0,0')
 }
 
 function formatBooleanDisplay (val) {

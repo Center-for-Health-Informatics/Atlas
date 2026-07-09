@@ -24,7 +24,6 @@ export default {
     name: 'Local Synthea',
     url: import.meta.env.VITE_WEBAPI_URL || 'https://dev.lastchance.pub/webapi/'
   },
-  disableBrowserCheck: import.meta.env.VITE_ATLAS_DISABLE_BROWSER_CHECK === 'true'
 }
 ```
 

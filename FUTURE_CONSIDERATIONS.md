@@ -8,13 +8,15 @@ Running list of things worth revisiting. Not bugs blocking current work — just
 
 - **No duplicate-concept guard in concept sets** — Atlas has never validated or deduped concept IDs within a concept set's item list (`components/conceptset/utils.js` `addItemsToConceptSet` just pushes). You can add the same concept twice — once by mistake (a related checkbox-clearing bug was already fixed), or deliberately with conflicting flags — and nothing warns you. Worth considering a duplicate check/warning when adding items that already exist in the current expression.
 
-- **Visual Accessibility** — Many things in the UI are only distinguished by color. This is not sufficient. Especially egregious are the red/green status indicators of icons.
+- **Visual Accessibility** — Many things in the UI are only distinguished by color. This is not sufficient. Especially egregious are the red/green status indicators of icons. Augment with badges?
 
 - **text field placeholders** — Many textfields have default text which must be replaced instead of placeholder attributes (*e.g.* “New Cohort Definition”). Maybe placeholder wasn’t broadly available when originally written? Maybe something to do with data binding?
 
 
 
 ## Infrastructure
+
+- **.mjs -> .js** - now that we have `"type": "module"` in package.json, re-adopt standard file extension
 
 - **Environment variable support** — webapi's config (`webapi/src/config.js`) is fairly minimal (`EXPRESS_PORT`, `EXPRESS_HOST`, `DB_PATH`, `WEBAPI_AUTH_HEADER`, `WEBAPI_VERSION`, `WEBAPI_SOURCES`). Worth revisiting what else should be externally configurable as the testing/deployment setup matures (e.g. per-source auth, logging level, CORS origins) rather than requiring code or compose file changes.
 

@@ -1,8 +1,8 @@
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 
-const formatStdDiff = (val) => numeral(val).format('0,0.0000')
+const formatStdDiff = (val) => formatNumeral(val, '0,0.0000')
 
-const formatPct = (val) => numeral(val).format('0.00') + '%'
+const formatPct = (val) => formatNumeral(val, '0.00') + '%'
 
 const colorHorizontalBoxplot = [
   '#ff9315',

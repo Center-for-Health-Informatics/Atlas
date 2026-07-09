@@ -6,7 +6,7 @@ import AutoBind from 'utils/AutoBind'
 import CharacterizationService from 'pages/characterizations/services/CharacterizationService'
 import pageUtils from 'pages/characterizations/utils'
 import utils from './utils'
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 import CsvUtils from 'utils/CsvUtils'
 import './explore-prevalence.less'
 
@@ -54,7 +54,7 @@ class ExplorePrevalence extends AutoBind(Component) {
     return {
       title: ko.i18n('columns.count', 'Count'),
       class: this.classes('col-count'),
-      render: (s, p, d) => numeral(d.count[strata] || 0).format(),
+      render: (s, p, d) => formatNumeral(d.count[strata] || 0),
     }
   }
 

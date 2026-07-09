@@ -3,7 +3,7 @@ import view from './annual.html?raw'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import AutoBind from 'utils/AutoBind'
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 import utils from '../utils'
 import 'components/charts/histogram'
 import './annual.less'
@@ -20,7 +20,7 @@ class ExploreTemporalAnnual extends AutoBind(Component) {
       {
         title: 'Count',
         class: this.classes('col-count'),
-        render: (s, p, d) => numeral(d.count || 0).format(),
+        render: (s, p, d) => formatNumeral(d.count || 0),
       },
       {
         title: 'Pct',

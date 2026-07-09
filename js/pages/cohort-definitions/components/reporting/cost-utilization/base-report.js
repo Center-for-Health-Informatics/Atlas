@@ -7,7 +7,7 @@ import * as d3 from 'd3'
 import MomentAPI from 'services/MomentAPI'
 import CsvUtils from 'utils/CsvUtils'
 import commonUtils from 'utils/CommonUtils'
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 import CohortResultsService from 'services/CohortResults'
 import { sortBy } from 'utils/NativeCompat'
 
@@ -69,15 +69,15 @@ class BaseCostUtilReport extends Component {
   }
 
   static formatFullNumber (val) {
-    return numeral(val).format()
+    return formatNumeral(val)
   }
 
   static formatPreciseNumber (val) {
-    return numeral(val).format('0,0.00')
+    return formatNumeral(val, '0,0.00')
   }
 
   static formatPercents (val) {
-    return numeral(val).format('0,0.00') + '%'
+    return formatNumeral(val, '0,0.00') + '%'
   }
 
   getCostColumns () {

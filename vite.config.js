@@ -120,7 +120,7 @@ export default defineConfig({
       { find: 'ohdsi-api', replacement: nm('@ohdsi/ui-toolbox/lib/umd/api/index.js') },
       { find: 'bootstrap-datetimepicker', replacement: nm('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') },
       { find: 'visibilityjs', replacement: nm('@ohdsi/visibilityjs/lib/visibility.core.js') },
-      { find: 'ajv', replacement: nm('ajv/dist/ajv.bundle.js') },
+      { find: 'ajv', replacement: nm('ajv/dist/ajv.js') },
       { find: 'html2canvas', replacement: nm('html2canvas/dist/html2canvas.min.js') },
       { find: 'venn', replacement: nm('venn.js/venn.js') },
       { find: 'facets', replacement: nm('facets/facets.js') },

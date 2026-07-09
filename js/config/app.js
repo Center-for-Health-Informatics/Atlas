@@ -121,7 +121,9 @@ appConfig.cemOptions = {
     splicer: 'https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid={@id}'
   },
 }
-appConfig.enableTermsAndConditions = true
+// Skip the SNOMED CT license modal outside production so it doesn't have to be
+// dismissed on every dev-server reload; config-local.js can still override this.
+appConfig.enableTermsAndConditions = process.env.NODE_ENV === 'production'
 appConfig.webAPIRoot = appConfig.api.url
 // todo: move "userAuthenticationEnabled", "plpResultsEnabled", etc into the object
 appConfig.features = {

@@ -12,7 +12,7 @@ ATLAS is an open source web application for OHDSI (Observational Health Data Sci
 # Install dependencies
 npm install
 
-# Run the dev server (Vite, proxies /webapi to a WebAPI backend — see vite.config.mjs)
+# Run the dev server (Vite, proxies /webapi to a WebAPI backend — see vite.config.js)
 npm run dev
 
 # Run tests
@@ -38,9 +38,9 @@ The app is served by Vite in dev (`npm run dev`, default port 5173) and built in
 
 ### Module system
 
-The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json` declares `"type": "module"`. A handful of third-party vendor files still use the older UMD/AMD `define(...)` wrapper pattern (e.g. `jquery.ddslick.js`, `jnj.chart.js`, `knockout.selectOnFocus.js`) — these are genuinely still in use and load fine under Vite via bare-specifier aliases in `vite.config.mjs`, they just haven't been rewritten as ESM since nothing requires it. There is no RequireJS/AMD loader in the app anymore.
+The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json` declares `"type": "module"`. A handful of third-party vendor files still use the older UMD/AMD `define(...)` wrapper pattern (e.g. `jquery.ddslick.js`, `jnj.chart.js`, `knockout.selectOnFocus.js`) — these are genuinely still in use and load fine under Vite via bare-specifier aliases in `vite.config.js`, they just haven't been rewritten as ESM since nothing requires it. There is no RequireJS/AMD loader in the app anymore.
 
-`vite.config.mjs` carries a large `resolve.alias` list that maps the old RequireJS-style bare module names (`'appConfig'`, `'atlas-state'`, `'const'`, `'services/...'`, `'pages/...'`, etc.) to real file paths, plus aliases for npm packages that ship non-standard entry points. When you see an import like `import sharedState from 'atlas-state'`, check `vite.config.mjs` to find what it actually resolves to.
+`vite.config.js` carries a large `resolve.alias` list that maps the old RequireJS-style bare module names (`'appConfig'`, `'atlas-state'`, `'const'`, `'services/...'`, `'pages/...'`, etc.) to real file paths, plus aliases for npm packages that ship non-standard entry points. When you see an import like `import sharedState from 'atlas-state'`, check `vite.config.js` to find what it actually resolves to.
 
 ### Core wiring
 
@@ -69,11 +69,11 @@ Strings use `ko.i18n('key', 'default English text')` throughout the codebase. Lo
 
 ### Build
 
-`npm run build` / `build:dev` / `build:docker` all run **`vite build`** (see `vite.config.mjs`). The old RequireJS-optimizer + Babel + Terser pipeline (`build/optimize.js`, `build/polyfill.js`) is gone — Vite handles bundling, transpilation (via `@vitejs/plugin-legacy` for older-browser fallback bundles), and minification directly. `genversion` (`genversion -e -s js/version.js`) writes a plain ESM `js/version.js` consumed via the `'version'` alias.
+`npm run build` / `build:dev` / `build:docker` all run **`vite build`** (see `vite.config.js`). The old RequireJS-optimizer + Babel + Terser pipeline (`build/optimize.js`, `build/polyfill.js`) is gone — Vite handles bundling, transpilation (via `@vitejs/plugin-legacy` for older-browser fallback bundles), and minification directly. `genversion` (`genversion -e js/version.js`) writes a plain ESM `js/version.js` consumed via the `'version'` alias.
 
 ## Testing
 
-Tests live in `tests/` and run on **Node's built-in test runner** (`node --import ./tests/register-hooks.mjs --test`), not Jest. Since app source is plain ESM, tests import modules directly — no AMD/RequireJS shim needed. The one wrinkle: some subject modules import Vite-only bare aliases (`appConfig`, `atlas-state`, etc.) that plain Node can't resolve; `tests/hooks.mjs` (registered via `tests/register-hooks.mjs`) is a custom module-resolution hook that redirects those specifiers to stub files in `tests/stubs/`. See `tests/utils/CommonUtils.test.js` for the canonical pattern of stubbing Atlas dependencies.
+Tests live in `tests/` and run on **Node's built-in test runner** (`node --import ./tests/register-hooks.js --test`), not Jest. Since app source is plain ESM, tests import modules directly — no AMD/RequireJS shim needed. The one wrinkle: some subject modules import Vite-only bare aliases (`appConfig`, `atlas-state`, etc.) that plain Node can't resolve; `tests/hooks.js` (registered via `tests/register-hooks.js`) is a custom module-resolution hook that redirects those specifiers to stub files in `tests/stubs/`. See `tests/utils/CommonUtils.test.js` for the canonical pattern of stubbing Atlas dependencies.
 
 ## Local configuration
 
@@ -88,7 +88,7 @@ export default {
 }
 ```
 
-This is imported directly (`import localConfig from 'config-local'`, aliased in `vite.config.mjs`) and deep-merged with the base config in `js/config.js`.
+This is imported directly (`import localConfig from 'config-local'`, aliased in `vite.config.js`) and deep-merged with the base config in `js/config.js`.
 
 ## Migration history
 

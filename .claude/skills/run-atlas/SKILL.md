@@ -10,7 +10,7 @@ Atlas is a browser-driven Knockout.js app served by Vite — there is no
 meaningful way to "run" it without a browser rendering pages against a
 live WebAPI backend. This skill covers both: starting the dev server,
 and driving a headless Chromium against it via a small Playwright REPL
-(`scripts/driver.mjs`), since `chromium-cli` is not available in this
+(`scripts/driver.js`), since `chromium-cli` is not available in this
 environment.
 
 ## 1. Point the app at a WebAPI backend
@@ -57,11 +57,9 @@ npx playwright install chromium
 Then pipe a script of commands into the driver (one command per line):
 
 ```bash
-node .claude/skills/run-atlas/scripts/driver.mjs <<'EOF'
+node .claude/skills/run-atlas/scripts/driver.js <<'EOF'
 nav http://localhost:5173/atlas/
 sleep 3000
-eval (function(){const b=Array.from(document.querySelectorAll('button')).find(x=>x.textContent.trim()==='Accept'); if(b) b.click();}())
-sleep 1500
 click-text Cohort Definitions
 sleep 2000
 screenshot cohort-definitions-list.png
@@ -100,9 +98,11 @@ binding throws underneath it.
 
 ## Gotchas specific to this app
 
-- **The SNOMED CT license modal blocks every fresh page load** — not
-  once per session, every `nav`. Dismiss it before interacting with
-  anything else:
+- **The SNOMED CT license modal is gated off outside production**
+  (`appConfig.enableTermsAndConditions = process.env.NODE_ENV === 'production'`
+  in `js/config/app.js`) — `npm run dev` never shows it, so there's no
+  need to dismiss it in driver scripts. If it does appear (e.g. testing
+  against an actual production build), dismiss it with:
   ```
   eval (function(){const b=Array.from(document.querySelectorAll('button')).find(x=>x.textContent.trim()==='Accept'); if(b) b.click();}())
   ```

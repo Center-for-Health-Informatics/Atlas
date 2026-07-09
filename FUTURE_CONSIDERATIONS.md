@@ -16,8 +16,12 @@ Running list of things worth revisiting. Not bugs blocking current work — just
 
 ## Infrastructure
 
-- **.mjs -> .js** - now that we have `"type": "module"` in package.json, re-adopt standard file extension
+- ~~**SNOMED agreement** — To make testing easier, only trigger the SNOMED agreement modal when NODE_ENV set to 'production'.~~ Done 2026-07-09: `appConfig.enableTermsAndConditions` (`js/config/app.js`) now gates on `process.env.NODE_ENV === 'production'`. Verified the modal is skipped under `npm run dev` and still shows in a real `NODE_ENV=production` build.
+
+- ~~**.mjs -> .js** — now that we have `"type": "module"` in package.json, re-adopt standard file extension~~ Done 2026-07-09: renamed the 6 remaining `.mjs` files (`vite.config.js`, `eslint.config.js`, `tests/register-hooks.js`, `tests/hooks.js`, `build/amd-to-esm.js`, `.claude/skills/run-atlas/scripts/driver.js`) and updated every reference (`package.json` scripts, `tests/register-hooks.js`'s hook registration, `CLAUDE.md`, `MIGRATION_STATUS.md`, the `run-atlas` skill). Verified with lint/test/build plus a live dev-server smoke test.
 
 - **Environment variable support** — webapi's config (`webapi/src/config.js`) is fairly minimal (`EXPRESS_PORT`, `EXPRESS_HOST`, `DB_PATH`, `WEBAPI_AUTH_HEADER`, `WEBAPI_VERSION`, `WEBAPI_SOURCES`). Worth revisiting what else should be externally configurable as the testing/deployment setup matures (e.g. per-source auth, logging level, CORS origins) rather than requiring code or compose file changes.
 
 - **old-style js** — The Javascript/ECMAScript language has progressed considerably since much of this code base was written. Update awkward idioms to use newer, cleaner capabilities.
+
+- **@ohdsi/atlascharts** — ancient tech, incorrect dependencies that affect Atlas. Fork and rewrite.

@@ -3,7 +3,7 @@
 // See ../SKILL.md for the full command reference and usage patterns.
 //
 // Usage:
-//   node driver.mjs <<'EOF'
+//   node driver.js <<'EOF'
 //   nav http://localhost:5173/atlas/
 //   sleep 2000
 //   screenshot home.png

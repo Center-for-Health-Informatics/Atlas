@@ -5,14 +5,14 @@
   "main": "js/main.js",
   "type": "module",
   "scripts": {
-    "dev": "vite --config vite.config.mjs",
+    "dev": "vite --config vite.config.js",
     "prep": "npm i && npm run clean && npm run genversion",
     "clean": "rimraf ./js/assets/bundle && rimraf ./js/assets/fonts && rimraf ./js/assets/images",
     "build": "npm run prep && npm run build:dev",
-    "build:dev": "vite build --config vite.config.mjs",
+    "build:dev": "vite build --config vite.config.js",
     "build:docker": "npm run clean && npm run genversion && npm run build:dev && npm prune --production",
-    "genversion": "genversion -e -s js/version.js",
-    "test": "node --import ./tests/register-hooks.mjs --test",
+    "genversion": "genversion -e js/version.js",
+    "test": "node --import ./tests/register-hooks.js --test",
     "lint": "eslint \"js/**/*.js\" \"tests/**/*.js\"",
     "lint:fix": "eslint --fix \"js/**/*.js\" \"tests/**/*.js\""
   },
@@ -41,17 +41,17 @@
   "devDependencies": {
     "@vitejs/plugin-legacy": "^5.4.3",
     "eslint": "^9.39.3",
-    "genversion": "^2.2.0",
+    "genversion": "^3.2.0",
     "neostandard": "^0.13.0",
     "playwright": "^1.61.1",
-    "rimraf": "^2.6.2",
+    "rimraf": "^6.1.3",
     "vite": "^5.4.21"
   },
   "dependencies": {
     "@ohdsi/atlascharts": "^2.1.0",
     "@ohdsi/ui-toolbox": "^1.1.0",
     "@ohdsi/visibilityjs": "^2.0.2",
-    "ajv": "^6.12.5",
+    "ajv": "^8.20.0",
     "bootstrap": "^3.4.1",
     "bootstrap-select": "^1.13.18",
     "clipboard": "^2.0.11",
@@ -84,5 +84,11 @@
     "svgsaver": "^0.9.0",
     "venn.js": "^0.2.20",
     "xss": "^1.0.14"
+  },
+  "allowScripts": {
+    "core-js@3.49.0": true,
+    "esbuild@0.21.5": true,
+    "fsevents@2.3.3": true,
+    "fsevents@2.3.2": true
   }
 }

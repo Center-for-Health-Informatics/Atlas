@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import viewModel from 'components/cohortbuilder/components/CycleToggleInput'
 import template from './CycleToggleInputTemplate.html?raw'
 

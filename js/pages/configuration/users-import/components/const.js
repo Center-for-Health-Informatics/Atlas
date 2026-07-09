@@ -1,5 +1,4 @@
 import ko from 'knockout'
-import config from 'appConfig'
 
 const WEEKDAYS = [
   {

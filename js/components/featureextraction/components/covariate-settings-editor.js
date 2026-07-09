@@ -2,7 +2,6 @@ import ko from 'knockout'
 import view from './covariate-settings-editor.html?raw'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
-import config from 'appConfig'
 import CovariateSettings from '../InputTypes/CovariateSettings'
 import './featureextraction.less'
 

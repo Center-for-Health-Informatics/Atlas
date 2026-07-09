@@ -5,11 +5,11 @@ ko.extenders.numeric = function (target, precision) {
   const result = ko.pureComputed({
     read: target,  // always return the original observables value
     write: function (newValue) {
-      const isNumeric = RegExp('^-?[0-9]*(?:\.[0-9]+)?$')
-      const isFloat = RegExp('^-?[0-9]*?\.[0-9]*$')
-      const isFloatWithNoMantissa = RegExp('^-?[0-9]\\.$')
-      const isFloatWithNoLeadingDigits = RegExp('^-?\.[0-9]*?$')
-      const hasCharacters = RegExp('.*[a-zA-Z]+.*')
+      const isNumeric = /^-?[0-9]*(?:.[0-9]+)?$/
+      const isFloat = /^-?[0-9]*?.[0-9]*$/
+      const isFloatWithNoMantissa = /^-?[0-9]\.$/
+      const isFloatWithNoLeadingDigits = /^-?.[0-9]*?$/
+      const hasCharacters = /.*[a-zA-Z]+.*/
       if (newValue === null || newValue === '') {
         target(null)
       } else {

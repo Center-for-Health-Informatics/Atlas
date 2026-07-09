@@ -48,8 +48,8 @@ class ManualMapping extends AutoBind(Component) {
     this.relatedSourcecodesColumns.forEach(column => {
       if (column.data === 'CONCEPT_NAME') {
         column.render = (s, p, d) => {
-          const valid = d.INVALID_REASON_CAPTION == 'Invalid' ? 'invalid' : ''
-          return '<a class="' + valid + '" href=\"#/concept/' + d.CONCEPT_ID + '\">' + d.CONCEPT_NAME + '</a>'
+          const valid = d.INVALID_REASON_CAPTION === 'Invalid' ? 'invalid' : ''
+          return '<a class="' + valid + '" href="#/concept/' + d.CONCEPT_ID + '">' + d.CONCEPT_NAME + '</a>'
         }
       }
     })
@@ -223,7 +223,6 @@ class ManualMapping extends AutoBind(Component) {
   async loadIncludedSourceCodes () {
     this.loadingIncludedSourceCodes(true)
 
-    const standardConceptId = this.currentConcept.CONCEPT_ID
     const selectedNonStandardConcepts = this.nonStandardConceptsForCurrentStandard().filter(item => item.isSelected())
 
     const allConceptsIds = [

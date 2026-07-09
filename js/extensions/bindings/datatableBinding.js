@@ -1,10 +1,8 @@
 import $ from 'jquery'
 import ko from 'knockout'
-import dataTables from 'datatables.net'
+import 'datatables.net'
 import config from 'appConfig'
 import filterXSS from 'xss'
-import moment from 'moment'
-import momentApi from 'services/MomentAPI'
 import commonUtils from 'utils/CommonUtils'
 import 'datatables.net-buttons'
 import 'colvis'
@@ -262,8 +260,7 @@ ko.bindingHandlers.dataTable = {
     // clear events that .on() attached to previously. Prior to this update, the binding may have specified an 'onRowClick' option, but no longer does.
     $(element).off('click', 'tr')
 
-    if (binding.onRowClick != null) // attach a onRowclick handler if the options binding specifies it.
-    {
+    if (binding.onRowClick != null) { // attach a onRowclick handler if the options binding specifies it.
       $(element).on('click', 'tr', function (evt) {
         if (this._DT_RowIndex != null) {
           binding.onRowClick(data[this._DT_RowIndex], evt, this, this._DT_RowIndex)

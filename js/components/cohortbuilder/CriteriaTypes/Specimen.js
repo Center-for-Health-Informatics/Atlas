@@ -15,7 +15,7 @@ function Specimen (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (self.CodesetId() == change.value.id) { self.CodesetId(null) }
+        if (self.CodesetId() === change.value.id) { self.CodesetId(null) }
       }
     })
   }, null, 'arrayChange')

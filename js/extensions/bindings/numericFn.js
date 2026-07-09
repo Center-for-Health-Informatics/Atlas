@@ -11,7 +11,7 @@ ko.observable.fn.numeric = function () {
         const current = underlyingObservable()
         let valueToWrite = isNaN(newValue) ? current : parseFloat(newValue)
 
-        if (newValue.length == 0) { valueToWrite = null }
+        if (newValue.length === 0) { valueToWrite = null }
 
         // only write if it changed
         if (valueToWrite !== current) {

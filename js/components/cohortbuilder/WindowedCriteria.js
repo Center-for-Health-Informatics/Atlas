@@ -9,7 +9,7 @@ class WindowedCriteria {
 
     // for backwards compatability, if the data.EndWindow is populated, but useEventEnd is null, set useEventEnd = true
     const endWindowData = data.EndWindow
-    if (endWindowData && !endWindowData.hasOwnProperty('UseEventEnd')) {
+    if (endWindowData && !Object.prototype.hasOwnProperty.call(endWindowData, 'UseEventEnd')) {
       endWindowData.UseEventEnd = true
     }
 

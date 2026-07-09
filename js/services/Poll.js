@@ -14,9 +14,6 @@ Visibility.change((e, state) => {
 })
 
 class PollService {
-  constructor () {
-  }
-
   add (opts = {}, ...args) {
     const { callback = () => {}, interval = 1000, isSilentAfterFirstCall = false } = opts
     const id = new Date().valueOf()
@@ -34,7 +31,7 @@ class PollService {
   async start (id) {
     if (callbacks.has(id)) {
       const cb = callbacks.get(id)
-      const { callback, interval, isSilentAfterFirstCall, totalFnCalls, args } = cb
+      const { callback, interval, isSilentAfterFirstCall, totalFnCalls } = cb
       try {
         if (isPageForeground()) {
           const silently = isSilentAfterFirstCall && totalFnCalls > 0
@@ -58,7 +55,7 @@ class PollService {
   }
 
   static pollImmediately () {
-    for (const [id, c] of callbacks) {
+    for (const [, c] of callbacks) {
       c.callback(c.args)
     }
   }

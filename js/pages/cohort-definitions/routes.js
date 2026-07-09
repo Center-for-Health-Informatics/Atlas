@@ -1,6 +1,5 @@
 import { AuthorizedRoute } from 'pages/Route'
 import sharedState from 'atlas-state'
-import globalConstants from 'const'
 
 function routes (router) {
   return {
@@ -76,16 +75,17 @@ function routes (router) {
       }
     ),
 
+    // eslint-disable-next-line no-useless-escape -- this route pattern is compiled into a RegExp by director; \w must be preserved
     '/cohortdefinition/:cohortDefinitionId:/?((\w|.)*)': new AuthorizedRoute((cohortDefinitionId, path = 'definition') => {
       Promise.all([import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort'), import('components/conceptset/concept-modal')]).then(() => {
         // Determine the view to show on the cohort manager screen based on the path
         path = path.split('/')
         let view = 'definition'
-        if (path.length > 0 && path[0] != '') {
+        if (path.length > 0 && path[0] !== '') {
           view = path[0]
         }
         let selectedSourceId = null
-        if (path.length > 1 && path[1] != '') {
+        if (path.length > 1 && path[1] !== '') {
           selectedSourceId = parseInt(path[1])
         }
         // Determine any optional parameters to set based on the query string

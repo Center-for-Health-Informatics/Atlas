@@ -1,7 +1,5 @@
 import ko from 'knockout'
-import $ from 'jquery'
 import view from './report.html?raw'
-import IRAnalysisService from 'services/IRAnalysis'
 import * as d3 from 'd3'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
@@ -9,16 +7,6 @@ import ChartUtils from 'utils/ChartUtils'
 import 'databindings'
 import 'databindings/irTreemapLegend'
 import '../../../../../components/cohortbuilder/css/report.css'
-
-function bitCounter (bits) {
-  let counted = 0
-  for (let b = 0; b < bits.length; b++) {
-    if (bits[b] == '1') {
-      counted++
-    }
-  }
-  return counted
-}
 
 class IRAnalysisReportsViewer extends Component {
   constructor (params) {
@@ -48,10 +36,10 @@ class IRAnalysisReportsViewer extends Component {
     this.treeIRExtent = ko.pureComputed(() => {
       const rates = []
       function traverse (node) {
-        if (node.hasOwnProperty('timeAtRisk') && node.timeAtRisk > 0 && node.cases > 0) {
+        if (Object.prototype.hasOwnProperty.call(node, 'timeAtRisk') && node.timeAtRisk > 0 && node.cases > 0) {
           rates.push(node.cases / node.timeAtRisk)
         }
-        if (node.hasOwnProperty('children')) {
+        if (Object.prototype.hasOwnProperty.call(node, 'children')) {
           node.children.forEach(function (child) {
             traverse(child)
           })
@@ -73,7 +61,7 @@ class IRAnalysisReportsViewer extends Component {
         .range(colors)
 
       const picker = function (d) {
-        if (d.cases == 0) { return '#000000' } else if (d.timeAtRisk > 0) { return color(d.cases / d.timeAtRisk) } else { return '#bababa' }
+        if (d.cases === 0) { return '#000000' } else if (d.timeAtRisk > 0) { return color(d.cases / d.timeAtRisk) } else { return '#bababa' }
       }
       picker.scale = color
       return picker
@@ -91,19 +79,18 @@ class IRAnalysisReportsViewer extends Component {
   }
 
   describe (bits, size, cases, timeAtRisk) {
-    const matched = bitCounter(bits)
-    let pass_count = 0
-    let fail_count = 0
+    let passCount = 0
+    let failCount = 0
     const passed = []
     const failed = []
 
     for (let b = 0; b < bits.length; b++) {
-      if (bits[b] == '1') {
+      if (bits[b] === '1') {
         passed.push(this.report().stratifyStats[b])
-        pass_count++
+        passCount++
       } else {
         failed.push(this.report().stratifyStats[b])
-        fail_count++
+        failCount++
       }
     }
 
@@ -113,8 +100,8 @@ class IRAnalysisReportsViewer extends Component {
     }
     this.pass(passed)
     this.fail(failed)
-    // this.rectSummary(`${size people} (${percentage.toFixed(2)}%), ${pass_count} criteria passed, ${fail_count} criteria failed.`);
-    this.rectSummary(`${cases.toLocaleString()} cases, ${timeAtRisk.toLocaleString()} TAR, Rate: ${this.calculateRate(cases, timeAtRisk)} ${this.rateCaption()}<br/>${size.toLocaleString()} (${percentage.toFixed(2)}%) people, ${pass_count} criteria passed, ${fail_count} criteria failed.`)
+    // this.rectSummary(`${size people} (${percentage.toFixed(2)}%), ${passCount} criteria passed, ${failCount} criteria failed.`);
+    this.rectSummary(`${cases.toLocaleString()} cases, ${timeAtRisk.toLocaleString()} TAR, Rate: ${this.calculateRate(cases, timeAtRisk)} ${this.rateCaption()}<br/>${size.toLocaleString()} (${percentage.toFixed(2)}%) people, ${passCount} criteria passed, ${failCount} criteria failed.`)
   }
 
   handleCellOver (data, context, event) {

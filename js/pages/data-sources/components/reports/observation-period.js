@@ -4,9 +4,7 @@ import * as d3 from 'd3'
 import atlascharts from 'atlascharts'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
-import constants from 'const'
 import Report from 'components/reports/classes/Report'
-import Component from 'components/Component'
 import 'components/charts/histogram'
 import 'components/charts/boxplot'
 import 'components/charts/line'
@@ -57,6 +55,7 @@ class ObservationPeriodReport extends Report {
       cumulativeObservation: {
         yFormat: d3.format('0.0%'),
         xFormat: (d) => this.formatToFixed(d),
+        // eslint-disable-next-line new-cap
         interpolate: new atlascharts.line().interpolation.curveStepBefore,
         xLabel: ko.i18n('dataSources.observationPeriodReport.days', 'Days'),
         yLabel: ko.i18n('dataSources.observationPeriodReport.percentOfPopulation', 'Percent of Population'),

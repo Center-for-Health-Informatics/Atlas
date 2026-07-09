@@ -13,7 +13,7 @@ function ddSlickInit (element, valueAccessor, allBindingsAccessor, viewModel, bi
 function ddSlickSubInit (element, viewModel, bindingContext, options) {
   const $element = $(element)
 
-  if ($element.children().length == 0) {
+  if ($element.children().length === 0) {
     $('<div></div>').appendTo($element)
   }
 
@@ -27,7 +27,7 @@ function ddSlickSubInit (element, viewModel, bindingContext, options) {
       options.onAction(data)
       const $element = $(element)
 
-      if ($element.children().length == 0) {
+      if ($element.children().length === 0) {
         $('<div></div>').appendTo($element)
       }
 

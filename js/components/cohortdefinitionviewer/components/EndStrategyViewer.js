@@ -14,7 +14,7 @@ function EndStrategyViewerViewModel (params) {
 
   self.strategyComponentName = ko.pureComputed(function () {
     const strategy = ko.utils.unwrapObservable(params.strategy)
-    if (strategy.hasOwnProperty('DateOffset')) { return 'date-offset-strategy-viewer' } else if (strategy.hasOwnProperty('CustomEra')) { return 'custom-era-strategy-viewer' } else { return 'unknown-strategy-viewer' }
+    if (Object.prototype.hasOwnProperty.call(strategy, 'DateOffset')) { return 'date-offset-strategy-viewer' } else if (Object.prototype.hasOwnProperty.call(strategy, 'CustomEra')) { return 'custom-era-strategy-viewer' } else { return 'unknown-strategy-viewer' }
   })
 }
 

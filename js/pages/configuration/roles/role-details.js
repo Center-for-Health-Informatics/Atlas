@@ -5,7 +5,6 @@ import Page from 'pages/Page'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import Clipboard from 'utils/Clipboard'
-import * as roleJsonParser from 'pages/configuration/roles/roleJsonParser'
 import roleService from 'services/role'
 import _ from 'lodash'
 import ohdsiUtils from 'assets/ohdsi.util'
@@ -68,11 +67,13 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
     })
 
     this.loading = ko.observable()
+    // eslint-disable-next-line new-cap
     this.dirtyFlag = ko.observable(new ohdsiUtils.dirtyFlag({
       role: this.roleName,
       users: this.userItems,
       permissions: this.permissionItems
     }))
+    // eslint-disable-next-line new-cap
     this.roleDirtyFlag = ko.observable(new ohdsiUtils.dirtyFlag({
       role: this.roleName
     }))
@@ -186,7 +187,7 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
   }
 
   async getExistingUsers () {
-    if (!this.users() || this.users().length == 0) {
+    if (!this.users() || this.users().length === 0) {
       const users = await userService.getUsers()
       this.users(users)
     }
@@ -198,7 +199,7 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
   }
 
   async getExistingPermissions () {
-    if (!this.permissions() || this.permissions().length == 0) {
+    if (!this.permissions() || this.permissions().length === 0) {
       const permissions = await roleService.getPermissions()
       this.permissions(permissions)
     }
@@ -311,7 +312,7 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
       })
     } else {
       const updatedRole = roles.find((role) => {
-        return role.id == this.roleId()
+        return role.id === this.roleId()
       })
       updatedRole.role = this.roleName()
     }
@@ -336,7 +337,7 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
       return false
     }
 
-    if (this.roleName() == defaultRoleName) {
+    if (this.roleName() === defaultRoleName) {
       alert('Please, change Role name')
       return false
     }
@@ -344,8 +345,8 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
     // check if such role already exists
     if (this.roles()
       .filter((role) => {
-        return (role.id != this.roleId() &&
-                      role.role == this.roleName())
+        return (role.id !== this.roleId() &&
+                      role.role === this.roleName())
       }).length > 0) {
       alert('Role already exists!')
       return false

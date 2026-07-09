@@ -95,7 +95,7 @@ function facetedDatatableProfile (params) {
       })
       facet.filter(null)
     } else {
-      facet.filter(d => selected.indexOf(d) != -1)
+      facet.filter(d => selected.indexOf(d) !== -1)
     }
   }
 };

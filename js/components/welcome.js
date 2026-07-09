@@ -107,7 +107,7 @@ function welcome (params) {
     } else {
       const loginUrl = self.serviceUrl + selectedProvider.url
 
-      if (selectedProvider.ajax == true) {
+      if (selectedProvider.ajax === true) {
         self.isInProgress(true)
         $.ajax({
           url: loginUrl,
@@ -156,7 +156,7 @@ function welcome (params) {
 
   self.runAs = function () {
     self.isInProgress(true)
-    const xhr = authApi.runAs(self.runAsLogin(), self.onLoginSuccessful, (jqXHR, textStatus, errorThrown) => {
+    authApi.runAs(self.runAsLogin(), self.onLoginSuccessful, (jqXHR, textStatus, errorThrown) => {
       const msg = jqXHR.getResponseHeader('x-auth-error')
       self.isInProgress(false)
       self.errorMsg(msg || 'User was not found')

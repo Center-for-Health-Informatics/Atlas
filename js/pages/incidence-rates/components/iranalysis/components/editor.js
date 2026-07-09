@@ -67,8 +67,8 @@ class IRAnalysisEditorModel extends AutoBind(Component) {
 
   cohortSelected (cohortId) {
     if (this.selectedCohortList().filter((item) => {
-      return cohortId == item
-    }).length == 0) { this.selectedCohortList.push(cohortId) }
+      return cohortId === item
+    }).length === 0) { this.selectedCohortList.push(cohortId) }
   };
 
   copyStrataRule (rule) {

@@ -3,7 +3,6 @@ import ko from 'knockout'
 import view from './evidence-pair-viewer.html?raw'
 import Component from 'components/Component'
 import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import evidenceAPI from 'services/EvidenceAPI'
 
 class EvidencePairViewer extends Component {

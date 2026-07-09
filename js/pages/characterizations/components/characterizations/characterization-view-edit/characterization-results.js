@@ -4,23 +4,19 @@ import FeatureAnalysisService from 'pages/characterizations/services/FeatureAnal
 import PrevalenceStatConverter from 'pages/characterizations/services/conversion/PrevalenceStatConverter'
 import DistributionStatConverter from 'pages/characterizations/services/conversion/DistributionStatConverter'
 import ComparativeDistributionStatConverter from 'pages/characterizations/services/conversion/ComparativeDistributionStatConverter'
-import pageUtils from 'pages/characterizations/utils'
 import view from './characterization-results.html?raw'
 import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import utils from './utils'
 import characterizationUtils from '../../../utils'
-import numeral from 'numeral'
 import lodash from 'lodash'
 import * as d3 from 'd3'
 import filterUtils from 'components/visualizations/filter-panel/utils'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 import momentAPI from 'services/MomentAPI'
 import SourceService from 'services/Source'
-import CsvUtils from 'utils/CsvUtils'
 import vocabularyProvider from 'services/Vocabulary'
 import sharedState from 'atlas-state'
 import exceptionUtils from 'utils/ExceptionUtils'
@@ -212,13 +208,7 @@ class CharacterizationViewEditResults extends AutoBind(Component) {
   async loadData () {
     this.loading(true)
 
-    let sourceList,
-      domains,
-      design,
-      execution,
-      totalCount;
-
-    [
+    const [
       sourceList,
       domains,
       design,

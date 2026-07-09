@@ -1,6 +1,5 @@
 import ko from 'knockout'
 import options from 'components/cohortbuilder/options'
-import utils from 'components/cohortbuilder/utils'
 import template from './ObservationPeriodTemplate.html?raw'
 
 function ObservationPeriodViewModel (params) {

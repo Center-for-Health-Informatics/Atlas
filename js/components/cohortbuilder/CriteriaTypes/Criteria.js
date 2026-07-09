@@ -1,7 +1,4 @@
 import ko from 'knockout'
-import Range from '../InputTypes/Range'
-import Concept from 'conceptpicker/InputTypes/Concept'
-import Text from '../InputTypes/Text'
 import DateAdjustment from '../InputTypes/DateAdjustment'
 import '../CriteriaGroup'
 import CriteriaGroup from '../CriteriaGroup'

@@ -198,12 +198,13 @@ class ComparativeCohortAnalysisManager extends Page {
     if (!confirm(ko.i18n('ple.deleteConfirmation', 'Delete estimation specification? Warning: deletion can not be undone!')())) { return }
 
     this.isDeleting(true)
-    const analysis = await EstimationService.deleteEstimation(this.selectedAnalysisId())
+    await EstimationService.deleteEstimation(this.selectedAnalysisId())
 
     this.loading(true)
     this.estimationAnalysis(null)
     this.selectedAnalysisId(null)
     this.comparisons.removeAll()
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.estimationAnalysis()))
     document.location = constants.paths.browser()
   }
@@ -218,7 +219,7 @@ class ComparativeCohortAnalysisManager extends Page {
     // Next check to see that an estimation analysis with this name does not already exist
     // in the database. Also pass the id so we can make sure that the current estimation analysis is excluded in this check.
     try {
-      const results = await EstimationService.exists(this.estimationAnalysis().name(), this.estimationAnalysis().id() == undefined ? 0 : this.estimationAnalysis().id())
+      const results = await EstimationService.exists(this.estimationAnalysis().name(), this.estimationAnalysis().id() === undefined ? 0 : this.estimationAnalysis().id())
       if (results > 0) {
         alert(ko.i18n('ple.analysisExistsAlert', 'An estimation analysis with this name already exists. Please choose a different name.')())
       } else {
@@ -336,6 +337,7 @@ class ComparativeCohortAnalysisManager extends Page {
     this.estimationAnalysis(null)
     this.selectedAnalysisId(null)
     this.comparisons.removeAll()
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.estimationAnalysis()))
     document.location = constants.paths.browser()
   }
@@ -478,13 +480,14 @@ class ComparativeCohortAnalysisManager extends Page {
   }
 
   resetDirtyFlag () {
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag({ analysis: this.estimationAnalysis(), comparisons: this.comparisons }))
   }
 
   newAnalysis () {
     this.loading(true)
     this.estimationAnalysis(new EstimationAnalysis({ id: 0, name: this.defaultName }, this.estimationType, this.defaultCovariateSettings()))
-    return new Promise(async (resolve, reject) => {
+    return new Promise((resolve) => {
       this.setCohortMethodAnalysisList()
       this.resetDirtyFlag()
       this.loading(false)

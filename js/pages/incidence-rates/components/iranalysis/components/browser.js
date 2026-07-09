@@ -1,9 +1,6 @@
-import ko from 'knockout'
 import view from './browser.html?raw'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
-import momentApi from 'services/MomentAPI'
-import datatableUtils from 'utils/DatatableUtils'
 import 'faceted-datatable'
 
 class IRAnalysisBrowserModel extends Component {

@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import config from 'appConfig'
 
 const WIZARD_STEPS = {

@@ -1,5 +1,4 @@
 import ko from 'knockout'
-import config from 'appConfig'
 import _ from 'lodash'
 import consts from 'const'
 import commonUtils from 'utils/CommonUtils'

@@ -21,12 +21,12 @@ function filterPanel (params) {
   // Do not show "Apply" button in live mode and trigger filtering immediately
   if (this.live) {
     this.filterListSubscription = this.filterList.subscribe(newFilter => {
-      Object.values(newFilter).map(filter => {
+      Object.values(newFilter).forEach(filter => {
         let prevVal
         if (filter.type === 'select') {
           prevVal = filter.selectedValue()
           filter.subscription = filter.selectedValue.subscribe(() => {
-            if (prevVal != filter.selectedValue()) {
+            if (prevVal !== filter.selectedValue()) {
               prevVal = filter.selectedValue()
               this.apply()
             }

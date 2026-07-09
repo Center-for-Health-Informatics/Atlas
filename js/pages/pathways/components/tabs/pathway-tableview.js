@@ -47,7 +47,7 @@ class PathwayTableview extends AutoBind(Component) {
     const pathwayGroups = this.results.data.pathwayGroups
     return ({
       cohorts: design.targetCohorts.filter(c => this.filterList.selectedValues().includes(c.id)).map(c => {
-        const pathwayGroup = pathwayGroups.find(p => p.targetCohortId == c.id)
+        const pathwayGroup = pathwayGroups.find(p => p.targetCohortId === c.id)
         if (pathwayGroup) {
           return {
             id: c.id,
@@ -56,7 +56,7 @@ class PathwayTableview extends AutoBind(Component) {
             pathwayCount: pathwayGroup.totalPathwaysCount,
             pathways: pathwayGroup.pathways.map(p => ({ // split pathway paths into paths and counts
               path: p.path.split('-')
-                .filter(step => step != 'end') // remove end markers from pathway
+                .filter(step => step !== 'end') // remove end markers from pathway
                 .map(p => +p)
                 .concat(Array(MAX_PATH_LENGTH).fill(null)) // pad end of paths to be at least MAX_PATH_LENGTH
                 .slice(0, MAX_PATH_LENGTH), // limit path to MAX_PATH_LENGTH.
@@ -73,7 +73,7 @@ class PathwayTableview extends AutoBind(Component) {
 
   pathCodeResolver (d) {
     return this.reportData().eventCodes
-      .filter(ec => ec.isCombo == false && (ec.code & d) > 0)
+      .filter(ec => ec.isCombo === false && (ec.code & d) > 0)
       .map(ec => ec.name)
       .join(' + ')
   }
@@ -153,7 +153,7 @@ class PathwayTableview extends AutoBind(Component) {
     const groups = pathways.reduce((acc, cur) => { // reduce pathways an Array of ranks containing a Map of counts by event cohort
       for (let i = 0; i < cur.path.length; i++) {
         acc[i] = acc[i] || new Map() // allocate a map for this rank if index is missing
-        eventCodes.filter(ec => ec.isCombo == false && (ec.code & cur.path[i]) > 0).forEach(ec => {
+        eventCodes.filter(ec => ec.isCombo === false && (ec.code & cur.path[i]) > 0).forEach(ec => {
           if (!acc[i].has(ec.code)) {
             acc[i].set(ec.code, { code: ec.code, rank: i + 1, personCount: cur.personCount }) // copy out to new object to avoid pollution of main data object
           } else {
@@ -223,7 +223,7 @@ class PathwayTableview extends AutoBind(Component) {
     const dataMap = pathways.reduce((acc, cur) => { // reduce pathways an Array of ranks containing a Map of counts by event cohort
       const visited = new Map()
       for (let i = 0; i < cur.path.length; i++) {
-        eventCodes.filter(ec => ec.isCombo == false && (ec.code & cur.path[i]) > 0).forEach(ec => {
+        eventCodes.filter(ec => ec.isCombo === false && (ec.code & cur.path[i]) > 0).forEach(ec => {
           if (visited.has(ec.code)) return // do not add this event cohort to the total if the event cohort has already been seen in this path
           visited.set(ec.code, true)
           if (!acc.has(ec.code)) {

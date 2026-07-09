@@ -1,15 +1,10 @@
 import ko from 'knockout'
-import sharedState from 'atlas-state'
 import * as PermissionService from 'pages/characterizations/services/PermissionService'
 import view from './characterization-design.html?raw'
-import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
-import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
-import VocabularyAPI from 'services/Vocabulary'
 import lodash from 'lodash'
 import conceptSetUtils from 'components/conceptset/utils'
 import globalConstants from 'const'
@@ -38,30 +33,30 @@ class CharacterizationDesign extends AutoBind(Component) {
     this.isEditPermitted = params.isEditPermitted
 
     this.cohorts = ko.pureComputed({
-      read: () => params.design() && params.design().cohorts() || [],
+      read: () => (params.design() && params.design().cohorts()) || [],
       write: (value) => params.design().cohorts(value),
     })
 
     this.strataConceptSets = ko.pureComputed({
-      read: () => params.design() && params.design().strataConceptSets || [],
+      read: () => (params.design() && params.design().strataConceptSets) || [],
       write: (value) => params.design() && params.design().strataConceptSets(value)
     })
 
     this.stratas = ko.pureComputed({
-      read: () => params.design() && params.design().stratas() || [],
+      read: () => (params.design() && params.design().stratas()) || [],
       write: (value) => params.design().stratas(value),
     })
 
     this.featureAnalyses = {
       newItemAction: this.showFeatureBrowser,
       columns: globalConstants.getLinkedFeatureAnalysisColumns(this),
-      data: ko.pureComputed(() => params.design() && params.design().featureAnalyses() || [])
+      data: ko.pureComputed(() => (params.design() && params.design().featureAnalyses()) || [])
     }
 
     this.featureAnalysesParams = {
       newItemAction: this.showParameterCreateModal,
       columns: globalConstants.getLinkedFeAParametersColumns(this),
-      data: ko.pureComputed(() => params.design() && params.design().parameters() || [])
+      data: ko.pureComputed(() => (params.design() && params.design().parameters()) || [])
     }
 
     this.includeAnnual = ko.observable(this.featureAnalyses.data().reduce((a, b) => a || !!ko.unwrap(b.includeAnnual), false))

@@ -3,7 +3,6 @@ import view from './included-preview.html?raw'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
-import sharedState from 'atlas-state'
 import vocabularyService from 'services/Vocabulary'
 import conceptSetUtils from 'components/conceptset/utils'
 

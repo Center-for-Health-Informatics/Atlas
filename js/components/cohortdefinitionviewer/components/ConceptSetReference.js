@@ -16,7 +16,7 @@ function ConceptSetReference (params) {
 
   self.referenceId = ko.pureComputed(function () {
     let calculatedRefId = ''
-    const selectedConceptSet = self.conceptSets().find(function (item) { return item.id == ko.utils.unwrapObservable(self.conceptSetId) })
+    const selectedConceptSet = self.conceptSets().find(function (item) { return item.id === ko.utils.unwrapObservable(self.conceptSetId) })
     if (selectedConceptSet) {
       calculatedRefId = (self.sortedConceptSets().indexOf(selectedConceptSet) + 1) + ''
     }
@@ -24,7 +24,7 @@ function ConceptSetReference (params) {
   })
 
   self.codesetName = ko.pureComputed(function () {
-    const selectedConceptSet = self.conceptSets().find(function (item) { return item.id == ko.utils.unwrapObservable(self.conceptSetId) })
+    const selectedConceptSet = self.conceptSets().find(function (item) { return item.id === ko.utils.unwrapObservable(self.conceptSetId) })
     if (selectedConceptSet) {
       return ko.utils.unwrapObservable(selectedConceptSet.name)
     } else { return self.defaultName }

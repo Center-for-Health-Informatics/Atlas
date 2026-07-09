@@ -3,10 +3,8 @@ import view from './identifiers.html?raw'
 import Component from 'components/Component'
 import ImportComponent from './ImportComponent'
 import AutoBind from 'utils/AutoBind'
-import Clipboard from 'utils/Clipboard'
 import commonUtils from 'utils/CommonUtils'
 import vocabularyApi from 'services/VocabularyProvider'
-import sharedState from 'atlas-state'
 
 class IndetifiersImport extends AutoBind(ImportComponent(Component)) {
   constructor (params) {

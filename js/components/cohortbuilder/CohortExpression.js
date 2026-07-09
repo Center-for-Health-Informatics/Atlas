@@ -14,8 +14,8 @@ function CohortExpression (data) {
   self.ConceptSets = ko.observableArray(data.ConceptSets && data.ConceptSets.map(function (d) { return new ConceptSet(d) }))
   self.PrimaryCriteria = ko.observable(new PrimaryCriteria(data.PrimaryCriteria, self.ConceptSets))
   self.AdditionalCriteria = ko.observable(data.AdditionalCriteria && new CriteriaGroup(data.AdditionalCriteria, self.ConceptSets))
-  self.QualifiedLimit = { Type: ko.observable(data.QualifiedLimit && data.QualifiedLimit.Type || 'First') }
-  self.ExpressionLimit = { Type: ko.observable(data.ExpressionLimit && data.ExpressionLimit.Type || 'First') }
+  self.QualifiedLimit = { Type: ko.observable((data.QualifiedLimit && data.QualifiedLimit.Type) || 'First') }
+  self.ExpressionLimit = { Type: ko.observable((data.ExpressionLimit && data.ExpressionLimit.Type) || 'First') }
   self.InclusionRules = ko.observableArray(data.InclusionRules && data.InclusionRules.map(function (rule) {
     return new InclusionRule(rule, self.ConceptSets)
   }))
@@ -24,7 +24,7 @@ function CohortExpression (data) {
   self.CensoringCriteria = ko.observableArray(data.CensoringCriteria && data.CensoringCriteria.map(function (criteria) {
     return CriteriaTypes.GetCriteriaFromObject(criteria, self.ConceptSets)
   }))
-  self.CollapseSettings = { CollapseType: ko.observable(data.CollapseSettings && data.CollapseSettings.CollapseType || 'ERA'), EraPad: ko.observable(data.CollapseSettings && data.CollapseSettings.EraPad || 0) }
+  self.CollapseSettings = { CollapseType: ko.observable((data.CollapseSettings && data.CollapseSettings.CollapseType) || 'ERA'), EraPad: ko.observable((data.CollapseSettings && data.CollapseSettings.EraPad) || 0) }
   self.CensorWindow = ko.observable(new Period(data.CensorWindow))
 
   self.cdmVersionRange = data.cdmVersionRange || null

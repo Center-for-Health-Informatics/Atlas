@@ -21,6 +21,7 @@ function render (element, valueAccessor) {
     yScale,
   } = valueAccessor()
 
+  // eslint-disable-next-line new-cap
   const linechart = new atlascharts.line()
 
   const width = $linechart.width()

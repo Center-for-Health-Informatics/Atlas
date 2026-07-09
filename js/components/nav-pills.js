@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'

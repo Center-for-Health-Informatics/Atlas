@@ -117,6 +117,7 @@ class JobViewEdit extends AutoBind(Page) {
     }
     this.weekdays.removeAll()
     job.weekDays.forEach(wd => this.weekdays.push(wd))
+    // eslint-disable-next-line new-cap
     this.jobDirtyFlag(new ohdsiUtil.dirtyFlag(this.job()))
     this.jobId.valueHasMutated()
   }

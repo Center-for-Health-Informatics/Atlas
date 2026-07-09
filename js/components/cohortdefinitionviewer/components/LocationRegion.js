@@ -1,6 +1,5 @@
 import ko from 'knockout'
 import options from 'components/cohortbuilder/options'
-import Range from 'components/cohortbuilder/InputTypes/Range'
 import template from './LocationRegionTemplate.html?raw'
 
 function LocationRegionViewModel (params) {
@@ -11,7 +10,7 @@ function LocationRegionViewModel (params) {
 
   self.getCodesetName = function (codesetId, defaultName) {
     if (codesetId != null) {
-      const selectedConceptSet = self.expression.ConceptSets().filter(function (item) { return item.id == codesetId })[0]
+      const selectedConceptSet = self.expression.ConceptSets().filter(function (item) { return item.id === codesetId })[0]
       return ko.utils.unwrapObservable(selectedConceptSet.name)
     } else { return defaultName }
   }

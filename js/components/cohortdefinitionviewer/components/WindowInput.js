@@ -9,7 +9,7 @@ function WindowInputViewModel (params) {
 
   self.getCoeffName = function (coeffId) {
     return self.options.windowCoeffOptions.filter(function (item) {
-      return item.value == coeffId
+      return item.value === coeffId
     })[0].name
   }
 }

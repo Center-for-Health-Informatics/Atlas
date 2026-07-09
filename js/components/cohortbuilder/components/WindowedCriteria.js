@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import view from './WindowedCriteria.html?raw'
 import Window from '../InputTypes/Window'
 import Component from 'components/Component'

@@ -13,6 +13,7 @@ function listRefreshCacheJobs () {
 }
 
 function createJob (updated) {
+  // eslint-disable-next-line new-cap
   const job = new jobDetail()
   job.type = updated.jobInstance.name
   job.status(updated.status)
@@ -40,13 +41,13 @@ function queue (newItem) {
 function getJobURL (n) {
   switch (n.jobInstance.name) {
     case 'generateCohort':
-      if (n.status == 'COMPLETED') {
+      if (n.status === 'COMPLETED') {
         return 'cohortdefinition/' + n.jobParameters.cohort_definition_id + '/generation/' + n.jobParameters.source_id
       } else {
         return 'cohortdefinition/' + n.jobParameters.cohort_definition_id + '/generation'
       }
     case 'irAnalysis':
-      if (n.status == 'COMPLETED') {
+      if (n.status === 'COMPLETED') {
         return 'iranalysis/' + n.jobParameters.analysis_id + '/generation/' + n.jobParameters.source_id
       } else {
         return 'iranalysis/' + n.jobParameters.analysis_id + '/generation'
@@ -54,14 +55,14 @@ function getJobURL (n) {
     case 'negativeControlsAnalysisJob':
       return 'conceptset/' + n.jobParameters.concept_set_id + '/evidence'
     case 'generateCohortCharacterization':
-      if (n.status == 'COMPLETED') {
+      if (n.status === 'COMPLETED') {
         return 'cc/characterizations/' + n.jobParameters.cohort_characterization_id + '/results/' +
             n.executionId
       } else {
         return 'cc/characterizations/' + n.jobParameters.cohort_characterization_id + '/executions/' + n.jobParameters.source_id
       }
     case 'generatePathwayAnalysis':
-      if (n.status == 'COMPLETED') {
+      if (n.status === 'COMPLETED') {
         return 'pathways/' + n.jobParameters.pathway_analysis_id + '/results/' + n.executionId
       } else {
         return 'pathways/' + n.jobParameters.pathway_analysis_id + '/executions/' + n.jobParameters.source_id

@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import view from './knn-settings.html?raw'
 import ModelSettingsEditorComponent from './ModelSettingsEditorComponent'
 import commonUtils from 'utils/CommonUtils'

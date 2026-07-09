@@ -1,5 +1,4 @@
 import ko from 'knockout'
-import $ from 'jquery'
 import template from './FeasibilityReportViewerTemplate.html?raw'
 import './FeasibilityIntersectReport'
 import './FeasibilityAttritionReport'

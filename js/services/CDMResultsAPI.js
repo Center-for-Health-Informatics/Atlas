@@ -31,7 +31,7 @@ function getConceptRecordCountWithResultsUrl (resultsUrl, conceptIds, results, i
 
       for (let c = 0; c < results.length; c++) {
         const concept = results[c]
-        if (densityIndex[getConceptId(concept)] != undefined) {
+        if (densityIndex[getConceptId(concept)] !== undefined) {
           setRecordCount(concept, formatter(densityIndex[getConceptId(concept)][0]))
           setDescendantRecordCount(concept, formatter(densityIndex[getConceptId(concept)][1]))
           setPersonCount(concept, formatter(densityIndex[getConceptId(concept)][2]))
@@ -46,7 +46,7 @@ function getConceptRecordCountWithResultsUrl (resultsUrl, conceptIds, results, i
 
       densityPromise.resolve()
     },
-    error: function (error) {
+    error: function () {
       for (let c = 0; c < results.length; c++) {
         const concept = results[c]
         setRecordCount(concept, 'timeout')

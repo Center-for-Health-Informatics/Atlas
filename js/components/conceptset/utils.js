@@ -326,11 +326,6 @@ async function loadSourceCodes (conceptSetStore) {
   }
 }
 
-async function loadAncestors (ancestors, descendants) {
-  const data = { ancestors, descendants }
-  return httpService.doPost(sharedState.vocabularyUrl() + 'lookup/identifiers/ancestors', data)
-}
-
 function loadAndApplyAncestors (data, conceptSetStore) {
   const selectedConceptIds = conceptSetStore.current().expression.items().filter(v => !ko.unwrap(v.isExcluded)).map(v => v.concept.CONCEPT_ID)
   const ids = []
@@ -394,8 +389,9 @@ async function loadIncluded (conceptSetStore) {
 // attempt to only load concepts when tab is opened:  check for null values in the observable arrays,
 // indicating that the data requires reload.
 async function onCurrentConceptSetModeChanged (mode, conceptSetStore) {
-  if (conceptSetStore.resolvingConceptSetExpression()) // do nothing
-  { return false }
+  if (conceptSetStore.resolvingConceptSetExpression()) { // do nothing
+    return false
+  }
   switch (mode) {
     case 'included-conceptsets':
     case 'included':
@@ -418,25 +414,6 @@ function createRepositoryConceptSet (conceptSetStore) {
   sharedState.RepositoryConceptSet.current(newConceptSet)
   conceptSetStore.current(sharedState.RepositoryConceptSet.current())
   conceptSetStore.isEditable(true)
-}
-
-function createConceptSetItem (concept) {
-  return {
-    concept: {
-      CONCEPT_ID: concept.CONCEPT_ID,
-      CONCEPT_NAME: concept.CONCEPT_NAME,
-      STANDARD_CONCEPT: concept.STANDARD_CONCEPT,
-      STANDARD_CONCEPT_CAPTION: concept.STANDARD_CONCEPT_CAPTION,
-      INVALID_REASON: concept.INVALID_REASON,
-      CONCEPT_CODE: concept.CONCEPT_CODE,
-      DOMAIN_ID: concept.DOMAIN_ID,
-      VOCABULARY_ID: concept.VOCABULARY_ID,
-      CONCEPT_CLASS_ID: concept.CONCEPT_CLASS_ID,
-    },
-    isExcluded: concept.isExcluded,
-    includeDescendants: concept.includeDescendants,
-    includeMapped: concept.includeMapped,
-  }
 }
 
 function addItemsToConceptSet ({ items = [], conceptSetStore }) {

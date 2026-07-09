@@ -118,6 +118,7 @@ class Configuration extends AutoBind(Page) {
   async checkJobs () {
     const notifications = await jobDetailsService.listRefreshCacheJobs()
     const jobs = notifications.data.map((n) => {
+      // eslint-disable-next-line new-cap
       const job = new jobDetail()
       job.status(n.status)
       job.executionId = n.executionId
@@ -218,6 +219,7 @@ class Configuration extends AutoBind(Page) {
           )
         },
         (error) => {
+          console.error(error)
           alert(
             ko.unwrap(
               ko.i18n(
@@ -382,7 +384,7 @@ class Configuration extends AutoBind(Page) {
       if (
         typeof authApi[key] === 'function' &&
         key.startsWith('isPermitted') &&
-        key != 'isPermitted'
+        key !== 'isPermitted'
       ) {
         authApi[key]() // Invoke the function
       }

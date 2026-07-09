@@ -107,6 +107,7 @@ class ReusableEditor extends AutoBind(Component) {
         return true
       } else {
         newParamId++
+        return false
       }
     })
 

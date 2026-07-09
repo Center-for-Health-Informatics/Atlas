@@ -1,5 +1,4 @@
 import ko from 'knockout'
-import $ from 'jquery'
 import * as d3 from 'd3'
 import template from './FeasibilityAttritionReport.html?raw'
 import '../css/report.css'
@@ -9,7 +8,7 @@ function FeasibilityAttritionReport (params) {
 
   function countMatch (node, mask) {
     let count = 0
-    if (node.hasOwnProperty('children')) {
+    if (Object.prototype.hasOwnProperty.call(node, 'children')) {
       node.children.forEach(function (c) {
         count += countMatch(c, mask)
       })
@@ -27,7 +26,7 @@ function FeasibilityAttritionReport (params) {
     let priorPct = 1.0
     const stats = self.report().inclusionRuleStats.map(function (d, i) {
       const countSatisfying = countMatch(treemapData, '1'.repeat(i + 1))
-      const percentSatisfying = self.report().summary.baseCount != 0 ? countSatisfying / self.report().summary.baseCount : 0
+      const percentSatisfying = self.report().summary.baseCount !== 0 ? countSatisfying / self.report().summary.baseCount : 0
       const pctDiff = priorPct - percentSatisfying
       priorPct = percentSatisfying
       return {

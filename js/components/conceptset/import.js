@@ -3,7 +3,6 @@ import view from './import.html?raw'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
-import sharedState from 'atlas-state'
 import vocabularyApi from 'services/VocabularyProvider'
 import conceptSetUtils from './utils'
 import constants from './const'
@@ -82,10 +81,10 @@ class ConceptSetImport extends AutoBind(Component) {
   }
 
   async importConceptSetExpression (expression, options) {
-    if (this.currentConceptSet().expression.items().length == 0 ||
-      options.type == constants.importTypes.APPEND ||
+    if (this.currentConceptSet().expression.items().length === 0 ||
+      options.type === constants.importTypes.APPEND ||
       this.confirmAction(options.type)) {
-      if (options.type == constants.importTypes.OVERWRITE) {
+      if (options.type === constants.importTypes.OVERWRITE) {
         this.conceptSetStore.expression().items([])
       }
       conceptSetUtils.addItemsToConceptSet({

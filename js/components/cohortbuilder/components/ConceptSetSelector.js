@@ -27,7 +27,7 @@ function conceptsetSelector (params) {
   })
   self.filteredConceptSets = ko.pureComputed(function () {
     const selectedConceptSet = self.conceptSets().filter(function (item) {
-      return item.id == self.conceptSetId()
+      return item.id === self.conceptSetId()
     })
     const filterText = self.filterText().toLowerCase()
     return [
@@ -43,7 +43,7 @@ function conceptsetSelector (params) {
   })
   self.conceptSetName = ko.pureComputed(function () {
     const selectedConceptSet = self.conceptSets().find(function (item) {
-      return item.id == self.conceptSetId()
+      return item.id === self.conceptSetId()
     })
     return (
       ((selectedConceptSet && selectedConceptSet.name()) ||

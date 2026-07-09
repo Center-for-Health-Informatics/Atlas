@@ -1,12 +1,9 @@
 import $ from 'jquery'
 import config from 'appConfig'
-import sourceAPI from 'services/SourceAPI'
 import sharedState from 'atlas-state'
-import numeral from 'numeral'
 import authAPI from 'services/AuthAPI'
 import httpService from 'services/http'
 import CDMResultAPI from 'services/CDMResultsAPI'
-import lodash from 'lodash'
 
 let domainsPromise = null
 const domains = []
@@ -45,7 +42,7 @@ function getDomains () {
 function loadDensity (results, sourceKey, formatter) {
   const densityPromise = $.Deferred()
 
-  if (results.length == 0) {
+  if (results.length === 0) {
     densityPromise.resolve()
     return densityPromise
   }
@@ -66,8 +63,7 @@ function loadDensity (results, sourceKey, formatter) {
 async function search (params) {
   const vocabUrl = getVocabUrl()
 
-  if (params.QUERY && Object.keys(params).length == 1)  // simple search via GET
-  {
+  if (params.QUERY && Object.keys(params).length === 1) { // simple search via GET
     return httpService.doGet(`${vocabUrl}search?query=${encodeQuery(params.QUERY)}`).then(({ data }) => data)
   }
 

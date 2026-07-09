@@ -2,11 +2,8 @@ import $ from 'jquery'
 import clipboard from 'clipboard'
 
 const Clipboard = (C = class {}) => class extends C {
-  constructor (props) {
-    super(props)
-  }
-
   copyToClipboard (clipboardButtonId, clipboardButtonMessageId, appendedText) {
+    // eslint-disable-next-line new-cap -- clipboard.js exports a lowercase constructor
     const currentClipboard = new clipboard(clipboardButtonId)
     currentClipboard.on('success', (e) => {
       console.log('Copied to clipboard')

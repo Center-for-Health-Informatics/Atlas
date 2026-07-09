@@ -1,15 +1,12 @@
 import ko from 'knockout'
 import view from './ir-manager.html?raw'
 import IRAnalysisService from 'services/IRAnalysis'
-import sourceAPI from 'services/SourceAPI'
 import cohortAPI from 'services/CohortDefinition'
 import IRAnalysisDefinition from './components/iranalysis/IRAnalysisDefinition'
-import IRAnalysisExpression from './components/iranalysis/IRAnalysisExpression'
 import ohdsiUtil from 'assets/ohdsi.util'
 import config from 'appConfig'
 import sharedState from 'atlas-state'
 import jobDetailsService from 'services/JobDetailsService'
-import jobDetail from 'services/job/jobDetail'
 import authAPI from 'services/AuthAPI'
 import FileService from 'services/file'
 import JobPollService from 'services/JobPollService'
@@ -169,7 +166,7 @@ class IRAnalysisManager extends AutoBind(Page) {
     this.isTarValid = ko.pureComputed(() => {
       const analysis = this.selectedAnalysis() && this.selectedAnalysis().expression()
       if (analysis == null) return
-      return !(analysis.timeAtRisk.start.DateField() == analysis.timeAtRisk.end.DateField() && analysis.timeAtRisk.end.Offset() <= analysis.timeAtRisk.start.Offset())
+      return !(analysis.timeAtRisk.start.DateField() === analysis.timeAtRisk.end.DateField() && analysis.timeAtRisk.end.Offset() <= analysis.timeAtRisk.start.Offset())
     })
 
     this.canSave = ko.pureComputed(() => {
@@ -397,6 +394,7 @@ class IRAnalysisManager extends AutoBind(Page) {
         this.previewVersion(null)
       }
       this.selectedAnalysis(new IRAnalysisDefinition(analysis))
+      // eslint-disable-next-line new-cap
       this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
       this.tags(analysis.tags)
       this.versionsParams.valueHasMutated()
@@ -457,7 +455,7 @@ class IRAnalysisManager extends AutoBind(Page) {
   }
 
   loadConceptSet (conceptSetId) {
-    this.conceptSetStore.current(this.selectedAnalysis().expression().ConceptSets().find(item => item.id == conceptSetId))
+    this.conceptSetStore.current(this.selectedAnalysis().expression().ConceptSets().find(item => item.id === conceptSetId))
     this.conceptSetStore.isEditable(this.isEditable())
     commonUtils.routeTo(`/iranalysis/${this.selectedAnalysisId()}/conceptsets`)
   }
@@ -479,6 +477,7 @@ class IRAnalysisManager extends AutoBind(Page) {
     const analysis = await IRAnalysisService.copyAnalysis(this.selectedAnalysisId())
     this.selectedAnalysis(new IRAnalysisDefinition(analysis))
     this.selectedAnalysisId(analysis.id)
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
     this.clearResults()
     this.versionsParams.valueHasMutated()
@@ -491,6 +490,7 @@ class IRAnalysisManager extends AutoBind(Page) {
     this.selectedAnalysis(null)
     this.selectedAnalysisId(null)
     this.previewVersion(null)
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
     this.conceptSetStore.clear()
 
@@ -520,13 +520,14 @@ class IRAnalysisManager extends AutoBind(Page) {
     // Next check to see that an incidence rate with this name does not already exist
     // in the database. Also pass the id so we can make sure that the current incidence rate is excluded in this check.
     try {
-      const results = await IRAnalysisService.exists(this.selectedAnalysis().name(), this.selectedAnalysisId() == undefined ? 0 : this.selectedAnalysisId())
+      const results = await IRAnalysisService.exists(this.selectedAnalysis().name(), this.selectedAnalysisId() == null ? 0 : this.selectedAnalysisId())
       if (results > 0) {
         alert(ko.i18n('ir.nameConflict', 'An incidence rate with this name already exists. Please choose a different name.')())
       } else {
         const savedIR = await IRAnalysisService.saveAnalysis(this.selectedAnalysis())
         this.selectedAnalysisId(savedIR.id)
         this.selectedAnalysis(new IRAnalysisDefinition(savedIR))
+        // eslint-disable-next-line new-cap
         this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
         this.previewVersion(null)
         this.versionsParams.valueHasMutated()
@@ -566,6 +567,7 @@ class IRAnalysisManager extends AutoBind(Page) {
 
   newAnalysis () {
     this.selectedAnalysis(new IRAnalysisDefinition())
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
   };
 

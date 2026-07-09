@@ -2,8 +2,6 @@ import ko from 'knockout'
 import Criteria from './Criteria'
 import Range from '../InputTypes/Range'
 import ConceptSetSelection from '../InputTypes/ConceptSetSelection'
-import Concept from 'conceptpicker/InputTypes/Concept'
-import Text from '../InputTypes/Text'
 
 function VisitDetail (data, conceptSets) {
   const self = this
@@ -14,10 +12,10 @@ function VisitDetail (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) {
+        if (ko.utils.unwrapObservable(self.CodesetId) === change.value.id) {
           self.CodesetId(null)
         }
-        if (ko.utils.unwrapObservable(self.VisitDetailSourceConcept()) == change.value.id) {
+        if (ko.utils.unwrapObservable(self.VisitDetailSourceConcept()) === change.value.id) {
           self.VisitSourceConcept()(null)
         }
       }

@@ -5,6 +5,7 @@ import ko from 'knockout'
 function getTools () {
   return httpService.doGet(appConfig.webAPIRoot + 'tool').then(({ data }) => data)
     .catch((err) => {
+      console.log(err)
       alert(ko.i18n('tool.error.list', 'Get list tool error, try later !')())
     })
 }
@@ -12,6 +13,7 @@ function getTools () {
 function updateTool (tool) {
   return httpService.doPut(appConfig.webAPIRoot + 'tool', tool)
     .catch((err) => {
+      console.log(err)
       alert(ko.i18n('tool.error.update', 'Update tool error, try later !')())
     })
 }
@@ -19,6 +21,7 @@ function updateTool (tool) {
 function createTool (tool) {
   return httpService.doPost(appConfig.webAPIRoot + 'tool', tool)
     .catch((err) => {
+      console.log(err)
       alert(ko.i18n('tool.error.create', 'Create tool error, try later !')())
     })
 }
@@ -26,6 +29,7 @@ function createTool (tool) {
 function deleteTool (id) {
   return httpService.doDelete(appConfig.webAPIRoot + `tool/${id}`)
     .catch((err) => {
+      console.log(err)
       alert(ko.i18n('tool.error.delete', 'Delete tool error, try later !')())
     })
 }

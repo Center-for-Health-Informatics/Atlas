@@ -95,9 +95,7 @@
   };
 
   define(function () {
-    let css
-
-    css = {
+    const css = {
       version: '0.3.1',
 
       load: function (name, req, load) { //, config (not used)

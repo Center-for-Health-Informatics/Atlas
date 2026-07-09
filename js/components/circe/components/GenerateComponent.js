@@ -7,7 +7,7 @@ function GenerateComponentViewModel (params) {
   self.dirtyFlag = params.dirtyFlag
   self.source = params.source
   self.isRunning = ko.pureComputed(function () {
-    return (self.info() && self.info().status != 'COMPLETE')
+    return (self.info() && self.info().status !== 'COMPLETE')
   })
 }
 

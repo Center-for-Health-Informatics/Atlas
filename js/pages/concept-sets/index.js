@@ -2,8 +2,6 @@ import ko from 'knockout'
 import appState from 'atlas-state'
 import buildRoutes from './routes'
 import constants from './const'
-import globalConstants from 'const'
-import conceptSetStore from 'components/conceptset/ConceptSetStore'
 
 const statusCss = ko.pureComputed(() => {
   if (appState.RepositoryConceptSet.current()) {

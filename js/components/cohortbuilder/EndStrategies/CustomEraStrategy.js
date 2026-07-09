@@ -13,7 +13,7 @@ function CustomEraStrategy (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (ko.utils.unwrapObservable(self.DrugCodesetId) == change.value.id) { self.DrugCodesetId(null) }
+        if (ko.utils.unwrapObservable(self.DrugCodesetId) === change.value.id) { self.DrugCodesetId(null) }
       }
     })
   }, null, 'arrayChange')

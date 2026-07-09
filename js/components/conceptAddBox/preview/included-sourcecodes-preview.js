@@ -5,9 +5,7 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import sharedState from 'atlas-state'
 import globalConstants from 'const'
-import conceptSetService from 'services/ConceptSet'
 import vocabularyService from 'services/Vocabulary'
-import conceptSetUtils from 'components/conceptset/utils'
 
 class IncludedSourcecodesPreview extends AutoBind(Component) {
   constructor (params) {

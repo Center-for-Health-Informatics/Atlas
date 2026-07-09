@@ -16,7 +16,7 @@ ko.bindingHandlers.ko_autocomplete = {
     })
 
     $(element).on('autocompleteselect', function (event, ui) {
-      const newVal = ui.item.value.trim().length == 0 ? null : ui.item.value.trim()
+      const newVal = ui.item.value.trim().length === 0 ? null : ui.item.value.trim()
       if (element.tagName.toLocaleLowerCase() === 'input') {
         element.value = newVal
         element.dispatchEvent(new Event('change'))

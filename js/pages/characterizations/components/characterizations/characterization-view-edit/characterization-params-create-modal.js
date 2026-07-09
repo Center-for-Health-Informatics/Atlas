@@ -1,8 +1,5 @@
 import ko from 'knockout'
-import sharedState from 'atlas-state'
 import view from './characterization-params-create-modal.html?raw'
-import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import 'utils/DatatableUtils'

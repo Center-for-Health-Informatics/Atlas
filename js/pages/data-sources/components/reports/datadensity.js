@@ -99,7 +99,6 @@ class datadensity extends Report {
     }
 
     if (rawData) {
-      const totalRecords = rawData.totalRecords
       // convert yyyymm to date
       rawData.forEach(function (d, i, ar) {
         const v = d.xCalendarMonth

@@ -203,6 +203,7 @@ class PathwaysManager extends AutoBind(Page) {
 
   setupDesign (design) {
     this.design(design)
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.design()))
   }
 

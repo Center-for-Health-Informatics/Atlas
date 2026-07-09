@@ -139,8 +139,7 @@ class ChartUtils {
         datum.value = +item.countValue
         result.push(datum)
       })
-    } else if (data.countValue instanceof Array) // multiple rows, each value of each column is in the indexed properties.
-    {
+    } else if (data.countValue instanceof Array) { // multiple rows, each value of each column is in the indexed properties.
       result = data.countValue.map(function (d, i) {
         const datum = {}
         datum.id = (d.conceptId || d.conceptName)[i]
@@ -148,8 +147,7 @@ class ChartUtils {
         datum.value = d.countValue[i]
         return datum
       })
-    } else // the dataset is a single value result, so the properties are not arrays.
-    {
+    } else { // the dataset is a single value result, so the properties are not arrays.
       result = [{
         id: data.conceptId,
         label: data.conceptName,
@@ -208,7 +206,6 @@ class ChartUtils {
     series.values = []
     if (data && !data.empty) {
       for (let i = 0; i < data[options.dateField].length; i++) {
-        const dateInt = data[options.dateField][i]
         series.values.push({
           xValue: new Date(Math.floor(data[options.dateField][i] / 100), (data[options.dateField][i] % 100) - 1, 1),
           yValue: data[options.yValue][i],

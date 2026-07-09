@@ -1,7 +1,6 @@
 import ko from 'knockout'
 import numeral from 'numeral'
 import utils from '../../utils'
-import lodash from 'lodash'
 
 class BaseStatConverter {
   constructor (classes) {
@@ -18,8 +17,7 @@ class BaseStatConverter {
       return map.set(strataId, strataName)
     }, new Map())) || new Map()
 
-    let mapCovariate
-    mapCovariate = (stat) => {
+    const mapCovariate = (stat) => {
       let row
       const rowId = this.getRowId(stat)
       if (!data.has(rowId)) {
@@ -88,11 +86,11 @@ class BaseStatConverter {
   }
 
   getRowId (stat) {
-    throw 'Override getRowId with actual implementation'
+    throw new Error('Override getRowId with actual implementation')
   }
 
   extractStrata (stat) {
-    throw 'Override extractStrata with actual implementation'
+    throw new Error('Override extractStrata with actual implementation')
   }
 
   setNestedValue (result, field, strataId, cohortId, value) {
@@ -112,7 +110,7 @@ class BaseStatConverter {
   }
 
   formatStdDiff (val) {
-    if (+val == Infinity || +val == -Infinity) {
+    if (+val === Infinity || +val === -Infinity) {
       return ''
     } else {
       return numeral(val).format('0,0.0000')
@@ -128,7 +126,7 @@ class BaseStatConverter {
       title: label,
       className: field === 'pct' ? 'pct-cell' : '',
       render: (s, p, d) => {
-        let res = d[field][strata] && d[field][strata][cohortId] || 0
+        let res = (d[field][strata] && d[field][strata][cohortId]) || 0
         if (p === 'display' && formatter) {
           res = formatter(res)
         }

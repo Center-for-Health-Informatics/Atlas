@@ -1,10 +1,8 @@
 import ko from 'knockout'
-import $ from 'jquery'
 import view from './results.html?raw'
 import config from 'appConfig'
 import FileService from 'services/file'
 import httpService from 'services/http'
-import moment from 'moment'
 import AutoBind from 'utils/AutoBind'
 import IRAnalysisService from 'services/IRAnalysis'
 import constants from 'pages/incidence-rates/const'
@@ -68,13 +66,15 @@ class IRAnalysisResultsViewer extends AutoBind(Component) {
     // observable subscriptions
 
     this.subscriptions.push(this.selectedTarget.subscribe((newVal) => {
-      if (this.selectedSourceId()) // this will cause a report refresh
-      { this.expandSelectedSource() }
+      if (this.selectedSourceId()) { // this will cause a report refresh
+        this.expandSelectedSource()
+      }
     }))
 
     this.subscriptions.push(this.selectedOutcome.subscribe((newVal) => {
-      if (this.selectedSourceId()) // this will cause a report refresh
-      { this.expandSelectedSource() }
+      if (this.selectedSourceId()) { // this will cause a report refresh
+        this.expandSelectedSource()
+      }
     }))
 
     this.executionDisabled = ko.pureComputed(() => {
@@ -214,7 +214,7 @@ class IRAnalysisResultsViewer extends AutoBind(Component) {
   getSummaryData (summaryList) {
     const targetId = this.selectedTarget()
     const outcomeId = this.selectedOutcome()
-    const summary = summaryList.find(item => item.targetId == targetId && item.outcomeId == outcomeId) || {}
+    const summary = summaryList.find(item => item.targetId === targetId && item.outcomeId === outcomeId) || {}
     const na = (values, converter = v => v) => values.filter(v => v === undefined).length > 0 ? 'n/a' : converter.apply(null, values)
     return {
       totalPersons: na([summary.totalPersons], tp => tp.toLocaleString()),

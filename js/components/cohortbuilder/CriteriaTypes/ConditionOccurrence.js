@@ -15,9 +15,10 @@ function ConditionOccurrence (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (self.CodesetId() == change.value.id) { self.CodesetId(null) }
-        if (ko.utils.unwrapObservable(self.ConditionSourceConcept()) == change.value.id) // ConditionSourceConcept is an observable wrapping another observable.
-        { self.ConditionSourceConcept()(null) }
+        if (self.CodesetId() === change.value.id) { self.CodesetId(null) }
+        if (ko.utils.unwrapObservable(self.ConditionSourceConcept()) === change.value.id) { // ConditionSourceConcept is an observable wrapping another observable.
+          self.ConditionSourceConcept()(null)
+        }
       }
     })
   }, null, 'arrayChange')

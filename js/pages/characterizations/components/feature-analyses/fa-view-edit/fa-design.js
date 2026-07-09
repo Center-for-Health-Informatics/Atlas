@@ -4,9 +4,6 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import Clipboard from 'utils/Clipboard'
-import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
-import AdditionalCriteria from 'components/cohortbuilder/AdditionalCriteria'
-import WindowedCriteria from 'components/cohortbuilder/WindowedCriteria'
 import DemographicGriteria from 'components/cohortbuilder/CriteriaTypes/DemographicCriteria'
 import cohortbuilderConsts from 'components/cohortbuilder/const'
 import cohortbuilderUtils from 'components/cohortbuilder/utils'
@@ -36,7 +33,7 @@ class FeatureAnalysisDesign extends AutoBind(Clipboard(Component)) {
     this.aggregates = params.aggregates
 
     this.conceptSets = ko.pureComputed({
-      read: () => params.data() && params.data().conceptSets || [],
+      read: () => (params.data() && params.data().conceptSets) || [],
       write: (value) => params.data().conceptSets(value),
     })
 

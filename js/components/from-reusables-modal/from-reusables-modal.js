@@ -3,11 +3,9 @@ import view from './from-reusables-modal.html?raw'
 import Component from 'components/Component'
 import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import ConceptSetItem from 'components/conceptset/InputTypes/ConceptSetItem'
-import * as CriteriaTypes from '../cohortbuilder/CriteriaTypes'
 import commonUtils from 'utils/CommonUtils'
 import AutoBind from 'utils/AutoBind'
 import datatableUtils from 'utils/DatatableUtils'
-import authApi from 'services/AuthAPI'
 import VocabularyAPI from 'services/Vocabulary'
 import ReusablesService from 'services/ReusablesService'
 import Reusable from 'services/Reusable'
@@ -213,7 +211,7 @@ class FromReusablesModal extends AutoBind(Component) {
 
   replaceParametersWithConceptSets (criteriaList, csIdMap, isGroup) {
     const replacer = (criteria, name) => {
-      if (criteria.hasOwnProperty(name)) {
+      if (Object.prototype.hasOwnProperty.call(criteria, name)) {
         criteria[name].CodesetId(csIdMap[criteria[name].CodesetId()])
         if (criteria[name].CorrelatedCriteria()) {
           this.replaceParametersWithConceptSets(criteria[name].CorrelatedCriteria().CriteriaList(), csIdMap, true)

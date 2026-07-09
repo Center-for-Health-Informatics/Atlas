@@ -17,7 +17,7 @@ class ExecutionSettingsEditor extends Component {
 
     this.maxSampleSizeToggle = ko.observable(this.getPlpDataArgs.maxSampleSize() != null || false)
     this.subscriptions.push(this.maxSampleSizeToggle.subscribe(optionVal => {
-      if (optionVal == false) {
+      if (optionVal === false) {
         this.getPlpDataArgs.maxSampleSize(null)
       } else {
         this.getPlpDataArgs.maxSampleSize(10000)

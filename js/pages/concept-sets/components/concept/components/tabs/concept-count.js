@@ -39,6 +39,7 @@ class ConceptManager extends Component {
             })
           }
         }).catch(err => {
+          console.error(err)
           const failedMsg = ko.i18n('cs.manager.concept.tabs.recordCounts.failedToLoadData', 'Failed to load data')
           sourceData.push({
             sourceName,

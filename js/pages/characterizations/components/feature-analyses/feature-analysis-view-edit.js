@@ -1,27 +1,22 @@
 import ko from 'knockout'
-import clipboard from 'clipboard'
 import FeatureAnalysisService from 'pages/characterizations/services/FeatureAnalysisService'
 import * as PermissionService from 'pages/characterizations/services/PermissionService'
 import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
-import AdditionalCriteria from 'components/cohortbuilder/AdditionalCriteria'
 import WindowedCriteria from 'components/cohortbuilder/WindowedCriteria'
 import DemographicGriteria from 'components/cohortbuilder/CriteriaTypes/DemographicCriteria'
 import view from './feature-analysis-view-edit.html?raw'
 import config from 'appConfig'
 import sharedState from 'atlas-state'
 import authApi from 'services/AuthAPI'
-import VocabularyAPI from 'services/Vocabulary'
 import GlobalPermissionService from 'services/Permission'
 import { entityType } from 'components/security/access/const'
 import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 import Page from 'pages/Page'
-import constants from 'pages/characterizations/const'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import Clipboard from 'utils/Clipboard'
 import ohdsiUtil from 'assets/ohdsi.util'
-import utils from '../../utils'
 import globalConstants from 'const'
 import componentConst from './const'
 import lodash from 'lodash'
@@ -335,6 +330,7 @@ class FeatureAnalysisViewEdit extends AutoBind(Clipboard(Page)) {
             expression: ko.observable(new WindowedCriteria(c.expression, data.conceptSets)),
           }
         }
+        return undefined
       }).filter(c => c)
     } else {
       parsedDesign = design
@@ -352,6 +348,7 @@ class FeatureAnalysisViewEdit extends AutoBind(Clipboard(Page)) {
     data.modifiedBy(modifiedBy)
     data.modifiedDate(modifiedDate)
     this.data(data)
+    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
     this.dataDirtyFlag(new ohdsiUtil.dirtyFlag(this.data()))
     this.previousDesign = { [type]: parsedDesign }
   }
@@ -480,7 +477,7 @@ class FeatureAnalysisViewEdit extends AutoBind(Clipboard(Page)) {
   }
 
   loadConceptSet (conceptSetId) {
-    this.conceptSetStore.current(this.conceptSets()().find(item => item.id == conceptSetId))
+    this.conceptSetStore.current(this.conceptSets()().find(item => item.id === conceptSetId))
     this.conceptSetStore.isEditable(this.canEdit())
     commonUtils.routeTo(`/cc/feature-analyses/${this.data().id}/conceptset`)
   }

@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import appConfig from 'appConfig'
 import authApi from 'services/AuthAPI'
 
@@ -36,7 +35,7 @@ class AuthorizedRoute extends Route {
     if (appConfig.userAuthenticationEnabled && authApi.subject() === undefined) {
       return this.waitForSubject()
     } else if (appConfig.userAuthenticationEnabled && authApi.subject() === null) {
-      return Promise.reject()
+      return Promise.reject(new Error('Unauthorized'))
     } else {
       return super.checkPermission()
     }
@@ -48,9 +47,9 @@ class AuthorizedRoute extends Route {
         if (subject) {
           super.checkPermission()
             .then(() => resolve())
-            .catch(() => reject())
+            .catch((err) => reject(err instanceof Error ? err : new Error('Failed to check permission')))
         } else {
-          reject()
+          reject(new Error('Subject unavailable'))
         }
       })
     })

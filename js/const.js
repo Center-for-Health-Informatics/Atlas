@@ -144,8 +144,8 @@ const getRelatedSourcecodesColumns = (sharedState, context, selectAllFn) => [
     title: ko.i18n('columns.name', 'Name'),
     data: 'CONCEPT_NAME',
     render: function (s, p, d) {
-      const valid = d.INVALID_REASON_CAPTION == 'Invalid' ? 'invalid' : ''
-      return '<a class="' + valid + '" href=\"#/concept/' + d.CONCEPT_ID + '\">' + d.CONCEPT_NAME + '</a>'
+      const valid = d.INVALID_REASON_CAPTION === 'Invalid' ? 'invalid' : ''
+      return '<a class="' + valid + '" href="#/concept/' + d.CONCEPT_ID + '">' + d.CONCEPT_NAME + '</a>'
     }
   },
   {

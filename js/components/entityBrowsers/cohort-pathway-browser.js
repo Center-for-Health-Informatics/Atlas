@@ -1,7 +1,5 @@
 import ko from 'knockout'
 import view from './cohort-pathway-browser.html?raw'
-import config from 'appConfig'
-import sharedState from 'atlas-state'
 import EntityBrowser from 'components/entity-browser'
 import authApi from 'services/AuthAPI'
 import commonUtils from 'utils/CommonUtils'

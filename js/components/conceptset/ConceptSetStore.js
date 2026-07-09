@@ -4,7 +4,6 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import csvUtils from 'utils/CsvUtils'
 import constants from './const'
-import utils from './utils'
 import vocabularyService from 'services/Vocabulary'
 import JSZip from 'jszip'
 import momentApi from 'services/MomentAPI'
@@ -108,7 +107,7 @@ class ConceptSetStore extends AutoBind() {
       const currentResolve = this.resolveCount.value()
       const conceptSetExpression = this.current().expression
       const identfiers = await vocabularyService.resolveConceptSetExpression(conceptSetExpression)
-      if (currentResolve != this.resolveCount.value()) {
+      if (currentResolve !== this.resolveCount.value()) {
         return Promise.reject(constants.RESOLVE_OUT_OF_ORDER)
       }
       this.conceptSetInclusionIdentifiers(identfiers)
@@ -121,8 +120,9 @@ class ConceptSetStore extends AutoBind() {
 
   async refresh (mode) {
     this.currentConseptSetTab(mode)
-    if (this.resolvingConceptSetExpression() || this.conceptSetInclusionIdentifiers() == null) // do nothing
-    { return false }
+    if (this.resolvingConceptSetExpression() || this.conceptSetInclusionIdentifiers() == null) { // do nothing
+      return false
+    }
     switch (mode) {
       case ViewMode.INCLUDED:
         this.includedConcepts() == null && await this.loadIncluded()
@@ -203,7 +203,7 @@ class ConceptSetStore extends AutoBind() {
       this.recommendedConcepts(normalizedData)
       return filtered
     } catch (err) {
-      if (err.status == 501) { // NOT_IMPLEMENTED means table does not exist
+      if (err.status === 501) { // NOT_IMPLEMENTED means table does not exist
         this.isRecommendedAvailable(false)
         this.recommendedConcepts([])
       } else {

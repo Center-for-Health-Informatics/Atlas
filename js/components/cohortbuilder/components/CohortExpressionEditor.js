@@ -1,12 +1,8 @@
 import ko from 'knockout'
-import $ from 'jquery'
 import options from '../options'
 import CriteriaGroup from '../CriteriaGroup'
-import * as criteriaTypes from '../CriteriaTypes'
-import CohortExpression from '../CohortExpression'
 import InclusionRule from '../InclusionRule'
 import template from './CohortExpressionEditorTemplate.html?raw'
-import constants from '../const'
 import './EndStrategyEditor'
 import 'databindings'
 import 'conceptpicker/ConceptPicker'
@@ -87,7 +83,7 @@ function CohortExpressionEditorViewModel (params) {
         if (value === 0 || value) {
           return value
         } else {
-
+          // omit falsy (but not zero) values from the serialized expression
         }
       },
       2

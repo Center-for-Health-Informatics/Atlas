@@ -1,5 +1,4 @@
 import httpService from 'services/http'
-import config from 'appConfig'
 import consts from 'pages/configuration/users-import/const'
 
 function listJobs () {

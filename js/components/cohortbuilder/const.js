@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 const criteria = {
   addConditionEra: {
     title: 'const.eventsList.addConditionEra.title',
@@ -1330,7 +1328,7 @@ const criteria = {
 function setCriteria (criteria) {
   return (list = [], descriptionAttr = '', titleAttr = '') => {
     const flatList = {}
-    list.map((elem) => {
+    list.forEach((elem) => {
       const criteriaItem = criteria[elem]
       const attrT = titleAttr.toLowerCase().replace(titleAttr.charAt(0), titleAttr.charAt(0).toUpperCase())
       const attrD = descriptionAttr.toLowerCase().replace(descriptionAttr.charAt(0), descriptionAttr.charAt(0).toUpperCase())

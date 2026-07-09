@@ -15,7 +15,7 @@ function PrimaryCriteria (data, conceptSets) {
     PostDays: ko.observable((data.ObservationWindow && data.ObservationWindow.PostDays) || 0)
   }
 
-  self.PrimaryCriteriaLimit = { Type: ko.observable(data.PrimaryCriteriaLimit && data.PrimaryCriteriaLimit.Type || 'First') }
+  self.PrimaryCriteriaLimit = { Type: ko.observable((data.PrimaryCriteriaLimit && data.PrimaryCriteriaLimit.Type) || 'First') }
 }
 
 export default PrimaryCriteria

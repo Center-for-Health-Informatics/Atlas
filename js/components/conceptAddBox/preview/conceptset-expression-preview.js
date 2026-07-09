@@ -4,8 +4,6 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import renderers from 'utils/Renderers'
-import conceptSetUtils from 'components/conceptset/utils'
-import sharedState from 'atlas-state'
 import 'components/conceptLegend/concept-legend'
 
 class ConceptsetExpressionPreview extends AutoBind(Component) {

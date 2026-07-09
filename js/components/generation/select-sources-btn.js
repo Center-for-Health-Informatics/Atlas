@@ -34,7 +34,7 @@ class SelectSourcesBtn extends AutoBind(Component) {
 
   generate () {
     let selectedSources = ko.utils.unwrapObservable(this.selectedSources)
-    if (this.sources().length == 1) {
+    if (this.sources().length === 1) {
       selectedSources = this.sources()
     }
 

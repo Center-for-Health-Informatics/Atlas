@@ -1,8 +1,3 @@
-import ko from 'knockout'
-import view from './role-import.html?raw'
-import Component from 'components/Component'
-import AutoBind from 'utils/AutoBind'
-import commonUtils from 'utils/CommonUtils'
 import Ajv from 'ajv'
 
 const ajv = new Ajv({ allErrors: true })

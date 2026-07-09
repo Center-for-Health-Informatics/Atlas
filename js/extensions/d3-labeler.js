@@ -5,24 +5,20 @@ export function labeler () {
   let h = 1 // box width
   const labeler = {}
 
-  const max_move = 5.0
-  const max_angle = 0.5
-  let acc = 0
-  let rej = 0
+  const maxMove = 5.0
+  const maxAngle = 0.5
 
   // weights
-  const w_len = 0.2 // leader line length
-  const w_inter = 1.0 // leader line intersection
-  const w_lab2 = 30.0 // label-label overlap
-  const w_lab_anc = 30.0 // label-anchor overlap
-  const w_orient = 3.0 // orientation bias
+  const wLen = 0.2 // leader line length
+  const wInter = 1.0 // leader line intersection
+  const wLab2 = 30.0 // label-label overlap
+  const wLabAnc = 30.0 // label-anchor overlap
+  const wOrient = 3.0 // orientation bias
 
   // booleans for user defined functions
-  let user_energy = false
-  let user_schedule = false
+  let userEnergy = false
 
-  let user_defined_energy,
-    user_defined_schedule
+  let userDefinedEnergy
 
   const energy = function (index) {
     // energy function, tailored for label placement
@@ -33,39 +29,37 @@ export function labeler () {
     let dy = anc[index].y - lab[index].y
     const dist = Math.sqrt(dx * dx + dy * dy)
     let overlap = true
-    const amount = 0
-    const theta = 0
 
     // penalty for length of leader line
-    if (dist > 0) ener += dist * w_len
+    if (dist > 0) ener += dist * wLen
 
     // label orientation bias
     dx /= dist
     dy /= dist
-    if (dx > 0 && dy > 0) { ener += 0 * w_orient } else if (dx < 0 && dy > 0) { ener += 1 * w_orient } else if (dx < 0 && dy < 0) { ener += 2 * w_orient } else { ener += 3 * w_orient }
+    if (dx > 0 && dy > 0) { ener += 0 * wOrient } else if (dx < 0 && dy > 0) { ener += 1 * wOrient } else if (dx < 0 && dy < 0) { ener += 2 * wOrient } else { ener += 3 * wOrient }
 
     const x21 = lab[index].x
     const y21 = lab[index].y - lab[index].height + 2.0
     const x22 = lab[index].x + lab[index].width
     const y22 = lab[index].y + 2.0
-    let x11, x12, y11, y12, x_overlap, y_overlap, overlap_area
+    let x11, x12, y11, y12, xOverlap, yOverlap, overlapArea
 
     for (let i = 0; i < m; i++) {
-      if (i != index) {
+      if (i !== index) {
         // penalty for intersection of leader lines
         overlap = intersect(anc[index].x, lab[index].x, anc[i].x, lab[i].x,
           anc[index].y, lab[index].y, anc[i].y, lab[i].y)
-        if (overlap) ener += w_inter
+        if (overlap) ener += wInter
 
         // penalty for label-label overlap
         x11 = lab[i].x
         y11 = lab[i].y - lab[i].height + 2.0
         x12 = lab[i].x + lab[i].width
         y12 = lab[i].y + 2.0
-        x_overlap = Math.max(0, Math.min(x12, x22) - Math.max(x11, x21))
-        y_overlap = Math.max(0, Math.min(y12, y22) - Math.max(y11, y21))
-        overlap_area = x_overlap * y_overlap
-        ener += (overlap_area * w_lab2)
+        xOverlap = Math.max(0, Math.min(x12, x22) - Math.max(x11, x21))
+        yOverlap = Math.max(0, Math.min(y12, y22) - Math.max(y11, y21))
+        overlapArea = xOverlap * yOverlap
+        ener += (overlapArea * wLab2)
       }
 
       // penalty for label-anchor overlap
@@ -73,10 +67,10 @@ export function labeler () {
       y11 = anc[i].y - anc[i].r
       x12 = anc[i].x + anc[i].r
       y12 = anc[i].y + anc[i].r
-      x_overlap = Math.max(0, Math.min(x12, x22) - Math.max(x11, x21))
-      y_overlap = Math.max(0, Math.min(y12, y22) - Math.max(y11, y21))
-      overlap_area = x_overlap * y_overlap
-      ener += (overlap_area * w_lab_anc)
+      xOverlap = Math.max(0, Math.min(x12, x22) - Math.max(x11, x21))
+      yOverlap = Math.max(0, Math.min(y12, y22) - Math.max(y11, y21))
+      overlapArea = xOverlap * yOverlap
+      ener += (overlapArea * wLabAnc)
     }
     return ener
   }
@@ -88,37 +82,36 @@ export function labeler () {
     const i = Math.floor(Math.random() * lab.length)
 
     // save old coordinates
-    const x_old = lab[i].x
-    const y_old = lab[i].y
+    const xOld = lab[i].x
+    const yOld = lab[i].y
 
     // old energy
-    let old_energy
-    if (user_energy) { old_energy = user_defined_energy(i, lab, anc) } else { old_energy = energy(i) }
+    let oldEnergy
+    if (userEnergy) { oldEnergy = userDefinedEnergy(i, lab, anc) } else { oldEnergy = energy(i) }
 
     // random translation
-    lab[i].x += (Math.random() - 0.5) * max_move
-    lab[i].y += (Math.random() - 0.5) * max_move
+    lab[i].x += (Math.random() - 0.5) * maxMove
+    lab[i].y += (Math.random() - 0.5) * maxMove
 
     // hard wall boundaries
-    if (lab[i].x > w) lab[i].x = x_old
-    if (lab[i].x < 0) lab[i].x = x_old
-    if (lab[i].y > h) lab[i].y = y_old
-    if (lab[i].y < 0) lab[i].y = y_old
+    if (lab[i].x > w) lab[i].x = xOld
+    if (lab[i].x < 0) lab[i].x = xOld
+    if (lab[i].y > h) lab[i].y = yOld
+    if (lab[i].y < 0) lab[i].y = yOld
 
     // new energy
-    let new_energy
-    if (user_energy) { new_energy = user_defined_energy(i, lab, anc) } else { new_energy = energy(i) }
+    let newEnergy
+    if (userEnergy) { newEnergy = userDefinedEnergy(i, lab, anc) } else { newEnergy = energy(i) }
 
     // delta E
-    const delta_energy = new_energy - old_energy
+    const deltaEnergy = newEnergy - oldEnergy
 
-    if (Math.random() < Math.exp(-delta_energy / currT)) {
-      acc += 1
+    if (Math.random() < Math.exp(-deltaEnergy / currT)) {
+      // move accepted
     } else {
       // move back to old coordinates
-      lab[i].x = x_old
-      lab[i].y = y_old
-      rej += 1
+      lab[i].x = xOld
+      lab[i].y = yOld
     }
   }
 
@@ -129,15 +122,15 @@ export function labeler () {
     const i = Math.floor(Math.random() * lab.length)
 
     // save old coordinates
-    const x_old = lab[i].x
-    const y_old = lab[i].y
+    const xOld = lab[i].x
+    const yOld = lab[i].y
 
     // old energy
-    let old_energy
-    if (user_energy) { old_energy = user_defined_energy(i, lab, anc) } else { old_energy = energy(i) }
+    let oldEnergy
+    if (userEnergy) { oldEnergy = userDefinedEnergy(i, lab, anc) } else { oldEnergy = energy(i) }
 
     // random angle
-    const angle = (Math.random() - 0.5) * max_angle
+    const angle = (Math.random() - 0.5) * maxAngle
 
     const s = Math.sin(angle)
     const c = Math.cos(angle)
@@ -147,33 +140,32 @@ export function labeler () {
     lab[i].y -= anc[i].y
 
     // rotate label
-    const x_new = lab[i].x * c - lab[i].y * s
-    const y_new = lab[i].x * s + lab[i].y * c
+    const xNew = lab[i].x * c - lab[i].y * s
+    const yNew = lab[i].x * s + lab[i].y * c
 
     // translate label back
-    lab[i].x = x_new + anc[i].x
-    lab[i].y = y_new + anc[i].y
+    lab[i].x = xNew + anc[i].x
+    lab[i].y = yNew + anc[i].y
 
     // hard wall boundaries
-    if (lab[i].x > w) lab[i].x = x_old
-    if (lab[i].x < 0) lab[i].x = x_old
-    if (lab[i].y > h) lab[i].y = y_old
-    if (lab[i].y < 0) lab[i].y = y_old
+    if (lab[i].x > w) lab[i].x = xOld
+    if (lab[i].x < 0) lab[i].x = xOld
+    if (lab[i].y > h) lab[i].y = yOld
+    if (lab[i].y < 0) lab[i].y = yOld
 
     // new energy
-    let new_energy
-    if (user_energy) { new_energy = user_defined_energy(i, lab, anc) } else { new_energy = energy(i) }
+    let newEnergy
+    if (userEnergy) { newEnergy = userDefinedEnergy(i, lab, anc) } else { newEnergy = energy(i) }
 
     // delta E
-    const delta_energy = new_energy - old_energy
+    const deltaEnergy = newEnergy - oldEnergy
 
-    if (Math.random() < Math.exp(-delta_energy / currT)) {
-      acc += 1
+    if (Math.random() < Math.exp(-deltaEnergy / currT)) {
+      // move accepted
     } else {
       // move back to old coordinates
-      lab[i].x = x_old
-      lab[i].y = y_old
-      rej += 1
+      lab[i].x = xOld
+      lab[i].y = yOld
     }
   }
 
@@ -181,23 +173,20 @@ export function labeler () {
     // returns true if two lines intersect, else false
     // from http://paulbourke.net/geometry/lineline2d/
 
-    let mua, mub
-    let denom, numera, numerb
-
-    denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
-    numera = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)
-    numerb = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)
+    const denom = (y4 - y3) * (x2 - x1) - (x4 - x3) * (y2 - y1)
+    const numera = (x4 - x3) * (y1 - y3) - (y4 - y3) * (x1 - x3)
+    const numerb = (x2 - x1) * (y1 - y3) - (y2 - y1) * (x1 - x3)
 
     /* Is the intersection along the the segments */
-    mua = numera / denom
-    mub = numerb / denom
+    const mua = numera / denom
+    const mub = numerb / denom
     if (!(mua < 0 || mua > 1 || mub < 0 || mub > 1)) {
       return true
     }
     return false
   }
 
-  const cooling_schedule = function (currT, initialT, nsweeps) {
+  const coolingSchedule = function (currT, initialT, nsweeps) {
     // linear cooling
     return (currT - (initialT / nsweeps))
   }
@@ -212,7 +201,7 @@ export function labeler () {
       for (let j = 0; j < m; j++) {
         if (Math.random() < 0.5) { mcmove(currT) } else { mcrotate(currT) }
       }
-      currT = cooling_schedule(currT, initialT, nsweeps)
+      currT = coolingSchedule(currT, initialT, nsweeps)
     }
   }
 
@@ -247,16 +236,14 @@ export function labeler () {
   labeler.alt_energy = function (x) {
     // user defined energy
     if (!arguments.length) return energy
-    user_defined_energy = x
-    user_energy = true
+    userDefinedEnergy = x
+    userEnergy = true
     return labeler
   }
 
   labeler.alt_schedule = function (x) {
     // user defined cooling_schedule
-    if (!arguments.length) return cooling_schedule
-    user_defined_schedule = x
-    user_schedule = true
+    if (!arguments.length) return coolingSchedule
     return labeler
   }
 

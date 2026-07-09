@@ -4,7 +4,6 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import faService from '../../../services/FeatureAnalysisService'
-import sharedState from 'atlas-state'
 import 'components/conceptset/conceptset-list'
 
 class FeatureAnalysisConceptSet extends AutoBind(Component) {

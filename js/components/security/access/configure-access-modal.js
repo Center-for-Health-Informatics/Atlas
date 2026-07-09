@@ -105,10 +105,10 @@ class ConfigureAccessModal extends AutoBind(Component) {
     this.isLoading(false)
   }
 
-  async grantAccess (perm_type) {
+  async grantAccess (permType) {
     this.isLoading(true)
     try {
-      if (perm_type == 'WRITE') {
+      if (permType === 'WRITE') {
         const role = this.writeRoleSuggestions().find(r => r.name === this.writeRoleName())
         await this.grantAccessFn(role.id, 'WRITE')
         await this._loadWriteAccessList()
@@ -125,10 +125,10 @@ class ConfigureAccessModal extends AutoBind(Component) {
     this.isLoading(false)
   }
 
-  async revokeRoleAccess (roleId, perm_type) {
+  async revokeRoleAccess (roleId, permType) {
     this.isLoading(true)
     try {
-      await this.revokeAccessFn(roleId, perm_type)
+      await this.revokeAccessFn(roleId, permType)
       await this.loadAccessList()
     } catch (ex) {
       console.log(ex)

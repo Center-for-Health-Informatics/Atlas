@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import numeral from 'numeral'
 
 function hasEvidence (row) {
@@ -19,7 +18,7 @@ function formatNumberWithCommas (val) {
 }
 
 function formatBooleanDisplay (val) {
-  return val.toString() == '1' ? 'Y' : 'N'
+  return val.toString() === '1' ? 'Y' : 'N'
 }
 
 export { hasEvidence, formatNumberWithCommas, formatBooleanDisplay }

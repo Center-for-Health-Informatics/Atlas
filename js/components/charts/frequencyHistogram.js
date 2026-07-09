@@ -6,6 +6,7 @@ import commonUtils from 'utils/CommonUtils'
 class FrequencyHistogramComponent extends Chart {
   constructor (params, element) {
     super(params, element)
+    // eslint-disable-next-line new-cap
     this.renderer = new atlascharts.histogram()
   }
 }

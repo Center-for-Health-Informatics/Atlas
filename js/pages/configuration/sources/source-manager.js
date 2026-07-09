@@ -217,6 +217,7 @@ class SourceManager extends AutoBind(Page) {
 
   newSource () {
     this.selectedSource(new Source())
+    // eslint-disable-next-line new-cap
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedSource()))
   }
 
@@ -354,6 +355,7 @@ class SourceManager extends AutoBind(Page) {
         this.loading(true)
         const source = await sourceApi.getSource(this.selectedSourceId())
         this.selectedSource(new Source(source))
+        // eslint-disable-next-line new-cap
         this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedSource()))
       } catch (e) {
         console.error(e)

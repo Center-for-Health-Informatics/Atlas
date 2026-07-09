@@ -24,6 +24,6 @@ ko.bindingHandlers.htmlValue = {
 
     if (element === document.activeElement) return // element is active, so don't overwrite the html value
 
-    if ((value == null || value.length == 0) && allBindings.defaultValue) { element.innerHTML = allBindings.defaultValue } else { element.innerHTML = value }
+    if ((value == null || value.length === 0) && allBindings.defaultValue) { element.innerHTML = allBindings.defaultValue } else { element.innerHTML = value }
   }
 }

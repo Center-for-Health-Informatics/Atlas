@@ -1,9 +1,5 @@
 import ko from 'knockout'
-import options from '../options'
-import CriteriaGroup from '../CriteriaGroup'
 import * as criteriaTypes from '../CriteriaTypes'
-import CohortExpression from '../CohortExpression'
-import InclusionRule from '../InclusionRule'
 import template from './CensoringCriteriaEditor.html?raw'
 import constants from '../const'
 import './CensoringCriteriaEditor.less'
@@ -225,11 +221,11 @@ function CensoringCriteriaViewModel (params) {
   self.getCriteriaIndexComponent = function (data) {
     data = ko.utils.unwrapObservable(data)
 
-    if (data.hasOwnProperty('ConditionOccurrence')) { return 'condition-occurrence-criteria' } else if (data.hasOwnProperty('ConditionEra')) { return 'condition-era-criteria' } else if (data.hasOwnProperty('DrugExposure')) { return 'drug-exposure-criteria' } else if (data.hasOwnProperty('DrugEra')) return 'drug-era-criteria'
-    else if (data.hasOwnProperty('DoseEra')) return 'dose-era-criteria'
-    else if (data.hasOwnProperty('ProcedureOccurrence')) { return 'procedure-occurrence-criteria' } else if (data.hasOwnProperty('Observation')) { return 'observation-criteria' } else if (data.hasOwnProperty('VisitOccurrence')) { return 'visit-occurrence-criteria' } else if (data.hasOwnProperty('VisitDetail')) { return 'visit-detail-criteria' } else if (data.hasOwnProperty('DeviceExposure')) { return 'device-exposure-criteria' } else if (data.hasOwnProperty('Measurement')) { return 'measurement-criteria' } else if (data.hasOwnProperty('Specimen')) return 'specimen-criteria'
-    else if (data.hasOwnProperty('ObservationPeriod')) { return 'observation-period-criteria' } else if (data.hasOwnProperty('PayerPlanPeriod')) { return 'payer-plan-period-criteria' } else if (data.hasOwnProperty('Death')) return 'death-criteria'
-    else if (data.hasOwnProperty('LocationRegion')) { return 'location-region-criteria' } else return 'unknownCriteriaType'
+    if (Object.prototype.hasOwnProperty.call(data, 'ConditionOccurrence')) { return 'condition-occurrence-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'ConditionEra')) { return 'condition-era-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'DrugExposure')) { return 'drug-exposure-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'DrugEra')) return 'drug-era-criteria'
+    else if (Object.prototype.hasOwnProperty.call(data, 'DoseEra')) return 'dose-era-criteria'
+    else if (Object.prototype.hasOwnProperty.call(data, 'ProcedureOccurrence')) { return 'procedure-occurrence-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'Observation')) { return 'observation-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'VisitOccurrence')) { return 'visit-occurrence-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'VisitDetail')) { return 'visit-detail-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'DeviceExposure')) { return 'device-exposure-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'Measurement')) { return 'measurement-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'Specimen')) return 'specimen-criteria'
+    else if (Object.prototype.hasOwnProperty.call(data, 'ObservationPeriod')) { return 'observation-period-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'PayerPlanPeriod')) { return 'payer-plan-period-criteria' } else if (Object.prototype.hasOwnProperty.call(data, 'Death')) return 'death-criteria'
+    else if (Object.prototype.hasOwnProperty.call(data, 'LocationRegion')) { return 'location-region-criteria' } else return 'unknownCriteriaType'
   }
 
   self.showReusablesModal = ko.observable(false)

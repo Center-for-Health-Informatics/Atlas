@@ -374,8 +374,8 @@ class Search extends AutoBind(Component) {
     // if we don't have a search and aren't looking up domain or vocabulary details, abort.
     if (
       this.currentSearch() === undefined &&
-    vocabElements.size == 0 &&
-    domainElements.size == 0
+    vocabElements.size === 0 &&
+    domainElements.size === 0
     ) {
       return
     }
@@ -420,7 +420,7 @@ class Search extends AutoBind(Component) {
       this.recommending(true)
       this.searchExecuted(false)
       const recommendedConcepts = await vocabularyProvider.search(searchParams)
-      if (recommendedConcepts.length == 0) {
+      if (recommendedConcepts.length === 0) {
         this.data([]) // indicate no results
         this.searchExecuted(true) // signals 'no results found' message
         return
@@ -458,7 +458,9 @@ class Search extends AutoBind(Component) {
 
   handleSearchResults (results) {
     if (results.length === 0) {
-      throw { message: 'No results found', results }
+      const error = new Error('No results found')
+      error.results = results
+      throw error
     }
 
     const promise = vocabularyProvider.loadDensity(results, this.currentResultSourceKey())
@@ -499,7 +501,7 @@ class Search extends AutoBind(Component) {
   }
 
   noResultsFoundMessage () {
-    return ko.i18n('search.noResultsFoundFor', 'No results found for')() + ' \"' + this.currentSearch() + '\"'
+    return ko.i18n('search.noResultsFoundFor', 'No results found for')() + ' "' + this.currentSearch() + '"'
   }
 
   async refreshRecordCounts (obj, event) {

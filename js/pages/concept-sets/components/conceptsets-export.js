@@ -22,7 +22,7 @@ class ConceptsetExport extends AutoBind(Component) {
   }
 
   onExportAction (result) {
-    if (result.action == 'add') {
+    if (result.action === 'add') {
       // Get the items we'd like to export from the table
       const itemsForExport = $('#exportConceptSetTable').DataTable().rows('.selected').data()
       const conceptSetIds = $.map(itemsForExport, function (obj) {

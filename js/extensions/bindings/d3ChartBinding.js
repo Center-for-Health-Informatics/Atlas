@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import ko from 'knockout'
 import atlascharts from 'atlascharts'
 
@@ -17,9 +16,6 @@ ko.bindingHandlers.d3ChartBinding = {
   update: function (element, valueAccessor, allBindings) {
     const va = ko.utils.unwrapObservable(valueAccessor())
     va.domElement(element)
-    const chartData = ko.utils.unwrapObservable(va.chartData) || []
-    const chartResolution = ko.utils.unwrapObservable(va.chartResolution) || { width: 460, height: 150 }
-    const chartType = ko.utils.unwrapObservable(va.chartType)
 
     /* charts should not be assumed to be knockout aware
    * (most jnj.charts are not), but they need ways to

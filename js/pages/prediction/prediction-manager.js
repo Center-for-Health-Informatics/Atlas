@@ -15,7 +15,6 @@ import PredictionService from 'services/Prediction'
 import Cohort from 'services/analysis/Cohort'
 import PatientLevelPredictionAnalysis from './inputTypes/PatientLevelPredictionAnalysis'
 import CovariateSettings from 'featureextraction/InputTypes/CovariateSettings'
-import TemporalCovariateSettings from 'featureextraction/InputTypes/TemporalCovariateSettings'
 import ConceptSet from 'services/analysis/ConceptSet'
 import ConceptSetCrossReference from 'services/analysis/ConceptSetCrossReference'
 import authAPI from 'services/AuthAPI'
@@ -226,6 +225,7 @@ class PatientLevelPredictionManager extends Page {
     this.selectedAnalysisId(null)
     this.targetCohorts.removeAll()
     this.outcomeCohorts.removeAll()
+    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.patientLevelPredictionAnalysis()))
     document.location = constants.paths.browser()
   }
@@ -252,13 +252,14 @@ class PatientLevelPredictionManager extends Page {
     if (!confirm(ko.unwrap(ko.i18n('predictions.confirmDelete', 'Delete patient level prediction specification? Warning: deletion can not be undone!')))) { return }
 
     this.isDeleting(true)
-    const analysis = PredictionService.deletePrediction(this.selectedAnalysisId())
+    PredictionService.deletePrediction(this.selectedAnalysisId())
 
     this.loading(true)
     this.patientLevelPredictionAnalysis(null)
     this.selectedAnalysisId(null)
     this.targetCohorts.removeAll()
     this.outcomeCohorts.removeAll()
+    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
     this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.patientLevelPredictionAnalysis()))
     document.location = constants.paths.browser()
   }
@@ -284,7 +285,7 @@ class PatientLevelPredictionManager extends Page {
     // Next check to see that a prediction analysis with this name does not already exist
     // in the database. Also pass the id so we can make sure that the current prediction analysis is excluded in this check.
     try {
-      const results = await PredictionService.exists(this.patientLevelPredictionAnalysis().name(), this.patientLevelPredictionAnalysis().id() == undefined ? 0 : this.patientLevelPredictionAnalysis().id())
+      const results = await PredictionService.exists(this.patientLevelPredictionAnalysis().name(), this.patientLevelPredictionAnalysis().id() === undefined ? 0 : this.patientLevelPredictionAnalysis().id())
       if (results > 0) {
         alert(ko.unwrap(ko.i18n('predictions.confirmSave', 'A prediction analysis with this name already exists. Please choose a different name.')))
       } else {
@@ -325,7 +326,7 @@ class PatientLevelPredictionManager extends Page {
     })
     specification.covariateSettings.forEach((cs, index) => {
       if (cs.includedCovariateConceptSet !== null && cs.includedCovariateConceptSet.id > 0) {
-        if (specification.conceptSets.filter(element => element.id === cs.includedCovariateConceptSet.id).length == 0) {
+        if (specification.conceptSets.filter(element => element.id === cs.includedCovariateConceptSet.id).length === 0) {
           specification.conceptSets.push(cs.includedCovariateConceptSet)
         }
         specification.conceptSetCrossReference.push(
@@ -338,7 +339,7 @@ class PatientLevelPredictionManager extends Page {
         )
       }
       if (cs.excludedCovariateConceptSet !== null && cs.excludedCovariateConceptSet.id > 0) {
-        if (specification.conceptSets.filter(element => element.id === cs.excludedCovariateConceptSet.id).length == 0) {
+        if (specification.conceptSets.filter(element => element.id === cs.excludedCovariateConceptSet.id).length === 0) {
           specification.conceptSets.push(cs.excludedCovariateConceptSet)
         }
         specification.conceptSetCrossReference.push(
@@ -365,13 +366,10 @@ class PatientLevelPredictionManager extends Page {
   newAnalysis () {
     this.loading(true)
     this.patientLevelPredictionAnalysis(new PatientLevelPredictionAnalysis({ id: 0, name: this.defaultName }))
-    return new Promise(async (resolve, reject) => {
-      this.setAnalysisSettingsLists()
-      this.resetDirtyFlag()
-      this.loading(false)
-
-      resolve()
-    })
+    this.setAnalysisSettingsLists()
+    this.resetDirtyFlag()
+    this.loading(false)
+    return Promise.resolve()
   }
 
   onAnalysisSelected () {
@@ -383,6 +381,7 @@ class PatientLevelPredictionManager extends Page {
   }
 
   resetDirtyFlag () {
+    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
     this.dirtyFlag(new ohdsiUtil.dirtyFlag({ analysis: this.patientLevelPredictionAnalysis(), targetCohorts: this.targetCohorts, outcomeCohorts: this.outcomeCohorts }))
   }
 

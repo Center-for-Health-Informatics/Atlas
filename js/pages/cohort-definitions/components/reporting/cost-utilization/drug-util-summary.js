@@ -19,7 +19,7 @@ class DrugUtilSummaryReport extends BaseDrugUtilReport {
         title: ko.i18n('columns.drugId', 'OMOP Concept'),
         data: 'drugId',
         className: this.classes('tbl-col', 'drug-id'),
-        render: id => `<a href=\"#/concept/${id}\">${id}</a>`,
+        render: id => `<a href="#/concept/${id}">${id}</a>`,
       },
       {
         title: ko.i18n('columns.drugName', 'Drug'),

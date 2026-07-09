@@ -12,8 +12,8 @@ function EndStrategyEditorViewModel (params) {
 
   function getTypeFromStrategy (strategy) {
     if (strategy == null) return 'default'
-    else if (strategy.hasOwnProperty('DateOffset')) return 'dateOffset'
-    else if (strategy.hasOwnProperty('CustomEra')) return 'customEra'
+    else if (Object.prototype.hasOwnProperty.call(strategy, 'DateOffset')) return 'dateOffset'
+    else if (Object.prototype.hasOwnProperty.call(strategy, 'CustomEra')) return 'customEra'
     throw new Error('Strategy instance does not resolve to a StrategyType.')
   }
 
@@ -55,7 +55,7 @@ function EndStrategyEditorViewModel (params) {
 
   self.strategyComponentName = ko.pureComputed(function () {
     const strategy = ko.utils.unwrapObservable(params.strategy)
-    if (strategy.hasOwnProperty('DateOffset')) { return 'date-offset-strategy' } else if (strategy.hasOwnProperty('CustomEra')) { return 'custom-era-strategy' } else return 'unknown-strategy'
+    if (Object.prototype.hasOwnProperty.call(strategy, 'DateOffset')) { return 'date-offset-strategy' } else if (Object.prototype.hasOwnProperty.call(strategy, 'CustomEra')) { return 'custom-era-strategy' } else return 'unknown-strategy'
   })
 
   self.subscriptions = []

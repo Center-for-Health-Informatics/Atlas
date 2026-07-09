@@ -3,11 +3,6 @@ import httpService from 'services/http'
 import sharedState from 'atlas-state'
 import config from 'appConfig'
 import authApi from 'services/AuthAPI'
-import vocabularyService from 'services/Vocabulary'
-import commonUtils from 'utils/CommonUtils'
-import globalConstants from 'const'
-import _ from 'lodash'
-import hash from 'hash-it'
 
 async function loadConceptSet (id) {
   return authApi.executeWithRefresh(httpService.doGet(config.api.url + 'conceptset/' + id).then(({ data }) => data))

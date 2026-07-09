@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 class TargetOutcome {
   constructor (data = {}) {
     this.targetId = data.targetId || null

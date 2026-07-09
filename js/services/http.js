@@ -4,7 +4,6 @@ import sharedState from 'atlas-state'
 import { Api as OHDSIApi, STATUS } from 'ohdsi-api'
 import EventBus from 'services/EventBus'
 
-const JSON_RESPONSE_TYPE = 'application/json'
 const TEXT_RESPONSE_TYPE = 'text/plain'
 class Api extends OHDSIApi {
   get headers () {

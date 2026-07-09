@@ -1,8 +1,6 @@
-import $ from 'jquery'
 import ko from 'knockout'
 import view from './cohort-comparison-print-friendly.html?raw'
 import config from 'appConfig'
-import cohortComparison from 'components/cohortcomparison/ComparativeCohortAnalysis'
 
 function cohortComparisonPrintFriendly (params) {
   const self = this

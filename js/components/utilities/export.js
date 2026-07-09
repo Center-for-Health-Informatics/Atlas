@@ -1,7 +1,5 @@
 import ko from 'knockout'
 import view from './export.html?raw'
-import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import Component from 'components/Component'
 import Clipboard from 'utils/Clipboard'
 import AutoBind from 'utils/AutoBind'

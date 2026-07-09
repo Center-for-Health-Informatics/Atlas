@@ -26,7 +26,7 @@ function multiSelectFilter (params) {
 
   self.onSelectionComplete = function (data, context, event) {
     // only reset the param's selectedValues if the current selections are different
-    if (params.multiple && !_.xor(params.selectedValues(), self.selectedValues()).length == 0) {
+    if (params.multiple && _.xor(params.selectedValues(), self.selectedValues()).length !== 0) {
       params.selectedValues(self.selectedValues())
     }
   }

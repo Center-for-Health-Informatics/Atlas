@@ -50,18 +50,18 @@ function FeasibilityIntersectReport (params) {
   }
 
   self.describe = function (bits, size) {
-    let pass_count = 0
-    let fail_count = 0
+    let passCount = 0
+    let failCount = 0
     const passed = []
     const failed = []
 
     for (let b = 0; b < bits.length; b++) {
       if (bits[b] === '1') {
         passed.push(self.report().inclusionRuleStats[b])
-        pass_count++
+        passCount++
       } else {
         failed.push(self.report().inclusionRuleStats[b])
-        fail_count++
+        failCount++
       }
     }
 
@@ -73,7 +73,7 @@ function FeasibilityIntersectReport (params) {
     self.fail(failed)
     self.rectSummary(ko.i18nformat('components.feasibilityIntersectReport.rectSummary',
       '<%=size%> people (<%=percentage%>%), <%=passCount%> criteria passed, <%=failCount%> criteria failed.',
-      { size, percentage: percentage.toFixed(2), passCount: pass_count, failCount: fail_count })())
+      { size, percentage: percentage.toFixed(2), passCount, failCount })())
   }
 
   self.handleCellOver = function (data, context, event) {
@@ -133,10 +133,10 @@ function FeasibilityIntersectReport (params) {
     let summaryPercent = 0
     const rects = $(element).find('rect')
     ko.utils.arrayForEach(rects, (rect) => {
-      if (self.allAnyOption() === 'ANY' && self.passedFailedOption() === 'PASSED' && checkRulesAny(rect.id) ||
-      self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'PASSED' && checkRulesAll(rect.id) ||
-      self.allAnyOption() === 'ANY' && self.passedFailedOption() === 'FAILED' && checkRulesAny(rect.id, true) ||
-      self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'FAILED' && checkRulesAll(rect.id, true)) { // include this rectangle in summary
+      if ((self.allAnyOption() === 'ANY' && self.passedFailedOption() === 'PASSED' && checkRulesAny(rect.id)) ||
+      (self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'PASSED' && checkRulesAll(rect.id)) ||
+      (self.allAnyOption() === 'ANY' && self.passedFailedOption() === 'FAILED' && checkRulesAny(rect.id, true)) ||
+      (self.allAnyOption() === 'ALL' && self.passedFailedOption() === 'FAILED' && checkRulesAll(rect.id, true))) { // include this rectangle in summary
         summaryValue += rect.__data__.value
 
         let percent = 0

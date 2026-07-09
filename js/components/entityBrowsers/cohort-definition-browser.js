@@ -1,7 +1,5 @@
 import ko from 'knockout'
 import view from './cohort-definition-browser.html?raw'
-import config from 'appConfig'
-import sharedState from 'atlas-state'
 import EntityBrowser from 'components/entity-browser'
 import commonUtils from 'utils/CommonUtils'
 import CohortDefinitionService from 'services/CohortDefinition'

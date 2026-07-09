@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 class FullAnalysis {
   constructor (targetComparatorOutcome, cohortMethodAnalysis) {
     this.targetComparatorOutcome = targetComparatorOutcome || null

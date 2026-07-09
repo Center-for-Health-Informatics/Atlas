@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import FieldOffset from './FieldOffset'
 
 function TimeAtRisk (data) {

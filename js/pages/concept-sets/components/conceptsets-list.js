@@ -4,12 +4,9 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import authApi from 'services/AuthAPI'
-import conceptSetService from 'services/ConceptSet'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
-import sharedState from 'atlas-state'
 import constants from '../const'
 import config from 'appConfig'
-import globalConstants from 'const'
 import 'components/tabs'
 import 'circe'
 
@@ -31,13 +28,13 @@ class ConceptsetList extends AutoBind(Component) {
   onConceptSetBrowserAction (result) {
     // Inspect the result to see what type of action was taken. For now
     // we're handling the 'add' action
-    if (result.action == 'add') {
+    if (result.action === 'add') {
       this.newConceptSet()
     }
   }
 
   newConceptSet () {
-    if (this.currentConceptSet() == undefined) {
+    if (this.currentConceptSet() === undefined) {
       commonUtils.routeTo(constants.paths.mode())
     }
   }

@@ -161,7 +161,7 @@ class BaseCostUtilReport extends Component {
   async loadData (filters) {
     this.loading(true)
     try {
-      const res = await this.fetchAPI({ filters })
+      await this.fetchAPI({ filters })
     } catch (e) {
       console.error(e)
     }

@@ -112,9 +112,9 @@ class ConceptsetCompare extends AutoBind(Component) {
     this.compareNewConceptSetName = ko.observable(this.currentConceptSet().name() + ko.i18n('cs.browser.compare.saveFromComparisonNameTail', ' - From Comparison')())
     this.compareResultsColumns = [{
       data: d => {
-        if (d.conceptIn1Only == 1) {
+        if (d.conceptIn1Only === 1) {
           return ko.i18n('facets.match.only1', 'CS1 Only')()
-        } else if (d.conceptIn2Only == 1) {
+        } else if (d.conceptIn2Only === 1) {
           return ko.i18n('facets.match.only2', 'CS2 Only')()
         } else {
           return ko.i18n('facets.match.both', 'Both')()
@@ -192,9 +192,9 @@ class ConceptsetCompare extends AutoBind(Component) {
       Facets: [{
         caption: ko.i18n('facets.caption.match', 'Match'),
         binding: d => {
-          if (d.conceptIn1Only == 1) {
+          if (d.conceptIn1Only === 1) {
             return ko.i18n('facets.match.only1', 'CS1 Only')
-          } else if (d.conceptIn2Only == 1) {
+          } else if (d.conceptIn2Only === 1) {
             return ko.i18n('facets.match.only2', 'CS2 Only')
           } else {
             return ko.i18n('facets.match.both', 'Both')
@@ -217,7 +217,7 @@ class ConceptsetCompare extends AutoBind(Component) {
         caption: ko.i18n('facets.caption.hasRecords', 'Has Records'),
         binding: d => {
           let val = d.recordCount
-          if (val.replace) { val = parseInt(val.replace(/\,/g, '')) } // Remove comma formatting and treat as int
+          if (val.replace) { val = parseInt(val.replace(/,/g, '')) } // Remove comma formatting and treat as int
           if (val > 0) {
             return 'true'
           } else {
@@ -229,7 +229,7 @@ class ConceptsetCompare extends AutoBind(Component) {
         caption: ko.i18n('facets.caption.hasDescendantRecords', 'Has Descendant Records'),
         binding: d => {
           let val = d.descendantRecordCount
-          if (val.replace) { val = parseInt(val.replace(/\,/g, '')) } // Remove comma formatting and treat as int
+          if (val.replace) { val = parseInt(val.replace(/,/g, '')) } // Remove comma formatting and treat as int
           if (val > 0) {
             return 'true'
           } else {
@@ -295,9 +295,9 @@ class ConceptsetCompare extends AutoBind(Component) {
 
   prepareDataAfterUploadFile (csvParse) {
     return csvParse.map(item => {
-      const { concept_name, concept_code, vocabulary_id } = item
+      const { concept_name: conceptName, concept_code: conceptCode, vocabulary_id: vocabularyId } = item
       return {
-        concept: { VOCABULARY_ID: vocabulary_id, CONCEPT_NAME: concept_name, CONCEPT_CODE: concept_code },
+        concept: { VOCABULARY_ID: vocabularyId, CONCEPT_NAME: conceptName, CONCEPT_CODE: conceptCode },
         includeDescendants: false,
         includeMapped: false,
         isExcluded: false

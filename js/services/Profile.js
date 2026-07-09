@@ -1,6 +1,5 @@
 import httpService from 'services/http'
 import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 
 const getProfile = function (sourceKey, personId, cohort) {
   const data = {

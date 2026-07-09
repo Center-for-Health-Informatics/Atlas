@@ -14,8 +14,8 @@ function Measurement (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
-        if (ko.utils.unwrapObservable(self.MeasurementSourceConcept()) == change.value.id) { self.MeasurementSourceConcept()(null) }
+        if (ko.utils.unwrapObservable(self.CodesetId) === change.value.id) { self.CodesetId(null) }
+        if (ko.utils.unwrapObservable(self.MeasurementSourceConcept()) === change.value.id) { self.MeasurementSourceConcept()(null) }
       }
     })
   }, null, 'arrayChange')

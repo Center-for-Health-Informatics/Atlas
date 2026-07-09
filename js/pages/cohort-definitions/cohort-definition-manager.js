@@ -9,21 +9,15 @@ import momentApi from 'services/MomentAPI'
 import conceptSetService from 'services/ConceptSet'
 import PermissionService from 'services/Permission'
 import TagsService from 'services/Tags'
-import moment from 'moment'
 import conceptSetUitls from 'components/conceptset/utils'
 import datatableUtils from 'utils/DatatableUtils'
 import CohortExpression from 'components/cohortbuilder/CohortExpression'
-import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 import cohortReportingService from 'services/CohortReporting'
-import vocabularyApi from 'services/VocabularyProvider'
-import exceptionUtils from 'utils/ExceptionUtils'
 import sharedState from 'atlas-state'
-import clipboard from 'clipboard'
 import * as d3 from 'd3'
 import sampleService from 'services/Sample'
 import jobService from 'services/Jobs'
-import jobDetail from 'services/job/jobDetail'
 import jobDetailsService from 'services/JobDetailsService'
 import cohortConst from 'pages/cohort-definitions/const'
 import Page from 'pages/Page'
@@ -39,7 +33,6 @@ import httpService from 'services/http'
 import globalConstants from 'const'
 import constants from './const'
 import { entityType } from 'components/security/access/const'
-import conceptSetUtils from 'components/conceptset/utils'
 import 'components/cohortbuilder/components/FeasibilityReportViewer'
 import 'databindings'
 import 'faceted-datatable'
@@ -79,8 +72,8 @@ function conceptSetSorter (a, b) {
 }
 
 function gender (code) {
-  if (code == 8507) return 'Male'
-  if (code == 8532) return 'Female'
+  if (code === 8507) return 'Male'
+  if (code === 8532) return 'Female'
   else return 'Other'
 }
 
@@ -117,14 +110,14 @@ function mapSampleListData (originalData) {
     } else {
       mode = ''
     }
-    if ((mode == 'Between' || mode == 'Not between') && el.age) {
+    if ((mode === 'Between' || mode === 'Not between') && el.age) {
       selectionCriteria = `${mode} ${el.age.min} and ${el.age.max}`
     } else if (el.age) {
       selectionCriteria = `${mode} ${el.age.value}`
     } else {
       selectionCriteria = 'Any age'
     }
-    if (el.gender.otherNonBinary && el.gender.conceptIds.length == 2) {
+    if (el.gender.otherNonBinary && el.gender.conceptIds.length === 2) {
       selectionCriteria = `Any Gender, ${selectionCriteria}`
     } else {
       if (el.gender.otherNonBinary) {
@@ -140,7 +133,7 @@ function mapSampleListData (originalData) {
     const sampleId = el.id
     const sampleName = el.name || ''
     const patientCounts = el.size
-    const createdBy = el.createdBy && el.createdBy.name || ''
+    const createdBy = (el.createdBy && el.createdBy.name) || ''
     const createdOn = new Date(el.createdDate).toLocaleString()
     return {
       sampleId,
@@ -204,13 +197,13 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     this.isFeMaleSample = ko.observable(false)
     this.isOtherGenderSample = ko.observable(false)
     // error state
-    this.sampleNameError = ko.pureComputed(() => this.sampleName().trim() == '')
+    this.sampleNameError = ko.pureComputed(() => this.sampleName().trim() === '')
     this.patientCountError = ko.pureComputed(() => !(this.patientCount() > 0)) // this works because null == 0
     this.isAgeRange = ko.pureComputed(() => ['between', 'notBetween'].includes(this.sampleAgeType()))
     this.firstAgeError = ko.pureComputed(() => this.firstAge() != null && this.firstAge() < 0)
     this.isAgeRangeError = ko.pureComputed(() => this.isAgeRange() && // age range selected
         !(this.firstAge() == null && this.secondAge() == null) && // one is non-null
-        (this.firstAge() == null || this.secondAge() == null || this.firstAge() < 0 || this.secondAge() < 0 || this.firstAge() == this.secondAge())) //  has invalid value
+        (this.firstAge() == null || this.secondAge() == null || this.firstAge() < 0 || this.secondAge() < 0 || this.firstAge() === this.secondAge())) //  has invalid value
 
     // sampleSourceKey changes => get list of samples
     this.trackSub(this.sampleSourceKey.subscribe(val => {
@@ -286,8 +279,8 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     this.sampleData = ko.observableArray([])
 
     this.isCohortGenerated = ko.pureComputed(() => {
-      const sourceInfo = this.cohortDefinitionSourceInfo().find(d => d.sourceKey == this.sampleSourceKey())
-      if (sourceInfo && this.getStatusMessage(sourceInfo) == 'COMPLETE') {
+      const sourceInfo = this.cohortDefinitionSourceInfo().find(d => d.sourceKey === this.sampleSourceKey())
+      if (sourceInfo && this.getStatusMessage(sourceInfo) === 'COMPLETE') {
         return true
       }
       return false
@@ -338,7 +331,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
       }
 
       if (this.currentCohortDefinition() && (this.currentCohortDefinition()
-        .id() != 0)) {
+        .id() !== 0)) {
         return authApi.isPermittedUpdateCohort(this.currentCohortDefinition()
           .id()) || !config.userAuthenticationEnabled
       } else {
@@ -353,13 +346,13 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     })
     this.canCopy = ko.pureComputed(() => {
       return !this.dirtyFlag().isDirty() && !this.isNew() &&
-      (this.isAuthenticated() && this.authApi.isPermittedCopyCohort(this.currentCohortDefinition().id()) || !config.userAuthenticationEnabled)
+      ((this.isAuthenticated() && this.authApi.isPermittedCopyCohort(this.currentCohortDefinition().id())) || !config.userAuthenticationEnabled)
     })
     this.canDelete = ko.pureComputed(() => {
       if (this.isNew()) {
         return false
       }
-      return ((this.isAuthenticated() && this.authApi.isPermittedDeleteCohort(this.currentCohortDefinition().id()) || !config.userAuthenticationEnabled))
+      return ((this.isAuthenticated() && this.authApi.isPermittedDeleteCohort(this.currentCohortDefinition().id())) || !config.userAuthenticationEnabled)
     })
     this.hasAccess = ko.pureComputed(() => {
       if (!config.userAuthenticationEnabled) {
@@ -442,7 +435,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
     this.canGenerate = ko.pureComputed(() => {
       const isDirty = this.dirtyFlag() && this.dirtyFlag().isDirty()
-      const isNew = this.currentCohortDefinition() && (this.currentCohortDefinition() && this.currentCohortDefinition().id() == 0)
+      const isNew = this.currentCohortDefinition() && (this.currentCohortDefinition() && this.currentCohortDefinition().id() === 0)
       const hasInitialEvent = this.currentCohortDefinition() && this.currentCohortDefinition().expression().PrimaryCriteria().CriteriaList().length > 0
       const isValid = this.criticalCount() <= 0
       const canGenerate = !(isDirty || isNew) && hasInitialEvent && isValid
@@ -595,12 +588,10 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
       if (this.currentCohortDefinition() && !this.isNew() && this.cohortDefinitionSourceInfo().some(i => [PENDING, RUNNING].includes(i.status()))) {
         const id = this.currentCohortDefinition().id()
         cohortDefinitionService.getInfo(id).then((infoList) => {
-          const hasPending = false
-
           infoList.forEach((info) => {
             // obtain source reference
             const source = this.cohortDefinitionSourceInfo().filter((cdsi) => {
-              const sourceId = sharedState.sources().find(source => source.sourceKey == cdsi.sourceKey).sourceId
+              const sourceId = sharedState.sources().find(source => source.sourceKey === cdsi.sourceKey).sourceId
               return sourceId === info.id.sourceId
             })[0]
 
@@ -613,7 +604,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
               source.startTime(momentApi.formatDateTime(new Date(info.startTime)))
               source.createdBy(info.createdBy ? info.createdBy.login : null)
 
-              if (info.status != 'COMPLETE' && info.status != 'FAILED') {
+              if (info.status !== 'COMPLETE' && info.status !== 'FAILED') {
                 // hasPending = true;
                 if (this.selectedReportSource() && source.sourceId === this.selectedReportSource().sourceId) {
                   this.selectedReportSource(null)
@@ -638,7 +629,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
     this.isRunning = ko.pureComputed(() => {
       return this.cohortDefinitionSourceInfo().filter((info) => {
-        return !(info.status() == 'COMPLETE' || info.status() == 'n/a')
+        return !(info.status() === 'COMPLETE' || info.status() === 'n/a')
       }).length > 0
     })
 
@@ -676,14 +667,14 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
     this.reportingState = ko.pureComputed(() => {
       // require a data source selection
-      if (this.reportSourceKey() == undefined) {
+      if (this.reportSourceKey() === undefined) {
         this.generateReportsEnabled(false)
         return 'awaiting_selection'
       }
 
       // check if the cohort has been generated
-      const sourceInfo = this.cohortDefinitionSourceInfo().find(d => d.sourceKey == this.reportSourceKey())
-      if (this.getStatusMessage(sourceInfo) != 'COMPLETED') {
+      const sourceInfo = this.cohortDefinitionSourceInfo().find(d => d.sourceKey === this.reportSourceKey())
+      if (this.getStatusMessage(sourceInfo) !== 'COMPLETED') {
         this.generateReportsEnabled(false)
         return 'cohort_not_generated'
       }
@@ -693,7 +684,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
         this.reportingSourceStatusLoading(true)
         cohortReportingService.getCompletedAnalyses(sourceInfo, this.currentCohortDefinition().id()).done(results => {
           const reports = cohortReportingService.getAvailableReports(results)
-          if (reports.length == 0) {
+          if (reports.length === 0) {
             this.reportingAvailableReports(reports)
             this.generateReportsEnabled(false)
             this.reportingSourceStatusAvailable(true)
@@ -715,19 +706,19 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
       // check if we can tell if the job to generate the reports is already running
       if (this.currentCohortDefinition() && this.currentJob()) {
-        if (this.currentJob().status && (this.currentJob().status == 'STARTED' || this.currentJob().status == 'STARTING' || this.currentJob().status == 'RUNNING')) {
+        if (this.currentJob().status && (this.currentJob().status === 'STARTED' || this.currentJob().status === 'STARTING' || this.currentJob().status === 'RUNNING')) {
           this.generateReportsEnabled(false)
           return 'generating_reports'
         }
       }
 
-      if (this.reportingAvailableReports().length == 0) {
+      if (this.reportingAvailableReports().length === 0) {
         // reset button to allow generation
         this.generateReportsEnabled(true)
         return 'report_unavailable'
       }
 
-      if (this.reportReportName() == undefined) {
+      if (this.reportReportName() === undefined) {
         // reset button to allow regeneration
         this.generateReportsEnabled(true)
         return 'awaiting_selection'
@@ -750,11 +741,11 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     })
 
     this.showReportNameDropdown = ko.pureComputed(() => {
-      return this.reportSourceKey() != undefined &&
-      this.reportingState() != 'checking_status' &&
-      this.reportingState() != 'cohort_not_generated' &&
-      this.reportingState() != 'reports_not_generated' &&
-      this.reportingState() != 'generating_reports'
+      return this.reportSourceKey() !== undefined &&
+      this.reportingState() !== 'checking_status' &&
+      this.reportingState() !== 'cohort_not_generated' &&
+      this.reportingState() !== 'reports_not_generated' &&
+      this.reportingState() !== 'generating_reports'
     })
 
     this.showUtilizationToRunModal = ko.observable(false)
@@ -949,7 +940,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
         this.close()
       }, (error) => {
         console.log('Error: ' + error)
-        if (error.status == 409) {
+        if (error.status === 409) {
           alert(ko.i18n('cohortDefinitions.cohortDefinitionManager.confirms.deleteConflict', 'Cohort definition cannot be deleted because it is referenced in some analysis.')())
           this.isDeleting(false)
         } else {
@@ -989,7 +980,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
         // reset view after save
         const savedDefinition = await cohortDefinitionService.saveCohortDefinition(definition)
         definition = new CohortDefinition(savedDefinition)
-        const redirectWhenComplete = definition.id() != this.currentCohortDefinition().id()
+        const redirectWhenComplete = definition.id() !== this.currentCohortDefinition().id()
         this.currentCohortDefinition(definition)
         this.previewVersion(null)
         this.versionsParams.valueHasMutated()
@@ -1007,7 +998,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
   close () {
     if (this.dirtyFlag().isDirty() && !confirm(ko.i18n('cohortDefinitions.cohortDefinitionManager.confirms.close', 'Your cohort changes are not saved. Would you like to continue?')())) {
-
+      // user cancelled the confirm dialog; do nothing and stay on the page.
     } else {
       this.conceptSetStore.clear()
       this.currentCohortDefinition(null)
@@ -1064,7 +1055,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
   getSourceKeyInfo (sourceKey) {
     return this.cohortDefinitionSourceInfo().filter((d) => {
-      return d.sourceKey == sourceKey
+      return d.sourceKey === sourceKey
     })[0]
   }
 
@@ -1105,7 +1096,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
   hasCDM (source) {
     for (let d = 0; d < source.daimons.length; d++) {
-      if (source.daimons[d].daimonType == 'CDM') {
+      if (source.daimons[d].daimonType === 'CDM') {
         return true
       }
     }
@@ -1114,7 +1105,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
   hasResults (source) {
     for (let d = 0; d < source.daimons.length; d++) {
-      if (source.daimons[d].daimonType == 'Results') {
+      if (source.daimons[d].daimonType === 'Results') {
         return true
       }
     }
@@ -1250,7 +1241,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   getSourceInfo (source) {
     const info = this.currentCohortDefinitionInfo()
     for (let i = 0; i < info.length; i++) {
-      if (info[i].id.sourceId == source.sourceId) {
+      if (info[i].id.sourceId === source.sourceId) {
         return info[i]
       }
     }
@@ -1433,8 +1424,8 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   }
 
   checkifDataLoaded (cohortDefinitionId, conceptSetId, sourceKey) {
-    if (this.currentCohortDefinition() && this.currentCohortDefinition().id() == cohortDefinitionId) {
-      if (this.currentConceptSet() && this.currentConceptSet().id == conceptSetId) {
+    if (this.currentCohortDefinition() && this.currentCohortDefinition().id() === cohortDefinitionId) {
+      if (this.currentConceptSet() && this.currentConceptSet().id === conceptSetId) {
         this.reportSourceKey(sourceKey)
         return true
       } else if (conceptSetId != null) {
@@ -1449,7 +1440,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   }
 
   loadConceptSet (conceptSetId) {
-    this.conceptSetStore.current(this.conceptSets()().find(item => item.id == conceptSetId))
+    this.conceptSetStore.current(this.conceptSets()().find(item => item.id === conceptSetId))
     this.conceptSetStore.isEditable(this.canEdit())
     commonUtils.routeTo(`/cohortdefinition/${this.currentCohortDefinition().id()}/conceptsets/`)
   }
@@ -1602,7 +1593,8 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   getCriteriaIndexComponent (data) {
     data = ko.utils.unwrapObservable(data)
     if (!data) return
-    if (data.hasOwnProperty('ConditionOccurrence')) { return 'condition-occurrence-criteria-viewer' } else if (data.hasOwnProperty('ConditionEra')) { return 'condition-era-criteria-viewer' } else if (data.hasOwnProperty('DrugExposure')) { return 'drug-exposure-criteria-viewer' } else if (data.hasOwnProperty('DrugEra')) { return 'drug-era-criteria-viewer' } else if (data.hasOwnProperty('DoseEra')) { return 'dose-era-criteria-viewer' } else if (data.hasOwnProperty('ProcedureOccurrence')) { return 'procedure-occurrence-criteria-viewer' } else if (data.hasOwnProperty('Observation')) { return 'observation-criteria-viewer' } else if (data.hasOwnProperty('VisitOccurrence')) { return 'visit-occurrence-criteria-viewer' } else if (data.hasOwnProperty('VisitDetail')) { return 'visit-detail-criteria-viewer' } else if (data.hasOwnProperty('DeviceExposure')) { return 'device-exposure-criteria-viewer' } else if (data.hasOwnProperty('Measurement')) { return 'measurement-criteria-viewer' } else if (data.hasOwnProperty('Specimen')) { return 'specimen-criteria-viewer' } else if (data.hasOwnProperty('ObservationPeriod')) { return 'observation-period-criteria-viewer' } else if (data.hasOwnProperty('PayerPlanPeriod')) { return 'payer-plan-period-criteria-viewer' } else if (data.hasOwnProperty('Death')) { return 'death-criteria-viewer' } else if (data.hasOwnProperty('LocationRegion')) { return 'location-region-viewer' } else { return 'unknownCriteriaType' }
+    const hasOwn = (key) => Object.prototype.hasOwnProperty.call(data, key)
+    if (hasOwn('ConditionOccurrence')) { return 'condition-occurrence-criteria-viewer' } else if (hasOwn('ConditionEra')) { return 'condition-era-criteria-viewer' } else if (hasOwn('DrugExposure')) { return 'drug-exposure-criteria-viewer' } else if (hasOwn('DrugEra')) { return 'drug-era-criteria-viewer' } else if (hasOwn('DoseEra')) { return 'dose-era-criteria-viewer' } else if (hasOwn('ProcedureOccurrence')) { return 'procedure-occurrence-criteria-viewer' } else if (hasOwn('Observation')) { return 'observation-criteria-viewer' } else if (hasOwn('VisitOccurrence')) { return 'visit-occurrence-criteria-viewer' } else if (hasOwn('VisitDetail')) { return 'visit-detail-criteria-viewer' } else if (hasOwn('DeviceExposure')) { return 'device-exposure-criteria-viewer' } else if (hasOwn('Measurement')) { return 'measurement-criteria-viewer' } else if (hasOwn('Specimen')) { return 'specimen-criteria-viewer' } else if (hasOwn('ObservationPeriod')) { return 'observation-period-criteria-viewer' } else if (hasOwn('PayerPlanPeriod')) { return 'payer-plan-period-criteria-viewer' } else if (hasOwn('Death')) { return 'death-criteria-viewer' } else if (hasOwn('LocationRegion')) { return 'location-region-viewer' } else { return 'unknownCriteriaType' }
   };
 
   copyExpressionToClipboard () {
@@ -1668,7 +1660,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
       if (value === 0 || value || ['UseEventEnd'].indexOf(key) > -1) {
         return value
       } else {
-
+        // omit falsy values (other than 0) from the serialized JSON.
       }
     }, 2)
   }
@@ -1812,7 +1804,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     const sourceKey = this.sampleSourceKey()
     sampleService.getSampleList({ cohortDefinitionId, sourceKey })
       .then(res => {
-        if (res.generationStatus != 'COMPLETE') {
+        if (res.generationStatus !== 'COMPLETE') {
           this.sampleSourceKey(null)
           alert(ko.i18n('cohortDefinitions.cohortDefinitionManager.samples.cohortShouldBeGenerated', 'Cohort should be generated before creating samples')())
           return
@@ -1832,13 +1824,13 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   onSampleListRowClick (d, e) {
     // find index of click
     const { sampleId } = d
-    const rowIndex = this.sampleList().findIndex(el => el.sampleId == sampleId)
+    const rowIndex = this.sampleList().findIndex(el => el.sampleId === sampleId)
 
     const cohortDefinitionId = this.currentCohortDefinition().id()
     const sourceKey = this.sampleSourceKey()
-    if (e.target.className == 'sample-list fa fa-trash') {
+    if (e.target.className === 'sample-list fa fa-trash') {
       // todo: close existing sample
-      if (this.selectedSampleId() == sampleId) {
+      if (this.selectedSampleId() === sampleId) {
         this.sampleData([])
         this.selectedSampleId(null)
         commonUtils.routeTo(`/cohortdefinition/${cohortDefinitionId}/samples/${sourceKey}/`)
@@ -1852,7 +1844,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
         .catch(() => {
           alert(ko.i18n('cohortDefinitions.cohortDefinitionManager.samples.errorDeleting', 'Error when deleting sample, please try again later')())
         })
-    } else if (e.target.className == 'sample-list fa fa-refresh') {
+    } else if (e.target.className === 'sample-list fa fa-refresh') {
       this.sampleDataLoading(true)
       this.refreshSample({ sampleId, sourceKey, cohortDefinitionId })
         .then(res => {

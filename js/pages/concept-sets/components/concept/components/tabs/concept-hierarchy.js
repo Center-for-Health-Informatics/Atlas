@@ -124,7 +124,7 @@ class ConceptHierarchy extends Component {
   hasRelationship (concept, relationships) {
     for (let r = 0; r < concept.RELATIONSHIPS.length; r++) {
       for (let i = 0; i < relationships.length; i++) {
-        if (concept.RELATIONSHIPS[r].RELATIONSHIP_NAME == relationships[i].name) {
+        if (concept.RELATIONSHIPS[r].RELATIONSHIP_NAME === relationships[i].name) {
           if (concept.RELATIONSHIPS[r].RELATIONSHIP_DISTANCE >= relationships[i].range[0] && concept.RELATIONSHIPS[r].RELATIONSHIP_DISTANCE <= relationships[i].range[1]) {
             return true
           }

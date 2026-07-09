@@ -5,18 +5,18 @@ import consts from '../const'
 async function StartExecution (executionGroup) {
   let confirmPromise
   if (!executionGroup) {
-    confirmPromise = new Promise((resolve, reject) => reject())
+    confirmPromise = new Promise((resolve, reject) => reject(new Error('No execution group provided')))
   } else {
     if ([consts.generationStatuses.STARTED, consts.generationStatuses.RUNNING].includes(executionGroup.status())) {
       confirmPromise = new Promise((resolve, reject) => {
         if (confirm(ko.i18n('components.executionUtils.startNewExecutionInParallelConfirmation', 'A generation for the source has already been started. Are you sure you want to start a new one in parallel?')())) {
           resolve()
         } else {
-          reject()
+          reject(new Error('User cancelled starting a new execution'))
         }
       })
     } else {
-      confirmPromise = new Promise(res => res())
+      confirmPromise = new Promise(resolve => resolve())
     }
   }
   return confirmPromise

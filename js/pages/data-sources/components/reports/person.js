@@ -5,7 +5,6 @@ import atlascharts from 'atlascharts'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
 import Report from 'components/reports/classes/Report'
-import Component from 'components/Component'
 import 'components/heading'
 import 'components/charts/histogram'
 import 'components/charts/donut'
@@ -28,7 +27,6 @@ class Person extends Report {
         xValue: 'x',
         yValue: 'y',
         getTooltipBuilder: options => d => {
-          const format = d3.format('')
           return `
           ${options.xLabel}: ${options.xFormat(d[options.xValue])}<br/>
           ${options.yLabel}: ${d3.format(',')(d[options.yValue])}

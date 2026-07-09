@@ -2,7 +2,6 @@ import ko from 'knockout'
 import view from './dashboard.html?raw'
 import * as d3 from 'd3'
 import atlascharts from 'atlascharts'
-import d3tip from 'd3-tip'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
 import Report from 'components/reports/classes/Report'
@@ -40,6 +39,7 @@ class Dashboard extends Report {
             return d3.format('d')(d)
           }
         },
+        // eslint-disable-next-line new-cap -- atlascharts library exposes a lowercase constructor
         interpolate: (new atlascharts.line()).interpolation.curveStepBefore,
         xLabel: 'x label',
         yLabel: ko.i18n('dataSources.dashboardReport.percentOfPopulation', 'Percent of Population')

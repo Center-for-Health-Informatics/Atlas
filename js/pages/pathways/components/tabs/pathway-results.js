@@ -2,8 +2,6 @@ import ko from 'knockout'
 import PathwayService from '../../PathwayService'
 import SourceService from 'services/Source'
 import view from './pathway-results.html?raw'
-import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
@@ -59,7 +57,7 @@ class PathwayResults extends AutoBind(Component) {
     };
 
     const splitNodes = [...Number.parseInt(node.data.name).toString(2)].reverse().reduce((result, bit, i) => {
-      if (bit == '1') {
+      if (bit === '1') {
         const nodeClone = Object.assign({}, node)
         nodeClone.data = { name: (1 << i).toString() }
         result.push(nodeClone)
@@ -99,7 +97,7 @@ class PathwayResults extends AutoBind(Component) {
     const eventCohorts = this.pathwaysObserver().eventCohorts
     const colors = this.pathwaysObserver().colors
     const ancestors = this.getAncestors(node)
-    const pathway = ancestors.map(p => (p.data.name == 'end')
+    const pathway = ancestors.map(p => (p.data.name === 'end')
       ? { names: [{ name: 'end', color: colors('end') }], count: p.value }
       : {
           names: eventCohorts.filter(c => (c.code & Number.parseInt(p.data.name)) > 0)
@@ -110,7 +108,7 @@ class PathwayResults extends AutoBind(Component) {
   }
 
   tooltipBuilder (d) {
-    const nameBuilder = (name, color) => `<span class="${this.classes('tip-name')}" style="background-color:${color}; color: ${name == 'end' ? 'black' : 'white'}">${name}</span>`
+    const nameBuilder = (name, color) => `<span class="${this.classes('tip-name')}" style="background-color:${color}; color: ${name === 'end' ? 'black' : 'white'}">${name}</span>`
     const stepBuilder = (step) => `<div class="${this.classes('tip-step')}">${step.names.map(n => nameBuilder(n.name, n.color)).join('')}</div>`
 
     const path = this.getPathToNode(d)
@@ -228,14 +226,14 @@ class PathwayResults extends AutoBind(Component) {
   prepareResultData (results, filters = []) {
     const selectedCohortIds = filterUtils.getSelectedFilterValues(filters).cohorts
 
-    if (!results || selectedCohortIds == undefined || selectedCohortIds.length == 0) return null
+    if (!results || selectedCohortIds === undefined || selectedCohortIds.length === 0) return null
 
     const cohortPathways = selectedCohortIds.map(id => {
       let result = null
-      const pathwayGroup = results.data.pathwayGroups.find(g => id == g.targetCohortId)
+      const pathwayGroup = results.data.pathwayGroups.find(g => id === g.targetCohortId)
       if (pathwayGroup) {
         const pathway = this.buildHierarchy(pathwayGroup.pathways)
-        const targetCohort = results.design.targetCohorts.find(c => id == c.id)
+        const targetCohort = results.design.targetCohorts.find(c => id === c.id)
         const summary = { ...this.summarizeHierarchy(pathway), cohortPersons: pathwayGroup.targetCohortCount, pathwayPersons: pathwayGroup.totalPathwaysCount }
         result = {
           pathway,

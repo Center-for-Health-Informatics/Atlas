@@ -32,8 +32,8 @@ function ConceptPickerViewModel (params) {
   self.dtApi = ko.observable()
 
   VocabularyProvider.getDomains().then(function (domains) {
-    if (self.SelectedDomain != null) {
-      const domainList = domains.filter(d => d != self.SelectedDomain)
+    if (self.SelectedDomain !== null) {
+      const domainList = domains.filter(d => d !== self.SelectedDomain)
       self.DomainOptions([self.SelectedDomain].concat(domainList)) // moving selected domain to top
     } else {
       self.DomainOptions(domains)
@@ -53,7 +53,8 @@ ConceptPickerViewModel.prototype.open = function () {
 }
 
 ConceptPickerViewModel.prototype.add = function (vm) {
-  if (vm.addHandler && vm.dtApi()) { var concepts = vm.dtApi().getSelectedData() }
+  let concepts
+  if (vm.addHandler && vm.dtApi()) { concepts = vm.dtApi().getSelectedData() }
   // first map to a concept
   const mappedConcepts = concepts.map(function (d) {
     return _mapConceptRowToConcept(d)
@@ -79,7 +80,7 @@ ConceptPickerViewModel.prototype.search = function () {
 }
 
 ConceptPickerViewModel.prototype.searchKeyUp = function (d, e) {
-  if (e.keyCode == 13) {
+  if (e.keyCode === 13) {
     this.search()
   }
 }
@@ -87,7 +88,7 @@ ConceptPickerViewModel.prototype.searchKeyUp = function (d, e) {
 ConceptPickerViewModel.prototype.doImport = function () {
   const self = this
   const notFound = []
-  if (this.importValues().trim().length == 0) {
+  if (this.importValues().trim().length === 0) {
     self.isImportEnabled(false)
     self.importValues('')
     return // Nothing to do, import values is blank.
@@ -107,7 +108,7 @@ ConceptPickerViewModel.prototype.doImport = function () {
       p = p.then(function () {
         return VocabularyProvider.getConcept(cId)
       }).then(function (data) {
-        if (data != '') { results.push(_mapConceptRowToConcept(data)) } else { notFound.push(cId) }
+        if (data !== '') { results.push(_mapConceptRowToConcept(data)) } else { notFound.push(cId) }
       })
     })
 

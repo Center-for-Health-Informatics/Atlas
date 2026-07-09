@@ -27,7 +27,7 @@ function TextFilterViewModel (params) {
 
   self.opName = ko.pureComputed(function () {
     return self.operationOptions.filter(function (item) {
-      return item.id == ko.utils.unwrapObservable(ko.utils.unwrapObservable(self.Filter).Op)
+      return item.id === ko.utils.unwrapObservable(ko.utils.unwrapObservable(self.Filter).Op)
     })[0].name
   })
 };

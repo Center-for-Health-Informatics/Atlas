@@ -3,7 +3,6 @@ import ko from 'knockout'
 import * as d3 from 'd3'
 import d3tip from 'd3-tip'
 import _ from 'lodash'
-import d3Selection from 'd3-selection'
 import momentApi from 'services/MomentAPI'
 import authApi from 'services/AuthAPI'
 import config from 'appConfig'
@@ -42,10 +41,8 @@ const htmlTipText = d => {
   return tipText
 }
 const pointClass = d => d.domain
-const radius = d => 2
 
 let highlightFunc = () => {}
-const zoomDimension = null
 let xfObservable = null
 
 const focusTip = d3tip()
@@ -73,7 +70,7 @@ ko.bindingHandlers.profileChart = {
 
     if (width < 100) { return }
 
-    const svg = categoryScatterPlot(element,
+    categoryScatterPlot(element,
       va.xfObservable,
       ko.utils.unwrapObservable(va.verticalLines || []),
       ko.utils.unwrapObservable(va.shadedRegions || []),
@@ -112,8 +109,8 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
       xfd[0].filter(null)
     } else {
       xfd[0].filterFunction(function (d) {
-        return xScale.invert(s[0]) <= d.startDay && d.startDay <= xScale.invert(s[1]) ||
-        xScale.invert(s[0]) <= d.endDay && d.endDay <= xScale.invert(s[1])
+        return (xScale.invert(s[0]) <= d.startDay && d.startDay <= xScale.invert(s[1])) ||
+        (xScale.invert(s[0]) <= d.endDay && d.endDay <= xScale.invert(s[1]))
       }) // start day
     }
     xfObservable.valueHasMutated()
@@ -122,7 +119,7 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
   let points = xfo().allFiltered()
 
   // prevent filtering to no data and error in chart
-  if (points.length == 0) {
+  if (points.length === 0) {
     xfd[0].filter(null)
     points = xfo().allFiltered()
   }
@@ -188,7 +185,7 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
       return ls + 'em'
     })
 
-  const regions = profilePlot.selectAll('rect.shaded-region')
+  profilePlot.selectAll('rect.shaded-region')
     .data(shadedRegions)
     .enter()
     .append('rect')
@@ -247,7 +244,7 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
 
   if (points.length <= 50) {
     // labeler usage from https://github.com/tinker10/D3-Labeler demo
-    const label_array = points.map((d, i) => {
+    const labelArray = points.map((d, i) => {
       d.x = xScale(d.startDay) + jitter(i).x
       d.y = yScale(d.domain) + jitter(i).y
       d.r = 8
@@ -261,7 +258,7 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
       }
     })
     const labels = profilePlot.selectAll('.labels')
-      .data(label_array)
+      .data(labelArray)
       .enter()
       .append('text')
       .attr('class', 'label')
@@ -272,12 +269,12 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
       .attr('fill', 'black')
     let index = 0
     labels.each(function () {
-      label_array[index].width = this.getBBox().width
-      label_array[index].height = this.getBBox().height
+      labelArray[index].width = this.getBBox().width
+      labelArray[index].height = this.getBBox().height
       index += 1
     })
     const links = profilePlot.selectAll('.link')
-      .data(label_array)
+      .data(labelArray)
       .enter()
       .append('line')
       .attr('class', 'link')
@@ -285,8 +282,8 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
       .attr('y1', d => d.y)
       .attr('x2', d => d.x)
       .attr('y2', d => d.y)
-    const sim_ann = labeler()
-      .label(label_array)
+    labeler()
+      .label(labelArray)
       .anchor(points)
       .width(width)
       .height(vizHeight)
@@ -341,16 +338,4 @@ function jitter (i, maxX = 6, maxY = 12) {
     x: jitterOffsets[i][0] * maxX,
     y: jitterYScale(jitterOffsets[i][1])
   }
-}
-
-function makeFilter (ext) {
-  const filter = function ([start, end] = []) {
-    return (
-      (start >= ext[0] && start <= ext[1]) ||
-    (end >= ext[0] && end <= ext[1]) ||
-    (start <= ext[0] && end >= ext[1])
-    )
-  }
-  filter.ext = () => ext
-  return filter
 }

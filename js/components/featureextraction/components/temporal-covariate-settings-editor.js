@@ -1,8 +1,6 @@
-import ko from 'knockout'
 import view from './temporal-covariate-settings-editor.html?raw'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
-import config from 'appConfig'
 import TemporalCovariateSettings from '../InputTypes/TemporalCovariateSettings'
 import './featureextraction.less'
 

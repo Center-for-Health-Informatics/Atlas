@@ -1,10 +1,8 @@
 import $ from 'jquery'
 import ko from 'knockout'
 import view from './explore-cohort.html?raw'
-import * as d3 from 'd3'
 import sharedState from 'atlas-state'
 import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import _ from 'lodash'
 import crossfilter from 'crossfilter'
 import 'd3-tip'
@@ -38,6 +36,7 @@ function exploreCohort (params) {
       method: 'GET',
       contentType: 'application/json',
       error: function (err) {
+        console.error(err)
         self.loading(false)
       },
       success: function (breakdown) {
@@ -141,7 +140,7 @@ function exploreCohort (params) {
       }
     }
   }
-  var dimConfig = {
+  const dimConfig = {
     gender: {
       caption: 'Gender',
       func: d => d.gender,
@@ -196,27 +195,3 @@ const component = {
 }
 ko.components.register('explore-cohort', component)
 export default component
-
-function standardDeviation (values) {
-  const avg = average(values)
-
-  const squareDiffs = values.map(function (value) {
-    const diff = value - avg
-    const sqrDiff = diff * diff
-    return sqrDiff
-  })
-
-  const avgSquareDiff = average(squareDiffs)
-
-  const stdDev = Math.sqrt(avgSquareDiff)
-  return stdDev
-}
-
-function average (data) {
-  const sum = data.reduce(function (sum, value) {
-    return sum + value
-  }, 0)
-
-  const avg = sum / data.length
-  return avg
-}

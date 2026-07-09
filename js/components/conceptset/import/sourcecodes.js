@@ -3,7 +3,6 @@ import view from './sourcecodes.html?raw'
 import Component from 'components/Component'
 import ImportComponent from './ImportComponent'
 import AutoBind from 'utils/AutoBind'
-import Clipboard from 'utils/Clipboard'
 import commonUtils from 'utils/CommonUtils'
 import vocabularyApi from 'services/VocabularyProvider'
 import './sourcecodes.less'
@@ -117,7 +116,7 @@ class SourceCodesImport extends AutoBind(ImportComponent(Component)) {
   async loadConcepts () {
     this.isSearching(true)
     try {
-      const codes = this.sourcecodes().match(/[0-9a-zA-Z\.-]+/g)
+      const codes = this.sourcecodes().match(/[0-9a-zA-Z.-]+/g)
       const { data } = await vocabularyApi.getConceptsByCode(codes)
       await vocabularyApi.loadDensity(data)
       data.forEach(c => { c.isSelected = ko.observable(false) })

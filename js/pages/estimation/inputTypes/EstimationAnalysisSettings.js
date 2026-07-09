@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import ComparativeCohortAnalysis from './ComparativeCohortAnalysis/ComparativeCohortAnalysis'
 
 class EstimationAnalysisSettings {

@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import momentApi from 'services/MomentAPI'
 
 function Concept (data) {

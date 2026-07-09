@@ -4,14 +4,6 @@ import config from 'appConfig'
 import authApi from 'services/AuthAPI'
 import httpService from 'services/http'
 
-function pruneJSON (key, value) {
-  if (value === 0 || value) {
-    return value
-  } else {
-
-  }
-}
-
 function getCohortDefinitionList () {
   const promise = $.ajax({
     url: config.webAPIRoot + 'cohortdefinition/',

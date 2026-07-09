@@ -3,10 +3,6 @@ import BaseStatConverter from './BaseStatConverter'
 import DistributionStat from './DistributionStat'
 
 class BaseDistributionStatConverter extends BaseStatConverter {
-  constructor (classes) {
-    super(classes)
-  }
-
   convertAnalysisToTabularData (analysis, stratas = null) {
     const result = super.convertAnalysisToTabularData(analysis, stratas)
     stratas && stratas.filter(s => result.data.findIndex(row => row.strataId === s.strataId) < 0)

@@ -30,7 +30,7 @@ class FileService {
           const blob = new Blob([xhr.response], { type: 'octet/stream' })
           saveAs(blob, filename)
         } else {
-          reject({ status: xhr.status, statusText: xhr.statusText })
+          reject(new Error(`${xhr.status}: ${xhr.statusText}`))
         }
       }, reject)
     })
@@ -43,15 +43,12 @@ class FileService {
           const filename = xhr.getResponseHeader('Content-Disposition')
             .split('filename=')[1]
             .split(';')[0]
-            .replace(/\"/g, '') // Clean up filename string
+            .replace(/"/g, '') // Clean up filename string
           const blob = new Blob([xhr.response], { type: 'octet/stream' })
           saveAs(blob, filename)
           resolve()
         } else {
-          reject({
-            status: xhr.status,
-            statusText: xhr.statusText
-          })
+          reject(new Error(`${xhr.status}: ${xhr.statusText}`))
         }
       }, reject)
     })

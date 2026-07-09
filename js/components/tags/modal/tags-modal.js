@@ -4,7 +4,6 @@ import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import AutoBind from 'utils/AutoBind'
 import datatableUtils from 'utils/DatatableUtils'
-import authApi from 'services/AuthAPI'
 import './tags-modal.less'
 import 'databindings'
 

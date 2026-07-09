@@ -1,6 +1,4 @@
 import ko from 'knockout'
-import cache from 'lscache'
-import jobDetail from 'services/job/jobDetail'
 import ohdsiUtil from 'assets/ohdsi.util'
 import constants from 'const-state'
 
@@ -59,6 +57,7 @@ state.IRAnalysis = {
   selectedSourceId: ko.observable(null),
   previewVersion: ko.observable(null),
 }
+// eslint-disable-next-line new-cap
 state.IRAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.IRAnalysis.current()))
 
 // Cohort characterizations
@@ -67,6 +66,7 @@ state.CohortCharacterization = {
   selectedId: ko.observable(null),
   previewVersion: ko.observable(null),
 }
+// eslint-disable-next-line new-cap
 state.CohortCharacterization.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.CohortCharacterization.current()))
 
 state.FeatureAnalysis = {
@@ -75,9 +75,11 @@ state.FeatureAnalysis = {
 }
 state.FeatureAnalysis.current.subscribe(newValue => {
   if (newValue != null) {
+    // eslint-disable-next-line new-cap
     state.FeatureAnalysis.dirtyFlag(new ohdsiUtil.dirtyFlag(state.FeatureAnalysis.current()))
   }
 })
+// eslint-disable-next-line new-cap
 state.FeatureAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.FeatureAnalysis.current()))
 
 // Pathways State
@@ -86,6 +88,7 @@ state.CohortPathways = {
   selectedId: ko.observable(null),
   previewVersion: ko.observable(null)
 }
+// eslint-disable-next-line new-cap
 state.CohortPathways.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.CohortPathways.current()))
 
 state.estimationAnalysis = {
@@ -94,6 +97,7 @@ state.estimationAnalysis = {
   selectedId: ko.observable(null),
   comparisons: ko.observableArray(),
 }
+// eslint-disable-next-line new-cap
 state.estimationAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.estimationAnalysis.current()))
 
 state.predictionAnalysis = {
@@ -103,6 +107,7 @@ state.predictionAnalysis = {
   targetCohorts: ko.observableArray(),
   outcomeCohorts: ko.observableArray(),
 }
+// eslint-disable-next-line new-cap
 state.predictionAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.predictionAnalysis.current()))
 
 state.availableLocales = ko.observableArray()
@@ -112,6 +117,7 @@ state.ConfigurationSource = {
   current: ko.observable(null),
   selectedId: ko.observable(null),
 }
+// eslint-disable-next-line new-cap
 state.ConfigurationSource.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.ConfigurationSource.current()))
 
 state.criteriaContext = ko.observable()
@@ -140,9 +146,11 @@ state.CohortDefinition = {
   lastUpdatedId: ko.observable(),
   previewVersion: ko.observable()
 }
+// eslint-disable-next-line new-cap
 state.CohortDefinition.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag({ header: state.CohortDefinition.current }))
 state.CohortDefinition.current.subscribe(newValue => {
   if (newValue != null) {
+    // eslint-disable-next-line new-cap
     state.CohortDefinition.dirtyFlag(new ohdsiUtil.dirtyFlag({ header: newValue }))
   }
 })
@@ -154,9 +162,11 @@ state.RepositoryConceptSet = {
   negativeControls: ko.observable(),
 }
 
+// eslint-disable-next-line new-cap
 state.RepositoryConceptSet.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.RepositoryConceptSet.current()))
 state.RepositoryConceptSet.current.subscribe(newValue => {
   if (newValue != null) {
+    // eslint-disable-next-line new-cap
     state.RepositoryConceptSet.dirtyFlag(new ohdsiUtil.dirtyFlag(newValue))
   }
 })
@@ -168,6 +178,7 @@ state.Reusable = {
   selectedId: ko.observable(null),
   previewVersion: ko.observable(null)
 }
+// eslint-disable-next-line new-cap
 state.Reusable.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.Reusable.current()))
 
 export default state

@@ -1,7 +1,4 @@
 import { AuthorizedRoute } from 'pages/Route'
-import globalConstants from 'const'
-import sharedState from 'atlas-state'
-import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 
 function routes (router) {
   const detailsRoute = new AuthorizedRoute((conceptSetId, mode = 'conceptset-expression') => {

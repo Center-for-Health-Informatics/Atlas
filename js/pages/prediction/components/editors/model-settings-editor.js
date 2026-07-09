@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import view from './model-settings-editor.html?raw'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'

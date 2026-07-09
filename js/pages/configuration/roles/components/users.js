@@ -1,14 +1,9 @@
 import ko from 'knockout'
-import sharedState from 'atlas-state'
 import view from './users.html?raw'
 import AutoBind from 'utils/AutoBind'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
-import ohdsiUtils from 'assets/ohdsi.util'
-import userService from 'services/User'
-import roleService from 'services/role'
 import authApi from 'services/AuthAPI'
-import constants from '../../const'
 import 'databindings'
 
 class UserView extends AutoBind(Component) {

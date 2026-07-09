@@ -1,6 +1,5 @@
 import ko from 'knockout'
 import view from './user-bar.html?raw'
-import AutoBind from 'utils/AutoBind'
 import appConfig from 'appConfig'
 import state from 'atlas-state'
 import Component from 'components/Component'
@@ -213,12 +212,12 @@ class UserBar extends Component {
 
   selectTab (tab) {
     switch (tab) {
-      default:
-      case 0:
-        this.selectedTabKey(constants.jobTypes.USER_JOB.title)
-        break
       case 1:
         this.selectedTabKey(constants.jobTypes.ALL_JOB.title)
+        break
+      case 0:
+      default:
+        this.selectedTabKey(constants.jobTypes.USER_JOB.title)
         break
     }
   }

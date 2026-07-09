@@ -15,14 +15,14 @@ function PayerPlanPeriod (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (ko.utils.unwrapObservable(self.PayerConcept()) == change.value.id) { self.PayerConcept()(null) }
-        if (ko.utils.unwrapObservable(self.PlanConcept()) == change.value.id) { self.PlanConcept()(null) }
-        if (ko.utils.unwrapObservable(self.SponsorConcept()) == change.value.id) { self.SponsorConcept()(null) }
-        if (ko.utils.unwrapObservable(self.StopReasonConcept()) == change.value.id) { self.StopReasonConcept()(null) }
-        if (ko.utils.unwrapObservable(self.PayerSourceConcept()) == change.value.id) { self.PayerSourceConcept()(null) }
-        if (ko.utils.unwrapObservable(self.PlanSourceConcept()) == change.value.id) { self.PlanSourceConcept()(null) }
-        if (ko.utils.unwrapObservable(self.SponsorSourceConcept()) == change.value.id) { self.SponsorSourceConcept()(null) }
-        if (ko.utils.unwrapObservable(self.StopReasonSourceConcept()) == change.value.id) { self.StopReasonSourceConcept()(null) }
+        if (ko.utils.unwrapObservable(self.PayerConcept()) === change.value.id) { self.PayerConcept()(null) }
+        if (ko.utils.unwrapObservable(self.PlanConcept()) === change.value.id) { self.PlanConcept()(null) }
+        if (ko.utils.unwrapObservable(self.SponsorConcept()) === change.value.id) { self.SponsorConcept()(null) }
+        if (ko.utils.unwrapObservable(self.StopReasonConcept()) === change.value.id) { self.StopReasonConcept()(null) }
+        if (ko.utils.unwrapObservable(self.PayerSourceConcept()) === change.value.id) { self.PayerSourceConcept()(null) }
+        if (ko.utils.unwrapObservable(self.PlanSourceConcept()) === change.value.id) { self.PlanSourceConcept()(null) }
+        if (ko.utils.unwrapObservable(self.SponsorSourceConcept()) === change.value.id) { self.SponsorSourceConcept()(null) }
+        if (ko.utils.unwrapObservable(self.StopReasonSourceConcept()) === change.value.id) { self.StopReasonSourceConcept()(null) }
       }
     })
   }, null, 'arrayChange')

@@ -136,8 +136,8 @@ function facetedDatatable (params) {
       }
       self.setDataLocalStorage(data, 'filter-data')
     }
-    const isAddConcept = currentPath?.split('?').reduce((prev, curr) => prev || curr.includes('search'), false) &&
-currentPath?.split('?').reduce((prev, curr) => prev || curr.includes('query'), false) ||
+    const isAddConcept = (currentPath?.split('?').reduce((prev, curr) => prev || curr.includes('search'), false) &&
+currentPath?.split('?').reduce((prev, curr) => prev || curr.includes('query'), false)) ||
 currentPath?.includes('/concept/')
 
     if (isAddConcept) {
@@ -147,7 +147,7 @@ currentPath?.includes('/concept/')
     const facet = data.facet
     data.selected(!data.selected())
     if (data.selected()) {
-      if (!facet.selectedItems.hasOwnProperty(data.key)) {
+      if (!Object.prototype.hasOwnProperty.call(facet.selectedItems, data.key)) {
         facet.selectedItems[data.key] = data
       }
     } else {
@@ -190,6 +190,7 @@ currentPath?.includes('/concept/')
     self.reference.subscribe(function (newValue) {
       if (self.reference() != null) {
         self.componentLoading(true)
+        // eslint-disable-next-line new-cap -- crossfilter's public API is a lowercase factory function
         self.data(new crossfilter(newValue))
         self.facets.removeAll()
         if (self.oOptions && self.oOptions.Facets) {
@@ -204,7 +205,7 @@ currentPath?.includes('/concept/')
               binding: facetConfig.binding,
               dimension,
               facetItems: [],
-              selectedItems: new Object(),
+              selectedItems: {},
             }
             // Add a selected observable to each dimension
             $.each(dimension.group().top(Number.POSITIVE_INFINITY), function (i, facetItem) {
@@ -220,7 +221,7 @@ currentPath?.includes('/concept/')
             if (facetConfig.defaultFacets && facetConfig.defaultFacets.length > 0) {
               $.each(facetConfig.defaultFacets, function (d, defaultFacet) {
                 const facetItem = $.grep(self.facets()[i].facetItems, function (f) {
-                  return f.key == defaultFacet
+                  return f.key === defaultFacet
                 })
                 if (facetItem.length > 0) {
                   self.updateFilters(facetItem[0], null)
@@ -236,7 +237,7 @@ currentPath?.includes('/concept/')
 
   subscriptions.push(
     self.outsideFilters.subscribe(function (newValue) {
-      if (self.outsideFilters() != undefined) {
+      if (self.outsideFilters() !== undefined) {
         self.updateOutsideFilters(newValue)
       }
     })

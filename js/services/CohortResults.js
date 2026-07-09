@@ -1,5 +1,4 @@
 import $ from 'jquery'
-import ko from 'knockout'
 import appConfig from 'appConfig'
 
 function loadData ({ path, filters }) {
@@ -10,7 +9,7 @@ function loadData ({ path, filters }) {
       data: filters,
       contentType: 'application/json',
       success: (res) => resolve(res),
-      error: (jqXHR, textStatus, errorThrown) => reject({ jqXHR, textStatus, errorThrown })
+      error: (jqXHR, textStatus, errorThrown) => reject(Object.assign(new Error(textStatus), { jqXHR, textStatus, errorThrown }))
     })
   })
 }

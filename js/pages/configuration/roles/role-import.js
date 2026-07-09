@@ -107,8 +107,11 @@ class RolesImport extends AutoBind(Component) {
     this.isProcessing(true)
     this.processed(0)
 
-    for await (const role of this.createRoles()) {
+    const rolesIterator = this.createRoles()
+    let next = await rolesIterator.next()
+    while (!next.done) {
       this.processed(this.processed() + 1)
+      next = await rolesIterator.next()
     }
 
     this.updateExisting()

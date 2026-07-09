@@ -4,8 +4,6 @@ import * as PermissionService from 'pages/characterizations/services/PermissionS
 import GlobalPermissionService from 'services/Permission'
 import TagsService from 'services/Tags'
 import { entityType } from 'components/security/access/const'
-import CriteriaGroup from 'components/cohortbuilder/CriteriaGroup'
-import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 import CharacterizationAnalysis from './CharacterizationAnalysis'
 import view from './characterization-view-edit.html?raw'
@@ -253,6 +251,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
 
   setupDesign (design) {
     this.design(design)
+    // eslint-disable-next-line new-cap -- ohdsi.util exposes a lowercase constructor
     this.designDirtyFlag(new ohdsiUtil.dirtyFlag(this.design()))
   }
 
@@ -312,6 +311,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
       } else {
         if (ccId < 1) {
           const newCharacterization = await CharacterizationService.createCharacterization(this.design())
+          // eslint-disable-next-line new-cap -- ohdsi.util exposes a lowercase constructor
           this.designDirtyFlag(new ohdsiUtil.dirtyFlag(this.design))
           commonUtils.routeTo(`/cc/characterizations/${newCharacterization.id}/${this.selectedTabKey()}`)
         } else {
@@ -348,6 +348,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
         .deleteCharacterization(this.componentParams().characterizationId())
         .then(res => {
           this.loading(false)
+          // eslint-disable-next-line new-cap -- ohdsi.util exposes a lowercase constructor
           this.designDirtyFlag(new ohdsiUtil.dirtyFlag(this.design))
           this.closeCharacterization()
         })
@@ -409,7 +410,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
   }
 
   loadConceptSet (conceptSetId) {
-    this.conceptSetStore.current(this.conceptSets()().find(item => item.id == conceptSetId))
+    this.conceptSetStore.current(this.conceptSets()().find(item => item.id === conceptSetId))
     this.conceptSetStore.isEditable(this.isEditPermitted())
     commonUtils.routeTo(`/cc/characterizations/${this.design().id}/conceptsets`)
   }

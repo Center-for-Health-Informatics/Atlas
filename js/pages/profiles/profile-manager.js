@@ -3,7 +3,6 @@ import ko from 'knockout'
 import globalConstants from 'const'
 import pluginRegistry from 'services/PluginRegistry'
 import view from './profile-manager.html?raw'
-import * as d3 from 'd3'
 import config from 'appConfig'
 import authApi from 'services/AuthAPI'
 import profileService from 'services/Profile'
@@ -18,8 +17,6 @@ import router from 'pages/Router'
 import moment from 'moment'
 import constants from './const'
 import _ from 'lodash'
-import crossfilter from 'crossfilter'
-import util from 'assets/ohdsi.util'
 import 'd3-tip'
 import 'databindings'
 import 'faceted-datatable'
@@ -113,7 +110,6 @@ class ProfileManager extends AutoBind(Page) {
       return this.sourceKey() || ko.i18n('profiles.selectADataSource', 'Select a Data Source')()
     })
     this.personRequests = {}
-    this.personRequest
     this.xfObservable = ko.observable()
     this.xfDimensions = []
     this.crossfilter = ko.observable()
@@ -179,6 +175,7 @@ class ProfileManager extends AutoBind(Page) {
           return (_.chain(this.conceptSets())
             .map(function (ids, conceptSetName) {
               if (_.includes(ids, d.conceptId)) { return conceptSetName + ' (Concept Set)' }
+              return undefined
             })
             .compact()
             .value()
@@ -195,7 +192,7 @@ class ProfileManager extends AutoBind(Page) {
       if (!this.xfObservable()) {
         return
       }
-      if (this.xfDimensions.length == 0) {
+      if (this.xfDimensions.length === 0) {
         this.xfDimensions.push(this.xfObservable().dimension(function (d) {
           return d
         }))
@@ -210,7 +207,7 @@ class ProfileManager extends AutoBind(Page) {
         .filter(d => {
           let filtered = true
           if (this.filterHighlightsText() && this.filterHighlightsText().length > 0) {
-            if (d.key.toLowerCase().indexOf(this.filterHighlightsText().toLowerCase()) == -1) {
+            if (d.key.toLowerCase().indexOf(this.filterHighlightsText().toLowerCase()) === -1) {
               filtered = false
             }
           }
@@ -332,7 +329,7 @@ class ProfileManager extends AutoBind(Page) {
         const cohortDefinitionId = this.cohortDefinitionId()
         if (cohortDefinitionId) {
           cohort = _.find(person.cohorts, function (o) {
-            return o.cohortDefinitionId == cohortDefinitionId
+            return o.cohortDefinitionId === cohortDefinitionId
           })
         }
         // In the event that we could not find the matching cohort in the person object or the cohort definition id is not specified default it

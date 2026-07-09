@@ -1,10 +1,8 @@
 import ko from 'knockout'
 import view from './select-sources-popup.html?raw'
-import config from 'appConfig'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
-import datatableUtils from 'utils/DatatableUtils'
 import renderers from 'utils/Renderers'
 import './select-sources-popup.less'
 

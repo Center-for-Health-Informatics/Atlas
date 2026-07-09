@@ -1,6 +1,4 @@
-import ko from 'knockout'
 import view from './treemap.html?raw'
-import Component from 'components/Component'
 import TreemapReport from 'components/reports/classes/Treemap'
 import constants from 'components/reports/const'
 import commonUtils from 'utils/CommonUtils'

@@ -31,7 +31,7 @@ function DateRangeViewModel (params) {
   self.rangeOpName = ko.pureComputed(function () {
     if (ko.utils.unwrapObservable(self.Range)) {
       return self.operationOptions.filter(function (item) {
-        return item.id == ko.utils.unwrapObservable(ko.utils.unwrapObservable(self.Range).Op)
+        return item.id === ko.utils.unwrapObservable(ko.utils.unwrapObservable(self.Range).Op)
       })[0].name
     }
   })

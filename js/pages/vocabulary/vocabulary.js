@@ -1,7 +1,7 @@
 import ko from 'knockout'
 import view from './vocabulary.html?raw'
 import Page from 'pages/Page'
-import searchTab from './components/search'
+import './components/search'
 import commonUtils from 'utils/CommonUtils'
 import 'components/heading'
 import './vocabulary.less'

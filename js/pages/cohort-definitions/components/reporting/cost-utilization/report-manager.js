@@ -5,7 +5,6 @@ import sharedState from 'atlas-state'
 import * as d3 from 'd3'
 import atlascharts from 'atlascharts'
 import colorbrewer from 'colorbrewer'
-import _ from 'lodash'
 import config from 'appConfig'
 import cohortReportingService from 'services/CohortReporting'
 import costUtilConst from 'pages/cohort-definitions/const'
@@ -27,7 +26,7 @@ class ReportManager extends Component {
     this.refresh = ko.observable(true)
     this.cohortCaption = ko.observable(
       ko.unwrap(ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_71', 'Click Here to Choose a Cohort')))
-    this.showSelectionArea = params.showSelectionArea == undefined ? true : params.showSelectionArea
+    this.showSelectionArea = params.showSelectionArea === undefined ? true : params.showSelectionArea
     this.reference = ko.observableArray()
     this.dataCompleteReference = ko.observableArray()
     this.dom = '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>'
@@ -62,9 +61,9 @@ class ReportManager extends Component {
     this.reportCohortDefinitionId = params.reportCohortDefinitionId
     this.reportValid = ko.computed(() => {
       return (
-        this.reportReportName() != undefined &&
-      this.reportSourceKey() != undefined &&
-      this.reportCohortDefinitionId() != undefined &&
+        this.reportReportName() !== undefined &&
+      this.reportSourceKey() !== undefined &&
+      this.reportCohortDefinitionId() !== undefined &&
       !this.loadingReport() &&
       !this.loadingReportDrilldown()
       )
@@ -217,15 +216,13 @@ class ReportManager extends Component {
       data: row => row.ethP < 0 ? '-' : row.ethP
     }]
 
-    this.careSiteDatatable
-
     this.currentAgeGroup = ko.observable()
 
     this.reportCohortDefinitionId.subscribe((d) => {
       if (this.showSelectionArea) {
         this.cohortCaption(sharedState.cohortDefinitions()
           .filter(function (value) {
-            return value.id == d
+            return value.id === d
           })[0].name)
         $('#cohortDefinitionChooser')
           .modal('hide')
@@ -240,11 +237,11 @@ class ReportManager extends Component {
     this.boxplotWidth = 200
     this.boxplotHeight = 125
     this.genderIcon = function (d) {
-      if (d.genderConceptId == 8507) {
+      if (d.genderConceptId === 8507) {
         return 'fa-male'
       }
 
-      if (d.genderConceptId == 8532) {
+      if (d.genderConceptId === 8532) {
         return 'fa-female'
       }
     }
@@ -261,7 +258,7 @@ class ReportManager extends Component {
         return b.ageGroup - a.ageGroup
       })
       data.forEach(d => {
-        if (d.genderConceptId == 8532) {
+        if (d.genderConceptId === 8532) {
           d.personCount = d.personCount * -1
         }
       })
@@ -295,7 +292,7 @@ class ReportManager extends Component {
         .tickValues([5, 15, 25, 35, 45, 55, 65, 75, 85, 95, 105])
         .tickFormat(d => {
           d = d - 5
-          if (d == 100) { return '100+' }
+          if (d === 100) { return '100+' }
 
           return d + '-' + (d + 9)
         })
@@ -337,7 +334,7 @@ class ReportManager extends Component {
         .attr('height', height / 11)
         .on('click', d => {
           const filteredProfiles = profiles.filter(s => {
-            return s.genderConceptId == d.genderConceptId && s.ageGroup == d.ageGroup
+            return s.genderConceptId === d.genderConceptId && s.ageGroup === d.ageGroup
           })
           profilesSelected(filteredProfiles)
         })
@@ -405,8 +402,8 @@ class ReportManager extends Component {
 
       const width = 1000
       const height = 250
-      const minimum_area = 50
-      const threshold = minimum_area / (width * height)
+      const minimumArea = 50
+      const threshold = minimumArea / (width * height)
 
       switch (this.reportReportName()) {
         case 'Template':
@@ -492,6 +489,7 @@ class ReportManager extends Component {
                 })
 
                 // create svg with range bands based on the trellis names
+                // eslint-disable-next-line new-cap
                 const chart = new atlascharts.trellisline()
                 chart.render(dataByDecile, '#death_trellisLinePlot', 1000, 300, {
                   trellisSet: allDeciles,
@@ -516,6 +514,7 @@ class ReportManager extends Component {
                   yPercent: 'yPrevalence1000Pp'
                 })
 
+                // eslint-disable-next-line new-cap
                 const prevalenceByMonth = new atlascharts.line()
                 prevalenceByMonth.render(byMonthSeries, '#deathPrevalenceByMonth', 1000, 300, {
                   xScale: d3.scaleTime()
@@ -531,6 +530,7 @@ class ReportManager extends Component {
 
               // death type
               if (data.deathByType && data.deathByType.length > 0) {
+                // eslint-disable-next-line new-cap
                 const genderDonut = new atlascharts.donut()
                 genderDonut.render(this.mapConceptData(data.deathByType), '#deathByType', size6.width, size6.height, {
                   margin: {
@@ -545,6 +545,7 @@ class ReportManager extends Component {
               // Age At Death
               const bpdata = ChartUtils.normalizeArray(data.agetAtDeath)
               if (!bpdata.empty) {
+                // eslint-disable-next-line new-cap
                 const boxplot = new atlascharts.boxplot()
                 const bpseries = []
 
@@ -601,7 +602,7 @@ class ReportManager extends Component {
 
               const normalizedData = ChartUtils.normalizeArray(data)
               if (!normalizedData.empty) {
-                const table_data = normalizedData.conceptPath.map((d, i) => {
+                const tableData = normalizedData.conceptPath.map((d, i) => {
                   const conceptDetails = normalizedData.conceptPath[i].split('||')
                   return {
                     concept_id: normalizedData.conceptId[i],
@@ -615,7 +616,7 @@ class ReportManager extends Component {
                   }
                 })
 
-                const datatable = $('#procedure_table')
+                $('#procedure_table')
                   .DataTable({
                     language: {
                       searchPlaceholder: 'Search...',
@@ -625,13 +626,13 @@ class ReportManager extends Component {
                     buttons: this.buttons,
                     ...this.tableOptions,
                     autoWidth: false,
-                    data: table_data,
+                    data: tableData,
                     createdRow: function (row, data, dataIndex) {
                       $(row)
                         .addClass('procedure_table_selector')
                     },
                     columns: [{
-                      data: 'concept_id'
+                      data: 'conceptId'
                     },
                     {
                       data: 'level_3'
@@ -664,6 +665,7 @@ class ReportManager extends Component {
                   })
 
                 const tree = this.buildHierarchyFromJSON(normalizedData, threshold)
+                // eslint-disable-next-line new-cap
                 const treemap = new atlascharts.treemap()
                 treemap.render(tree, '#procedure_treemap_container', width, height, {
                   onclick: (node) => {
@@ -714,7 +716,7 @@ class ReportManager extends Component {
               this.loadingReport(false)
               const normalizedData = atlascharts.chart.normalizeDataframe(ChartUtils.normalizeArray(data, true))
               if (!normalizedData.empty) {
-                const table_data = normalizedData.conceptPath.map((d, i) => {
+                const tableData = normalizedData.conceptPath.map((d, i) => {
                   const conceptDetails = normalizedData.conceptPath[i].split('||')
                   return {
                     concept_id: normalizedData.conceptId[i],
@@ -729,7 +731,7 @@ class ReportManager extends Component {
                   }
                 })
 
-                const datatable = $('#drug_table')
+                $('#drug_table')
                   .DataTable({
                     language: {
                       searchPlaceholder: 'Search...',
@@ -739,13 +741,13 @@ class ReportManager extends Component {
                     buttons: this.buttons,
                     ...this.tableOptions,
                     autoWidth: false,
-                    data: table_data,
+                    data: tableData,
                     createdRow: function (row, data, dataIndex) {
                       $(row)
                         .addClass('drug_table_selector')
                     },
                     columns: [{
-                      data: 'concept_id'
+                      data: 'conceptId'
                     },
                     {
                       data: 'atc1'
@@ -782,6 +784,7 @@ class ReportManager extends Component {
                   })
 
                 const tree = this.buildHierarchyFromJSON(normalizedData, threshold)
+                // eslint-disable-next-line new-cap
                 const treemap = new atlascharts.treemap()
                 treemap.render(tree, '#drug_treemap_container', width, height, {
                   onclick: (node) => {
@@ -832,7 +835,7 @@ class ReportManager extends Component {
 
               const normalizedData = atlascharts.chart.normalizeDataframe(ChartUtils.normalizeArray(data, true))
               if (!normalizedData.empty) {
-                const table_data = normalizedData.conceptPath.map((d, i) => {
+                const tableData = normalizedData.conceptPath.map((d, i) => {
                   const conceptDetails = normalizedData.conceptPath[i].split('||')
                   return {
                     concept_id: normalizedData.conceptId[i],
@@ -846,7 +849,7 @@ class ReportManager extends Component {
                   }
                 })
 
-                const datatable = $('#drugera_table')
+                $('#drugera_table')
                   .DataTable({
                     language: {
                       searchPlaceholder: 'Search...',
@@ -856,13 +859,13 @@ class ReportManager extends Component {
                     buttons: this.buttons,
                     ...this.tableOptions,
                     autoWidth: false,
-                    data: table_data,
+                    data: tableData,
                     createdRow: function (row, data, dataIndex) {
                       $(row)
                         .addClass('drugera_table_selector')
                     },
                     columns: [{
-                      data: 'concept_id'
+                      data: 'conceptId'
                     },
                     {
                       data: 'atc1'
@@ -895,6 +898,7 @@ class ReportManager extends Component {
                   })
 
                 const tree = this.eraBuildHierarchyFromJSON(normalizedData, threshold)
+                // eslint-disable-next-line new-cap
                 const treemap = new atlascharts.treemap()
                 treemap.render(tree, '#drugera_treemap_container', width, height, {
                   onclick: (node) => {
@@ -943,7 +947,7 @@ class ReportManager extends Component {
               this.loadingReport(false)
               const normalizedData = atlascharts.chart.normalizeDataframe(ChartUtils.normalizeArray(data, true))
               if (!normalizedData.empty) {
-                const table_data = normalizedData.conceptPath.map((d, i) => {
+                const tableData = normalizedData.conceptPath.map((d, i) => {
                   const conceptDetails = normalizedData.conceptPath[i].split('||')
                   return {
                     concept_id: normalizedData.conceptId[i],
@@ -958,7 +962,7 @@ class ReportManager extends Component {
                   }
                 })
 
-                const datatable = $('#condition_table')
+                $('#condition_table')
                   .DataTable({
                     language: {
                       searchPlaceholder: 'Search...',
@@ -968,13 +972,13 @@ class ReportManager extends Component {
                     ...this.tableOptions,
                     autoWidth: false,
                     order: [6, 'desc'],
-                    data: table_data,
+                    data: tableData,
                     createdRow: function (row, data, dataIndex) {
                       $(row)
                         .addClass('condition_table_selector')
                     },
                     columns: [{
-                      data: 'concept_id'
+                      data: 'conceptId'
                     },
                     {
                       data: 'soc'
@@ -1012,6 +1016,7 @@ class ReportManager extends Component {
                   })
 
                 const tree = this.buildHierarchyFromJSON(normalizedData, threshold)
+                // eslint-disable-next-line new-cap
                 const treemap = new atlascharts.treemap()
                 treemap.render(tree, '#condition_treemap_container', width, height, {
                   onclick: (node) => {
@@ -1060,6 +1065,7 @@ class ReportManager extends Component {
               // age by gender
               const ageByGenderData = ChartUtils.normalizeArray(data.ageByGender)
               if (!ageByGenderData.empty) {
+                // eslint-disable-next-line new-cap
                 const agegenderboxplot = new atlascharts.boxplot()
                 const agData = ageByGenderData.category
                   .map(function (d, i) {
@@ -1093,6 +1099,7 @@ class ReportManager extends Component {
                 histData.INTERVALS = histData.DATA.INTERVAL_INDEX.length
 
                 const ageAtFirstObservationData = atlascharts.histogram.mapHistogram(histData)
+                // eslint-disable-next-line new-cap
                 const ageAtFirstObservationHistogram = new atlascharts.histogram()
                 ageAtFirstObservationHistogram.render(ageAtFirstObservationData, '#ageatfirstobservation', size12.width, size12.height, {
                   xFormat: d3.format('0.0d'),
@@ -1124,6 +1131,7 @@ class ReportManager extends Component {
                       observationLengthXLabel = 'Years'
                     }
                   }
+                  // eslint-disable-next-line new-cap
                   const observationLengthHistogram = new atlascharts.histogram()
                   observationLengthHistogram.render(observationLengthData, '#observationlength', size12.width, size12.height, {
                     xLabel: observationLengthXLabel,
@@ -1139,6 +1147,7 @@ class ReportManager extends Component {
               .remove();
             let cumObsData = ChartUtils.normalizeArray(data.cumulativeObservation);
             if (!cumObsData.empty) {
+              // eslint-disable-next-line new-cap
               let cumulativeObservationLine = new atlascharts.line();
               let cumulativeData = atlascharts.histogram.normalizeDataframe(cumObsData)
                 .xLengthOfObservation
@@ -1163,6 +1172,7 @@ class ReportManager extends Component {
 
               cumulativeObservationLine.render(cumulativeData, "#cumulativeobservation", 230, 115, {
                 yFormat: d3.format('0%'),
+                // eslint-disable-next-line new-cap
                 interpolate: (new atlascharts.line()).interpolation.curveStepBefore,
                 xLabel: cumulativeObservationXLabel,
                 yLabel: 'Percent of Population'
@@ -1175,6 +1185,7 @@ class ReportManager extends Component {
               if (!obsPeriodByGenderData.empty) {
                 d3.selectAll('#opbygender svg')
                   .remove()
+                // eslint-disable-next-line new-cap
                 const opbygenderboxplot = new atlascharts.boxplot()
                 const opgData = obsPeriodByGenderData.category
                   .map(function (d, i) {
@@ -1222,6 +1233,7 @@ class ReportManager extends Component {
                 .remove()
               const obsPeriodByLenByAgeData = ChartUtils.normalizeArray(data.durationByAgeDecile)
               if (!obsPeriodByLenByAgeData.empty) {
+                // eslint-disable-next-line new-cap
                 const opbyageboxplot = new atlascharts.boxplot()
                 const opaData = obsPeriodByLenByAgeData.category
                   .map(function (d, i) {
@@ -1276,6 +1288,7 @@ class ReportManager extends Component {
               histData3.MAX = +data.personsWithContinuousObservationsByYearStats[0].maxValue;
               histData3.INTERVALS = Math.round((histData3.MAX - histData3.OFFSET + histData3.intervalSize) / histData3.INTERVAL_SIZE) + histData3.INTERVAL_SIZE;
               d3.selectAll("#oppeoplebyyear svg").remove();
+              // eslint-disable-next-line new-cap
               let observationLengthByYearHistogram = new atlascharts.histogram();
               observationLengthByYearHistogram.render(atlascharts.histogram.mapHistogram(histData3), "#oppeoplebyyear", size12.width, size12.height, {
                 xLabel: 'Year',
@@ -1294,6 +1307,7 @@ class ReportManager extends Component {
                 })
                 d3.selectAll('#oppeoplebymonthsingle svg')
                   .remove()
+                // eslint-disable-next-line new-cap
                 const observationByMonthSingle = new atlascharts.line()
                 observationByMonthSingle.render(byMonthSeries, '#oppeoplebymonthsingle', size12.width, size12.height, {
                   xScale: d3.scaleTime()
@@ -1313,6 +1327,7 @@ class ReportManager extends Component {
               if (!personPeriodData.empty) {
                 d3.selectAll('#opperperson svg')
                   .remove()
+                // eslint-disable-next-line new-cap
                 const donut = new atlascharts.donut()
                 donut.render(this.mapConceptData(data.observationPeriodsPerPerson), '#opperperson', size12.width, size12.height, {
                   margin: {
@@ -1334,7 +1349,7 @@ class ReportManager extends Component {
               this.loadingReport(false)
               const normalizedData = atlascharts.chart.normalizeDataframe(ChartUtils.normalizeArray(data, true))
               if (!normalizedData.empty) {
-                const table_data = normalizedData.conceptPath.map((d, i) => {
+                const tableData = normalizedData.conceptPath.map((d, i) => {
                   const conceptDetails = normalizedData.conceptPath[i].split('||')
                   return {
                     concept_id: normalizedData.conceptId[i],
@@ -1349,7 +1364,7 @@ class ReportManager extends Component {
                   }
                 })
 
-                const datatable = $('#conditionera_table')
+                $('#conditionera_table')
                   .DataTable({
                     language: {
                       searchPlaceholder: 'Search...',
@@ -1359,13 +1374,13 @@ class ReportManager extends Component {
                     buttons: this.buttons,
                     ...this.tableOptions,
                     autoWidth: false,
-                    data: table_data,
+                    data: tableData,
                     createdRow: function (row, data, dataIndex) {
                       $(row)
                         .addClass('conditionera_table_selector')
                     },
                     columns: [{
-                      data: 'concept_id'
+                      data: 'conceptId'
                     },
                     {
                       data: 'soc'
@@ -1402,6 +1417,7 @@ class ReportManager extends Component {
                   })
 
                 const tree = this.eraBuildHierarchyFromJSON(normalizedData, threshold)
+                // eslint-disable-next-line new-cap
                 const treemap = new atlascharts.treemap()
                 treemap.render(tree, '#conditionera_treemap_container', width, height, {
                   onclick: (node) => {
@@ -1449,12 +1465,12 @@ class ReportManager extends Component {
               this.currentReport(this.reportReportName())
               this.loadingReport(false)
 
-              let table_data, datatable, tree, treemap
+              let tableData
               if (data.drugEraPrevalence) {
                 const drugEraPrevalence = atlascharts.chart.normalizeDataframe(ChartUtils.normalizeArray(data.drugEraPrevalence, true))
 
                 if (!drugEraPrevalence.empty) {
-                  table_data = drugEraPrevalence.conceptPath.map((d, i) => {
+                  tableData = drugEraPrevalence.conceptPath.map((d, i) => {
                     const conceptDetails = d.split('||')
                     return {
                       concept_id: drugEraPrevalence.conceptId[i],
@@ -1482,9 +1498,9 @@ class ReportManager extends Component {
                       buttons: this.buttons,
                       ...this.tableOptions,
                       autoWidth: false,
-                      data: table_data,
+                      data: tableData,
                       columns: [{
-                        data: 'concept_id'
+                        data: 'conceptId'
                       },
                       {
                         data: 'atc1'
@@ -1518,6 +1534,7 @@ class ReportManager extends Component {
                   this.datatables['drugs-by-index-table'] = datatable
 
                   const tree = this.buildHierarchyFromJSON(drugEraPrevalence, threshold)
+                  // eslint-disable-next-line new-cap
                   const treemap = new atlascharts.treemap()
                   treemap.render(tree, '#drugindex_treemap_container', width, height, {
                     onclick: (node) => {
@@ -1573,12 +1590,12 @@ class ReportManager extends Component {
               this.currentReport(this.reportReportName())
               this.loadingReport(false)
 
-              let table_data, datatable, tree, treemap
+              let tableData
               // condition prevalence
               if (data.conditionOccurrencePrevalence) {
                 const normalizedData = atlascharts.chart.normalizeDataframe(ChartUtils.normalizeArray(data.conditionOccurrencePrevalence, true))
                 if (!normalizedData.empty) {
-                  table_data = normalizedData.conceptPath.map((d, i) => {
+                  tableData = normalizedData.conceptPath.map((d, i) => {
                     const conceptDetails = d.split('||')
                     return {
                       concept_id: normalizedData.conceptId[i],
@@ -1606,10 +1623,10 @@ class ReportManager extends Component {
                       dom: this.dom,
                       buttons: this.buttons,
                       ...this.tableOptions,
-                      data: table_data,
+                      data: tableData,
                       autoWidth: false,
                       columns: [{
-                        data: 'concept_id'
+                        data: 'conceptId'
                       },
                       {
                         data: 'soc'
@@ -1648,6 +1665,7 @@ class ReportManager extends Component {
                   this.datatables['condition_table'] = datatable
 
                   const tree = this.buildHierarchyFromJSON(normalizedData, threshold)
+                  // eslint-disable-next-line new-cap
                   const treemap = new atlascharts.treemap()
                   treemap.render(tree, '#condition_treemap_container', width, height, {
                     onclick: (node) => {
@@ -1703,11 +1721,11 @@ class ReportManager extends Component {
               this.currentReport(this.reportReportName())
               this.loadingReport(false)
 
-              let table_data, datatable, tree, treemap
+              let tableData
               if (data.procedureOccurrencePrevalence) {
                 const normalizedData = atlascharts.chart.normalizeDataframe(ChartUtils.normalizeArray(data.procedureOccurrencePrevalence, true))
                 if (!normalizedData.empty) {
-                  table_data = normalizedData.conceptPath.map((d, i) => {
+                  tableData = normalizedData.conceptPath.map((d, i) => {
                     const conceptDetails = d.split('||')
                     return {
                       concept_id: normalizedData.conceptId[i],
@@ -1735,9 +1753,9 @@ class ReportManager extends Component {
                       buttons: this.buttons,
                       ...this.tableOptions,
                       autoWidth: false,
-                      data: table_data,
+                      data: tableData,
                       columns: [{
-                        data: 'concept_id'
+                        data: 'conceptId'
                       },
                       {
                         data: 'level_4'
@@ -1771,6 +1789,7 @@ class ReportManager extends Component {
                   this.datatables['procedure_table'] = datatable
 
                   const tree = this.buildHierarchyFromJSON(normalizedData, threshold)
+                  // eslint-disable-next-line new-cap
                   const treemap = new atlascharts.treemap()
                   treemap.render(tree, '#procedureindex_treemap_container', width, height, {
                     onclick: (node) => {
@@ -1839,6 +1858,7 @@ class ReportManager extends Component {
                     return item
                   })
 
+                // eslint-disable-next-line new-cap
                 const personsByDurationSingle = new atlascharts.line()
                 personsByDurationSingle.render(personsByDurationData, '#personsByDurationFromStartToEnd', size12.width, size12.height, {
                   yFormat: d3.format('0%'),
@@ -1858,6 +1878,7 @@ class ReportManager extends Component {
                   yPercent: 'yPrevalence1000Pp'
                 })
 
+                // eslint-disable-next-line new-cap
                 const prevalenceByMonth = new atlascharts.line()
                 prevalenceByMonth.render(byMonthSeries, '#prevalenceByMonth', size12.width, size12.height, {
                   xScale: d3.scaleTime()
@@ -1874,6 +1895,7 @@ class ReportManager extends Component {
               // age at index
               const ageAtIndexDistribution = ChartUtils.normalizeArray(data.ageAtIndexDistribution)
               if (!ageAtIndexDistribution.empty) {
+                // eslint-disable-next-line new-cap
                 const boxplot = new atlascharts.boxplot()
                 const agData = ageAtIndexDistribution.category
                   .map(function (d, i) {
@@ -1898,6 +1920,7 @@ class ReportManager extends Component {
               // distributionAgeCohortStartByCohortStartYear
               const distributionAgeCohortStartByCohortStartYear = ChartUtils.normalizeArray(data.distributionAgeCohortStartByCohortStartYear)
               if (!distributionAgeCohortStartByCohortStartYear.empty) {
+                // eslint-disable-next-line new-cap
                 const boxplotCsy = new atlascharts.boxplot()
                 const csyData = distributionAgeCohortStartByCohortStartYear.category
                   .map(function (d, i) {
@@ -1922,6 +1945,7 @@ class ReportManager extends Component {
               // distributionAgeCohortStartByGender
               const distributionAgeCohortStartByGender = ChartUtils.normalizeArray(data.distributionAgeCohortStartByGender)
               if (!distributionAgeCohortStartByGender.empty) {
+                // eslint-disable-next-line new-cap
                 const boxplotBg = new atlascharts.boxplot()
                 const bgData = distributionAgeCohortStartByGender.category
                   .map(function (d, i) {
@@ -1951,6 +1975,7 @@ class ReportManager extends Component {
                   yValue: 'countValue',
                   yPercent: 'percentValue'
                 })
+                // eslint-disable-next-line new-cap
                 const observationByMonthSingle = new atlascharts.line()
                 observationByMonthSingle.render(personsInCohortFromCohortStartToEndSeries, '#personinCohortFromStartToEnd', size12.width, size12.height, {
                   xScale: d3.scaleTime()
@@ -2018,6 +2043,7 @@ class ReportManager extends Component {
                 })
 
                 // create svg with range bands based on the trellis names
+                // eslint-disable-next-line new-cap
                 const chart = new atlascharts.trellisline()
                 chart.render(dataByDecile, '#cohort_trellisLinePlot', size12.width, size12.height, {
                   trellisSet: allDeciles,
@@ -2045,6 +2071,7 @@ class ReportManager extends Component {
               this.loadingReport(false)
 
               if (data.yearOfBirth.length > 0 && data.yearOfBirthStats.length > 0) {
+                // eslint-disable-next-line new-cap
                 const yearHistogram = new atlascharts.histogram()
                 const histData = {}
                 histData.INTERVAL_SIZE = 1
@@ -2059,8 +2086,11 @@ class ReportManager extends Component {
                 })
               }
 
+              // eslint-disable-next-line new-cap
               const genderDonut = new atlascharts.donut()
+              // eslint-disable-next-line new-cap
               const raceDonut = new atlascharts.donut()
+              // eslint-disable-next-line new-cap
               const ethnicityDonut = new atlascharts.donut()
               genderDonut.render(this.mapConceptData(data.gender), '#gender', size4.width, size4.height)
               raceDonut.render(this.mapConceptData(data.race), '#race', size4.width, size4.height)
@@ -2090,7 +2120,7 @@ class ReportManager extends Component {
               this.dataCompleteReference(data)
 
               const initOneBarData = ChartUtils.normalizeArray(data.filter(function (d) {
-                return d.covariance == '0~10'
+                return d.covariance === '0~10'
               }), true)
 
               this.showHorizontalBar(initOneBarData)
@@ -2105,16 +2135,16 @@ class ReportManager extends Component {
               this.currentReport(this.reportReportName())
               this.loadingReport(false)
 
-              const all_map_data = data.map(function (d) {
+              const allMapData = data.map(function (d) {
                 return d.insitution
               })
-              const care_site_array = []
-              for (let i = 0; i < all_map_data.length; i++) {
-                if (care_site_array.indexOf(all_map_data[i]) == -1) {
-                  care_site_array.push(all_map_data[i])
+              const careSiteArray = []
+              for (let i = 0; i < allMapData.length; i++) {
+                if (careSiteArray.indexOf(allMapData[i]) === -1) {
+                  careSiteArray.push(allMapData[i])
                 }
               }
-              const care_site_data = care_site_array.map(function (d) {
+              const careSiteData = careSiteArray.map(function (d) {
                 return {
                   institution: d
                 }
@@ -2128,7 +2158,7 @@ class ReportManager extends Component {
                 dom: this.dom,
                 buttons: this.buttons,
                 ...this.tableOptions,
-                data: care_site_data,
+                data: careSiteData,
                 columns: [{
                   data: 'institution'
                 }],
@@ -2141,10 +2171,10 @@ class ReportManager extends Component {
                 $('#care_site_table tbody tr.selected').removeClass('selected')
                 $(this).addClass('selected')
 
-                const institution_id = context.careSiteDatatable.data()[context.careSiteDatatable.row(this)[0]].institution
+                const institutionId = context.careSiteDatatable.data()[context.careSiteDatatable.row(this)[0]].institution
 
                 const entropyData = ChartUtils.normalizeArray(data.filter(function (d) {
-                  return d.insitution == institution_id
+                  return d.insitution === institutionId
                 }), true)
                 if (!entropyData.empty) {
                   const byDateSeries = context.mapDateDataToSeries(entropyData, {
@@ -2154,6 +2184,7 @@ class ReportManager extends Component {
                     yPercent: 'entropy'
                   })
 
+                  // eslint-disable-next-line new-cap
                   const prevalenceByDate = new atlascharts.line()
                   prevalenceByDate.render(byDateSeries, '#entropyByDate', 400, 200, {
                     xScale: d3.scaleTime().domain(d3.extent(byDateSeries[0].values, function (d) {
@@ -2282,22 +2313,23 @@ class ReportManager extends Component {
     }
 
     // drilldown functions
-    this.conditionDrilldown = (concept_id, concept_name) => {
+    this.conditionDrilldown = (conceptId, conceptName) => {
       this.activeReportDrilldown(false)
       this.loadingReportDrilldown(true)
 
       $.ajax({
         type: 'GET',
-        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/condition/' + concept_id + '?refresh=true',
+        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/condition/' + conceptId + '?refresh=true',
         success: (data) => {
           this.activeReportDrilldown(true)
           this.loadingReportDrilldown(false)
           $('#conditionDrilldown')
-            .html(concept_name + ' Drilldown Report')
+            .html(conceptName + ' Drilldown Report')
 
           // age at first diagnosis visualization
           d3.selectAll('#ageAtFirstDiagnosis svg')
             .remove()
+          // eslint-disable-next-line new-cap
           const boxplot = new atlascharts.boxplot()
           const bpseries = []
           const bpdata = ChartUtils.normalizeArray(data.ageAtFirstDiagnosis, true)
@@ -2336,6 +2368,7 @@ class ReportManager extends Component {
               yPercent: 'yPrevalence1000Pp'
             })
 
+            // eslint-disable-next-line new-cap
             const prevalenceByMonth = new atlascharts.line()
             const size = this.breakpoints.guessFromNode('#conditionPrevalenceByMonth')
             prevalenceByMonth.render(byMonthSeries, '#conditionPrevalenceByMonth', size.width, this.breakpoints.wide.height, {
@@ -2355,6 +2388,7 @@ class ReportManager extends Component {
           d3.selectAll('#conditionsByType svg')
             .remove()
           if (conditionType) {
+            // eslint-disable-next-line new-cap
             const donut = new atlascharts.donut()
             donut.render(conditionType, '#conditionsByType', size12.width, size12.height, {
               margin: {
@@ -2427,6 +2461,7 @@ class ReportManager extends Component {
             })
 
             // create svg with range bands based on the trellis names
+            // eslint-disable-next-line new-cap
             const chart = new atlascharts.trellisline()
             const size = this.breakpoints.guessFromNode('#condition_trellisLinePlot')
             chart.render(dataByDecile, '#condition_trellisLinePlot', size.width, this.breakpoints.wide.height, {
@@ -2447,16 +2482,16 @@ class ReportManager extends Component {
       })
     }
 
-    this.drugExposureDrilldown = (concept_id, concept_name) => {
+    this.drugExposureDrilldown = (conceptId, conceptName) => {
       this.loadingReportDrilldown(true)
       this.activeReportDrilldown(false)
 
       $.ajax({
         type: 'GET',
-        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/drug/' + concept_id + '?refresh=' + this.refresh(),
+        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/drug/' + conceptId + '?refresh=' + this.refresh(),
         success: (data) => {
           $('#drugExposureDrilldown')
-            .text(concept_name)
+            .text(conceptName)
           this.activeReportDrilldown(true)
           this.loadingReportDrilldown(false)
 
@@ -2466,6 +2501,7 @@ class ReportManager extends Component {
           this.boxplotHelper(data.refillsDistribution, '#refillsDistribution', this.boxplotWidth, this.boxplotHeight, 'Refills', 'Refills')
 
           // drug  type visualization
+          // eslint-disable-next-line new-cap
           const donut = new atlascharts.donut()
           const drugsByType = this.mapConceptData(data.drugsByType)
           donut.render(drugsByType, '#drugsByType', size12.width, size12.height, {
@@ -2491,6 +2527,7 @@ class ReportManager extends Component {
 
             d3.selectAll('#drugPrevalenceByMonth svg')
               .remove()
+            // eslint-disable-next-line new-cap
             const prevalenceByMonth = new atlascharts.line()
             prevalenceByMonth.render(byMonthSeries, '#drugPrevalenceByMonth', 900, 250, {
               xScale: d3.scaleTime()
@@ -2560,6 +2597,7 @@ class ReportManager extends Component {
             })
 
             // create svg with range bands based on the trellis names
+            // eslint-disable-next-line new-cap
             const chart = new atlascharts.trellisline()
             chart.render(dataByDecile, '#drug_trellisLinePlot', 1000, 300, {
               trellisSet: allDeciles,
@@ -2578,19 +2616,19 @@ class ReportManager extends Component {
       })
     }
 
-    this.conditionEraDrilldown = (concept_id, concept_name) => {
+    this.conditionEraDrilldown = (conceptId, conceptName) => {
       this.loadingReportDrilldown(true)
       this.activeReportDrilldown(false)
 
       $.ajax({
         type: 'GET',
-        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/conditionera/' + concept_id + '?refresh=' + this.refresh(),
+        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/conditionera/' + conceptId + '?refresh=' + this.refresh(),
         success: (data) => {
           this.activeReportDrilldown(true)
           this.loadingReportDrilldown(false)
 
           $('#conditionEraDrilldown')
-            .html(concept_name + ' Drilldown Report')
+            .html(conceptName + ' Drilldown Report')
 
           this.boxplotHelper(data.ageAtFirstDiagnosis, '#conditioneras_age_at_first_diagnosis', 500, 300, 'Gender', 'Age at First Diagnosis')
           this.boxplotHelper(data.lengthOfEra, '#conditioneras_length_of_era', 500, 300, '', 'Days')
@@ -2606,6 +2644,7 @@ class ReportManager extends Component {
 
             d3.selectAll('#conditioneraPrevalenceByMonth svg')
               .remove()
+            // eslint-disable-next-line new-cap
             const prevalenceByMonth = new atlascharts.line()
             const size = this.breakpoints.guessFromNode('#conditioneraPrevalenceByMonth')
             prevalenceByMonth.render(byMonthSeries, '#conditioneraPrevalenceByMonth', size.width, this.breakpoints.wide.height, {
@@ -2675,6 +2714,7 @@ class ReportManager extends Component {
             })
 
             // create svg with range bands based on the trellis names
+            // eslint-disable-next-line new-cap
             const chart = new atlascharts.trellisline()
             const size = this.breakpoints.guessFromNode('#conditionera_trellisLinePlot')
             chart.render(dataByDecile, '#conditionera_trellisLinePlot', size.width, this.breakpoints.wide.height, {
@@ -2694,19 +2734,19 @@ class ReportManager extends Component {
       })
     }
 
-    this.drugeraDrilldown = (concept_id, concept_name) => {
+    this.drugeraDrilldown = (conceptId, conceptName) => {
       this.activeReportDrilldown(false)
       this.loadingReportDrilldown(true)
 
       $.ajax({
         type: 'GET',
-        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/drugera/' + concept_id + '?refresh=' + this.refresh(),
+        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/drugera/' + conceptId + '?refresh=' + this.refresh(),
         success: (data) => {
           this.activeReportDrilldown(true)
           this.loadingReportDrilldown(false)
 
           $('#drugeraDrilldown')
-            .html(concept_name + ' Drilldown Report')
+            .html(conceptName + ' Drilldown Report')
 
           // age at first exposure visualization
           this.boxplotHelper(data.ageAtFirstExposure, '#drugeras_age_at_first_exposure', 500, 200, 'Gender', 'Age at First Exposure')
@@ -2723,6 +2763,7 @@ class ReportManager extends Component {
 
             d3.selectAll('#drugeraPrevalenceByMonth svg')
               .remove()
+            // eslint-disable-next-line new-cap
             const prevalenceByMonth = new atlascharts.line()
             const size = this.breakpoints.guessFromNode('#drugeraPrevalenceByMonth')
             prevalenceByMonth.render(byMonthSeries, '#drugeraPrevalenceByMonth', size.width, this.breakpoints.wide.height, {
@@ -2793,6 +2834,7 @@ class ReportManager extends Component {
             })
 
             // create svg with range bands based on the trellis names
+            // eslint-disable-next-line new-cap
             const chart = new atlascharts.trellisline()
             const size = this.breakpoints.guessFromNode('#drugera_trellisLinePlot')
             chart.render(dataByDecile, '#drugera_trellisLinePlot', size.width, this.breakpoints.wide.height, {
@@ -2812,20 +2854,21 @@ class ReportManager extends Component {
       })
     }
 
-    this.procedureDrilldown = (concept_id, concept_name) => {
+    this.procedureDrilldown = (conceptId, conceptName) => {
       this.activeReportDrilldown(false)
       this.loadingReportDrilldown(true)
 
       $.ajax({
         type: 'GET',
-        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/procedure/' + concept_id + '?refresh=' + this.refresh(),
+        url: this.config.api.url + 'cohortresults/' + this.reportSourceKey() + '/' + this.reportCohortDefinitionId() + '/procedure/' + conceptId + '?refresh=' + this.refresh(),
         success: (data) => {
           this.activeReportDrilldown(true)
           this.loadingReportDrilldown(false)
           $('#procedureDrilldown')
-            .text(concept_name + ' Drilldown Report')
+            .text(conceptName + ' Drilldown Report')
 
           // age at first diagnosis visualization
+          // eslint-disable-next-line new-cap
           const boxplot = new atlascharts.boxplot()
           const bpseries = []
           const bpdata = ChartUtils.normalizeArray(data.ageAtFirstOccurrence)
@@ -2861,6 +2904,7 @@ class ReportManager extends Component {
               yPercent: 'yPrevalence1000Pp'
             })
 
+            // eslint-disable-next-line new-cap
             const prevalenceByMonth = new atlascharts.line()
             prevalenceByMonth.render(byMonthSeries, '#procedurePrevalenceByMonth', 1000, 300, {
               xScale: d3.scaleTime()
@@ -2876,6 +2920,7 @@ class ReportManager extends Component {
 
           // procedure type visualization
           if (data.proceduresByType && data.proceduresByType.length > 0) {
+            // eslint-disable-next-line new-cap
             const donut = new atlascharts.donut()
             donut.render(this.mapConceptData(data.proceduresByType), '#proceduresByType', size12.width, size12.height, {
               margin: {
@@ -2942,6 +2987,7 @@ class ReportManager extends Component {
             })
 
             // create svg with range bands based on the trellis names
+            // eslint-disable-next-line new-cap
             const chart = new atlascharts.trellisline()
             const size = this.breakpoints.guessFromNode('#procedure_trellisLinePlot')
             chart.render(dataByDecile, '#procedure_trellisLinePlot', size.width, this.breakpoints.wide.height, {
@@ -2967,7 +3013,7 @@ class ReportManager extends Component {
       const rowIndex = event.target._DT_CellIndex.row
       const rowData = dataTable.row(rowIndex).data()
 
-      this.drilldown(rowData.concept_id, rowData.name, drilldownType)
+      this.drilldown(rowData.conceptId, rowData.name, drilldownType)
     }
 
     this.drilldown = (id, name, type) => {
@@ -3000,6 +3046,7 @@ class ReportManager extends Component {
                 }
               })
 
+            // eslint-disable-next-line new-cap
             const scatter = new atlascharts.scatterplot()
             $('#' + type + 'DrilldownScatterplotHeading').html(name)
 
@@ -3030,7 +3077,7 @@ class ReportManager extends Component {
                   const years = Math.round(o.duration / 365)
                   const days = o.duration % 365
                   let result = ''
-                  if (years != 0) { result += years + 'y ' }
+                  if (years !== 0) { result += years + 'y ' }
 
                   result += days + 'd'
                   return result
@@ -3182,8 +3229,7 @@ class ReportManager extends Component {
           datum.value = +this.countValue
           result.push(datum)
         })
-      } else if (data.countValue instanceof Array) // multiple rows, each value of each column is in the indexed properties.
-      {
+      } else if (data.countValue instanceof Array) { // multiple rows, each value of each column is in the indexed properties.
         result = data.countValue.map(function (d, i) {
           const datum = {}
           datum.id = (this.conceptId || this.conceptName)[i]
@@ -3191,8 +3237,7 @@ class ReportManager extends Component {
           datum.value = this.countValue[i]
           return datum
         }, data)
-      } else // the dataset is a single value result, so the properties are not arrays.
-      {
+      } else { // the dataset is a single value result, so the properties are not arrays.
         result = [{
           id: data.conceptId,
           label: data.conceptName,
@@ -3248,7 +3293,6 @@ class ReportManager extends Component {
       series.values = []
       if (data && !data.empty) {
         for (let i = 0; i < data[options.dateField].length; i++) {
-          const dateInt = data[options.dateField][i]
           series.values.push({
             xValue: new Date(Math.floor(data[options.dateField][i] / 100), (data[options.dateField][i] % 100) - 1, 1),
             yValue: data[options.yValue][i],
@@ -3347,6 +3391,7 @@ class ReportManager extends Component {
     }
 
     this.boxplotHelper = function (data, target, width, height, xlabel, ylabel) {
+      // eslint-disable-next-line new-cap
       const boxplot = new atlascharts.boxplot()
       let yMax = 0
       const bpseries = []
@@ -3385,7 +3430,7 @@ class ReportManager extends Component {
       const rowData = dataTable.row(rowIndex)
         .data()
 
-      this.drugExposureDrilldown(rowData.concept_id, rowData.rxnorm)
+      this.drugExposureDrilldown(rowData.conceptId, rowData.rxnorm)
     }
 
     this.handleProcedureTableClick = (data, context, event) => {
@@ -3395,7 +3440,7 @@ class ReportManager extends Component {
       const rowData = dataTable.row(rowIndex)
         .data()
 
-      this.procedureDrilldown(rowData.concept_id, rowData.procedure_name)
+      this.procedureDrilldown(rowData.conceptId, rowData.procedure_name)
     }
 
     this.handleDrugEraTableClick = (data, context, event) => {
@@ -3405,7 +3450,7 @@ class ReportManager extends Component {
       const rowData = dataTable.row(rowIndex)
         .data()
 
-      this.drugeraDrilldown(rowData.concept_id, rowData.ingredient)
+      this.drugeraDrilldown(rowData.conceptId, rowData.ingredient)
     }
 
     this.handleConditionTableClick = (data, context, event) => {
@@ -3415,7 +3460,7 @@ class ReportManager extends Component {
       const rowData = dataTable.row(rowIndex)
         .data()
 
-      this.conditionDrilldown(rowData.concept_id, rowData.snomed)
+      this.conditionDrilldown(rowData.conceptId, rowData.snomed)
     }
 
     this.handleConditionEraTableClick = (data, context, event) => {
@@ -3425,7 +3470,7 @@ class ReportManager extends Component {
       const rowData = dataTable.row(rowIndex)
         .data()
 
-      this.conditionEraDrilldown(rowData.concept_id, rowData.snomed)
+      this.conditionEraDrilldown(rowData.conceptId, rowData.snomed)
     }
 
     this.subscriptions.push(

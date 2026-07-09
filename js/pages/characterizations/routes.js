@@ -1,6 +1,3 @@
-import ko from 'knockout'
-import globalConstants from 'const'
-import sharedState from 'atlas-state'
 import {
   AuthorizedRoute
 } from 'pages/Route'

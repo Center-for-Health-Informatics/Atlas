@@ -5,24 +5,24 @@
  */
 /* jslint regexp: true */
 /* global require, XMLHttpRequest, ActiveXObject,
-  define, window, process, Packages,
+  define, process, Packages,
   java, location, Components, FileUtils */
 
 define(['module'], function (module) {
   'use strict'
 
-  let text; let fs; let Cc; let Ci; let xpcIsWindows
+  let fs; let Cc; let Ci; let xpcIsWindows
   let progIds = ['Msxml2.XMLHTTP', 'Microsoft.XMLHTTP', 'Msxml2.XMLHTTP.4.0']
-  const xmlRegExp = /^\s*<\?xml(\s)+version=[\'\"](\d)*.(\d)*[\'\"](\s)*\?>/im
+  const xmlRegExp = /^\s*<\?xml(\s)+version=['"](\d)*.(\d)*['"](\s)*\?>/im
   const bodyRegExp = /<body[^>]*>\s*([\s\S]+)\s*<\/body>/im
   const hasLocation = typeof location !== 'undefined' && location.href
-  const defaultProtocol = hasLocation && location.protocol && location.protocol.replace(/\:/, '')
+  const defaultProtocol = hasLocation && location.protocol && location.protocol.replace(/:/, '')
   const defaultHostName = hasLocation && location.hostname
   const defaultPort = hasLocation && (location.port || undefined)
   const buildMap = {}
   const masterConfig = (module.config && module.config()) || {}
 
-  text = {
+  const text = {
     version: '2.0.14',
 
     strip: function (content) {
@@ -116,7 +116,7 @@ define(['module'], function (module) {
       }
     },
 
-    xdRegExp: /^((\w+)\:)?\/\/([^\/\\]+)/,
+    xdRegExp: /^((\w+):)?\/\/([^/\\]+)/,
 
     /**
          * Is an URL on another domain. Only works for browser use, returns
@@ -127,16 +127,16 @@ define(['module'], function (module) {
          * @returns Boolean
          */
     useXhr: function (url, protocol, hostname, port) {
-      let uProtocol; let uHostName; let uPort
+      let uHostName
       const match = text.xdRegExp.exec(url)
       if (!match) {
         return true
       }
-      uProtocol = match[2]
+      const uProtocol = match[2]
       uHostName = match[3]
 
       uHostName = uHostName.split(':')
-      uPort = uHostName[1]
+      const uPort = uHostName[1]
       uHostName = uHostName[0]
 
       return (!uProtocol || uProtocol === protocol) &&
@@ -204,7 +204,7 @@ define(['module'], function (module) {
     },
 
     write: function (pluginName, moduleName, write, config) {
-      if (buildMap.hasOwnProperty(moduleName)) {
+      if (Object.prototype.hasOwnProperty.call(buildMap, moduleName)) {
         const content = text.jsEscape(buildMap[moduleName])
         write.asModule(pluginName + '!' + moduleName,
           "define(function () { return '" +
@@ -272,7 +272,7 @@ define(['module'], function (module) {
       // Allow plugins direct access to xhr headers
       if (headers) {
         for (header in headers) {
-          if (headers.hasOwnProperty(header)) {
+          if (Object.prototype.hasOwnProperty.call(headers, header)) {
             xhr.setRequestHeader(header.toLowerCase(), headers[header])
           }
         }
@@ -358,14 +358,14 @@ define(['module'], function (module) {
     xpcIsWindows = ('@mozilla.org/windows-registry-key;1' in Cc)
 
     text.get = function (url, callback) {
-      let inStream; let convertStream; let fileObj
+      let inStream; let convertStream
       const readData = {}
 
       if (xpcIsWindows) {
         url = url.replace(/\//g, '\\')
       }
 
-      fileObj = new FileUtils.File(url)
+      const fileObj = new FileUtils.File(url)
 
       // XPCOM, you so crazy
       try {
@@ -383,7 +383,7 @@ define(['module'], function (module) {
         inStream.close()
         callback(readData.value)
       } catch (e) {
-        throw new Error((fileObj && fileObj.path || '') + ': ' + e)
+        throw new Error(((fileObj && fileObj.path) || '') + ': ' + e)
       }
     }
   }

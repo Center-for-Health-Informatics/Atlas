@@ -13,7 +13,7 @@ options.negControlTableColumns = [
     title: '',
     render: (s, p, d) => {
       if (utils.hasEvidence(d)) {
-        return '<button type=\"button\" title=\"View Details\" class=\"btn btn-default btn-xs\"><i class=\"fa fa-external-link\" aria-hidden=\"true\"></i>&nbsp;</button>'
+        return '<button type="button" title="View Details" class="btn btn-default btn-xs"><i class="fa fa-external-link" aria-hidden="true"></i>&nbsp;</button>'
       }
     },
     sortable: false,
@@ -21,7 +21,7 @@ options.negControlTableColumns = [
   {
     title: ko.i18n('columns.name', 'Name'),
     render: (s, p, d) => {
-      return '<a target=\"_new\" href=\'#/concept/' + d.conceptId + '\'>' + d.conceptName + '</a>'
+      return '<a target="_new" href=\'#/concept/' + d.conceptId + '\'>' + d.conceptName + '</a>'
     },
   },
   {
@@ -205,7 +205,7 @@ options.negControlTableOptions = {
   Facets: [{
     caption: ko.i18n('facets.caption.drugLabelExists', 'Suggested Negative Control'),
     binding: d => {
-      return d.negativeControl.toString() == '1' ? ko.i18n('options.yes', 'Yes') : ko.i18n('options.no', 'No')
+      return d.negativeControl.toString() === '1' ? ko.i18n('options.yes', 'Yes') : ko.i18n('options.no', 'No')
     },
   },
   {

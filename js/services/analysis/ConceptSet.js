@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 class ConceptSet {
   constructor (data = {}) {
     this.id = data.id || 0

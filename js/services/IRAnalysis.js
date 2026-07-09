@@ -1,17 +1,8 @@
-import $ from 'jquery'
 import ko from 'knockout'
 import config from 'appConfig'
 import authApi from 'services/AuthAPI'
 import httpService from 'services/http'
 import fileService from 'services/file'
-
-function pruneJSON (key, value) {
-  if (value === 0 || value) {
-    return value
-  } else {
-
-  }
-}
 
 function parse ({ data }) {
   return Object.assign(data, {

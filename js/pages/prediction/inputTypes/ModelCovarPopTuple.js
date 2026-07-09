@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 class ModelCovarPopTuple {
   constructor (data = {}) {
     this.modelName = data.modelName || null

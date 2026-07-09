@@ -4,10 +4,7 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import sharedState from 'atlas-state'
-import globalConstants from 'const'
-import conceptSetService from 'services/ConceptSet'
 import conceptSetUtils from 'components/conceptset/utils'
-import renderers from 'utils/Renderers'
 import MomentApi from 'services/MomentAPI'
 import httpService from 'services/http'
 import './resolve-mappings.less'
@@ -149,7 +146,7 @@ class ResolveConceptSetMappings extends AutoBind(Component) {
         title: ko.i18n('columns.name', 'Name'),
         data: 'CONCEPT_NAME',
         render: function (s, p, d) {
-          const valid = d.INVALID_REASON_CAPTION == 'Invalid' ? 'invalid' : ''
+          const valid = d.INVALID_REASON_CAPTION === 'Invalid' ? 'invalid' : ''
           if (p === 'display') {
             return '<a class="' + valid + '" style="color: #007bff; cursor: pointer; text-decoration: none;" onclick="event.preventDefault();">' + d.CONCEPT_NAME + '</a>'
           }

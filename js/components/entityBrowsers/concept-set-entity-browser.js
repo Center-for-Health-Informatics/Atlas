@@ -1,13 +1,10 @@
 import ko from 'knockout'
 import view from './concept-set-entity-browser.html?raw'
-import config from 'appConfig'
-import sharedState from 'atlas-state'
 import appConfig from 'appConfig'
 import EntityBrowser from 'components/entity-browser'
 import authApi from 'services/AuthAPI'
 import VocabularyProvider from 'services/VocabularyProvider'
 import commonUtils from 'utils/CommonUtils'
-import CharacterizationService from 'pages/characterizations/services/CharacterizationService'
 import datatableUtils from 'utils/DatatableUtils'
 import 'faceted-datatable'
 

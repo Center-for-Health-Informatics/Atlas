@@ -206,8 +206,8 @@ class ReportDrilldown extends Report {
       const freqData = ChartUtils.normalizeArray(rawData)
       if (!freqData.empty) {
         // Histogram
-        const frequencyHistogram = new Object()
-        const frequencyHistData = new Object()
+        const frequencyHistogram = {}
+        const frequencyHistData = {}
         let totalCnt = 0
         for (const i in freqData.yNumPersons) {
           totalCnt += freqData.yNumPersons[i]
@@ -273,8 +273,9 @@ class ReportDrilldown extends Report {
       mappedData.sort(function (a, b) {
         const nameA = a.label.toLowerCase()
         const nameB = b.label.toLowerCase()
-        if (nameA < nameB) // sort string ascending
-        { return -1 }
+        if (nameA < nameB) { // sort string ascending
+          return -1
+        }
         if (nameA > nameB) { return 1 }
         return 0 // default return value (no sorting)
       })

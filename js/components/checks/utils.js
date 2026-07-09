@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import consts from './const'
 
 function renderSeverity (data) {

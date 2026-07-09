@@ -4,8 +4,6 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import Clipboard from 'utils/Clipboard'
 import commonUtils from 'utils/CommonUtils'
-import conceptSetUtils from './utils'
-import sharedState from 'atlas-state'
 
 class ConceptSetExport extends AutoBind(Clipboard(Component)) {
   constructor (params) {

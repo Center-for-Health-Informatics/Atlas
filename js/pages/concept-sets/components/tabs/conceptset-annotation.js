@@ -3,7 +3,6 @@ import view from './conceptset-annotation.html?raw'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
-import authApi from 'services/AuthAPI'
 import 'faceted-datatable'
 import './conceptset-annotation.less'
 

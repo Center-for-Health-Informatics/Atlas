@@ -52,7 +52,7 @@ class ComparativeCohortAnalysisUtilities extends Component {
     })
 
     this.subscriptions.push(this.utilityPillMode.subscribe(() => {
-      if (this.utilityPillMode() == 'download') {
+      if (this.utilityPillMode() === 'download') {
         this.computeCartesian()
       }
     }))
@@ -84,7 +84,7 @@ class ComparativeCohortAnalysisUtilities extends Component {
       this.cohortMethodAnalysisList()
     )
     fullAnalysisCartesian.forEach(element => {
-      if (element.length != 2) {
+      if (element.length !== 2) {
         console.error('Expecting array with index 0: TargetComparatorOutcome, 1: CohortMethodAnalysis')
       } else {
         this.fullAnalysisList().push(
@@ -108,6 +108,7 @@ class ComparativeCohortAnalysisUtilities extends Component {
   }
 
   copyFullSpecificationToClipboard () {
+    // eslint-disable-next-line new-cap
     const currentClipboard = new clipboard('#btnCopyFullSpecificationClipboard')
 
     currentClipboard.on('success', function (e) {

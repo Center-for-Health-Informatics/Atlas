@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import {
   AuthorizedRoute
 } from 'pages/Route'

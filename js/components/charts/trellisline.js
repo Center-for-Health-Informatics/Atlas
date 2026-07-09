@@ -1,23 +1,20 @@
-import ko from 'knockout'
 import Chart from 'components/Chart'
-import Component from 'components/Component'
 import atlascharts from 'atlascharts'
 import * as d3 from 'd3'
 import view from 'components/charts/chart.html?raw'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
-import constants from 'const'
 
 class Trellisline extends Chart {
   constructor (params, element) {
     super(params, element)
+    // eslint-disable-next-line new-cap
     this.renderer = new atlascharts.trellisline()
   }
 
   prepareData (rawData) {
     const trellisData = ChartUtils.normalizeArray(rawData)
     if (!trellisData.empty) {
-      const allDeciles = constants.defaultDeciles
       const minYear = d3.min(trellisData.xCalendarYear)
       const maxYear = d3.max(trellisData.xCalendarYear)
 

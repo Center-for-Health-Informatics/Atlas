@@ -33,7 +33,7 @@ class CsvUtils {
    * @return {string} The CSV equivalent of objArray.
    */
   static toCsv (objArray, sDelimiter, cDelimiter) {
-    let i; let l; const names = []; let name; let value; let obj; let row; let output = ''; let n; let nl
+    const names = []; let name; let value; let obj; let row; let output = ''
 
     // Initialize default parameters.
     if (typeof (sDelimiter) === 'undefined' || sDelimiter === null) {
@@ -50,7 +50,7 @@ class CsvUtils {
       if (i === 0) {
         // Loop through the names
         for (name in obj) {
-          if (obj.hasOwnProperty(name)) {
+          if (Object.prototype.hasOwnProperty.call(obj, name)) {
             names.push(name)
             row += [sDelimiter, name, sDelimiter, cDelimiter].join('')
           }
@@ -100,7 +100,7 @@ class CsvUtils {
           const header = requiredHeader.every(head => file.meta.fields.includes(head))
           if (!header) {
             alert('Select a valid CSV File with required headers')
-            reject('Select a valid CSV File with required headers')
+            reject(new Error('Select a valid CSV File with required headers'))
           }
         }
         resolve(file.data)

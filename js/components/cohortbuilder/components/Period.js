@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import componentTemplate from './PeriodTemplate.html?raw'
 
 function PeriodViewModel (params) {

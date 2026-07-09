@@ -1,8 +1,6 @@
-import ko from 'knockout'
 import view from './decision-tree-settings.html?raw'
 import ModelSettingsEditorComponent from './ModelSettingsEditorComponent'
 import commonUtils from 'utils/CommonUtils'
-import dataTypeConverterUtils from 'utils/DataTypeConverterUtils'
 import './decision-tree-settings.less'
 
 const settings = {

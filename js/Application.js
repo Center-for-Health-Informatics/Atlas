@@ -10,8 +10,6 @@ import executionService from 'services/Execution'
 import sourceApi from 'services/SourceAPI'
 import i18nService from 'services/I18nService'
 import EventBus from 'services/EventBus'
-import conceptSetService from 'services/ConceptSet'
-import commonUtils from 'utils/CommonUtils'
 import BemHelper from 'utils/BemHelper'
 import constants from 'const'
 import bowser from 'bowser'
@@ -38,7 +36,7 @@ export default class Application {
       )
     })
     this.initializationComplete = ko.pureComputed(() => {
-      return sharedState.appInitializationStatus() != constants.applicationStatuses.initializing
+      return sharedState.appInitializationStatus() !== constants.applicationStatuses.initializing
     })
 
     this.bowser = bowser
@@ -89,57 +87,61 @@ export default class Application {
  * @returns Promise
 */
   bootstrap () {
-    const promise = new Promise(async (resolve, reject) => {
-      $.support.cors = true
-      sharedState.appInitializationStatus(ko.observable(constants.applicationStatuses.initializing))
-      config.api.isExecutionEngineAvailable = ko.observable(false)
-      ko.applyBindings({
-        // provide to a view access to both model and the router via this.router
-        ...this,
-      }, document.getElementsByTagName('html')[0])
-      httpService.setUnauthorizedHandler(() => authApi.resetAuthParams())
-      httpService.setUserTokenGetter(() => authApi.getAuthorizationHeader())
-
-      try {
-        await i18nService.getAvailableLocales()
-      } catch (e) {
-        reject(e.message)
-      }
-
-      if (config.userAuthenticationEnabled) {
-        try {
-          // Routes to welcome are part of auth flow, loadUserInfo in this case is unnecessary and fails.
-          // More importantly it can trigger an infinite loop when skipLoginEnabled is enabled.
-          if (!window.location.href.includes('/welcome/')) {
-            await authApi.loadUserInfo()
-          }
-        } catch (e) {
-          reject(e.message)
-        }
-      }
-      authApi.isAuthenticated.subscribe(executionService.checkExecutionEngineStatus)
-      this.attachGlobalEventListeners()
-      await executionService.checkExecutionEngineStatus(authApi.isAuthenticated())
-
-      // Add user interaction listener that keeps refreshing the token as long
-      // as the user is active (either moving mouse, navigating with keyboard and/or typing):
-      let userInteractionCount = 0
-       ;['mouseover', 'keydown', 'focusin'].forEach(eventType => {
-        window.addEventListener(eventType, (event) => {
-          userInteractionCount++
-          if (userInteractionCount % 30 == 0) {
-            userInteractionCount = 0
-            if (authApi.isAuthenticated() && this.timeToExpire() < config.refreshTokenThreshold) {
-              authApi.refreshToken()
-            }
-          }
-        })
-      })
-
-      resolve()
+    const promise = new Promise((resolve, reject) => {
+      this._bootstrapInternal(resolve, reject)
     })
 
     return promise
+  }
+
+  async _bootstrapInternal (resolve, reject) {
+    $.support.cors = true
+    sharedState.appInitializationStatus(ko.observable(constants.applicationStatuses.initializing))
+    config.api.isExecutionEngineAvailable = ko.observable(false)
+    ko.applyBindings({
+      // provide to a view access to both model and the router via this.router
+      ...this,
+    }, document.getElementsByTagName('html')[0])
+    httpService.setUnauthorizedHandler(() => authApi.resetAuthParams())
+    httpService.setUserTokenGetter(() => authApi.getAuthorizationHeader())
+
+    try {
+      await i18nService.getAvailableLocales()
+    } catch (e) {
+      reject(e.message)
+    }
+
+    if (config.userAuthenticationEnabled) {
+      try {
+        // Routes to welcome are part of auth flow, loadUserInfo in this case is unnecessary and fails.
+        // More importantly it can trigger an infinite loop when skipLoginEnabled is enabled.
+        if (!window.location.href.includes('/welcome/')) {
+          await authApi.loadUserInfo()
+        }
+      } catch (e) {
+        reject(e.message)
+      }
+    }
+    authApi.isAuthenticated.subscribe(executionService.checkExecutionEngineStatus)
+    this.attachGlobalEventListeners()
+    await executionService.checkExecutionEngineStatus(authApi.isAuthenticated())
+
+    // Add user interaction listener that keeps refreshing the token as long
+    // as the user is active (either moving mouse, navigating with keyboard and/or typing):
+    let userInteractionCount = 0
+       ;['mouseover', 'keydown', 'focusin'].forEach(eventType => {
+      window.addEventListener(eventType, (event) => {
+        userInteractionCount++
+        if (userInteractionCount % 30 === 0) {
+          userInteractionCount = 0
+          if (authApi.isAuthenticated() && this.timeToExpire() < config.refreshTokenThreshold) {
+            authApi.refreshToken()
+          }
+        }
+      })
+    })
+
+    resolve()
   }
 
   /**

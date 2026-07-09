@@ -1,8 +1,6 @@
-import ko from 'knockout'
 import view from './gradient-boosting-machine-settings.html?raw'
 import ModelSettingsEditorComponent from './ModelSettingsEditorComponent'
 import commonUtils from 'utils/CommonUtils'
-import dataTypeConverterUtils from 'utils/DataTypeConverterUtils'
 
 const settings = {
   ntrees: 'ntrees',

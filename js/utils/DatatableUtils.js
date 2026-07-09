@@ -45,7 +45,7 @@ const getFacetForDate = function (date) {
 }
 
 const getCreatedByLogin = (d, emptyFieldSubstitute = 'anonymous') =>
-  d.hasOwnProperty('createdBy') && !!d.createdBy
+  Object.prototype.hasOwnProperty.call(d, 'createdBy') && !!d.createdBy
     ? typeof d.createdBy === 'string'
       ? d.createdBy
       : typeof d.createdBy === 'object' && !!d.createdBy.name

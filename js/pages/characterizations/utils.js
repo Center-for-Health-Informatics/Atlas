@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import constants from './const'
 
 function extractMeaningfulCovName (fullName, faType = constants.feAnalysisTypes.CRITERIA) {

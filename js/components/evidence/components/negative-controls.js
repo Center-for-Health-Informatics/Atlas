@@ -62,7 +62,7 @@ class NegativeControls extends Component {
       if (utils.hasEvidence(s)) {
         this.linkoutDrugConceptIds = []
         this.linkoutConditionConceptIds = []
-        if (this.targetDomainId() == 'Drug') {
+        if (this.targetDomainId() === 'Drug') {
           this.linkoutDrugConceptIds.push(s.conceptId)
           this.linkoutConditionConceptIds = this.conceptIds()
         } else {
@@ -86,7 +86,7 @@ class NegativeControls extends Component {
     this.isRunning = ko.pureComputed(() => {
       return this.evidenceSources()
         .filter(function (info) {
-          return !(info.status() == 'COMPLETE' || info.status() == 'n/a')
+          return !(info.status() === 'COMPLETE' || info.status() === 'n/a')
         })
         .length > 0
     })
@@ -94,7 +94,7 @@ class NegativeControls extends Component {
     this.getSourceInfo = (sourceKey) => {
       return this.evidenceSources()
         .filter(function (d) {
-          return d.sourceKey() == sourceKey
+          return d.sourceKey() === sourceKey
         })[0]
     }
 
@@ -102,7 +102,7 @@ class NegativeControls extends Component {
       const isDirty = this.dirtyFlag() && this.dirtyFlag()
         .isDirty()
       const isNew = this.conceptSet() && (this.conceptSet()
-        .id == 0)
+        .id === 0)
       const canGenerate = !(isDirty || isNew)
       return (canGenerate)
     })
@@ -119,7 +119,7 @@ class NegativeControls extends Component {
             // obtain source reference
             const source = this.evidenceSources()
               .filter(function (s) {
-                return s.sourceId() == info.sourceId
+                return s.sourceId() === info.sourceId
               })[0]
 
             if (source) {
@@ -131,7 +131,7 @@ class NegativeControls extends Component {
                 source.startTime(momentApi.formatDateTime(date))
                 source.executionDuration('...')
 
-                if (info.status != 'COMPLETE') {
+                if (info.status !== 'COMPLETE') {
                   hasPending = true
                 } else {
                   source.executionDuration((info.executionDuration / 1000) + 's')
@@ -174,7 +174,7 @@ class NegativeControls extends Component {
           }, 5000)
         })
         .fail(info => {
-          authApi.handleAccessDenied
+          authApi.handleAccessDenied(info)
           console.error('Job failed: ' + JSON.stringify(info))
         })
     }
@@ -194,21 +194,21 @@ class NegativeControls extends Component {
         .length
       const conditionLength = this.selectedConcepts()
         .filter(function (elem) {
-          return elem.concept.DOMAIN_ID == 'Condition'
+          return elem.concept.DOMAIN_ID === 'Condition'
         })
         .length
       const drugLength = this.selectedConcepts()
         .filter(function (elem) {
-          return elem.concept.DOMAIN_ID == 'Drug'
+          return elem.concept.DOMAIN_ID === 'Drug'
         })
         .length
 
       if (conceptSetLength > 0) {
-        if (conditionLength == conceptSetLength) {
+        if (conditionLength === conceptSetLength) {
           conceptSetValid = true
           conceptDomainId = 'Condition'
           targetDomainId = 'Drug'
-        } else if (drugLength == conceptSetLength) {
+        } else if (drugLength === conceptSetLength) {
           conceptSetValid = true
           conceptDomainId = 'Drug'
           targetDomainId = 'Condition'
@@ -255,7 +255,7 @@ class NegativeControls extends Component {
           const evidenceSources = this.getEvidenceSourcesFromConfig()
           evidenceSources.forEach((evidenceSource, i) => {
             const gi = $.grep(generationInfo, function (a) {
-              return a.sourceId == evidenceSource.sourceId()
+              return a.sourceId === evidenceSource.sourceId()
             })
             if (gi.length > 0) {
               const date = new Date(gi[0].startTime)
@@ -265,8 +265,8 @@ class NegativeControls extends Component {
               evidenceSources[i].status(gi[0].status)
               evidenceSources[i].isValid(gi[0].isValid)
               const giParams = JSON.parse(gi[0].params)
-              evidenceSources[i].csToInclude = ko.observable(giParams.csToInclude != null ? giParams.csToInclude : 0)
-              evidenceSources[i].csToExclude = ko.observable(giParams.csToExclude != null ? giParams.csToExclude : 0)
+              evidenceSources[i].csToInclude = ko.observable(giParams.csToInclude !== null ? giParams.csToInclude : 0)
+              evidenceSources[i].csToExclude = ko.observable(giParams.csToExclude !== null ? giParams.csToExclude : 0)
 
               if (evidenceSources[i].csToInclude()) {
                 conceptSetService.getConceptSet(evidenceSources[i].csToInclude()).then((csInfo) => {
@@ -285,7 +285,7 @@ class NegativeControls extends Component {
                 evidenceSources[i].csToExcludeLoading(false)
               }
 
-              if (gi[0].status == 'RUNNING') {
+              if (gi[0].status === 'RUNNING') {
                 this.pollForInfo()
               }
             } else {
@@ -305,7 +305,7 @@ class NegativeControls extends Component {
       sharedState.sources().forEach(source => {
         if (source.hasResults) {
           resultSources.push(source)
-          if (source.resultsUrl == sharedState.resultsUrl()) {
+          if (source.resultsUrl === sharedState.resultsUrl()) {
             this.currentResultSource(source)
           }
         }
@@ -356,7 +356,7 @@ class NegativeControls extends Component {
               this.negativeControls(results)
               // Get the drug label information
               let conceptIdsForLabels = null
-              if (this.targetDomainId() == 'Drug') {
+              if (this.targetDomainId() === 'Drug') {
                 // Take the list of drugs from the results
                 conceptIdsForLabels = conceptIdsForNegativeControls
               } else {
@@ -379,14 +379,14 @@ class NegativeControls extends Component {
         negativeControls[i].drugLabelExists = 'N/A'
       }
 
-      if (targetDomainId == 'Drug') {
+      if (targetDomainId === 'Drug') {
         for (let e = 0; e < drugLabelExists.length; e++) {
           drugLabelExistsIndex[Object.values(drugLabelExists[e])[0]] = Object.values(drugLabelExists[e])[2]
         }
 
         for (let c = 0; c < negativeControls.length; c++) {
           const concept = negativeControls[c]
-          if (drugLabelExistsIndex[concept.conceptId] != undefined) {
+          if (drugLabelExistsIndex[concept.conceptId] !== undefined) {
             concept.drugLabelExists = drugLabelExistsIndex[concept.conceptId]
           }
         }
@@ -398,10 +398,10 @@ class NegativeControls extends Component {
     this.getDrugLabelExistsByBoolean = (filter) => {
       return this.drugLabelExists()
         .filter(function (elem) {
-          return elem.usaProductLabelExists == filter
+          return elem.usaProductLabelExists === filter
         })
         .sort(function (left, right) {
-          return left.conceptName.toLowerCase() == right.conceptName.toLowerCase() ? 0 : (left.conceptName.toLowerCase() < right.conceptName.toLowerCase() ? -1 : 1)
+          return left.conceptName.toLowerCase() === right.conceptName.toLowerCase() ? 0 : (left.conceptName.toLowerCase() < right.conceptName.toLowerCase() ? -1 : 1)
         })
     }
 
@@ -455,8 +455,7 @@ class NegativeControls extends Component {
         .data()
       const selectedConcepts = []
       _.each(dtItems, (item) => {
-        let concept
-        concept = {
+        const concept = {
           CONCEPT_CLASS_ID: item.conceptClassId,
           CONCEPT_CODE: item.conceptCode,
           CONCEPT_ID: item.conceptId,
@@ -468,8 +467,7 @@ class NegativeControls extends Component {
           STANDARD_CONCEPT_CAPTION: null,
           VOCABULARY_ID: null,
         }
-        let newItem
-        newItem = {
+        const newItem = {
           concept,
           isExcluded: ko.observable(false),
           includeDescendants: ko.observable(false),

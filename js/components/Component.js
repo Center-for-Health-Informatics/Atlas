@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import BemHelper from 'utils/BemHelper'
 import AuthAPI from 'services/AuthAPI'
 

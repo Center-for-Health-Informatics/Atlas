@@ -10,21 +10,22 @@ import utils from '../utils'
 import ko from 'knockout'
 
 function GetSettingNameFromObject (data) {
-  if (data.hasOwnProperty('NaiveBayesSettings')) {
+  const has = (key) => Object.prototype.hasOwnProperty.call(data, key)
+  if (has('NaiveBayesSettings')) {
     return 'NaiveBayesSettings'
-  } else if (data.hasOwnProperty('RandomForestSettings')) {
+  } else if (has('RandomForestSettings')) {
     return 'RandomForestSettings'
-  } else if (data.hasOwnProperty('MLPSettings')) {
+  } else if (has('MLPSettings')) {
     return 'MLPSettings'
-  } else if (data.hasOwnProperty('KNNSettings')) {
+  } else if (has('KNNSettings')) {
     return 'KNNSettings'
-  } else if (data.hasOwnProperty('GradientBoostingMachineSettings')) {
+  } else if (has('GradientBoostingMachineSettings')) {
     return 'GradientBoostingMachineSettings'
-  } else if (data.hasOwnProperty('DecisionTreeSettings')) {
+  } else if (has('DecisionTreeSettings')) {
     return 'DecisionTreeSettings'
-  } else if (data.hasOwnProperty('AdaBoostSettings')) {
+  } else if (has('AdaBoostSettings')) {
     return 'AdaBoostSettings'
-  } else if (data.hasOwnProperty('LassoLogisticRegressionSettings')) {
+  } else if (has('LassoLogisticRegressionSettings')) {
     return 'LassoLogisticRegressionSettings'
   }
 }

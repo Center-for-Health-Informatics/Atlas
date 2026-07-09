@@ -3,7 +3,7 @@ import _ from 'lodash'
 import ko from 'knockout'
 import view from './concept-by-index.html?raw'
 import * as d3 from 'd3'
-import jnj_chart from 'jnj_chart'
+import jnjChart from 'jnj_chart'
 
 function conceptByIndex (params) {
   const self = this
@@ -86,7 +86,8 @@ function conceptByIndex (params) {
               }
             })
 
-          const scatter = new jnj_chart.scatterplot()
+          // eslint-disable-next-line new-cap -- jnj_chart library exposes a lowercase constructor
+          const scatter = new jnjChart.scatterplot()
 
           scatter.render(totalRecordsData, '#concept-by-index-scatterplot', 460, 150, {
             yFormat: d3.format('0.2%'),
@@ -115,7 +116,7 @@ function conceptByIndex (params) {
                   const years = Math.round(o.duration / 365)
                   const days = o.duration % 365
                   let result = ''
-                  if (years != 0) { result += years + 'y ' }
+                  if (years !== 0) { result += years + 'y ' }
 
                   result += days + 'd'
                   return result

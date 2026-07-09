@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import template from './InclusionRuleEditorTemplate.html?raw'
 import 'components/cohortbuilder/components/CriteriaGroup'
 import 'ko.sortable'

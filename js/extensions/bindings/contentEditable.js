@@ -4,7 +4,6 @@ import $ from 'jquery'
 ko.bindingHandlers.contentEditable = {
   init: function (element, valueAccessor, allBindingsAccessor) {
     element.contentEditable = true
-    const value = ko.unwrap(valueAccessor())
 
     $(element).on('input', function () {
       if (ko.isWriteableObservable(valueAccessor())) {

@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 const WarningSeverity = {
   INFO: 'INFO',
   WARNING: 'WARNING',

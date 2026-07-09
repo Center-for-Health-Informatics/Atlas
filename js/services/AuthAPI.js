@@ -5,7 +5,6 @@ import cookie from 'services/CookieAPI'
 import httpService from 'services/http'
 
 const TOKEN_HEADER = 'Bearer'
-const LOCAL_STORAGE_PERMISSIONS_KEY = 'permissions'
 const AUTH_PROVIDERS = {
   IAP: 'AtlasGoogleSecurity',
 }
@@ -91,7 +90,7 @@ const loadUserInfo = function () {
         }
         resolve()
       } else {
-        reject('Cannot retrieve user info')
+        reject(new Error('Cannot retrieve user info'))
       }
     }
   }))
@@ -182,7 +181,7 @@ const checkPermission = function (permission, etalon) {
     return false
   }
 
-  if (permission == etalon) { // quick check: if equal on both sides, then permission is granted.
+  if (permission === etalon) { // quick check: if equal on both sides, then permission is granted.
     return true
   }
 
@@ -196,7 +195,7 @@ const checkPermission = function (permission, etalon) {
     if (etalonLevels.length - 1 < i) {
       return true
     } else {
-      var etalonPart = etalonLevels[i].split(',')
+      const etalonPart = etalonLevels[i].split(',')
       const permissionPart = permissionLevel.split(',')
       if (!etalonPart.includes('*') && !permissionPart.every(pp => etalonPart.includes(pp))) {
         return false
@@ -206,7 +205,7 @@ const checkPermission = function (permission, etalon) {
   }
   // If etalon has more parts than the permission, return true if rest of eLevels contains wildcard
   for (; i < etalonLevels.length; i++) { // loop through remaining etalonLevels
-    etalonPart = etalonLevels[i].split(',')
+    const etalonPart = etalonLevels[i].split(',')
     if (!etalonPart.includes('*')) {
       return false
     }
@@ -241,8 +240,7 @@ function base64urldecode (arg) {
   let s = arg
   s = s.replace(/-/g, '+') // 62nd char of encoding
   s = s.replace(/_/g, '/') // 63rd char of encoding
-  switch (s.length % 4) // Pad with trailing '='s
-  {
+  switch (s.length % 4) { // Pad with trailing '='s
     case 0: break // No pad chars in this case
     case 2: s += '=='; break // Two pad chars
     case 3: s += '='; break // One pad char
@@ -253,7 +251,7 @@ function base64urldecode (arg) {
 
 function parseJwtPayload (jwt) {
   const parts = jwt.split('.')
-  if (parts.length != 3) {
+  if (parts.length !== 3) {
     throw new Error('JSON Web Token must have three parts')
   }
 
@@ -265,7 +263,7 @@ let refreshTokenPromise = null
 const isPromisePending = function (p) {
   return p && typeof p === 'object' && typeof p.status === 'function' && p.status() === 'pending'
 }
-var refreshToken = function () {
+const refreshToken = function () {
   if (!config.userAuthenticationEnabled) {
     return Promise.resolve(true) // no-op if userAuthenticationEnabled == false
   }
@@ -517,7 +515,7 @@ const setAuthParams = (tokenHeader, permissionsStr = '') => {
   !!permissionsStr && permissions(permissionsStr)
 }
 
-var resetAuthParams = function () {
+const resetAuthParams = function () {
   token(null)
   subject(null)
   permissions(null)

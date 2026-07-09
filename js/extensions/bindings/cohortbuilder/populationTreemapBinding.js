@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import ko from 'knockout'
 import * as d3 from 'd3'
 
@@ -34,8 +33,6 @@ function calculateColor (bits) {
 function renderTreemap (data, target) {
   const w = 400
   const h = 400
-  const x = d3.scaleLinear().range([0, w])
-  const y = d3.scaleLinear().range([0, h])
 
   const treemap = d3.treemap()
     .round(false)

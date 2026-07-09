@@ -25,7 +25,7 @@ ko.bindingHandlers.datepicker = {
 
     // handle date data coming via json from Microsoft
     if (typeof value === 'string') {
-      if (String(value).indexOf('/Date(') == 0) {
+      if (String(value).indexOf('/Date(') === 0) {
         value = new Date(parseInt(value.replace(/\/Date\((.*?)\)\//gi, '$1')))
       } else { value = new Date(value) }
 

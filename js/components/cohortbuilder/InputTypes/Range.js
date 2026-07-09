@@ -2,8 +2,6 @@ import ko from 'knockout'
 import momentAPI from 'services/MomentAPI'
 import _ from 'lodash'
 
-const debug = false
-
 function Range (data) {
   const self = this
   data = data || {}

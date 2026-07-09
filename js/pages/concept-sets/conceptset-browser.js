@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import view from './conceptset-browser.html?raw'
 import Page from 'pages/Page'
 import AutoBind from 'utils/AutoBind'

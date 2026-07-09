@@ -1,7 +1,5 @@
 import ko from 'knockout'
 
-const debug = false
-
 function Text (data) {
   const self = this
   data = data || {}

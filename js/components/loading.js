@@ -1,6 +1,5 @@
 import ko from 'knockout'
 import view from './loading.html?raw'
-import config from 'appConfig'
 
 function loading (params) {
   const self = this

@@ -2,8 +2,6 @@ import ko from 'knockout'
 import AdditionalCriteria from './AdditionalCriteria'
 import DemographicCriteria from './CriteriaTypes/DemographicCriteria'
 
-const debug = true
-
 function CriteriaGroup (data, conceptSets) {
   const self = this
 

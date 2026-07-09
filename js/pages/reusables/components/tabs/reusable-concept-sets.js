@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import view from './reusable-concept-sets.html?raw'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'

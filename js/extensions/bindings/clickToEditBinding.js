@@ -35,9 +35,8 @@ ko.bindingHandlers.clickToEdit = {
           if (event.keyCode === 13) {
             observable.editing(false)
             return false
-          }
-          // if user hits escape, push the current observable value back to the field, then set editing to false
-          else if (event.keyCode === 27) {
+          } else if (event.keyCode === 27) {
+            // if user hits escape, push the current observable value back to the field, then set editing to false
             observable.valueHasMutated()
             observable.editing(false)
             return false

@@ -1,5 +1,4 @@
 import httpService from 'services/http'
-import config from 'appConfig'
 import constants from 'const'
 
 export default class JobsService {

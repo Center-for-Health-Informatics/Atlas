@@ -19,7 +19,7 @@ function CohortConceptSetBrowser (params) {
     VocabularyProvider.getConceptSetExpression(conceptSet.id, source.url)
       .then((result) => {
         let isCancelled = false
-        while (self.cohortConceptSets().find(cs => cs.name() == conceptSet.name) != null && !isCancelled) {
+        while (self.cohortConceptSets().find(cs => cs.name() === conceptSet.name) != null && !isCancelled) {
           const newName = prompt('Duplicate Concept Name. Please enter a new name', conceptSet.name)
           if (newName) {
             conceptSet.name = newName

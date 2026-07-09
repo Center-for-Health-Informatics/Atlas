@@ -1,6 +1,5 @@
 import ko from 'knockout'
 import template from './ConceptListTemplate.html?raw'
-import Concept from 'conceptpicker/InputTypes/Concept'
 
 function CocneptListViewModel (params) {
   const self = this

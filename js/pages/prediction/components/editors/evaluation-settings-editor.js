@@ -10,7 +10,7 @@ class EvaluationSettingsEditor extends Component {
   constructor (params) {
     super(params)
 
-    this.isInteger = RegExp('^[1-9][0-9]*$')
+    this.isInteger = /^[1-9][0-9]*$/
     this.runPlpArgs = params.runPlpArgs()
     this.options = constants.options
     this.subscriptions = params.subscriptions

@@ -18,8 +18,6 @@ const DAIMON_TYPE = {
   Temp: 'Temp'
 }
 
-let sources
-
 function getSources () {
   return $.ajax({
     url: config.webAPIRoot + 'source/sources/'
@@ -95,8 +93,8 @@ function setSharedStateSources (sources, priorityDaimons) {
   const serviceCacheKey = getCacheKey()
 
   sharedState.vocabularyUrl() || (priorityDaimons[DAIMON_TYPE.Vocabulary] && sharedState.defaultVocabularyUrl(getVocabularyUrl(priorityDaimons[DAIMON_TYPE.Vocabulary].sourceKey)))
-  sharedState.evidenceUrl() || priorityDaimons[DAIMON_TYPE.CEM] && sharedState.defaultEvidenceUrl(getEvidenceUrl(priorityDaimons[DAIMON_TYPE.CEM].sourceKey))
-  sharedState.resultsUrl() || priorityDaimons[DAIMON_TYPE.Results] && sharedState.defaultResultsUrl(getResultsUrl(priorityDaimons[DAIMON_TYPE.Results].sourceKey))
+  sharedState.evidenceUrl() || (priorityDaimons[DAIMON_TYPE.CEM] && sharedState.defaultEvidenceUrl(getEvidenceUrl(priorityDaimons[DAIMON_TYPE.CEM].sourceKey)))
+  sharedState.resultsUrl() || (priorityDaimons[DAIMON_TYPE.Results] && sharedState.defaultResultsUrl(getResultsUrl(priorityDaimons[DAIMON_TYPE.Results].sourceKey)))
 
   const sourceList = lodash.sortBy(sources.map(function (source, sourceIndex) {
     source.hasVocabulary = false
@@ -161,6 +159,7 @@ function setSharedStateSources (sources, priorityDaimons) {
           sharedState.currentVocabularyVersion() || sharedState.defaultVocabularyVersion(info.version)
         },
         error: function (err) {
+          console.error(err)
           source.version('unknown')
           source.dialect('unknown')
           source.url = config.api.url + source.sourceKey + '/'

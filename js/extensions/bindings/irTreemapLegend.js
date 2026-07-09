@@ -1,9 +1,8 @@
-import $ from 'jquery'
 import ko from 'knockout'
 import * as d3 from 'd3'
 
 function renderLegend (data, target, options) {
-  if (data().scale.domain().length == 0 || isNaN(data().scale.domain()[0])) {
+  if (data().scale.domain().length === 0 || isNaN(data().scale.domain()[0])) {
     // scale is empty or was calculated as NaN so it's invalid. Do nothing.
     return
   }
@@ -49,7 +48,7 @@ function renderLegend (data, target, options) {
       return options.calculateRate(d, 1)
     })
 
-  const xAxisGroup = svg.append('g')
+  svg.append('g')
     .attr('class', 'axis')
     .attr('transform', 'translate(0,20)')
     .call(xAxis)

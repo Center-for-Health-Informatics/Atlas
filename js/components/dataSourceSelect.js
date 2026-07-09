@@ -57,7 +57,7 @@ class DataSourceSelect extends AutoBind(Component) {
       return
     }
     this.recordCountsRefreshing(true)
-    const currentResultSource = this.resultSources().find(source => source.sourceId == event.target.value)
+    const currentResultSource = this.resultSources().find(source => source.sourceId === event.target.value)
     this.selectedSource(currentResultSource)
     this.refreshRecordCounts()
   }
@@ -70,21 +70,24 @@ class DataSourceSelect extends AutoBind(Component) {
 
     const { ViewMode } = constants
     switch (this.currentConceptSetTab()) {
-      case ViewMode.INCLUDED:
+      case ViewMode.INCLUDED: {
         const resultsIncludedConcepts = this.includedConcepts()
         await vocabularyProvider.loadDensity(resultsIncludedConcepts, this.selectedSource().sourceKey)
         this.includedConcepts(resultsIncludedConcepts)
         break
-      case ViewMode.SOURCECODES:
+      }
+      case ViewMode.SOURCECODES: {
         const resultsIncludedSourcecodes = this.includedSourcecodes()
         await vocabularyProvider.loadDensity(resultsIncludedSourcecodes, this.selectedSource().sourceKey)
         this.includedSourcecodes(resultsIncludedSourcecodes)
         break
-      case ViewMode.RECOMMEND:
+      }
+      case ViewMode.RECOMMEND: {
         const resultsRecommendedConcepts = this.recommendedConcepts()
         await vocabularyProvider.loadDensity(resultsRecommendedConcepts, this.selectedSource().sourceKey)
         this.recommendedConcepts(resultsRecommendedConcepts)
         break
+      }
     }
 
     this.currentSourceId = this.selectedSource().sourceId

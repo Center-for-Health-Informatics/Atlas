@@ -14,6 +14,7 @@ function routes (router) {
         router.setCurrentView('ir-manager', { analysisId, activeTab: 'definition', version })
       })
     }),
+    // eslint-disable-next-line no-useless-escape -- this route pattern is compiled into a RegExp by director; \w must be preserved
     '/iranalysis/:analysisId:/?((\w|.)*)': new AuthorizedRoute((analysisId, path) => {
       analysisId = parseInt(analysisId)
       path = path.split('/')

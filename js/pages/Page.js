@@ -1,4 +1,3 @@
-import ko from 'knockout'
 import Component from 'components/Component'
 import _ from 'lodash'
 

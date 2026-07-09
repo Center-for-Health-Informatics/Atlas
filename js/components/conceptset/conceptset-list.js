@@ -1,16 +1,12 @@
 import ko from 'knockout'
 import view from './conceptset-list.html?raw'
-import config from 'appConfig'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import sharedState from 'atlas-state'
-import conceptSetService from 'services/ConceptSet'
-import conceptSetUtils from './utils'
 import ConceptSet from './InputTypes/ConceptSet'
 import constants from './const'
 import exceptionUtils from 'utils/ExceptionUtils'
-import globalConstants from 'const'
 import 'components/tabs'
 import './expression'
 import './included'
@@ -132,7 +128,7 @@ class ConceptSetList extends AutoBind(Component) {
         await this.conceptSetStore.resolveConceptSetExpression()
         await this.conceptSetStore.refresh(this.selectedTabKey())
       } catch (err) {
-        if (err == RESOLVE_OUT_OF_ORDER) { console.info(err) } else { throw (err) }
+        if (err === RESOLVE_OUT_OF_ORDER) { console.info(err) } else { throw (err) }
       }
     }))
 
@@ -228,7 +224,7 @@ class ConceptSetList extends AutoBind(Component) {
     this.tableApi() && this.tableApi()
       .getRows((idx, data) => data.id === currentId).deselect()
     this.conceptSetStore.current(null)
-    if (this.conceptSetStore == sharedState.activeConceptSet()) {
+    if (this.conceptSetStore === sharedState.activeConceptSet()) {
       sharedState.activeConceptSet(null)
     }
   }

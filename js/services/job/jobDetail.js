@@ -21,11 +21,11 @@ function jobDetail (data) {
   self.url = ko.observable(data.url || null)
 
   self.isComplete = function () {
-    return self.status() == 'COMPLETED' || self.status() == 'COMPLETE'
+    return self.status() === 'COMPLETED' || self.status() === 'COMPLETE'
   }
 
   self.isFailed = function () {
-    return self.status() == 'FAILED'
+    return self.status() === 'FAILED'
   }
 
   self.checkProgress = function (progressData) {
@@ -43,7 +43,7 @@ function jobDetail (data) {
     switch (this.type) {
       case 'batch':
         this.progress(statusData.progress)
-        if (this.progress() == '0') {
+        if (this.progress() === '0') {
           return 'STARTING'
         } else if (this.progress() < this.progressMax) {
           return 'RUNNING'
@@ -51,16 +51,16 @@ function jobDetail (data) {
           return 'COMPLETE'
         }
       case 'cohort-generation':
-        statusData = statusData.find(j => (String(j.id.cohortDefinitionId) + String(j.id.sourceId)) == this.executionId)
+        statusData = statusData.find(j => (String(j.id.cohortDefinitionId) + String(j.id.sourceId)) === this.executionId)
         break
       case 'ir-analysis':
-        statusData = statusData.find(j => (String(j.executionInfo.id.analysisId) + String(j.executionInfo.id.sourceId)) == this.executionId)
+        statusData = statusData.find(j => (String(j.executionInfo.id.analysisId) + String(j.executionInfo.id.sourceId)) === this.executionId)
         if (statusData) {
           statusData = statusData.executionInfo
         }
         break
       case 'negative-controls':
-        statusData = statusData.find(j => (String(j.conceptSetId) + String(j.sourceId)) == this.executionId)
+        statusData = statusData.find(j => (String(j.conceptSetId) + String(j.sourceId)) === this.executionId)
         break
       case 'plp':
       case 'cca':

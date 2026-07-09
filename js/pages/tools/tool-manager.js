@@ -85,7 +85,6 @@ class ToolManage extends Page {
     } finally {
       this.loading(false)
       this.getToolFromAllPages()
-      return false
     }
   }
 

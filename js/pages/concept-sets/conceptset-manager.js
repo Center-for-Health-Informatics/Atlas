@@ -138,7 +138,7 @@ class ConceptsetManager extends AutoBind(Page) {
     this.canOptimize = ko.computed(() => {
       return (
         this.currentConceptSet() &&
-      this.currentConceptSet().id != 0 &&
+      this.currentConceptSet().id !== 0 &&
       this.currentConceptSet().expression.items().length > 1 &&
       this.canCreate() &&
       this.canEdit()
@@ -154,7 +154,7 @@ class ConceptsetManager extends AutoBind(Page) {
       this.optimalConceptSet().length > 0 &&
       this.currentConceptSet() && this.currentConceptSet().expression.items() &&
       this.currentConceptSet().expression.items().length > 0) {
-        returnVal = this.optimalConceptSet().length != this.currentConceptSet().expression.items().length
+        returnVal = this.optimalConceptSet().length !== this.currentConceptSet().expression.items().length
       }
       return returnVal
     })
@@ -383,7 +383,7 @@ class ConceptsetManager extends AutoBind(Page) {
         await this.conceptSetStore.resolveConceptSetExpression()
         await this.conceptSetStore.refresh(this.tabs[this.selectedTab() || 0].key)
       } catch (err) {
-        if (err == RESOLVE_OUT_OF_ORDER) { console.info(err) } else { throw (err) }
+        if (err === RESOLVE_OUT_OF_ORDER) { console.info(err) } else { throw (err) }
       }
     }))
 
@@ -565,10 +565,10 @@ class ConceptsetManager extends AutoBind(Page) {
   closeConceptSet () {
     if (this.currentConceptSetDirtyFlag().isDirty() &&
       !confirm(ko.unwrap(ko.i18n('cs.manager.csNotSavedConfirmMessage', 'Your concept set changes are not saved. Would you like to continue?')))) {
-
+      // user chose not to continue; leave the concept set open
     } else {
       this.conceptSetStore.clear()
-      if (this.conceptSetStore == sharedState.activeConceptSet()) {
+      if (this.conceptSetStore === sharedState.activeConceptSet()) {
         sharedState.activeConceptSet(null)
       }
       this.currentConceptSetDirtyFlag().reset()

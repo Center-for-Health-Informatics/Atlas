@@ -15,8 +15,8 @@ function Observation (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
-        if (ko.utils.unwrapObservable(self.ObservationSourceConcept()) == change.value.id) { self.ObservationSourceConcept()(null) }
+        if (ko.utils.unwrapObservable(self.CodesetId) === change.value.id) { self.CodesetId(null) }
+        if (ko.utils.unwrapObservable(self.ObservationSourceConcept()) === change.value.id) { self.ObservationSourceConcept()(null) }
       }
     })
   }, null, 'arrayChange')

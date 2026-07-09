@@ -12,7 +12,7 @@ class AtlasRouter {
   constructor () {
     this.activeRoute = ko.observable({})
     this.currentView = ko.observable('loading')
-    this.onLoginSubscription
+    this.onLoginSubscription = undefined
     this.pages = Object.values(pages)
     this.routerParams = ko.observable()
     this.currentViewAccessible = ko.pureComputed(() => {
@@ -63,7 +63,6 @@ class AtlasRouter {
           this.onLoginSubscription.dispose()
         }
         const handler = routes[key].handler.bind(null, ...args)
-        const title = routes[key].title
         routes[key].checkPermission()
           .then(() => handler())
           .catch((ex) => {

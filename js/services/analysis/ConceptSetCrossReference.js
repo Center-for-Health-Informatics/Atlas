@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 class ConceptSetCrossReference {
   constructor (data = {}) {
     this.conceptSetId = data.conceptSetId || 0

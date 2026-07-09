@@ -14,8 +14,8 @@ function ProcedureOccurrence (data, conceptSets) {
   conceptSets.subscribe(function (changes) {
     changes.forEach(function (change) {
       if (change.status === 'deleted') {
-        if (ko.utils.unwrapObservable(self.CodesetId) == change.value.id) { self.CodesetId(null) }
-        if (ko.utils.unwrapObservable(self.ProcedureSourceConcept()) == change.value.id) { self.ProcedureSourceConcept()(null) }
+        if (ko.utils.unwrapObservable(self.CodesetId) === change.value.id) { self.CodesetId(null) }
+        if (ko.utils.unwrapObservable(self.ProcedureSourceConcept()) === change.value.id) { self.ProcedureSourceConcept()(null) }
       }
     })
   }, null, 'arrayChange')

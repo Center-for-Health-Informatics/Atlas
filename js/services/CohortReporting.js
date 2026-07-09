@@ -289,7 +289,7 @@ function getQuickAnalysisIdentifiers () {
     .concat(visualizationPacks.drugEras.analyses)
     .concat(visualizationPacks.procedure.analyses)
     .concat(visualizationPacks.tornado.analyses)
-    .filter((d, i, arr) => arr.indexOf(d) == i)
+    .filter((d, i, arr) => arr.indexOf(d) === i)
 }
 
 function getHealthcareAnalysesIdentifiers () {
@@ -298,7 +298,7 @@ function getHealthcareAnalysesIdentifiers () {
 
 function getAvailableReports (completedAnalyses) {
   const reports = []
-  if (completedAnalyses.length == 0) {
+  if (completedAnalyses.length === 0) {
     return reports
   }
 
@@ -311,7 +311,7 @@ function getAvailableReports (completedAnalyses) {
     }
     let analysisMissing = false
     vp.analyses.forEach(a => {
-      if (completedAnalyses.indexOf(a) == -1) {
+      if (completedAnalyses.indexOf(a) === -1) {
         analysisMissing = true
       };
     })

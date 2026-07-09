@@ -3,8 +3,6 @@ import view from './aggregate-select.html?raw'
 import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
-import lodash from 'lodash'
-import FeatureAnalysisService from '../../../services/FeatureAnalysisService'
 import consts from '../const'
 import './aggregate-select.less'
 
@@ -60,7 +58,7 @@ class AggregateSelector extends AutoBind(Component) {
 
   getCriteriaDomains (criteria) {
     if (criteria.criteriaType === 'WindowedCriteria') {
-      return CriteriaDomains.filter(d => criteria.expression().Criteria.hasOwnProperty(d.type)).flatMap(d => d.domains) || []
+      return CriteriaDomains.filter(d => Object.prototype.hasOwnProperty.call(criteria.expression().Criteria, d.type)).flatMap(d => d.domains) || []
     }
     return []
   }

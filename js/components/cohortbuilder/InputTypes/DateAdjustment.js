@@ -1,6 +1,5 @@
 import ko from 'knockout'
 
-const debug = false
 function DateAdjustment (data) {
   const self = this
   data = data || {}

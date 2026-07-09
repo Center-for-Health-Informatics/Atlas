@@ -1,5 +1,3 @@
-import ko from 'knockout'
-
 const importTypes = {
   OVERWRITE: 'overwrite',
   APPEND: 'append',

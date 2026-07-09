@@ -3,10 +3,10 @@ import ModelCovarPopTuple from './ModelCovarPopTuple'
 
 class FullAnalysis {
   constructor (targetOutcome, modelCovarPopTuple) {
-    if (typeof targetOutcome !== TargetOutcome) {
+    if (!(targetOutcome instanceof TargetOutcome)) {
       targetOutcome = new TargetOutcome(targetOutcome)
     }
-    if (typeof modelCovarPopTuple !== ModelCovarPopTuple) {
+    if (!(modelCovarPopTuple instanceof ModelCovarPopTuple)) {
       modelCovarPopTuple = new ModelCovarPopTuple(modelCovarPopTuple)
     }
 

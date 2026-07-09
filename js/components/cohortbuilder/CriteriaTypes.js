@@ -17,37 +17,37 @@ import PayerPlanPeriod from './CriteriaTypes/PayerPlanPeriod'
 import LocationRegion from './CriteriaTypes/LocationRegion'
 
 function GetCriteriaFromObject (data, conceptSets) {
-  if (data.hasOwnProperty('ConditionOccurrence')) {
+  if (Object.prototype.hasOwnProperty.call(data, 'ConditionOccurrence')) {
     return { ConditionOccurrence: new ConditionOccurrence(data.ConditionOccurrence, conceptSets) }
-  } else if (data.hasOwnProperty('ConditionEra')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'ConditionEra')) {
     return { ConditionEra: new ConditionEra(data.ConditionEra, conceptSets) }
-  } else if (data.hasOwnProperty('DrugExposure')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'DrugExposure')) {
     return { DrugExposure: new DrugExposure(data.DrugExposure, conceptSets) }
-  } else if (data.hasOwnProperty('DrugEra')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'DrugEra')) {
     return { DrugEra: new DrugEra(data.DrugEra, conceptSets) }
-  } else if (data.hasOwnProperty('DoseEra')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'DoseEra')) {
     return { DoseEra: new DoseEra(data.DoseEra, conceptSets) }
-  } else if (data.hasOwnProperty('Observation')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'Observation')) {
     return { Observation: new Observation(data.Observation, conceptSets) }
-  } else if (data.hasOwnProperty('ProcedureOccurrence')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'ProcedureOccurrence')) {
     return { ProcedureOccurrence: new ProcedureOccurrence(data.ProcedureOccurrence, conceptSets) }
-  } else if (data.hasOwnProperty('VisitOccurrence')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'VisitOccurrence')) {
     return { VisitOccurrence: new VisitOccurrence(data.VisitOccurrence, conceptSets) }
-  } else if (data.hasOwnProperty('VisitDetail')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'VisitDetail')) {
     return { VisitDetail: new VisitDetail(data.VisitDetail, conceptSets) }
-  } else if (data.hasOwnProperty('DeviceExposure')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'DeviceExposure')) {
     return { DeviceExposure: new DeviceExposure(data.DeviceExposure, conceptSets) }
-  } else if (data.hasOwnProperty('Measurement')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'Measurement')) {
     return { Measurement: new Measurement(data.Measurement, conceptSets) }
-  } else if (data.hasOwnProperty('ObservationPeriod')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'ObservationPeriod')) {
     return { ObservationPeriod: new ObservationPeriod(data.ObservationPeriod, conceptSets) }
-  } else if (data.hasOwnProperty('Specimen')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'Specimen')) {
     return { Specimen: new Specimen(data.Specimen, conceptSets) }
-  } else if (data.hasOwnProperty('Death')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'Death')) {
     return { Death: new Death(data.Death, conceptSets) }
-  } else if (data.hasOwnProperty('PayerPlanPeriod')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'PayerPlanPeriod')) {
     return { PayerPlanPeriod: new PayerPlanPeriod(data.PayerPlanPeriod, conceptSets) }
-  } else if (data.hasOwnProperty('LocationRegion')) {
+  } else if (Object.prototype.hasOwnProperty.call(data, 'LocationRegion')) {
     return { LocationRegion: new LocationRegion(data.LocationRegion, conceptSets) }
   }
 }

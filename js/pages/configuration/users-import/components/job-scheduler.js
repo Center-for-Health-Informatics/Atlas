@@ -1,5 +1,4 @@
 import ko from 'knockout'
-import moment from 'moment'
 import view from './job-scheduler.html?raw'
 import AutoBind from 'utils/AutoBind'
 import Component from 'components/Component'
@@ -7,10 +6,6 @@ import commonUtils from 'utils/CommonUtils'
 import Const from '../const'
 import './weekdays'
 import './job-scheduler.less'
-
-function toDate (date) {
-  return date ? moment.utc(date).toDate() : null
-}
 
 class JobScheduler extends AutoBind(Component) {
   constructor (params) {

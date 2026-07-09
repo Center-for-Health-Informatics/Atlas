@@ -8,25 +8,25 @@ async function loadRoleSuggestions (roleSearch) {
   return res.data
 }
 
-async function loadEntityAccessList (entityType, entityId, perm_type = 'WRITE') {
-  const res = await httpService.doGet(config.webAPIRoot + `permission/access/${entityType}/${entityId}/${perm_type}`)
+async function loadEntityAccessList (entityType, entityId, permType = 'WRITE') {
+  const res = await httpService.doGet(config.webAPIRoot + `permission/access/${entityType}/${entityId}/${permType}`)
   return res.data
 }
 
-function grantEntityAccess (entityType, entityId, roleId, perm_type = 'WRITE') {
+function grantEntityAccess (entityType, entityId, roleId, permType = 'WRITE') {
   return httpService.doPost(
     config.webAPIRoot + `permission/access/${entityType}/${entityId}/role/${roleId}`,
     {
-      accessType: perm_type
+      accessType: permType
     }
   )
 }
 
-function revokeEntityAccess (entityType, entityId, roleId, perm_type = 'WRITE') {
+function revokeEntityAccess (entityType, entityId, roleId, permType = 'WRITE') {
   return httpService.doDelete(
     config.webAPIRoot + `permission/access/${entityType}/${entityId}/role/${roleId}`,
     {
-      accessType: perm_type
+      accessType: permType
     }
   )
 }
@@ -40,16 +40,16 @@ function decorateComponent (component, { entityTypeGetter, entityIdGetter, creat
 
   component.isOwner = ko.computed(() => config.userAuthenticationEnabled && component.isOwnerFn(authApi.subject()))
 
-  component.loadAccessList = (perm_type = 'WRITE') => {
-    return loadEntityAccessList(entityTypeGetter(), entityIdGetter(), perm_type)
+  component.loadAccessList = (permType = 'WRITE') => {
+    return loadEntityAccessList(entityTypeGetter(), entityIdGetter(), permType)
   }
 
-  component.grantAccess = (roleId, perm_type = 'WRITE') => {
-    return grantEntityAccess(entityTypeGetter(), entityIdGetter(), roleId, perm_type)
+  component.grantAccess = (roleId, permType = 'WRITE') => {
+    return grantEntityAccess(entityTypeGetter(), entityIdGetter(), roleId, permType)
   }
 
-  component.revokeAccess = (roleId, perm_type = 'WRITE') => {
-    return revokeEntityAccess(entityTypeGetter(), entityIdGetter(), roleId, perm_type)
+  component.revokeAccess = (roleId, permType = 'WRITE') => {
+    return revokeEntityAccess(entityTypeGetter(), entityIdGetter(), roleId, permType)
   }
 
   component.loadAccessRoleSuggestions = (searchStr) => {

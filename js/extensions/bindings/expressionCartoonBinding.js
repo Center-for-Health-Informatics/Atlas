@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import ko from 'knockout'
 import * as d3 from 'd3'
-import d3tip from 'd3-tip'
 import _ from 'lodash'
 
 const divWidth = ko.observable() // triggers update
@@ -253,19 +252,19 @@ function getGroups (cohdef, which) {
       return getGroups(cohdef, 'top').map(subGroups)
   }
 }
-var getCrit = _.curry(function (feature, crit) {
+const getCrit = _.curry(function (feature, crit) {
   switch (feature) {
     case 'additional':
       if (crit.Criteria) { return crit }
       throw new Error('not an additional crit')
-    case 'wrapper': // the single-property object with key=domain, val=crit
+    case 'wrapper': { // the single-property object with key=domain, val=crit
       if (crit._isWrapper) return crit
-      var wrapper = crit.Criteria || crit
+      const wrapper = crit.Criteria || crit
       Object.defineProperty(wrapper, '_isWrapper', {
         value: true,
         configurable: true
       })
-      var kv = _.toPairs(wrapper)
+      const kv = _.toPairs(wrapper)
       if (kv.length !== 1) { throw new Error("can't find wrapper in crit") }
       if (!kv[0][1]._domain) {
         Object.defineProperty(kv[0][1], '_domain', {
@@ -278,6 +277,7 @@ var getCrit = _.curry(function (feature, crit) {
         })
       }
       return wrapper
+    }
     case 'domain':
       return crit._domain || _.keys(getCrit('wrapper', crit))[0]
     case 'critorgroup':
@@ -331,9 +331,10 @@ function startWindow (sw, ext) {
 }
 
 function durExt (crit, ext, shift, op) { // from start to longest possible duration
+  let range, durDays
   if (crit.Criteria) { // additional, starts at midpoint of StartWindow
-    var range = getRange(crit.Criteria, 'dur')
-    var durDays = rangeInfo(range, 'max')
+    range = getRange(crit.Criteria, 'dur')
+    durDays = rangeInfo(range, 'max')
     const sw = startWindow(crit.StartWindow, ext)
     let start = (sw[0] + sw[1]) / 2
     if (shift && (start + durDays) > ext[1]) {
@@ -519,7 +520,7 @@ function critGroupHeaderUpdate (d3element, {
   if (!critgroup) {
     html = ko.unwrap(ko.i18n('components.expressionCartoonBindings.noCriteriaGroup', 'No criteria group'))
   } else {
-    const all_any =
+    const allAny =
     ko.unwrap(ko.i18nformat('components.expressionCartoonBindings.expressionCartoonBindingsText_6', 'Restrict to people having events matching <%=critgroupTypeToLowerCase%> of the following criteria.', { critgroupTypeToLowerCase: critgroup.Type.toLowerCase() }))
     const rightHeaderMessage1 = ko.unwrap(ko.i18n('components.expressionCartoonBindings.expressionCartoonBindingsText_7', 'Events must start within bracketed period'))
     const rightHeaderMessage2 = ko.unwrap(ko.i18n('components.expressionCartoonBindings.expressionCartoonBindingsText_8', 'relative to index date. Lines and arrows represent required duration of these events.'))
@@ -538,7 +539,7 @@ function critGroupHeaderUpdate (d3element, {
         ${rightHeaderMessage2}
       `
 
-    html += `${all_any}${rightHeader}
+    html += `${allAny}${rightHeader}
             <div class="row">
               <div class="axis-div col-xs-${12 - NAME_COLS} col-xs-offset-${NAME_COLS}">
                 <div class="cartoon">
@@ -555,7 +556,6 @@ function critGroupHeaderUpdate (d3element, {
 function primaryCritBodyUpdate (d3element, {
   cohdef
 } = {}) {
-  const pcList = getCrits(cohdef, 'primary', 'crit')
   groupBody(d3element, {
     cohdef,
     group: cohdef.PrimaryCriteria,
@@ -653,7 +653,6 @@ function connectorText (nodes, parentcrit, subgroup) {
   nodes.selectAll('div.indent-bar')
     .html(function (crit) {
       crit = getCrit('critorgroup', crit)
-      if (!('_critIndex' in crit)) debugger
       if (!crit._critIndex || subgroup) return groupMsg
       d3.select(this).style('text-align', 'right')
       return groupConnector
@@ -844,12 +843,6 @@ function critName (selection, cohdef, critType) {
   selection.each(function (_crit) {
     const crit = getCrit('crit', _crit)
     const text = `${critLabel(crit, cohdef)}`
-    let verbose = `<span style="opacity:0.2">${critCartoonText(crit)}</span>`
-    if (critType === 'group') {
-      verbose += `<span style="opacity:0.2">
-              ${addCritOccurrenceText(_crit)}, ${addCritWindowText(_crit)}
-              </span>`
-    }
     // d3.select(this).html(text + verbose);
     d3.select(this).html(text)
   })
@@ -905,11 +898,11 @@ function durInterval (crit, cohdef, critType, addcrit) {
   const range = getRange(crit, 'dur')
   if (!range) return ''
   let html = ''
-  let y
+  let yLine, yText, durext
   if (critType === 'primary') {
-    var yLine = ypos(crit, 'dur', critType)
-    var yText = ypos(crit, 'dur-text', critType)
-    var durext = durExt(crit, cohdef.obsExt, false, range.Op)
+    yLine = ypos(crit, 'dur', critType)
+    yText = ypos(crit, 'dur-text', critType)
+    durext = durExt(crit, cohdef.obsExt, false, range.Op)
   } else {
     yLine = ypos(crit, 'add-dur', critType)
     yText = ypos(crit, 'add-dur-text', critType)
@@ -1059,7 +1052,6 @@ function obsPeriodShading (crit, cohdef, critType, svg) {
   const prior = Math.abs(cohdef.PrimaryCriteria.ObservationWindow.PriorDays)
   const post = cohdef.PrimaryCriteria.ObservationWindow.PostDays
   const dotY = ypos(crit, 'index-dot', critType)
-  const dotR = ypos(crit, 'index-r', critType)
   const leftEdge = cohdef.obsScale.range()[0]
   const leftWidth = cohdef.obsScale(-prior)
   const rightEdge = cohdef.obsScale.range()[1]
@@ -1118,20 +1110,15 @@ function markerText (crit, addcrit) {
 }
 
 function swPeriodBrace (crit, addcrit, cohdef, swin) {
-  const startDateRange = getRange(crit, 'start')
-  const endDateRange = getRange(crit, 'end') // ignore these?
-
   const critType = 'group' // kludgy
   const dotY = ypos(crit, 'add-dot', critType)
   const dotLabel = ypos(crit, 'add-dot-label', critType)
   const dotR = ypos(crit, 'add-r', critType)
   const braceTop = ypos(crit, 'add-brace-top', critType)
-  const braceLabel = ypos(crit, 'add-brace-label', critType)
   const braceHeight = ypos(crit, 'add-brace-height', critType)
   const braceLeft = cohdef.obsScale(swin[0])
   const braceRight = cohdef.obsScale(swin[1])
   const braceMid = (braceLeft + braceRight) / 2
-  const braceMidDays = (swin[0] + swin[1]) / 2
 
   const indexDot = symbol({
     term: 'start',
@@ -1290,7 +1277,7 @@ function niceDomain (domain) {
 
 function conceptName (crit, cohdef) {
   return crit.CodesetId > -1
-    ? _.find(cohdef.ConceptSets, d => d.id == crit.CodesetId).name
+    ? _.find(cohdef.ConceptSets, d => d.id === crit.CodesetId).name
     : ''
 }
 
@@ -1350,19 +1337,6 @@ function makeCurlyBraceHalf (x1, y1, x2, y2, w, q, half) {
   return left + right
 }
 
-function addCritOccurrenceText (ac) {
-  const oc = ac.Occurrence
-  const distinctOrAll = oc.IsDistinct ? ko.unwrap(ko.i18n('components.expressionCartoonBindings.distinct', 'distinct')) : ko.unwrap(ko.i18n('components.expressionCartoonBindings.all', 'all'))
-  return ko.unwrap(ko.i18nformat('components.expressionCartoonBindings.expressionCartoonBindingsText_9', 'with <%=type%> <%%=count> using <%=distinctOrAll%> occurrences', { type: ['exactly', 'at most', 'at least'][oc.Type], count: oc.Count, distinctOrAll }))
-}
-
-function addCritWindowText (ac) {
-  const sw = ac.StartWindow
-  const beforeArAfterStart = sw.Start.Coeff === -1 ? ko.unwrap(ko.i18n('components.expressionCartoonBindings.before', 'before')) : ko.unwrap(ko.i18n('components.expressionCartoonBindings.after', 'after'))
-  const beforeArAfterEnd = sw.End.Coeff === -1 ? ko.unwrap(ko.i18n('components.expressionCartoonBindings.before', 'before')) : ko.unwrap(ko.i18n('components.expressionCartoonBindings.after', 'after'))
-  return ko.unwrap(ko.i18nformat('components.expressionCartoonBindings.expressionCartoonBindingsText_10', 'occurring between <%=startDays%> days <%=beforeArAfterStart%> and <%=endDays%> days <%=beforeArAfterEnd%> index', { startDays: sw.Start.Days, endDays: sw.End.Days, beforeArAfterStart, beforeArAfterEnd }))
-}
-
 function durType (crit) {
   if ('EraLength' in crit) {
     return ko.unwrap(ko.i18n('components.expressionCartoonBindings.era', 'Era'))
@@ -1397,23 +1371,4 @@ function dateText (range) {
     return `${rangeInfo(range, 'nice-op')} ${rangeInfo(range, 'lower')}
                 and ${rangeInfo(range, 'upper')}`
   }
-}
-
-function critCartoonText (crit) {
-  const dur = durText(crit)
-  const startRange = getRange(crit, 'start')
-  let start = 'any time'
-  if (startRange) {
-    start = dateText(startRange)
-    // `${rangeInfo(startRange, 'nice-op')} ${rangeInfo(startRange, 'val')}`;
-  }
-
-  const endRange = getRange(crit, 'end')
-  let end = 'any time'
-  if (endRange) {
-    end = dateText(endRange)
-    // `${rangeInfo(endRange, 'nice-op')} ${rangeInfo(endRange, 'val')}`;
-  }
-
-  return `start ${start}, end ${end}, ${dur}`
 }

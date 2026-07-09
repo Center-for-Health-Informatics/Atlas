@@ -25,7 +25,6 @@ export default {
   title: ko.i18n('navigation.pathways', constants.pageTitle),
   buildRoutes,
   icon: 'sitemap',
-  navUrl: () => '#/pathways',
   statusCss,
   navUrl
 }

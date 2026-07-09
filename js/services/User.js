@@ -1,6 +1,4 @@
-import $ from 'jquery'
 import config from 'appConfig'
-import authApi from 'services/AuthAPI'
 import ko from 'knockout'
 import httpService from './http'
 

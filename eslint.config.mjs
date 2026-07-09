@@ -3,7 +3,7 @@ import globals from 'globals'
 
 export default [
   {
-    ignores: ['js/assets/**', 'js/assets/bundle/**', 'js/extensions/plugins/css.min.js'],
+    ignores: ['js/assets/**', 'js/assets/bundle/**'],
   },
   ...neostandard(),
   {

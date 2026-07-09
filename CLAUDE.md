@@ -12,38 +12,44 @@ ATLAS is an open source web application for OHDSI (Observational Health Data Sci
 # Install dependencies
 npm install
 
+# Run the dev server (Vite, proxies /webapi to a WebAPI backend — see vite.config.mjs)
+npm run dev
+
 # Run tests
 npm test
 
-# Run a single test file
-npx jest tests/utils/CommonUtils.test.js --runInBand
+# Lint (neostandard-based ESLint config)
+npm run lint
+npm run lint:fix
 
-# Full build (install + clean + generate version + bundle + minify)
+# Full build (install + clean + generate version + vite build)
 npm run build
 
-# Dev build only (no install/clean/genversion)
+# Dev build only (no install/clean/genversion, just `vite build`)
 npm run build:dev
 
 # Docker build
 npm run build:docker
 ```
 
-There is no dev server — Atlas is served as static files. Point a web server at the project root; the entry point is `index.html`. A running WebAPI instance is required at the URL configured in `js/config/app.js` (default: `http://localhost:8080/WebAPI/`).
+The app is served by Vite in dev (`npm run dev`, default port 5173) and built into `js/assets/bundle/` for production (`npm run build`), with `index.html` as the entry point. A running WebAPI instance is required — configured via `js/config-local.js` (gitignored, created by the user; see "Local configuration" below).
 
 ## Architecture
 
 ### Module system
 
-The entire codebase uses **AMD (RequireJS)** modules — every file uses `define([...deps], factory)` or `define(factory)`. There is no ES module `import`/`export` syntax in application code. The module IDs map to paths configured in [js/settings.js](js/settings.js).
+The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json` declares `"type": "module"`. A handful of third-party vendor files still use the older UMD/AMD `define(...)` wrapper pattern (e.g. `jquery.ddslick.js`, `jnj.chart.js`, `knockout.selectOnFocus.js`) — these are genuinely still in use and load fine under Vite via bare-specifier aliases in `vite.config.mjs`, they just haven't been rewritten as ESM since nothing requires it. There is no RequireJS/AMD loader in the app anymore.
+
+`vite.config.mjs` carries a large `resolve.alias` list that maps the old RequireJS-style bare module names (`'appConfig'`, `'atlas-state'`, `'const'`, `'services/...'`, `'pages/...'`, etc.) to real file paths, plus aliases for npm packages that ship non-standard entry points. When you see an import like `import sharedState from 'atlas-state'`, check `vite.config.mjs` to find what it actually resolves to.
 
 ### Core wiring
 
-- **Entry point**: `index.html` → `js/main.js` loads RequireJS, applies settings, then bootstraps the app.
+- **Entry point**: `index.html` → `<script type="module" src="/js/main.js">` loads core deps/styles, then bootstraps the app. `js/main.js` writes step-by-step load progress to `console.log`/`document.title` when `process.env.NODE_ENV !== 'production'`, to make module-load failures easy to spot during development — silent in production builds.
 - **Application**: `js/Application.js` — initializes auth, sources, jobs, locale, and unsaved-change tracking.
 - **Router**: `js/pages/Router.js` — uses the `director` library; reads routes from each page module and dispatches to the matching Knockout component.
 - **Shared state**: `js/components/atlas-state.js` — a singleton observable state bag (sources, current entities, dirty flags, locale, job listing, etc.). Import as `'atlas-state'`.
 - **Constants/enums**: `js/const.js` — application-wide enums (applicationStatuses, generationStatuses, executionStatuses, sqlDialects, etc.). Import as `'const'`.
-- **Config**: `js/config/app.js` is the base config; `js/config/local.js` (gitignored, created by the user) and `docker/config-local.js` (template) override it. Import the merged config as `'appConfig'`.
+- **Config**: `js/config/app.js` is the base config; `js/config-local.js` (gitignored, created by the user) and `docker/config-local.js` (template) override it, deep-merged with lodash `mergeWith` in `js/config.js`. Import the merged config as `'appConfig'`.
 
 ### UI framework
 
@@ -63,25 +69,27 @@ Strings use `ko.i18n('key', 'default English text')` throughout the codebase. Lo
 
 ### Build
 
-The build uses **RequireJS optimizer** (`r.js`) via `build/optimize.js` to bundle everything into `js/assets/bundle/bundle.js`, then **Terser** to minify. Babel transforms (preset-env + object-rest-spread) are applied during the r.js build step.
+`npm run build` / `build:dev` / `build:docker` all run **`vite build`** (see `vite.config.mjs`). The old RequireJS-optimizer + Babel + Terser pipeline (`build/optimize.js`, `build/polyfill.js`) is gone — Vite handles bundling, transpilation (via `@vitejs/plugin-legacy` for older-browser fallback bundles), and minification directly. `genversion` (`genversion -e -s js/version.js`) writes a plain ESM `js/version.js` consumed via the `'version'` alias.
 
 ## Testing
 
-Tests live in `tests/` and use **Jest 29** with the `requirejsInstance` global (configured in `jest.config.js`). Because AMD modules can't be directly imported by Jest, tests load them via `requireAmd([...])` (also a global). Stub out Atlas dependencies (`atlas-state`, `appConfig`, etc.) with `requirejsInstance.define(...)` in `beforeAll`. See `tests/utils/CommonUtils.test.js` for the canonical pattern.
+Tests live in `tests/` and run on **Node's built-in test runner** (`node --import ./tests/register-hooks.mjs --test`), not Jest. Since app source is plain ESM, tests import modules directly — no AMD/RequireJS shim needed. The one wrinkle: some subject modules import Vite-only bare aliases (`appConfig`, `atlas-state`, etc.) that plain Node can't resolve; `tests/hooks.mjs` (registered via `tests/register-hooks.mjs`) is a custom module-resolution hook that redirects those specifiers to stub files in `tests/stubs/`. See `tests/utils/CommonUtils.test.js` for the canonical pattern of stubbing Atlas dependencies.
 
 ## Local configuration
 
-To override the WebAPI URL without modifying tracked files, create `js/config-local.js`:
+To point at a WebAPI instance without modifying tracked files, create `js/config-local.js` (gitignored):
 
 ```js
-define([], function () {
-  return {
-    api: {
-      name: 'My Instance',
-      url: 'http://my-webapi-host:8080/WebAPI/'
-    }
-  };
-});
+export default {
+  api: {
+    name: 'My Instance',
+    url: 'http://my-webapi-host:8080/WebAPI/'
+  }
+}
 ```
 
-This file is loaded via `optional!config-local` in `js/config.js` and deep-merged with the base config using lodash `mergeWith`.
+This is imported directly (`import localConfig from 'config-local'`, aliased in `vite.config.mjs`) and deep-merged with the base config in `js/config.js`.
+
+## Migration history
+
+This codebase was migrated from AMD/RequireJS to ESM/Vite; see `MIGRATION_STATUS.md` for the full history if you run into something that looks like a leftover from that transition.

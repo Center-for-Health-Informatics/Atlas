@@ -25,11 +25,6 @@ export default defineConfig({
 
   resolve: {
     alias: [
-      // ── AMD plugin aliases (kept for transition; removed after Phase 3) ──
-      { find: /^text!(.+)/, replacement: '$1?raw' },
-      { find: /^less!(.+)/, replacement: '$1' },
-      { find: /^css!(.+)/, replacement: '$1' },
-
       // ── App config ──
       { find: 'appConfig', replacement: js('config.js') },
       { find: 'config-local', replacement: js('config-local.js') },
@@ -140,7 +135,6 @@ export default defineConfig({
       { find: 'assets', replacement: js('assets') },
       { find: 'jnj_chart', replacement: js('assets/jnj.chart.js') },
       { find: 'localStorageExtender', replacement: js('assets/localStorageExtender.js') },
-      { find: 'd3-slider', replacement: js('assets/d3.slider.js') },
       { find: 'd3-scale-chromatic', replacement: nm('d3-scale-chromatic/src/index.js') },
     ],
   },

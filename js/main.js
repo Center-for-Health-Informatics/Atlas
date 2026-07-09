@@ -1,4 +1,5 @@
-const log = m => { console.log('[LOAD]', m); document.title = m }
+const debug = process.env.NODE_ENV !== 'production'
+const log = m => { if (debug) { console.log('[LOAD]', m); document.title = m } }
 
 async function run () {
   log('jquery'); const { default: $ } = await import('jquery')
@@ -23,7 +24,6 @@ async function run () {
   await import('bootstrap-select/dist/css/bootstrap-select.css')
   await import('./styles/buttons.css')
   await import('./styles/cartoon.css')
-  await import('./styles/d3.slider.css')
   await import('./styles/exploreCohort.css')
   await import('./styles/jquery.dataTables.colVis.css')
   await import('./styles/jquery.datatables.tabletools.css')
@@ -61,6 +61,8 @@ async function run () {
 }
 
 run().catch(err => {
-  console.error('[LOAD FAILED]', err)
-  document.title = 'FAILED: ' + err.message
+  if (debug) {
+    console.error('[LOAD FAILED]', err)
+    document.title = 'FAILED: ' + err.message
+  }
 })

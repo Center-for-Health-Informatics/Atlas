@@ -2,7 +2,11 @@
 <html lang="en">
 
 	<head>
-		<script>window.addEventListener('error', function(e) { document.title = (e.filename||'?') + ':' + e.lineno; console.error('MODULE ERROR', e.filename, e.lineno, e.message); }, true)</script>
+		<script type="module">
+			if (process.env.NODE_ENV !== 'production') {
+				window.addEventListener('error', function(e) { document.title = (e.filename||'?') + ':' + e.lineno; console.error('MODULE ERROR', e.filename, e.lineno, e.message); }, true)
+			}
+		</script>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">

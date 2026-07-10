@@ -1,4 +1,10 @@
 import ko from 'knockout'
+// Registers ko.i18n, used below at module load time. Import this directly
+// rather than relying on main.js happening to import 'databindings' first --
+// that ordering isn't guaranteed once Rollup's production chunking pulls
+// const.js into a shared chunk (it works in dev's unbundled ESM graph, but
+// broke in production because of it).
+import './extensions/bindings/i18nBinding'
 import config from 'appConfig'
 import renderers from 'utils/Renderers'
 import MomentApi from 'services/MomentAPI'

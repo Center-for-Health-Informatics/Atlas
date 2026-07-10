@@ -1,5 +1,5 @@
 # Build the source
-FROM docker.io/library/node:lts-slim as builder
+FROM docker.io/library/node:lts-slim AS builder
 
 WORKDIR /code
 
@@ -8,10 +8,15 @@ WORKDIR /code
 COPY package.json /code/
 RUN npm install
 
-# Build code
+# Build code. images/ is needed here too (not just in the final stage) --
+# index.html references favicon.ico/atlas_loading.svg/ohdsi_color.png, and
+# Vite needs the real files present to resolve, hash, and copy them into the
+# build output; without it, Vite silently leaves those references untouched
+# instead of erroring, which is easy to miss.
 COPY ./vite.config.js /code/vite.config.js
 COPY ./build /code/build
 COPY ./js /code/js
+COPY ./images /code/images
 COPY ./index.html /code/index.html
 
 # Set explicitly (rather than relying on vite build's implicit default) so the
@@ -149,12 +154,20 @@ COPY ./docker/nginx-default.conf /etc/nginx/conf.d/default.conf
 COPY ./docker/optimization.conf /etc/nginx/conf.d/optimization.conf
 COPY ./docker/30-atlas-env-subst.sh /docker-entrypoint.d/30-atlas-env-subst.sh
 
-# Load code
+# Load code -- the actual Vite production build output (index.html + hashed
+# assets/), not the raw source tree. base: '/atlas/' in vite.config.js means
+# asset URLs are emitted as "/atlas/assets/...", so the *contents* of the
+# outDir (js/assets/bundle/) are copied directly into the atlas/ docroot,
+# not nested under it.
+#
+# images/ is still needed as a separate, unbundled directory: at least one
+# Knockout component template (js/components/circe/components/
+# GenerateComponentTemplate.html) references "images/running.png" via a
+# runtime-loaded raw HTML string, which Vite's asset pipeline never sees or
+# rewrites, so the path must resolve against a real images/ dir at runtime.
 COPY ./images /usr/share/nginx/html/atlas/images
 COPY ./README.md ./LICENSE /usr/share/nginx/html/atlas/
-COPY --from=builder /code/index.html* /usr/share/nginx/html/atlas/
-COPY --from=builder /code/node_modules /usr/share/nginx/html/atlas/node_modules
-COPY --from=builder /code/js /usr/share/nginx/html/atlas/js
+COPY --from=builder /code/js/assets/bundle/. /usr/share/nginx/html/atlas/
 
 # Load Atlas runtime config with current user, so it can be modified
 # with env substitution at container start

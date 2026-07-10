@@ -3,3 +3,7 @@
 /.github
 /.idea
 /.vscode
+/js/assets/bundle
+/js/assets/fonts
+/js/assets/images
+/js/version.js

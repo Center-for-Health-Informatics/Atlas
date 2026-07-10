@@ -29,7 +29,7 @@ table.cohort-generate-sources thead, table.cohort-generate-sources tbody tr {
 }
 
 table.cohort-generate-sources thead {
-  width: calc(100%-1em)
+  width: calc(100% - 1em)
 }
 
 td.date-column {

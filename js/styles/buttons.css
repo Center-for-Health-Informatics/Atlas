@@ -12,9 +12,7 @@
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
-  *vertical-align: auto;
   zoom: 1;
-  *display: inline;
   border: 1px solid #d4d4d4;
   height: 32px;
   line-height: 32px;

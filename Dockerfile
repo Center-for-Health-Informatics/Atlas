@@ -1,3 +1,8 @@
+# check=skip=SecretsUsedInArgOrEnv
+# ATLAS_USER_AUTH_ENABLED and ATLAS_REFRESH_TOKEN_THRESHOLD below trip
+# buildkit's secret-name heuristic (AUTH/TOKEN substrings) but are a boolean
+# feature flag and a numeric duration in seconds, not credentials.
+
 # Build the source
 FROM docker.io/library/node:lts-slim AS builder
 

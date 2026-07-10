@@ -1,6 +1,3 @@
-*~
-.idea
-/web.config
 /node_modules/
 /js/assets/bundle
 /js/assets/fonts
@@ -9,7 +6,6 @@ js/version.js
 .env.local
 .env.*.local
 package-lock.json
-.vscode
 
 # Global gitignore excludes .claude/ entirely (personal settings, caches, etc.);
 # re-include just the project skills we want tracked in this repo.

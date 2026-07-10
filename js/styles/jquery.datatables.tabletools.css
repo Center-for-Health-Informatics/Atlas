@@ -56,7 +56,6 @@ a.DTTT_button {
 	padding: 5px 8px;
 	border: 1px solid #999;
 	cursor: pointer;
-	*cursor: hand;
 	font-size: 0.88em;
 	color: black !important;
 
@@ -214,7 +213,6 @@ button.DTTT_button_collection:hover span {
  */
 table.DTTT_selectable tbody tr {
 	cursor: pointer;
-	*cursor: hand;
 }
 
 table.dataTable tr.DTTT_selected.odd {

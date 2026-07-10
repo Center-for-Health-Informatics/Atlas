@@ -11,7 +11,7 @@
     "build": "npm run prep && npm run build:dev",
     "build:dev": "vite build --config vite.config.js",
     "build:docker": "npm run clean && npm run genversion && npm run build:dev && npm prune --production",
-    "genversion": "genversion -e js/version.js",
+    "genversion": "node build/genversion.js",
     "test": "node --import ./tests/register-hooks.js --test",
     "lint": "eslint \"js/**/*.js\" \"tests/**/*.js\"",
     "lint:fix": "eslint --fix \"js/**/*.js\" \"tests/**/*.js\""
@@ -41,7 +41,6 @@
   "devDependencies": {
     "@vitejs/plugin-legacy": "^5.4.3",
     "eslint": "^9.39.3",
-    "genversion": "^3.2.0",
     "neostandard": "^0.13.0",
     "playwright": "^1.61.1",
     "rimraf": "^6.1.3",

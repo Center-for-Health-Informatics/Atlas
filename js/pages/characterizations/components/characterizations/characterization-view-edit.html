@@ -21,13 +21,13 @@
                 <button type="button" class="btn btn-primary" data-bind="click: () => isTagsModalShown(!isTagsModalShown()), visible: isEditPermitted() && !previewVersion(), css: { disabled: isProcessing() }, title: ko.i18n('common.tags', 'Tags')"><i class="fa fa-tags"></i></button>
                 <button type="button" class="btn btn-primary" data-bind="visible: !previewVersion(), click: copyCc, css: {disabled: !canCopy() || isProcessing() }, title: , title: ko.i18n('common.createACopy', 'Create a copy')"><i class="fa fa-copy"></i></button>
 
-		<!-- ko if: enablePermissionManagement -->
+    <!-- ko if: enablePermissionManagement -->
                 <button class="btn btn-primary" data-bind="visible: isOwner() && !previewVersion(), click: () => isAccessModalShown(!isAccessModalShown()), title: ko.i18n('common.configureAccess', 'Configure access')">
                     <i class="fa fa-lock"></i>
                 </button>
-		<!-- /ko -->
+    <!-- /ko -->
 
-		<button type="button" class="btn btn-danger"  data-bind="visible: !previewVersion(), click: deleteCc, css: {disabled: !$component.isDeletePermitted() || isProcessing() }"><i class="fa fa-trash-alt"></i></button>
+    <button type="button" class="btn btn-danger"  data-bind="visible: !previewVersion(), click: deleteCc, css: {disabled: !$component.isDeletePermitted() || isProcessing() }"><i class="fa fa-trash-alt"></i></button>
                 <!-- /ko -->
             </div>
         </div>
@@ -90,21 +90,21 @@
 <!-- /ko -->
 
 <configure-access-modal params="
-	isModalShown: $component.isAccessModalShown,
-	isOwnerFn: $component.isOwnerFn,
-	loadAccessListFn: $component.loadAccessList,
-	grantAccessFn: $component.grantAccess,
-	revokeAccessFn: $component.revokeAccess,
-	loadRoleSuggestionsFn: $component.loadAccessRoleSuggestions
+  isModalShown: $component.isAccessModalShown,
+  isOwnerFn: $component.isOwnerFn,
+  loadAccessListFn: $component.loadAccessList,
+  grantAccessFn: $component.grantAccess,
+  revokeAccessFn: $component.revokeAccess,
+  loadRoleSuggestionsFn: $component.loadAccessRoleSuggestions
 "></configure-access-modal>
 
 <tags-modal params="
-	isModalShown: $component.isTagsModalShown,
-	tagsList: $component.tagsList,
-	assignTagFn: $component.assignTag,
-	unassignTagFn: $component.unassignTag,
-	createNewTagFn: $component.createNewTag,
-	loadAvailableTagsFn: $component.loadAvailableTags,
-	checkAssignPermissionFn: $component.checkAssignPermission,
-	checkUnassignPermissionFn: $component.checkUnassignPermission
+  isModalShown: $component.isTagsModalShown,
+  tagsList: $component.tagsList,
+  assignTagFn: $component.assignTag,
+  unassignTagFn: $component.unassignTag,
+  createNewTagFn: $component.createNewTag,
+  loadAvailableTagsFn: $component.loadAvailableTags,
+  checkAssignPermissionFn: $component.checkAssignPermission,
+  checkUnassignPermissionFn: $component.checkUnassignPermission
 "></tags-modal>

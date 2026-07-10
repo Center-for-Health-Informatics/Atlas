@@ -109,15 +109,15 @@ table.sources-table tr {
     transition: background-color 0.3s ease; /* Smooth transition for hover effect */
 }
 table.sources-table tr:hover {
-    background-color: #f2f2f2; 
+    background-color: #f2f2f2;
 }
 table.sources-table tr td {
-    border-top: solid 1px #FFF;      
-    border-bottom: solid 1px #FFF;      
+    border-top: solid 1px #FFF;
+    border-bottom: solid 1px #FFF;
 }
 table.sources-table tr:hover td {
-    border-top: solid 1px #ccc;      
-    border-bottom: solid 1px #ccc;      
+    border-top: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
 }
 table.sources-table tbody td {
     padding: 0 10px 4px;
@@ -125,4 +125,3 @@ table.sources-table tbody td {
 .generation-buttons {
     white-space: nowrap;
 }
-  

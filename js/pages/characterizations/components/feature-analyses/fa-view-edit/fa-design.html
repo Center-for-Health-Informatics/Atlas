@@ -16,7 +16,7 @@
             <!-- /ko -->
             <textarea data-bind="
                     css: classes({ element: 'descr', extra: 'form-control' }),
-					attr: { disabled: $component.canEdit() ? null : true }
+          attr: { disabled: $component.canEdit() ? null : true }
                     textInput: $component.data().descr
                 "></textarea>
         </div>
@@ -32,7 +32,7 @@
                         data-bind="
                             if: $component.canEdit() || $component.data().type() === $component.featureTypes.PRESET,
                             css: classes({ element: 'nav-pill', extra: $component.data().type() === $component.featureTypes.PRESET ? 'active' : null }),
-							attr: { disabled: $component.canEdit() ? null : true },
+              attr: { disabled: $component.canEdit() ? null : true },
                             click: setType.bind(null, $component.featureTypes.PRESET)
                         ">
                         <a data-bind="text: ko.i18n('cc.fa.preset', 'Preset')"></a>
@@ -45,7 +45,7 @@
                         data-bind="
                             if: ($component.canEdit() && !$component.featureId()) || $component.data().type() === $component.featureTypes.CRITERIA_SET,
                             css: classes({ element: 'nav-pill', extra: $component.data().type() === $component.featureTypes.CRITERIA_SET ? 'active' : null }),
-							attr: { disabled: $component.canEdit() ? null : true },
+              attr: { disabled: $component.canEdit() ? null : true },
                             click: setType.bind(null, $component.featureTypes.CRITERIA_SET)
                         ">
                         <a data-bind="text: ko.i18n('cc.fa.criteria', 'Criteria')"></a>
@@ -54,7 +54,7 @@
                         data-bind="
                             if: ($component.canEdit() && !$component.featureId()) || $component.data().type() === $component.featureTypes.CUSTOM_FE,
                             css: classes({ element: 'nav-pill', extra: $component.data().type() === $component.featureTypes.CUSTOM_FE ? 'active' : null }),
-							attr: { disabled: $component.canEdit() ? null : true },
+              attr: { disabled: $component.canEdit() ? null : true },
                             click: setType.bind(null, $component.featureTypes.CUSTOM_FE)
                         ">
                         <a data-bind="text: ko.i18n('cc.fa.custom', 'Custom')"></a>
@@ -71,8 +71,8 @@
             </div>
             <!-- /ko -->
             <div data-bind="
-                    if: $component.data().type() === $component.featureTypes.CRITERIA_SET, 
-					css: classes('design')
+                    if: $component.data().type() === $component.featureTypes.CRITERIA_SET,
+          css: classes('design')
                 ">
                 <div data-bind="css: classes({extra: 'panel panel-primary'})">
                     <div data-bind="css: classes({ extra: 'panel-heading' }), text: ko.i18n('cc.fa.analysisType', 'Analysis type:')"></div>
@@ -103,37 +103,37 @@
                         </div>
                     </span>
                 <!-- ko foreach: $component.data().design -->
-				<div data-bind="css: $component.canEdit() ? '' : 'feature-analysis-view-edit__content--disabled'">
-					<div data-bind="
-								css: $component.classes('criteria'),
-								eventListener: [
-									{ event: 'click', selector: '.conceptset_import', callback: $component.handleConceptSetImport},
-									{ event: 'click', selector: '.conceptset_edit', callback: $component.handleEditConceptSet }
-								]
-							">
-						<div data-bind="css: $component.classes('criteria-heading')">
-							<input
-									data-bind="css: $component.classes({ element: 'criteria-name', extra: 'form-control' }), textInput: $data.name, placeholder: ko.i18n('cc.fa.criteriaName', 'Criteria name')"
-							/>
-							<button
-									type="button"
-									data-bind="css: $component.classes({ element: 'criteria-delete', extra: 'btn btn-sm btn-danger' }), attr: { disabled: $component.canEdit() ? null : true }, click: () => $component.removeCriteria($index())"
-							><i class="fa fa-trash-alt"></i></button>
-						</div>
-						<!-- Aggregate -->
-						<div data-bind="if: $parent.data().statType() === 'DISTRIBUTION' && $data.criteriaType !== 'DemographicCriteria'">
-							<aggregate-select params="aggregates: $component.aggregates, currentAggregate: $data.aggregate, domains: $component.domains, criteria: $data"></aggregate-select>
-						</div>
-						<div data-bind="if: $data.criteriaType === 'CriteriaGroup'">
-							<criteria-group params="{ expression: { ConceptSets: $component.data().conceptSets }, group: $data.expression}"></criteria-group>
-						</div>
-						<div data-bind="if: $data.criteriaType === 'DemographicCriteria'">
-							<demographic-criteria params="{ criteria: $data.expression }"></demographic-criteria>
-						</div>
-						<div data-bind="if: $data.criteriaType === 'WindowedCriteria'">
-							<windowed-criteria params="{ expression: { ConceptSets: $component.data().conceptSets }, criteria: $data.expression, disableObservationPeriod: true, defaultObservationPeriod: true }"></windowed-criteria>
-						</div>
-					</div>
+        <div data-bind="css: $component.canEdit() ? '' : 'feature-analysis-view-edit__content--disabled'">
+          <div data-bind="
+                css: $component.classes('criteria'),
+                eventListener: [
+                  { event: 'click', selector: '.conceptset_import', callback: $component.handleConceptSetImport},
+                  { event: 'click', selector: '.conceptset_edit', callback: $component.handleEditConceptSet }
+                ]
+              ">
+            <div data-bind="css: $component.classes('criteria-heading')">
+              <input
+                  data-bind="css: $component.classes({ element: 'criteria-name', extra: 'form-control' }), textInput: $data.name, placeholder: ko.i18n('cc.fa.criteriaName', 'Criteria name')"
+              />
+              <button
+                  type="button"
+                  data-bind="css: $component.classes({ element: 'criteria-delete', extra: 'btn btn-sm btn-danger' }), attr: { disabled: $component.canEdit() ? null : true }, click: () => $component.removeCriteria($index())"
+              ><i class="fa fa-trash-alt"></i></button>
+            </div>
+            <!-- Aggregate -->
+            <div data-bind="if: $parent.data().statType() === 'DISTRIBUTION' && $data.criteriaType !== 'DemographicCriteria'">
+              <aggregate-select params="aggregates: $component.aggregates, currentAggregate: $data.aggregate, domains: $component.domains, criteria: $data"></aggregate-select>
+            </div>
+            <div data-bind="if: $data.criteriaType === 'CriteriaGroup'">
+              <criteria-group params="{ expression: { ConceptSets: $component.data().conceptSets }, group: $data.expression}"></criteria-group>
+            </div>
+            <div data-bind="if: $data.criteriaType === 'DemographicCriteria'">
+              <demographic-criteria params="{ criteria: $data.expression }"></demographic-criteria>
+            </div>
+            <div data-bind="if: $data.criteriaType === 'WindowedCriteria'">
+              <windowed-criteria params="{ expression: { ConceptSets: $component.data().conceptSets }, criteria: $data.expression, disableObservationPeriod: true, defaultObservationPeriod: true }"></windowed-criteria>
+            </div>
+          </div>
                 </div>
                 <!-- /ko -->
             </div>
@@ -176,18 +176,18 @@ showModal: showConceptSetBrowser,
 title: ko.i18n('cc.fa.selectConceptSet', 'Select Concept Set...'),
 modifiers: ['lg'],
 data: {
-		criteriaContext: $component.criteriaContext,
-		strataConceptSets: $component.conceptSets(),
-		onActionComplete: $component.onRespositoryActionComplete
+    criteriaContext: $component.criteriaContext,
+    strataConceptSets: $component.conceptSets(),
+    onActionComplete: $component.onRespositoryActionComplete
 }
 }">
-		<div class="paddedWrapper">
-				<concept-set-browser params="
-										criteriaContext: criteriaContext,
-										cohortConceptSets: strataConceptSets,
-										onActionComplete: onActionComplete
-								"></concept-set-browser>
-		</div>
+    <div class="paddedWrapper">
+        <concept-set-browser params="
+                    criteriaContext: criteriaContext,
+                    cohortConceptSets: strataConceptSets,
+                    onActionComplete: onActionComplete
+                "></concept-set-browser>
+    </div>
 </atlas-modal>
 
 <!--
@@ -197,9 +197,9 @@ data: {
       <div class="modal-header">Import Concept Set From Repository...</div>
       <div class="paddedWrapper">
         <concept-set-browser params="
-            criteriaContext: $component.criteriaContext, 
-            cohortConceptSets: $component.conceptSets(), 
-            onActionComplete: $component.onRespositoryActionComplete, 
+            criteriaContext: $component.criteriaContext,
+            cohortConceptSets: $component.conceptSets(),
+            onActionComplete: $component.onRespositoryActionComplete,
             buttonActionEnabled: true"></concept-set-browser>
       </div>
     </div>

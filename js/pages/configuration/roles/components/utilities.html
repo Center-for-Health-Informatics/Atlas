@@ -31,23 +31,23 @@
             <!-- /ko -->
 
             <import params="{
-							entityId: currentRoleId,
-							isPermittedImport: isPermittedImport,
-							importService: importService,
-							importJSON: importJSON,
-							isJSONValid: isJSONValid,
-							afterImportSuccess: afterImportSuccess
-						}"></import>
+              entityId: currentRoleId,
+              isPermittedImport: isPermittedImport,
+              importService: importService,
+              importJSON: importJSON,
+              isJSONValid: isJSONValid,
+              afterImportSuccess: afterImportSuccess
+            }"></import>
         </div>
         <div role="tabpanel" data-bind="visible: $component.expressionMode() == 'export'" class="tab-pane">
             <div class="paddedWrapper">
                 <export params="{
-								entityId: currentRoleId,
-								isPermittedExport: isPermittedExport,
-								exportService: exportService,
-								dirtyFlag: dirtyFlag,
-								message: { entityName: 'role' }
-							}"></export>
+                entityId: currentRoleId,
+                isPermittedExport: isPermittedExport,
+                exportService: exportService,
+                dirtyFlag: dirtyFlag,
+                message: { entityName: 'role' }
+              }"></export>
             </div>
         </div>
     </div>

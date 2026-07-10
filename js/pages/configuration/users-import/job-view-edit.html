@@ -15,27 +15,27 @@
 
     <tabs data-bind="visible: !$component.loading()" params="
             selectedTabKey: $component.selectedTabKey,
-		    selectTab: $component.selectTab,
-		    tabs: [
-		        {
-		            title: ko.i18n('configuration.userImport.tabs.scheduler', 'Scheduler'),
-		            key: 'scheduler',
-		            componentName: 'job-scheduler',
-		            componentParams: $component.componentParams,
-		        },
-		        {
-		            title: ko.i18n('configuration.userImport.tabs.roleMapping', 'Role Mapping'),
-		            key: 'mapping',
-		            componentName: 'role-group-mapping',
-		            componentParams: $component.componentParams,
-		        },
-		        {
-		            title: ko.i18n('configuration.userImport.tabs.jobHistory', 'Job History'),
-		            key: 'job-history',
-		            componentName: 'user-import-job-history',
-		            componentParams: $component.componentParams,
-		        },
-		    ]
+        selectTab: $component.selectTab,
+        tabs: [
+            {
+                title: ko.i18n('configuration.userImport.tabs.scheduler', 'Scheduler'),
+                key: 'scheduler',
+                componentName: 'job-scheduler',
+                componentParams: $component.componentParams,
+            },
+            {
+                title: ko.i18n('configuration.userImport.tabs.roleMapping', 'Role Mapping'),
+                key: 'mapping',
+                componentName: 'role-group-mapping',
+                componentParams: $component.componentParams,
+            },
+            {
+                title: ko.i18n('configuration.userImport.tabs.jobHistory', 'Job History'),
+                key: 'job-history',
+                componentName: 'user-import-job-history',
+                componentParams: $component.componentParams,
+            },
+        ]
         ">
 
     </tabs>

@@ -14,14 +14,14 @@
 
     <div data-bind="css: classes('reusables-table'), if: !isLoading() && !selectedReusable()">
         <faceted-datatable params="{
-				order: [[3, 'desc']],
-				columns: reusablesTable.gridColumns,
-				options: reusablesTable.gridOptions,
-				reference: reusablesList,
-				pageLength: reusablesTable.tableOptions.pageLength,
-				lengthMenu: reusablesTable.tableOptions.lengthMenu,
-				language: ko.i18n('datatable.language')
-		}"></faceted-datatable>
+        order: [[3, 'desc']],
+        columns: reusablesTable.gridColumns,
+        options: reusablesTable.gridOptions,
+        reference: reusablesList,
+        pageLength: reusablesTable.tableOptions.pageLength,
+        lengthMenu: reusablesTable.tableOptions.lengthMenu,
+        language: ko.i18n('datatable.language')
+    }"></faceted-datatable>
     </div>
 
     <div data-bind="css: classes('selected-reusable'), if: !isLoading() && selectedReusable()">

@@ -33,15 +33,15 @@ table.cohort-generate-sources thead {
 }
 
 td.date-column {
-	width: 125px;
+  width: 125px;
 }
 
 td.author-column {
-	width: 125px;
+  width: 125px;
 }
 
 td.id-column {
-	width: 45px;
+  width: 45px;
 }
 
 .breadcrumb-container {
@@ -2133,38 +2133,38 @@ div.wrapper_ohdsi a {
 }
 
 .numericInputField {
-	padding-left: 3px;
-	padding-right: 3px;
-	margin-right: 3px;
-	line-height: 18px;
-	min-width: 18px;
-	min-height:19px;
-	border: solid 1px;
-	display: inline-block;
-	background-color: white;
-	color: black;
-	border-color: gray;
-	text-indent: 0px;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 3px;
+  line-height: 18px;
+  min-width: 18px;
+  min-height:19px;
+  border: solid 1px;
+  display: inline-block;
+  background-color: white;
+  color: black;
+  border-color: gray;
+  text-indent: 0px;
 }
 
 .dropdown {
-	margin: 2px 0px;
-	padding-right: 18px;
-	background-image: url(images/arrow_down.png);
-	background-position: center right;
-	background-repeat: no-repeat;
+  margin: 2px 0px;
+  padding-right: 18px;
+  background-image: url(images/arrow_down.png);
+  background-position: center right;
+  background-repeat: no-repeat;
 }
 
 .thresholdLevel {
-	width: 30%
+  width: 30%
 }
 
 .thresholdLevel div {
-	display: flex
+  display: flex
 }
 
 .thresholdLevel div input {
-	margin-right: 10px
+  margin-right: 10px
 }
 
 .import-modal-footer {

@@ -100,7 +100,7 @@
             <span data-bind="text: ko.i18nformat('components.analysisExecution.buttons.allExecutions', 'All executions (<%=submissions%>)', {submissions: submissions().length})"></span>
           </button>
         </li>
- 			<!-- ko if: $component.config.shinyEnabled -->
+      <!-- ko if: $component.config.shinyEnabled -->
       <div class="btn-group">
         <button class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"
           data-bind="attr: {disabled: !$component.isResultsViewPermitted(sourceKey) || $component.runningExecutionStatuses.includes(status()) || submissions().length < 1}">
@@ -116,7 +116,7 @@
           </li>
         </ul>
       </div>
-			<!-- /ko -->
+      <!-- /ko -->
       </ul>
     </div>
     <ul data-bind="css: classes('result-list')">

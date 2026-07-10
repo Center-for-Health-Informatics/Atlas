@@ -14,7 +14,7 @@ In this study, we compare <span class="cohort-comparison-pf-reference" data-bind
 </div>
 <div data-bind="if: $component.cohortComparison().minimumWashoutPeriod() > 0">
 <br />
-For both cohorts, we impose a requirement that patients must have at least <span data-bind="text: $component.cohortComparison().minimumWashoutPeriod()"></span> days of continuous observation prior to cohort entry.      
+For both cohorts, we impose a requirement that patients must have at least <span data-bind="text: $component.cohortComparison().minimumWashoutPeriod()"></span> days of continuous observation prior to cohort entry.
 </div>
 <div data-bind="if: $component.cohortComparison().minimumDaysAtRisk() > 0">
 <br />
@@ -45,7 +45,7 @@ Patients with <span class="cohort-comparison-pf-reference" data-bind="text: $com
 Propensity scores will be used as an analytic strategy to reduce potential confounding due to imbalance between the target and comparator cohorts in baseline covariates.  The propensity score is the probability of a patient being classified in the target cohort vs. the comparator cohort, given a set of observed covariates.  In this study, the propensity score is estimated for each patient, using the predicted probability from a regularized logistic regression model, fit with a Laplace prior (LASSO) and the regularization hyperparameter selected by optimizing the likelihood in a 10-fold cross validation, using a starting variance of 0.01 and a tolerance of 2e-7.
 <br />
 <br />
-The types of baseline covariates used to fit the propensity score model will be:  
+The types of baseline covariates used to fit the propensity score model will be:
 <br />
 <br />
 <div>
@@ -147,7 +147,7 @@ Specific covariates to be excluded from the propensity score model are labelled 
 </div>
 <div data-bind="if: $component.cohortComparison().psMatch() == 1">
 <br />
-Patients in the target cohort will be matched to patients in the comparator cohort, using a maximum ratio of <span data-bind="text: $component.cohortComparison().psMatchMaxRatio()"></span>:1 matching, using a greedy matching algorithm, applying a caliper of 0.25 of the standard deviation of the propensity score distribution.  
+Patients in the target cohort will be matched to patients in the comparator cohort, using a maximum ratio of <span data-bind="text: $component.cohortComparison().psMatchMaxRatio()"></span>:1 matching, using a greedy matching algorithm, applying a caliper of 0.25 of the standard deviation of the propensity score distribution.
 </div>
 <div data-bind="if: $component.cohortComparison().psStrat() == 1">
 <br />
@@ -155,7 +155,7 @@ The target cohort and comparator cohorts will be stratified into <span data-bind
 </div>
 <div data-bind="if: $component.cohortComparison().omCovariates() == 1">
 <br />
-A multivariate <span data-bind="if: ($component.cohortComparison().psMatch() == 1 || $component.cohortComparison().psStrat() == 1)">conditional</span> <span data-bind="text: $component.cohortComparison().modelTypeName()"></span> will be used to estimate the <span class="modelTypeRate" data-bind="text: $component.cohortComparison().modelTypeRate()"></span> of <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().outcomeCaption()"></span> in <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().treatmentCaption()"></span>, relative to <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().comparatorCaption()"></span>, adjusting for baseline covariates.  
+A multivariate <span data-bind="if: ($component.cohortComparison().psMatch() == 1 || $component.cohortComparison().psStrat() == 1)">conditional</span> <span data-bind="text: $component.cohortComparison().modelTypeName()"></span> will be used to estimate the <span class="modelTypeRate" data-bind="text: $component.cohortComparison().modelTypeRate()"></span> of <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().outcomeCaption()"></span> in <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().treatmentCaption()"></span>, relative to <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().comparatorCaption()"></span>, adjusting for baseline covariates.
 <br />
 <br />
 <!--<div>
@@ -273,7 +273,7 @@ An attrition diagram will be provided to detail the loss of patients from the or
 </div>
 <div>
 <br/>
-The final outcome model, a <span data-bind="if: $component.cohortComparison().psAdjustment() == 1">conditional <span><span data-bind="text: $component.cohortComparison().modelTypeName()"></span> model, will be summarized by providing the <span data-bind="text: $component.cohortComparison().modelTypeRate()"></span> ratio and associated 95% confidence interval.  The number of persons, amount of time-at-risk, and number of outcomes in each cohort will also be reported.  
+The final outcome model, a <span data-bind="if: $component.cohortComparison().psAdjustment() == 1">conditional <span><span data-bind="text: $component.cohortComparison().modelTypeName()"></span> model, will be summarized by providing the <span data-bind="text: $component.cohortComparison().modelTypeRate()"></span> ratio and associated 95% confidence interval.  The number of persons, amount of time-at-risk, and number of outcomes in each cohort will also be reported.
 </div>
 <div data-bind="if: $component.cohortComparison().modelType() == 3">
 <br/>

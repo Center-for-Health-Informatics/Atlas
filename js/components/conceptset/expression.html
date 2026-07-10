@@ -14,12 +14,12 @@
                 type="button"
                 class="btn btn-sm btn-danger"
                 data-bind="
-                    click:function() { $component.deleteConcepts(); }, 
+                    click:function() { $component.deleteConcepts(); },
                     css: { disabled: conceptsForRemovalLength() === 0 || !canEdit() },
                     text: ko.i18n('components.conceptSet.removeSelected', 'Remove Selected')"
             ></button>
         </span>
-        
+
         <span data-bind="tooltip: buttonTooltipText">
             <button type="button" class="btn btn-sm btn-danger" data-bind="click:function() { $component.onDelete(); }, enable: canEdit, text: ko.i18n('components.conceptSet.deleteConceptSet', 'Delete Concept Set')"></button>
         </span>

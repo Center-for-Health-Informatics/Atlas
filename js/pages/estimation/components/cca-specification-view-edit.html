@@ -30,7 +30,7 @@
                             <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addComparison, disable: !$component.isEditPermitted()"><i class="fa fa-plus"></i> <span data-bind="text: ko.i18n('ple.spec.addComparisons', 'Add Comparisons')"></span></button>
                             </div>
                             <div class="panel-body">
-                                <faceted-datatable params="{ 
+                                <faceted-datatable params="{
                                 columns: cca.comparisonTableColumns,
                                 options: cca.comparisonTableOptions,
                                 pageLength: cca.comparisonTableOptions.pageLength,
@@ -61,7 +61,7 @@
                                 <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addAnalysis, disable: !$component.isEditPermitted()"><i class="fa fa-plus"></i> <span data-bind="text: ko.i18n('ple.spec.addAnalysisSettings', 'Add Analysis Settings')"></span></button>
                             </div>
                             <div class="panel-body">
-                                <faceted-datatable params="{ 
+                                <faceted-datatable params="{
                                     columns: cca.analysisSettingsTableColumns,
                                     options: cca.analysisSettingsTableOptions,
                                     pageLength: cca.analysisSettingsTableOptions.pageLength,
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                             </div>
-                        </div>    
+                        </div>
                     </div>
                     </div>
                 </div>

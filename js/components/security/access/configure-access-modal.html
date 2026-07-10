@@ -1,21 +1,21 @@
 <atlas-modal params="showModal: $component.isModalShown,
-										 title: ko.i18n('common.configureAccess', 'Configure access'),
-										 data: {
-										    classes: classes,
-										    isLoading: isLoading,
-										    readRoleName: readRoleName,
-		                                                                    writeRoleName: writeRoleName,
-										    writeAccessColumns: writeAccessColumns,
-		                                                                    readAccessColumns: readAccessColumns,
-										    writeAccessList: writeAccessList,
-		                                                                    readAccessList: readAccessList,
-										    grantAccess: grantAccess,
-										    revokeRoleAccess: revokeRoleAccess,
-										    readRoleOptions: readRoleOptions,
-										    readRoleSearch: readRoleSearch,
-		                                                                    writeRoleOptions: writeRoleOptions,
-										    writeRoleSearch: writeRoleSearch
-										 }">
+                     title: ko.i18n('common.configureAccess', 'Configure access'),
+                     data: {
+                        classes: classes,
+                        isLoading: isLoading,
+                        readRoleName: readRoleName,
+                                                                        writeRoleName: writeRoleName,
+                        writeAccessColumns: writeAccessColumns,
+                                                                        readAccessColumns: readAccessColumns,
+                        writeAccessList: writeAccessList,
+                                                                        readAccessList: readAccessList,
+                        grantAccess: grantAccess,
+                        revokeRoleAccess: revokeRoleAccess,
+                        readRoleOptions: readRoleOptions,
+                        readRoleSearch: readRoleSearch,
+                                                                        writeRoleOptions: writeRoleOptions,
+                        writeRoleSearch: writeRoleSearch
+                     }">
     <loading data-bind="css: classes('loading-panel'), visible: isLoading()" params="status: ko.i18n('common.configureAccessModal.loadingAccessList', 'Loading access list...')"></loading>
     <div data-bind="css: classes()">
         <div data-bind="if: !isLoading()">
@@ -47,9 +47,9 @@
                         "/>
                     </div>
                 </div>
-	    </div>
-	    <div data-bind="css: classes('new-access')">
-		<label data-bind="css: classes('new-access-label'), text: ko.i18n('common.configureAccessModal.addReadAccessToRole', 'Add READ access to role:')"></label>
+      </div>
+      <div data-bind="css: classes('new-access')">
+    <label data-bind="css: classes('new-access-label'), text: ko.i18n('common.configureAccessModal.addReadAccessToRole', 'Add READ access to role:')"></label>
                 <div class="input-group"
                      data-bind="css: classes({ element: 'new-access-btn-group', extra: ['new-access-btn-group'] })">
                     <input
@@ -64,7 +64,7 @@
                         <button class="btn btn-primary" type="button" data-bind="click: grantAccess.bind($data,'READ'), attr: { disabled: !(readRoleName() && readRoleName().length) }, text: ko.i18n('common.add', 'Add')"></button>
                     </span>
                 </div>
-		<div data-bind="css: classes('access-list')">
+    <div data-bind="css: classes('access-list')">
                     <label data-bind="css: classes('access-list-label'), text: ko.i18n('common.configureAccessModal.rolesWithReadAccess', 'Roles with READ access:')"></label>
                     <div>
                         <table data-bind="
@@ -75,8 +75,8 @@
                             }
                         "/>
                     </div>
-		</div>
-	    </div>
+    </div>
+      </div>
         </div>
     </div>
 </atlas-modal>

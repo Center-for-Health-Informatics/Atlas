@@ -16,11 +16,11 @@
             <button class="btn btn-primary" title="Close" data-bind="click: close, enable: !isProcessing(), title: ko.i18n('common.close', 'Close')"><i class="fa fa-times"></i></button>
             <!-- ko ifnot: isNewEntity -->
             <button class="btn btn-primary" title="Create a copy" data-bind="click: copy, enable: canCopy() && !isProcessing(), css: {'disabled': !canCopy()}, title: ko.i18n('common.createACopy', 'Create a copy')"><i class="fa fa-copy"></i></button>
-	        <!-- ko if: enablePermissionManagement -->
+          <!-- ko if: enablePermissionManagement -->
                 <button class="btn btn-primary" title="Configure access" data-bind="visible: isOwner, click: () => isAccessModalShown(!isAccessModalShown()), title: ko.i18n('common.configureAccess', 'Configure access')">
                     <i class="fa fa-lock"></i>
                 </button>
-		<!-- /ko -->
+    <!-- /ko -->
                 <button class="btn btn-danger" title="Delete" data-bind="click: $component.delete, enable: canDelete() && !isProcessing(), title: ko.i18n('common.delete', 'Delete')"><i class="fa fa-trash-alt"></i></button>
             <!-- /ko -->
           </div>
@@ -69,12 +69,12 @@
 </div>
 
 <configure-access-modal params="
-	isModalShown: $component.isAccessModalShown,
-	isOwnerFn: $component.isOwnerFn,
-	loadAccessListFn: $component.loadAccessList,
-	grantAccessFn: $component.grantAccess,
-	revokeAccessFn: $component.revokeAccess,
-	loadRoleSuggestionsFn: $component.loadAccessRoleSuggestions
+  isModalShown: $component.isAccessModalShown,
+  isOwnerFn: $component.isOwnerFn,
+  loadAccessListFn: $component.loadAccessList,
+  grantAccessFn: $component.grantAccess,
+  revokeAccessFn: $component.revokeAccess,
+  loadRoleSuggestionsFn: $component.loadAccessRoleSuggestions
 "></configure-access-modal>
 
 <!-- /ko -->

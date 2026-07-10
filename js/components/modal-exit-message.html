@@ -1,14 +1,14 @@
 <atlas-modal params="{
-		showModal: showModal,
-		title: title,
-		data: {
+    showModal: showModal,
+    title: title,
+    data: {
             exitMessage: $component.exitMessage,
             classes: $component.classes,
             copyExitMessageToClipboard: $component.copyExitMessageToClipboard,
             buttonId: buttonId,
             noticeId: noticeId,
         }
-	}">
+  }">
     <div data-bind="if: exitMessage()">
         <textarea id="exitMessage" data-bind="css: classes('exit-message'), text: exitMessage()"></textarea>
     </div>

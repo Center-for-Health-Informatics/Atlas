@@ -24,4 +24,10 @@ Running list of things worth revisiting. Not bugs blocking current work — just
 
 - **old-style js** — The Javascript/ECMAScript language has progressed considerably since much of this code base was written. Update awkward idioms to use newer, cleaner capabilities.
 
-- **@ohdsi/atlascharts** — ancient tech, incorrect dependencies that affect Atlas. Fork and rewrite.
+- **@ohdsi/atlascharts** — ancient tech, incorrect dependencies that affect Atlas. Fork and rewrite. Probably the other @ohdsi/* modules, too.
+
+- **Audit for more production-only bugs** — the Docker image had apparently never actually served the real Vite production bundle until 2026-07-10 (see `CHANGELOG.md`/`MIGRATION_STATUS.md`), and the one production-only bug found once it finally did (`ko.i18n` registration-order, in `js/const.js`) was invisible in dev and in `vite preview` smoke-checks alike — only a real Docker deployment surfaced it. Worth a deliberate pass exercising more of the app against a real production Docker build (not just `npm run dev`/`vite preview`) to catch anything else in this same "works everywhere except the one place it actually ships" category.
+
+- **`esbuild` CSS-minify warnings during `docker build`** — several `Expected identifier but found "*"` / `The "-" operator only works if there is whitespace on both sides` warnings appear when building production CSS (seen 2026-07-10, `.rob/build.log`). Cosmetic/non-fatal (build still succeeds, app renders fine), likely from a vendor or LESS-compiled stylesheet using syntax `esbuild`'s CSS minifier doesn't fully understand. Not investigated — worth tracking down which source file(s) trigger it and whether the minified output is actually correct.
+
+- **old filesystem cruft** — `.editorconfig`, `.github`, `.jshintrc`, entries in `.gitignore`. Anything else?

@@ -61,8 +61,12 @@ async function run () {
 }
 
 run().catch(err => {
+  // Always log a fatal boot failure, even in production -- unlike the
+  // step-by-step trace above (deliberately dev-only), silently swallowing
+  // the one error that explains why the app never got past the splash
+  // screen makes production issues undebuggable.
+  console.error('[LOAD FAILED]', err)
   if (debug) {
-    console.error('[LOAD FAILED]', err)
     document.title = 'FAILED: ' + err.message
   }
 })

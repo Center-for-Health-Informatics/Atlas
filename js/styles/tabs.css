@@ -9,8 +9,6 @@
     background: transparent;
     border: none;
     border-bottom: 1px solid #c0c0c0;
-    -moz-border-radius: 0px;
-    -webkit-border-radius: 0px;
     border-radius: 0px;
     font-size: 15px;
   }

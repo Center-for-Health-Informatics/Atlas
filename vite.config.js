@@ -27,8 +27,6 @@ export default defineConfig({
     alias: [
       // ── App config ──
       { find: 'appConfig', replacement: js('config.js') },
-      { find: 'config-local', replacement: js('config-local.js') },
-      { find: 'config-gis', replacement: js('config-gis.js') },
       { find: 'const-state', replacement: js('const-state.js') },
       { find: 'version', replacement: js('version.js') },
 

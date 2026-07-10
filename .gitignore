@@ -5,8 +5,9 @@
 /js/assets/bundle
 /js/assets/fonts
 /js/assets/images
-js/config-local.js
 js/version.js
+.env.local
+.env.*.local
 package-lock.json
 .vscode
 

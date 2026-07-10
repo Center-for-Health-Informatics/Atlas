@@ -49,7 +49,7 @@ The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json`
 - **Router**: `js/pages/Router.js` — uses the `director` library; reads routes from each page module and dispatches to the matching Knockout component.
 - **Shared state**: `js/components/atlas-state.js` — a singleton observable state bag (sources, current entities, dirty flags, locale, job listing, etc.). Import as `'atlas-state'`.
 - **Constants/enums**: `js/const.js` — application-wide enums (applicationStatuses, generationStatuses, executionStatuses, sqlDialects, etc.). Import as `'const'`.
-- **Config**: `js/config/app.js` is the base config; `js/config-local.js` (gitignored, created by the user) and `docker/config-local.js` (template) override it, deep-merged with lodash `mergeWith` in `js/config.js`. Import the merged config as `'appConfig'`.
+- **Config**: `js/config/app.js` is the base config, deep-merged with `js/config/terms-and-conditions.js` via lodash `mergeWith` in `js/config.js`. `js/config.js` is also the single place env vars flow in: `VITE_WEBAPI_URL`/`VITE_WEBAPI_NAME` at build time (see "Local configuration" below), and `window.ATLAS_RUNTIME_CONFIG` (populated from `docker/runtime-config.template.js`, `@@VAR@@`-substituted via `sed` at container start — not `envsubst`, whose `${VAR}` syntax collides with real JS template literals) at container runtime, merged in last so it takes precedence. Import the merged config as `'appConfig'`.
 
 ### UI framework
 
@@ -77,18 +77,14 @@ Tests live in `tests/` and run on **Node's built-in test runner** (`node --impor
 
 ## Local configuration
 
-To point at a WebAPI instance without modifying tracked files, create `js/config-local.js` (gitignored):
+To point `npm run dev`/`npm run build` at a WebAPI instance without modifying tracked files, set `VITE_WEBAPI_URL` (and optionally `VITE_WEBAPI_NAME`) as an environment variable — e.g. in a gitignored `.env.local` file (Vite loads this automatically) or via `direnv`/`.envrc`:
 
-```js
-export default {
-  api: {
-    name: 'My Instance',
-    url: 'http://my-webapi-host:8080/WebAPI/'
-  }
-}
+```
+VITE_WEBAPI_URL=http://my-webapi-host:8080/WebAPI/
+VITE_WEBAPI_NAME=My Instance
 ```
 
-This is imported directly (`import localConfig from 'config-local'`, aliased in `vite.config.js`) and deep-merged with the base config in `js/config.js`.
+`js/config.js` reads these directly via `import.meta.env.VITE_*` — there's no separate config file to create. (Container runtime configuration, for a *built* image without a rebuild, is a different mechanism — see `docker/runtime-config.template.js` and the `ATLAS_*`/`WEBAPI_URL` env vars documented in `Dockerfile`.)
 
 ## Migration history
 

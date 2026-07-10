@@ -1,5 +1,5 @@
 # Build the source
-FROM docker.io/library/node:18.14.1-alpine@sha256:045b1a1c90bdfd8fcaad0769922aa16c401e31867d8bf5833365b0874884bbae as builder
+FROM docker.io/library/node:lts-slim as builder
 
 WORKDIR /code
 
@@ -9,16 +9,23 @@ COPY package.json /code/
 RUN npm install
 
 # Build code
+COPY ./vite.config.js /code/vite.config.js
 COPY ./build /code/build
 COPY ./js /code/js
+COPY ./index.html /code/index.html
+
+# Set explicitly (rather than relying on vite build's implicit default) so the
+# production build mode is self-documenting. Must come after `npm install`,
+# since vite itself is a devDependency npm would skip installing if NODE_ENV
+# were already "production" at install time.
+ENV NODE_ENV=production
 RUN npm run build:docker
 
 # Statically pre-compress all output files to be served
-COPY ./index.html /code/index.html
 RUN find . -type f "(" \
         -name "*.css" \
         -o -name "*.html" \
-        -o -name "*.js" ! -name "config-local.js" \
+        -o -name "*.js" ! -name "runtime-config.js" \
         -o -name "*.json" \
         -o -name "*.svg" \
         -o -name "*.xml" \
@@ -26,7 +33,7 @@ RUN find . -type f "(" \
       | xargs -0 -n 1 gzip -kf
 
 # Production Nginx image
-FROM docker.io/nginxinc/nginx-unprivileged:1.27.2-alpine
+FROM docker.io/nginxinc/nginx-unprivileged:1.28.0-bookworm@sha256:cd33960e98e93d4d63385790ff7f8f5bf2ca95184c581b7f42ae8aea1139fbfc
 
 LABEL org.opencontainers.image.title="OHDSI-Atlas"
 LABEL org.opencontainers.image.authors="Joris Borgdorff <joris@thehyve.nl>, Lee Evans - www.ltscomputingllc.com, Shaun Turner<shaun.turner1@nhs.net>"
@@ -149,6 +156,6 @@ COPY --from=builder /code/index.html* /usr/share/nginx/html/atlas/
 COPY --from=builder /code/node_modules /usr/share/nginx/html/atlas/node_modules
 COPY --from=builder /code/js /usr/share/nginx/html/atlas/js
 
-# Load Atlas local config with current user, so it can be modified
-# with env substitution
-COPY --chown=101 docker/config-local.js /usr/share/nginx/html/atlas/js/config-local.js
+# Load Atlas runtime config with current user, so it can be modified
+# with env substitution at container start
+COPY --chown=101 docker/runtime-config.template.js /usr/share/nginx/html/atlas/js/runtime-config.js

@@ -1,5 +1,5 @@
-// Please remember to update the environmental variables in the Dockerfile and the docker config-local.js to reflect
-// any new settings introduced here
+// Please remember to update the environmental variables in the Dockerfile and
+// docker/runtime-config.template.js to reflect any new settings introduced here
 
 const appConfig = {}
 
@@ -122,7 +122,7 @@ appConfig.cemOptions = {
   },
 }
 // Skip the SNOMED CT license modal outside production so it doesn't have to be
-// dismissed on every dev-server reload; config-local.js can still override this.
+// dismissed on every dev-server reload.
 appConfig.enableTermsAndConditions = process.env.NODE_ENV === 'production'
 appConfig.webAPIRoot = appConfig.api.url
 // todo: move "userAuthenticationEnabled", "plpResultsEnabled", etc into the object

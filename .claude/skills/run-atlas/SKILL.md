@@ -15,16 +15,14 @@ environment.
 
 ## 1. Point the app at a WebAPI backend
 
-The app needs `js/config-local.js` (gitignored, not tracked) to know
-which WebAPI instance to hit. If it doesn't exist yet, create it:
+The app needs `VITE_WEBAPI_URL` set in the environment to know which
+WebAPI instance to hit — `js/config.js` reads it directly via
+`import.meta.env.VITE_WEBAPI_URL`, no config file to create. Check
+`.envrc` (direnv) first; if the repo doesn't already have one set up,
+export it before starting the dev server:
 
-```js
-export default {
-  api: {
-    name: 'Local Synthea',
-    url: import.meta.env.VITE_WEBAPI_URL || 'https://dev.lastchance.pub/webapi/'
-  },
-}
+```bash
+export VITE_WEBAPI_URL=https://dev.lastchance.pub/webapi/
 ```
 
 `https://dev.lastchance.pub/webapi/` is a shared test instance backed

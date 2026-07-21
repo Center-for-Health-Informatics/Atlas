@@ -17,16 +17,16 @@
                     <loading data-bind="visible:loadingDownload()" params="status: 'computing analyses'"></loading>
                     <br/>
                     <div data-bind="visible:(!loadingDownload() && $component.fullAnalysisList().length > 0)">
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
+                        <div class="card panel-primary">
+                            <div class="card-header">
                                 <i class="fa fa-heartbeat"></i> <span data-bind="text: ko.i18n('ple.util.reviewDownload', 'Review & Download')"></span>
                             </div>
-                            <div class="panel-body">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                            <div class="card-body">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <i class="fa fa-book"></i> <span data-bind="text: ko.i18n('ple.util.reviewFullSpec', 'Review Full Study Specification')"></span>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <faceted-datatable params="{
                                             columns: cca.fullAnalysisTableColumns,
                                             options: cca.fullAnalysisTableOptions,
@@ -38,11 +38,11 @@
                                         }"></faceted-datatable>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <i class="fa fa-download"></i> <span data-bind="text: ko.i18n('ple.util.downloadPackage', 'Download Study Package')"></span>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <div>
                                             <label data-bind="text: ko.i18n('ple.util.downloadNote', 'Please provide a name for the study package and click download to obtain the study package in ZIP format.')"></label>
                                             <div class="input-group">

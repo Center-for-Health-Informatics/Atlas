@@ -13,12 +13,11 @@
             defaultName: ko.i18n('components.conditionDevice.anyDevice', 'Any Device')"></conceptset-selector>
         </td>
         <td>
-          <div class="btn-group pull-right">
-            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i
+          <div class="btn-group float-end">
+            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown"><i
                 class="fa fa-plus"></i>
               <span
-                data-bind="text: ko.i18n('components.conditionDevice.addAttribute', 'Add attribute...')"></span><span
-                class="caret"></span></button>
+                data-bind="text: ko.i18n('components.conditionDevice.addAttribute', 'Add attribute...')"></span></button>
             <ul class="dropdown-menu" data-bind="foreach:$component.addActions">
               <li><a data-bind="click:action" href="#">
                   <div class="optionText" data-bind="text: ko.i18n($data.title, $data.defaultTitle)"></div>

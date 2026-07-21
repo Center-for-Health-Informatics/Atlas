@@ -11,8 +11,8 @@
       <!-- ko ifnot: currentConcept().STANDARD_CONCEPT == 'N' -->
         <div data-bind="css: classes('hierarchy-filters')">
           <div class="row">
-            <div class="pull-left" data-bind="css: classes('filter-view'), text: ko.i18n('cs.manager.concept.tabs.hierarchy.view', 'View:')"></div>
-            <div class="pull-left">
+            <div class="float-start" data-bind="css: classes('filter-view'), text: ko.i18n('cs.manager.concept.tabs.hierarchy.view', 'View:')"></div>
+            <div class="float-start">
               <ul class="nav nav-pills">
                 <li role="presentation" data-bind="css: {active: $component.hierarchyPillMode() == 'all' }, click: function() {$component.hierarchyPillMode('all') };"><a data-bind="text: ko.i18n('cs.manager.concept.tabs.hierarchy.fullHierarchy', 'Full Hierarchy')"></a></li>
                 <li role="presentation" data-bind="css: {active: $component.hierarchyPillMode() == 'parents' }, click: function() {$component.hierarchyPillMode('parents') };"><a data-bind="text: ko.i18n('cs.manager.concept.tabs.hierarchy.parents', 'Parents')"></a></li>
@@ -23,11 +23,11 @@
           </div>
         </div>
         <div id="wrapperParents" data-bind="visible: ['all', 'parents'].includes($component.hierarchyPillMode())">
-          <div class="panel panel-default">
-            <div class="panel-heading">
+          <div class="card panel-default">
+            <div class="card-header">
               <i class="fa fa-arrow-up"></i> <span data-bind="text: ko.i18n('cs.manager.concept.tabs.hierarchy.parents', 'Parents')"></span>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
               <!-- ko if: $component.metarchy.parents().length == 0 -->
               <div data-bind="text: ko.i18n('cs.manager.concept.tabs.hierarchy.noParentConceptsFound', 'No parent concepts found')"></div>
               <!-- /ko -->
@@ -48,7 +48,7 @@
               <!-- /ko -->
             </div>
               <!-- ko if: $component.metarchy.parents().length > 0 -->
-              <div class="panel-footer">
+              <div class="card-footer">
                 <concept-add-box params="{
                   canSelectSource: true,
                   isActive: () => metarchy.parents().filter(c => c.isSelected()).length > 0,
@@ -59,11 +59,11 @@
           </div>
         </div>
         <div id="wrapperHierarchyAnchor" data-bind="visible: ['all', 'current'].includes($component.hierarchyPillMode())">
-          <div class="panel panel-default">
-            <div class="panel-heading">
+          <div class="card panel-default">
+            <div class="card-header">
               <i class="fa fa-arrow-right"></i> <span data-bind="text: ko.i18n('cs.manager.concept.tabs.hierarchy.currentConcept', 'Current Concept')"></span>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <faceted-datatable params="{
                   pageLength: tableOptions.pageLength,
                   lengthMenu: tableOptions.lengthMenu,
@@ -78,7 +78,7 @@
                   language: ko.i18n('datatable.language')
                 }"></faceted-datatable>
             </div>
-            <div class="panel-footer">
+            <div class="card-footer">
               <concept-add-box params="{
                 canSelectSource: true,
                 isActive: () => currentConceptArray().filter(c => c.isSelected()).length > 0,
@@ -88,11 +88,11 @@
           </div>
         </div>
         <div id="wrapperChildren" data-bind="visible: ['all', 'children'].includes($component.hierarchyPillMode())">
-            <div class="panel panel-default">
-              <div class="panel-heading">
+            <div class="card panel-default">
+              <div class="card-header">
                 <i class="fa fa-arrow-down"></i> <span data-bind="text: ko.i18n('cs.manager.concept.tabs.hierarchy.children', 'Children')"></span>
               </div>
-              <div class="panel-body">
+              <div class="card-body">
                 <!-- ko if: $component.metarchy.children().length == 0 -->
                 <div data-bind="text: ko.i18n('cs.manager.concept.tabs.hierarchy.noChildConceptsFound', 'No child concepts found')"></div>
                 <!-- /ko -->
@@ -112,7 +112,7 @@
                 <!-- /ko -->
               </div>
               <!-- ko if: $component.metarchy.children().length > 0 -->
-              <div class="panel-footer">
+              <div class="card-footer">
                 <concept-add-box params="{
                   canSelectSource: true,
                   isActive: () => metarchy.children().filter(c => c.isSelected()).length > 0,

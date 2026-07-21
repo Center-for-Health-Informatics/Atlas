@@ -2,6 +2,7 @@ import $ from 'jquery'
 import ko from 'knockout'
 import * as d3 from 'd3'
 import _ from 'lodash'
+import { Tooltip } from 'bootstrap'
 
 const divWidth = ko.observable() // triggers update
 const cartoonWidth = ko.computed(function () {
@@ -159,7 +160,7 @@ function expressionChangeSetup (element, cohdef) {
   });
   */
   $('div.cartoon').width(cartoonWidth())
-  $('[data-toggle="tooltip"]').tooltip()
+  document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(el => new Tooltip(el))
 }
 
 function d3AddIfNeeded (parentElement, data, tag, classes, addCb, updateCb, cbParams) {
@@ -402,14 +403,14 @@ function primaryCritHeaderAdd (d3element, {
   if (!d3element.size()) { return }
   const headerHtml = `
               <div class="primary section-header row header-row">
-                <div class="col-xs-12 header-content">
+                <div class="col-12 header-content">
                 </div>
               </div>
               <div class="paddedWrapper primary header row header-row">
-                <div class="col-xs-12 header-content">
+                <div class="col-12 header-content">
                   <div class="msg"></div>
                   <div class="row">
-                    <div class="col-xs-${12 - NAME_COLS} col-xs-offset-${NAME_COLS}">
+                    <div class="col-${12 - NAME_COLS} offset-${NAME_COLS}">
                       <div class="cartoon">
                       </div>
                     </div>
@@ -445,7 +446,7 @@ function primaryCritHeaderUpdate (d3element, {
           (<svg style="display:inline-block" height="10px" width="10px">
             <circle cx="5" cy="5" r="4" style="fill:green" />
           </svg>)` */
-    '<svg height="0" class="x axis col-xs-12"><g transform="translate(0,20)" /></svg>'
+    '<svg height="0" class="x axis col-12"><g transform="translate(0,20)" /></svg>'
 
   d3element.select('div.section-header>div.header-content').html(title)
   d3element.select('div.msg').html(limitMsg + ' ' + resultDateMsg)
@@ -463,21 +464,21 @@ function skeleton (selection, {
   // send __data__ down to all the elements
   selection
     .classed(`${type}-row`, true)
-  selection.append('div').attr('class', `indent-bar col-xs-${INDENT_COLS}`)
-  let right = selection.append('div').attr('class', `after-indent col-xs-${12 - INDENT_COLS}`)
+  selection.append('div').attr('class', `indent-bar col-${INDENT_COLS}`)
+  let right = selection.append('div').attr('class', `after-indent col-${12 - INDENT_COLS}`)
   right = right.append('div').attr('class', 'row')
   /*
   if (type === 'header') {
-    right.append('div').attr('class', `header-content col-xs-12`)
+    right.append('div').attr('class', `header-content col-12`)
   } else
   */
   if (type === 'subgroup') {
-    right.append('div').attr('class', 'subgroup-container col-xs-12')
+    right.append('div').attr('class', 'subgroup-container col-12')
   } else {
-    right.append('div').attr('class', `name col-xs-${NAME_COLS}`)
-    right.append('div').attr('class', `col-xs-${12 - NAME_COLS}`)
+    right.append('div').attr('class', `name col-${NAME_COLS}`)
+    right.append('div').attr('class', `col-${12 - NAME_COLS}`)
       .append('div').attr('class', 'cartoon')
-      .append('svg').attr('class', 'col-xs-12')
+      .append('svg').attr('class', 'col-12')
       .attr('height', 0)
   }
 }
@@ -499,11 +500,11 @@ function skeletonUpdate (selection, {
 function critGroupHeaderAdd (d3element) {
   d3element.html(`
                <div class="crit header row header-row">
-                <div class="col-xs-12 header-content">
+                <div class="col-12 header-content">
                   <div class="row">
-                    <div class="axis-div col-xs-${12 - NAME_COLS} col-xs-offset-${NAME_COLS}">
+                    <div class="axis-div col-${12 - NAME_COLS} offset-${NAME_COLS}">
                       <div class="cartoon">
-                        <svg height="0" class="x axis col-xs-12"><g transform="translate(0,20)" /></svg>
+                        <svg height="0" class="x axis col-12"><g transform="translate(0,20)" /></svg>
                       </div>
                     </div>
                   </div>
@@ -541,9 +542,9 @@ function critGroupHeaderUpdate (d3element, {
 
     html += `${allAny}${rightHeader}
             <div class="row">
-              <div class="axis-div col-xs-${12 - NAME_COLS} col-xs-offset-${NAME_COLS}">
+              <div class="axis-div col-${12 - NAME_COLS} offset-${NAME_COLS}">
                 <div class="cartoon">
-                  <svg height="0" class="x axis col-xs-12"><g transform="translate(0,20)" /></svg>
+                  <svg height="0" class="x axis col-12"><g transform="translate(0,20)" /></svg>
                 </div>
               </div>
             </div>`
@@ -569,7 +570,7 @@ function addCritSectBodyAdd (d3element, {
 }) {
   const headerHtml = `
               <div class="critgroup section-header row header-row paddedWrapper">
-                <div class="col-xs-12 header-content">
+                <div class="col-12 header-content">
                 </div>
               </div>
               <div class="critgroup section-body paddedWrapper">
@@ -761,7 +762,7 @@ function inclusionRulesHeaderUpdate (d3element, {
   const html = `<div class="heading">${titleMessage}</div>`
   const headerHtml = `
               <div class="critgroup section-header row header-row">
-                <div class="col-xs-12 header-content">
+                <div class="col-12 header-content">
                   ${html}
                 </div>
               </div>
@@ -819,7 +820,7 @@ function inclusionRuleBodyUpdate (d3element, {
 function inclusionRuleHeaderAdd (d3element) {
   d3element.html(`
                 <div class="inclusion header row header-row">
-                  <div class="col-xs-12 header-content">
+                  <div class="col-12 header-content">
                   </div>
                 </div>
                `)

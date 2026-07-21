@@ -5,14 +5,12 @@ async function run () {
   log('jquery'); const { default: $ } = await import('jquery')
   log('knockout'); const { default: ko } = await import('knockout')
   window.jQuery = window.$ = $
-  log('bootstrap'); await import('bootstrap')
   log('ko.sortable'); await import('ko.sortable')
   log('databindings'); await import('databindings')
   log('services/PluginRegistry'); await import('services/PluginRegistry')
 
   log('css'); await import('./styles/font-awesome.min.css')
   await import('./styles/bootstrap.min.css')
-  await import('./styles/bootstrap-theme.min.css')
   await import('./styles/jquery.dataTables.min.css')
   await import('./styles/tabs.css')
   await import('./styles/jquery-ui.css')
@@ -20,7 +18,6 @@ async function run () {
   await import('./styles/atlas.css')
   await import('./styles/chart.css')
   await import('./styles/achilles.css')
-  await import('bootstrap-select/dist/css/bootstrap-select.css')
   await import('./styles/buttons.css')
   await import('./styles/cartoon.css')
   await import('./styles/exploreCohort.css')
@@ -41,7 +38,6 @@ async function run () {
   log('terms-and-conditions'); await import('./components/terms-and-conditions/terms-and-conditions')
 
   log('bootstrap done')
-  $.fn.bstooltip = $.fn.tooltip
   ko.options.deferUpdates = true
 
   const app = new Application(router)

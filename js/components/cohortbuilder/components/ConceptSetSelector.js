@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import ko from 'knockout'
 import template from './ConceptSetSelectorTemplate.html?raw'
-import 'databindings/cohortbuilder/dropupBinding'
 import 'databindings'
 
 function conceptSetSorter (a, b) {

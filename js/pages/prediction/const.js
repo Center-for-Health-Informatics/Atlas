@@ -150,8 +150,8 @@ const options = {
   ],
   fullAnalysisTableOptions: {
     ...commonUtils.getTableOptions('S'),
-    dom: '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
-    domNoButtons: '<<"row vertical-align"<"col-xs-6"l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
+    dom: '<<"row vertical-align"<"col-6"<"dt-btn"B>l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
+    domNoButtons: '<<"row vertical-align"<"col-6"l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
     Facets: [{
       caption: ko.i18n('facets.caption.targetCohorts', 'Target Cohorts'),
       binding: d => d.targetOutcome.targetName,
@@ -174,14 +174,14 @@ const options = {
   },
   specificationSummaryTableOptions: {
     ...commonUtils.getTableOptions('S'),
-    dom: '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
-    domNoButtons: '<<"row vertical-align"<"col-xs-6"l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
+    dom: '<<"row vertical-align"<"col-6"<"dt-btn"B>l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
+    domNoButtons: '<<"row vertical-align"<"col-6"l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
   },
   covariateSettingsTableOptions: {
     ...commonUtils.getTableOptions('S'),
-    dom: '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
-    domNoButtons: '<<"row vertical-align"<"col-xs-6"l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
-    // '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>';
+    dom: '<<"row vertical-align"<"col-6"<"dt-btn"B>l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
+    domNoButtons: '<<"row vertical-align"<"col-6"l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
+    // '<<"row vertical-align"<"col-6"<"dt-btn"B>l><"col-6 search"f>><"row vertical-align"<"col-3"i><"col-9"p>><t><"row vertical-align"<"col-3"i><"col-9"p>>>';
   },
   nfoldOptions: range(2, 16).map(v => '' + v),
   dayOptions: ['0', '1', '7', '14', '21', '30', '60', '90', '120', '180', '365', '548', '730', '1095'],

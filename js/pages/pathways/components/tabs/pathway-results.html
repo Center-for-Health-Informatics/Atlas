@@ -34,9 +34,9 @@
     </div>
     <!-- ko foreach: cohortPathways -->
       <div data-bind="css: $component.classes('report-group')">
-        <div data-bind="css: $component.classes({ element: 'legend-panel', extra: ['panel panel-primary'] })">
-          <div class="panel-heading" data-bind="text: ko.i18n('pathways.manager.executions.results.legend.title', 'Legend')"></div>
-          <div class="panel-body">
+        <div data-bind="css: $component.classes({ element: 'legend-panel', extra: ['card panel-primary'] })">
+          <div class="card-header" data-bind="text: ko.i18n('pathways.manager.executions.results.legend.title', 'Legend')"></div>
+          <div class="card-body">
             <div data-bind="css: $component.classes('legend-section')">
               <h5 data-bind="text: ko.i18n('pathways.manager.executions.results.legend.targetCohort', 'Target Cohort')"></h5>
               <div class="title" data-bind="text: targetCohortName"/>
@@ -67,11 +67,11 @@
           </div>
         </div>
 
-        <div data-bind="css: $component.classes({ element: 'plot-panel', extra: ['panel panel-primary'] })">
-          <div class="panel-heading" data-bind="text: ko.i18n('pathways.manager.executions.results.diagram.title', 'Sunburst plot')">
+        <div data-bind="css: $component.classes({ element: 'plot-panel', extra: ['card panel-primary'] })">
+          <div class="card-header" data-bind="text: ko.i18n('pathways.manager.executions.results.diagram.title', 'Sunburst plot')">
 
           </div>
-          <div class="panel-body">
+          <div class="card-body">
             <sunburst data-bind="css: $component.classes('sunburst')"
                   params="data: () => pathway,
                     reportName: targetCohortName,
@@ -90,9 +90,9 @@
           </div>
         </div>
 
-        <div data-bind="css: $component.classes({ element: 'path-details-panel', extra: ['panel panel-primary'] })">
-          <div class="panel-heading" data-bind="text: ko.i18n('pathways.manager.executions.results.details.title', 'Path details')"></div>
-          <div class="panel-body">
+        <div data-bind="css: $component.classes({ element: 'path-details-panel', extra: ['card panel-primary'] })">
+          <div class="card-header" data-bind="text: ko.i18n('pathways.manager.executions.results.details.title', 'Path details')"></div>
+          <div class="card-body">
             <!-- ko ifnot: pathDetails -->
               <div data-bind="text: ko.i18n('pathways.manager.executions.results.details.noPath', 'No path selected: click path to see details.')"></div>
             <!-- /ko -->

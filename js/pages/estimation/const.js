@@ -268,7 +268,7 @@ const getCca = (canEdit) => [{
   ],
   comparisonTableOptions: {
     ...commonUtils.getTableOptions('S'),
-    dom: '<<"row vertical-align"<"col-xs-6"l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
+    dom: '<<"row vertical-align"<"col-6"l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
   },
   analysisSettingsTableColumns: [
     {
@@ -356,7 +356,7 @@ const getCca = (canEdit) => [{
   ],
   analysisSettingsTableOptions: {
     ...commonUtils.getTableOptions('S'),
-    dom: '<<"row vertical-align"<"col-xs-6"l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
+    dom: '<<"row vertical-align"<"col-6"l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
   },
   fullAnalysisTableColumns: [
     {
@@ -406,8 +406,8 @@ const getCca = (canEdit) => [{
   ],
   fullAnalysisTableOptions: {
     ...commonUtils.getTableOptions('S'),
-    dom: '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
-    domNoButtons: '<<"row vertical-align"<"col-xs-6"l><"col-xs-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>',
+    dom: '<<"row vertical-align"<"col-6"<"dt-btn"B>l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
+    domNoButtons: '<<"row vertical-align"<"col-6"l><"col-6 search"f>><"row vertical-align"><t><"row vertical-align"<"col-3"i><"col-9"p>>>',
     Facets: [{
       caption: ko.i18n('facets.caption.targetCohorts', 'Target Cohorts'),
       binding: d => d.targetComparatorOutcome.target.name,

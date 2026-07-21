@@ -45,21 +45,19 @@
         }),
         placeholder: ko.i18n('search.placeholder', 'Type your search here'),
         disable: searching()" />
-      <div class="input-group-btn" data-bind="tooltip:recommendButtonTooltip">
-        <button class="btn btn-primary" type="submit" data-bind="title: ko.i18n('search.buttonTitle', 'Search'), disable: searching()"><i class="fa fa-search"></i></button>
-        <button class="btn btn-success" type="button" data-bind="title: ko.i18n('search.recommendButtonTitle', 'Recommend'), disable: isRecommendDisabled, click: recommendClick"><i class="fa fa-shopping-cart"></i></button>
-      </div>
+      <button class="btn btn-primary" type="submit" data-bind="title: ko.i18n('search.buttonTitle', 'Search'), disable: searching()"><i class="fa fa-search"></i></button>
+      <button class="btn btn-success" type="button" data-bind="title: ko.i18n('search.recommendButtonTitle', 'Recommend'), disable: isRecommendDisabled, click: recommendClick, tooltip: recommendButtonTooltip"><i class="fa fa-shopping-cart"></i></button>
     </div>
   </form>
   <div class="row">
-    <div data-bind="click: toggleAdvanced, text: ko.i18n('search.advancedOptions', 'Advanced Options')" class="pull-right btn btn-sm btn-link"></div>
+    <div data-bind="click: toggleAdvanced, text: ko.i18n('search.advancedOptions', 'Advanced Options')" class="float-end btn btn-sm btn-link"></div>
   </div>
   <!-- ko if: isInProgress() || loading() || recommending() -->
     <loading params="status: loadingMessage"></loading>
   <!-- /ko -->
   <div class="advanced-options" data-bind="visible: showAdvanced">
     <div data-bind="css: classes({ element: 'clear-btn', extra: 'row' })">
-      <div class="btn btn-success btn-sm pull-right" data-bind="click: clearAllAdvanced">
+      <div class="btn btn-success btn-sm float-end" data-bind="click: clearAllAdvanced">
         <i class="fa fa-eraser"></i> <span data-bind="text: ko.i18n('search.clearAllSelections', 'Clear All Selections')"></span>
       </div>
     </div>
@@ -71,7 +69,7 @@
     <empty-state params="message: noResultsFoundMessage()"></empty-state>
   <!-- /ko -->
   <div data-bind="visible: data().length > 0">
-    <div class="pull-right">
+    <div class="float-end">
       <i data-bind="attr: { class: recordCountClass }" aria-hidden="true">
       </i>
       <span data-bind="text: ko.i18n('search.viewCountMessage', 'View record counts for:')"></span>

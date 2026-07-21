@@ -7,8 +7,8 @@
     </div>
     <div id="filters" data-bind="css: classes('filter-group-bordered')">
         <div class="row">
-            <div class="pull-left" data-bind="css: classes('filter-view'), text: ko.i18n('ple.spec.view', 'View:')"></div>
-            <div class="pull-left">
+            <div class="float-start" data-bind="css: classes('filter-view'), text: ko.i18n('ple.spec.view', 'View:')"></div>
+            <div class="float-start">
                 <ul class="nav nav-pills">
                 <li role="presentation" data-bind="css: {active: $component.editorMode() == 'all' }, click: function() {$component.editorMode('all') };"><a data-bind="text: ko.i18n('ple.spec.viewFull', 'All')"></a></li>
                 <li role="presentation" data-bind="css: {active: $component.editorMode() == 'studyPop' }, click: function() {$component.editorMode('studyPop') };"><a data-bind="text: ko.i18n('ple.spec.studyPopulation', 'Study Population')"></a></li>
@@ -21,11 +21,11 @@
         </div>
     </div>
     <div role="tabpanel" data-bind="visible: $component.editorMode() == 'all' || $component.editorMode() == 'studyPop'" class="tab-pane">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card panel-primary">
+            <div class="card-header">
                 <i class="fa fa-users" aria-hidden="true"></i> <span data-bind="text: ko.i18n('ple.spec.studyPopulation', 'Study Population')"></span>
             </div>
-            <div data-bind="css:{'panel-body':true, 'div-disabled':!$component.isEditPermitted()}">
+            <div data-bind="css:{'card-body':true, 'div-disabled':!$component.isEditPermitted()}">
                 <div>
                     <label data-bind="text: ko.i18n('ple.spec.studyPopulationPanel.startDate', 'Study start date - a calendar date specifying the minimum date that a cohort index can appear (leave blank to use all time):')"></label>
                     <div class="input-group">
@@ -90,11 +90,11 @@
         </div>
     </div>
     <div role="tabpanel" data-bind="visible: $component.editorMode() == 'all' || $component.editorMode() == 'covariates'" class="tab-pane">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card panel-primary">
+            <div class="card-header">
                 <i class="fa fa-cogs" aria-hidden="true"></i> <span data-bind="text: ko.i18n('ple.spec.covariateSettings', 'Covariate Settings')"></span>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div>
                     <label><span data-bind="text: ko.i18n('ple.spec.usingCovariates', 'Using OHDSI covariates for propensity score model.')"></span>
                         (<span class="linkish" data-bind="click: () => { showCovariateSelector(true) }, text: ko.i18n('ple.spec.clickToViewDetails', 'Click to view details')"></span>)</label>
@@ -103,10 +103,8 @@
                     <label data-bind="html: ko.i18n('ple.spec.conceptsToIncludeLabel', 'Concepts to <b>include</b> when constructing the covariates to be used in this study. (Leave blank if you want to include every concept).*')"></label>
                     <div class="input-group">
                         <input class="form-control" type="text" disabled data-bind="value: $component.analysis.getDbCohortMethodDataArgs.covariateSettings.includedCovariateConceptSet().name" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" data-bind="click:chooseIncludedCovariates, disable: !$component.isEditPermitted()"><i class="fa fa-folder-open"></i></button>
+                        <button class="btn btn-primary" data-bind="click:chooseIncludedCovariates, disable: !$component.isEditPermitted()"><i class="fa fa-folder-open"></i></button>
                             <button class="btn btn-danger" data-bind="disable:($component.analysis.getDbCohortMethodDataArgs.covariateSettings.includedCovariateConceptSet().id == 0 || !$component.isEditPermitted()),click:clearIncludedCovariates" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-                        </span>
                     </div>
                     <label><i data-bind="text: ko.i18n('ple.spec.conceptsToIncludeNoteAnalysis', '* Concepts defined here are combined with those defined in the Comparisons section.')"></i></label>
                 </div>
@@ -115,10 +113,8 @@
                     <label data-bind="html: ko.i18n('ple.spec.conceptsToExcludeLabel', 'Concepts to <b>exclude</b> when constructing the covariates to be used in this study.*')"></label>
                     <div class="input-group">
                         <input class="form-control" type="text" disabled data-bind="value: $component.analysis.getDbCohortMethodDataArgs.covariateSettings.excludedCovariateConceptSet().name" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" data-bind="click:chooseExcludedCovariates, disable: !$component.isEditPermitted()"><i class="fa fa-folder-open"></i></button>
+                        <button class="btn btn-primary" data-bind="click:chooseExcludedCovariates, disable: !$component.isEditPermitted()"><i class="fa fa-folder-open"></i></button>
                             <button class="btn btn-danger" data-bind="disable:($component.analysis.getDbCohortMethodDataArgs.covariateSettings.excludedCovariateConceptSet().id == 0 || !$component.isEditPermitted()),click:clearExcludedCovariates" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-                        </span>
                     </div>
                     <label><i data-bind="text: ko.i18n('ple.spec.conceptsToExcludeNoteAnalysis', '* Concepts defined here are combined with those defined in the Comparisons section.')"></i></label>
                 </div>
@@ -126,11 +122,11 @@
         </div>
     </div>
     <div role="tabpanel" data-bind="visible: $component.editorMode() == 'all' || $component.editorMode() == 'timeAtRisk'" class="tab-pane">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card panel-primary">
+            <div class="card-header">
                 <i class="fa fa-clock-o" aria-hidden="true"></i> <span data-bind="text: ko.i18n('ple.spec.timeAtRisk', 'Time At Risk')"></span>
             </div>
-            <div data-bind="css:{'panel-body':true, 'div-disabled': !$component.isEditPermitted()}">
+            <div data-bind="css:{'card-body':true, 'div-disabled': !$component.isEditPermitted()}">
                 <div>
                     <label data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.defineTheTimeAtRiskWindowStart', 'Define the time-at-risk window start, relative to target/comparator cohort entry:')"></label>
                     <div class="input-group">
@@ -153,11 +149,11 @@
         </div>
     </div>
     <div role="tabpanel" data-bind="visible: $component.editorMode() == 'all' || $component.editorMode() == 'psAdjustment'" class="tab-pane">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card panel-primary">
+            <div class="card-header">
                 <i class="fa fa-balance-scale" aria-hidden="true"></i> <span data-bind="text: ko.i18n('ple.spec.propensityScoreAdjustment', 'Propensity Score Adjustment')"></span>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
                     <div>
                         <label data-bind="text: ko.i18n('ple.spec.propensityScoreAdjustmentPanel.howToTrim', 'How do you want to trim your cohorts based on the propensity score distribution?')"></label>
@@ -216,21 +212,21 @@
                 </div>
                 <div class="row" data-bind="css: classes('subsection'), visible: $component.useRegularization">
                     <div class="col-md-6">
-                        <div class="panel panel-primary" data-bind="collapsable: showControlDisplay, collapseTargetClass: 'panel-body', collapseOptions: { selectorClass: 'panel-heading', collapsabledClass: 'active' }">
-                            <div class="panel-heading panel-subheading panel-heading-collapsible" data-bind="click: toggleControlDisplay">
+                        <div class="card panel-primary" data-bind="collapsable: showControlDisplay, collapseTargetClass: 'card-body', collapseOptions: { selectorClass: 'card-header', collapsabledClass: 'active' }">
+                            <div class="card-header panel-subheading panel-heading-collapsible" data-bind="click: toggleControlDisplay">
                                 <span class="glyphicon-chevron-up"><i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.controlSettings', 'Control Settings')"></span></span>
                             </div>
-                            <div class="panel-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
+                            <div class="card-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
                                 <cyclops-control-editor params="control: $component.analysis.createPsArgs.control, isEditPermitted: $component.isEditPermitted"></cyclops-control-editor>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="panel panel-primary" data-bind="collapsable: showPriorDisplay, collapseTargetClass: 'panel-body', collapseOptions: { selectorClass: 'panel-heading', collapsabledClass: 'active' }">
-                            <div class="panel-heading panel-subheading panel-heading-collapsible" data-bind="click: togglePriorDisplay">
+                        <div class="card panel-primary" data-bind="collapsable: showPriorDisplay, collapseTargetClass: 'card-body', collapseOptions: { selectorClass: 'card-header', collapsabledClass: 'active' }">
+                            <div class="card-header panel-subheading panel-heading-collapsible" data-bind="click: togglePriorDisplay">
                                 <span class="glyphicon-chevron-up"><i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.prior', 'Prior')"></span></span>
                             </div>
-                            <div class="panel-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
+                            <div class="card-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
                                 <cyclops-prior-editor params="prior: $component.analysis.createPsArgs.prior, isEditPermitted: $component.isEditPermitted"></cyclops-prior-editor>
                             </div>
                         </div>
@@ -240,11 +236,11 @@
         </div>
     </div>
     <div role="tabpanel" data-bind="visible: $component.editorMode() == 'all' || $component.editorMode() == 'outcome'" class="tab-pane">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
+        <div class="card panel-primary">
+            <div class="card-header">
                 <i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.outcomeModel', 'Outcome Model')"></span>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
                 <div>
                     <outcome-model-args-editor params="isEditPermitted: $component.isEditPermitted, matchStratifySelection: $component.matchStratifySelection, outcomeModelArgs: $component.analysis.fitOutcomeModelArgs, subscriptions: $component.subscriptions"></outcome-model-args-editor>
                 </div>

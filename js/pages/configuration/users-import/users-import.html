@@ -3,16 +3,16 @@
 <access-denied params="isAuthenticated: isAuthenticated, isPermitted: canImport"></access-denied>
 
 <div data-bind="css: classes({extra: ['paddedWrapper']}), if: config.userAuthenticationEnabled && canImport">
-    <div data-bind="css: classes({extra: ['panel', 'panel-primary']})">
-        <div data-bind="css: classes({extra: ['panel-heading', 'padded']}), text: ko.i18n('configuration.userImport.wizard.title', 'Importing users')"></div>
-        <div data-bind="css: classes({extra: ['panel-body']})">
+    <div data-bind="css: classes({extra: ['card', 'panel-primary']})">
+        <div data-bind="css: classes({extra: ['card-header', 'padded']}), text: ko.i18n('configuration.userImport.wizard.title', 'Importing users')"></div>
+        <div data-bind="css: classes({extra: ['card-body']})">
 
             <!-- select sources -->
             <div data-bind="if: hasMultipleProviders && wizardStep() === $component.WIZARD_STEPS.PROVIDERS">
                 <step-header params="header:ko.i18n('configuration.userImport.wizard.selectSource.header', 'Please, select a provider to import users from.')"></step-header>
                 <div data-bind="if: connectionCheck()">
-                    <div data-bind="css: classes({extra: ['panel', 'panel-warning', 'padded']})">
-                        <div data-bind="css: classes({extra: ['panel-body']})">
+                    <div data-bind="css: classes({extra: ['card', 'panel-warning', 'padded']})">
+                        <div data-bind="css: classes({extra: ['card-body']})">
                             <div data-bind="css: infoMessageClass(), text: connectionCheck().message"></div>
                         </div>
                     </div>

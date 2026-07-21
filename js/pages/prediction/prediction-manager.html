@@ -15,8 +15,7 @@
             textInput: $component.patientLevelPredictionAnalysis() && $component.patientLevelPredictionAnalysis().name,
             css: { emptyInput: !isNameFilled() },
             attr: { disabled: !canEdit() }" />
-          <div class="input-group-btn" role="group">
-              <button class="btn btn-success"
+          <button class="btn btn-success"
                       data-bind="title: ko.i18n('common.save', 'Save'), click: save, enable: canSave() && !isProcessing()"><i
                       class="fa fa-save"></i></button>
               <button class="btn btn-primary"
@@ -37,7 +36,6 @@
                       data-bind="title: ko.i18n('common.delete', 'Delete'), click: $component.delete, enable: canDelete() && !isProcessing()"><i
                       class="fa fa-trash-alt"></i></button>
               <!-- /ko -->
-          </div>
       </div>
       <name-validation params="
         hasEmptyName: !isNameFilled(),

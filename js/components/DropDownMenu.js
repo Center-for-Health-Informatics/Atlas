@@ -10,7 +10,7 @@ class DropDownMenu extends AutoBind(Component) {
     this.title = params.title || ko.i18n('common.menu', 'Menu')
     this.actions = params.actions || []
     this.formatOption = params.formatOption || function (d) { return d }
-    this.dropDownClasses = params.cssClasses || 'btn-group pull-right'
+    this.dropDownClasses = params.cssClasses || 'btn-group float-end'
     this.buttonClasses = params.buttonClasses || 'btn btn-primary btn-sm dropdown-toggle'
     this.icon = params.icon || '<i class="fa fa-plus"></i>'
   }

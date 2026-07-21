@@ -3,12 +3,10 @@
         <label data-bind="text: ko.i18n('predictions.editors.predictionEditorText_1', 'What concepts do you want to include in baseline covariates in the patient-level prediction model? (Leave blank if you want to include everything)')"></label>
         <div class="input-group">
             <input class="form-control" type="text" disabled data-bind="value: $component.covariateSettings.includedCovariateConceptSet().name" />
-            <span class="input-group-btn">
-                <button class="btn btn-primary" data-bind="click:chooseIncludedCovariates"><i class="fa fa-folder-open"></i></button>
+            <button class="btn btn-primary" data-bind="click:chooseIncludedCovariates"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger"
                 data-bind="disable:$component.covariateSettings.includedCovariateConceptSet().id == 0,click:clearIncludedCovariates"
                 type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-            </span>
         </div>
         <!--<div data-bind="visible: comparison.comparator().id > 0 && comparison.comparator().name == null" class="errorInline"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> The comparator cohort specified (#<span data-bind="text:comparison.comparator().id"></span>) was deleted. Please select a different cohort.</div>-->
     </div>
@@ -23,12 +21,10 @@
         <label data-bind="text: ko.i18n('predictions.editors.predictionEditorText_3', 'What concepts do you want to exclude in baseline covariates in the patient-level prediction model? (Leave blank if you want to include everything)')"></label>
         <div class="input-group">
             <input class="form-control" type="text" disabled data-bind="value: $component.covariateSettings.excludedCovariateConceptSet().name" />
-            <span class="input-group-btn">
-                <button class="btn btn-primary" data-bind="click:chooseExcludedCovariates"><i class="fa fa-folder-open"></i></button>
+            <button class="btn btn-primary" data-bind="click:chooseExcludedCovariates"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger"
                 data-bind="disable:$component.covariateSettings.excludedCovariateConceptSet().id == 0,click:clearExcludedCovariates"
                 type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-            </span>
         </div>
     </div>
     <div>

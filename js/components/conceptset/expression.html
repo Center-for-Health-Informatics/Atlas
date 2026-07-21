@@ -5,7 +5,7 @@
     <conceptset-editor params="conceptSetItems:data, canEditCurrentConceptSet: canEdit"></conceptset-editor>
 
     <div class="clear"></div>
-    <div data-bind="css: classes({element: 'button-pane', extra: 'pull-right'})">
+    <div data-bind="css: classes({element: 'button-pane', extra: 'float-end'})">
         <span data-bind="tooltip: buttonTooltipText">
             <button type="button" class="btn btn-sm btn-success" data-bind="click:function() { $component.addConcepts(); }, enable: canEdit, text: ko.i18n('components.conceptSet.addConcepts', 'Add Concepts')"></button>
         </span>

@@ -95,8 +95,8 @@ appConfig.strictXSSOptions = {
 }
 appConfig.xssOptions = {
   whiteList: {
-    a: ['href', 'class', 'data-bind', 'data-toggle', 'aria-expanded'],
-    button: ['class', 'type', 'data-toggle', 'aria-expanded'],
+    a: ['href', 'class', 'data-bind', 'data-bs-toggle', 'aria-expanded'],
+    button: ['class', 'type', 'data-bs-toggle', 'aria-expanded'],
     span: ['class', 'data-bind'],
     i: ['class', 'id', 'aria-hidden'],
     div: ['class', 'style', 'id'],

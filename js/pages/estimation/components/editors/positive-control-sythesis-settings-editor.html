@@ -47,11 +47,11 @@
     </div>
     <label data-bind="text: ko.i18n('ple.spec.evaluationSettingsPanel.advancedSettingsStartsHere', 'Advanced Settings start here')"></label>
     <div class="row" data-bind="css: classes('subsection')">
-        <div class="panel panel-default" data-bind="collapsable: showAdditionalSettings, collapseTargetClass: 'panel-body', collapseOptions: { selectorClass: 'panel-heading', collapsabledClass: 'active' }">
-            <div class="panel-heading panel-subheading panel-heading-collapsible div-enabled" data-bind="click: toggleAdditionalSettings">
+        <div class="card panel-default" data-bind="collapsable: showAdditionalSettings, collapseTargetClass: 'card-body', collapseOptions: { selectorClass: 'card-header', collapsabledClass: 'active' }">
+            <div class="card-header panel-subheading panel-heading-collapsible div-enabled" data-bind="click: toggleAdditionalSettings">
                 <span class="glyphicon-chevron-up"><i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.evaluationSettingsPanel.additionalSettings', 'Additional Settings')"></span></span>
             </div>
-            <div class="panel-body collapse">
+            <div class="card-body collapse">
                 <div>
                     <label data-bind="text: ko.i18n('ple.spec.evaluationSettingsPanel.maxNumberOfPeopleToFit', 'Maximum number of people used to fit an outcome model:')"></label>
                     <div class="input-group">

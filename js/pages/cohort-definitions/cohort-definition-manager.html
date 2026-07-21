@@ -13,8 +13,7 @@
       <div class="input-group">
         <input class="form-control" type="text"
           data-bind="placeholder: ko.i18n('const.newEntityNames.cohortDefinition', 'New Cohort Definition'), enabled: canEdit(), textInput: currentCohortDefinition().name, css: { emptyInput: !isNameFilled() }" />
-        <div class="input-group-btn">
-          <button class="btn btn-success"
+        <button class="btn btn-success"
             data-bind="title: !previewVersion() ? ko.i18n('common.save', 'Save') : ko.i18n('common.saveAsCurrentVersion', 'Save as current version'), click: save, enable: canSave() && !isProcessing()"><i
               class="fa fa-save"></i></button>
           <button class="btn btn-primary"
@@ -46,7 +45,6 @@
               class="fa fa-trash-alt"></i></button>
           <!-- /ko -->
           <!-- /ko -->
-        </div>
       </div>
       <name-validation params="
         hasEmptyName: !isNameFilled(),
@@ -335,14 +333,14 @@
       </div>
       <div role="tabpanel" data-bind="css: { active: $component.tabMode() == 'reporting' }" class="tab-pane">
         <div class="pad-5">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
+          <div class="card panel-primary">
+            <div class="card-header">
               <span
                 data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.panels.reportSelections', 'Report Selections')"></span>
             </div>
-            <div class="panel-body">
+            <div class="card-body">
               <div class="row">
-                <div class="btn-group pull-right pad-5">
+                <div class="btn-group float-end pad-5">
                   <button class="btn btn-primary btn-sm"
                     data-bind="visible: $component.generateReportsEnabled, css : {disabled:!$component.generateReportsEnabled()}, attr : {'disabled':!$component.generateReportsEnabled()}, click:$component.generateAllAnalyses">
                     <span
@@ -382,41 +380,41 @@
           </div>
           <loading data-bind="visible: $component.isReportGenerating()"></loading>
           <div data-bind="visible: !$component.isReportGenerating()">
-            <div class="panel panel-danger" data-bind="visible: $component.reportingState()=='cohort_not_generated'">
-              <div class="panel-heading">
+            <div class="card panel-danger" data-bind="visible: $component.reportingState()=='cohort_not_generated'">
+              <div class="card-header">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_1', 'Cohort Not Generated')"></span>
               </div>
-              <div class="panel-body">
+              <div class="card-body">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_2', 'This cohort has not been generated in the data source you selected. Please return to the generation tab to generate the cohort before accessing reporting.')"></span>
               </div>
             </div>
-            <div class="panel panel-danger" data-bind="visible: $component.reportingState()=='reports_not_generated'">
-              <div class="panel-heading ">
+            <div class="card panel-danger" data-bind="visible: $component.reportingState()=='reports_not_generated'">
+              <div class="card-header ">
 
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_3', 'Reports Not Generated')"></span>
               </div>
-              <div class="panel-body">
+              <div class="card-body">
 
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_4', 'Reports have not yet been generated for this cohort. Please click the generate button below to generate the reports.')"></span>
               </div>
             </div>
-            <div class="panel panel-info" data-bind="visible: $component.reportingState()=='awaiting_selection'">
-              <div class="panel-heading ">
+            <div class="card panel-info" data-bind="visible: $component.reportingState()=='awaiting_selection'">
+              <div class="card-header ">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_5', 'Make a Selection')"></span>
 
               </div>
-              <div class="panel-body">
-                <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_6', 'Please make a selection in the Report Selections panel.')"></span>
+              <div class="card-body">
+                <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_6', 'Please make a selection in the Report Selections card.')"></span>
 
               </div>
             </div>
-            <div class="panel panel-info"
+            <div class="card panel-info"
               data-bind="visible: (!$component.reportingSourceStatusLoading() && $component.reportingState()=='generating_reports')">
-              <div class="panel-heading ">
+              <div class="card-header ">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_7', 'Generating Reports')"></span>
 
               </div>
-              <div class="panel-body">
+              <div class="card-body">
                 <table class="pad-5" style="width:100%;">
                   <thead>
                     <th data-bind="text: ko.i18n('columns.jobName', 'Job Name')"></th>
@@ -435,54 +433,54 @@
                 </table>
               </div>
             </div>
-            <div class="panel panel-danger"
+            <div class="card panel-danger"
               data-bind="visible: (!$component.reportingSourceStatusLoading() && $component.reportingState()=='report_unavailable')">
-              <div class="panel-heading ">
+              <div class="card-header ">
 
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_8', 'Report Unavailable')"></span>
               </div>
-              <div class="panel-body">
+              <div class="card-body">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_9', 'The report you requested is not available. Please click the generate button to generate cohort reports for this data source.')"></span>
 
               </div>
             </div>
-            <div class="panel panel-danger"
+            <div class="card panel-danger"
               data-bind="visible: (!$component.reportingSourceStatusLoading() && $component.reportingState()=='unknown_cohort_report_state')">
-              <div class="panel-heading ">
+              <div class="card-header ">
 
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_10', 'Whoops')"></span>
               </div>
-              <div class="panel-body">
+              <div class="card-body">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_11', 'The reporting system has encountered an error. Please provide the following details to your ATLAS administration team or submit an issue on ')"></span>
 
                 <a href="https://www.github.com/ohdsi/atlas"><i
                     class="fa fa-github"></i> Github</a>.
               </div>
-              <div class="panel-footer">
+              <div class="card-footer">
                 <div data-bind="html:$component.reportingError"></div>
               </div>
             </div>
-            <div class="panel panel-danger"
+            <div class="card panel-danger"
               data-bind="visible: (!$component.reportingSourceStatusLoading() && $component.createReportJobFailed)">
-              <div class="panel-heading ">
+              <div class="card-header ">
 
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_12', 'Create Reporting Job Failed')"></span>
               </div>
-              <div class="panel-body">
+              <div class="card-body">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_11', 'The reporting system has encountered an error. Please provide the following details to your ATLAS administration team or submit an issue on ')"></span>
                 <a href="https://www.github.com/ohdsi/atlas"><i
                     class="fa fa-github"></i> Github</a>.
               </div>
-              <div class="panel-footer">
+              <div class="card-footer">
                 <div data-bind="html:$component.createReportJobError"></div>
               </div>
             </div>
-            <div class="panel panel-warning" data-bind="visible: $component.reportingSourceStatusLoading()">
-              <div class="panel-heading ">
+            <div class="card panel-warning" data-bind="visible: $component.reportingSourceStatusLoading()">
+              <div class="card-header ">
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_13', 'Please Wait')"></span>
 
               </div>
-              <div class="panel-body">
+              <div class="card-body">
 
                 <span data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_14', 'Please wait while for the report status to be loaded.')"></span>
               </div>
@@ -514,9 +512,9 @@
         <!-- samples content  -->
         <div role="tabpanel" data-bind="css: { active: $component.tabMode() == 'samples' }" class="tab-pane">
           <div class="pad-5">
-            <div class="panel panel-primary">
-              <div class="panel-heading" data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.samples.sampleSelections', 'Sample Selections')"></div>
-              <div class="panel-body">
+            <div class="card panel-primary">
+              <div class="card-header" data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.samples.sampleSelections', 'Sample Selections')"></div>
+              <div class="card-body">
                 <div class="row">
                   <div class="col-sm-12">
                     <select class="form-control"
@@ -530,7 +528,7 @@
                 </div>
               </div>
             </div>
-            <div class="pull-right"
+            <div class="float-end"
               data-bind="visible: !$component.isLoadingSampleData() && $component.sampleSourceKey()"
             >
               <button
@@ -569,9 +567,9 @@
             <loading data-bind="visible: $component.sampleDataLoading()"></loading>
             <!-- notifications -->
             <div data-bind="visible: sampleData() && sampleData().length == 0">
-              <div class="panel panel-danger" data-bind="visible: !$component.isCohortGenerated">
-                <div class="panel-heading" data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_1', 'Cohort Not Generated')"></div>
-                <div class="panel-body" data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.samples.cohortNotGeneratedNote', 'This cohort has not been generated in the data source you selected. Please return to the generation tab to generate the cohort before accessing samples.')"></div>
+              <div class="card panel-danger" data-bind="visible: !$component.isCohortGenerated">
+                <div class="card-header" data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.cohortDefinitionManagerText_1', 'Cohort Not Generated')"></div>
+                <div class="card-body" data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.samples.cohortNotGeneratedNote', 'This cohort has not been generated in the data source you selected. Please return to the generation tab to generate the cohort before accessing samples.')"></div>
               </div>
             </div>
           </div>
@@ -792,10 +790,10 @@
     </button>
     <!-- ko if: $component.config.shinyEnabled -->
     <div class="btn-group">
-      <button class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" data-bind="attr: {disabled: $component.isSourceRunning($data) || !isValid()}">
+      <button class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bind="attr: {disabled: $component.isSourceRunning($data) || !isValid()}">
         <i class="fa fa-network-wired"></i>
         <span data-bind="text: 'Shiny App'"></span>
-        <span class="caret"></span>
+        
       </button>
       <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: $component.shinyOptions">
         <li>

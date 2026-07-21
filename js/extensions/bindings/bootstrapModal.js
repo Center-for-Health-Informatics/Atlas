@@ -1,38 +1,30 @@
-import $ from 'jquery'
 import ko from 'knockout'
+import { Modal } from 'bootstrap'
 
 ko.bindingHandlers.modal = {
   init: function (element, valueAccessor) {
-    $(element).modal({
-      show: false
-    })
+    const modal = Modal.getOrCreateInstance(element, { show: false })
 
     const value = valueAccessor()
     if (ko.isObservable(value)) {
-      // Update 28/02/2018
-      // Thank @HeyJude for fixing a bug on
-      // double "hide.bs.modal" event firing.
-      // Use "hidden.bs.modal" event to avoid
-      // bootstrap running internal modal.hide() twice.
-      $(element).on('hidden.bs.modal', function () {
+      // Use "hidden.bs.modal" (rather than "hide.bs.modal") to avoid
+      // running modal.hide() twice.
+      element.addEventListener('hidden.bs.modal', function () {
         value(false)
       })
     }
 
-    // Update 13/07/2016
-    // based on @Richard's finding,
-    // don't need to destroy modal explicitly in latest bootstrap.
-    // modal('destroy') doesn't exist in latest bootstrap.
-    // ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-    //    $(element).modal("destroy");
-    // });
+    ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+      modal.dispose()
+    })
   },
   update: function (element, valueAccessor) {
     const value = valueAccessor()
+    const modal = Modal.getOrCreateInstance(element)
     if (ko.utils.unwrapObservable(value)) {
-      $(element).modal('show')
+      modal.show()
     } else {
-      $(element).modal('hide')
+      modal.hide()
     }
   }
 }

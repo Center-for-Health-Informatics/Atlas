@@ -2,7 +2,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         <i class="fa fa-lightbulb"></i> <span data-bind="text: ko.i18n('profiles.eventHighlighting', 'Event Highlighting')"></span>
       </div>
       <div class="modal-body">
@@ -51,30 +51,24 @@
   <div class="asset-heading">
     <form data-bind="submit:loadPerson">
       <div class="input-group" role="group">
-        <div class="input-group-btn" role="group">
-          <button type="button" title="choose a data source" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span data-bind="text:$component.sourceKeyCaption"></span>&nbsp;&nbsp;<span class="caret"></span>
+        <button type="button" title="choose a data source" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span data-bind="text:$component.sourceKeyCaption"></span>&nbsp;&nbsp;
           </button>
           <ul class="dropdown-menu" data-bind="enable: !person() && !loadingPerson(),foreach: permittedSources().filter(d=>d.hasCDM)">
             <li>
               <a href="#" data-bind="text:sourceName,click:$component.setSourceKey"></a>
             </li>
           </ul>
-        </div>
         <input type="text" class="form-control" data-bind="enable: sourceKey(),value: personId, placeholder: ko.i18n('profiles.personId', 'Person Id')">
-        <div class="input-group-btn">
-          <div class="btn btn-primary" data-bind="css:{active:$component.showSection.profileChart},click:$component.dispToggle, value:'profileChart', title: ko.i18n('profiles.toggleChartTooltip', 'toggle chart display')">
+        <div class="btn btn-primary" data-bind="css:{active:$component.showSection.profileChart},click:$component.dispToggle, value:'profileChart', title: ko.i18n('profiles.toggleChartTooltip', 'toggle chart display')">
             <i class="fa fa-chart-line" data-bind="value:'profileChart'" />
-          </div>
           <div class="btn btn-primary" data-bind="css:{active:$component.showSection.datatable},click:$component.dispToggle, value:'datatable', title: ko.i18n('profiles.toggleTableTooltip', 'toggle table display')">
             <i class="fa fa-table" data-bind="value:'datatable'" />
           </div>
         </div>
-        <div class="input-group-btn" role="group">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalHighlights" data-bind="title: ko.i18n('profiles.highlightEventsTooltip', 'highlight events')">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalHighlights" data-bind="title: ko.i18n('profiles.highlightEventsTooltip', 'highlight events')">
             <span><i class="fa fa-paint-brush"></i></span>
           </button>
-        </div>
       </div>
     </form>
     <div style="margin-top:5px;" data-bind="visible:person && !cantFindPerson() && !loadingPerson(), with:person">
@@ -100,7 +94,7 @@
   <div data-bind="visible: !cantFindPerson() && !loadingPerson()">
     <div data-bind="css: classes()">
       <div data-bind="css: classes({ element: 'profile-control', extra: 'row' })">
-        <div data-bind="if: person, attr: { class: 'col-xs-12'}">
+        <div data-bind="if: person, attr: { class: 'col-12'}">
           <div data-bind="
           css: classes('chart')
           attr: {

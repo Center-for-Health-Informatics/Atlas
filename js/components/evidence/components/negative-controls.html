@@ -21,18 +21,16 @@
     <br/>
     <div class="heading" data-bind="text: ko.i18n('cs.manager.exploreEvidence.evidenceSources', 'Evidence Sources')"></div>
     <div class="paddedWrapper" data-bind="foreach:$component.evidenceSources">
-      <div class="panel panel-default">
-        <div class="panel-heading" data-bind="text:sourceName"></div>
-        <div class="panel-body">
+      <div class="card panel-default">
+        <div class="card-header" data-bind="text:sourceName"></div>
+        <div class="card-body">
           <div class="form-group">
             <strong data-bind="text: ko.i18n('cs.manager.exploreEvidence.generationSettings', 'Generation Settings')"></strong><br/>
             <label data-bind="text: ko.i18n('cs.manager.exploreEvidence.includeLabel', 'What concepts do you want to include as known negative controls? (Optional)')"></label>
             <div class="input-group">
               <input class="form-control" type="text" disabled data-bind="value: $data.csToIncludeCaption" />
-              <span class="input-group-btn">
-                <button class="btn btn-primary" data-bind="click: function() {$component.chooseIncludeConceptSet($data)}"><i class="fa fa-folder-open"></i></button>
+              <button class="btn btn-primary" data-bind="click: function() {$component.chooseIncludeConceptSet($data)}"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger" data-bind="disable: $data.csToInclude() == 0, click:function() {$component.clearIncludeConceptSet($data)}" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-              </span>
             </div>
             <div data-bind="visible: !$data.csToIncludeLoading() && $data.csToInclude() > 0 && $data.csToIncludeCaption() == null" class="errorInline"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
               <span data-bind="text: ko.i18nformat('cs.manager.exploreEvidence.deletedCcMessage', 'The concept set specified (#<%=cs%>) was deleted. Please select a different concept set.', {cs:$data.csToInclude()})"></span>
@@ -42,10 +40,8 @@
             <label data-bind="text: ko.i18n('cs.manager.exploreEvidence.excludeLabel', 'What concepts do you want to exclude as known positive controls? (Optional)')"></label>
             <div class="input-group">
               <input class="form-control" type="text" disabled data-bind="value: $data.csToExcludeCaption" />
-              <span class="input-group-btn">
-                <button class="btn btn-primary" data-bind="click: function() {$component.chooseExcludeConceptSet($data)}"><i class="fa fa-folder-open"></i></button>
+              <button class="btn btn-primary" data-bind="click: function() {$component.chooseExcludeConceptSet($data)}"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger" data-bind="disable: $data.csToExclude() == 0, click:function() {$component.clearExcludeConceptSet($data)}" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
-              </span>
             </div>
             <div data-bind="visible: !$data.csToExcludeLoading() && $data.csToExclude() > 0 && $data.csToExcludeCaption() == null" class="errorInline"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
               <span data-bind="text: ko.i18n('cs.manager.exploreEvidence.deletedCcMessage', 'The concept set specified (<%=cs%>) was deleted. Please select a different concept set', {cs: $data.csToExclude()})"></span>
@@ -110,8 +106,8 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6">
-            <div class="panel panel-success">
-              <div class="panel-heading">
+            <div class="card panel-success">
+              <div class="card-header">
                 <span data-bind="text: ko.i18n('cs.manager.exploreEvidence.drugLabelsFound', 'Drug Labels Found')"></span>
                 (<span data-bind="text: $component.drugLabelExistsIsTrue().length"></span>)
               </div>
@@ -123,8 +119,8 @@
             </div>
           </div>
           <div class="col-md-6">
-            <div class="panel panel-danger">
-              <div class="panel-heading">
+            <div class="card panel-danger">
+              <div class="card-header">
                 <span data-bind="text: ko.i18n('cs.manager.exploreEvidence.drugLabelsNotFound', 'Drug Labels Not Found')"></span>
                 (<span data-bind="text: $component.drugLabelExistsIsFalse().length"></span>)
               </div>
@@ -147,10 +143,10 @@
     </div>
   </div>
   <div class="container-fluid">
-    <div class="pull-left">
+    <div class="float-start">
       <button class="btn btn-sm btn-primary" data-bind="click:function() { showNegControlsSaveNewModal(true); }, text: ko.i18n('cs.manager.exploreEvidence.saveNewButton', 'Save New Concept Set From Selection Below')"></button>
     </div>
-    <div class="pull-right" style="padding-bottom: 10px;">
+    <div class="float-end" style="padding-bottom: 10px;">
       <i data-bind="attr: { class: $component.recordCountClass }" aria-hidden="true"></i>
       <span data-bind="text: ko.i18n('cs.manager.exploreEvidence.viewDatabaseRecordCounts', 'View database record counts (RC) and descendant record counts (DRC) for:')"></span>
       <select data-bind="options: $component.resultSources, optionsText: 'sourceName', optionsValue: 'sourceKey', value: $component.currentResultSource().sourceKey, event: { change: $component.refreshRecordCounts }"></select>
@@ -177,7 +173,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="modal-title" data-bind="text: ko.i18n('cs.manager.exploreEvidence.chooseAConceptSet', 'Choose a Concept Set')"></div>
       </div>
       <div class="modal-body">
@@ -190,7 +186,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         <div class="modal-title" data-bind="text: ko.i18n('cs.manager.exploreEvidence.viewingEvidence', 'Viewing Evidence')"></div>
       </div>
       <div class="modal-body">

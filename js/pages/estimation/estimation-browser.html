@@ -4,7 +4,7 @@
   <span data-bind="click: newEstimation,
   css: classes({
     element: 'new-btn',
-    extra: `pull-right btn btn-sm btn-primary ${canCreateEstimation() ? '' : 'disabled'}`,
+    extra: `float-end btn btn-sm btn-primary ${canCreateEstimation() ? '' : 'disabled'}`,
   }),
   text: ko.i18n('const.newEntityNames.ple', 'New Population Level Effect Estimation')"></span>
 

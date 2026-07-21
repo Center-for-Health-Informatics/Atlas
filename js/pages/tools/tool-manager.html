@@ -27,7 +27,7 @@
           <textarea rows="5" data-bind="visible: isEditing, value: description, keyupBubble: false" style="margin-top: 2px; max-width: 100%;" id="toolDescription"></textarea>
           <div class="flex-between" style="margin-top: 18px; align-items: flex-start; justify-content: flex-start;" data-bind="visible: isEditing">
             <label for="toolAddDescription" data-bind="text: ko.i18n('columns.enabled', 'Enabled')" style="width: 10%;"></label>
-            <div class="material-switch pull-right" style=" margin-left: 8px;" data-bind="visible: isEditing">
+            <div class="material-switch float-end" style=" margin-left: 8px;" data-bind="visible: isEditing">
               <input id="switchBtnTool" name="switchBtnTool" data-bind="checked: enabled" style="display: none;"/>
               <label for="switchBtnTool" class="label-success" data-bind="css: enabled ? 'label-switch-enable' : '', click:() => $component.handleCheckVisible(id)"></label>
             </div>
@@ -86,7 +86,7 @@
       </div>
       <div class="flex-between" style="margin-top: 18px; align-items: flex-start; justify-content: flex-start;">
         <label for="toolAddDescription" data-bind="text: ko.i18n('columns.enabled', 'Enabled')" style="width: 10%;"></label>
-        <div class="material-switch pull-right" style="margin-left: 8px; width: 70%;">
+        <div class="material-switch float-end" style="margin-left: 8px; width: 70%;">
           <input id="switchBtnTool" name="switchBtnTool" data-bind="checked: toolIsVisible()" style="display: none;"/>
           <label for="switchBtnTool" class="label-success" data-bind="css: toolIsVisible() ? 'label-switch-enable' : '', click: toggleVisiableTool"></label>
         </div>

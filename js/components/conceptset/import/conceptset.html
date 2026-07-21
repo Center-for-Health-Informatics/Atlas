@@ -3,7 +3,7 @@
   <textarea class="form-control" rows="5" data-bind="value: importConceptSetJson"></textarea>
   <div style="position: absolute" data-bind="if: errorMessage().length > 0"><span data-bind="text: errorMessage"></span></div>
   <div class="clear"></div>
-  <div class="pull-right">
+  <div class="float-end">
     <span data-bind="tooltip: buttonTooltipText">
       <button type="button" data-bind="click:() => { $component.doImport({type: $component.importTypes.APPEND }); }, css: { disabled: !canEdit() }" class="btn btn-sm btn-primary">
         <i class="fa fa-upload"></i> <span data-bind="text: ko.i18n('components.conceptSet.appendConceptSetExpression', 'Append Concept Set Expression')"></span>

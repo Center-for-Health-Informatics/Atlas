@@ -46,7 +46,7 @@ function facetedDatatable (params) {
     restore: ko.i18n('datatable.language.buttons.resetColumns', 'Reset Columns')
   }
   self.deferRender = typeof params.deferRender !== 'undefined' ? params.deferRender : true
-  self.dom = params.dom || '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>'
+  self.dom = params.dom || '<<"row vertical-align"<"col-6"<"dt-btn"B>l><"col-6 search"f>><"row vertical-align"<"col-3"i><"col-9"p>><t><"row vertical-align"<"col-3"i><"col-9"p>>>'
   self.language = params.language || {
     search: 'Filter: '
   }

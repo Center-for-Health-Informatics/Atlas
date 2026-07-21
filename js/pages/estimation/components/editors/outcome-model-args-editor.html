@@ -33,21 +33,21 @@
 </div>
 <div class="row" data-bind="css: classes('subsection'), visible: $component.useRegularization">
     <div class="col-md-6">
-        <div class="panel panel-primary" data-bind="collapsable: showControlDisplay, collapseTargetClass: 'panel-body', collapseOptions: { selectorClass: 'panel-heading', collapsabledClass: 'active' }">
-            <div class="panel-heading panel-subheading panel-heading-collapsible" data-bind="click: toggleControlDisplay">
+        <div class="card panel-primary" data-bind="collapsable: showControlDisplay, collapseTargetClass: 'card-body', collapseOptions: { selectorClass: 'card-header', collapsabledClass: 'active' }">
+            <div class="card-header panel-subheading panel-heading-collapsible" data-bind="click: toggleControlDisplay">
                 <span class="glyphicon-chevron-up"><i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.controlSettings', 'Control Settings')"></span></span>
             </div>
-            <div class="panel-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
+            <div class="card-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
                 <cyclops-control-editor params="control: $component.outcomeModelArgs.control, isEditPermitted: $component.isEditPermitted"></cyclops-control-editor>
             </div>
         </div>
     </div>
     <div class="col-md-6">
-        <div class="panel panel-primary" data-bind="collapsable: showPriorDisplay, collapseTargetClass: 'panel-body', collapseOptions: { selectorClass: 'panel-heading', collapsabledClass: 'active' }">
-            <div class="panel-heading panel-subheading panel-heading-collapsible" data-bind="click: togglePriorDisplay">
+        <div class="card panel-primary" data-bind="collapsable: showPriorDisplay, collapseTargetClass: 'card-body', collapseOptions: { selectorClass: 'card-header', collapsabledClass: 'active' }">
+            <div class="card-header panel-subheading panel-heading-collapsible" data-bind="click: togglePriorDisplay">
                 <span class="glyphicon-chevron-up"><i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.prior', 'Prior')"></span></span>
             </div>
-            <div class="panel-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
+            <div class="card-body collapse" data-bind="css:{'div-disabled': !$component.isEditPermitted()}">
                 <cyclops-prior-editor params="prior: $component.outcomeModelArgs.prior, isEditPermitted: $component.isEditPermitted"></cyclops-prior-editor>
             </div>
         </div>

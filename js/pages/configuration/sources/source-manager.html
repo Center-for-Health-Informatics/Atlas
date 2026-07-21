@@ -12,8 +12,7 @@
                               css: { emptyInput: !isNameCorrect() },
                               placeholder: ko.i18n('configuration.viewEdit.source.new.placeholder', 'New Source')
               "/>
-              <div class="input-group-btn" role="group">
-                  <button class="btn btn-success"
+              <button class="btn btn-success"
                           data-bind="click: save, enable: dirtyFlag().isDirty() && canSave(), css: {'disabled': !dirtyFlag().isDirty, 'btn-success': dirtyFlag().isDirty},
                                    title: ko.i18n('common.save', 'Save')">
                       <i class="fa fa-save"></i></button>
@@ -22,7 +21,6 @@
                   <button class="btn btn-danger"
                       data-bind="click: $component.delete, enable: canDelete(),
                              title: ko.i18n('common.delete', 'Delete')"><i class="fa fa-trash-alt"></i></button>
-              </div>
             </div>
             <div data-bind="visible: !isNameCorrect()" class="empty-name-error">
               <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
@@ -30,8 +28,8 @@
             </div>
           </div>
           <div class="pad-10">
-              <div class="panel panel-primary">
-                  <div class="panel-body">
+              <div class="card panel-primary">
+                  <div class="card-body">
                       <div class="source-params" style="width: 100%">
                         <div class="source-row">
                             <div class="control-group" style="width: 50%">
@@ -174,9 +172,9 @@
                           </div>
                         </div>
                       </div>
-                      <div class="panel panel-primary">
-                          <div class="panel-heading" data-bind="text: ko.i18n('configuration.viewEdit.krb.sourceDaimons.label', 'Source daimons')"></div>
-                          <div class="panel-body">
+                      <div class="card panel-primary">
+                          <div class="card-header" data-bind="text: ko.i18n('configuration.viewEdit.krb.sourceDaimons.label', 'Source daimons')"></div>
+                          <div class="card-body">
                               <table class="padded">
                                   <tbody data-bind="foreach: selectedSource().daimons">
                                       <td data-bind="text:daimonType"></td>

@@ -7,10 +7,10 @@
             <hr />
             <div id="filters">
                 <div class="row">
-                    <div class="pull-left" data-bind="css: classes('filter-view')">
+                    <div class="float-start" data-bind="css: classes('filter-view')">
                         <span data-bind="text: ko.i18n('predictions.item.view', 'View:')"></span>
                     </div>
-                    <div class="pull-left">
+                    <div class="float-start">
                         <ul class="nav nav-pills">
                             <li role="presentation"
                                 data-bind="css: {active: $component.specificationPillMode() == 'all' }, click: function() {$component.specificationPillMode('all') };">
@@ -39,20 +39,20 @@
                 data-bind="visible: $component.specificationPillMode() == 'all' || $component.specificationPillMode() == 'predictions'"
                 class="tab-pane">
                 <div class="paddedWrapper">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
+                    <div class="card panel-primary">
+                        <div class="card-header">
                             <i class="fa fa-heartbeat"></i> <span data-bind="text: ko.i18n('predictions.item.predictionProblemSettings', 'Prediction Problem Settings')"></span>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="paddedWrapper">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <i class="fa fa-users"></i> <span data-bind="text: ko.i18n('predictions.item.targetCohort', 'Target Cohorts')"></span>
-                                        <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addTarget, disable: !$component.isEditPermitted()">
+                                        <button type="button" class="btn btn-primary btn-sm float-end" data-bind="click: addTarget, disable: !$component.isEditPermitted()">
                                             <i class="fa fa-plus"></i> <span data-bind="text: ko.i18n('predictions.item.addTargetCohort', 'Add Target Cohort')"></span>
                                         </button>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <faceted-datatable params="{
                                             columns: $component.cohortTableColumns,
                                             options: options.specificationSummaryTableOptions,
@@ -65,16 +65,16 @@
                                         }"></faceted-datatable>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <i class="fa fa-users"></i>
                                         <span data-bind="text: ko.i18n('predictions.item.outcomeCohort', 'Outcome Cohorts')"></span>
-                                        <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addOutcome, disable: !$component.isEditPermitted()">
+                                        <button type="button" class="btn btn-primary btn-sm float-end" data-bind="click: addOutcome, disable: !$component.isEditPermitted()">
                                             <i class="fa fa-plus"></i>
                                             <span data-bind="text: ko.i18n('predictions.item.addOutcomeCohort', 'Add Outcome Cohort')"></span>
                                         </button>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <faceted-datatable params="{
                                             columns: $component.cohortTableColumns,
                                             options: options.specificationSummaryTableOptions,
@@ -96,18 +96,18 @@
                 data-bind="visible: $component.specificationPillMode() == 'all' || $component.specificationPillMode() == 'analysisSettings'"
                 class="tab-pane">
                 <div class="paddedWrapper">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
+                    <div class="card panel-primary">
+                        <div class="card-header">
                             <i class="fa fa-cogs"></i>
                             <span data-bind="text: ko.i18n('predictions.item.analysisSettings', 'Analysis Settings')"></span>
                         </div>
-                        <div class="panel-body">
+                        <div class="card-body">
                             <div class="paddedWrapper">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <span data-bind="text: ko.i18n('predictions.item.modelSettings', 'Model Settings')"></span>
-                                        <div class="btn-group pull-right">
-                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="true" data-bind="disable: !$component.isEditPermitted()">
+                                        <div class="btn-group float-end">
+                                            <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="true" data-bind="disable: !$component.isEditPermitted()">
                                                 <i class="fa fa-plus"></i>
                                                 <span data-bind="text: ko.i18n('predictions.item.addModelSettings', 'Add Model Settings')"></span>
                                             </button>
@@ -116,7 +116,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <faceted-datatable params="{
                                             columns: $component.modelSettingsTableColumns,
                                             options: options.specificationSummaryTableOptions,
@@ -129,17 +129,17 @@
                                         }"></faceted-datatable>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <span data-bind="text: ko.i18n('predictions.item.covariateSettings', 'Covariate Settings')"></span>
-                                        <div class="btn-group pull-right">
-                                            <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addCovariateSettings, disable: !$component.isEditPermitted()">
+                                        <div class="btn-group float-end">
+                                            <button type="button" class="btn btn-primary btn-sm float-end" data-bind="click: addCovariateSettings, disable: !$component.isEditPermitted()">
                                                 <i class="fa fa-plus"></i>
                                                 <span data-bind="text: ko.i18n('predictions.item.addCovariateSettings', 'Add Covariate Settings')"></span>
                                             </button>
                                         </div>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <faceted-datatable params="{
                                             columns: $component.covariateSettingsTableColumns,
                                             options: options.specificationSummaryTableOptions,
@@ -152,15 +152,15 @@
                                         }"></faceted-datatable>
                                     </div>
                                 </div>
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel-default">
+                                    <div class="card-header">
                                         <span data-bind="text: ko.i18n('predictions.item.populationSettings', 'Population Settings')"></span>
-                                        <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addPopulationSettings, disable: !$component.isEditPermitted()">
+                                        <button type="button" class="btn btn-primary btn-sm float-end" data-bind="click: addPopulationSettings, disable: !$component.isEditPermitted()">
                                             <i class="fa fa-plus"></i>
                                             <span data-bind="text: ko.i18n('predictions.item.addPopulationSettings', 'Add Population Settings')"></span>
                                         </button>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body">
                                         <faceted-datatable params="{
                                             columns: $component.populationSettingsTableColumns,
                                             options: options.specificationSummaryTableOptions,
@@ -182,11 +182,11 @@
                 data-bind="visible: $component.specificationPillMode() == 'all' || $component.specificationPillMode() == 'executionSettings'"
                 class="tab-pane">
                 <div class="paddedWrapper">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
+                    <div class="card panel-primary">
+                        <div class="card-header">
                             <i class="fa fa-cog"></i> <span data-bind="text: ko.i18n('predictions.item.executionSettings', 'Execution Settings')"></span>
                         </div>
-                        <div class="panel-body" data-bind="css:{'settings-disabled': !$component.isEditPermitted()}">
+                        <div class="card-body" data-bind="css:{'settings-disabled': !$component.isEditPermitted()}">
                             <execution-settings-editor params="getPlpDataArgs: $component.patientLevelPredictionAnalysis() && $component.patientLevelPredictionAnalysis().getPlpDataArgs, runPlpArgs: $component.patientLevelPredictionAnalysis() && $component.patientLevelPredictionAnalysis().runPlpArgs, subscriptions: $component.subscriptions, isEditPermitted: $component.isEditPermitted"></execution-settings-editor>
                         </div>
                     </div>
@@ -196,11 +196,11 @@
                 data-bind="visible: $component.specificationPillMode() == 'all' || $component.specificationPillMode() == 'trainingSettings'"
                 class="tab-pane">
                 <div class="paddedWrapper">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
+                    <div class="card panel-primary">
+                        <div class="card-header">
                             <i class="fa fa-cog"></i> <span data-bind="text: ko.i18n('predictions.item.trainingSettings', 'Training Settings')"></span>
                         </div>
-                        <div class="panel-body" data-bind="css:{'settings-disabled': !$component.isEditPermitted()}">
+                        <div class="card-body" data-bind="css:{'settings-disabled': !$component.isEditPermitted()}">
                             <evaluation-settings-editor params="runPlpArgs: $component.patientLevelPredictionAnalysis() && $component.patientLevelPredictionAnalysis().runPlpArgs, subscriptions: $component.subscriptions, isEditPermitted: $component.isEditPermitted"></evaluation-settings-editor>
                         </div>
                     </div>
@@ -211,8 +211,8 @@
     <div id="editors" data-bind="visible: $component.managerMode() == 'editor'">
         <div id="editor-heading" class="editor-container">
             <div class="paddedWrapper">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
+                <div class="card panel-default">
+                    <div class="card-header">
                         <div class="row">
                             <div data-bind="click: closeEditor" class="editor-back-icon"><i class="fa fa-chevron-left fa-lg"></i></div>
                             <div>
@@ -221,7 +221,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body" data-bind="if: $component.editorComponentName() != null, css:{'settings-disabled': !$component.isEditPermitted()}">
+                    <div class="card-body" data-bind="if: $component.editorComponentName() != null, css:{'settings-disabled': !$component.isEditPermitted()}">
                         <div id="editorComponent" data-bind='component: {name: $component.editorComponentName(), params: $component.editorComponentParams()}'></div>
                     </div>
                 </div>

@@ -11,8 +11,7 @@
     <div class="input-group">
       <input type="text" class="form-control"
       data-bind="attr: { disabled: $component.canEdit() ? null : true }, textInput: design().name, css: {emptyInput: !isNameFilled()}" />
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-success" data-bind="click: $component.save, css: {disabled:!canSave() || isProcessing()}, attr: {title: previewVersion() ? ko.i18n('common.saveAsCurrentVersion', 'Save as current version') : ko.i18n('common.save', 'Save')}"><i class="fa fa-save"></i></button>
+      <button type="button" class="btn btn-success" data-bind="click: $component.save, css: {disabled:!canSave() || isProcessing()}, attr: {title: previewVersion() ? ko.i18n('common.saveAsCurrentVersion', 'Save as current version') : ko.i18n('common.save', 'Save')}"><i class="fa fa-save"></i></button>
         <button class="btn btn-primary"
             data-bind="visible: previewVersion(), title: ko.i18n('common.backToCurrent', 'Back to current version'), click: backToCurrentVersion">
           <i class="fa fa-undo"></i>
@@ -26,7 +25,6 @@
         <!-- /ko -->
         <button type="button" class="btn btn-danger" data-bind="visible: !previewVersion(), click: $component.del, css: {disabled: !canDelete() || isProcessing()}, title: ko.i18n('common.delete', 'Delete')"><i class="fa fa-trash-alt"></i></button>
         <!-- /ko -->
-      </div>
     </div>
     <name-validation params="
       hasEmptyName: !isNameFilled(),

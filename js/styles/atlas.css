@@ -272,7 +272,7 @@ pre span.key {
   justify-content: flex-start;
 }
 
-.panel-heading a {
+.card-header a {
   color: #003142;
 }
 
@@ -1127,27 +1127,27 @@ ul.nav.nav-tabs {
   margin-bottom: 0px;
 }
 
-.panel {
+.card {
   border-radius: 0;
   /* box-shadow: none; */
 }
 
-.panel-heading {
+.card-header {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   padding: 4px 5px 4px 10px;
 }
 
-.panel-footer {
+.card-footer {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0
 }
 
-.panel-group .panel {
+.panel-group .card {
   border-radius: 0
 }
 
-.panel-group .panel+.panel {
+.panel-group .card+.card {
   margin-top: 0px;
   border-top: solid 1px #eee;
 }
@@ -1163,10 +1163,6 @@ ul.nav.nav-tabs {
 
 .well-sm {
   border-radius: 0
-}
-
-.close {
-  text-shadow: none
 }
 
 .tooltip-inner {
@@ -1484,7 +1480,7 @@ textarea.code {
   /* font-size: 8px; */
 }
 
-.panel-default>.panel-heading {
+.panel-default>.card-header {
   background-image: none;
   background-color: #ddd;
   border-bottom: solid 1px #ccc;
@@ -1750,10 +1746,6 @@ cohort-comparison-manager .row .btn {
   font-size: 10px;
 }
 
-.modal-header button.close {
-  color: #fff;
-}
-
 #matchedpopdistChart svg {
   height: 400px;
 }
@@ -1769,11 +1761,6 @@ cohort-comparison-manager .row .btn {
 .scatterTooltip {
   width: 300px;
   white-space: normal;
-}
-
-.modal-header .close {
-  color: #fff;
-  opacity: .8;
 }
 
 div.generateAction {
@@ -1898,7 +1885,7 @@ i.fa.pending {
   margin-bottom: 0px;
 }
 
-.panel-heading i.fa.fa-question-circle {
+.card-header i.fa.fa-question-circle {
   font-size: 18px;
   margin-right: 7px;
   color: #fff;
@@ -1916,7 +1903,7 @@ i.fa.pending {
   background-color: #ccc;
 }
 
-.report .panel-body {
+.report .card-body {
   padding: 0px 0px 5px 0px;
 }
 
@@ -1926,13 +1913,13 @@ i.fa.pending {
   font-size: 14px;
 }
 
-atlas.cohort-editor .panel-body {}
+atlas.cohort-editor .card-body {}
 
 .cohort-definition-panel .cohort-definition-panel {
   margin: 10px;
 }
 
-.cohort-definition-panel .cohort-definition-panel .panel-body {
+.cohort-definition-panel .cohort-definition-panel .card-body {
   padding: 10px;
 }
 

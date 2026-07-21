@@ -66,12 +66,8 @@
                 <input
                         class="form-control"
                         data-bind="placeholder: ko.i18n('components.tags.tagNamePlaceholder', 'Tag name'), textInput: newCustomTagName">
-                <span class="input-group-btn">
-                    <select class="form-control groups-dropdown" data-bind="options: groupsForCustomTags, optionsText: 'name', optionsValue: 'id', value: newCustomTagGroup" />
-                </span>
-                <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button" data-bind="click: createNewCustomTag, attr: { disabled: !(newCustomTagName() && newCustomTagName().length) }, text: ko.i18n('components.tags.createAndAssign', 'Create and assign')"></button>
-                </span>
+                <select class="form-control groups-dropdown" data-bind="options: groupsForCustomTags, optionsText: 'name', optionsValue: 'id', value: newCustomTagGroup" />
+                <button class="btn btn-primary" type="button" data-bind="click: createNewCustomTag, attr: { disabled: !(newCustomTagName() && newCustomTagName().length) }, text: ko.i18n('components.tags.createAndAssign', 'Create and assign')"></button>
             </div>
         </div>
 

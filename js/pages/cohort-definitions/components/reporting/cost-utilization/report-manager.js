@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import ko from 'knockout'
+import { Modal, Popover } from 'bootstrap'
 import view from './report-manager.html?raw'
 import sharedState from 'atlas-state'
 import * as d3 from 'd3'
@@ -30,7 +31,7 @@ class ReportManager extends Component {
     this.showSelectionArea = params.showSelectionArea === undefined ? true : params.showSelectionArea
     this.reference = ko.observableArray()
     this.dataCompleteReference = ko.observableArray()
-    this.dom = '<<"row vertical-align"<"col-xs-6"<"dt-btn"B>l><"col-xs-6 search"f>><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>><t><"row vertical-align"<"col-xs-3"i><"col-xs-9"p>>>'
+    this.dom = '<<"row vertical-align"<"col-6"<"dt-btn"B>l><"col-6 search"f>><"row vertical-align"<"col-3"i><"col-9"p>><t><"row vertical-align"<"col-3"i><"col-9"p>>>'
     this.tableOptions = params.tableOptions || commonUtils.getTableOptions('M')
     this.visualizationPacks = cohortReportingService.visualizationPacks
     this.costUtilConst = costUtilConst
@@ -225,8 +226,7 @@ class ReportManager extends Component {
           .filter(function (value) {
             return value.id === d
           })[0].name)
-        $('#cohortDefinitionChooser')
-          .modal('hide')
+        Modal.getOrCreateInstance('#cohortDefinitionChooser').hide()
       }
     })
 
@@ -248,8 +248,7 @@ class ReportManager extends Component {
     }
 
     this.showBrowser = function () {
-      $('#cohortDefinitionChooser')
-        .modal('show')
+      Modal.getOrCreateInstance('#cohortDefinitionChooser').show()
     }
 
     this.datatables = {}
@@ -692,8 +691,7 @@ class ReportManager extends Component {
                     return title
                   }
                 })
-                $('[data-toggle="popover"]')
-                  .popover()
+                document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
               }
             }
           })
@@ -811,8 +809,7 @@ class ReportManager extends Component {
                     return title
                   }
                 })
-                $('[data-toggle="popover"]')
-                  .popover()
+                document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
               }
             }
           })
@@ -925,8 +922,7 @@ class ReportManager extends Component {
                     return title
                   }
                 })
-                $('[data-toggle="popover"]')
-                  .popover()
+                document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
               }
             }
           })
@@ -1043,7 +1039,7 @@ class ReportManager extends Component {
                     return title
                   }
                 })
-                $('[data-toggle="popover"]').popover()
+                document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
               }
             }
           })
@@ -1444,8 +1440,7 @@ class ReportManager extends Component {
                     return title
                   }
                 })
-                $('[data-toggle="popover"]')
-                  .popover()
+                document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
               }
             }
           })
@@ -1568,8 +1563,7 @@ class ReportManager extends Component {
                     }
                   })
 
-                  $('[data-toggle="popover"]')
-                    .popover()
+                  document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
                 }
               }
             }
@@ -1699,8 +1693,7 @@ class ReportManager extends Component {
                     }
                   })
 
-                  $('[data-toggle="popover"]')
-                    .popover()
+                  document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
                 }
               }
             }
@@ -1823,8 +1816,7 @@ class ReportManager extends Component {
                     }
                   })
 
-                  $('[data-toggle="popover"]')
-                    .popover()
+                  document.querySelectorAll('[data-bs-toggle="popover"]').forEach(el => new Popover(el))
                 }
               }
             }

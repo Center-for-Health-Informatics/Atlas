@@ -49,9 +49,9 @@
   "dependencies": {
     "@ohdsi/ui-toolbox": "^1.1.0",
     "@ohdsi/visibilityjs": "^2.0.2",
+    "@popperjs/core": "^2.11.8",
     "ajv": "^8.20.0",
-    "bootstrap": "^3.4.1",
-    "bootstrap-select": "^1.13.18",
+    "bootstrap": "^5.3.8",
     "clipboard": "^2.0.11",
     "colorbrewer": "^1.5.3",
     "crossfilter2": "^1.5.4",

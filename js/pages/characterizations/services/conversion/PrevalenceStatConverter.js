@@ -103,7 +103,7 @@ class PrevalenceStatConverter extends BaseStatConverter {
         if (stat && stat.analysisId && (stat.domainId !== undefined && stat.domainId !== 'DEMOGRAPHICS')) {
           if (stat.cohorts.length > 1) {
             html = `<div class='${this.classes('explore-dropdown')}'>`
-            html += `<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-expanded='false'><span data-bind="text: ko.i18n('cc.viewEdit.executions.prevalenceStatConverter.explore', 'Explore')"></span><span class='${this.classes({ element: 'explore-caret', extra: 'caret' })}'></span></a>`
+            html += "<a href='#' class='dropdown-toggle' data-bs-toggle='dropdown' role='button' aria-expanded='false'><span data-bind=\"text: ko.i18n('cc.viewEdit.executions.prevalenceStatConverter.explore', 'Explore')\"></span></a>"
             html += "<ul class='dropdown-menu' role='menu'>"
             stat.cohorts.forEach((cohort, idx) => {
               html += `<li class='${this.classes('explore-menu-item')}' title='${cohort.cohortName}'>

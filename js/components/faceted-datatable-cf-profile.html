@@ -10,7 +10,7 @@
 </div>
 
 <div data-bind="if:!facetsOnly" class="row">
-  <div class="feFilter col-xs-2">
+  <div class="feFilter col-2">
     <div data-bind="foreach:facets">
       <div class="facetName"><i class="fa fa-filter"></i><span data-bind="text:caption"></span></div>
       <div class="facetScrollBox" data-bind="foreach:Members">
@@ -20,7 +20,7 @@
       </div>
     </div>
   </div>
-  <div class="col-xs-10">
+  <div class="col-10">
     <div class="facetedDataTableProfile">
       <table width="100%" class="conceptTable stripe compact hover" cellspacing="0" data-bind="dataTable:{
             data: $component.data,

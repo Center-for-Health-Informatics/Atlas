@@ -241,7 +241,7 @@ class ProfileManager extends AutoBind(Page) {
       profileChart: ko.observable(true),
       datatable: ko.observable(true),
     }
-    this.highlightDom = '<<"row vertical-align"<"col-xs-6"><"col-xs-6 search"f>><t><"row vertical-align"<"col-xs-6"i><"col-xs-6"p>>>'
+    this.highlightDom = '<<"row vertical-align"<"col-6"><"col-6 search"f>><t><"row vertical-align"<"col-6"i><"col-6"p>>>'
     this.highlightColumns = ['select', {
       render: this.swatch,
       data: 'highlight()',

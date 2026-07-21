@@ -35,14 +35,14 @@
   </div>
 </atlas-modal>
 
-<div class="panel panel-primary cohort-definition-panel ui-front">
-  <div class="panel-heading">
+<div class="card panel-primary cohort-definition-panel ui-front">
+  <div class="card-header">
     <span
       data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortEntryEvents', 'Cohort Entry Events')"></span>
     <i data-bind="click: function () { $component.helpCohortEventsOpened(true) }"
-      class="fa fa-question-circle pull-right"></i>
+      class="fa fa-question-circle float-end"></i>
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <div class="criteriaGroup">
 
       <initial-criteria-editor params="{expression: expression}"></initial-criteria-editor>
@@ -102,14 +102,14 @@
 </div>
 </div>
 
-<div class="panel panel-primary cohort-definition-panel ui-front">
-  <div class="panel-heading">
+<div class="card panel-primary cohort-definition-panel ui-front">
+  <div class="card-header">
     <span
       data-bind="text: ko.i18n('components.cohortExpressionEditor.inclusionCriteriaTitle', 'Inclusion Criteria')"></span>
     <i data-bind="click: function () { $component.helpInclusionCriteriaOpened(true) }"
-      class="fa fa-question-circle pull-right"></i>
+      class="fa fa-question-circle float-end"></i>
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <div data-bind="eventListener: [
        { event: 'click', selector: '.copyInclusionRule', callback: copyInclusionRule},
        { event: 'click', selector: '.deleteInclusionRule', callback: deleteInclusionRule}]">
@@ -168,13 +168,13 @@
   </div>
 </div>
 
-<div class="panel panel-primary cohort-definition-panel ui-front">
-  <div class="panel-heading">
+<div class="card panel-primary cohort-definition-panel ui-front">
+  <div class="card-header">
     <span data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortExitTitle', 'Cohort Exit')"></span>
     <i data-bind="click: function () { $component.helpCohortExitOpened(true) }"
-      class="fa fa-question-circle pull-right"></i>
+      class="fa fa-question-circle float-end"></i>
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <div class="heading strong"
       data-bind="text: ko.i18n('components.cohortExpressionEditor.eventPersistence', 'Event Persistence:')"></div>
     <end-strategy-editor
@@ -191,11 +191,11 @@
   </div>
 </div>
 
-<div class="panel panel-primary cohort-definition-panel ui-front">
-  <div class="panel-heading">
+<div class="card panel-primary cohort-definition-panel ui-front">
+  <div class="card-header">
     <span data-bind="text: ko.i18n('components.cohortExpressionEditor.cohortErasTitle', 'Cohort Eras')"></span>
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <div data-bind="with: expression">
       <ul>
         <li>

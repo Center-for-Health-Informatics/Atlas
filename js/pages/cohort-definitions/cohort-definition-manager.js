@@ -1,6 +1,6 @@
-import $ from 'jquery'
 import { uniq } from 'utils/NativeCompat'
 import ko from 'knockout'
+import { Tooltip } from 'bootstrap'
 import view from './cohort-definition-manager.html?raw'
 import config from 'appConfig'
 import CohortDefinition from 'components/cohortbuilder/CohortDefinition'
@@ -1335,18 +1335,41 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
     ko.bindingHandlers.tooltip = {
       init: function (element, valueAccessor) {
         const value = ko.utils.unwrapObservable(valueAccessor())
-        $("[aria-label='Demographics']").attr('data-original-title', 'Results with Demographics').bstooltip({
-          html: true,
-          container: 'body',
-        })
-        $(element).attr('data-original-title', value).bstooltip({
-          html: true,
-          container: 'body'
-        })
+        const demographicsEl = document.querySelector("[aria-label='Demographics']")
+        if (demographicsEl && !Tooltip.getInstance(demographicsEl)) {
+          // eslint-disable-next-line no-new
+          new Tooltip(demographicsEl, {
+            html: true,
+            container: 'body',
+            title: 'Results with Demographics',
+          })
+        }
+        if (value) {
+          const tooltip = new Tooltip(element, {
+            html: true,
+            container: 'body',
+            title: value
+          })
+          ko.utils.domNodeDisposal.addDisposeCallback(element, () => tooltip.dispose())
+        }
       },
       update: function (element, valueAccessor) {
         const value = ko.utils.unwrapObservable(valueAccessor())
-        $(element).attr('data-original-title', value)
+        let tooltip = Tooltip.getInstance(element)
+        if (value) {
+          if (tooltip) {
+            tooltip.setContent({ '.tooltip-inner': value })
+          } else {
+            tooltip = new Tooltip(element, {
+              html: true,
+              container: 'body',
+              title: value
+            })
+            ko.utils.domNodeDisposal.addDisposeCallback(element, () => tooltip.dispose())
+          }
+        } else if (tooltip) {
+          tooltip.dispose()
+        }
       }
     }
     if (parseInt(cohortDefinitionId) === 0) {

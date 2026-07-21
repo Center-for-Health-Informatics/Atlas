@@ -6,9 +6,9 @@
 
     <div data-bind="visible:!isLoading()">
 
-      <div class="panel panel-primary" data-bind="if: hasRCAccess()">
-        <div class="panel-heading" data-bind="text: ko.i18n('cs.manager.concept.tabs.recordCounts.recordCountsAcrossSources', 'Record Counts across Sources')"></div>
-        <div class="panel-body">
+      <div class="card panel-primary" data-bind="if: hasRCAccess()">
+        <div class="card-header" data-bind="text: ko.i18n('cs.manager.concept.tabs.recordCounts.recordCountsAcrossSources', 'Record Counts across Sources')"></div>
+        <div class="card-body">
           <table width="100%" class="conceptTable stripe compact hover" cellspacing="0" data-bind="dataTable:{
                 data: sourceCounts(),
                 options: {

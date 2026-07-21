@@ -1,13 +1,13 @@
 <div class="undraggable" style="position: relative; display: inline">
-  <div style="position:relative" class="btn-group btn-group-sm thumb-dropdown" data-bind="dropup, eventListener: [
+  <div style="position:relative" class="btn-group btn-group-sm thumb-dropdown" data-bind="eventListener: [
                                                                   { event: 'mouseenter', selector: '.conceptset', callback: showConceptSetPreview},
                                                                   { event: 'hidden.bs.dropdown', callback: hideConceptSetPreview}
                                                                 ]">
     <button type="button" class="btn btn-primary conceptset_edit"
       style="max-width:200px; overflow-x: hidden; text-overflow:ellipsis; white-space:nowrap"
       data-bind="text:conceptSetName, attr:{'title': conceptSetName}"></button>
-    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-      <span class="caret"></span> <!-- caret -->
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+       <!-- caret -->
       <span class="sr-only" data-bind="text:conceptSetName"></span>
     </button>
 

@@ -290,11 +290,11 @@ Negative control outcomes will be used to evaluate the potential impact of resid
 <h3>Appendix 1: Cohort Definitions</h3>
 <div data-bind="if: $component.cohortComparison().treatmentCohortDefinition() != null">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             The target cohort <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().treatmentCaption()"></span> is defined as:
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <cohort-expression-viewer params="expression: $component.cohortComparison().treatmentCohortDefinition()"></cohort-expression-viewer>
         </div>
     </div>
@@ -302,22 +302,22 @@ Negative control outcomes will be used to evaluate the potential impact of resid
 <div>
 <div data-bind="if: $component.cohortComparison().comparatorCohortDefinition() != null">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             The comparator cohort <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().comparatorCaption()"></span> is defined as:
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <cohort-expression-viewer params="expression: $component.cohortComparison().comparatorCohortDefinition()"></cohort-expression-viewer>
         </div>
     </div>
 </div>
 <div data-bind="if: $component.cohortComparison().outcomeCohortDefinition() != null">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             The outcome <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().outcomeCaption()"></span> is defined as:
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <cohort-expression-viewer params="expression: $component.cohortComparison().outcomeCohortDefinition()"></cohort-expression-viewer>
         </div>
     </div>
@@ -325,11 +325,11 @@ Negative control outcomes will be used to evaluate the potential impact of resid
 <h3>Appendix 2: Code List Definitions</h3>
 <div data-bind="if: $component.cohortComparison().psInclusionId() > 0">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().psInclusionCaption()"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <!-- ko foreach: ko.observableArray($component.cohortComparison().psInclusionConceptSet()) -->
             <conceptset-viewer params="{conceptSet: $data}"></conceptset-viewer>
             <!-- /ko -->
@@ -338,11 +338,11 @@ Negative control outcomes will be used to evaluate the potential impact of resid
 </div>
 <div data-bind="if: $component.cohortComparison().psExclusionId() > 0">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().psExclusionCaption()"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <!-- ko foreach: ko.observableArray($component.cohortComparison().psExclusionConceptSet()) -->
             <conceptset-viewer params="{conceptSet: $data}"></conceptset-viewer>
             <!-- /ko -->
@@ -351,11 +351,11 @@ Negative control outcomes will be used to evaluate the potential impact of resid
 </div>
 <div data-bind="if: $component.cohortComparison().omInclusionId() > 0">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().omInclusionCaption()"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <!-- ko foreach: ko.observableArray($component.cohortComparison().omInclusionConceptSet()) -->
             <conceptset-viewer params="{conceptSet: $data}"></conceptset-viewer>
             <!-- /ko -->
@@ -364,11 +364,11 @@ Negative control outcomes will be used to evaluate the potential impact of resid
 </div>
 <div data-bind="if: $component.cohortComparison().omExclusionId() > 0">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().omExclusionCaption()"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <!-- ko foreach: ko.observableArray($component.cohortComparison().omInclusionConceptSet()) -->
             <conceptset-viewer params="{conceptSet: $data}"></conceptset-viewer>
             <!-- /ko -->
@@ -377,11 +377,11 @@ Negative control outcomes will be used to evaluate the potential impact of resid
 </div>
 <div data-bind="if: $component.cohortComparison().negativeControlId() > 0">
     <br />
-    <div class="panel panel-default">
-        <div class="panel-heading">
+    <div class="card panel-default">
+        <div class="card-header">
             <span class="cohort-comparison-pf-reference" data-bind="text: $component.cohortComparison().negativeControlCaption()"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <!-- ko foreach: ko.observableArray($component.cohortComparison().negativeControlConceptSet()) -->
             <conceptset-viewer params="{conceptSet: $data}"></conceptset-viewer>
             <!-- /ko -->

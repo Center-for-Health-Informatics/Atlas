@@ -3,7 +3,7 @@
 <div data-bind="if: canReadPredictions(), css: classes({ extra: 'paddedWrapper flexed' })">
   <span data-bind="click: newPrediction, text: ko.i18n('predictions.newItem', 'New Patient Level Prediction'), css: classes({
     element: 'new-btn',
-    extra: `pull-right btn btn-sm btn-primary ${canCreatePrediction() ? '' : 'disabled'}`,
+    extra: `float-end btn btn-sm btn-primary ${canCreatePrediction() ? '' : 'disabled'}`,
   })"></span>
 
   <faceted-datatable data-bind="visible: loading()==false" params="

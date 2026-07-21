@@ -10,8 +10,7 @@
     <div class="asset-heading">
         <div class="input-group">
             <input type="text" class="form-control" data-bind="css: {emptyInput: !isNameFilled()}, attr: { disabled: isEditPermitted() ? null : true }, textInput: design().name" />
-            <div class="input-group-btn">
-                <button type="button" class="btn btn-success" data-bind="click: save, css: {disabled:!isSavePermitted() || isProcessing() }, attr: {title: !previewVersion() ? ko.i18n('common.save', 'Save') : ko.i18n('common.saveAsCurrentVersion', 'Save as current version')}"><i class="fa fa-save"></i></button>
+            <button type="button" class="btn btn-success" data-bind="click: save, css: {disabled:!isSavePermitted() || isProcessing() }, attr: {title: !previewVersion() ? ko.i18n('common.save', 'Save') : ko.i18n('common.saveAsCurrentVersion', 'Save as current version')}"><i class="fa fa-save"></i></button>
                 <button class="btn btn-primary"
                         data-bind="visible: previewVersion(), title: ko.i18n('common.backToCurrent', 'Back to current version'), click: backToCurrentVersion">
                     <i class="fa fa-undo"></i>
@@ -29,7 +28,6 @@
 
     <button type="button" class="btn btn-danger"  data-bind="visible: !previewVersion(), click: deleteCc, css: {disabled: !$component.isDeletePermitted() || isProcessing() }"><i class="fa fa-trash-alt"></i></button>
                 <!-- /ko -->
-            </div>
         </div>
         <name-validation params="
             hasEmptyName: !isNameFilled(),

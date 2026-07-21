@@ -1,6 +1,7 @@
 import $ from 'jquery'
 import { each } from 'utils/NativeCompat'
 import ko from 'knockout'
+import { Modal } from 'bootstrap'
 import view from './negative-controls.html?raw'
 import Component from 'components/Component'
 import config from 'appConfig'
@@ -487,7 +488,7 @@ class NegativeControls extends Component {
     }
 
     this.chooseIncludeConceptSet = (source) => {
-      $('#ncModalConceptSetSelect').modal('show')
+      Modal.getOrCreateInstance('#ncModalConceptSetSelect').show()
       this.csTarget = source.csToInclude
       this.csTargetCaption = source.csToIncludeCaption
     }
@@ -498,7 +499,7 @@ class NegativeControls extends Component {
     }
 
     this.chooseExcludeConceptSet = (source) => {
-      $('#ncModalConceptSetSelect').modal('show')
+      Modal.getOrCreateInstance('#ncModalConceptSetSelect').show()
       this.csTarget = source.csToExclude
       this.csTargetCaption = source.csToExcludeCaption
     }
@@ -509,7 +510,7 @@ class NegativeControls extends Component {
     }
 
     this.conceptsetSelected = (d) => {
-      $('#ncModalConceptSetSelect').modal('hide')
+      Modal.getOrCreateInstance('#ncModalConceptSetSelect').hide()
       conceptSetService.getConceptSet(d.id).then((csInfo) => {
         this.csTarget(csInfo.data.id)
         this.csTargetCaption(csInfo.data.name)

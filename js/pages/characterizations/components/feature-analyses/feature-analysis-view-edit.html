@@ -10,10 +10,8 @@
     <div class="asset-heading">
         <div class="input-group">
             <input type="text" placeholder="New Feature Analysis" class="form-control" data-bind="attr: { disabled: canEdit() ? null : true }, textInput: $component.data().name, css: { emptyInput: !isNameFilled() }" />
-            <div class="input-group-btn" role="group">
-                <div class="fe-save-btn" data-bind="tooltip: saveTooltipText">
+            <div class="fe-save-btn" data-bind="tooltip: saveTooltipText">
                     <button class="btn btn-success" data-bind="click: save, enable: canSave() && !isProcessing()"><i class="fa fa-save"></i></button>
-                </div>
                 <button class="btn btn-primary" data-bind="click: closeAnalysis, enable: !isProcessing(), title: ko.i18n('common.close', 'Close')"><i class="fa fa-times"></i></button>
                 <!-- ko ifnot: isNewEntity -->
                 <button type="button" class="btn btn-primary" data-bind="click: copyFeatureAnalysis, css: {disabled: !canCopy() || isProcessing() }, title: ko.i18n('common.createACopy', 'Create a copy')"><i class="fa fa-copy"></i></button>

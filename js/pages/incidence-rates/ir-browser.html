@@ -3,7 +3,7 @@
 <!-- ko if:$component.canReadIRs -->
 <div class="paddedWrapper flexed">
   <div>
-    <span class="pull-right btn btn-sm btn-primary" data-bind="click: $component.newAnalysis, css: {disabled: !$component.canCreateIR()}, text: ko.i18n('ir.newanalysis', 'New Analysis')"></span>
+    <span class="float-end btn btn-sm btn-primary" data-bind="click: $component.newAnalysis, css: {disabled: !$component.canCreateIR()}, text: ko.i18n('ir.newanalysis', 'New Analysis')"></span>
   </div>
   <div data-bind="eventListener: [{event: 'click', selector: '.linkish', callback: onAnalysisSelected}]">
     <ir-analysis-browser params="

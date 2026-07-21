@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import $ from 'jquery'
+import { Modal } from 'bootstrap'
 import commonUtils from 'utils/CommonUtils'
 import template from './concept-modal.html?raw'
 import 'databindings'
@@ -13,7 +13,7 @@ function ConceptSetListModal (params) {
   self.onNavigate = function () {
     // closes the modal when the concept link is clicked (causing a route change)
     // see: https://github.com/twbs/bootstrap/issues/489
-    $('.modal.in').modal('hide')
+    document.querySelectorAll('.modal.show').forEach(el => Modal.getInstance(el)?.hide())
   }
   self.tableOptions = commonUtils.getTableOptions('M')
 }

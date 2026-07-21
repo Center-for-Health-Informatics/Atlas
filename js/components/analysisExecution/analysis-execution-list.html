@@ -102,11 +102,11 @@
         </li>
       <!-- ko if: $component.config.shinyEnabled -->
       <div class="btn-group">
-        <button class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown"
+        <button class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown"
           data-bind="attr: {disabled: !$component.isResultsViewPermitted(sourceKey) || $component.runningExecutionStatuses.includes(status()) || submissions().length < 1}">
           <i class="fa fa-network-wired"></i>
           <span data-bind="text: 'Shiny App'"></span>
-          <span class="caret"></span>
+          
         </button>
         <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: $component.shinyOptions">
           <li>

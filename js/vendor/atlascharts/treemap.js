@@ -235,15 +235,15 @@ class Treemap extends Chart {
         .on('mouseout', (event, d) => this.tip.hide(d, event.target))
     } else {
       cell
-        .attr('data-container', 'body')
-        .attr('data-toggle', 'popover')
-        .attr('data-trigger', 'hover')
-        .attr('data-placement', 'top')
-        .attr('data-html', true)
-        .attr('data-title', function (d) {
+        .attr('data-bs-container', 'body')
+        .attr('data-bs-toggle', 'popover')
+        .attr('data-bs-trigger', 'hover')
+        .attr('data-bs-placement', 'top')
+        .attr('data-bs-html', true)
+        .attr('data-bs-title', function (d) {
           return options.gettitle(d.data)
         })
-        .attr('data-content', function (d) {
+        .attr('data-bs-content', function (d) {
           return options.getcontent(d.data)
         })
     }

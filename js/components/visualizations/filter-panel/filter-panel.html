@@ -1,6 +1,6 @@
-<div data-bind="css: classes({ extra: ['panel', 'panel-primary'] })">
-    <div class="panel-heading" data-bind="text: ko.i18n('components.filterPanel.title', 'Filter panel')"></div>
-    <div data-bind="css: classes({ element: 'body', extra: ['panel-body'] })">
+<div data-bind="css: classes({ extra: ['card', 'panel-primary'] })">
+    <div class="card-header" data-bind="text: ko.i18n('components.filterPanel.title', 'Filter card')"></div>
+    <div data-bind="css: classes({ element: 'body', extra: ['card-body'] })">
         <ul data-bind="css: classes('list')">
             <!-- ko foreach: filterList -->
                 <li data-bind="css: $parent.classes('list-item')">

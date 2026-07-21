@@ -1,7 +1,7 @@
 <div data-bind="css: classes('content'), if: data">
 
-    <div data-bind="css: classes({ element: 'descr-panel', extra: 'panel panel-primary' })">
-        <div class="panel-heading" data-bind="text: ko.i18n('cc.fa.description', 'Description')"></div>
+    <div data-bind="css: classes({ element: 'descr-panel', extra: 'card panel-primary' })">
+        <div class="card-header" data-bind="text: ko.i18n('cc.fa.description', 'Description')"></div>
         <div data-bind="css: classes({ element: 'descr-panel-body' })">
             <!-- ko if: $component.canEdit() -->
             <multi-select
@@ -22,8 +22,8 @@
         </div>
     </div>
 
-    <div data-bind="css: classes({ element: 'design-panel', extra: 'panel panel-primary'})">
-        <div class="panel-heading" data-bind="text: ko.i18n('cc.fa.design', 'Design')"></div>
+    <div data-bind="css: classes({ element: 'design-panel', extra: 'card panel-primary'})">
+        <div class="card-header" data-bind="text: ko.i18n('cc.fa.design', 'Design')"></div>
         <div data-bind="css: classes({ element: 'design-panel-body' })">
             <div data-bind="css: classes('type-selector')">
                 <ul data-bind="css: classes({ element: 'nav', extra: 'nav nav-pills' })">
@@ -74,8 +74,8 @@
                     if: $component.data().type() === $component.featureTypes.CRITERIA_SET,
           css: classes('design')
                 ">
-                <div data-bind="css: classes({extra: 'panel panel-primary'})">
-                    <div data-bind="css: classes({ extra: 'panel-heading' }), text: ko.i18n('cc.fa.analysisType', 'Analysis type:')"></div>
+                <div data-bind="css: classes({extra: 'card panel-primary'})">
+                    <div data-bind="css: classes({ extra: 'card-header' }), text: ko.i18n('cc.fa.analysisType', 'Analysis type:')"></div>
                     <div data-bind="css: classes('stat-type-selector')">
                         <multi-select
                                 data-bind="css: classes()"
@@ -89,9 +89,9 @@
                 <span data-bind="if: data().statType() === 'DISTRIBUTION', css: classes('add-criteria-windowed'), attr: { disabled: $component.canEdit() ? null : true }">
                         <div>
                             <div class="btn-group">
-                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i>
+                                <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-plus"></i>
                                     <span data-bind="text: ko.i18n('cc.fa.addNewCriteria', 'Add New Criteria...')"></span>
-                                    <span class="caret"></span></button>
+                                    </button>
                                 <ul class="dropdown-menu" data-bind="foreach:$component.windowedActions">
                                     <li><a data-bind="click:action" href="#">
                                             <div class="optionText" data-bind="text: ko.i18n($data.title, $data.defaultTitle)"></div>

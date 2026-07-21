@@ -7,12 +7,12 @@
   <!-- ko if: showSelectionArea -->
   <div class="reportControls pad-5">
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-12">
         <select class="form-control" data-bind="css : { invalid:  currentSource()==undefined }, options: sources, optionsText: 'sourceName', value: currentSource, optionsCaption: ko.i18n('dataSources.selectASource', 'Select a Source')"></select>
       </div>
     </div>
     <div class="row">
-      <div class="col-xs-12">
+      <div class="col-12">
         <select class="form-control" data-bind="css : { invalid:  selectedReport()==undefined }, options: reports, optionsCaption: ko.i18n('dataSources.selectAReport', 'Select a Report'), optionsText: 'name', value: selectedReport, disable: !currentSource()"></select>
       </div>
     </div>

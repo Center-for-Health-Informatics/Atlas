@@ -20,24 +20,24 @@
 
 <div class="reportControls">
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       <button class="form-control btn btn-sm btn-primary" data-bind="click: $component.showBrowser, text:$component.cohortCaption"></button>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       <select class="form-control" data-bind="css : { invalid: $component.reportReportName()==undefined }, options:$root.reports(), optionsCaption:'Select a Report', value:$component.reportReportName"></select>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12">
       <select class="form-control" data-bind="css : { invalid: $component.reportSourceKey()==undefined }, options:$component.sharedState.sources().filter($root.hasResults), optionsValue:'sourceKey', optionsText:'sourceName', value:$component.reportSourceKey, optionsCaption: ko.i18n('dataSources.selectASource', 'Select a Source')"></select>
     </div>
   </div>
   <div class="row">
-    <div class="col-xs-10"></div>
-    <div class="col-xs-2">
-      <button class="pull-right form-control btn btn-sm btn-primary" data-bind="click: $component.runReport, enable: $component.reportValid(), text: $component.loadingReport() ? 'Loading...' : 'View Report'"></button>
+    <div class="col-10"></div>
+    <div class="col-2">
+      <button class="float-end form-control btn btn-sm btn-primary" data-bind="click: $component.runReport, enable: $component.reportValid(), text: $component.loadingReport() ? 'Loading...' : 'View Report'"></button>
     </div>
   </div>
   <div class="clear"></div>
@@ -91,31 +91,31 @@
 
 <div id="reportPerson" data-bind="if: $component.currentReport() == 'Person' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_6', 'Year of Birth')"></span>
-        <i data-bind="click:function(){ setHelpContent('year-of-birth') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('year-of-birth') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
           <div class="evidenceVisualization" id="hist"></div>
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_7', 'The number of people in this cohort shown with respect to their year of birth.')"></span>
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_8', 'Demographics')"></span>
-        <i data-bind="click:function(){ setHelpContent('demographics') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('demographics') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="row">
-          <div class="col-xs-4">
+          <div class="col-4">
             <div class="chartContainer" data-bind="css: classes('chartContainer')">
               <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
               <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -125,7 +125,7 @@
               <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_9', 'Gender')"></span>
             </div>
           </div>
-          <div class="col-xs-4">
+          <div class="col-4">
             <div class="chartContainer" data-bind="css: classes('chartContainer')">
               <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
               <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -135,7 +135,7 @@
               <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_10', 'Race')"></span>
             </div>
           </div>
-          <div class="col-xs-4">
+          <div class="col-4">
             <div class="chartContainer" data-bind="css: classes('chartContainer')">
               <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
               <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -152,11 +152,11 @@
 </div>
 
 <!-- ko if: $component.currentReport() == 'Measurement' && !$component.loadingReport() -->
-<div class="panel panel-danger">
-  <div class="panel-heading">
+<div class="card panel-danger">
+  <div class="card-header">
     <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_12', 'Report Not implemented')"></span>
   </div>
-  <div class="panel-body">
+  <div class="card-body">
     <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_13', 'This report has not been implemented.')"></span>
   </div>
 </div>
@@ -164,12 +164,12 @@
 
 <div id="reportCohortSpecific" data-bind="if: $component.currentReport() == 'Cohort Specific' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_14', 'Prevalence by Month')"></span>
-        <i data-bind="click:function(){ setHelpContent('cohort-specific-prevalence-per-month') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('cohort-specific-prevalence-per-month') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -178,12 +178,12 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_15', 'Cohort Start')"></span>
-        <i data-bind="click:function(){ setHelpContent('cohort-specific-cohort-start') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('cohort-specific-cohort-start') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -192,12 +192,12 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_16', 'Persons in Cohort from Start to End')"></span>
-        <i data-bind="click:function(){ setHelpContent('cohort-specific-start-to-end') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('cohort-specific-start-to-end') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -206,12 +206,12 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_17', 'Number of Persons by Duration from Cohort Start to Cohort End')"></span>
-        <i data-bind="click:function(){ setHelpContent('cohort-specific-duration-start-to-end') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('cohort-specific-duration-start-to-end') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -220,12 +220,12 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_18', 'Distribution of Age at Cohort Start by Cohort Start Year')"></span>
-        <i data-bind="click:function(){ setHelpContent('cohort-specific-duration-start-to-end') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('cohort-specific-duration-start-to-end') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -234,12 +234,12 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_19', 'Age Distributions')"></span>
-        <i data-bind="click:function(){ setHelpContent('cohort-specific-age-distributions') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('cohort-specific-age-distributions') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="row">
           <div class="col-sm-6">
             <div class="chartContainer" data-bind="css: classes('chartContainer')">
@@ -269,12 +269,12 @@
 
 <div id="reportTornado" data-bind="visible: $component.currentReport() == 'Tornado' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_22', 'Tornado')"></span>
-        <i data-bind="click:function(){ setHelpContent('tornado') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('tornado') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body pad-5">
+      <div class="card-body pad-5">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -283,12 +283,12 @@
       </div>
     </div>
   </div>
-  <div class="panel panel-primary">
-    <div class="panel-heading">
+  <div class="card panel-primary">
+    <div class="card-header">
       <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_23', 'Sample Profiles')"></span>
-      <i data-bind="click:function(){ setHelpContent('tornado') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+      <i data-bind="click:function(){ setHelpContent('tornado') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
     </div>
-    <div class="panel-body" style="background-color:#222;">
+    <div class="card-body" style="background-color:#222;">
       <div id="tornadoProfiles" class="text-center">
         <div style="color:#eee;" data-bind="if:$component.tornadoProfiles().length == 0">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_24', 'Select a Bar from the Tornado Plot to view Sample Profiles for that Strata.')"></span>
@@ -309,18 +309,18 @@
 
 <div id="reportConditionsByIndex" data-bind="if: $component.currentReport() == 'Conditions by Index' && !$component.loadingReport()">
   <div class="pad-5 report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_25', 'Condition Prevalence')"></span>
-        <i data-bind="click:function(){ setHelpContent('conditions-by-index-condition-prevalence') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('conditions-by-index-condition-prevalence') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="active"><a href="#condition-table-panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#condition-table-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
             </a>
           </li>
-          <li id="treemap-tab"><a href="#condition-treemap-panel" role="tab" data-toggle="tab">
+          <li id="treemap-tab"><a href="#condition-treemap-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a>
           </li>
@@ -363,11 +363,11 @@
     </loading>
     <!-- /ko -->
     <!-- ko if: $component.activeReportDrilldown -->
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_29', 'Drilldown Report')"></span>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div>
           <div id="conditionDrilldownScatterplotHeading" class="reportSectionHeading">
           </div>
@@ -385,18 +385,18 @@
 
 <div id="reportDrugErasByIndex" data-bind="if: $component.currentReport() == 'Drugs by Index' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_30', 'Drugs by Index Date ')"></span>
-        <i data-bind="click:function(){ setHelpContent('drugs-by-index') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('drugs-by-index') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="active"><a href="#drugs-by-index-table-panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#drugs-by-index-table-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
           </a>
           </li>
-          <li id="treemap-tab"><a href="#drugs-by-index-treemap-panel" role="tab" data-toggle="tab">
+          <li id="treemap-tab"><a href="#drugs-by-index-treemap-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a>
           </li>
@@ -452,73 +452,73 @@
 <div id="reportConditionPeriods" data-bind="if: $component.currentReport() == 'Observation Periods' && !$component.loadingReport()">
   <div class="report">
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_31', 'Age at First Observation')"></span>
-        <i data-bind="click:function(){ setHelpContent('observation-periods-age-at-first-observation') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('observation-periods-age-at-first-observation') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
           <div class="evidenceVisualization" id="ageatfirstobservation"></div>
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_32', 'The distribution of age at first observation in the cohort.')"></span>
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_33', 'Age by Gender')"></span>
-        <i data-bind="click:function(){ setHelpContent('observation-periods-age-by-gender') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('observation-periods-age-by-gender') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
           <div class="evidenceVisualization" id="agebygender"></div>
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_34', 'The distribution of age at first observation in the cohort stratified by gender.')"></span>
 
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_35', 'Observation Length')"></span>
-        <i data-bind="click:function(){ setHelpContent('observation-periods-length') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('observation-periods-length') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
           <div class="evidenceVisualization" id="observationlength"></div>
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_36', 'Distribution of total observation time in cohort.')"></span>
 
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_37', 'Observation Length by Gender')"></span>
-        <i data-bind="click:function(){ setHelpContent('observation-periods-length-by-gender') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('observation-periods-length-by-gender') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
           <div class="evidenceVisualization" id="opbygender"></div>
         </div>
       </div>
-      <div class="panel-footer">
+      <div class="card-footer">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_38', 'Distribution of total observation time in cohort by gender.')"></span>
 
       </div>
@@ -531,13 +531,13 @@
     <div class="evidenceVisualization" id="cumulativeobservation"></div>
     -->
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_39', 'Observation Length by Age Decile')"></span>
-        <i data-bind="click:function(){ setHelpContent('observation-periods-length-by-age-decile') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('observation-periods-length-by-age-decile') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -547,22 +547,22 @@
     </div>
 
     <!-- tooltip bug
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        Persons with Continuous Observation by Year<i data-bind="click:setHelpContent('observation-periods-continuous')" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        Persons with Continuous Observation by Year<i data-bind="click:setHelpContent('observation-periods-continuous')" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="evidenceVisualization" id="opbyage"></div>
       </div>
     </div>
     -->
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_40', 'Observation Periods per Person')"></span>
-        <i data-bind="click:function(){ setHelpContent('observation-periods-per-person') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('observation-periods-per-person') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -571,13 +571,13 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_41', 'Persons With Continuous Observation By Month')"></span>
-        <i data-bind="click:function(){ setHelpContent('observation-periods-continuous-by-month') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('observation-periods-continuous-by-month') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -591,20 +591,20 @@
 
 <div id="reportConditionEras" data-bind="if: $component.currentReport() == 'Condition Eras' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_42', 'Condition Era Prevalence')"></span>
-        <i data-bind="click: function(){ setHelpContent('condition-era-prevalence') }"  class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click: function(){ setHelpContent('condition-era-prevalence') }"  class="fa fa-question-circle float-end"></i>
 
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="active"><a href="#conditionera-table-panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#conditionera-table-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
           </a>
           </li>
-          <li><a href="#conditionera-treemap-panel" role="tab" data-toggle="tab">
+          <li><a href="#conditionera-treemap-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a>
           </li>
@@ -646,11 +646,11 @@
       <span data-bind="text: ko.i18n('common.loading', 'Loading')"></span>
     </div>
     <div data-bind="if:$component.activeReportDrilldown">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_42', 'Condition Era Prevalence')"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -658,12 +658,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_43', 'Condition Era Prevalence by Month')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -672,11 +672,11 @@
         </div>
       </div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_44', 'Age at First Diagnosis')"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -685,12 +685,12 @@
         </div>
       </div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
 
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_45', 'Length of Condition Era')"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -704,18 +704,18 @@
 
 <div id="reportProceduresByIndex" data-bind="if: $component.currentReport() == 'Procedures by Index' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_46', 'Procedure Prevalence')"></span>
-        <i data-bind="click:function(){ setHelpContent('procedure-by-index-prevalence') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('procedure-by-index-prevalence') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li id="treemap-tab"><a href="#procedure-treemap-panel" role="tab" data-toggle="tab">
+          <li id="treemap-tab"><a href="#procedure-treemap-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a>
           </li>
-          <li class="active"><a href="#procedure-table-panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#procedure-table-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
           </a>
           </li>
@@ -780,18 +780,18 @@
 
 <div id="reportCondition" data-bind="visible: $component.currentReport() == 'Condition' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_47', 'Condition Prevalence')"></span>
-        <i data-bind="click:function(){ setHelpContent('condition-prevalence') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('condition-prevalence') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="active"><a href="#condition-table-panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#condition-table-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
           </a></li>
-          <li id="treemap-tab"><a href="#condition-treemap-panel" role="tab" data-toggle="tab">
+          <li id="treemap-tab"><a href="#condition-treemap-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a></li>
         </ul>
@@ -835,11 +835,11 @@
     <div data-bind="if:$component.activeReportDrilldown">
       <div class="heading" id="conditionDrilldown"></div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_47', 'Condition Prevalence')"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -848,12 +848,12 @@
         </div>
       </div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_48', 'Condition Prevalence by Month')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -862,12 +862,12 @@
         </div>
       </div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_49', 'Condition Type')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -876,11 +876,11 @@
         </div>
       </div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_44', 'Age at First Diagnosis')"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -894,19 +894,19 @@
 
 <div id="reportDrugEras" data-bind="if: $component.currentReport() == 'Drug Eras' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_50', 'Drug Era Prevalence')"></span>
-        <i data-bind="click:function(){ setHelpContent('drug-era-prevalence') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('drug-era-prevalence') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="active"><a href="#drugera-table-panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#drugera-table-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
           </a>
           </li>
-          <li><a href="#drugera-treemap-panel" role="tab" data-toggle="tab">
+          <li><a href="#drugera-treemap-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a>
           </li>
@@ -949,11 +949,11 @@
     <div data-bind="if:$component.activeReportDrilldown">
       <div class="heading" id="drugeraDrilldown"></div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_50', 'Drug Era Prevalence')"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -961,12 +961,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_51', 'Drug Era Prevalence by Month')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -974,12 +974,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_52', 'Age at First Exposure by Gender')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -987,12 +987,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_53', 'Length of Era Distribution')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1006,19 +1006,19 @@
 
 <div id="reportDrugExposure" data-bind="if: $component.currentReport() == 'Drug Exposure' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_54', 'Drug Exposure')"></span>
-        <i data-bind="click:function(){ setHelpContent('drug-exposure') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('drug-exposure') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="active"><a href="#drug_table_panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#drug_table_panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
           </a>
           </li>
-          <li id="treemap-tab"><a href="#drug_treemap_panel" role="tab" data-toggle="tab">
+          <li id="treemap-tab"><a href="#drug_treemap_panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a>
           </li>
@@ -1061,12 +1061,12 @@
     <div data-bind="if:$component.activeReportDrilldown">
       <div class="heading" id="drugExposureDrilldown"></div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_55', 'Drug Exposure Prevalence')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1074,12 +1074,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_56', 'Drug Exposure Prevalence by Month')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1087,12 +1087,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_57', 'Age at First Exposure')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1100,11 +1100,11 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_58', 'Days Supply Distribution')"></span>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1112,12 +1112,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_59', 'Quantity Distribution')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1125,12 +1125,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_60', 'Refills Distribution')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1138,12 +1138,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_61', 'Drugs by Type')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1157,19 +1157,19 @@
 
 <div id="reportProcedure" data-bind="if: $component.currentReport() == 'Procedure' && !$component.loadingReport()">
   <div class=" report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_62', 'Procedure Prevalence')"></span>
-        <i data-bind="click:function(){ setHelpContent('procedure-prevalence') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('procedure-prevalence') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="active"><a href="#procedure-table-panel" role="tab" data-toggle="tab">
+          <li class="active"><a href="#procedure-table-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_26', 'Table')"></span>
           </a>
           </li>
-          <li><a href="#procedure-treemap-panel" role="tab" data-toggle="tab">
+          <li><a href="#procedure-treemap-panel" role="tab" data-bs-toggle="tab">
             <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_27', 'Treemap')"></span>
           </a>
           </li>
@@ -1211,12 +1211,12 @@
     <div data-bind="if:$component.activeReportDrilldown">
       <div class="heading" id="procedureDrilldown"></div>
 
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_62', 'Procedure Prevalence')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1224,12 +1224,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_63', 'Procedure Prevalence by Month')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1237,12 +1237,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_64', 'Procedures by Type')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1250,12 +1250,12 @@
           </div>
         </div>
       </div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">
+      <div class="card panel-primary">
+        <div class="card-header">
           <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_65', 'Age at First Occurrence')"></span>
 
         </div>
-        <div class="panel-body">
+        <div class="card-body">
           <div class="chartContainer" data-bind="css: classes('chartContainer')">
             <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
             <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1270,13 +1270,13 @@
 
 <div id="reportDeath" data-bind="if: $component.currentReport() == 'Death' && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_66', 'Death Prevalence by Age, Gender, Year')"></span>
-        <i data-bind="click:function(){ setHelpContent('death-prevalence') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('death-prevalence') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1285,13 +1285,13 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_67', 'Death Prevalence by Month')"></span>
-        <i data-bind="click:function(){ setHelpContent('death-prevalence-by-month') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('death-prevalence-by-month') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="chartContainer" data-bind="css: classes('chartContainer')">
           <button title="PNG" data-bind="css: classes('export-button'), click: $component.export">PNG</button>
           <button title="SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg">SVG</button>
@@ -1300,13 +1300,13 @@
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
+    <div class="card panel-primary">
+      <div class="card-header">
 
         <span data-bind="text: ko.i18n('cohortDefinitions.costUtilization.reportManager.reportManagerText_68', 'Death Details')"></span>
-        <i data-bind="click:function(){ setHelpContent('death-details') }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+        <i data-bind="click:function(){ setHelpContent('death-details') }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <div class="row">
           <div class="col-sm-6">
             <div class="chartContainer" data-bind="css: classes('chartContainer')">
@@ -1336,11 +1336,11 @@
 
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilPersonAndExposureBaseline.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureBaseline) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-persons-exposure params="{
           window: costUtilConst.windowType.baseline,
           source: $component.reportSourceKey(),
@@ -1353,11 +1353,11 @@
 
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilPersonAndExposureCohort.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureCohort) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-persons-exposure params="{
           window: costUtilConst.windowType.atrisk,
           source: $component.reportSourceKey(),
@@ -1370,11 +1370,11 @@
 
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilVisitRecordsBaseline.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsBaseline) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-visit-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),
@@ -1388,11 +1388,11 @@
 
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilVisitDatesBaseline.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesBaseline) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-visit-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),
@@ -1406,11 +1406,11 @@
 
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilCareSiteDatesBaseline.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesBaseline) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-visit-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),
@@ -1424,11 +1424,11 @@
 
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilVisitRecordsCohort.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsCohort) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-visit-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),
@@ -1441,11 +1441,11 @@
 </div>
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilVisitDatesCohort.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesCohort) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-visit-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),
@@ -1458,11 +1458,11 @@
 </div>
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilCareSiteDatesCohort.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesCohort) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-visit-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),
@@ -1475,11 +1475,11 @@
 </div>
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilDrugBaseline.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilDrugBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugBaseline) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilDrugBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-drug-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),
@@ -1491,11 +1491,11 @@
 </div>
 <div data-bind="if: $component.currentReport() == ko.unwrap(visualizationPacks.healthcareUtilDrugCohort.name) && !$component.loadingReport()">
   <div class="report">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <span data-bind="text: visualizationPacks.healthcareUtilDrugCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugCohort) }" data-toggle="modal" data-target="#helpModal" class="fa fa-question-circle pull-right"></i>
+    <div class="card panel-primary">
+      <div class="card-header">
+        <span data-bind="text: visualizationPacks.healthcareUtilDrugCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
         <cost-utilization-drug-util params="{
           source: $component.reportSourceKey(),
           cohortId: $component.reportCohortDefinitionId(),

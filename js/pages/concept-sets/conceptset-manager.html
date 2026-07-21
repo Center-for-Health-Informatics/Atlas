@@ -13,8 +13,7 @@
     <div class="input-group">
       <input class="form-control" id="txtConceptSetName" type="text"
       data-bind="attr: { disabled: !canEdit() }, textInput: currentConceptSet().name, css: { emptyInput: !isNameFilled() }, placeholder: ko.i18n('const.newEntityNames.conceptSet', 'New Concept Set')"/>
-      <div class="input-group-btn">
-        <button type="button" class="btn btn-success" data-bind="click: save, css: { disabled: !canSave() || isProcessing() }, title: !previewVersion() ? ko.i18n('common.save', 'Save') : ko.i18n('common.saveAsCurrentVersion', 'Save as current version')"><i class="fa fa-save"></i></button>
+      <button type="button" class="btn btn-success" data-bind="click: save, css: { disabled: !canSave() || isProcessing() }, title: !previewVersion() ? ko.i18n('common.save', 'Save') : ko.i18n('common.saveAsCurrentVersion', 'Save as current version')"><i class="fa fa-save"></i></button>
         <button class="btn btn-primary"
                 data-bind="visible: previewVersion(), title: ko.i18n('common.backToCurrent', 'Back to current version'), click: backToCurrentVersion">
           <i class="fa fa-undo"></i>
@@ -35,7 +34,6 @@
 
         <button type="button" class="btn btn-danger" data-bind="visible: !previewVersion(), click: $component.delete, css: { disabled: !canDelete() || isProcessing() }, title: ko.i18n('common.delete', 'Delete')"><i class="fa fa-trash-alt"></i></button>
         <!-- /ko -->
-      </div>
     </div>
     <name-validation params="
       hasEmptyName: !isNameFilled(),
@@ -75,10 +73,10 @@
             <span data-bind="text: ko.i18n('cs.manager.pleaseReviewMessage', 'Please review the optimized definition and options for saving.')"></span>
           </div>
           <div class="col-md-4">
-            <div class="btn-group pull-right" role="group">
-              <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="btn-group float-end" role="group">
+              <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span data-bind="text: ko.i18n('cs.manager.saveOptions', 'Save Options')"></span>
-                <span class="caret"></span>
+                
               </button>
               <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupDrop1">
                 <li><a class="dropdown-item" href="#" data-bind="click: overwriteConceptSet, text: ko.i18n('cs.manager.overwriteOption', 'Overwrite Current Concept Set')"></a></li>

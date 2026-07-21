@@ -31,9 +31,7 @@
                             eventType: 'blur',
                             ko_autocomplete: { source: writeRoleOptions(), minLength: 0, maxShowItems: 10, scroll: true }"
                     >
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" data-bind="click: grantAccess.bind($data,'WRITE'), attr: { disabled: !(writeRoleName() && writeRoleName().length) }, text: ko.i18n('common.add', 'Add')"></button>
-                    </span>
+                    <button class="btn btn-primary" type="button" data-bind="click: grantAccess.bind($data,'WRITE'), attr: { disabled: !(writeRoleName() && writeRoleName().length) }, text: ko.i18n('common.add', 'Add')"></button>
                 </div>
                 <div data-bind="css: classes('access-list')">
                     <label data-bind="css: classes('access-list-label'), text: ko.i18n('common.configureAccessModal.rolesWithWriteAccess', 'Roles with WRITE access:')"></label>
@@ -60,9 +58,7 @@
                             eventType: 'blur',
                             ko_autocomplete: { source: readRoleOptions(), minLength: 0, maxShowItems: 10, scroll: true }"
                     >
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button" data-bind="click: grantAccess.bind($data,'READ'), attr: { disabled: !(readRoleName() && readRoleName().length) }, text: ko.i18n('common.add', 'Add')"></button>
-                    </span>
+                    <button class="btn btn-primary" type="button" data-bind="click: grantAccess.bind($data,'READ'), attr: { disabled: !(readRoleName() && readRoleName().length) }, text: ko.i18n('common.add', 'Add')"></button>
                 </div>
     <div data-bind="css: classes('access-list')">
                     <label data-bind="css: classes('access-list-label'), text: ko.i18n('common.configureAccessModal.rolesWithReadAccess', 'Roles with READ access:')"></label>

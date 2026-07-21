@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import ko from 'knockout'
+import { Collapse } from 'bootstrap'
 
 ko.bindingHandlers.collapsable = {
   update: function (element, valueAccessor, allBindingsAccessor) {
@@ -20,14 +21,15 @@ ko.bindingHandlers.collapsable = {
     }
 
     const value = valueAccessor()
+    const collapse = Collapse.getOrCreateInstance(collapsableContainer, { toggle: false })
     if (ko.utils.unwrapObservable(value)) {
       $(element).children('.' + options.selectorClass).addClass(options.expandedClass)
       $(element).children('.' + options.selectorClass).removeClass(options.collapsabledClass)
-      $(collapsableContainer).collapse('show')
+      collapse.show()
     } else {
       $(element).children('.' + options.selectorClass).removeClass(options.expandedClass)
       $(element).children('.' + options.selectorClass).addClass(options.collapsabledClass)
-      $(collapsableContainer).collapse('hide')
+      collapse.hide()
     }
   }
 }

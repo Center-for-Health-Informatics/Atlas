@@ -5,8 +5,8 @@
             <hr/>
             <div id="filters">
                 <div class="row">
-                    <div class="pull-left" data-bind="css: classes('filter-view'), text: ko.i18n('ple.spec.view', 'View:')"></div>
-                    <div class="pull-left">
+                    <div class="float-start" data-bind="css: classes('filter-view'), text: ko.i18n('ple.spec.view', 'View:')"></div>
+                    <div class="float-start">
                         <ul class="nav nav-pills">
                             <li role="presentation" data-bind="css: {active: $component.specificationPillMode() == 'all' }, click: function() {$component.specificationPillMode('all') };"><a data-bind="text: ko.i18n('ple.spec.viewFullSpecification', 'Full Specification')"></a></li>
                             <li role="presentation" data-bind="css: {active: $component.specificationPillMode() == 'comparisons' }, click: function() {$component.specificationPillMode('comparisons') };"><a data-bind="text: ko.i18n('ple.spec.viewComparisons', 'Comparisons')"></a></li>
@@ -18,18 +18,18 @@
             </div>
                 <div role="tabpanel" data-bind="visible: $component.specificationPillMode() == 'all' || $component.specificationPillMode() == 'comparisons'" class="tab-pane">
                 <div class="paddedWrapper">
-                    <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="card panel-primary">
+                    <div class="card-header">
                         <i class="fa fa-balance-scale"></i> <span data-bind="text: ko.i18n('ple.spec.viewComparisons', 'Comparisons')"></span>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="paddedWrapper">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
+                        <div class="card panel-default">
+                            <div class="card-header">
                             <i class="fa fa-users"></i> <span data-bind="text: ko.i18n('ple.spec.viewComparisons', 'Comparisons')"></span>
-                            <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addComparison, disable: !$component.isEditPermitted()"><i class="fa fa-plus"></i> <span data-bind="text: ko.i18n('ple.spec.addComparisons', 'Add Comparisons')"></span></button>
+                            <button type="button" class="btn btn-primary btn-sm float-end" data-bind="click: addComparison, disable: !$component.isEditPermitted()"><i class="fa fa-plus"></i> <span data-bind="text: ko.i18n('ple.spec.addComparisons', 'Add Comparisons')"></span></button>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <faceted-datatable params="{
                                 columns: cca.comparisonTableColumns,
                                 options: cca.comparisonTableOptions,
@@ -49,18 +49,18 @@
                 </div>
                 <div role="tabpanel" data-bind="visible: $component.specificationPillMode() == 'all' || $component.specificationPillMode() == 'analysisSettings'" class="tab-pane">
                     <div class="paddedWrapper">
-                        <div class="panel panel-primary">
-                    <div class="panel-heading">
+                        <div class="card panel-primary">
+                    <div class="card-header">
                         <i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.analysisSettings', 'Analysis Settings')"></span>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="paddedWrapper">
-                            <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="card panel-default">
+                            <div class="card-header">
                                 <span data-bind="text: ko.i18n('ple.spec.analysisSettings', 'Analysis Settings')"></span>
-                                <button type="button" class="btn btn-primary btn-sm pull-right" data-bind="click: addAnalysis, disable: !$component.isEditPermitted()"><i class="fa fa-plus"></i> <span data-bind="text: ko.i18n('ple.spec.addAnalysisSettings', 'Add Analysis Settings')"></span></button>
+                                <button type="button" class="btn btn-primary btn-sm float-end" data-bind="click: addAnalysis, disable: !$component.isEditPermitted()"><i class="fa fa-plus"></i> <span data-bind="text: ko.i18n('ple.spec.addAnalysisSettings', 'Add Analysis Settings')"></span></button>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <faceted-datatable params="{
                                     columns: cca.analysisSettingsTableColumns,
                                     options: cca.analysisSettingsTableOptions,
@@ -80,26 +80,26 @@
                 </div>
                 <div role="tabpanel" data-bind="visible: $component.specificationPillMode() == 'all' || $component.specificationPillMode() == 'evaluation'" class="tab-pane">
                 <div class="paddedWrapper">
-                    <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="card panel-primary">
+                    <div class="card-header">
                         <i class="fa fa-cogs"></i> <span data-bind="text: ko.i18n('ple.spec.evaluationSettings', 'Evaluation Settings')"></span>
                     </div>
-                    <div class="panel-body">
+                    <div class="card-body">
                         <div class="paddedWrapper">
-                            <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="card panel-default">
+                            <div class="card-header">
                                 <i class="fa fa-users"></i> <span data-bind="text: ko.i18n('ple.spec.evaluationSettingsPanel.negativeControl', 'Negative Control Outcome Cohort Definition')"></span>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <span data-bind="text: ko.i18n('ple.spec.evaluationSettingsPanel.negativeControlDesc', 'This expression will define the criteria for inclusion and duration of time for cohorts intended for use as negative control outcomes.')"></span>
                                 <nc-outcome-cohort-settings-editor params="negativeControlCohortSettings: $component.estimationAnalysis() && $component.estimationAnalysis().negativeControlOutcomeCohortDefinition, isEditPermitted: $component.isEditPermitted"></nc-outcome-cohort-settings-editor>
                             </div>
                             </div>
-                            <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="card panel-default">
+                            <div class="card-header">
                                 <i class="fa fa-cog"></i> <span data-bind="text: ko.i18n('ple.spec.evaluationSettingsPanel.positiveControl', 'Positive Control Synthesis')"></span>
                             </div>
-                            <div class="panel-body">
+                            <div class="card-body">
                                 <div data-bind="css: {'div-disabled': !$component.isEditPermitted()}">
                                     <label data-bind="text: ko.i18n('ple.spec.evaluationSettingsPanel.positiveControlPerform', 'Should we perform positive control synthesis? (to calibrate confidence intervals)')"></label>
                                     <div class="input-group">
@@ -121,8 +121,8 @@
     <div id="editors" data-bind="visible: $component.managerMode() == 'editor'">
         <div id="editor-heading" class="editor-container">
             <div class="paddedWrapper">
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="card panel-default">
+                <div class="card-header">
                     <div class="row">
                     <div data-bind="click: closeEditor" class="editor-back-icon"><i class="fa fa-chevron-left fa-lg"></i></div>
                     <div>
@@ -131,7 +131,7 @@
                     </div>
                     </div>
                 </div>
-                <div class="panel-body" data-bind="if: $component.editorComponentName() != null">
+                <div class="card-body" data-bind="if: $component.editorComponentName() != null">
                     <div id="editorComponent" data-bind='component: {name: $component.editorComponentName(), params: $component.editorComponentParams()}'></div>
                 </div>
             </div>

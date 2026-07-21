@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import ko from 'knockout'
-import 'datatables.net'
+import DataTable from 'datatables.net'
 import config from 'appConfig'
 import filterXSS from 'xss'
 import commonUtils from 'utils/CommonUtils'
@@ -8,6 +8,24 @@ import 'datatables.net-buttons'
 import 'colvis'
 import 'datatables.net-buttons-html5'
 import 'datatables.net-select'
+
+// pdfmake bundles ~1.6MB of embedded font data (vfs_fonts) - kept out of the
+// main bundle via dynamic import (its own lazy chunk, fetched in parallel
+// rather than blocking initial render). Kicked off unconditionally, as soon
+// as this module loads, rather than deferred until a table with export
+// buttons is constructed: the excel/pdf export buttons' `available()` check
+// runs synchronously at DataTable construction time, so the fetch needs a
+// head start to be ready by the time any table with export buttons actually
+// gets built.
+Promise.all([
+  import('pdfmake'),
+  import('pdfmake/vfs_fonts'),
+  import('jszip'),
+]).then(([{ default: pdfMake }, { default: pdfFonts }, { default: JSZip }]) => {
+  pdfMake.addVirtualFileSystem(pdfFonts)
+  DataTable.Buttons.pdfMake(pdfMake)
+  DataTable.Buttons.jszip(JSZip)
+})
 
 function renderSelected (s, p, d) {
   return '<span class="fa fa-check-circle"></span>'

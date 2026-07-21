@@ -30,7 +30,7 @@ function getDomains () {
             domains.push(v.DOMAIN_ID)
           })
           resolve(domains)
-        })
+        }, reject)
       })
     } else {
       return new Promise((resolve, reject) => resolve([]))

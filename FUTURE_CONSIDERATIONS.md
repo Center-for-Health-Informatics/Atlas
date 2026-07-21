@@ -23,6 +23,14 @@ Running list of things worth revisiting. Not bugs blocking current work — just
 - **Environment variable support** — webapi's config (`webapi/src/config.js`) is fairly minimal (`EXPRESS_PORT`, `EXPRESS_HOST`, `DB_PATH`, `WEBAPI_AUTH_HEADER`, `WEBAPI_VERSION`, `WEBAPI_SOURCES`). Worth revisiting what else should be externally configurable as the testing/deployment setup matures (e.g. per-source auth, logging level, CORS origins) rather than requiring code or compose file changes.
 
 - **old-style js** — The Javascript/ECMAScript language has progressed considerably since much of this code base was written. Update awkward idioms to use newer, cleaner capabilities.
+  - Fetch
+  - Class
+  - async/await
+  - Promise
+  - expanded method repetoire
+  - expanded <input> types
+  - expanded DOM API
+
 
 - **@ohdsi/atlascharts** — ancient tech, incorrect dependencies that affect Atlas. Fork and rewrite. Probably the other @ohdsi/* modules, too.
 

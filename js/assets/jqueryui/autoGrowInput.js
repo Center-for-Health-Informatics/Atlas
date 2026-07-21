@@ -24,7 +24,7 @@ $.fn.autoGrowInput = function (o) {
       if (isValidWidthChange) input.width(newWidth)
     }
     testSubject.insertAfter(input)
-    $(this).bind('keyup keydown blur update', check)
+    $(this).on('keyup keydown blur update', check)
   })
 
   return this

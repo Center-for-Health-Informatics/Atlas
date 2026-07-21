@@ -15,6 +15,7 @@ const aliasMap = {
   'pages/Page': 'pages/Page.js',
   'services/MomentAPI': 'services/MomentAPI.js',
   const: 'const.js',
+  jquery: 'jquery.js',
 }
 
 export async function resolve (specifier, context, nextResolve) {

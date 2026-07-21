@@ -156,7 +156,7 @@ export default class Application {
   attachGlobalEventListeners () {
     const self = this
     $(window)
-      .bind('beforeunload', function () {
+      .on('beforeunload', function () {
         if (self.hasUnsavedChanges()) { return 'Changes will be lost if you do not save.' }
       })
   }

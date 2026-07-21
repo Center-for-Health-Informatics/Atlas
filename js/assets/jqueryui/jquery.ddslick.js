@@ -204,7 +204,7 @@
 			//Check if already destroyed
 			if (pluginData) {
 				var originalElement = pluginData.original;
-				$this.removeData('ddslick').unbind('.ddslick').replaceWith(originalElement);
+				$this.removeData('ddslick').off('.ddslick').replaceWith(originalElement);
 			}
 		});
 	}

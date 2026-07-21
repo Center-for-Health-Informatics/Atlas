@@ -1710,7 +1710,7 @@ var DEBUG = true;
 			var ajax = $.ajax(opts);
 			ajax.then(function (results) {
 				storagePut(key, results, ajaxCache);
-			});
+			}, function () {});
 			return ajax;
 		} else {
 			var results = storageGet(key, ajaxCache);

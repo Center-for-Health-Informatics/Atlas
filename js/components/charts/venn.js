@@ -4,7 +4,7 @@ import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
 import * as d3 from 'd3'
-import venn from 'venn'
+import { VennDiagram, sortAreas } from '@upsetjs/venn.js'
 import './venn.less'
 
 class Venn extends Component {
@@ -70,7 +70,7 @@ class Venn extends Component {
       return conceptSets.sort((a, b) => b.size - a.size)
     })
 
-    const chart = venn.VennDiagram()
+    const chart = VennDiagram()
     chart.wrap(false)
       .height(450)
 
@@ -109,7 +109,7 @@ class Venn extends Component {
 
       .on('mouseover', function (event, d) {
         // sort all the areas relative to the current item
-        venn.sortAreas(div, d)
+        sortAreas(div, d)
         tooltip.transition().duration(400).style('opacity', 0.9).style('visibility', 'visible')
         const title = `<div class="title">${d.label ? ko.i18n('cs.browser.compare.vennDiagramCommonConcepts', 'Common concepts')() : ko.i18nformat('cs.browser.compare.vennDiagramNameConceptSet', '<%=name%> concept set', { name: d.name })()}</div>`
         const amount = d.label ? `<div class="title">${ko.i18nformat('cs.browser.compare.vennDiagramAmountConcepts', 'The amount: <%=count%>', { count: d.count })()}</div>` : `<div class="title">${ko.i18nformat('cs.browser.compare.vennDiagramTotalAmountConcepts', 'The total amount of concepts: <%=count%>', { count: d.count })()}</div>`

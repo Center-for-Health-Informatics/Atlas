@@ -113,7 +113,6 @@ export default defineConfig({
       { find: 'visibilityjs', replacement: nm('@ohdsi/visibilityjs/lib/visibility.core.js') },
       { find: 'ajv', replacement: nm('ajv/dist/ajv.js') },
       { find: 'html2canvas', replacement: nm('html2canvas/dist/html2canvas.min.js') },
-      { find: 'venn', replacement: nm('venn.js/venn.js') },
       { find: 'facets', replacement: nm('facets/facets.js') },
       { find: 'clipboard', replacement: nm('clipboard/dist/clipboard.js') },
 

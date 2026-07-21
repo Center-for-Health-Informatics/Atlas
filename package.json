@@ -50,6 +50,7 @@
     "@ohdsi/ui-toolbox": "^1.1.0",
     "@ohdsi/visibilityjs": "^2.0.2",
     "@popperjs/core": "^2.11.8",
+    "@upsetjs/venn.js": "^2.0.0",
     "ajv": "^8.20.0",
     "bootstrap": "^5.3.8",
     "clipboard": "^2.0.11",
@@ -79,7 +80,6 @@
     "pdfmake": "^0.2.23",
     "prismjs": "^1.29.0",
     "svgsaver": "^0.9.0",
-    "venn.js": "^0.2.20",
     "xss": "^1.0.14"
   },
   "allowScripts": {

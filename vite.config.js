@@ -30,13 +30,6 @@ export default defineConfig({
       { find: 'const-state', replacement: js('const-state.js') },
       { find: 'version', replacement: js('version.js') },
 
-      // ── AMD map: d3 v4 sub-package redirects ──
-      { find: 'd3-color', replacement: nm('d3/build/d3.js') },
-      { find: 'd3-interpolate', replacement: nm('d3/build/d3.js') },
-      { find: 'd3-selection', replacement: nm('d3/build/d3.js') },
-      { find: 'd3-transition', replacement: nm('d3/build/d3.js') },
-      { find: 'd3-collection', replacement: nm('d3/build/d3.js') },
-
       // ── AMD map: jqueryui local overrides ──
       { find: 'jqueryui/jquery.ddslick', replacement: js('assets/jqueryui/jquery.ddslick.js') },
       { find: 'jqueryui/autoGrowInput', replacement: js('assets/jqueryui/autoGrowInput.js') },
@@ -100,13 +93,13 @@ export default defineConfig({
       { find: 'colvis', replacement: nm('datatables.net-buttons/js/buttons.colVis.js') },
       { find: 'crossfilter', replacement: nm('crossfilter2/crossfilter.js') },
       { find: 'director', replacement: nm('director/build/director.js') },
-      { find: 'atlascharts', replacement: nm('@ohdsi/atlascharts/dist/atlascharts.umd.js') },
+      { find: 'atlascharts', replacement: js('vendor/atlascharts/main.js') },
       { find: 'lscache', replacement: nm('lscache/lscache.js') },
       { find: 'prism', replacement: nm('prismjs/prism.js') },
       { find: 'prismlanguages', replacement: nm('prismjs/components') },
       { find: 'papaparse', replacement: nm('papaparse/papaparse.js') },
-      { find: 'd3', replacement: nm('d3/build/d3.js') },
-      { find: 'd3-tip', replacement: nm('d3-tip/dist/index.js') },
+      { find: 'd3', replacement: nm('d3/src/index.js') },
+      { find: 'd3-tip', replacement: nm('d3-tip/index.js') },
       { find: 'moment', replacement: nm('moment/moment.js') },
       { find: /^bootstrap-select$/, replacement: nm('bootstrap-select/dist/js/bootstrap-select.js') },
       { find: 'less-js', replacement: nm('less/dist/less.js') },

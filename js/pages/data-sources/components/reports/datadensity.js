@@ -3,6 +3,7 @@ import view from './datadensity.html?raw'
 import * as d3 from 'd3'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
+import { nestEntries } from 'utils/D3NestCompat'
 import Report from 'components/reports/classes/Report'
 import 'components/Component'
 import 'components/heading'
@@ -106,9 +107,7 @@ class datadensity extends Report {
       })
 
       // nest dataframe data into key->values pair
-      const parsedData = d3.nest()
-        .key(d => d.seriesName)
-        .entries(rawData)
+      const parsedData = nestEntries(rawData, [(d) => d.seriesName])
         .map(d => ({
           name: d.key,
           values: d.values

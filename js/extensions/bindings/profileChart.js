@@ -103,8 +103,8 @@ function categoryScatterPlot (element, xfo, verticalLines, shadedRegions, xfd) {
       .attr('y', -minBoxPix / 2)
   }
 
-  function brushEnded () {
-    const s = d3.event.selection
+  function brushEnded (event) {
+    const s = event.selection
     if (s === null) {
       xfd[0].filter(null)
     } else {

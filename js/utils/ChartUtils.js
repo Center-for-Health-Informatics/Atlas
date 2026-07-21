@@ -167,7 +167,7 @@ class ChartUtils {
     let keys
 
     if (ary && ary.length > 0 && ary instanceof Array) {
-      keys = d3.keys(ary[0])
+      keys = Object.keys(ary[0])
 
       keys.forEach(function (key) {
         obj[key] = []

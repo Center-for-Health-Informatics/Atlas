@@ -4,6 +4,7 @@ import * as d3 from 'd3'
 import view from 'components/charts/chart.html?raw'
 import commonUtils from 'utils/CommonUtils'
 import ChartUtils from 'utils/ChartUtils'
+import { nestEntries } from 'utils/D3NestCompat'
 
 class Trellisline extends Chart {
   constructor (params, element) {
@@ -27,28 +28,19 @@ class Trellisline extends Chart {
         }
       }
 
-      const nestByDecile = d3.nest()
-        .key(function (d) {
-          return d.trellisName
-        })
-        .key(function (d) {
-          return d.seriesName
-        })
-        .sortValues(function (a, b) {
-          return a.xCalendarYear - b.xCalendarYear
-        })
+      const nestByDecile = (data) => nestEntries(data, [(d) => d.trellisName, (d) => d.seriesName], (a, b) => a.xCalendarYear - b.xCalendarYear)
 
       // map data into chartable form
       const normalizedSeries = trellisData.trellisName.map(function (d, i) {
         const item = {}
         const container = this
-        d3.keys(container).forEach(function (p) {
+        Object.keys(container).forEach(function (p) {
           item[p] = container[p][i]
         })
         return item
       }, trellisData)
 
-      const dataByDecile = nestByDecile.entries(normalizedSeries)
+      const dataByDecile = nestByDecile(normalizedSeries)
       // fill in gaps
       const yearRange = d3.range(minYear, maxYear, 1)
       let yearData = {}

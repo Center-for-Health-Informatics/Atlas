@@ -103,11 +103,11 @@ class Venn extends Component {
 
     // add listeners to all the groups to display tooltip on mouseover
     div.selectAll('g')
-      .on('click', function (d) {
+      .on('click', function (event, d) {
         params.updateOutsideFilters(d.key)
       })
 
-      .on('mouseover', function (d) {
+      .on('mouseover', function (event, d) {
         // sort all the areas relative to the current item
         venn.sortAreas(div, d)
         tooltip.transition().duration(400).style('opacity', 0.9).style('visibility', 'visible')
@@ -122,9 +122,9 @@ class Venn extends Component {
           .style('stroke-width', 3)
       })
 
-      .on('mousemove', function () {
-        tooltip.style('left', (d3.event.pageX + 40) + 'px')
-          .style('top', (d3.event.pageY - 40) + 'px')
+      .on('mousemove', function (event) {
+        tooltip.style('left', (event.pageX + 40) + 'px')
+          .style('top', (event.pageY - 40) + 'px')
       })
 
       .on('mouseout', function () {

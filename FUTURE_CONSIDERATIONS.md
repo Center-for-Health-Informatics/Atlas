@@ -33,3 +33,5 @@ Running list of things worth revisiting. Not bugs blocking current work — just
 - ~~**old filesystem cruft**~~ Done 2026-07-10: `.jshintrc` deleted (zero references anywhere — eslint/neostandard fully replaced it). `.github/workflows/ci.yaml` and `release.yaml` deleted — both were broken for this fork (`npm test -- --runInBand` is a Jest flag but this repo's `test` script uses Node's built-in test runner; both targeted the upstream `ohdsi/atlas` DockerHub image/secrets, not this fork; `release.yaml`'s distribution step predated the Vite migration and didn't match current build output). `.editorconfig` kept — still functional, not cruft. `.gitignore`'s `/web.config` entry (IIS-hosting leftover, this fork deploys via Docker/nginx only) left as low-priority/harmless.
 
 - **filesystem layout** — Everything is under js/, styles, html, fonts, data — it's a mess
+
+- **non-Bootstrap jQuery** — replace our own jQuery usage with vanilla ECMA Script where we can

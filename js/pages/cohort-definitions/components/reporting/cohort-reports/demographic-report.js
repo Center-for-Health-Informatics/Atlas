@@ -22,7 +22,6 @@ import 'components/visualizations/line-chart'
 import 'components/charts/scatterplot'
 import 'components/charts/splitBoxplot'
 import 'components/charts/horizontalBoxplot'
-import 'd3-scale-chromatic'
 
 const TYPE_PREVALENCE = 'prevalence'
 

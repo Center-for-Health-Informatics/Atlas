@@ -4,6 +4,7 @@ import ko from 'knockout'
 import view from './concept-by-index.html?raw'
 import * as d3 from 'd3'
 import jnjChart from 'jnj_chart'
+import { nestEntries } from 'utils/D3NestCompat'
 
 function conceptByIndex (params) {
   const self = this
@@ -15,7 +16,7 @@ function conceptByIndex (params) {
 
   self.dataframeToArray = function (dataframe) {
     // dataframes from R serialize into an obect where each column is an array of values.
-    const keys = d3.keys(dataframe)
+    const keys = Object.keys(dataframe)
     let result
     if (dataframe[keys[0]] instanceof Array) {
       result = dataframe[keys[0]].map(function (d, i) {
@@ -37,7 +38,7 @@ function conceptByIndex (params) {
     let keys
 
     if (ary && ary.length > 0 && ary instanceof Array) {
-      keys = d3.keys(ary[0])
+      keys = Object.keys(ary[0])
 
       $.each(keys, function () {
         obj[this] = []
@@ -74,11 +75,7 @@ function conceptByIndex (params) {
           const normalized = self.dataframeToArray(self.normalizeArray(result))
 
           // nest dataframe data into key->values pair
-          const totalRecordsData = d3.nest()
-            .key(function (d) {
-              return d.recordType
-            })
-            .entries(normalized)
+          const totalRecordsData = nestEntries(normalized, [(d) => d.recordType])
             .map(function (d) {
               return {
                 name: d.key,

@@ -678,10 +678,9 @@ function groupBody (d3element, {
     .call(drawCrits, cohdef, critType)
 
   critNodes
-    .on('mouseover', function (crit) {
+    .on('mouseover', function (evt, crit) {
       cohdef.selectedCriteria(crit)
       // cohdef.selectedCriteria(getCrit("wrapper",crit));
-      const evt = d3.event
       const tt = $('div#cartoon-tooltip > div#tooltip')
 
       const xTooltip = document.documentElement.clientWidth - 25 > evt.pageX + tt.width()

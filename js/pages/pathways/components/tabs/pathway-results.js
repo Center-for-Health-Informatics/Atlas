@@ -10,6 +10,7 @@ import AtlasCharts from 'atlascharts'
 import * as d3 from 'd3'
 import filterUtils from 'components/visualizations/filter-panel/utils'
 import ChartUtils from 'utils/ChartUtils'
+import { schemeCategory20 } from 'utils/D3LegacySchemes'
 import 'components/visualizations/filter-panel/filter-panel'
 import 'components/charts/sunburst'
 import 'components/nav-pills'
@@ -249,7 +250,7 @@ class PathwayResults extends AutoBind(Component) {
     }).filter(cp => cp)
 
     const eventCohorts = results.data.eventCodes.filter(ec => !ec.isCombo)
-    const colorScheme = d3.scaleOrdinal(eventCohorts.length > 10 ? d3.schemeCategory20 : d3.schemeCategory10)
+    const colorScheme = d3.scaleOrdinal(eventCohorts.length > 10 ? schemeCategory20 : d3.schemeCategory10)
     // initialize colors based on design
     this.results().design.eventCohorts.forEach((d, i) => colorScheme(Math.pow(2, i)))
     const fixedColors = { end: 'rgba(185, 184, 184, 0.23)' }

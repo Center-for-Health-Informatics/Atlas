@@ -10,7 +10,6 @@ import userService from 'services/User'
 import roleService from 'services/role'
 import * as permissionService from './services/PermissionService'
 import Const from './const'
-import moment from 'moment'
 import './job-view-edit.less'
 import 'components/tabs'
 import './components/job-scheduler'
@@ -21,7 +20,7 @@ const EMPTY_JOB = {
   enabled: true,
   preserveRoles: true,
   providerType: Const.PROVIDERS.ACTIVE_DIRECTORY,
-  startDate: moment().add(1, 'hours').toDate(),
+  startDate: new Date(Date.now() + 60 * 60 * 1000),
   frequency: 'ONCE',
   recurringTimes: 0,
   weekDays: [],
@@ -32,7 +31,7 @@ const EMPTY_JOB = {
 }
 
 function toDate (date) {
-  return date ? moment.utc(date).toDate() : null
+  return date ? new Date(date) : null
 }
 
 class JobViewEdit extends AutoBind(Page) {
@@ -51,7 +50,6 @@ class JobViewEdit extends AutoBind(Page) {
     this.jobEnds = ko.observable('never')
     this.loadProviders()
     this.weekdays = ko.observableArray()
-    this.moment = moment
     this.setupJob(EMPTY_JOB)
     this.selectedTabKey = ko.observable('scheduler')
     this.roleGroups = ko.observable([])
@@ -152,9 +150,9 @@ class JobViewEdit extends AutoBind(Page) {
     }
 
     // const tzOffset = new Date().getTimezoneOffset();
-    job.startDate = moment.utc(job.startDate).format()
+    job.startDate = new Date(job.startDate).toISOString()
     if (job.recurringUntilDate) {
-      job.recurringUntilDate = moment.utc(job.recurringUntilDate).format()
+      job.recurringUntilDate = new Date(job.recurringUntilDate).toISOString()
     }
 
     switch (this.jobEnds()) {

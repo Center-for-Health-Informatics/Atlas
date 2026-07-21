@@ -12,7 +12,7 @@
         <div data-bind="css: classes({ element: 'schedule', extra: 'form-group'})">
             <label data-bind="css: classes({extra: 'btn'}), text: ko.i18n('configuration.userImport.scheduler.startOn', 'Start on:')"></label>
             <div data-bind="css: classes({extra: ['input-group', 'date']})">
-                <input placeholder="YYYY-MM-DD" data-bind="dateTimePicker: job().startDate, format: 'yyyy-mm-dd hh:ii', css: classes({extra: 'form-control'}) " />
+                <input type="datetime-local" data-bind="dateTimePicker: job().startDate, css: classes({extra: 'form-control'}) " />
                 <span data-bind="css: classes({extra: 'input-group-addon'})">
                     <span data-bind="css: classes({extra: ['fa', 'fa-calendar']})"></span>
                 </span>
@@ -42,7 +42,7 @@
                 <div data-bind="css: classes('ends-label')">
                     <label data-bind="css: classes({ extra: 'btn'})"><input name="ends" value="on" data-bind="checked: jobEnds" type="radio" />
                         <span data-bind="text: ko.i18n('configuration.userImport.scheduler.on', 'On')"></span>
-                        <input placeholder="YYYY-MM-DD" data-bind="enable: jobEnds() === jobEndOptions.ON, dateTimePicker: job().recurringUntilDate, format: 'yyyy-mm-dd hh:ii', css: classes({element: 'ends-on', extra: 'form-control'}) " />
+                        <input type="datetime-local" data-bind="enable: jobEnds() === jobEndOptions.ON, dateTimePicker: job().recurringUntilDate, css: classes({element: 'ends-on', extra: 'form-control'}) " />
                     </label>
                 </div>
             </div>

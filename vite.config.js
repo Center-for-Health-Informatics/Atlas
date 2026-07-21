@@ -109,7 +109,6 @@ export default defineConfig({
       { find: 'lz-string', replacement: nm('lz-string/libs/lz-string.js') },
       { find: 'colorbrewer', replacement: nm('colorbrewer/index.js') },
       { find: 'ohdsi-api', replacement: nm('@ohdsi/ui-toolbox/lib/umd/api/index.js') },
-      { find: 'bootstrap-datetimepicker', replacement: nm('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') },
       { find: 'visibilityjs', replacement: nm('@ohdsi/visibilityjs/lib/visibility.core.js') },
       { find: 'ajv', replacement: nm('ajv/dist/ajv.js') },
       { find: 'html2canvas', replacement: nm('html2canvas/dist/html2canvas.min.js') },

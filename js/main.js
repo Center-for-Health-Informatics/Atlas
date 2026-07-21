@@ -12,7 +12,6 @@ async function run () {
 
   log('css'); await import('./styles/font-awesome.min.css')
   await import('./styles/bootstrap.min.css')
-  await import('eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')
   await import('./styles/bootstrap-theme.min.css')
   await import('./styles/jquery.dataTables.min.css')
   await import('./styles/tabs.css')

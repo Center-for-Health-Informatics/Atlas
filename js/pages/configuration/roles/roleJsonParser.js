@@ -1,6 +1,5 @@
-import Ajv from 'ajv'
+import { validate, errorsText } from 'utils/JsonSchemaValidator'
 
-const ajv = new Ajv({ allErrors: true })
 const ROLE_PERMISSION = 'role'
 const PUBLIC_ROLE_ID = 1
 const PERMISSION_ID_REGEX = /:[0-9]+:/
@@ -49,21 +48,21 @@ const validateAndParseRoles = function (json, userItems, permissionItems, existi
   try {
     const object = JSON.parse(json)
     if (Array.isArray(object)) {
-      isValid = ajv.validate(rolesJSONSchema, object)
+      isValid = validate(rolesJSONSchema, object)
       if (isValid) {
         roles = object.map(role => {
           return this.parseRole(existingRoles, role, userItems, permissionItems)
         })
       }
     } else {
-      isValid = ajv.validate(roleJSONSchema, object)
+      isValid = validate(roleJSONSchema, object)
       if (isValid) {
         roles = [this.parseRole(existingRoles, object, userItems, permissionItems)]
       }
     }
 
     if (!isValid) {
-      throw new Error(ajv.errorsText(ajv.errors))
+      throw new Error(errorsText())
     }
   } catch (er) {
     roles = []

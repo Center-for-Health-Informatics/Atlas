@@ -1,10 +1,9 @@
 import ko from 'knockout'
-import Visibility from 'visibilityjs'
 
 const callbacks = new Map()
-const isPageForeground = ko.observable(Visibility.state() === 'visible')
-Visibility.change((e, state) => {
-  const isForeground = state === 'visible'
+const isPageForeground = ko.observable(document.visibilityState === 'visible')
+document.addEventListener('visibilitychange', () => {
+  const isForeground = document.visibilityState === 'visible'
   isPageForeground(isForeground)
 
   if (isForeground) {

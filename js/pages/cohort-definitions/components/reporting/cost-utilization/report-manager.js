@@ -5,7 +5,7 @@ import view from './report-manager.html?raw'
 import sharedState from 'atlas-state'
 import * as d3 from 'd3'
 import atlascharts from 'atlascharts'
-import colorbrewer from 'colorbrewer'
+import { colorbrewerReds3, colorbrewerSpectral10 } from 'utils/ColorSchemes'
 import config from 'appConfig'
 import cohortReportingService from 'services/CohortReporting'
 import costUtilConst from 'pages/cohort-definitions/const'
@@ -1534,7 +1534,7 @@ class ReportManager extends Component {
                       return node.relative_risk
                     },
                     getcolorrange: function () {
-                      return colorbrewer.Reds[3]
+                      return colorbrewerReds3
                     },
                     getcolorscale: function () {
                       return [-6, 0, 5]
@@ -1664,7 +1664,7 @@ class ReportManager extends Component {
                       return node.relative_risk
                     },
                     getcolorrange: function () {
-                      return colorbrewer.Reds[3]
+                      return colorbrewerReds3
                     },
                     getcolorscale: function () {
                       return [-6, 0, 5]
@@ -1787,7 +1787,7 @@ class ReportManager extends Component {
                       return node.relative_risk
                     },
                     getcolorrange: function () {
-                      return colorbrewer.Reds[3]
+                      return colorbrewerReds3
                     },
                     getcolorscale: function () {
                       return [-6, 0, 5]
@@ -2374,7 +2374,7 @@ class ReportManager extends Component {
               },
               colors: d3.scaleOrdinal()
                 .domain(conditionType)
-                .range(colorbrewer.Spectral[10])
+                .range(colorbrewerSpectral10)
             })
           }
 
@@ -2479,7 +2479,7 @@ class ReportManager extends Component {
             },
             colors: d3.scaleOrdinal()
               .domain(drugsByType)
-              .range(colorbrewer.Spectral[10])
+              .range(colorbrewerSpectral10)
           })
 
           // prevalence by month

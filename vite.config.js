@@ -91,6 +91,11 @@ export default defineConfig({
       { find: 'datatables.net-buttons-html5', replacement: nm('datatables.net-buttons/js/buttons.html5.mjs') },
       { find: 'datatables.net-select', replacement: nm('datatables.net-select/js/dataTables.select.mjs') },
       { find: 'colvis', replacement: nm('datatables.net-buttons/js/buttons.colVis.mjs') },
+      // pdfmake is pinned to 0.2.x in package.json on purpose (see CHANGELOG.md) -
+      // that line ships this prebuilt build/pdfmake.js + build/vfs_fonts.js pair.
+      // 0.3.x dropped them for a from-source, bundler-oriented build requiring
+      // new @foliojs-fork/* peer deps - upgrading means redoing this aliasing,
+      // not a version bump.
       { find: 'pdfmake/vfs_fonts', replacement: nm('pdfmake/build/vfs_fonts.js') },
       { find: 'pdfmake', replacement: nm('pdfmake/build/pdfmake.js') },
       { find: 'director', replacement: nm('director/build/director.js') },
@@ -112,14 +117,12 @@ export default defineConfig({
       { find: 'visibilityjs', replacement: nm('@ohdsi/visibilityjs/lib/visibility.core.js') },
       { find: 'ajv', replacement: nm('ajv/dist/ajv.js') },
       { find: 'html2canvas', replacement: nm('html2canvas/dist/html2canvas.min.js') },
-      { find: 'facets', replacement: nm('facets/facets.js') },
       { find: 'clipboard', replacement: nm('clipboard/dist/clipboard.js') },
 
       // ── Local asset files ──
       { find: 'assets', replacement: js('assets') },
       { find: 'jnj_chart', replacement: js('assets/jnj.chart.js') },
       { find: 'localStorageExtender', replacement: js('assets/localStorageExtender.js') },
-      { find: 'd3-scale-chromatic', replacement: nm('d3-scale-chromatic/src/index.js') },
     ],
   },
 

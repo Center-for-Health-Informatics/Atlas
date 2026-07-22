@@ -344,6 +344,18 @@ pre span.key {
   padding-top: 75px;
 }
 
+/* Bootstrap 5's .row offsets its children with a -12px margin (half of
+   --bs-gutter-x: 1.5rem), meant to be cancelled out by a .container's
+   matching padding. faceted-datatable's .row has no such wrapper - every
+   page embedding it (Concept Sets, Cohort Definitions, Prediction,
+   Estimation, Incidence Rates, Pathways, etc.) supplies only its own
+   outer margin, not padding, so the .row bleeds 12px past its container
+   on both sides. Cancel it at the source instead of patching each page. */
+.feFilterRow {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .fa.fa-refresh.fa-spin {
   font-weight: normal;
 }

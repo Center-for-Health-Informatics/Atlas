@@ -1,8 +1,8 @@
 <div data-bind="css: classes(), visible: !isAuthenticated || !isPermitted()">
     <!-- ko if: isAuthenticated && !isPermitted() -->
-        <forbidden />
+        <forbidden></forbidden>
     <!-- /ko -->
     <!-- ko ifnot: isAuthenticated -->
-        <unauthenticated />
+        <unauthenticated></unauthenticated>
     <!-- /ko -->
 </div>

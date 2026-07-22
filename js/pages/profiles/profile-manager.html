@@ -61,10 +61,10 @@
           </ul>
         <input type="text" class="form-control" data-bind="enable: sourceKey(),value: personId, placeholder: ko.i18n('profiles.personId', 'Person Id')">
         <div class="btn btn-primary" data-bind="css:{active:$component.showSection.profileChart},click:$component.dispToggle, value:'profileChart', title: ko.i18n('profiles.toggleChartTooltip', 'toggle chart display')">
-            <i class="fa fa-chart-line" data-bind="value:'profileChart'" />
-          <div class="btn btn-primary" data-bind="css:{active:$component.showSection.datatable},click:$component.dispToggle, value:'datatable', title: ko.i18n('profiles.toggleTableTooltip', 'toggle table display')">
-            <i class="fa fa-table" data-bind="value:'datatable'" />
-          </div>
+            <i class="fa fa-chart-line" data-bind="value:'profileChart'"></i>
+        </div>
+        <div class="btn btn-primary" data-bind="css:{active:$component.showSection.datatable},click:$component.dispToggle, value:'datatable', title: ko.i18n('profiles.toggleTableTooltip', 'toggle table display')">
+          <i class="fa fa-table" data-bind="value:'datatable'"></i>
         </div>
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalHighlights" data-bind="title: ko.i18n('profiles.highlightEventsTooltip', 'highlight events')">
             <span><i class="fa fa-paint-brush"></i></span>

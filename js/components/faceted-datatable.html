@@ -2,7 +2,7 @@
   <h3><i class="fa fa-spinner fa-spin"></i> Loading ...</h3>
 </div>
 <div data-bind="ifnot: $component.componentLoading(), css: {visible: !componentLoading(), hidden: componentLoading()}">
-  <div class="row">
+  <div class="row feFilterRow">
     <div class="feFilter" data-bind="visible:$component.facets().length > 0, css: {'col-2': $component.facets().length > 0}">
       <div data-bind="with: $component.facets">
         <div data-bind="foreach:$data">

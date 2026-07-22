@@ -101,6 +101,19 @@
     padding-left: 5px;
   }
 
+  // Bootstrap 5's .row offsets its children with a -12px margin (half of
+  // --bs-gutter-x: 1.5rem) to cancel out the .col-*'s own gutter padding.
+  // The .col-* padding above is hardcoded to 5px, a pre-existing local
+  // convention that predates the Bootstrap 5 upgrade — so it no longer
+  // matches .row's margin, and every .row/.col-* pair in this page overflows
+  // its container by 7px on each side. Match .row's margin to the same 5px
+  // instead of adopting Bootstrap's default, to keep this page's existing
+  // compact spacing.
+  & .row {
+    margin-right: -5px;
+    margin-left: -5px;
+  }
+
   & .treemap {
 
     &__tbl-col {

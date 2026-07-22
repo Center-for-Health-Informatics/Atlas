@@ -33,7 +33,7 @@ import $ from 'jquery'
 import ko from 'knockout'
 import LZString from 'lz-string'
 import _ from 'lodash'
-import crossfilter from 'crossfilter'
+import crossfilter from 'utils/CrossfilterUtils'
 
 var DEBUG = true;
 	var ALLOW_CACHING = [

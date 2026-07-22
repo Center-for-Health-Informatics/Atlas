@@ -93,7 +93,6 @@ export default defineConfig({
       { find: 'colvis', replacement: nm('datatables.net-buttons/js/buttons.colVis.mjs') },
       { find: 'pdfmake/vfs_fonts', replacement: nm('pdfmake/build/vfs_fonts.js') },
       { find: 'pdfmake', replacement: nm('pdfmake/build/pdfmake.js') },
-      { find: 'crossfilter', replacement: nm('crossfilter2/crossfilter.js') },
       { find: 'director', replacement: nm('director/build/director.js') },
       { find: 'atlascharts', replacement: js('vendor/atlascharts/main.js') },
       { find: 'lscache', replacement: nm('lscache/lscache.js') },

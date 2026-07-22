@@ -113,7 +113,6 @@ export default defineConfig({
       { find: 'lz-string', replacement: nm('lz-string/libs/lz-string.js') },
       { find: 'ohdsi-api', replacement: nm('@ohdsi/ui-toolbox/lib/umd/api/index.js') },
       { find: 'html2canvas', replacement: nm('html2canvas/dist/html2canvas.min.js') },
-      { find: 'clipboard', replacement: nm('clipboard/dist/clipboard.js') },
 
       // ── Local asset files ──
       { find: 'assets', replacement: js('assets') },

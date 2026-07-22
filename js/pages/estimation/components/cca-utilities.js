@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import ko from 'knockout'
 import view from './cca-utilities.html?raw'
 import Component from 'components/Component'
@@ -8,7 +7,6 @@ import config from 'appConfig'
 import EstimationService from 'services/Estimation'
 import * as PermissionService from '../PermissionService'
 import constants from '../const'
-import clipboard from 'clipboard'
 import FullAnalysis from '../inputTypes/ComparativeCohortAnalysis/FullAnalysis'
 import Cohort from 'services/analysis/Cohort'
 import TargetComparatorOutcome from '../inputTypes/TargetComparatorOutcome'
@@ -105,23 +103,6 @@ class ComparativeCohortAnalysisUtilities extends Component {
     )
       .catch((e) => console.error('error when downloading: ' + e))
       .finally(() => this.loading(false))
-  }
-
-  copyFullSpecificationToClipboard () {
-    // eslint-disable-next-line new-cap
-    const currentClipboard = new clipboard('#btnCopyFullSpecificationClipboard')
-
-    currentClipboard.on('success', function (e) {
-      e.clearSelection()
-      $('#copyFullSpecificationToClipboardMessage').fadeIn()
-      setTimeout(function () {
-        $('#copyFullSpecificationToClipboardMessage').fadeOut()
-      }, 1500)
-    })
-
-    currentClipboard.on('error', function (e) {
-      console.error('Error copying to clipboard')
-    })
   }
 }
 

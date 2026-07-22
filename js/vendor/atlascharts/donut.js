@@ -19,7 +19,7 @@ Authors: Christopher Knoll, Mark Valez, Sigfried Gold, Alexander Saltykov
 */
 
 import * as d3 from 'd3'
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 import Chart from './chart'
 
 class Donut extends Chart {
@@ -72,7 +72,7 @@ class Donut extends Chart {
 
     const tooltipBuilder = this.donutDefaultTooltip(
       (d) => d.label,
-      (d) => numeral(d.value).format('0,0'),
+      (d) => formatNumeral(d.value),
       (d) => this.formatters.formatpercent(total !== 0 ? d.value / total : 0.0)
     )
 

@@ -14,7 +14,6 @@ import Page from 'pages/Page'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import router from 'pages/Router'
-import moment from 'moment'
 import constants from './const'
 import _ from 'lodash'
 import 'd3-tip'
@@ -31,6 +30,15 @@ const reduceToRecs = [ // crossfilter group reduce functions where group val
   (p, v, nf) => _.without(p, v),
   () => []
 ]
+
+// Calendar-day arithmetic (DST-safe, same as moment's local-mode .add/.subtract(n, 'days')):
+// setDate/getDate operate on local wall-clock date, so the offset shifts automatically
+// across a DST transition instead of just adding/subtracting a fixed 24h.
+function addDays (date, days) {
+  const d = new Date(date)
+  d.setDate(d.getDate() + days)
+  return d
+}
 
 class ProfileManager extends AutoBind(Page) {
   constructor (params) {
@@ -135,8 +143,8 @@ class ProfileManager extends AutoBind(Page) {
       if (this.canViewProfileDates() && this.xfObservable && this.xfObservable() && this.xfObservable().isElementFiltered()) {
         const filtered = this.xfObservable().allFiltered()
         return filtered.map(v => ({
-          startDate: moment(v.startDate).add(v.startDays, 'days').valueOf(),
-          endDate: moment(v.endDate).subtract(v.endDays, 'days').valueOf(),
+          startDate: addDays(v.startDate, v.startDays).valueOf(),
+          endDate: addDays(v.endDate, -v.endDays).valueOf(),
         }))
           .reduce((a, v) => ({
             startDate: a.startDate < v.startDate ? a.startDate : v.startDate,

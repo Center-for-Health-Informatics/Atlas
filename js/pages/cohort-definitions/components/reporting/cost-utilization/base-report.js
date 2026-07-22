@@ -2,7 +2,6 @@ import ko from 'knockout'
 import Component from 'components/Component'
 import appConfig from 'appConfig'
 import filterPanelUtils from 'components/visualizations/filter-panel/utils'
-import moment from 'moment'
 import * as d3 from 'd3'
 import MomentAPI from 'services/MomentAPI'
 import CsvUtils from 'utils/CsvUtils'
@@ -191,8 +190,8 @@ class BaseCostUtilReport extends Component {
   createChartData (yValueField) {
     return this.dataList().map((entry, idx) => ({
       id: idx,
-      xValue: moment(entry.periodStart).toDate(),
-      periodEnd: moment(entry.periodEnd).toDate(),
+      xValue: new Date(entry.periodStart),
+      periodEnd: new Date(entry.periodEnd),
       yValue: parseFloat(entry[yValueField]) || 0,
     }))
   }

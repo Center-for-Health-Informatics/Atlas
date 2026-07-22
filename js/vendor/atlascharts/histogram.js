@@ -19,7 +19,7 @@ Authors: Christopher Knoll, Alexander Saltykov
 */
 
 import * as d3 from 'd3'
-import numeral from 'numeral'
+import { formatNumeral } from 'utils/NumberFormatUtils'
 import Chart from './chart'
 
 class Histogram extends Chart {
@@ -113,7 +113,7 @@ class Histogram extends Chart {
 
     const tooltipBuilder = typeof options.getTooltipBuilder === 'function'
       ? options.getTooltipBuilder(options)
-      : d => numeral(d.y).format('0,0')
+      : d => formatNumeral(d.y)
 
     this.useTip((tip) => {
       tip.attr('class', 'd3-tip')

@@ -3,7 +3,7 @@ import httpService from 'services/http'
 import authApi from 'services/AuthAPI'
 import roleService from 'services/role'
 import config from 'appConfig'
-import lscache from 'lscache'
+import { get as cacheGet } from 'utils/LocalStorageCache'
 import sharedState from 'atlas-state'
 import $ from 'jquery'
 import executionService from 'services/Execution'
@@ -169,7 +169,7 @@ export default class Application {
     console.info('Initializing service information')
     return new Promise((resolve, reject) => {
       const serviceCacheKey = 'ATLAS|' + config.api.url
-      const cachedService = lscache.get(serviceCacheKey)
+      const cachedService = cacheGet(serviceCacheKey)
 
       if (cachedService && cachedService.sources) {
         console.info('cached service')

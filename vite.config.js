@@ -100,7 +100,6 @@ export default defineConfig({
       { find: 'pdfmake', replacement: nm('pdfmake/build/pdfmake.js') },
       { find: 'director', replacement: nm('director/build/director.js') },
       { find: 'atlascharts', replacement: js('vendor/atlascharts/main.js') },
-      { find: 'lscache', replacement: nm('lscache/lscache.js') },
       { find: 'prism', replacement: nm('prismjs/prism.js') },
       { find: 'prismlanguages', replacement: nm('prismjs/components') },
       { find: 'papaparse', replacement: nm('papaparse/papaparse.js') },
@@ -120,7 +119,6 @@ export default defineConfig({
       // ── Local asset files ──
       { find: 'assets', replacement: js('assets') },
       { find: 'jnj_chart', replacement: js('assets/jnj.chart.js') },
-      { find: 'localStorageExtender', replacement: js('assets/localStorageExtender.js') },
     ],
   },
 
@@ -136,7 +134,6 @@ export default defineConfig({
       'moment',
       'lodash',
       'numeral',
-      'lscache',
       'papaparse',
       'jszip',
     ],

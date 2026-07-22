@@ -3,7 +3,7 @@ import config from 'appConfig'
 import sharedState from 'atlas-state'
 import ohdsiUtil from 'assets/ohdsi.util'
 import authApi from 'services/AuthAPI'
-import lscache from 'lscache'
+import { set as cacheSet, remove as cacheRemove } from 'utils/LocalStorageCache'
 import ko from 'knockout'
 import { sortBy } from 'utils/NativeCompat'
 import httpService from 'services/http'
@@ -33,7 +33,7 @@ function saveSource (sourceKey, source) {
   formData.append('keyfile', source.keyfile)
   formData.append('source', new Blob([JSON.stringify(source)], { type: 'application/json' }))
 
-  lscache.remove(getCacheKey())
+  cacheRemove(getCacheKey())
   if (sourceKey && parseInt(sourceKey) !== 0) {
     return httpService.doPut(config.api.url + 'source/' + (sourceKey), formData)
   } else {
@@ -51,7 +51,7 @@ function getSource (sourceKey) {
 }
 
 function deleteSource (sourceKey) {
-  lscache.remove(getCacheKey())
+  cacheRemove(getCacheKey())
   return httpService.doDelete(`${config.webAPIRoot}source/${sourceKey}`)
 }
 
@@ -174,7 +174,7 @@ function setSharedStateSources (sources, priorityDaimons) {
   sharedState.sources(sourceList)
   if (config.cacheSources) {
     config.api.sources = sourceList
-    lscache.set(serviceCacheKey, config.api.sources, 720)
+    cacheSet(serviceCacheKey, config.api.sources, 720)
   }
 }
 

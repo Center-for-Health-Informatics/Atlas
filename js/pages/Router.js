@@ -1,11 +1,10 @@
 import pages from 'pages'
-import vocabularyPage from 'pages/vocabulary/index'
 import authApi from 'services/AuthAPI'
 import sharedState from 'atlas-state'
 import ko from 'knockout'
 import constants from 'const'
 import EventBus from 'services/EventBus'
-import { Router } from 'director'
+import { compileRoutes, matchRoute } from 'utils/HashRouter'
 
 class AtlasRouter {
   constructor () {
@@ -27,13 +26,43 @@ class AtlasRouter {
   }
 
   run () {
-    const routerOptions = {
-      notfound: () => this.handleNotFound(),
+    this.compiledRoutes = compileRoutes(this.aggregateRoutes())
+    window.addEventListener('hashchange', () => this.dispatch())
+
+    // Mirrors director's own bootstrap: an empty hash gets set to '/' (which
+    // fires 'hashchange' and dispatches asynchronously); a hash that's
+    // already present (e.g. a bookmarked deep link) dispatches immediately,
+    // since setting it to the same value wouldn't trigger a change event.
+    if (this.isHashEmpty()) {
+      window.location.hash = '/'
+    } else {
+      this.dispatch()
     }
-    this.router = new Router(this.aggregateRoutes())
-    this.router.qs = this.qs
-    this.router.configure(routerOptions)
-    this.router.init('/')
+  }
+
+  isHashEmpty () {
+    return window.location.hash === '' || window.location.hash === '#'
+  }
+
+  getPath () {
+    const hash = window.location.hash.replace(/^#/, '')
+    if (hash === '') {
+      return '/'
+    }
+    return hash[0] === '/' ? hash : '/' + hash
+  }
+
+  dispatch () {
+    const match = matchRoute(this.compiledRoutes, this.getPath())
+    if (match) {
+      match.handler(...match.captures)
+    } else {
+      this.handleNotFound()
+    }
+  }
+
+  setRoute (path) {
+    window.location.hash = path[0] === '/' ? path : '/' + path
   }
 
   qs () {
@@ -41,7 +70,7 @@ class AtlasRouter {
   }
 
   handleNotFound () {
-    this.router.setRoute(vocabularyPage.baseUrl)
+    this.setRoute('/search')
   }
 
   aggregateRoutes () {

@@ -98,7 +98,6 @@ export default defineConfig({
       // not a version bump.
       { find: 'pdfmake/vfs_fonts', replacement: nm('pdfmake/build/vfs_fonts.js') },
       { find: 'pdfmake', replacement: nm('pdfmake/build/pdfmake.js') },
-      { find: 'director', replacement: nm('director/build/director.js') },
       { find: 'atlascharts', replacement: js('vendor/atlascharts/main.js') },
       { find: 'prism', replacement: nm('prismjs/prism.js') },
       { find: 'prismlanguages', replacement: nm('prismjs/components') },
@@ -124,7 +123,6 @@ export default defineConfig({
       'jquery',
       'knockout',
       'bootstrap',
-      'director',
       'prismjs',
       'xss',
       'lodash',

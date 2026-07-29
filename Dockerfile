@@ -3,15 +3,23 @@
 # buildkit's secret-name heuristic (AUTH/TOKEN substrings) but are a boolean
 # feature flag and a numeric duration in seconds, not credentials.
 
-# Build the source
-FROM docker.io/library/node:lts-slim AS builder
+# Build the source.
+#
+# Pinned to $BUILDPLATFORM (the machine running the build) rather than the
+# target platform: everything this stage emits is a Vite bundle -- JS, CSS,
+# HTML, gzip -- which is architecture-neutral. So when cross-building the
+# linux/amd64 image from an arm64 Mac, npm and vite run *natively* instead of
+# under QEMU, and both architectures share one build. Only the nginx runtime
+# stage below is genuinely per-architecture.
+FROM --platform=$BUILDPLATFORM docker.io/library/node:lts-slim AS builder
 
 WORKDIR /code
 
 # First install dependencies. This part will be cached as long as
-# the package.json file remains identical.
-COPY package.json /code/
-RUN npm install
+# package.json and package-lock.json remain identical. `npm ci` rather than
+# `npm install` so the image is built from the committed lockfile.
+COPY package.json package-lock.json /code/
+RUN npm ci
 
 # Build code. images/ is needed here too (not just in the final stage) --
 # index.html references favicon.ico/atlas_loading.svg/ohdsi_color.png, and
@@ -25,9 +33,9 @@ COPY ./images /code/images
 COPY ./index.html /code/index.html
 
 # Set explicitly (rather than relying on vite build's implicit default) so the
-# production build mode is self-documenting. Must come after `npm install`,
-# since vite itself is a devDependency npm would skip installing if NODE_ENV
-# were already "production" at install time.
+# production build mode is self-documenting. Must come after `npm ci`, since
+# vite itself is a devDependency npm would skip installing if NODE_ENV were
+# already "production" at install time.
 ENV NODE_ENV=production
 RUN npm run build:docker
 
@@ -42,16 +50,37 @@ RUN find . -type f "(" \
       ")" -print0 \
       | xargs -0 -n 1 gzip -kf
 
-# Production Nginx image
+# Production Nginx image.
+#
+# The digest pin must refer to a multi-arch *image index*, not a single
+# platform's manifest -- otherwise the linux/amd64 and linux/arm64 legs of the
+# build both resolve to whatever one architecture the digest names, and the
+# mismatch shows up only at run time on the deployment host. Verify before
+# bumping:
+#     podman manifest inspect docker.io/nginxinc/nginx-unprivileged@sha256:...
+# and check for `"mediaType": "application/vnd.oci.image.index.v1+json"` with
+# both amd64 and arm64 entries.
 FROM docker.io/nginxinc/nginx-unprivileged:1.28.0-bookworm@sha256:cd33960e98e93d4d63385790ff7f8f5bf2ca95184c581b7f42ae8aea1139fbfc
 
+# Supplied by build.sh so a deployed image can be traced back to a commit.
+ARG VERSION=dev
+ARG REVISION=unknown
+ARG CREATED=
+
 LABEL org.opencontainers.image.title="OHDSI-Atlas"
+LABEL org.opencontainers.image.version="$VERSION"
+LABEL org.opencontainers.image.revision="$REVISION"
+LABEL org.opencontainers.image.created="$CREATED"
 LABEL org.opencontainers.image.authors="Joris Borgdorff <joris@thehyve.nl>, Lee Evans - www.ltscomputingllc.com, Shaun Turner<shaun.turner1@nhs.net>"
 LABEL org.opencontainers.image.description="ATLAS is an open source software tool for researchers to \
 conduct scientific analyses on standardized observational data"
 LABEL org.opencontainers.image.licenses="Apache-2.0"
 LABEL org.opencontainers.image.vendor="OHDSI"
-LABEL org.opencontainers.image.source="https://github.com/OHDSI/Atlas"
+LABEL org.opencontainers.image.source="https://github.com/Center-for-Health-Informatics/Atlas"
+
+# Documentation only -- nginx-unprivileged cannot bind :80 as a non-root user,
+# so docker/nginx-default.conf listens on 8080 and the compose file maps to it.
+EXPOSE 8080
 
 # URL where WebAPI can be queried by the client
 ENV USE_DYNAMIC_WEBAPI_URL="false"

@@ -1,0 +1,31 @@
+# Deployment compose file for chi-cetus (/srv/atlas/compose.yaml).
+#
+# Copy this file and .env.example (as .env) to /srv/atlas on the target host.
+# The host needs a one-time `docker login chi-tools.uc.edu`; the registry has a
+# publicly valid TLS certificate, so no insecure-registries entry is needed in
+# /etc/docker/daemon.json.
+#
+#   docker compose up -d
+#
+# To pin a release instead of tracking latest, replace the image tag with an
+# immutable one (e.g. chi-tools.uc.edu/atlas:0.2.0-gab12cd3) and drop
+# pull_policy. That is also how to roll back.
+
+services:
+  atlas:
+    image: chi-tools.uc.edu/atlas:latest
+    # Required with a mutable `latest` tag: without it, `docker compose up -d`
+    # reuses the locally cached image and silently deploys nothing new.
+    pull_policy: always
+    restart: unless-stopped
+    environment:
+      # Not read by Atlas itself -- only sets the container clock, which
+      # affects nginx log timestamps.
+      - TZ=${TZ}
+      # Substituted into js/runtime-config.js at container start by
+      # docker/30-atlas-env-subst.sh. See the Dockerfile for the full list of
+      # ATLAS_* variables this image accepts.
+      - WEBAPI_URL=${WEBAPI_URL}
+      - ATLAS_INSTANCE_NAME=${ATLAS_INSTANCE_NAME}
+    ports:
+      - "${HTTP_PORT}:8080"

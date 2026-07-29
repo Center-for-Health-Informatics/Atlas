@@ -5,11 +5,12 @@
 js/version.js
 .env.local
 .env.*.local
-package-lock.json
+.envrc
 
-# Global gitignore excludes .claude/ entirely (personal settings, caches, etc.);
-# re-include just the project skills we want tracked in this repo.
-!.claude/
+# Track only the project skills under .claude/; local settings and caches are
+# personal. The `.claude/*` + re-include pairing is required because git will
+# not re-include a path whose parent directory is excluded -- `.claude/` on its
+# own would make `!.claude/skills/` unreachable.
 .claude/*
 !.claude/skills/
 .claude/skills/run-atlas/scripts/screenshots/

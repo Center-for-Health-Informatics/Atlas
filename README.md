@@ -48,15 +48,40 @@ Atlas is a browser app (Vite + Knockout.js), so configuration happens in two dif
 | `ATLAS_INSTANCE_NAME` | Display name for that instance |
 | `ATLAS_*` | Feature flags and auth-provider settings — see the full list of `ENV` defaults in [`Dockerfile`](Dockerfile) |
 
+## Building the container image
+
+`build.sh` produces a multi-arch (`linux/amd64` + `linux/arm64`) image with podman, so a build
+on an Apple Silicon machine runs on the AMD64 deployment hosts. It tags three names — the
+`package.json` version, that version plus the short git SHA, and `latest` — and pushes only when
+asked:
+
+```bash
+./build.sh            # build only; nothing leaves this machine
+PUSH=1 ./build.sh     # build and push to chi-tools.uc.edu
+```
+
+Pushing needs a one-time `podman login chi-tools.uc.edu`. Pushes from a dirty working tree are
+refused (override with `FORCE=1`), since a `latest` built from uncommitted code can't be
+reproduced. Overrides: `REGISTRY`, `PLATFORMS` (e.g. `PLATFORMS=linux/arm64` for a fast
+local-only build).
+
+The Vite build runs natively on the build host rather than under emulation — its output is
+architecture-neutral, so both architectures share it. Only the nginx runtime layer differs.
+
 ## Running with Docker
 
 ```bash
-docker build -t atlas .
-docker run --rm -p 8080:8080 \
+podman run --rm -p 8080:8080 \
   -e WEBAPI_URL=http://my-webapi-host:8080/WebAPI/ \
   -e ATLAS_INSTANCE_NAME="My Instance" \
-  atlas
+  chi-tools.uc.edu/atlas:latest
 ```
+
+Atlas is served under the `/atlas/` path prefix, so the URL is <http://localhost:8080/atlas/>.
+
+For deployment, [`deploy/compose.yaml`](deploy/compose.yaml) and
+[`deploy/.env.example`](deploy/.env.example) are the files to copy to `/srv/atlas` on the target
+host.
 
 ## Getting Involved
 * Developer questions/comments/feedback: <a href="http://forums.ohdsi.org/c/developers">OHDSI Forum</a>

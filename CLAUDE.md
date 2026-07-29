@@ -28,8 +28,11 @@ npm run build
 # Dev build only (no install/clean/genversion, just `vite build`)
 npm run build:dev
 
-# Docker build
+# Vite build as run inside the Docker builder stage
 npm run build:docker
+
+# Build the multi-arch container image (add PUSH=1 to push to the registry)
+./build.sh
 ```
 
 The app is served by Vite in dev (`npm run dev`, default port 5173) and built into `js/assets/bundle/` for production (`npm run build`), with `index.html` as the entry point. A running WebAPI instance is required — configured via `js/config-local.js` (gitignored, created by the user; see "Local configuration" below).
@@ -68,6 +71,8 @@ Each subdirectory of `js/pages/` is a feature area (cohort-definitions, concept-
 Strings use `ko.i18n('key', 'default English text')` throughout the codebase. Locale is loaded at runtime from WebAPI (`/i18n?lang=...`) and stored in `atlas-state.localeSettings`.
 
 ### Build
+
+`build.sh` builds the container image for `linux/amd64` and `linux/arm64` at once. The Dockerfile's builder stage is pinned to `--platform=$BUILDPLATFORM` so npm and Vite run natively on the build host rather than under QEMU — valid **only** because the Vite output (JS/CSS/HTML) is architecture-neutral and both target images can share it. Don't copy that trick to a project with native modules; the sibling `webapi` repo, for instance, must build `node_modules` per target architecture.
 
 `npm run build` / `build:dev` / `build:docker` all run **`vite build`** (see `vite.config.js`). The old RequireJS-optimizer + Babel + Terser pipeline (`build/optimize.js`, `build/polyfill.js`) is gone — Vite handles bundling, transpilation (via `@vitejs/plugin-legacy` for older-browser fallback bundles), and minification directly. `genversion` (`genversion -e js/version.js`) writes a plain ESM `js/version.js` consumed via the `'version'` alias.
 

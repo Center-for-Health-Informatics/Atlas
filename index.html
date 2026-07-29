@@ -106,7 +106,13 @@
     <terms-and-conditions params="model: $data"></terms-and-conditions>
   <!-- /ko -->
 
-  <script src="/js/runtime-config.js"></script>
+  <!-- Must match vite.config.js `base` ('/atlas/') and the docroot layout in
+       Dockerfile. Kept as a root-absolute URL on purpose: a relative path
+       would be treated by Vite as an asset to bundle, but this file is
+       generated at container start by docker/30-atlas-env-subst.sh and must
+       stay a plain, unhashed file. 404s harmlessly under `npm run dev`, where
+       config comes from VITE_* instead. -->
+  <script src="/atlas/js/runtime-config.js"></script>
   <script type="module" src="/js/main.js"></script>
 
 </body>

@@ -111,7 +111,17 @@
        would be treated by Vite as an asset to bundle, but this file is
        generated at container start by docker/30-atlas-env-subst.sh and must
        stay a plain, unhashed file. 404s harmlessly under `npm run dev`, where
-       config comes from VITE_* instead. -->
+       config comes from VITE_* instead.
+
+       `vite build` warns: "can't be bundled without type="module" attribute".
+       That warning is expected and must NOT be "fixed" -- adding type="module"
+       makes Vite resolve and bundle js/runtime-config.js, which is only a
+       33-byte stub in the source tree, permanently baking
+       `window.ATLAS_RUNTIME_CONFIG = {}` into a hashed chunk. The substituted
+       file the container writes to this path would then be loaded by nothing,
+       and the whole WEBAPI_URL / ATLAS_* runtime env mechanism would silently
+       no-op. It also has to stay a *classic* script so it runs during parsing,
+       ahead of the deferred module entry that reads the global. -->
   <script src="/atlas/js/runtime-config.js"></script>
   <script type="module" src="/js/main.js"></script>
 

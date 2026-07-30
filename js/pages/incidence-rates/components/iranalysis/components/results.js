@@ -16,6 +16,7 @@ import 'databindings'
 import './results.less'
 import 'components/generation/select-sources-btn'
 import 'components/modal-exit-message'
+import './report'
 
 class IRAnalysisResultsViewer extends AutoBind(Component) {
   constructor (params) {

@@ -15,6 +15,7 @@ import 'components/conceptAddBox/preview/conceptset-expression-preview'
 import 'components/conceptAddBox/preview/included-preview'
 import 'components/conceptAddBox/preview/included-preview-badge'
 import 'components/conceptAddBox/preview/included-sourcecodes-preview'
+import 'faceted-datatable'
 
 class ResolveConceptSetMappings extends AutoBind(Component) {
   constructor (params) {

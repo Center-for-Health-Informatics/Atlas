@@ -7,6 +7,7 @@ import estimationConstants from '../../const'
 import dataTypeConverterUtils from 'utils/DataTypeConverterUtils'
 import 'databindings'
 import 'cyclops'
+import 'featureextraction/components/covariate-settings-editor'
 
 class PositiveControlSythesisSettingsEditor extends Component {
   constructor (params) {

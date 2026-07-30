@@ -12,6 +12,7 @@ import 'components/entityBrowsers/characterization-browser'
 import 'components/entityBrowsers/incidence-rate-browser'
 import 'components/entityBrowsers/cohort-pathway-browser'
 import 'components/entityBrowsers/reusable-browser'
+import 'components/ac-access-denied'
 import './multi-assign.less'
 
 const ASSETS = {

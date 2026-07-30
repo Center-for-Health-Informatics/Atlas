@@ -6,6 +6,7 @@ import commonUtils from 'utils/CommonUtils'
 import sharedState from 'atlas-state'
 import globalConstants from 'const'
 import vocabularyService from 'services/Vocabulary'
+import 'faceted-datatable'
 
 class IncludedSourcecodesPreview extends AutoBind(Component) {
   constructor (params) {

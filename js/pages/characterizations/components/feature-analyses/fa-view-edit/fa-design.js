@@ -11,6 +11,8 @@ import conceptSetUtils from 'components/conceptset/utils'
 import constants from 'pages/characterizations/const'
 import 'components/multi-select'
 import '../components/aggregate-select'
+import 'circe'
+import 'components/cohortbuilder/components'
 import './fa-design.less'
 
 class FeatureAnalysisDesign extends AutoBind(Clipboard(Component)) {

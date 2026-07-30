@@ -15,6 +15,9 @@ import ConceptSet from 'components/conceptset/InputTypes/ConceptSet'
 import Const from './coneptset-compare-const'
 import 'components/modal'
 import 'components/charts/venn'
+import 'circe'
+import 'conceptset-modal'
+import 'faceted-datatable'
 import './conceptset-compare.less'
 
 class ConceptsetCompare extends AutoBind(Component) {

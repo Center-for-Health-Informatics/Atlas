@@ -17,6 +17,7 @@ import 'components/conceptAddBox/preview/included-preview'
 import 'components/conceptAddBox/preview/included-preview-badge'
 import 'components/conceptAddBox/preview/included-sourcecodes-preview'
 import 'components/conceptset/included-sourcecodes'
+import 'faceted-datatable'
 
 class ManualMapping extends AutoBind(Component) {
   constructor (params) {

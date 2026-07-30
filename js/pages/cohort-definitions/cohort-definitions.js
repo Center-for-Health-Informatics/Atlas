@@ -10,6 +10,7 @@ import 'databindings'
 import 'faceted-datatable'
 import 'components/heading'
 import 'components/entityBrowsers/cohort-definition-browser'
+import 'components/ac-access-denied'
 import './cohort-definitions.less'
 
 class CohortDefinitions extends Page {

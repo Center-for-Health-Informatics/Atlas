@@ -5,6 +5,7 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import vocabularyService from 'services/Vocabulary'
 import conceptSetUtils from 'components/conceptset/utils'
+import 'faceted-datatable'
 
 class IncludedConceptsPreview extends AutoBind(Component) {
   constructor (params) {

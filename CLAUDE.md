@@ -61,7 +61,16 @@ The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json`
 
 **Knockout.js 3.5** with `ko.options.deferUpdates = true`. Components follow the `.js` + `.html` + optional `.less` pattern. The base `Component` class in `js/components/Component.js` provides BEM CSS helpers, subscription cleanup, and `isAuthenticated`.
 
-Components register themselves as a **side effect of their module body running**, so the module whose template contains `<foo-bar>` must import `foo-bar` — that convention is the only thing guaranteeing the component exists when the route loads. Breaking it usually appears to work, because some unrelated eager module happens to have loaded the registration already, and then breaks the day that path goes lazy. `npm run check:registrations` (`build/check-registrations.mjs`) enforces this statically per route; run it after changing any `routes.js` or any import graph. Browser smoke tests do **not** catch these — the references typically sit behind a condition a smoke test never reaches (`<access-denied>` renders only for a user without permission, others live in modals and inactive tabs).
+Components register themselves as a **side effect of their module body running**, so the module whose template contains `<foo-bar>` must import `foo-bar` — that convention is the only thing guaranteeing the component exists when the route loads. Breaking it usually appears to work, because some unrelated eager module happens to have loaded the registration already, and then breaks the day that path goes lazy.
+
+`npm run check:registrations` (`build/check-registrations.mjs`) enforces this statically, and runs two passes:
+
+1. **Per route** — a component a route references but nothing in that route's import closure registers. This is a live bug: the page throws `Unknown component` the moment that reference is reached.
+2. **Per module** — a module whose own template references a component its own import closure never reaches, so it works only because a sibling on the same route loaded the registration. Not broken today, but this is the state every bug of the first kind started in. The fix is a bare `import 'foo-bar'`, which is free: these all land in lazy chunks (adding 42 of them moved the boot payload by 58 bytes).
+
+Run it after changing any `routes.js` or any import graph. Browser smoke tests do **not** catch either kind — the references typically sit behind a condition a smoke test never reaches (`<access-denied>` renders only for a user without permission, others live in modals and inactive tabs).
+
+The checker's model is import *closure*, not direct imports, so it cannot flag an import whose registration some other dependency also happens to pull in (45 such references exist). Add the direct import anyway when the tag is in your own template — closure coverage through someone else's dependency is exactly the coupling this rule exists to remove.
 
 ### Pages
 

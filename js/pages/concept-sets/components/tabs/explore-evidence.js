@@ -5,6 +5,7 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import sharedState from 'atlas-state'
 import ConceptSetStore from 'components/conceptset/ConceptSetStore'
+import 'evidence'
 
 class ExploreEvidence extends AutoBind(Component) {
   constructor (params) {

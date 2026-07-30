@@ -1,6 +1,7 @@
 import ko from 'knockout'
 import view from './cohort-comparison-print-friendly.html?raw'
 import config from 'appConfig'
+import 'cohortdefinitionviewer'
 
 function cohortComparisonPrintFriendly (params) {
   const self = this

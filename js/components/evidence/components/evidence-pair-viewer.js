@@ -4,6 +4,7 @@ import view from './evidence-pair-viewer.html?raw'
 import Component from 'components/Component'
 import config from 'appConfig'
 import evidenceAPI from 'services/EvidenceAPI'
+import 'faceted-datatable'
 
 class EvidencePairViewer extends Component {
   constructor (params) {

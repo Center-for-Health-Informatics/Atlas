@@ -12,6 +12,7 @@ import ModelCovarPopTuple from '../inputTypes/ModelCovarPopTuple'
 import FullAnalysis from '../inputTypes/FullAnalysis'
 import 'utilities/import'
 import 'utilities/export'
+import 'faceted-datatable'
 
 class PredictionUtilities extends Component {
   constructor (params) {

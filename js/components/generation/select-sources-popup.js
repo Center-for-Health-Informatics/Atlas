@@ -4,6 +4,7 @@ import Component from 'components/Component'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import renderers from 'utils/Renderers'
+import 'faceted-datatable'
 import './select-sources-popup.less'
 
 class SelectSourcesPopup extends AutoBind(Component) {

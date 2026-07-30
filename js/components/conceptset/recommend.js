@@ -7,6 +7,7 @@ import sharedState from 'atlas-state'
 import utils from './utils'
 import 'components/conceptAddBox/concept-add-box'
 import 'components/dataSourceSelect'
+import 'faceted-datatable'
 
 class ConceptSetRecommend extends AutoBind(Component) {
   constructor (params) {

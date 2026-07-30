@@ -5,6 +5,7 @@ import ImportComponent from './ImportComponent'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import vocabularyApi from 'services/VocabularyProvider'
+import 'components/conceptAddBox/concept-add-box'
 
 class IndetifiersImport extends AutoBind(ImportComponent(Component)) {
   constructor (params) {

@@ -14,6 +14,7 @@ import jobDetail from 'services/job/jobDetail'
 import cacheApi from 'services/CacheAPI'
 import './configuration.less'
 import 'components/heading'
+import 'components/ac-access-denied'
 
 class Configuration extends AutoBind(Page) {
   constructor (params) {

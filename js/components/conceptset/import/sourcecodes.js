@@ -5,6 +5,8 @@ import ImportComponent from './ImportComponent'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import vocabularyApi from 'services/VocabularyProvider'
+import 'components/conceptAddBox/concept-add-box'
+import 'faceted-datatable'
 import './sourcecodes.less'
 
 class SourceCodesImport extends AutoBind(ImportComponent(Component)) {

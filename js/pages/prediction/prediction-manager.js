@@ -35,6 +35,7 @@ import 'components/heading'
 import 'components/authorship'
 import 'components/name-validation'
 import 'components/analysisExecution/analysis-execution-list'
+import 'components/ac-access-denied'
 
 const NOT_FOUND = 'NOT FOUND'
 

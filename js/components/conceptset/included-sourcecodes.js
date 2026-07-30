@@ -8,6 +8,7 @@ import globalConstants from 'const'
 import conceptSetUtils from './utils'
 import 'components/conceptAddBox/concept-add-box'
 import 'components/dataSourceSelect'
+import 'faceted-datatable'
 
 class IncludedSourcecodes extends AutoBind(Component) {
   constructor (params) {

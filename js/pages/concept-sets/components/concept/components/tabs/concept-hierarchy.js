@@ -10,6 +10,7 @@ import httpService from 'services/http'
 import constants from 'pages/concept-sets/const'
 import 'faceted-datatable'
 import 'components/conceptAddBox/concept-add-box'
+import 'components/ac-access-denied'
 import './concept-hierarchy.less'
 
 class ConceptHierarchy extends Component {

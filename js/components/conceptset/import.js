@@ -10,6 +10,7 @@ import 'components/tabs'
 import './import/identifiers'
 import './import/sourcecodes'
 import './import/conceptset'
+import 'circe'
 import './import.less'
 
 class ConceptSetImport extends AutoBind(Component) {

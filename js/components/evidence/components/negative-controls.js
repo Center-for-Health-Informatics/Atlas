@@ -19,6 +19,8 @@ import 'assets/ohdsi.util'
 import 'databindings'
 import 'evidence'
 import 'conceptset-modal'
+import 'circe'
+import 'faceted-datatable'
 
 class NegativeControls extends Component {
   constructor (params) {

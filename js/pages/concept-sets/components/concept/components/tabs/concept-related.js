@@ -11,6 +11,7 @@ import httpService from 'services/http'
 import 'faceted-datatable'
 import 'components/conceptLegend/concept-legend'
 import 'components/conceptAddBox/concept-add-box'
+import 'components/ac-access-denied'
 
 class ConceptRelated extends Component {
   constructor (params) {

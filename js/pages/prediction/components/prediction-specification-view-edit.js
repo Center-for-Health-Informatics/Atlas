@@ -12,6 +12,8 @@ import 'featureextraction/components/covariate-settings-editor'
 import 'featureextraction/components/temporal-covariate-settings-editor'
 import 'components/entityBrowsers/cohort-definition-browser'
 import 'faceted-datatable'
+import './editors/evaluation-settings-editor'
+import './editors/execution-settings-editor'
 import './prediction-specification-view-edit.less'
 
 class PredictionSpecificationViewEdit extends AutoBind(Component) {

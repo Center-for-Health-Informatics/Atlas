@@ -4,6 +4,7 @@ import commonUtils from 'utils/CommonUtils'
 import momentApi from 'services/MomentAPI'
 import './concept-details.less'
 import 'components/ac-access-denied'
+import 'components/conceptAddBox/concept-add-box'
 
 class ConceptDetails extends Component {
   constructor (params) {

@@ -6,6 +6,7 @@ import sharedState from 'atlas-state'
 import authApi from 'services/AuthAPI'
 import constants from 'components/reports/const'
 import 'components/reports/reportDrilldown'
+import 'components/ac-access-denied'
 
 class ConceptDrilldownReport extends Component {
   constructor (params) {

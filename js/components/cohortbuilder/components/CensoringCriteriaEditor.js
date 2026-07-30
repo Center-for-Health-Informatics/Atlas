@@ -2,6 +2,7 @@ import ko from 'knockout'
 import * as criteriaTypes from '../CriteriaTypes'
 import template from './CensoringCriteriaEditor.html?raw'
 import constants from '../const'
+import 'components/from-reusables-modal/from-reusables-modal'
 import './CensoringCriteriaEditor.less'
 
 function CensoringCriteriaViewModel (params) {

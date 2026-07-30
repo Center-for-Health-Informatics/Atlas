@@ -203,8 +203,35 @@ for (const routeFile of routeFiles) {
   })
 }
 
-if (total) {
-  console.log(`\n${total} missing component registration(s) across ${routeFiles.length} routes.js files`)
+// ── Per-module convention check ──────────────────────────────────────────────
+// The per-route check above catches what is actually broken *today*. This one
+// catches what is one refactor away from breaking: a module whose own template
+// references `<foo-bar>` but whose own import closure never reaches the
+// registration, so it only works because some sibling on the same route happens
+// to have loaded it. Nothing here is a live bug -- but every live bug this
+// checker has ever found started as one of these, and the fix is one bare
+// import that costs nothing (adding 42 of them moved the boot payload by 58
+// bytes, because they all land in lazy chunks).
+const owning = walk(js('')).filter(f => fs.existsSync(f.replace(/\.js$/, '.html')))
+let drift = 0
+
+for (const mod of owning) {
+  const own = addClosure(mod, new Set())
+  const missing = [...references(new Set([mod]))]
+    .filter(([name]) => !bootRegistered.has(name) && !own.has(registry.get(name)))
+  if (!missing.length) continue
+
+  drift += missing.length
+  console.log(`\n${rel(mod)}`)
+  for (const [name] of missing) {
+    console.log(`  RELIES ON A SIBLING for '${name}'`)
+    console.log(`    registered by ${rel(registry.get(name))}  <- add a bare import of this here`)
+  }
+}
+
+if (total || drift) {
+  if (total) console.log(`\n${total} missing component registration(s) across ${routeFiles.length} routes.js files`)
+  if (drift) console.log(`${drift} component reference(s) relying on a sibling module's import`)
   process.exit(1)
 }
-console.log(`No missing component registrations (${routeFiles.length} routes.js files, ${registry.size} components).`)
+console.log(`No missing component registrations (${routeFiles.length} routes.js files, ${owning.length} modules, ${registry.size} components).`)

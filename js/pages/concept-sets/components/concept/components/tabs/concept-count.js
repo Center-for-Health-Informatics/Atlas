@@ -6,6 +6,7 @@ import sharedState from 'atlas-state'
 import httpService from 'services/http'
 import authApi from 'services/AuthAPI'
 import * as PermissionService from 'pages/concept-sets/PermissionService'
+import 'components/ac-access-denied'
 
 class ConceptManager extends Component {
   constructor (params) {

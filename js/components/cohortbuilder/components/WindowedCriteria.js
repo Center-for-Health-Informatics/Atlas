@@ -5,6 +5,7 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import utils from '../utils'
 import options from '../options'
+import 'components/cohortbuilder/components'
 import './WindowedCriteria.less'
 
 class WindowedCriteria extends AutoBind(Component) {

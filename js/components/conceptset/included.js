@@ -7,6 +7,7 @@ import conceptSetUtils from './utils'
 import 'components/conceptAddBox/concept-add-box'
 import './concept-modal'
 import 'components/dataSourceSelect'
+import 'faceted-datatable'
 
 class IncludedConcepts extends AutoBind(Component) {
   constructor (params) {

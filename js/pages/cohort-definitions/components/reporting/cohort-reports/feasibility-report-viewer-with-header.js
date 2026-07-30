@@ -4,6 +4,7 @@ import CohortDefinitionService from 'services/CohortDefinition'
 import commonUtils from 'utils/CommonUtils'
 import sharedState from 'atlas-state'
 import view from './feasibility-report-viewer-with-header.html?raw'
+import 'components/cohortbuilder/components/FeasibilityReportViewer'
 
 class FeasibilityReportViewerWithHeader extends Component {
   constructor (params) {

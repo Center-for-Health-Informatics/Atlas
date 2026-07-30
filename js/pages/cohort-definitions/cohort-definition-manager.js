@@ -58,6 +58,8 @@ import 'components/name-validation'
 import 'components/versions/versions'
 import 'databindings/tooltipBinding'
 import './components/reporting/cost-utilization/report-manager'
+import 'cohortdefinitionviewer'
+import 'components/explore-cohort'
 
 // Ids reach this component from two directions: as numbers off WebAPI payloads,
 // and as strings out of the router's path parameters. `===` between the two is

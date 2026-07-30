@@ -35,7 +35,7 @@ class Histogram extends Chart {
       const target = {}
       target.x = offset + 1.0 * tempData.INTERVAL_INDEX[i] * intervalSize
       target.dx = intervalSize
-      target.y = tempData.COUNT_VALUE[i] || 0
+      target.y = +tempData.COUNT_VALUE[i] || 0
       result.push(target)
     }
 
@@ -179,7 +179,7 @@ class Histogram extends Chart {
       .tickFormat(options.xFormat)
 
     const y = options.yScale
-      .domain([0, options.yMax || d3.max(data, d => d.y)])
+      .domain([0, options.yMax || d3.max(data, d => +d.y)])
       .range([height, 0])
 
     const yAxis = d3.axisLeft()

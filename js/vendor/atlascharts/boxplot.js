@@ -118,7 +118,7 @@ class Boxplot extends Chart {
       .domain(data.map(d => d.Category))
     const y = d3.scaleLinear()
       .range([height, 0])
-      .domain([options.yMin || 0, options.yMax || d3.max(data, d => d.max)])
+      .domain([options.yMin || 0, options.yMax || d3.max(data, d => +d.max)])
 
     const xAxis = d3.axisBottom()
       .scale(x)

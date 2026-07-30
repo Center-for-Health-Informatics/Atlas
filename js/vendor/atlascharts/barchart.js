@@ -79,7 +79,7 @@ class BarChart extends Chart {
       .ticks(5)
 
     x.domain(data.map(d => d[label]))
-    y.domain([0, options.yMax || d3.max(data, d => d[value])])
+    y.domain([0, options.yMax || d3.max(data, d => +d[value])])
 
     // create temporary x axis
     const tempXAxis = svg.append('g').attr('class', 'axis')

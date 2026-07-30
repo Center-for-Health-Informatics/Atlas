@@ -60,7 +60,7 @@ class HorizontalBoxplot extends Boxplot {
 
     const x = d3.scaleLinear()
       .range([0, width])
-      .domain([options.xMin || d3.min(data, d => d.min), options.xMax || d3.max(data, d => d.max)])
+      .domain([options.xMin || d3.min(data, d => +d.min), options.xMax || d3.max(data, d => +d.max)])
       .nice()
 
     const y = d3.scaleBand()

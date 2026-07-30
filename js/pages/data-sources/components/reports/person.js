@@ -44,7 +44,7 @@ class Person extends Report {
       histData.INTERVAL_SIZE = 1
       histData.OFFSET = data.yearOfBirthStats[0].minValue
       const mappedHistData = data.yearOfBirth.map(each => ({ INTERVAL_INDEX: each.intervalIndex, COUNT_VALUE: each.countValue }))
-      histData.DATA = ChartUtils.normalizeArray(mappedHistData)
+      histData.DATA = ChartUtils.normalizeArray(mappedHistData, true)
       histData.INTERVALS = data.yearOfBirth.length
       this.yearHistogramData(atlascharts.histogram.mapHistogram(histData))
     }

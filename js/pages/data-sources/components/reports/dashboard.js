@@ -81,7 +81,7 @@ class Dashboard extends Report {
         INTERVAL_INDEX: value.intervalIndex,
         COUNT_VALUE: value.countValue
       }))
-      histData.DATA = ChartUtils.normalizeArray(ageAtFirstDataMapped)
+      histData.DATA = ChartUtils.normalizeArray(ageAtFirstDataMapped, true)
       histData.OFFSET = 0
       histData.INTERVALS = histData.DATA.INTERVAL_INDEX.length
       this.ageAtFirstObservationData(atlascharts.histogram.mapHistogram(histData))

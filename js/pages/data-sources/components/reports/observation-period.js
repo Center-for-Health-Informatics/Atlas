@@ -246,7 +246,7 @@ class ObservationPeriodReport extends Report {
       }))
       histData.OFFSET = 0
       histData.INTERVAL_SIZE = 1
-      histData.DATA = ChartUtils.normalizeArray(observationDataMapped)
+      histData.DATA = ChartUtils.normalizeArray(observationDataMapped, true)
       histData.INTERVALS = histData.DATA.INTERVAL_INDEX.length
     }
 

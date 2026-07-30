@@ -136,13 +136,44 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'index.html'),
+      // No `output.manualChunks` here on purpose. Rollup's default chunking is
+      // correct for this codebase (verified: zero cycles in the emitted chunk
+      // graph), and hand-grouping is a trap -- js/main.js hand-sequences its
+      // dynamic imports, assigning window.jQuery after importing jquery but
+      // before pulling in the UMD vendor files that read that global.
+      // Coalescing app code pulls jquery and those UMD files into one eagerly
+      // evaluated chunk, and Vite's preload helper then gives the entry chunk a
+      // *static* edge into it, so it runs before the assignment and the boot
+      // dies with "jQuery is not defined".
+      //
+      // Chunking problems only ever surface in the production build -- the dev
+      // server serves unbundled modules in a working order -- so verify any
+      // change here by loading a real production build in a browser, never
+      // `npm run dev`. See MIGRATION_STATUS.md for why we are on Vite 7.
     },
   },
 
   server: {
     port: 5173,
     host: '0.0.0.0',
-    allowedHosts: true, // internal dev-only environment, no external exposure
+    // Explicit allowlist rather than `true`. This is the Host-header check that
+    // blocks DNS-rebinding attacks against the dev server: with `true`, any
+    // site a developer visits can resolve its own hostname to this machine and
+    // read whatever the dev server will serve -- which matters because Vite's
+    // recurring CVE class is exactly `server.fs.deny` bypasses. Add a hostname
+    // here when you need to reach the dev server under a new name.
+    allowedHosts: [
+      // Public names, reached through the nginx reverse proxies. Those pass
+      // `proxy_set_header Host $host`, so the dev server sees these names, not
+      // the backend's.
+      'chi-dev.uc.edu',
+      'dev.lastchance.pub',
+      // The backend's own name/address, for hitting :5173 directly, bypassing
+      // the proxy.
+      'work.lastchance.pub',
+      '192.168.1.233',
+      'localhost',
+    ],
     proxy: {
       '/webapi': {
         target: 'http://169.254.0.2:1248',

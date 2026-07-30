@@ -74,7 +74,10 @@ Strings use `ko.i18n('key', 'default English text')` throughout the codebase. Lo
 
 `build.sh` builds the container image for `linux/amd64` and `linux/arm64` at once. The Dockerfile's builder stage is pinned to `--platform=$BUILDPLATFORM` so npm and Vite run natively on the build host rather than under QEMU — valid **only** because the Vite output (JS/CSS/HTML) is architecture-neutral and both target images can share it. Don't copy that trick to a project with native modules; the sibling `webapi` repo, for instance, must build `node_modules` per target architecture.
 
-`npm run build` / `build:dev` / `build:docker` all run **`vite build`** (see `vite.config.js`). The old RequireJS-optimizer + Babel + Terser pipeline (`build/optimize.js`, `build/polyfill.js`) is gone — Vite handles bundling, transpilation (via `@vitejs/plugin-legacy` for older-browser fallback bundles), and minification directly. `genversion` (`genversion -e js/version.js`) writes a plain ESM `js/version.js` consumed via the `'version'` alias.
+`npm run build` / `build:dev` / `build:docker` all run **`vite build`** (see `vite.config.js`).
+
+**Vite is pinned to 7.x on purpose — do not upgrade to 8 without re-measuring.** Vite 8 swaps Rollup for Rolldown, whose code splitting emits a cyclic chunk graph for this codebase; bindings are then read across the cycle before the defining chunk runs, and the production bundle fails to boot with `undefined` base classes. The dev server is unaffected, so this is invisible unless you load a real production build. See `MIGRATION_STATUS.md` for the measurements and the security review behind the pin.
+ The old RequireJS-optimizer + Babel + Terser pipeline (`build/optimize.js`, `build/polyfill.js`) is gone — Vite handles bundling, transpilation (via `@vitejs/plugin-legacy` for older-browser fallback bundles), and minification directly. `genversion` (`genversion -e js/version.js`) writes a plain ESM `js/version.js` consumed via the `'version'` alias.
 
 ## Testing
 

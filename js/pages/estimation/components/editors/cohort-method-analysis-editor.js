@@ -12,7 +12,7 @@ import './match-args-editor'
 import './stratify-args-editor'
 import './outcome-model-args-editor'
 import 'featureextraction/components/covariate-settings-editor'
-import 'components/entityBrowsers/cohort-definition-browser'
+import 'circe'
 import './cohort-method-analysis.less'
 
 class CohortMethodAnalysisEditor extends Component {

@@ -2,7 +2,6 @@ import ko from 'knockout'
 import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import view from './linked-entity-list.html?raw'
-import 'components/entityBrowsers/cohort-definition-browser'
 import './linked-entity-list.less'
 
 class LinkedEntityList extends Component {

@@ -59,6 +59,14 @@ import 'components/versions/versions'
 import 'databindings/tooltipBinding'
 import './components/reporting/cost-utilization/report-manager'
 
+// Ids reach this component from two directions: as numbers off WebAPI payloads,
+// and as strings out of the router's path parameters. `===` between the two is
+// always false, which silently selected nothing on direct navigation to a
+// concept set URL. Compare by value instead. Ids are never coerced at the route
+// boundary here (unlike concept-sets/routes.js) because '0' means "new cohort
+// definition" and several checks in this file rely on it being truthy.
+const sameId = (a, b) => a != null && b != null && Number(a) === Number(b)
+
 const includeKeys = ['UseEventEnd']
 function pruneJSON (key, value) {
   if (value === 0 || value || includeKeys.includes(key)) {
@@ -974,7 +982,9 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
 
         // If we are saving a new cohort definition (id === 0) then clear
         // the id field before saving
-        if (this.currentCohortDefinition().id() === '0') {
+        // `setNewCohortDefinition` sets a numeric 0, so the old `=== '0'` here
+        // never matched and the id was never actually cleared.
+        if (sameId(this.currentCohortDefinition().id(), 0)) {
           this.currentCohortDefinition().id(undefined)
         }
         let definition = ko.toJS(this.currentCohortDefinition())
@@ -1448,8 +1458,8 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   }
 
   checkifDataLoaded (cohortDefinitionId, conceptSetId, sourceKey) {
-    if (this.currentCohortDefinition() && this.currentCohortDefinition().id() === cohortDefinitionId) {
-      if (this.currentConceptSet() && this.currentConceptSet().id === conceptSetId) {
+    if (this.currentCohortDefinition() && sameId(this.currentCohortDefinition().id(), cohortDefinitionId)) {
+      if (this.currentConceptSet() && sameId(this.currentConceptSet().id, conceptSetId)) {
         this.reportSourceKey(sourceKey)
         return true
       } else if (conceptSetId != null) {
@@ -1464,7 +1474,7 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   }
 
   loadConceptSet (conceptSetId) {
-    this.conceptSetStore.current(this.conceptSets()().find(item => item.id === conceptSetId))
+    this.conceptSetStore.current(this.conceptSets()().find(item => sameId(item.id, conceptSetId)))
     this.conceptSetStore.isEditable(this.canEdit())
     // Point the shared "add concepts to this set" target at this cohort
     // definition's store, so /search knows where to add to. Previously done by

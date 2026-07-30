@@ -6,17 +6,17 @@
                 <li data-bind="css: $parent.classes('list-item')">
                     <!-- ko if: type === 'select' -->
                     <div class="visualizations-filter-item">
-                        <span class="visualizations-filter-item__label" data-bind="text: label" />
+                        <span class="visualizations-filter-item__label" data-bind="text: label"></span>
                         <div class="visualizations-filter-item__body">
-                            <multi-select params="{ options: options, selectedValue: selectedValue, multiple: false }"/>
+                            <multi-select params="{ options: options, selectedValue: selectedValue, multiple: false }"></multi-select>
                         </div>
                     </div>
                     <!-- /ko -->
                     <!-- ko if: type === 'multiselect' -->
                     <div class="visualizations-filter-item">
-                        <span class="visualizations-filter-item__label" data-bind="text: label" />
+                        <span class="visualizations-filter-item__label" data-bind="text: label"></span>
                         <div class="visualizations-filter-item__body">
-                            <multi-select params="{ options: options, selectedValues: selectedValues, multiple: true }"/>
+                            <multi-select params="{ options: options, selectedValues: selectedValues, multiple: true }"></multi-select>
                         </div>
                     </div>
                     <!-- /ko -->

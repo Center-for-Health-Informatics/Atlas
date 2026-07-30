@@ -20,7 +20,7 @@
   </div>
 
   <div data-bind="css: classes('filter')">
-    <visualizations-filter-panel params="{ filterList: $component.filterList, live: true }"/>
+    <visualizations-filter-panel params="{ filterList: $component.filterList, live: true }"></visualizations-filter-panel>
   </div>
 
   <h3 data-bind="css: $component.classes('analysis-name')"><span data-bind="text: ko.i18n('pathways.manager.executions.results.title', 'Pathways Analysis for')"></span> <span data-bind="text: pathwaysObserver().title"></span></h3>
@@ -39,16 +39,16 @@
           <div class="card-body">
             <div data-bind="css: $component.classes('legend-section')">
               <h5 data-bind="text: ko.i18n('pathways.manager.executions.results.legend.targetCohort', 'Target Cohort')"></h5>
-              <div class="title" data-bind="text: targetCohortName"/>
+              <div class="title" data-bind="text: targetCohortName"></div>
               <ul data-bind="css: $component.classes('legend-props-list')">
                 <li>
-                  <span data-bind="text: ko.i18n('pathways.manager.executions.results.legend.targetCohortCount', 'Target cohort count:')"></span> <span data-bind="text: targetCohortCount"/>
+                  <span data-bind="text: ko.i18n('pathways.manager.executions.results.legend.targetCohortCount', 'Target cohort count:')"></span> <span data-bind="text: targetCohortCount"></span>
                 </li>
                 <li>
-                  <span data-bind="text: ko.i18n('pathways.manager.executions.results.legend.personsCount', 'Persons with pathways count:')"></span> <span data-bind="text: personsReported"/>
+                  <span data-bind="text: ko.i18n('pathways.manager.executions.results.legend.personsCount', 'Persons with pathways count:')"></span> <span data-bind="text: personsReported"></span>
                 </li>
                 <li>
-                  <span data-bind="text: ko.i18n('pathways.manager.executions.results.legend.personsPortion', 'Persons with pathways portion:')"></span> <span data-bind="text: personsReportedPct"/>
+                  <span data-bind="text: ko.i18n('pathways.manager.executions.results.legend.personsPortion', 'Persons with pathways portion:')"></span> <span data-bind="text: personsReportedPct"></span>
                 </li>
               </ul>
             </div>

@@ -2,7 +2,7 @@
     <div data-bind="css: classes({ extra: ['form-group'] })">
         <label data-bind="text: ko.i18n('configuration.userImport.searchGroup', 'Search group:')"></label>
         <div data-bind="css: classes({ element: 'row', extra: ['input-group'] })">
-            <input type="text" data-bind="textInput: searchText, css: classes({ extra: ['form-control'] }), event: { 'keyup': onSubmitSearch }, keyupBubble: false, placeholder: ko.i18n('configuration.userImport.searchGroupPlaceholder', 'Search...')"/>
+            <input type="text" data-bind="textInput: searchText, css: classes({ extra: ['form-control'] }), event: { 'keyup': onSubmitSearch }, keyupBubble: false, placeholder: ko.i18n('configuration.userImport.searchGroupPlaceholder', 'Search...')">
             <button data-bind="click: searchGroups, css: classes({ extra: ['btn', 'btn-sm', 'btn-primary'] })"><i class="fa fa-search"></i> <span data-bind="text: ko.i18n('common.search', 'Search')"></span></button>
         </div>
     </div>
@@ -38,6 +38,6 @@
         </table>
     </div>
     <div data-bind="css: classes('loader'), if: loading()">
-        <loading params="status: ko.i18n('common.loading', 'Loading')" />
+        <loading params="status: ko.i18n('common.loading', 'Loading')"></loading>
     </div>
 </div>

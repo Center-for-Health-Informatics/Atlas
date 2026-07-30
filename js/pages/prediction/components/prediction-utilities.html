@@ -22,7 +22,7 @@
                 </div>
                 <div data-bind="if: $component.specificationValid() && !($component.dirtyFlag().isDirty())">
                     <loading data-bind="visible:loadingDownload()" params="status: 'computing analyses'"></loading>
-                    <br />
+                    <br>
                     <div data-bind="visible:(!loadingDownload() && $component.fullAnalysisList().length > 0)">
                         <div class="card panel-primary">
                             <div class="card-header">
@@ -44,7 +44,7 @@
                                                         data-bind="text: ko.i18n('predictions.utilitiesText_5', 'Please review the full study specification below and scroll down the page to download the study package.')"></span>
                                                 </i></span>
                                         </div>
-                                        <hr />
+                                        <hr>
                                         <ul class="nav nav-pills">
                                             <li role="presentation"
                                                 data-bind="css: { active: $component.downloadTabMode() == 'full' }, click: function() { $component.downloadTabMode('full') };">

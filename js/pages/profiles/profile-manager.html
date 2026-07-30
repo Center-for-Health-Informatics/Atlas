@@ -88,7 +88,7 @@
 
   <div data-bind="visible: cantFindPerson()" class="loading">
     <span data-bind="text: ko.i18n('profiles.сantFind', 'Can\'t find')"></span>
-    <span data-bind="text:personId" />
+    <span data-bind="text:personId"></span>
   </div>
 
   <div data-bind="visible: !cantFindPerson() && !loadingPerson()">

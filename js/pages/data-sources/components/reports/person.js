@@ -28,7 +28,7 @@ class Person extends Report {
         yValue: 'y',
         getTooltipBuilder: options => d => {
           return `
-          ${options.xLabel}: ${options.xFormat(d[options.xValue])}<br/>
+          ${options.xLabel}: ${options.xFormat(d[options.xValue])}<br>
           ${options.yLabel}: ${d3.format(',')(d[options.yValue])}
         `
         },

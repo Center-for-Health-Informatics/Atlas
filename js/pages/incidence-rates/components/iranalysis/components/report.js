@@ -101,7 +101,7 @@ class IRAnalysisReportsViewer extends Component {
     this.pass(passed)
     this.fail(failed)
     // this.rectSummary(`${size people} (${percentage.toFixed(2)}%), ${passCount} criteria passed, ${failCount} criteria failed.`);
-    this.rectSummary(`${cases.toLocaleString()} cases, ${timeAtRisk.toLocaleString()} TAR, Rate: ${this.calculateRate(cases, timeAtRisk)} ${this.rateCaption()}<br/>${size.toLocaleString()} (${percentage.toFixed(2)}%) people, ${passCount} criteria passed, ${failCount} criteria failed.`)
+    this.rectSummary(`${cases.toLocaleString()} cases, ${timeAtRisk.toLocaleString()} TAR, Rate: ${this.calculateRate(cases, timeAtRisk)} ${this.rateCaption()}<br>${size.toLocaleString()} (${percentage.toFixed(2)}%) people, ${passCount} criteria passed, ${failCount} criteria failed.`)
   }
 
   handleCellOver (data, context, event) {

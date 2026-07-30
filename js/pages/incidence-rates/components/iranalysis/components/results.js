@@ -117,13 +117,13 @@ class IRAnalysisResultsViewer extends AutoBind(Component) {
       title: ko.i18n('ir.results.cases', 'Cases'),
       render: (s, p, d) => d.info() ? `${this.getSummaryData(d.info().summaryList).cases}` : 'n/a'
     }, {
-      title: `<span>${ko.i18n('ir.results.proportion', 'Proportion')()}</span><br/><small><span>${this.ipCaption()}</span></small>`,
+      title: `<span>${ko.i18n('ir.results.proportion', 'Proportion')()}</span><br><small><span>${this.ipCaption()}</span></small>`,
       render: (s, p, d) => d.info() ? `${this.getSummaryData(d.info().summaryList).proportion}` : 'n/a'
     }, {
-      title: `<span>${ko.i18n('ir.results.timeAtRisk', 'Time At Risk')()}</span><br/><small>(years)</small>`,
+      title: `<span>${ko.i18n('ir.results.timeAtRisk', 'Time At Risk')()}</span><br><small>(years)</small>`,
       render: (s, p, d) => d.info() ? `${this.getSummaryData(d.info().summaryList).timeAtRisk}` : 'n/a'
     }, {
-      title: `<span>${ko.i18n('ir.results.rate', 'Rate')()}</span><br/><small><span>${this.irCaption()}</span></small>`,
+      title: `<span>${ko.i18n('ir.results.rate', 'Rate')()}</span><br><small><span>${this.irCaption()}</span></small>`,
       render: (s, p, d) => d.info() ? `${this.getSummaryData(d.info().summaryList).rate}` : 'n/a'
     }, {
       title: ko.i18n('ir.results.started', 'Started'),

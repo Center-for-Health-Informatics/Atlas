@@ -26,19 +26,19 @@
   <div class="release-notes">
     <div class="paddedWrapper">
       <a data-bind="attr: { href: atlasReleaseUrl }" target="_new">ATLAS Version <span data-bind="text: atlasVersion"></span> Release Notes</a>
-      <br/>
+      <br>
       <a data-bind="attr: { href: webapiReleaseUrl }" target="_new">WebAPI Version <span data-bind="text: webapiVersion"></span> Release Notes</a>
     </div>
 
     <div data-bind="hidden: loading">
       <div class="paddedWrapper" data-bind="html: ko.i18nformat('home.releaseNotes.issues', 'This latest release contains <b><%=issues%></b> feature enhancements and issue resolutions:', {issues: github_status().length})">
-        <br/>
+        <br>
       </div>
 
       <div class="paddedWrapper github-issue-container" data-bind="foreach:github_status">
         <div class="github-issue">
           <a target="_blank" data-bind="attr:{href: html_url, title: title}, text:title"></a>
-          <img class="github-avatar" data-bind="attr:{src: user.avatar_url}" />
+          <img class="github-avatar" data-bind="attr:{src: user.avatar_url}">
         </div>
       </div>
     </div>

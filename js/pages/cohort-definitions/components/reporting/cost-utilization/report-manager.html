@@ -84,7 +84,7 @@
     <div class="chartContainer" data-bind="css: classes('chartContainer')">
       <button title="Export image" data-bind="css: classes('export-button'), click: $component.export"><i class="far fa-file-image"></i></button>
       <button title="Export SVG" data-bind="css: classes('exportSvg-button'), click: $component.exportSvg"><i class="fas fa-file-download"></i></button>
-      <div class="evidenceVisualization" id="entropyByDate" />
+      <div class="evidenceVisualization" id="entropyByDate"></div>
     </div>
   </div>
 </div>
@@ -1338,7 +1338,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureBaseline.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-persons-exposure params="{
@@ -1355,7 +1355,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilPersonAndExposureCohort.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilPersonAndExposureCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-persons-exposure params="{
@@ -1372,7 +1372,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsBaseline.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-visit-util params="{
@@ -1390,7 +1390,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesBaseline.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-visit-util params="{
@@ -1408,7 +1408,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesBaseline.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-visit-util params="{
@@ -1426,7 +1426,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitRecordsCohort.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitRecordsCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-visit-util params="{
@@ -1443,7 +1443,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilVisitDatesCohort.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilVisitDatesCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-visit-util params="{
@@ -1460,7 +1460,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilCareSiteDatesCohort.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilCareSiteDatesCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-visit-util params="{
@@ -1477,7 +1477,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilDrugBaseline.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilDrugBaseline.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugBaseline) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-drug-util params="{
@@ -1493,7 +1493,7 @@
   <div class="report">
     <div class="card panel-primary">
       <div class="card-header">
-        <span data-bind="text: visualizationPacks.healthcareUtilDrugCohort.name" /><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
+        <span data-bind="text: visualizationPacks.healthcareUtilDrugCohort.name"></span><i data-bind="click:function(){ setHelpContent(visualizationPacks.healthcareUtilDrugCohort) }" data-bs-toggle="modal" data-bs-target="#helpModal" class="fa fa-question-circle float-end"></i>
       </div>
       <div class="card-body">
         <cost-utilization-drug-util params="{

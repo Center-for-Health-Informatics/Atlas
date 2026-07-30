@@ -2,7 +2,7 @@
     <div id="summary" data-bind="visible: $component.managerMode() == 'summary'">
         <div class="paddedWrapper">
             <textarea data-bind="css: classes('description-entry'), value: $component.estimationAnalysis() && $component.estimationAnalysis().description, disable: !$component.isEditPermitted(), placeholder: ko.i18n('ple.spec.descriptionPlaceholder', 'enter a description here (1000 characters max)')" maxlength="1000"></textarea>
-            <hr/>
+            <hr>
             <div id="filters">
                 <div class="row">
                     <div class="float-start" data-bind="css: classes('filter-view'), text: ko.i18n('ple.spec.view', 'View:')"></div>

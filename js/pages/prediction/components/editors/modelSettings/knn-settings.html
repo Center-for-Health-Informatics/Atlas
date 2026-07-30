@@ -1,6 +1,6 @@
 <label data-bind="text: $component.modelSettingDescription(k.name)"></label>
-<div class="input-group" >
-    <input class="form-control" type="text" data-bind="textInput: k.value" />
+<div class="input-group">
+    <input class="form-control" type="text" data-bind="textInput: k.value">
     <button class="btn" data-bind="disable: isDefault(k.name),
                 click: function(data, event) { setToDefault(k.name) },
                 css: {'btn-danger': !(isDefault(k.name))},

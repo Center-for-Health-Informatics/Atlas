@@ -1,9 +1,9 @@
 <div data-bind="css: classes()">
     <div data-bind="css: classes('block')">
-        <visualizations-filter-panel params="{ filterList: $component.filterList, apply: $component.applyFilters, live: true }"/>
+        <visualizations-filter-panel params="{ filterList: $component.filterList, apply: $component.applyFilters, live: true }"></visualizations-filter-panel>
     </div>
     <div data-bind="visible: loading()">
-        <loading params="status:'loading'" />
+        <loading params="status:'loading'"></loading>
     </div>
     <div data-bind="visible: !loading()">
         <div data-bind="css: classes('block')">
@@ -23,9 +23,9 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td data-bind="text: summary.personsCount"/>
-                        <td data-bind="text: summary.exposureTotal"/>
-                        <td data-bind="text: summary.exposureAvg"/>
+                        <td data-bind="text: summary.personsCount"></td>
+                        <td data-bind="text: summary.exposureTotal"></td>
+                        <td data-bind="text: summary.exposureAvg"></td>
                     </tr>
                 </tbody>
             </table>
@@ -37,7 +37,7 @@
             <ul class="nav nav-tabs">
                 <!-- ko foreach: Object.keys(tabLabels) -->
                 <li role="presentation" data-bind="click: function() { $component.currentTab($data); }, attr: {class: $component.currentTab() == $data ? 'active' : ''}">
-                    <a data-bind="text: $component.tabLabels[$data]" />
+                    <a data-bind="text: $component.tabLabels[$data]"></a>
                 </li>
                 <!-- /ko -->
                 <li data-bind="css: classes('save-csv-tab'), click: $component.saveAsCsv">
@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div role="tabpanel" data-bind="if: $component.currentTab() == $component.rawDataTab && !loading()">
-                    <table-baseline-exposure params="{ dataList: dataList }"/>
+                    <table-baseline-exposure params="{ dataList: dataList }"></table-baseline-exposure>
                 </div>
             </div>
         </div>

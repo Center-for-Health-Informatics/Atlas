@@ -1,6 +1,6 @@
 //Title: Custom DropDown plugin by PC
 //Documentation: http://designwithpc.com/Plugins/ddslick
-//Author: PC 
+//Author: PC
 //Website: http://designwithpc.com
 //Twitter: http://twitter.com/chaudharyp
 
@@ -42,10 +42,10 @@
 			onSelected: function () {}
 		},
 
-		ddSelectHtml = '<div class="dd-select"><input class="dd-selected-value" type="hidden" /><a class="dd-selected"></a><span class="dd-pointer dd-pointer-down"></span></div>',
+		ddSelectHtml = '<div class="dd-select"><input class="dd-selected-value" type="hidden"><a class="dd-selected"></a><span class="dd-pointer dd-pointer-down"></span></div>',
 		ddOptionsHtml = '<ul class="dd-options"></ul>'
 
-	//Public methods 
+	//Public methods
 	methods.init = function (options) {
 		//Preserve the original defaults by passing an empty object as the target
 		var options = $.extend({}, defaults, options);
@@ -115,8 +115,8 @@
 					if (item.selected) options.defaultSelectedIndex = index;
 					ddOptions.append('<li>' +
 						'<a class="dd-option">' +
-						(item.value ? ' <input class="dd-option-value" type="hidden" value="' + item.value + '" />' : '') +
-						(item.imageSrc ? ' <img class="dd-option-image' + (options.imagePosition == "right" ? ' dd-image-right' : '') + '" src="' + item.imageSrc + '" />' : '') +
+						(item.value ? ' <input class="dd-option-value" type="hidden" value="' + item.value + '">' : '') +
+						(item.imageSrc ? ' <img class="dd-option-image' + (options.imagePosition == "right" ? ' dd-image-right' : '') + '" src="' + item.imageSrc + '">' : '') +
 						(item.text ? ' <label class="dd-option-text">' + item.text + '</label>' : '') +
 						(item.description ? ' <small class="dd-option-description dd-desc">' + item.description + '</small>' : '') +
 						'</a>' +
@@ -237,7 +237,7 @@
 		//If set to display to full html, add html
 		if (settings.showSelectedHTML) {
 			ddSelected.html(
-				(selectedData.imageSrc ? '<img class="dd-selected-image' + (settings.imagePosition == "right" ? ' dd-image-right' : '') + '" src="' + selectedData.imageSrc + '" />' : '') +
+				(selectedData.imageSrc ? '<img class="dd-selected-image' + (settings.imagePosition == "right" ? ' dd-image-right' : '') + '" src="' + selectedData.imageSrc + '">' : '') +
 				(selectedData.text ? '<label class="dd-selected-text">' + selectedData.text + '</label>' : '') +
 				(selectedData.description ? '<small class="dd-selected-description dd-desc' + (settings.truncateDescription ? ' dd-selected-description-truncated' : '') + '" >' + selectedData.description + '</small>' : '')
 			);
@@ -329,5 +329,5 @@
 	$('body').on('click', function () {
 		$('.dd-click-off-close').slideUp(50).siblings('.dd-select').find('.dd-pointer').removeClass('dd-pointer-up');
 	});
-	
+
 }));

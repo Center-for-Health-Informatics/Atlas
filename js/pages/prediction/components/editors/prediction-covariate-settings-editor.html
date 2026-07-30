@@ -2,7 +2,7 @@
     <div>
         <label data-bind="text: ko.i18n('predictions.editors.predictionEditorText_1', 'What concepts do you want to include in baseline covariates in the patient-level prediction model? (Leave blank if you want to include everything)')"></label>
         <div class="input-group">
-            <input class="form-control" type="text" disabled data-bind="value: $component.covariateSettings.includedCovariateConceptSet().name" />
+            <input class="form-control" type="text" disabled data-bind="value: $component.covariateSettings.includedCovariateConceptSet().name">
             <button class="btn btn-primary" data-bind="click:chooseIncludedCovariates"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger"
                 data-bind="disable:$component.covariateSettings.includedCovariateConceptSet().id == 0,click:clearIncludedCovariates"
@@ -20,7 +20,7 @@
     <div>
         <label data-bind="text: ko.i18n('predictions.editors.predictionEditorText_3', 'What concepts do you want to exclude in baseline covariates in the patient-level prediction model? (Leave blank if you want to include everything)')"></label>
         <div class="input-group">
-            <input class="form-control" type="text" disabled data-bind="value: $component.covariateSettings.excludedCovariateConceptSet().name" />
+            <input class="form-control" type="text" disabled data-bind="value: $component.covariateSettings.excludedCovariateConceptSet().name">
             <button class="btn btn-primary" data-bind="click:chooseExcludedCovariates"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger"
                 data-bind="disable:$component.covariateSettings.excludedCovariateConceptSet().id == 0,click:clearExcludedCovariates"
@@ -43,7 +43,7 @@
         </div>
     </div>
 </div>
-<hr/>
+<hr>
 <h4 data-bind="text: ko.i18n('predictions.editors.predictionSelectCovariates', 'Select Covariates')"></h4>
 <covar-settings-editor params="covariateSettings: $component.covariateSettings, isEditPermitted: $component.isEditPermitted"></covar-settings-editor>
 <atlas-modal params="{

@@ -16,7 +16,7 @@ data-bind="attr: {placeholder: ko.i18n('components.conceptPicker.importConcepts'
     <div class="search-block">
       <input
       data-bind="attr: {placeholder: ko.i18n('components.conceptPicker.search', 'Search')}, value: searchText, valueUpdate: 'input', event: { keyup: searchKeyUp }" />
-      <select class="form-input" data-bind="options: $component.DomainOptions, value: SelectedDomain" />
+      <select class="form-input" data-bind="options: $component.DomainOptions, value: SelectedDomain"></select>
       <button data-bind="text: ko.i18n('components.conceptPicker.search', 'Search'), click: search" type="button" class="btn btn-primary btn-sm"></button>
     </div>
     <table class="stripe compact hover" cellspacing="0" width="100%"

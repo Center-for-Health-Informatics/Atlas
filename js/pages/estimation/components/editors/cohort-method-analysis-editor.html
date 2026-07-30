@@ -2,7 +2,7 @@
     <div>
         <div class="row">
             <div data-bind="css: classes('analysis-name-container')"><label data-bind="css: classes('analysis-name'), text: ko.i18n('ple.spec.analysisName', 'Analysis name:')"></label></div>
-            <div><input class="form-control" type="text" data-bind="css: classes('analysis-name', 'analysis-name-input'), textInput: $component.analysis.description, attr: {disabled: !isEditPermitted()}" /></div>
+            <div><input class="form-control" type="text" data-bind="css: classes('analysis-name', 'analysis-name-input'), textInput: $component.analysis.description, attr: {disabled: !isEditPermitted()}"></div>
         </div>
     </div>
     <div id="filters" data-bind="css: classes('filter-group-bordered')">
@@ -53,7 +53,7 @@
                 <div>
                     <label data-bind="html: ko.i18n('ple.spec.studyPopulationPanel.minimumObservations', 'The minimum required continuous observation time (in days) prior to index date for a person to be included in the cohort.')"></label>
                     <div class="input-group">
-                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.getDbCohortMethodDataArgs.washoutPeriod, eventType:'blur', ko_autocomplete: { value: $component.analysis.getDbCohortMethodDataArgs.washoutPeriod, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }" />
+                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.getDbCohortMethodDataArgs.washoutPeriod, eventType:'blur', ko_autocomplete: { value: $component.analysis.getDbCohortMethodDataArgs.washoutPeriod, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
                     </div>
                 </div>
                 <div>
@@ -77,13 +77,13 @@
                 <div data-bind="visible: $component.analysis.createStudyPopArgs.removeSubjectsWithPriorOutcome()">
                     <label data-bind="html: ko.i18n('ple.spec.studyPopulationPanel.daysPriorOutcomes', 'How many days should we look back when identifying prior outcomes?')"></label>
                     <div class="input-group">
-                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.priorOutcomeLookback, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.priorOutcomeLookback, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }" />
+                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.priorOutcomeLookback, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.priorOutcomeLookback, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
                     </div>
                 </div>
                 <div>
                     <label data-bind="html: ko.i18n('ple.spec.studyPopulationPanel.cohortCap', 'If either the target or the comparator cohort is larger than this number it will be sampled to this size. (0 for this value indicates no maximum size)')"></label>
                     <div class="input-group">
-                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.getDbCohortMethodDataArgs.maxCohortSize, eventType:'blur', ko_autocomplete: { value: $component.analysis.getDbCohortMethodDataArgs.maxCohortSize, source: $component.options.maxCohortSizeOptions, minLength: 0, maxShowItems: 10, scroll: true }" />
+                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.getDbCohortMethodDataArgs.maxCohortSize, eventType:'blur', ko_autocomplete: { value: $component.analysis.getDbCohortMethodDataArgs.maxCohortSize, source: $component.options.maxCohortSizeOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
                     </div>
                 </div>
             </div>
@@ -102,17 +102,17 @@
                 <div>
                     <label data-bind="html: ko.i18n('ple.spec.conceptsToIncludeLabel', 'Concepts to <b>include</b> when constructing the covariates to be used in this study. (Leave blank if you want to include every concept).*')"></label>
                     <div class="input-group">
-                        <input class="form-control" type="text" disabled data-bind="value: $component.analysis.getDbCohortMethodDataArgs.covariateSettings.includedCovariateConceptSet().name" />
+                        <input class="form-control" type="text" disabled data-bind="value: $component.analysis.getDbCohortMethodDataArgs.covariateSettings.includedCovariateConceptSet().name">
                         <button class="btn btn-primary" data-bind="click:chooseIncludedCovariates, disable: !$component.isEditPermitted()"><i class="fa fa-folder-open"></i></button>
                             <button class="btn btn-danger" data-bind="disable:($component.analysis.getDbCohortMethodDataArgs.covariateSettings.includedCovariateConceptSet().id == 0 || !$component.isEditPermitted()),click:clearIncludedCovariates" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
                     </div>
                     <label><i data-bind="text: ko.i18n('ple.spec.conceptsToIncludeNoteAnalysis', '* Concepts defined here are combined with those defined in the Comparisons section.')"></i></label>
                 </div>
-                <hr/>
+                <hr>
                 <div>
                     <label data-bind="html: ko.i18n('ple.spec.conceptsToExcludeLabel', 'Concepts to <b>exclude</b> when constructing the covariates to be used in this study.*')"></label>
                     <div class="input-group">
-                        <input class="form-control" type="text" disabled data-bind="value: $component.analysis.getDbCohortMethodDataArgs.covariateSettings.excludedCovariateConceptSet().name" />
+                        <input class="form-control" type="text" disabled data-bind="value: $component.analysis.getDbCohortMethodDataArgs.covariateSettings.excludedCovariateConceptSet().name">
                         <button class="btn btn-primary" data-bind="click:chooseExcludedCovariates, disable: !$component.isEditPermitted()"><i class="fa fa-folder-open"></i></button>
                             <button class="btn btn-danger" data-bind="disable:($component.analysis.getDbCohortMethodDataArgs.covariateSettings.excludedCovariateConceptSet().id == 0 || !$component.isEditPermitted()),click:clearExcludedCovariates" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
                     </div>
@@ -130,19 +130,19 @@
                 <div>
                     <label data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.defineTheTimeAtRiskWindowStart', 'Define the time-at-risk window start, relative to target/comparator cohort entry:')"></label>
                     <div class="input-group">
-                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.riskWindowStart, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.riskWindowStart, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }" /> &nbsp;<span data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.daysFrom', 'days from')"></span>&nbsp; <select data-bind="options: $component.constants.timeAtRiskCohortDate, optionsText:'name', optionsValue:'id', value: $component.analysis.createStudyPopArgs.addExposureDaysToStart"></select>
+                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.riskWindowStart, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.riskWindowStart, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span> &nbsp;<span data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.daysFrom', 'days from')"></span>&nbsp; <select data-bind="options: $component.constants.timeAtRiskCohortDate, optionsText:'name', optionsValue:'id', value: $component.analysis.createStudyPopArgs.addExposureDaysToStart"></select>
                     </div>
                 </div>
                 <div>
                     <label data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.defineTheTimeAtRiskWindowEnd', 'Define the time-at-risk window end:')"></label>
                     <div class="input-group">
-                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.riskWindowEnd, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.riskWindowEnd, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }" />  &nbsp;<span data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.daysFrom', 'days from')"></span>&nbsp; <select data-bind="options: $component.constants.timeAtRiskCohortDate, optionsText:'name', optionsValue:'id', value: $component.analysis.createStudyPopArgs.addExposureDaysToEnd"></select>
+                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.riskWindowEnd, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.riskWindowEnd, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>  &nbsp;<span data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.daysFrom', 'days from')"></span>&nbsp; <select data-bind="options: $component.constants.timeAtRiskCohortDate, optionsText:'name', optionsValue:'id', value: $component.analysis.createStudyPopArgs.addExposureDaysToEnd"></select>
                     </div>
                 </div>
                 <div>
                     <label data-bind="text: ko.i18n('ple.spec.timeAtRiskPanel.minimumNumberOfDaysAtRisk', 'The minimum number of days at risk?')"></label>
                     <div class="input-group">
-                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.minDaysAtRisk, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.minDaysAtRisk, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }" />
+                        <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createStudyPopArgs.minDaysAtRisk, eventType:'blur', ko_autocomplete: { value: $component.analysis.createStudyPopArgs.minDaysAtRisk, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
                     </div>
                 </div>
             </div>
@@ -164,13 +164,13 @@
                     <div data-bind="visible: $component.trimSelection() == 'byPercent'">
                         <label data-bind="text: ko.i18n('ple.spec.propensityScoreAdjustmentPanel.trimFraction', 'Trim Fraction (1-100%):')"></label>
                         <div class="input-group">
-                            <input class="form-control" type="text" data-bind="value: $component.trimFraction" />
+                            <input class="form-control" type="text" data-bind="value: $component.trimFraction">
                         </div>
                     </div>
                     <div data-bind="visible: $component.trimSelection() == 'toEquipoise'">
                         <label data-bind="text: ko.i18n('ple.spec.propensityScoreAdjustmentPanel.lowerAndUpperBound', 'Specify the lower and upper bound on the preference score for keeping persons (specify as: min %, max %, eg: 25,75):')"></label>
                         <div class="input-group">
-                            <input class="form-control" type="text" data-bind="value: $component.bounds" />
+                            <input class="form-control" type="text" data-bind="value: $component.bounds">
                         </div>
                     </div>
                     <div>
@@ -194,7 +194,7 @@
                     <div>
                         <label data-bind="text: ko.i18n('ple.spec.propensityScoreAdjustmentPanel.maxNumberOfPeople', 'What is the maximum number of people to include in the propensity score model when fitting? Setting this number to 0 means no down-sampling will be applied:')"></label>
                         <div class="input-group">
-                            <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createPsArgs.maxCohortSizeForFitting, eventType:'blur', ko_autocomplete: { value: $component.analysis.createPsArgs.maxCohortSizeForFitting, source: $component.options.maxCohortSizeForFittingOptions, minLength: 0, maxShowItems: 10, scroll: true }" />
+                            <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditPermitted(), htmlValue: $component.analysis.createPsArgs.maxCohortSizeForFitting, eventType:'blur', ko_autocomplete: { value: $component.analysis.createPsArgs.maxCohortSizeForFitting, source: $component.options.maxCohortSizeForFittingOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
                         </div>
                     </div>
                     <div>

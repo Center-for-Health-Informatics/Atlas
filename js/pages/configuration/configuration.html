@@ -19,7 +19,7 @@
           <div class="right">
             <div class="padded priority" data-bind="if:$component.canChangePriority">
               <div class="priority-label" data-bind="text:ko.i18n('configuration.changeSourcePriorities', 'Change source priorities in:')"></div>
-              <select class="form-control configuration__source-select" data-bind="options: $component.priorityOptions, optionsText:'name', optionsValue:'id', value: $component.sharedState.priorityScope" />
+              <select class="form-control configuration__source-select" data-bind="options: $component.priorityOptions, optionsText:'name', optionsValue:'id', value: $component.sharedState.priorityScope"></select>
             </div>
             <span class="btn btn-sm btn-primary" data-bind="text:ko.i18n('configuration.newSource', 'New Source'), click: $component.newSource, visible: $component.config.userAuthenticationEnabled, css: {disabled: !$component.canCreateSource()}">
             </span>
@@ -108,7 +108,7 @@
         </table>
       </div>
       <div data-bind="if: isInProgress()" class="text-center">
-          <loading params="theme: 'light'" />
+          <loading params="theme: 'light'"></loading>
       </div>
       <div>
         <div class="configuration__command-pane">

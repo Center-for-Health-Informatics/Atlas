@@ -16,10 +16,10 @@
 <div>
   <span data-bind="with: expression().PrimaryCriteria().ObservationWindow">
     <span data-bind="text: ko.i18n('components.cohortExpressionViewer.cohortExpressionViewerText_2', 'with continuous observation of at least')"></span>
-  <span class="numericField" data-bind="text: PriorDays.numeric()" />
+  <span class="numericField" data-bind="text: PriorDays.numeric()"></span>
   <span data-bind="text: ko.i18n('components.cohortExpressionViewer.cohortExpressionViewerText_3', 'days prior and ')"></span>
 
-  <span class="numericField" data-bind="text: PostDays.numeric()" />
+  <span class="numericField" data-bind="text: PostDays.numeric()"></span>
   <span data-bind="text: ko.i18n('components.cohortExpressionViewer.cohortExpressionViewerText_4', 'days after event index date,')"></span>
 
 </span>
@@ -31,7 +31,7 @@
     </b>
   </span>
 </div>
-<br/>
+<br>
 
 <div style="width:60%" data-bind="with: expression">
   <div data-bind="if: AdditionalCriteria">
@@ -102,7 +102,7 @@
 <div data-bind="with: expression().CollapseSettings">
   <span data-bind="text: ko.i18n('components.cohortExpressionViewer.cohortExpressionViewerText_14', 'Collapse cohort by era with a gap size of ')"></span>
 
-  <span class="numericField" data-bind="text: EraPad" />
+  <span class="numericField" data-bind="text: EraPad"></span>
   <span data-bind="text: ko.i18n('common.days', 'days')"></span>
 </div>
 <div data-bind="if: $component.showCensorWindow">

@@ -30,9 +30,9 @@
             <span data-bind="text: ko.i18n('cc.viewEdit.design.subgroups.noSubgroups', 'No subgroups defined')"></span>
         </div>
         <!-- ko if: stratas().length > 0 -->
-        <input type="text" data-bind="css: classes({ element: 'stratified-by', extra: 'form-control'}), textInput: design().stratifiedBy, attr: {placeholder: ko.i18n('cc.viewEdit.design.subgroups.stratifiedByPlaceholder', 'Stratified by')}" />
+        <input type="text" data-bind="css: classes({ element: 'stratified-by', extra: 'form-control'}), textInput: design().stratifiedBy, attr: {placeholder: ko.i18n('cc.viewEdit.design.subgroups.stratifiedByPlaceholder', 'Stratified by')}">
         <label data-bind="css: classes('strata-checkbox')">
-            <input type="checkbox" data-bind="checked: design().strataOnly" /> <span data-bind="text: ko.i18n('cc.viewEdit.design.subgroups.subgroupOnly', 'Calculate subgroup analyses only')"></span>
+            <input type="checkbox" data-bind="checked: design().strataOnly"> <span data-bind="text: ko.i18n('cc.viewEdit.design.subgroups.subgroupOnly', 'Calculate subgroup analyses only')"></span>
         </label>
         <!-- /ko -->
         <div data-bind="foreach: stratas">

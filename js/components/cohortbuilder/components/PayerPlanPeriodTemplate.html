@@ -2,8 +2,8 @@
   <div style="position: relative">
     <table class="criteriaTable">
       <colgroup>
-        <col style="width:100%"/>
-        <col />
+        <col style="width:100%">
+       <col>
       </colgroup>
       <tr>
         <td>
@@ -26,18 +26,18 @@
     </table>
     <table class="criteriaTable">
       <colgroup>
-        <col style="width:20px"/>
-        <col />
+        <col style="width:20px">
+       <col>
       </colgroup>
       <tr data-bind="if: DateAdjustment() != null, visible: DateAdjustment() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('DateAdjustment') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('DateAdjustment') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_26', 'with date adjustment:')"></span>
           <date-adjustment params="DateAdjustment: DateAdjustment"></date-adjustment>
         </td>
       </tr>
       <tr data-bind="if: First() != null, visible: First() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('First') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('First') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_2', 'limited to the patients first payer plan period')"></span>
@@ -46,7 +46,7 @@
         </td>
       </tr>
       <tr data-bind="if: AgeAtStart() != null, visible: AgeAtStart() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('AgeAtStart') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('AgeAtStart') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_3', 'with age at period start')"></span>
 
@@ -54,7 +54,7 @@
         </td>
       </tr>
       <tr data-bind="if: AgeAtEnd() != null, visible: AgeAtEnd() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('AgeAtEnd') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('AgeAtEnd') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_4', 'with age at period end')"></span>
 
@@ -62,7 +62,7 @@
         </td>
       </tr>
       <tr data-bind="if: PeriodLength() != null, visible: PeriodLength() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('PeriodLength') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"  /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('PeriodLength') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"  ></i></td>
         <td>
           <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_5', 'with period duration')"></span>
 
@@ -70,7 +70,7 @@
         </td>
       </tr>
       <tr data-bind="if: Gender() != null, visible: Gender() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('Gender') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('Gender') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_6', 'with a gender of:')"></span>
@@ -80,7 +80,7 @@
         </td>
       </tr>
       <tr data-bind="if: GenderCS() != null, visible: GenderCS() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('GenderCS') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('GenderCS') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.cohortCriteria.genderCS', 'with gender conept')"></span>
@@ -92,7 +92,7 @@
         </td>
       </tr>
       <tr data-bind="if: UserDefinedPeriod() != null, visible: UserDefinedPeriod() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('UserDefinedPeriod') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('UserDefinedPeriod') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_7', 'using specified period:')"></span>
 
@@ -100,7 +100,7 @@
         </td>
       </tr>
       <tr data-bind="if: PeriodStartDate() != null, visible: PeriodStartDate() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('PeriodStartDate') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('PeriodStartDate') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_8', 'payer plan period start is:')"></span>
 
@@ -108,7 +108,7 @@
         </td>
       </tr>
       <tr data-bind="if: PeriodEndDate() != null, visible: PeriodEndDate() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('PeriodEndDate') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('PeriodEndDate') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_9', 'payer plan period end is:')"></span>
 
@@ -116,7 +116,7 @@
         </td>
       </tr>
       <tr data-bind="if: PayerConcept() != null, visible: PayerConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('PayerConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('PayerConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_10', 'Payer Concept is')"></span>
@@ -127,7 +127,7 @@
         </td>
       </tr>
       <tr data-bind="if: PlanConcept() != null, visible: PlanConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('PlanConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('PlanConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_11', 'Plan Concept is')"></span>
@@ -138,7 +138,7 @@
         </td>
       </tr>
       <tr data-bind="if: SponsorConcept() != null, visible: SponsorConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('SponsorConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('SponsorConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_12', 'Sponsor Concept is')"></span>
@@ -149,7 +149,7 @@
         </td>
       </tr>
       <tr data-bind="if: StopReasonConcept() != null, visible: StopReasonConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('StopReasonConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('StopReasonConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_13', 'Stop Reason Concept is')"></span>
@@ -160,7 +160,7 @@
         </td>
       </tr>
       <tr data-bind="if: PayerSourceConcept() != null, visible: PayerSourceConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('PayerSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"  /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('PayerSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"  ></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_14', 'Payer Source Concept is')"></span>
@@ -171,7 +171,7 @@
         </td>
       </tr>
       <tr data-bind="if: PlanSourceConcept() != null, visible: PlanSourceConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('PlanSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('PlanSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_15', 'Plan Source Concept is')"></span>
@@ -182,7 +182,7 @@
         </td>
       </tr>
       <tr data-bind="if: SponsorSourceConcept() != null, visible: SponsorSourceConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('SponsorSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('SponsorSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_16', 'Sponsor Source Concept is')"></span>
@@ -193,7 +193,7 @@
         </td>
       </tr>
       <tr data-bind="if: StopReasonSourceConcept() != null, visible: StopReasonSourceConcept() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('StopReasonSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('StopReasonSourceConcept') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td>
           <div>
             <span data-bind="text: ko.i18n('components.conditionPayerPlanPeriod.conditionPayerPlanText_17', 'Stop Reason Source Concept is')"></span>
@@ -204,7 +204,7 @@
         </td>
       </tr>
       <tr data-bind="if: CorrelatedCriteria() != null, visible: CorrelatedCriteria() != null">
-        <td><i data-bind="click: function() { $component.removeCriterion('CorrelatedCriteria') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" /></td>
+        <td><i data-bind="click: function() { $component.removeCriterion('CorrelatedCriteria') }, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i></td>
         <td style="background-color: white">
           <criteria-group params="{expression: $component.expression, group: CorrelatedCriteria, indexMessage: $component.indexMessage}"></criteria-group>
         </td>

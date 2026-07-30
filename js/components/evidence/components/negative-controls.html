@@ -1,6 +1,6 @@
 <div data-bind="if: !$component.conceptSetValid()">
   <div class="heading">
-    <i class="fa fa-exclamation-triangle fa-lg"></i> <span data-bind="text: $component.conceptSetValidText"></span><br /><br />
+    <i class="fa fa-exclamation-triangle fa-lg"></i> <span data-bind="text: $component.conceptSetValidText"></span><br><br>
   </div>
 </div>
 <div data-bind="if: $component.conceptSetValid()">
@@ -12,23 +12,23 @@
       <span data-bind="text: ko.i18n('components.navigateControls.navigateControlsText_1', 'Common Evidence Model')"></span>
       </a> (CEM).
       <span data-bind="text: ko.i18n('cs.manager.exploreEvidence.message2', 'The evidence base is comprised of evidence found in published literature, product labels and spontaneous reports. Use the evidence sources below to find out what evidence has been associated to the concepts included in this concept set.')"></span>
-      <br/><br/>
+      <br><br>
       <strong data-bind="text: ko.i18n('cs.manager.exploreEvidence.additionalInformation', 'Additional Information:')"></strong>
       <a target="_new" href="https://github.com/OHDSI/CommonEvidenceModel/wiki/Negative-Controls-In-ATLAS" data-bind="text: ko.i18n('cs.manager.exploreEvidence.anchor1', 'Obtaining Negative Controls from ATLAS')"></a>&nbsp;|&nbsp;
       <a target="_new" href="https://github.com/OHDSI/CommonEvidenceModel/blob/master/postProcessingNegativeControls/README.md" data-bind="text: ko.i18n('cs.manager.exploreEvidence.anchor2', 'High level information on negative controls processing')"></a>&nbsp;|&nbsp;
       <a target="_new" href="https://github.com/OHDSI/CommonEvidenceModel/blob/master/postProcessingNegativeControlsPrep/README.md" data-bind="text: ko.i18n('cs.manager.exploreEvidence.anchor3', 'Additional resources')"></a>
     </div>
-    <br/>
+    <br>
     <div class="heading" data-bind="text: ko.i18n('cs.manager.exploreEvidence.evidenceSources', 'Evidence Sources')"></div>
     <div class="paddedWrapper" data-bind="foreach:$component.evidenceSources">
       <div class="card panel-default">
         <div class="card-header" data-bind="text:sourceName"></div>
         <div class="card-body">
           <div class="form-group">
-            <strong data-bind="text: ko.i18n('cs.manager.exploreEvidence.generationSettings', 'Generation Settings')"></strong><br/>
+            <strong data-bind="text: ko.i18n('cs.manager.exploreEvidence.generationSettings', 'Generation Settings')"></strong><br>
             <label data-bind="text: ko.i18n('cs.manager.exploreEvidence.includeLabel', 'What concepts do you want to include as known negative controls? (Optional)')"></label>
             <div class="input-group">
-              <input class="form-control" type="text" disabled data-bind="value: $data.csToIncludeCaption" />
+              <input class="form-control" type="text" disabled data-bind="value: $data.csToIncludeCaption">
               <button class="btn btn-primary" data-bind="click: function() {$component.chooseIncludeConceptSet($data)}"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger" data-bind="disable: $data.csToInclude() == 0, click:function() {$component.clearIncludeConceptSet($data)}" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
             </div>
@@ -39,7 +39,7 @@
           <div class="form-group">
             <label data-bind="text: ko.i18n('cs.manager.exploreEvidence.excludeLabel', 'What concepts do you want to exclude as known positive controls? (Optional)')"></label>
             <div class="input-group">
-              <input class="form-control" type="text" disabled data-bind="value: $data.csToExcludeCaption" />
+              <input class="form-control" type="text" disabled data-bind="value: $data.csToExcludeCaption">
               <button class="btn btn-primary" data-bind="click: function() {$component.chooseExcludeConceptSet($data)}"><i class="fa fa-folder-open"></i></button>
                 <button class="btn btn-danger" data-bind="disable: $data.csToExclude() == 0, click:function() {$component.clearExcludeConceptSet($data)}" type="button"><i class="fa fa-times-circle" aria-hidden="true"></i></button>
             </div>
@@ -133,7 +133,7 @@
       </div>
     </div>
   </div>
-  <br/>
+  <br>
   <div class="paddedWrapper">
     <div class="heading">
       <span data-bind="text: ko.i18n('cs.manager.exploreEvidence.evidenceForAll', 'Evidence for all')"></span>

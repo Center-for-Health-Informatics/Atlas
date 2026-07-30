@@ -16,8 +16,8 @@
 </div>
 <div>
     <label data-bind="text: $component.modelSettingDescription(nthread.name)"></label>
-    <div class="input-group" >
-        <input class="form-control" type="text" data-bind="value: nthread.value" />
+    <div class="input-group">
+        <input class="form-control" type="text" data-bind="value: nthread.value">
         <button class="btn" data-bind="disable: isDefault(nthread.name),
                     click: function(data, event) { setToDefault(nthread.name) },
                     css: {'btn-danger': !(isDefault(nthread.name))},

@@ -167,15 +167,15 @@
                 <!-- /ko -->
 
                 <div class="cohort-printfriendly" data-bind="html:printFriendlyHtml"></div>
-                <br/>
+                <br>
                 <h3 data-bind="text: ko.i18n('cohortDefinitions.cohortDefinitionManager.panels.appendix_1', 'Appendix 1: Concept Set Definitions')"></h3>
-                <br/>
+                <br>
               </div>
               <!-- ko foreach: sortedConceptSets -->
               <div><span data-bind="text: ($index() + 1)"></span>. <span data-bind="text: $data.name"></span></div>
               <div style="padding-left:20px">
                 <conceptset-viewer params="{conceptSet: $data}"></conceptset-viewer>
-                <br />
+                <br>
               </div>
               <!-- /ko -->
             </div>
@@ -793,7 +793,7 @@
       <button class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bind="attr: {disabled: $component.isSourceRunning($data) || !isValid()}">
         <i class="fa fa-network-wired"></i>
         <span data-bind="text: 'Shiny App'"></span>
-        
+
       </button>
       <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: $component.shinyOptions">
         <li>

@@ -24,7 +24,7 @@ class LinkedCohortList extends Component {
     }
 
     if (params.canEditName) {
-      nameCol.render = (s, p, d) => p === 'display' ? '<span data-bind="clickToEdit: name" />' : ko.utils.unwrapObservable(d.name)
+      nameCol.render = (s, p, d) => p === 'display' ? '<span data-bind="clickToEdit: name"></span>' : ko.utils.unwrapObservable(d.name)
       nameCol.className = this.classes('col-cohort-name', 'editable')
     } else {
       nameCol.data = 'name'

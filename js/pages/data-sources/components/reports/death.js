@@ -46,7 +46,7 @@ class Death extends Report {
           return d => {
             const format = d3.format('0.5f')
             return `
-            ${options.xLabel}: ${options.xFormat(d.xValue)}<br/>
+            ${options.xLabel}: ${options.xFormat(d.xValue)}<br>
             ${options.yLabel}: ${format(d.yValue)}
           `
           }

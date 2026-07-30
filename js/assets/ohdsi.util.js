@@ -1485,7 +1485,7 @@ var DEBUG = true;
 		return (d, i, j) => {
 			return (accessors
 				.map(func => func(d, i, j))
-				.map(o => `${o.name}: ${o.value}<br/>`)
+				.map(o => `${o.name}: ${o.value}<br>`)
 				.join(''))
 		};
 	}

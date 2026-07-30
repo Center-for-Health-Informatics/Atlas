@@ -21,7 +21,7 @@ function toRepositoryConceptSetItems (conceptSetItems) {
 }
 
 const recommendedRelationshipRenderFunction = (s, p, d) => {
-  const tooltip = d.RELATIONSHIPS.map(d => commonUtils.escapeTooltip(d)).join('<br/>')
+  const tooltip = d.RELATIONSHIPS.map(d => commonUtils.escapeTooltip(d)).join('<br>')
   return `<span data-bind="tooltip: '${tooltip}'">${d.RELATIONSHIPS.length}</span>`
 }
 
@@ -294,7 +294,7 @@ function getAncestorsModalHandler ({ conceptSetStore, ancestors, ancestorsModalI
 function getAncestorsRenderFunction () {
   return (s, p, d) => {
     if (d.ANCESTORS != null) {
-      const tooltip = d.ANCESTORS.map(d => commonUtils.escapeTooltip(d.CONCEPT_NAME)).join('<br/>')
+      const tooltip = d.ANCESTORS.map(d => commonUtils.escapeTooltip(d.CONCEPT_NAME)).join('<br>')
       return `<a data-bind="click: d => $parents[1].showAncestorsModal(d.CONCEPT_ID), tooltip: '${tooltip}'">${d.ANCESTORS.length}</a>`
     } else {
       return '<i class="fa fa-circle-notch fa-spin"></i>'

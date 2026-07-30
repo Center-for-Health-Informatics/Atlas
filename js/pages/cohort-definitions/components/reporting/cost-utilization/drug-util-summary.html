@@ -1,12 +1,12 @@
 <div data-bind="css: classes()">
     <div data-bind="css: classes('filters-block')">
-        <visualizations-filter-panel params="{ filterList: $component.filterList, apply: $component.applyFilters, live: true }"/>
+        <visualizations-filter-panel params="{ filterList: $component.filterList, apply: $component.applyFilters, live: true }"></visualizations-filter-panel>
         <div data-bind="visible: filtersLoading()">
-            <loading params="status:'loading'" />
+            <loading params="status:'loading'"></loading>
         </div>
     </div>
     <div data-bind="css: classes('loader'), visible: loading()">
-        <loading params="status:'loading'" />
+        <loading params="status:'loading'"></loading>
     </div>
     <div data-bind="visible: !loading()">
         <div data-bind="css: classes('toolbar')">

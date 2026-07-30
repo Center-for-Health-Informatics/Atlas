@@ -260,7 +260,7 @@ const getPopulationSettingsTableColumns = (canEdit) => [
     render: (s, p, d) => {
       return d.riskWindowStart().toString() +
           "<span data-bind=\"text: ko.i18n('common.daysAbbr', 'd')\"></span> " +
-          "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br/>" +
+          "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br>" +
           ko.unwrap(consts.timeAtRiskCohortDate.find(f => f.id === d.addExposureDaysToStart()).name)
     },
   },
@@ -269,7 +269,7 @@ const getPopulationSettingsTableColumns = (canEdit) => [
     render: (s, p, d) => {
       return d.riskWindowEnd().toString() +
           "<span data-bind=\"text: ko.i18n('common.daysAbbr', 'd')\"></span> " +
-          "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br/>" +
+          "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br>" +
           ko.unwrap(consts.timeAtRiskCohortDate.find(f => f.id === d.addExposureDaysToEnd()).name)
     },
   },

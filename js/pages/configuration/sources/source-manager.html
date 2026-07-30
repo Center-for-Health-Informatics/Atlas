@@ -133,17 +133,17 @@
                             <label data-bind="text: ko.i18n('configuration.viewEdit.krb.authenticationMethod.label', 'Kerberos authentication method:')"></label>
                           </div>
                           <label>
-                            <input type="radio" value="keytab" data-bind="checked: selectedSource().krbAuthMethod" class="source-manager__radio-btn"/>
+                            <input type="radio" value="keytab" data-bind="checked: selectedSource().krbAuthMethod" class="source-manager__radio-btn">
                             <span class="source-manager__radio-btn-label" data-bind="text: ko.i18n('configuration.viewEdit.krb.keytab.label', 'Keytab')"></span>
                           </label>
                           <div data-bind="visible: fieldsVisibility.showKrbKeyfile()" class="source-manager__keytab">
-                            <input type="file" id="keyfile" name="keytab" accept=".keytab" data-bind="event: { change: function() { uploadFile($element.files[0]) } }, visible: fieldsVisibility.krbFileInput()"/>
+                            <input type="file" id="keyfile" name="keytab" accept=".keytab" data-bind="event: { change: function() { uploadFile($element.files[0]) } }, visible: fieldsVisibility.krbFileInput()">
                             <span data-bind="text: selectedSource().keyfileName, visible: !fieldsVisibility.krbFileInput()"></span>
                             <button type="button" class="btn btn-sm btn-danger source-manager__remove-btn"
                                 data-bind="visible: !fieldsVisibility.krbFileInput(), click: removeKeyfile, text: ko.i18n('configuration.viewEdit.krb.buttons.remove', 'Remove:')"></button>
                            </div>
                           <label class="source-manager__pwd-label">
-                            <input type="radio" value="password" data-bind="checked: selectedSource().krbAuthMethod" class="source-manager__radio-btn"/>
+                            <input type="radio" value="password" data-bind="checked: selectedSource().krbAuthMethod" class="source-manager__radio-btn">
                             <span class="source-manager__radio-btn-label"  data-bind="text: ko.i18n('configuration.viewEdit.krb.userPassword.label', 'User name and password')"></span>
                           </label>
                           <div class="source-manager__control-group control-group" data-bind="visible: !fieldsVisibility.showKrbKeyfile()">
@@ -178,7 +178,7 @@
                               <table class="padded">
                                   <tbody data-bind="foreach: selectedSource().daimons">
                                       <td data-bind="text:daimonType"></td>
-                                      <td><input type="checkbox" data-bind="checked: enabled, enable: $component.canEdit()" /></td>
+                                      <td><input type="checkbox" data-bind="checked: enabled, enable: $component.canEdit()"></td>
                                       <td><input type="text" data-bind="
                                             textInput: tableQualifier, enable: $component.canEdit() && $data.enabled,
                                             title: daimonType + ' table qualifier'" /></td>

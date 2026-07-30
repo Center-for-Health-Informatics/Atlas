@@ -2,8 +2,8 @@
   <div class="criteriaHeading">
     <table>
       <colgroup>
-        <col />
-        <col />
+       <col>
+       <col>
       </colgroup>
       <tbody>
         <tr>
@@ -62,8 +62,8 @@
     <div class="demographicCriteria">
       <table>
         <colgroup>
-          <col span="1" class="rule" />
-          <col span="1" class="delete" />
+          <col span="1" class="rule">
+          <col span="1" class="delete">
         </colgroup>
         <tbody>
           <tr>
@@ -98,8 +98,8 @@
     <div class="additionalCriteria">
       <table>
         <colgroup>
-          <col span="1" class="rule" />
-          <col span="1" class="delete" />
+          <col span="1" class="rule">
+          <col span="1" class="delete">
         </colgroup>
         <tbody>
           <tr>
@@ -113,7 +113,7 @@
                   </span>
 
                   <span data-bind="text: ko.i18n('components.criteriaGroup.with','with')"></span>
-                  <select data-bind="options: $component.options.occurrenceTypeOptions, optionsText: 'name', optionsValue: 'id', value: Occurrence.Type" />
+                  <select data-bind="options: $component.options.occurrenceTypeOptions, optionsText: 'name', optionsValue: 'id', value: Occurrence.Type"></select>
                   <span contenteditable="true" class="numericInputField dropdown"
                         data-bind="htmlValue: Occurrence.Count.numeric(),
                                    eventType: 'blur',
@@ -122,7 +122,7 @@
                               ko.i18n('components.criteriaGroup.usingDistinct','using distinct') :
                               ko.i18n('components.criteriaGroup.usingAll','using all')"></button>
                   <!-- ko if: !$data.Occurrence.IsDistinct() --> <span data-bind="text: ko.i18n('components.criteriaGroup.occurrencesOf','occurrences of:')"></span>  <!-- /ko -->
-                  <!-- ko if: $data.Occurrence.IsDistinct() --> <select data-bind="options: $component.getDistinctOptions($data.Criteria), optionsText: 'name', optionsValue: 'id', value: $data.Occurrence.CountColumn" />  <!-- /ko -->
+                  <!-- ko if: $data.Occurrence.IsDistinct() --> <select data-bind="options: $component.getDistinctOptions($data.Criteria), optionsText: 'name', optionsValue: 'id', value: $data.Occurrence.CountColumn"></select>  <!-- /ko -->
                 </div>
                 <div data-bind="component: {
                   name: $component.getCriteriaComponent($data.Criteria),
@@ -134,7 +134,7 @@
                   <cycle-toggle-input
                     params="{value: StartWindow.UseEventEnd, options: $component.options.EventDateOptions}">
                   </cycle-toggle-input>
-                  <span data-bind="text:ko.i18n('components.criteriaGroup.between','between')"></span><br />
+                  <span data-bind="text:ko.i18n('components.criteriaGroup.between','between')"></span><br>
 
                   <window-input params="Window: StartWindow"></window-input>
                   <cycle-toggle-input
@@ -142,7 +142,7 @@
                   </cycle-toggle-input>
                   <!-- ko if: EndWindow -->
                   <div>
-                    <i data-bind="click: $component.removeEndWindow, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times" />
+                    <i data-bind="click: $component.removeEndWindow, title: ko.i18n('common.remove', 'Remove')" class="fa fa-times"></i>
                     <span data-bind="text:ko.i18n('components.criteriaGroup.and', 'and')"></span>
                     <cycle-toggle-input params="{value: EndWindow().UseEventEnd, options: $component.options.EventDateOptions}"></cycle-toggle-input>
                     <span data-bind="text:ko.i18n('components.criteriaGroup.between', 'between')"></span>
@@ -164,11 +164,11 @@
                 <div class="restrictVisitSection" data-bind="if: $component.hasVO($data.Criteria)">
                   <input type="checkbox" data-bind="checked: RestrictVisit">
                   <span
-                    data-bind="text:ko.i18n('components.criteriaGroup.criteriaGroupText_1','restrict to the same visit occurrence')"></span><br />
+                    data-bind="text:ko.i18n('components.criteriaGroup.criteriaGroupText_1','restrict to the same visit occurrence')"></span><br>
                 </div>
                 <input type="checkbox" data-bind="checked: IgnoreObservationPeriod">
                 <span
-                  data-bind="text:ko.i18n('components.criteriaGroup.criteriaGroupText_2','allow events from outside observation period')"></span><br />
+                  data-bind="text:ko.i18n('components.criteriaGroup.criteriaGroupText_2','allow events from outside observation period')"></span><br>
               </div>
             </td>
             <td>

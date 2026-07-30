@@ -7,7 +7,7 @@ $.fn.autoGrowInput = function (o) {
     var minWidth = o.minWidth || $(this).width()
     var val = ''
     var input = $(this)
-    var testSubject = $('<tester/>').css({
+    var testSubject = $('<tester></tester>').css({
       position: 'absolute', top: -9999, left: -9999, width: 'auto',
       fontSize: input.css('fontSize'), fontFamily: input.css('fontFamily'),
       fontWeight: input.css('fontWeight'), letterSpacing: input.css('letterSpacing'),

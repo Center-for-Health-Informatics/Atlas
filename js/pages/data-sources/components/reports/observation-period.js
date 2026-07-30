@@ -82,7 +82,7 @@ class ObservationPeriodReport extends Report {
         getTooltipBuilder: (options) => (d) => {
           const format = d3.format(',.4s')
           return `
-                          ${options.xLabel}: ${options.xFormat(d.xValue)}<br/>
+                          ${options.xLabel}: ${options.xFormat(d.xValue)}<br>
                           ${options.yLabel}: ${format(d.yValue)}
                       `
         },

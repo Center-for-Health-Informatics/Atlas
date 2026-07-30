@@ -19,8 +19,8 @@
             <col style="width:auto">
             <tr>
               <td align="top"><i class="fa fa-times targetCohort"></i></td>
-              <td align="top">#<span data-bind="text: id"/>: </td>
-              <td align="top"><span data-bind="text: name"/></td>
+              <td align="top">#<span data-bind="text: id"></span>: </td>
+              <td align="top"><span data-bind="text: name"></span></td>
             </tr>
           </table>
         </td>
@@ -31,8 +31,8 @@
             <col style="width:auto">
             <tr>
               <td align="top"><i class="fa fa-times outcomeCohort"></i></td>
-              <td align="top">#<span data-bind="text: id"/>: </td>
-              <td align="top"><span data-bind="text: name"/></td>
+              <td align="top">#<span data-bind="text: id"></span>: </td>
+              <td align="top"><span data-bind="text: name"></span></td>
             </tr>
           </table>
         </td>
@@ -53,16 +53,16 @@
       <ul>
         <li>
           <span data-bind="text: ko.i18n('ir.editor.timeAtRiskStartsWith', 'Time at risk starts with')"></span>
-          <select data-bind="options: $component.fieldOptions, optionsText: 'name', optionsValue: 'id', value: analysis().timeAtRisk.start.DateField" />
+          <select data-bind="options: $component.fieldOptions, optionsText: 'name', optionsValue: 'id', value: analysis().timeAtRisk.start.DateField"></select>
           <span data-bind="text: ko.i18n('ir.editor.timeAtRiskPlus', 'plus')"></span>
-          <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditable(), htmlValue: analysis().timeAtRisk.start.Offset.numeric(), eventType:'blur', ko_autocomplete: { value: analysis().timeAtRisk.start.Offset, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }" />
+          <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditable(), htmlValue: analysis().timeAtRisk.start.Offset.numeric(), eventType:'blur', ko_autocomplete: { value: analysis().timeAtRisk.start.Offset, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
           <span data-bind="text: ko.i18n('ir.editor.timeAtRiskStartsWithDays', 'days.')"></span>
         </li>
         <li>
           <span data-bind="text: ko.i18n('ir.editor.timeAtRiskEndsWith', 'Time at risk ends with')"></span>
-          <select data-bind="options: $component.fieldOptions, optionsText: 'name', optionsValue: 'id', value: analysis().timeAtRisk.end.DateField" />
+          <select data-bind="options: $component.fieldOptions, optionsText: 'name', optionsValue: 'id', value: analysis().timeAtRisk.end.DateField"></select>
           <span data-bind="text: ko.i18n('ir.editor.timeAtRiskPlus', 'plus')"></span>
-          <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditable(), htmlValue: analysis().timeAtRisk.end.Offset.numeric(), eventType:'blur', ko_autocomplete: { value: analysis().timeAtRisk.end.Offset, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }" />
+          <span class="numericInputField dropdown" data-bind="contenteditableSwitch: isEditable(), htmlValue: analysis().timeAtRisk.end.Offset.numeric(), eventType:'blur', ko_autocomplete: { value: analysis().timeAtRisk.end.Offset, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
           <span data-bind="text: ko.i18n('ir.editor.timeAtRiskEndsWithDays', 'days.')"></span>
         </li>
       </ul>
@@ -95,8 +95,8 @@
 
     <table style="width: 100%">
       <colgroup>
-        <col span="1" style="width: 200px;" />
-        <col span="1" />
+        <col span="1" style="width: 200px;">
+        <col span="1">
       </colgroup>
       <tbody>
         <tr>

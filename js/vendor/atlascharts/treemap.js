@@ -227,7 +227,7 @@ class Treemap extends Chart {
           })
           .offset([3, 0])
           .html(function (d) {
-            return `${options.gettitle(d.data)}<br/><br/>${options.getcontent(d.data)}`
+            return `${options.gettitle(d.data)}<br><br>${options.getcontent(d.data)}`
           })
       })
       cell

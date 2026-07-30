@@ -44,9 +44,9 @@ export default class Application {
     })
     this.appInitializationErrorMessage = ko.computed(() => {
       if (this.noSourcesAvailable()) {
-        return ko.i18n('commonErrors.noSources', 'The current WebAPI has no sources defined.<br/>Please add one or more on <a href="#/configure">configuration</a> page.')()
+        return ko.i18n('commonErrors.noSources', 'The current WebAPI has no sources defined.<br>Please add one or more on <a href="#/configure">configuration</a> page.')()
       } else if (this.appInitializationStatus() !== constants.applicationStatuses.noSourcesAvailable) {
-        return ko.i18n('commonErrors.webapiConnectError', 'Unable to connect to an instance of the WebAPI.<br/>Please contact your administrator to resolve this issue.')()
+        return ko.i18n('commonErrors.webapiConnectError', 'Unable to connect to an instance of the WebAPI.<br>Please contact your administrator to resolve this issue.')()
       }
     })
     this.pageTitle = ko.pureComputed(() => {

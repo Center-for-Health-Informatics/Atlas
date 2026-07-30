@@ -13,7 +13,7 @@
           <label for="toolName" data-bind="visible: isEditing, text: ko.i18n('columns.name', 'Name')"></label>
           <div class="flex-between">
             <h3 data-bind="hidden: isEditing, text: name, click: () => window.open(url, '_blank')"></h3>
-            <input type="text" data-bind="visible: isEditing, textInput: name, keyupBubble: false" id="toolName"/>
+            <input type="text" data-bind="visible: isEditing, textInput: name, keyupBubble: false" id="toolName">
             <div style="width: 15% !important; align-items: center; display: flex; justify-content: flex-end;">
               <i class="fas fa-edit" id="editIcon" style="font-size: 24px; color: #2271A5; cursor: pointer;" data-bind="hidden: (isEditing || !$component.canUpdateTool()), click:() => $component.handleIsEditing(id), style:{ 'z-index': 9 }"></i>
               <i class="far fa-trash-alt" id="deleteIcon" style="font-size: 24px; color: #F44; cursor: pointer; margin-left: 10px;" data-bind="hidden: (isEditing || !$component.canDeleteTool()), click:() => $component.handleDelete(id), style:{ 'z-index': 9 }"></i>
@@ -21,14 +21,14 @@
             </div>
           </div>
           <label for="toolUrl" data-bind="visible: isEditing, text: ko.i18n('common.url', 'URL')" style="margin-top: 19px"></label>
-          <input type="text" data-bind="visible: isEditing, textInput: url, keyupBubble: false" style="margin-top: 2px" id="toolUrl"/>
+          <input type="text" data-bind="visible: isEditing, textInput: url, keyupBubble: false" style="margin-top: 2px" id="toolUrl">
           <p data-bind="hidden: isEditing, text: description" style="margin-top: 24px; font-weight: 500; font-size: 13px;"></p>
           <label for="toolDescription" data-bind="visible: isEditing, text: ko.i18n('columns.description', 'Description')" style="margin-top: 19px;"></label>
           <textarea rows="5" data-bind="visible: isEditing, value: description, keyupBubble: false" style="margin-top: 2px; max-width: 100%;" id="toolDescription"></textarea>
           <div class="flex-between" style="margin-top: 18px; align-items: flex-start; justify-content: flex-start;" data-bind="visible: isEditing">
             <label for="toolAddDescription" data-bind="text: ko.i18n('columns.enabled', 'Enabled')" style="width: 10%;"></label>
             <div class="material-switch float-end" style=" margin-left: 8px;" data-bind="visible: isEditing">
-              <input id="switchBtnTool" name="switchBtnTool" data-bind="checked: enabled" style="display: none;"/>
+              <input id="switchBtnTool" name="switchBtnTool" data-bind="checked: enabled" style="display: none;">
               <label for="switchBtnTool" class="label-success" data-bind="css: enabled ? 'label-switch-enable' : '', click:() => $component.handleCheckVisible(id)"></label>
             </div>
           </div>
@@ -72,12 +72,12 @@
     <div class="flexed" style="padding: 8px 20px;">
       <div class="form-group" data-bind="css: {'has-error': (newName()?.trim() === '' || !newName()), 'has-success': newName()?.trim()}">
         <label for="toolAddName" class="control-label" data-bind="text: ko.i18n('tool.name', '* Name')"></label>
-        <input required type="text" id="toolAddName" data-bind="textInput: newName" type="text" class="form-control"/>
+        <input required type="text" id="toolAddName" data-bind="textInput: newName" type="text" class="form-control">
         <span class="help-block" data-bind="visible: (newName()?.trim() === '' || !newName()), text: ko.i18n('tool.nameValidMess', 'Tool name cannot be empty')"></span>
       </div>
       <div class="form-group" data-bind="css: {'has-error': (newUrl()?.trim() === '' || !newUrl()), 'has-success': newUrl()?.trim()}">
         <label for="toolAddURL" class="control-label" data-bind="text: ko.i18n('tool.url', '* URL')"></label>
-        <input required type="text" id="toolAddURL" data-bind="textInput: newUrl" type="text" class="form-control"/>
+        <input required type="text" id="toolAddURL" data-bind="textInput: newUrl" type="text" class="form-control">
         <span class="help-block" data-bind="visible: (newUrl()?.trim() === '' || !newUrl()), text: ko.i18n('tool.urlValidMess', 'Tool url cannot be empty')"></span>
       </div>
       <div class="form-group" style="margin-top: 10px; align-items: flex-start; justify-content: flex-start;">
@@ -87,7 +87,7 @@
       <div class="flex-between" style="margin-top: 18px; align-items: flex-start; justify-content: flex-start;">
         <label for="toolAddDescription" data-bind="text: ko.i18n('columns.enabled', 'Enabled')" style="width: 10%;"></label>
         <div class="material-switch float-end" style="margin-left: 8px; width: 70%;">
-          <input id="switchBtnTool" name="switchBtnTool" data-bind="checked: toolIsVisible()" style="display: none;"/>
+          <input id="switchBtnTool" name="switchBtnTool" data-bind="checked: toolIsVisible()" style="display: none;">
           <label for="switchBtnTool" class="label-success" data-bind="css: toolIsVisible() ? 'label-switch-enable' : '', click: toggleVisiableTool"></label>
         </div>
       </div>

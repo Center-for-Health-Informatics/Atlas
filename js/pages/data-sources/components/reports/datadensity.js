@@ -23,8 +23,8 @@ class datadensity extends Report {
       const yValue = d[options.yValue]
       const value = yValue < 1 ? d3.format('.3f')(yValue) : d3.formatPrefix('.3s', yValue)(yValue)
       return `
-      ${d.seriesName}<br/>
-      ${options.xLabel}: ${options.xFormat(d[options.xValue])}<br/>
+      ${d.seriesName}<br>
+      ${options.xLabel}: ${options.xFormat(d[options.xValue])}<br>
       ${options.yLabel}: ${value}
     `
     }

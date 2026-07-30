@@ -11,7 +11,7 @@
   <div>
     <div class="asset-heading">
       <div class="input-group ir-header">
-        <input type="text" class="form-control ir-name" data-bind="textInput: selectedAnalysis().name, css: { emptyInput: !isNameFilled() }, enable: isEditable, placeholder: ko.i18n('const.newEntityNames.incidenceRate', 'New Incidence Rate Analysis')"/>
+        <input type="text" class="form-control ir-name" data-bind="textInput: selectedAnalysis().name, css: { emptyInput: !isNameFilled() }, enable: isEditable, placeholder: ko.i18n('const.newEntityNames.incidenceRate', 'New Incidence Rate Analysis')">
         <button class="btn btn-success" data-bind="click: save, enable: canSave() && !isProcessing(), css: {disabled:!canSave() || isProcessing()}, title: previewVersion() ? ko.i18n('common.saveAsCurrentVersion', 'Save as current version') : ko.i18n('common.save', 'Save')"><i class="fa fa-save"></i></button>
           <button class="btn btn-primary"
               data-bind="visible: previewVersion(), title: ko.i18n('common.backToCurrent', 'Back to current version'), click: backToCurrentVersion">

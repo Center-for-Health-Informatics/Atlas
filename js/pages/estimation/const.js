@@ -233,7 +233,7 @@ const getCca = (canEdit) => [{
             }
           })
           const outcomeDisplay = d.outcomes().length === 2 ? 'outcome' : 'outcomes'
-          return ko.toJS(d.outcomes()[0]).name + '<br/><div class="tool-tip">(' + (d.outcomes().length - 1) + '+ more ' + outcomeDisplay + '<span class="tooltiptext">' + tooltipText + '</span>)</div>'
+          return ko.toJS(d.outcomes()[0]).name + '<br><div class="tool-tip">(' + (d.outcomes().length - 1) + '+ more ' + outcomeDisplay + '<span class="tooltiptext">' + tooltipText + '</span>)</div>'
         } else if (d.outcomes().length === 1) {
           return ko.toJS(d.outcomes()[0]).name
         } else {
@@ -291,7 +291,7 @@ const getCca = (canEdit) => [{
         if (d.createStudyPopArgs != null) {
           return d.createStudyPopArgs.riskWindowStart() +
                       "<span data-bind=\"text: ko.i18n('common.daysAbbr', 'd')\"></span> " +
-                      "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br/>" +
+                      "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br>" +
                       ko.unwrap(consts.timeAtRiskCohortDate.find(f => f.id === d.createStudyPopArgs.addExposureDaysToStart()).name)
         } else {
           return ''
@@ -304,7 +304,7 @@ const getCca = (canEdit) => [{
         if (d.createStudyPopArgs != null) {
           return d.createStudyPopArgs.riskWindowEnd() +
                       "<span data-bind=\"text: ko.i18n('common.daysAbbr', 'd')\"></span> " +
-                      "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br/>" +
+                      "<span data-bind=\"text: ko.i18n('ple.spec.from', 'from')\"></span><br>" +
                       ko.unwrap(consts.timeAtRiskCohortDate.find(f => f.id === d.createStudyPopArgs.addExposureDaysToEnd()).name)
         } else {
           return ''
@@ -393,7 +393,7 @@ const getCca = (canEdit) => [{
     {
       title: ko.i18n('columns.timeAtRisk', 'Time At Risk'),
       data: d => {
-        // return (d.cohortMethodAnalysis.createStudyPopArgs.riskWindowStart() + "-" + d.cohortMethodAnalysis.createStudyPopArgs.riskWindowEnd() + "d<br/>(min: " + d.cohortMethodAnalysis.createStudyPopArgs.minDaysAtRisk() + "d)");
+        // return (d.cohortMethodAnalysis.createStudyPopArgs.riskWindowStart() + "-" + d.cohortMethodAnalysis.createStudyPopArgs.riskWindowEnd() + "d<br>(min: " + d.cohortMethodAnalysis.createStudyPopArgs.minDaysAtRisk() + "d)");
         return getTimeAtRisk(d.cohortMethodAnalysis.createStudyPopArgs)
       }
     },

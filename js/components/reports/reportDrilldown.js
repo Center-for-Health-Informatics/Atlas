@@ -92,7 +92,7 @@ class ReportDrilldown extends Report {
         getTooltipBuilder: options => d => {
           const yFormat = d3.format('.2f')
           return `
-          Count: ${options.xFormat(d[options.xValue])}<br/>
+          Count: ${options.xFormat(d[options.xValue])}<br>
           ${options.yLabel}: ${yFormat(d[options.yValue])}
         `
         },

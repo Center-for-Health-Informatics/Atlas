@@ -7,20 +7,20 @@
         </a>
     </div>
     <div data-bind="css: classes('filters-block')">
-        <visualizations-filter-panel params="{ filterList: $component.filterList, apply: $component.applyFilters, live: true }"/>
+        <visualizations-filter-panel params="{ filterList: $component.filterList, apply: $component.applyFilters, live: true }"></visualizations-filter-panel>
         <div data-bind="visible: filtersLoading()">
-            <loading params="status:'loading'" />
+            <loading params="status:'loading'"></loading>
         </div>
     </div>
     <div data-bind="css: classes('loader'), visible: loading()">
-        <loading params="status:'loading'" />
+        <loading params="status:'loading'"></loading>
     </div>
     <div data-bind="visible: !loading()">
         <div data-bind="css: classes('block')">
             <ul class="nav nav-tabs">
                 <!-- ko foreach: Object.keys(tabLabels) -->
                 <li role="presentation" data-bind="click: function() { $component.currentTab($data); }, attr: {class: $component.currentTab() == $data ? 'active' : ''}">
-                    <a data-bind="text: $component.tabLabels[$data]" />
+                    <a data-bind="text: $component.tabLabels[$data]"></a>
                 </li>
                 <!-- /ko -->
                 <li data-bind="css: classes('save-csv-tab'), click: $component.saveAsCsv">

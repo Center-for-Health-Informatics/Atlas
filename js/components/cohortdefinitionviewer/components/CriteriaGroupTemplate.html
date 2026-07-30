@@ -26,7 +26,7 @@
 <!-- ko foreach: group().CriteriaList -->
   <li>
     <div>
-      <span data-bind="if: ($parent.group().DemographicCriteriaList().length > 0 || $index() > 0)"><span data-bind="text: $component.group().Type() == 'ALL' ? 'and ' : 'or '"></span></span><span data-bind="text: $component.getOccurrenceType(Occurrence.Type())" />
+      <span data-bind="if: ($parent.group().DemographicCriteriaList().length > 0 || $index() > 0)"><span data-bind="text: $component.group().Type() == 'ALL' ? 'and ' : 'or '"></span></span><span data-bind="text: $component.getOccurrenceType(Occurrence.Type())"></span>
       <span data-bind="text: Occurrence.Count"></span> <span data-bind="text: Occurrence.IsDistinct() ? 'distinct' : ''"></span>
       <span data-bind="text: Occurrence.Count != 1
           ? ko.i18n('components.criteriaGroup.occurrencesOf', 'occurrences of')
@@ -46,7 +46,7 @@
       <window-input-viewer params="Window: EndWindow"></window-input-viewer> <cycle-toggle-input-viewer params="{value: EndWindow().UseIndexEnd, options: $component.options.IndexDateOptions}"></cycle-toggle-input-viewer>
       <!-- /ko -->
       <!-- ko if: RestrictVisit -->
-      <br/>
+      <br>
       <b data-bind="text:ko.i18n('components.criteriaGroup.occurringWithinTheSameVisit', 'occurring within the same visit')"></b>
       <!-- /ko -->
       <div class="indexMessage"><span class="indexMessage" data-bind="text: $component.indexMessage"></span>

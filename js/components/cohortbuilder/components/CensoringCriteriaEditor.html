@@ -1,8 +1,8 @@
 <div class="criteriaHeading">
     <table>
         <colgroup>
-            <col />
-            <col />
+           <col>
+           <col>
         </colgroup>
         <tbody>
         <tr>
@@ -15,7 +15,7 @@
                         <i class="fa fa-plus"></i>
                         <span
                                 data-bind="text: ko.i18n('components.cohortExpressionEditor.addCensoringEvent', 'Add Censoring Event')"></span>
-                        
+
                     </button>
                     <ul class="dropdown-menu" data-bind="foreach:$component.censorCriteriaOptions">
                         <li>
@@ -35,8 +35,8 @@
 
 <table class="criteria">
     <colgroup>
-        <col span="1" class="rule" />
-        <col span="1" class="delete" />
+        <col span="1" class="rule">
+        <col span="1" class="delete">
     </colgroup>
     <tbody
             data-bind="sortable: {data: ko.unwrap(expression).CensoringCriteria, connectClass : 'censoringCriteria', options: {cancel: ':input, button, [contenteditable]'}}">

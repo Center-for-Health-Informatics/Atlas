@@ -1,7 +1,7 @@
 <!-- ko if: strategy()-->
 <div>
   <b
-    data-bind="text: ko.i18n('components.customEraStrategy.customEraStrategyText_1', 'Continuous Exposure Persistence:')"></b><br />
+    data-bind="text: ko.i18n('components.customEraStrategy.customEraStrategyText_1', 'Continuous Exposure Persistence:')"></b><br>
   <span
     data-bind="text: ko.i18n('components.customEraStrategy.customEraStrategyText_2', 'Specify a concept set that contains one or more drugs.  A drug era will be derived from all drug exposure events for any of the drugs within the concept set, using the specified persistence window as a maximum allowable gap in days between successive exposure events and adding a specified surveillance window to the final exposure event.  If no exposure event end date is provided, then an exposure event end date is inferred to be event start date + days supply in cases when days supply is available or event start date + 1 day otherwise. This event persistence assures that the cohort end date will be no greater than the drug era end date.')"></span>
 </div>
@@ -45,7 +45,7 @@
       <span contenteditable="true" class="numericInputField dropdown"
         data-bind="htmlValue: strategy().DaysSupplyOverride.numeric(), eventType:'blur', ko_autocomplete: { value: strategy().DaysSupplyOverride, source: $component.options.dayOptions, minLength: 0, maxShowItems: 10, scroll: true }"></span>
       <span data-bind="text: ko.i18n('components.customEraStrategy.customEraStrategyText_11', 'days.')"></span>
-      <i class="fa fa-times" data-bind="click: $component.removeDaysSupplyOverride" /></li>
+      <i class="fa fa-times" data-bind="click: $component.removeDaysSupplyOverride"></i></li>
     <!-- /ko -->
 
   </ul>

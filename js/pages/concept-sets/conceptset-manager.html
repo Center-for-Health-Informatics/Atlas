@@ -76,7 +76,7 @@
             <div class="btn-group float-end" role="group">
               <button id="btnGroupDrop1" type="button" class="btn btn-sm btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span data-bind="text: ko.i18n('cs.manager.saveOptions', 'Save Options')"></span>
-                
+
               </button>
               <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupDrop1">
                 <li><a class="dropdown-item" href="#" data-bind="click: overwriteConceptSet, text: ko.i18n('cs.manager.overwriteOption', 'Overwrite Current Concept Set')"></a></li>
@@ -92,7 +92,7 @@
           <div class="form-group">
             <label for="txtOptimizerSavingNewName" data-bind="text: ko.i18n('cs.manager.pleaseProvideNameMessage', 'Please provide a name for your new concept set:')"></label>
             </br>
-            <input placeholder="Concept Set Name" id="txtOptimizerSavingNewName" class="form-control optimizer-new-name" type="text" data-bind="textInput: optimizerSavingNewName" />
+            <input placeholder="Concept Set Name" id="txtOptimizerSavingNewName" class="form-control optimizer-new-name" type="text" data-bind="textInput: optimizerSavingNewName">
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-primary" data-bind="click: saveNewOptimizedConceptSet, text: ko.i18n('cs.manager.saveButton', 'Save')"></button>
               <button type="button" class="btn btn-sm btn-danger" data-bind="click: cancelSaveNewOptimizedConceptSet, text: ko.i18n('cs.manager.cancelButton', 'Cancel')"></button>

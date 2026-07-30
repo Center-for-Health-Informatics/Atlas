@@ -1,15 +1,22 @@
 import {
   AuthorizedRoute
 } from 'pages/Route'
-import './components/characterizations/characterization-view-edit'
 
+// Every route here loads its view component dynamically, like every other
+// page's routes.js. `characterization-view-edit` used to be a static import at
+// the top of this file -- the only static component import in any routes.js --
+// which put the whole characterizations component tree into the eager Router
+// chunk, and with it conceptset-list, cohort-definition-browser,
+// ConceptSetStore and JSZip. See MIGRATION_STATUS.md.
 function routes (router) {
   const characterizationViewEdit = new AuthorizedRoute((id, section, subId) => {
-    router.setCurrentView('characterization-view-edit', {
-      characterizationId: id,
-      section: section || 'design',
-      executionId: section === 'results' ? subId : null,
-      sourceId: section === 'executions' ? subId : null,
+    import('./components/characterizations/characterization-view-edit').then(() => {
+      router.setCurrentView('characterization-view-edit', {
+        characterizationId: id,
+        section: section || 'design',
+        executionId: section === 'results' ? subId : null,
+        sourceId: section === 'executions' ? subId : null,
+      })
     })
   })
 
@@ -29,10 +36,12 @@ function routes (router) {
       })
     }),
     'cc/characterizations/:id:/version/:version:': new AuthorizedRoute((id, version) => {
-      router.setCurrentView('characterization-view-edit', {
-        characterizationId: id,
-        section: 'design',
-        version
+      import('./components/characterizations/characterization-view-edit').then(() => {
+        router.setCurrentView('characterization-view-edit', {
+          characterizationId: id,
+          section: 'design',
+          version
+        })
       })
     }),
     'cc/characterizations/:id:': characterizationViewEdit,

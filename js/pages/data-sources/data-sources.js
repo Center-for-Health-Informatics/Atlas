@@ -21,6 +21,7 @@ import './components/reports/observation'
 import './components/reports/death'
 import './components/reports/observation-period'
 import './data-sources.less'
+import 'components/ac-access-denied'
 
 class DataSources extends Page {
   constructor (params) {

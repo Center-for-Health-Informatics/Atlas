@@ -26,12 +26,12 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <select class="form-control" data-bind="css : { invalid: $component.reportReportName()==undefined }, options:$root.reports(), optionsCaption:'Select a Report', value:$component.reportReportName"></select>
+      <select class="form-control" data-bind="css : { invalid: $component.reportReportName()==undefined }, options:$component.reports(), optionsCaption:'Select a Report', value:$component.reportReportName"></select>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <select class="form-control" data-bind="css : { invalid: $component.reportSourceKey()==undefined }, options:$component.sharedState.sources().filter($root.hasResults), optionsValue:'sourceKey', optionsText:'sourceName', value:$component.reportSourceKey, optionsCaption: ko.i18n('dataSources.selectASource', 'Select a Source')"></select>
+      <select class="form-control" data-bind="css : { invalid: $component.reportSourceKey()==undefined }, options:$component.sharedState.sources().filter($component.hasResults), optionsValue:'sourceKey', optionsText:'sourceName', value:$component.reportSourceKey, optionsCaption: ko.i18n('dataSources.selectASource', 'Select a Source')"></select>
     </div>
   </div>
   <div class="row">

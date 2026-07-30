@@ -30,6 +30,7 @@ import 'components/heading'
 import 'components/authorship'
 import 'components/name-validation'
 import 'components/versions/versions'
+import 'components/ac-access-denied'
 
 class PathwaysManager extends AutoBind(Page) {
   constructor (params) {

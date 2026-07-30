@@ -9,6 +9,8 @@ import commonUtils from 'utils/CommonUtils'
 import datatableUtils from 'utils/DatatableUtils'
 import './browser.less'
 import 'components/heading'
+import 'faceted-datatable'
+import 'components/ac-access-denied'
 
 class ReusablesBrowser extends Page {
   constructor (params) {

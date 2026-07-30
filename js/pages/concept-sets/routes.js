@@ -2,8 +2,7 @@ import { AuthorizedRoute } from 'pages/Route'
 
 function routes (router) {
   const detailsRoute = new AuthorizedRoute((conceptSetId, mode = 'conceptset-expression') => {
-    Promise.all([import('./conceptset-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('components/conceptset/concept-modal')]).then(() => {
-      // sharedState.activeConceptSet(ConceptSetStore.getStore(ConceptSetStore.sourceKeys().repository));
+    import('./conceptset-manager').then(() => {
       router.setCurrentView('conceptset-manager', {
         conceptSetId: conceptSetId && parseInt(conceptSetId),
         mode,

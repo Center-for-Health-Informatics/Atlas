@@ -8,6 +8,8 @@ import commonUtils from 'utils/CommonUtils'
 import datatableUtils from 'utils/DatatableUtils'
 import './browser.less'
 import 'components/heading'
+import 'faceted-datatable'
+import 'components/ac-access-denied'
 
 class PathwaysBrowser extends Page {
   constructor (params) {

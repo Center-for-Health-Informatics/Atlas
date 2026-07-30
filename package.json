@@ -1,6 +1,6 @@
 {
   "name": "@chi/atlas",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "is an open source software tool for researchers to conduct scientific analyses on standardized observational data converted to the OMOP Common Data Model V5",
   "main": "js/main.js",
   "type": "module",
@@ -12,6 +12,7 @@
     "build:dev": "vite build --config vite.config.js",
     "build:docker": "npm run clean && npm run genversion && npm run build:dev && npm prune --production",
     "genversion": "node build/genversion.js",
+    "check:registrations": "node build/check-registrations.mjs",
     "test": "node --import ./tests/register-hooks.js --test",
     "lint": "eslint \"js/**/*.js\" \"tests/**/*.js\"",
     "lint:fix": "eslint --fix \"js/**/*.js\" \"tests/**/*.js\""

@@ -11,6 +11,9 @@ import ReusablesService from 'services/ReusablesService'
 import Reusable from 'services/Reusable'
 import './from-reusables-modal.less'
 import 'databindings'
+import 'faceted-datatable'
+import 'components/cohortbuilder/components'
+import 'circe'
 
 class FromReusablesModal extends AutoBind(Component) {
   constructor (params) {

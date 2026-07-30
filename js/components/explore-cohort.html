@@ -22,23 +22,23 @@
                 facetsOnly: true,
               }"></faceted-datatable-cf-profile>
             <div class="col-8 offset-2">
-              <div data-bind="text:$component.membersChosen" />
+              <div data-bind="text:$component.membersChosen"></div>
               <div data-bind="foreach:$component.facets">
-                <div data-bind="text:$component.selectedDesc($data)" />
+                <div data-bind="text:$component.selectedDesc($data)"></div>
               </div>
               <div data-bind="if: !$component.someMembers().length">
                 <span data-bind="text: ko.i18n('components.exploreCohort.fetchingFirst', 'Fetching first')"></span>
-                <span data-bind="text:$component.defaultFetchMax"/>
+                <span data-bind="text:$component.defaultFetchMax"></span>
                 <span data-bind="text: ko.i18n('components.exploreCohort.members', 'members')"></span>
               </div>
               <div data-bind="if: $component.someMembers().length">
                 <span data-bind="text:$component.someMembers().length === $component.defaultFetchMax
-                                  ? 'First' : 'Found'"/>
-                <span data-bind="text:$component.someMembers().length"/>
+                                  ? 'First' : 'Found'"></span>
+                <span data-bind="text:$component.someMembers().length"></span>
                 <span data-bind="text: ko.i18n('components.exploreCohort.members', 'members')"></span>:
               </div>
               <div data-bind="foreach:$component.someMembers">
-                <a data-bind="text:personId, attr: {href: url}" target="_blank" />
+                <a data-bind="text:personId, attr: {href: url}" target="_blank"></a>
               </div>
             </div>
           </div>

@@ -1,17 +1,37 @@
 import { AuthorizedRoute } from 'pages/Route'
 import sharedState from 'atlas-state'
 
+// The module set behind the cohort definition editor, shared by every route
+// that renders `cohort-definition-manager`. It lives in one place because it
+// used to be copy-pasted per route, and the drift is what left four modules
+// both statically and dynamically imported -- Rollup then warns
+// INEFFECTIVE_DYNAMIC_IMPORT and cannot split them out. See MIGRATION_STATUS.md.
+//
+// Leaf Knockout components are deliberately absent here. Each registers itself
+// with `ko.components.register` at module scope, and reaches the page through
+// its parent component's static import (`conceptset-list` -> `expression` ->
+// `conceptset-editor`, `included` -> `concept-modal`), which is the convention
+// everywhere else in js/components. Listing them again as dynamic imports buys
+// nothing and entangles their chunks.
+const loadCohortEditor = () => Promise.all([
+  import('components/cohortbuilder/CohortDefinition'),
+  import('components/atlas.cohort-editor'),
+  import('./cohort-definitions'),
+  import('./cohort-definition-manager'),
+  import('components/explore-cohort'),
+])
+
 function routes (router) {
   return {
     '/cohortdefinitions': new AuthorizedRoute(() => {
-      Promise.all([import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser')]).then(() => {
+      Promise.all([import('./cohort-definitions'), import('./cohort-definition-manager')]).then(() => {
         router.setCurrentView('cohort-definitions')
       })
     }),
 
     '/cohortdefinition/:cohortDefinitionId/samples': new AuthorizedRoute(
       cohortDefinitionId => {
-        Promise.all([import('components/conceptset/ConceptSetStore'), import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort')]).then(() => {
+        loadCohortEditor().then(() => {
         // not re-render component if it was rendered already
           router.setCurrentView('cohort-definition-manager', {
             cohortDefinitionId,
@@ -24,7 +44,7 @@ function routes (router) {
 
     '/cohortdefinition/:cohortDefinitionId/samples/:sourceKey': new AuthorizedRoute(
       (cohortDefinitionId, sourceKey) => {
-        Promise.all([import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort')]).then(() => {
+        loadCohortEditor().then(() => {
           router.setCurrentView('cohort-definition-manager', {
             cohortDefinitionId,
             sourceKey,
@@ -37,7 +57,7 @@ function routes (router) {
 
     '/cohortdefinition/:cohortDefinitionId/samples/:sourceKey/:sampleId': new AuthorizedRoute(
       (cohortDefinitionId, sourceKey, sampleId) => {
-        Promise.all([import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort')]).then(() => {
+        loadCohortEditor().then(() => {
           router.setCurrentView('cohort-definition-manager', {
             cohortDefinitionId,
             sampleId,
@@ -51,9 +71,11 @@ function routes (router) {
 
     '/cohortdefinition/:cohortDefinitionId/conceptsets/:conceptSetId/:mode': new AuthorizedRoute(
       (cohortDefinitionId, conceptSetId, mode) => {
-        Promise.all([import('components/conceptset/ConceptSetStore'), import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort')]).then(([{ default: ConceptSetStore }]) => {
+        // `sharedState.activeConceptSet` is primed by
+        // cohort-definition-manager's `loadConceptSet`, which is the single
+        // funnel for a route-supplied conceptSetId.
+        loadCohortEditor().then(() => {
           sharedState.CohortDefinition.mode('conceptsets')
-          sharedState.activeConceptSet(ConceptSetStore.cohortDefinition())
           router.setCurrentView('cohort-definition-manager', {
             cohortDefinitionId,
             mode: 'conceptsets',
@@ -64,7 +86,7 @@ function routes (router) {
 
     '/cohortdefinition/:cohortDefinitionId/version/:version': new AuthorizedRoute(
       (cohortDefinitionId, version) => {
-        Promise.all([import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('components/conceptset/concept-modal')]).then(() => {
+        loadCohortEditor().then(() => {
           router.setCurrentView('cohort-definition-manager', {
             cohortDefinitionId,
             version,
@@ -77,7 +99,7 @@ function routes (router) {
 
     // eslint-disable-next-line no-useless-escape -- this route pattern is compiled into a RegExp by director; \w must be preserved
     '/cohortdefinition/:cohortDefinitionId:/?((\w|.)*)': new AuthorizedRoute((cohortDefinitionId, path = 'definition') => {
-      Promise.all([import('components/cohortbuilder/CohortDefinition'), import('components/atlas.cohort-editor'), import('./cohort-definitions'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser'), import('conceptset-editor'), import('./components/reporting/cost-utilization/report-manager'), import('components/explore-cohort'), import('components/conceptset/concept-modal')]).then(() => {
+      loadCohortEditor().then(() => {
         // Determine the view to show on the cohort manager screen based on the path
         path = path.split('/')
         let view = 'definition'
@@ -102,7 +124,8 @@ function routes (router) {
     }),
 
     '/reports': new AuthorizedRoute(() => {
-      Promise.all([import('./components/reporting/cost-utilization/report-manager'), import('./cohort-definition-manager'), import('components/entityBrowsers/cohort-definition-browser')]).then(() => {
+      // `report-manager` arrives with the manager, whose template binds the tag
+      import('./cohort-definition-manager').then(() => {
         router.setCurrentView('report-manager')
       })
     }),

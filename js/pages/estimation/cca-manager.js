@@ -33,6 +33,7 @@ import 'components/checks/warnings'
 import 'components/heading'
 import 'components/authorship'
 import 'components/name-validation'
+import 'components/analysisExecution/analysis-execution-list'
 
 class ComparativeCohortAnalysisManager extends Page {
   constructor (params) {

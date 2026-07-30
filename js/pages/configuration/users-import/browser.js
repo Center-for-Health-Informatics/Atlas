@@ -11,6 +11,9 @@ import jobService from './services/JobService'
 import Const from './const'
 import Utils from './utils'
 import './browser.less'
+import 'components/heading'
+import 'components/ac-access-denied'
+import 'faceted-datatable'
 
 class UserImportBrowser extends AutoBind(Component) {
   constructor (params) {

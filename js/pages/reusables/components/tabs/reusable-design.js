@@ -9,6 +9,8 @@ import ConceptSetStore from 'components/conceptset/ConceptSetStore'
 import conceptSetUtils from 'components/conceptset/utils'
 import constants from 'const'
 import './reusable-design.less'
+import 'components/cohortbuilder/components'
+import 'circe'
 
 class ReusableEditor extends AutoBind(Component) {
   constructor (params) {

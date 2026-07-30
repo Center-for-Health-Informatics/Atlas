@@ -7,6 +7,7 @@ import 'databindings'
 import './tabbed-grid.less'
 import 'components/heading'
 import 'faceted-datatable'
+import 'components/ac-access-denied'
 
 class CharacterizationsTabbedGrid extends Component {
   constructor (params) {

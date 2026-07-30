@@ -4,7 +4,7 @@ function routes (router) {
   return {
     // eslint-disable-next-line no-useless-escape -- this route pattern is compiled into a RegExp by director; \w must be preserved
     '/profiles/?((\w|.)*)': new AuthorizedRoute((path) => {
-      Promise.all([import('./profile-manager'), import('components/entityBrowsers/cohort-definition-browser')]).then(() => {
+      import('./profile-manager').then(() => {
         path = path.split('/')
         const params = {}
         params.sourceKey = (path[0] || null)

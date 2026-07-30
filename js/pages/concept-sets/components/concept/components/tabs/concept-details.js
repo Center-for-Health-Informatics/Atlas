@@ -3,6 +3,7 @@ import Component from 'components/Component'
 import commonUtils from 'utils/CommonUtils'
 import momentApi from 'services/MomentAPI'
 import './concept-details.less'
+import 'components/ac-access-denied'
 
 class ConceptDetails extends Component {
   constructor (params) {

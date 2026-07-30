@@ -35,6 +35,7 @@ import 'components/checks/warnings'
 import 'components/heading'
 import 'components/authorship'
 import 'components/name-validation'
+import 'components/analysisExecution/analysis-execution-list'
 
 const NOT_FOUND = 'NOT FOUND'
 

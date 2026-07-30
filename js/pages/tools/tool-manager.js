@@ -8,6 +8,8 @@ import momentApi from 'services/MomentAPI'
 import * as PermissionService from './PermissionService'
 import '../../styles/switch-button.css'
 import './tool-management.less'
+import 'components/heading'
+import 'components/ac-access-denied'
 
 class ToolManage extends Page {
   constructor (params) {

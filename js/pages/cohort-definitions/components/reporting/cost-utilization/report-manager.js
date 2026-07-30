@@ -16,6 +16,7 @@ import { nestEntries } from 'utils/D3NestCompat'
 import 'databindings'
 import 'faceted-datatable'
 import 'colvis'
+import 'components/entityBrowsers/cohort-definition-browser'
 import './persons-exposure'
 import './visit-util'
 import './drug-util'
@@ -37,17 +38,38 @@ class ReportManager extends Component {
     this.costUtilConst = costUtilConst
     this.activeReportDrilldown = ko.observable(false)
     this._loadingReportDrilldown = ko.observable(false)
-    this.reportSourceKey = params.reportSourceKey
-    this.reportReportName = params.reportReportName
+
+    // Backing for the `showSelectionArea` block of the template, which is only
+    // rendered on the standalone /reports route. It used to read `$root.reports`
+    // and `$root.hasResults` off the cohort definition manager; neither has
+    // existed there for a long time, and `$component.sharedState` was never
+    // assigned at all, so the route threw on bind. The report keys are the same
+    // strings `runReport` switches on, taken from their single source of truth.
+    this.sharedState = sharedState
+    this.reports = ko.observableArray(
+      [...new Set(Object.values(this.visualizationPacks)
+        .map(pack => ko.unwrap(pack.reportKey))
+        .filter(Boolean))].sort()
+    )
+    this.hasResults = source => source.daimons.some(daimon => daimon.daimonType === 'Results')
+
+    // As a child of cohort-definition-manager these all arrive as observables
+    // owned by the parent. On the standalone /reports route the component is
+    // rendered with no params at all and picks the cohort/source itself through
+    // the selection area, so it has to own them -- without the fallbacks the
+    // reportValid computed below calls undefined and the route dies.
+    this.reportSourceKey = params.reportSourceKey || ko.observable()
+    this.reportReportName = params.reportReportName || ko.observable()
     this.currentReport = ko.observable()
+    const loadingReport = params.loadingReport || ko.observable(false)
 
     // Setting 'ko.options.deferUpdates = true' in PR #2084 breaks rendering of reports and charts
     // we need explicitly call for 'ko.tasks.runEarly' method
     // TODO: Needs to be refactored in 2.8.1
     this.loadingReport = ko.pureComputed({
-      read: () => params.loadingReport(),
+      read: () => loadingReport(),
       write: isLoading => {
-        params.loadingReport(isLoading)
+        loadingReport(isLoading)
         ko.tasks.runEarly()
       }
     })
@@ -59,8 +81,8 @@ class ReportManager extends Component {
       }
     })
 
-    this.reportTriggerRun = params.reportTriggerRun
-    this.reportCohortDefinitionId = params.reportCohortDefinitionId
+    this.reportTriggerRun = params.reportTriggerRun || ko.observable(false)
+    this.reportCohortDefinitionId = params.reportCohortDefinitionId || ko.observable()
     this.reportValid = ko.computed(() => {
       return (
         this.reportReportName() !== undefined &&

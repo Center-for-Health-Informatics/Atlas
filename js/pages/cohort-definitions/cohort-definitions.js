@@ -9,6 +9,7 @@ import constants from 'pages/cohort-definitions/const'
 import 'databindings'
 import 'faceted-datatable'
 import 'components/heading'
+import 'components/entityBrowsers/cohort-definition-browser'
 import './cohort-definitions.less'
 
 class CohortDefinitions extends Page {

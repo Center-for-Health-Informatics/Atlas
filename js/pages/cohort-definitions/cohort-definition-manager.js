@@ -57,6 +57,7 @@ import 'components/conceptset/conceptset-list'
 import 'components/name-validation'
 import 'components/versions/versions'
 import 'databindings/tooltipBinding'
+import './components/reporting/cost-utilization/report-manager'
 
 const includeKeys = ['UseEventEnd']
 function pruneJSON (key, value) {
@@ -1465,6 +1466,11 @@ class CohortDefinitionManager extends AutoBind(Clipboard(Page)) {
   loadConceptSet (conceptSetId) {
     this.conceptSetStore.current(this.conceptSets()().find(item => item.id === conceptSetId))
     this.conceptSetStore.isEditable(this.canEdit())
+    // Point the shared "add concepts to this set" target at this cohort
+    // definition's store, so /search knows where to add to. Previously done by
+    // the conceptsets route in routes.js, which needed a dynamic import of
+    // ConceptSetStore just for the binding.
+    sharedState.activeConceptSet(this.conceptSetStore)
     commonUtils.routeTo(`/cohortdefinition/${this.currentCohortDefinition().id()}/conceptsets/`)
   }
 

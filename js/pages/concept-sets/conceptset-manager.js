@@ -33,6 +33,9 @@ import 'components/tabs'
 import 'components/modal'
 import './components/tabs/conceptset-expression'
 import 'components/conceptset/included'
+// `included` registers the tab body; the tab's hasBadge flag makes components/tabs
+// render `${componentName}-badge`, so the badge needs registering here too.
+import 'components/conceptset/included-badge'
 import 'components/conceptset/included-sourcecodes'
 import 'components/conceptset/recommend'
 import 'components/conceptset/import'
@@ -44,6 +47,8 @@ import 'components/tags/modal/tags-modal'
 import 'components/authorship'
 import 'components/name-validation'
 import 'components/ac-access-denied'
+// the 'warnings' tab, plus its badge (warnings.js imports ./warnings-badge)
+import 'components/checks/warnings'
 import 'components/versions/versions'
 import './components/tabs/conceptset-annotation'
 import './components/tabs/resolve-mappings'

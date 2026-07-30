@@ -15,6 +15,7 @@ import 'components/tabs'
 import './components/job-scheduler'
 import './components/role-group-mapping'
 import './components/job-history'
+import 'components/heading'
 
 const EMPTY_JOB = {
   enabled: true,

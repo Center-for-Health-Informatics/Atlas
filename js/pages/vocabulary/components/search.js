@@ -21,6 +21,7 @@ import 'components/empty-state'
 import 'components/conceptLegend/concept-legend'
 import 'components/conceptAddBox/concept-add-box'
 import './search.less'
+import 'components/ac-access-denied'
 
 class Search extends AutoBind(Component) {
   constructor (params) {

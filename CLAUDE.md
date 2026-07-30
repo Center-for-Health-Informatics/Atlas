@@ -22,6 +22,9 @@ npm test
 npm run lint
 npm run lint:fix
 
+# Check that every route registers the Knockout components it references
+npm run check:registrations
+
 # Full build (install + clean + generate version + vite build)
 npm run build
 
@@ -57,6 +60,8 @@ The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json`
 ### UI framework
 
 **Knockout.js 3.5** with `ko.options.deferUpdates = true`. Components follow the `.js` + `.html` + optional `.less` pattern. The base `Component` class in `js/components/Component.js` provides BEM CSS helpers, subscription cleanup, and `isAuthenticated`.
+
+Components register themselves as a **side effect of their module body running**, so the module whose template contains `<foo-bar>` must import `foo-bar` — that convention is the only thing guaranteeing the component exists when the route loads. Breaking it usually appears to work, because some unrelated eager module happens to have loaded the registration already, and then breaks the day that path goes lazy. `npm run check:registrations` (`build/check-registrations.mjs`) enforces this statically per route; run it after changing any `routes.js` or any import graph. Browser smoke tests do **not** catch these — the references typically sit behind a condition a smoke test never reaches (`<access-denied>` renders only for a user without permission, others live in modals and inactive tabs).
 
 ### Pages
 

@@ -12,7 +12,7 @@
     "build:dev": "vite build --config vite.config.js",
     "build:docker": "npm run clean && npm run genversion && npm run build:dev && npm prune --production",
     "genversion": "node build/genversion.js",
-    "check:registrations": "node build/check-registrations.mjs",
+    "check:registrations": "node build/check-registrations.js",
     "test": "node --import ./tests/register-hooks.js --test",
     "lint": "eslint \"js/**/*.js\" \"tests/**/*.js\"",
     "lint:fix": "eslint --fix \"js/**/*.js\" \"tests/**/*.js\""

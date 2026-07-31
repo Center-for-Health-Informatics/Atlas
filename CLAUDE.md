@@ -48,6 +48,17 @@ The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json`
 
 `vite.config.js` carries a large `resolve.alias` list that maps the old RequireJS-style bare module names (`'appConfig'`, `'atlas-state'`, `'const'`, `'services/...'`, `'pages/...'`, etc.) to real file paths, plus aliases for npm packages that ship non-standard entry points. When you see an import like `import sharedState from 'atlas-state'`, check `vite.config.js` to find what it actually resolves to.
 
+### File naming
+
+**Everything is `.js` — never add a `.mjs` file.** `package.json` declares `"type": "module"`, so `.js` is already ESM and the extension buys nothing; the last six `.mjs` files were renamed on 2026-07-30. This applies to build scripts, configs and test helpers too, not just app source (`vite.config.js`, `eslint.config.js`, `build/*.js`, `tests/hooks.js`).
+
+Two naming styles, split by what the module *is*:
+
+- **kebab-case** for Knockout component modules — the `.js` + `.html` + optional `.less` trio sharing one basename (`faceted-datatable.js`, `concept-add-box.js`). 207 of 219 component modules follow this.
+- **PascalCase** for class, service and utility modules (`CommonUtils.js`, `ConceptSetStore.js`, `AutoBind.js`, `Component.js`).
+
+A component file's basename usually equals the component name it registers, but **not reliably — 67 of 204 differ** (`ac-access-denied.js` registers `access-denied`, `heading.js` registers `heading-title`, `modal.js` registers `atlas-modal`, `DropDownMenu.js` registers `drop-down-menu`). Don't infer the filename from a tag you see in a template; grep for the `ko.components.register` / `commonUtils.build` call, or let `npm run check:registrations` tell you which file registers it.
+
 ### Core wiring
 
 - **Entry point**: `index.html` → `<script type="module" src="/js/main.js">` loads core deps/styles, then bootstraps the app. `js/main.js` writes step-by-step load progress to `console.log`/`document.title` when `process.env.NODE_ENV !== 'production'`, to make module-load failures easy to spot during development — silent in production builds.
@@ -63,7 +74,7 @@ The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json`
 
 Components register themselves as a **side effect of their module body running**, so the module whose template contains `<foo-bar>` must import `foo-bar` — that convention is the only thing guaranteeing the component exists when the route loads. Breaking it usually appears to work, because some unrelated eager module happens to have loaded the registration already, and then breaks the day that path goes lazy.
 
-`npm run check:registrations` (`build/check-registrations.mjs`) enforces this statically, and runs two passes:
+`npm run check:registrations` (`build/check-registrations.js`) enforces this statically, and runs two passes:
 
 1. **Per route** — a component a route references but nothing in that route's import closure registers. This is a live bug: the page throws `Unknown component` the moment that reference is reached.
 2. **Per module** — a module whose own template references a component its own import closure never reaches, so it works only because a sibling on the same route loaded the registration. Not broken today, but this is the state every bug of the first kind started in. The fix is a bare `import 'foo-bar'`, which is free: these all land in lazy chunks (adding 42 of them moved the boot payload by 58 bytes).

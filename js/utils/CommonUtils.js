@@ -74,10 +74,6 @@ function contextSensitiveLinkColor (row, data) {
     .addClass(getConceptLinkClass(data))
 }
 
-function highlightRow (row, cssClass) {
-  $(row).addClass(cssClass)
-}
-
 function hasCDM (source) {
   return source.daimons.find(daimon => daimon.daimonType === 'CDM') !== undefined
 }
@@ -96,11 +92,6 @@ function renderLink (s, p, d) {
 
 function renderBoundLink (s, p, d) {
   return renderLink(s, p, d.concept)
-}
-
-const renderHierarchyLink = function (d) {
-  const valid = d.INVALID_REASON_CAPTION === 'Invalid' || d.STANDARD_CONCEPT !== 'S' ? 'invalid' : ''
-  return '<a class="' + valid + '" href="#/concept/' + d.CONCEPT_ID + '">' + d.CONCEPT_NAME + '</a>'
 }
 
 const syntaxHighlight = function (json) {
@@ -211,5 +202,5 @@ const getTableOptions = (variant = 'M') => {
   }), {})
 }
 
-export { build, confirmAndDelete, cartesian, routeTo, hasRelationship, contextSensitiveLinkColor, hasCDM, hasResults, renderLink, renderBoundLink, renderHierarchyLink, syntaxHighlight, getPathwaysUrl, normalizeUrl, toggleConceptSetCheckbox, selectAllFilteredItems, escapeTooltip, highlightRow, buildConceptSetItems, getSelectedConcepts, getUniqueIdentifier, clearConceptsSelectionState, formatDateForAuthorship, isNameCharactersValid, isNameLengthValid, getTableOptions, getConceptLinkClass }
-export default { build, confirmAndDelete, cartesian, routeTo, hasRelationship, contextSensitiveLinkColor, hasCDM, hasResults, renderLink, renderBoundLink, renderHierarchyLink, syntaxHighlight, getPathwaysUrl, normalizeUrl, toggleConceptSetCheckbox, selectAllFilteredItems, escapeTooltip, highlightRow, buildConceptSetItems, getSelectedConcepts, getUniqueIdentifier, clearConceptsSelectionState, formatDateForAuthorship, isNameCharactersValid, isNameLengthValid, getTableOptions, getConceptLinkClass }
+export { build, confirmAndDelete, cartesian, routeTo, hasRelationship, contextSensitiveLinkColor, hasCDM, hasResults, renderLink, renderBoundLink, syntaxHighlight, getPathwaysUrl, normalizeUrl, toggleConceptSetCheckbox, selectAllFilteredItems, escapeTooltip, buildConceptSetItems, getSelectedConcepts, getUniqueIdentifier, clearConceptsSelectionState, formatDateForAuthorship, isNameCharactersValid, isNameLengthValid, getTableOptions, getConceptLinkClass }
+export default { build, confirmAndDelete, cartesian, routeTo, hasRelationship, contextSensitiveLinkColor, hasCDM, hasResults, renderLink, renderBoundLink, syntaxHighlight, getPathwaysUrl, normalizeUrl, toggleConceptSetCheckbox, selectAllFilteredItems, escapeTooltip, buildConceptSetItems, getSelectedConcepts, getUniqueIdentifier, clearConceptsSelectionState, formatDateForAuthorship, isNameCharactersValid, isNameLengthValid, getTableOptions, getConceptLinkClass }

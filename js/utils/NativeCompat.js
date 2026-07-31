@@ -142,12 +142,6 @@ export function uniqBy (array, iteratee) {
   })
 }
 
-export function xor (a, b) {
-  const setA = new Set(a)
-  const setB = new Set(b)
-  return [...a.filter((x) => !setB.has(x)), ...b.filter((x) => !setA.has(x))]
-}
-
 export function range (start, end, step) {
   if (end === undefined) {
     end = start

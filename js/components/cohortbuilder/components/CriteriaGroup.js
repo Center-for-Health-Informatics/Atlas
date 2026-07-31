@@ -7,7 +7,6 @@ import options from '../options'
 import utils from '../utils'
 import constants from '../const'
 import template from './CriteriaGroupTemplate.html?raw'
-import 'components/DropDownMenu'
 import 'components/from-reusables-modal/from-reusables-modal'
 import './CriteriaGroup.less'
 

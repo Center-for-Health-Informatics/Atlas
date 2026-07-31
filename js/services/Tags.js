@@ -52,10 +52,6 @@ function createNewTag (tag) {
   return httpService.doPost(config.webAPIRoot + 'tag/', tag)
 }
 
-function getTag (id) {
-  return httpService.doGet(config.webAPIRoot + `tag/${id}`)
-}
-
 function updateTag (tag) {
   return httpService.doPut(config.webAPIRoot + `tag/${tag.id}`, tag)
 }
@@ -142,5 +138,5 @@ function decorateComponent (component, { assetTypeGetter, assetGetter, addTagToA
   }
 }
 
-export { ASSET_TYPE, assignTag, unassignTag, loadTagsSuggestions, decorateComponent, loadAvailableTags, getAssignmentPermissions, multiAssign, multiUnassign, createNewTag, getTag, updateTag, deleteTag }
-export default { ASSET_TYPE, assignTag, unassignTag, loadTagsSuggestions, decorateComponent, loadAvailableTags, getAssignmentPermissions, multiAssign, multiUnassign, createNewTag, getTag, updateTag, deleteTag }
+export { ASSET_TYPE, assignTag, unassignTag, loadTagsSuggestions, decorateComponent, loadAvailableTags, getAssignmentPermissions, multiAssign, multiUnassign, createNewTag, updateTag, deleteTag }
+export default { ASSET_TYPE, assignTag, unassignTag, loadTagsSuggestions, decorateComponent, loadAvailableTags, getAssignmentPermissions, multiAssign, multiUnassign, createNewTag, updateTag, deleteTag }

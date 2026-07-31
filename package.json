@@ -65,7 +65,6 @@
     "knockout-sortable": "^1.2.2",
     "less": "^4.7.0",
     "lodash": "^4.17.21",
-    "lz-string": "^1.4.4",
     "papaparse": "^5.3.2",
     "pdfmake": "^0.2.23",
     "prismjs": "^1.29.0",

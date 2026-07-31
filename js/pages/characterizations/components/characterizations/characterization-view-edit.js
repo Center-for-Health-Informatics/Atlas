@@ -14,7 +14,7 @@ import Page from 'pages/Page'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import exceptionUtils from 'utils/ExceptionUtils'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import constants from 'const'
 import { get } from 'utils/NativeCompat'
 import './characterization-view-edit.less'
@@ -252,7 +252,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
   setupDesign (design) {
     this.design(design)
     // eslint-disable-next-line new-cap -- ohdsi.util exposes a lowercase constructor
-    this.designDirtyFlag(new ohdsiUtil.dirtyFlag(this.design()))
+    this.designDirtyFlag(new dirtyFlag(this.design()))
   }
 
   diagnose () {
@@ -312,7 +312,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
         if (ccId < 1) {
           const newCharacterization = await CharacterizationService.createCharacterization(this.design())
           // eslint-disable-next-line new-cap -- ohdsi.util exposes a lowercase constructor
-          this.designDirtyFlag(new ohdsiUtil.dirtyFlag(this.design))
+          this.designDirtyFlag(new dirtyFlag(this.design))
           commonUtils.routeTo(`/cc/characterizations/${newCharacterization.id}/${this.selectedTabKey()}`)
         } else {
           const updatedCharacterization = await CharacterizationService.updateCharacterization(ccId, this.design())
@@ -349,7 +349,7 @@ class CharacterizationViewEdit extends AutoBind(Page) {
         .then(res => {
           this.loading(false)
           // eslint-disable-next-line new-cap -- ohdsi.util exposes a lowercase constructor
-          this.designDirtyFlag(new ohdsiUtil.dirtyFlag(this.design))
+          this.designDirtyFlag(new dirtyFlag(this.design))
           this.closeCharacterization()
         })
     }

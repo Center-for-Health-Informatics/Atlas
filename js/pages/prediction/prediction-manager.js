@@ -3,7 +3,7 @@ import view from './prediction-manager.html?raw'
 import Page from 'pages/Page'
 import router from 'pages/Router'
 import commonUtils from 'utils/CommonUtils'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import config from 'appConfig'
 import constants from './const'
 import globalConstants from 'const'
@@ -226,8 +226,8 @@ class PatientLevelPredictionManager extends Page {
     this.selectedAnalysisId(null)
     this.targetCohorts.removeAll()
     this.outcomeCohorts.removeAll()
-    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.patientLevelPredictionAnalysis()))
+    // eslint-disable-next-line new-cap -- dirtyFlag is a lowercase factory function
+    this.dirtyFlag(new dirtyFlag(this.patientLevelPredictionAnalysis()))
     document.location = constants.paths.browser()
   }
 
@@ -260,8 +260,8 @@ class PatientLevelPredictionManager extends Page {
     this.selectedAnalysisId(null)
     this.targetCohorts.removeAll()
     this.outcomeCohorts.removeAll()
-    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.patientLevelPredictionAnalysis()))
+    // eslint-disable-next-line new-cap -- dirtyFlag is a lowercase factory function
+    this.dirtyFlag(new dirtyFlag(this.patientLevelPredictionAnalysis()))
     document.location = constants.paths.browser()
   }
 
@@ -382,8 +382,8 @@ class PatientLevelPredictionManager extends Page {
   }
 
   resetDirtyFlag () {
-    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag({ analysis: this.patientLevelPredictionAnalysis(), targetCohorts: this.targetCohorts, outcomeCohorts: this.outcomeCohorts }))
+    // eslint-disable-next-line new-cap -- dirtyFlag is a lowercase factory function
+    this.dirtyFlag(new dirtyFlag({ analysis: this.patientLevelPredictionAnalysis(), targetCohorts: this.targetCohorts, outcomeCohorts: this.outcomeCohorts }))
   }
 
   loadAnalysisFromServer (analysis) {

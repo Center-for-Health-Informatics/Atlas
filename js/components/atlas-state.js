@@ -1,5 +1,5 @@
 import ko from 'knockout'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import constants from 'const-state'
 
 const state = {}
@@ -58,7 +58,7 @@ state.IRAnalysis = {
   previewVersion: ko.observable(null),
 }
 // eslint-disable-next-line new-cap
-state.IRAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.IRAnalysis.current()))
+state.IRAnalysis.dirtyFlag = ko.observable(new dirtyFlag(state.IRAnalysis.current()))
 
 // Cohort characterizations
 state.CohortCharacterization = {
@@ -67,7 +67,7 @@ state.CohortCharacterization = {
   previewVersion: ko.observable(null),
 }
 // eslint-disable-next-line new-cap
-state.CohortCharacterization.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.CohortCharacterization.current()))
+state.CohortCharacterization.dirtyFlag = ko.observable(new dirtyFlag(state.CohortCharacterization.current()))
 
 state.FeatureAnalysis = {
   current: ko.observable(null),
@@ -76,11 +76,11 @@ state.FeatureAnalysis = {
 state.FeatureAnalysis.current.subscribe(newValue => {
   if (newValue != null) {
     // eslint-disable-next-line new-cap
-    state.FeatureAnalysis.dirtyFlag(new ohdsiUtil.dirtyFlag(state.FeatureAnalysis.current()))
+    state.FeatureAnalysis.dirtyFlag(new dirtyFlag(state.FeatureAnalysis.current()))
   }
 })
 // eslint-disable-next-line new-cap
-state.FeatureAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.FeatureAnalysis.current()))
+state.FeatureAnalysis.dirtyFlag = ko.observable(new dirtyFlag(state.FeatureAnalysis.current()))
 
 // Pathways State
 state.CohortPathways = {
@@ -89,7 +89,7 @@ state.CohortPathways = {
   previewVersion: ko.observable(null)
 }
 // eslint-disable-next-line new-cap
-state.CohortPathways.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.CohortPathways.current()))
+state.CohortPathways.dirtyFlag = ko.observable(new dirtyFlag(state.CohortPathways.current()))
 
 state.estimationAnalysis = {
   current: ko.observable(null),
@@ -98,7 +98,7 @@ state.estimationAnalysis = {
   comparisons: ko.observableArray(),
 }
 // eslint-disable-next-line new-cap
-state.estimationAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.estimationAnalysis.current()))
+state.estimationAnalysis.dirtyFlag = ko.observable(new dirtyFlag(state.estimationAnalysis.current()))
 
 state.predictionAnalysis = {
   current: ko.observable(null),
@@ -108,7 +108,7 @@ state.predictionAnalysis = {
   outcomeCohorts: ko.observableArray(),
 }
 // eslint-disable-next-line new-cap
-state.predictionAnalysis.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.predictionAnalysis.current()))
+state.predictionAnalysis.dirtyFlag = ko.observable(new dirtyFlag(state.predictionAnalysis.current()))
 
 state.availableLocales = ko.observableArray()
 state.locale = ko.observable()
@@ -118,7 +118,7 @@ state.ConfigurationSource = {
   selectedId: ko.observable(null),
 }
 // eslint-disable-next-line new-cap
-state.ConfigurationSource.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.ConfigurationSource.current()))
+state.ConfigurationSource.dirtyFlag = ko.observable(new dirtyFlag(state.ConfigurationSource.current()))
 
 state.criteriaContext = ko.observable()
 
@@ -147,11 +147,11 @@ state.CohortDefinition = {
   previewVersion: ko.observable()
 }
 // eslint-disable-next-line new-cap
-state.CohortDefinition.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag({ header: state.CohortDefinition.current }))
+state.CohortDefinition.dirtyFlag = ko.observable(new dirtyFlag({ header: state.CohortDefinition.current }))
 state.CohortDefinition.current.subscribe(newValue => {
   if (newValue != null) {
     // eslint-disable-next-line new-cap
-    state.CohortDefinition.dirtyFlag(new ohdsiUtil.dirtyFlag({ header: newValue }))
+    state.CohortDefinition.dirtyFlag(new dirtyFlag({ header: newValue }))
   }
 })
 state.cohortDefinitions = ko.observableArray()
@@ -163,11 +163,11 @@ state.RepositoryConceptSet = {
 }
 
 // eslint-disable-next-line new-cap
-state.RepositoryConceptSet.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.RepositoryConceptSet.current()))
+state.RepositoryConceptSet.dirtyFlag = ko.observable(new dirtyFlag(state.RepositoryConceptSet.current()))
 state.RepositoryConceptSet.current.subscribe(newValue => {
   if (newValue != null) {
     // eslint-disable-next-line new-cap
-    state.RepositoryConceptSet.dirtyFlag(new ohdsiUtil.dirtyFlag(newValue))
+    state.RepositoryConceptSet.dirtyFlag(new dirtyFlag(newValue))
   }
 })
 
@@ -179,6 +179,6 @@ state.Reusable = {
   previewVersion: ko.observable(null)
 }
 // eslint-disable-next-line new-cap
-state.Reusable.dirtyFlag = ko.observable(new ohdsiUtil.dirtyFlag(state.Reusable.current()))
+state.Reusable.dirtyFlag = ko.observable(new dirtyFlag(state.Reusable.current()))
 
 export default state

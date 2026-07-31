@@ -1,6 +1,6 @@
 // Hand-rolled replacement for the small subset of crossfilter2 actually used
-// by this app (faceted-datatable, explore-cohort, ohdsi.util's
-// SharedCrossfilter, profile-manager) -- see .rob/dependency-removal.md.
+// by this app (faceted-datatable, explore-cohort, profile-manager) -- see
+// .rob/dependency-removal.md.
 //
 // Unlike real crossfilter, this recomputes each dimension/group from scratch
 // on every read instead of maintaining incremental sorted indexes. That's

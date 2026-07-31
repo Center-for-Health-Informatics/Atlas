@@ -7,7 +7,7 @@ import commonUtils from 'utils/CommonUtils'
 import Clipboard from 'utils/Clipboard'
 import roleService from 'services/role'
 import { difference } from 'utils/NativeCompat'
-import ohdsiUtils from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import userService from 'services/User'
 import authApi from 'services/AuthAPI'
 import fileService from 'services/file'
@@ -68,13 +68,13 @@ class RoleDetails extends AutoBind(Clipboard(Page)) {
 
     this.loading = ko.observable()
     // eslint-disable-next-line new-cap
-    this.dirtyFlag = ko.observable(new ohdsiUtils.dirtyFlag({
+    this.dirtyFlag = ko.observable(new dirtyFlag({
       role: this.roleName,
       users: this.userItems,
       permissions: this.permissionItems
     }))
     // eslint-disable-next-line new-cap
-    this.roleDirtyFlag = ko.observable(new ohdsiUtils.dirtyFlag({
+    this.roleDirtyFlag = ko.observable(new dirtyFlag({
       role: this.roleName
     }))
 

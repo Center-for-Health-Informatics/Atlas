@@ -6,7 +6,7 @@ import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import config from 'appConfig'
 import vocabularyProvider from 'services/Vocabulary'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import sourceApi from 'services/SourceAPI'
 import roleService from 'services/role'
 import { omit, difference, flatten } from 'utils/NativeCompat'
@@ -218,7 +218,7 @@ class SourceManager extends AutoBind(Page) {
   newSource () {
     this.selectedSource(new Source())
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedSource()))
+    this.dirtyFlag(new dirtyFlag(this.selectedSource()))
   }
 
   supportsKeyfileAuth () {
@@ -356,7 +356,7 @@ class SourceManager extends AutoBind(Page) {
         const source = await sourceApi.getSource(this.selectedSourceId())
         this.selectedSource(new Source(source))
         // eslint-disable-next-line new-cap
-        this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedSource()))
+        this.dirtyFlag(new dirtyFlag(this.selectedSource()))
       } catch (e) {
         console.error(e)
         alert(ko.unwrap(ko.i18nformat('configuration.viewEdit.source.alerts.sourceSelectedError', 'An error occurred while attempting to get a source with id=<%=selectedSourceId%>.', { selectedSourceId: this.selectedSourceId() })))

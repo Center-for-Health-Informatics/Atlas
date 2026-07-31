@@ -3,7 +3,7 @@ import view from './ir-manager.html?raw'
 import IRAnalysisService from 'services/IRAnalysis'
 import cohortAPI from 'services/CohortDefinition'
 import IRAnalysisDefinition from './components/iranalysis/IRAnalysisDefinition'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import config from 'appConfig'
 import sharedState from 'atlas-state'
 import jobDetailsService from 'services/JobDetailsService'
@@ -395,7 +395,7 @@ class IRAnalysisManager extends AutoBind(Page) {
       }
       this.selectedAnalysis(new IRAnalysisDefinition(analysis))
       // eslint-disable-next-line new-cap
-      this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
+      this.dirtyFlag(new dirtyFlag(this.selectedAnalysis()))
       this.tags(analysis.tags)
       this.versionsParams.valueHasMutated()
       this.loading(false)
@@ -478,7 +478,7 @@ class IRAnalysisManager extends AutoBind(Page) {
     this.selectedAnalysis(new IRAnalysisDefinition(analysis))
     this.selectedAnalysisId(analysis.id)
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
+    this.dirtyFlag(new dirtyFlag(this.selectedAnalysis()))
     this.clearResults()
     this.versionsParams.valueHasMutated()
     this.isCopying(false)
@@ -491,7 +491,7 @@ class IRAnalysisManager extends AutoBind(Page) {
     this.selectedAnalysisId(null)
     this.previewVersion(null)
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
+    this.dirtyFlag(new dirtyFlag(this.selectedAnalysis()))
     this.conceptSetStore.clear()
 
     this.sources().forEach(function (source) {
@@ -528,7 +528,7 @@ class IRAnalysisManager extends AutoBind(Page) {
         this.selectedAnalysisId(savedIR.id)
         this.selectedAnalysis(new IRAnalysisDefinition(savedIR))
         // eslint-disable-next-line new-cap
-        this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
+        this.dirtyFlag(new dirtyFlag(this.selectedAnalysis()))
         this.previewVersion(null)
         this.versionsParams.valueHasMutated()
         commonUtils.routeTo(constants.apiPaths.analysis(savedIR.id))
@@ -568,7 +568,7 @@ class IRAnalysisManager extends AutoBind(Page) {
   newAnalysis () {
     this.selectedAnalysis(new IRAnalysisDefinition())
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.selectedAnalysis()))
+    this.dirtyFlag(new dirtyFlag(this.selectedAnalysis()))
   };
 
   execute (sourceKey) {

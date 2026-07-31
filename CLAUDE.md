@@ -44,7 +44,7 @@ The app is served by Vite in dev (`npm run dev`, default port 5173) and built in
 
 ### Module system
 
-The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json` declares `"type": "module"`. A handful of third-party vendor files still use the older UMD/AMD `define(...)` wrapper pattern (e.g. `jquery.ddslick.js`, `jnj.chart.js`, `knockout.selectOnFocus.js`) — these are genuinely still in use and load fine under Vite via bare-specifier aliases in `vite.config.js`, they just haven't been rewritten as ESM since nothing requires it. There is no RequireJS/AMD loader in the app anymore.
+The codebase is **ESM** (`import`/`export`), bundled by **Vite**. `package.json` declares `"type": "module"`. A handful of third-party vendor files still use the older UMD/AMD `define(...)` wrapper pattern (e.g. `jquery.ddslick.js`, `knockout.selectOnFocus.js`) — these are genuinely still in use and load fine under Vite via bare-specifier aliases in `vite.config.js`, they just haven't been rewritten as ESM since nothing requires it. There is no RequireJS/AMD loader in the app anymore.
 
 `vite.config.js` carries a large `resolve.alias` list that maps the old RequireJS-style bare module names (`'appConfig'`, `'atlas-state'`, `'const'`, `'services/...'`, `'pages/...'`, etc.) to real file paths, plus aliases for npm packages that ship non-standard entry points. When you see an import like `import sharedState from 'atlas-state'`, check `vite.config.js` to find what it actually resolves to.
 

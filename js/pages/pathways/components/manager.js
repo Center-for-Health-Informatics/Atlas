@@ -13,7 +13,7 @@ import Page from 'pages/Page'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import exceptionUtils from 'utils/ExceptionUtils'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import constants from 'const'
 import { get } from 'utils/NativeCompat'
 import './manager.less'
@@ -205,7 +205,7 @@ class PathwaysManager extends AutoBind(Page) {
   setupDesign (design) {
     this.design(design)
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.design()))
+    this.dirtyFlag(new dirtyFlag(this.design()))
   }
 
   setupSection (section) {

@@ -1,6 +1,5 @@
 import $ from 'jquery'
 import config from 'appConfig'
-import ohdsiUtil from 'assets/ohdsi.util'
 import authApi from 'services/AuthAPI'
 import momentApi from 'services/MomentAPI'
 import httpService from 'services/http'
@@ -22,7 +21,7 @@ function runExecution (sourceKey, analysisId, analysisType, template) {
 }
 
 function loadExecutions (analysisType, analysisId, callback) {
-  ohdsiUtil.cachedAjax({
+  $.ajax({
     url: `${config.api.url}${executionPath}/${analysisType}/${analysisId}/executions`,
     method: 'GET',
     contentType: 'application/json',

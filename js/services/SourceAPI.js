@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import config from 'appConfig'
 import sharedState from 'atlas-state'
-import ohdsiUtil from 'assets/ohdsi.util'
 import authApi from 'services/AuthAPI'
 import { set as cacheSet, remove as cacheRemove } from 'utils/LocalStorageCache'
 import ko from 'knockout'
@@ -42,7 +41,7 @@ function saveSource (sourceKey, source) {
 }
 
 function getSource (sourceKey) {
-  return ohdsiUtil.cachedAjax({
+  return $.ajax({
     method: 'GET',
     url: config.api.url + 'source/details/' + sourceKey,
     contentType: 'application/json',

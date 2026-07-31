@@ -4,7 +4,7 @@ import sharedState from 'atlas-state'
 import AutoBind from 'utils/AutoBind'
 import Page from 'pages/Page'
 import commonUtils from 'utils/CommonUtils'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import jobService from './services/JobService'
 import userService from 'services/User'
 import roleService from 'services/role'
@@ -117,7 +117,7 @@ class JobViewEdit extends AutoBind(Page) {
     this.weekdays.removeAll()
     job.weekDays.forEach(wd => this.weekdays.push(wd))
     // eslint-disable-next-line new-cap
-    this.jobDirtyFlag(new ohdsiUtil.dirtyFlag(this.job()))
+    this.jobDirtyFlag(new dirtyFlag(this.job()))
     this.jobId.valueHasMutated()
   }
 

@@ -16,7 +16,7 @@ import Page from 'pages/Page'
 import AutoBind from 'utils/AutoBind'
 import commonUtils from 'utils/CommonUtils'
 import Clipboard from 'utils/Clipboard'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import globalConstants from 'const'
 import componentConst from './const'
 import { sortBy } from 'utils/NativeCompat'
@@ -348,8 +348,8 @@ class FeatureAnalysisViewEdit extends AutoBind(Clipboard(Page)) {
     data.modifiedBy(modifiedBy)
     data.modifiedDate(modifiedDate)
     this.data(data)
-    // eslint-disable-next-line new-cap -- ohdsiUtil.dirtyFlag is a lowercase factory function from the ohdsi.util library
-    this.dataDirtyFlag(new ohdsiUtil.dirtyFlag(this.data()))
+    // eslint-disable-next-line new-cap -- dirtyFlag is a lowercase factory function
+    this.dataDirtyFlag(new dirtyFlag(this.data()))
     this.previousDesign = { [type]: parsedDesign }
   }
 

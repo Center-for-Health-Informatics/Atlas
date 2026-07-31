@@ -2,7 +2,7 @@ import ko from 'knockout'
 import view from './cca-manager.html?raw'
 import Page from 'pages/Page'
 import commonUtils from 'utils/CommonUtils'
-import ohdsiUtil from 'assets/ohdsi.util'
+import dirtyFlag from 'utils/DirtyFlag'
 import config from 'appConfig'
 import constants from './const'
 import globalConstants from 'const'
@@ -206,7 +206,7 @@ class ComparativeCohortAnalysisManager extends Page {
     this.selectedAnalysisId(null)
     this.comparisons.removeAll()
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.estimationAnalysis()))
+    this.dirtyFlag(new dirtyFlag(this.estimationAnalysis()))
     document.location = constants.paths.browser()
   }
 
@@ -339,7 +339,7 @@ class ComparativeCohortAnalysisManager extends Page {
     this.selectedAnalysisId(null)
     this.comparisons.removeAll()
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag(this.estimationAnalysis()))
+    this.dirtyFlag(new dirtyFlag(this.estimationAnalysis()))
     document.location = constants.paths.browser()
   }
 
@@ -482,7 +482,7 @@ class ComparativeCohortAnalysisManager extends Page {
 
   resetDirtyFlag () {
     // eslint-disable-next-line new-cap
-    this.dirtyFlag(new ohdsiUtil.dirtyFlag({ analysis: this.estimationAnalysis(), comparisons: this.comparisons }))
+    this.dirtyFlag(new dirtyFlag({ analysis: this.estimationAnalysis(), comparisons: this.comparisons }))
   }
 
   newAnalysis () {

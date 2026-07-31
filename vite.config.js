@@ -107,13 +107,11 @@ export default defineConfig({
       { find: 'less-js', replacement: nm('less/dist/less.js') },
       { find: 'svgsaver', replacement: nm('svgsaver/browser.js') },
       { find: 'jszip', replacement: nm('jszip/dist/jszip.min.js') },
-      { find: 'lz-string', replacement: nm('lz-string/libs/lz-string.js') },
       { find: 'ohdsi-api', replacement: nm('@ohdsi/ui-toolbox/lib/umd/api/index.js') },
       { find: 'html2canvas', replacement: nm('html2canvas/dist/html2canvas.min.js') },
 
       // ── Local asset files ──
       { find: 'assets', replacement: js('assets') },
-      { find: 'jnj_chart', replacement: js('assets/jnj.chart.js') },
     ],
   },
 

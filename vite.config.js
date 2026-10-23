@@ -91,11 +91,10 @@ export default defineConfig({
       { find: 'datatables.net-buttons-html5', replacement: nm('datatables.net-buttons/js/buttons.html5.mjs') },
       { find: 'datatables.net-select', replacement: nm('datatables.net-select/js/dataTables.select.mjs') },
       { find: 'colvis', replacement: nm('datatables.net-buttons/js/buttons.colVis.mjs') },
-      // pdfmake is pinned to 0.2.x in package.json on purpose (see CHANGELOG.md) -
-      // that line ships this prebuilt build/pdfmake.js + build/vfs_fonts.js pair.
-      // 0.3.x dropped them for a from-source, bundler-oriented build requiring
-      // new @foliojs-fork/* peer deps - upgrading means redoing this aliasing,
-      // not a version bump.
+      // pdfmake's prebuilt browser bundle + font VFS pair. 0.3.x still ships
+      // both (vfs_fonts.js is CJS, `module.exports = vfs`), so the aliases are
+      // unchanged from 0.2.x; only its API went promise-based, which Buttons'
+      // pdfHtml5 (`createPdf(doc).download()`) doesn't depend on.
       { find: 'pdfmake/vfs_fonts', replacement: nm('pdfmake/build/vfs_fonts.js') },
       { find: 'pdfmake', replacement: nm('pdfmake/build/pdfmake.js') },
       { find: 'atlascharts', replacement: js('vendor/atlascharts/main.js') },
